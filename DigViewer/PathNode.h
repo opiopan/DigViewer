@@ -1,0 +1,42 @@
+//
+//  PathNode.h
+//  DigViewer
+//
+//  Created by opiopan on 2013/01/05.
+//  Copyright (c) 2013年 opiopan. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "NodeID.h"
+
+@interface PathNode : NSObject
+
+// 属性
+@property (readonly) NSString*       name;
+@property (readonly) PathNode*       me;
+@property (readonly, weak) PathNode* parent;
+@property (readonly) NSMutableArray* children;
+@property (readonly) BOOL            isLeaf;
+@property (readonly) NSMutableArray* images;
+@property (readonly) NSUInteger      indexInParent;
+@property (readonly) PathNode*       imageNode;
+@property (readonly) NSString*       imagePath;
+@property (readonly) NSString*       imageName;
+@property (readonly) NSImage*        image;
+@property (readonly) NSImage*        icon;
+@property (readonly) NodeID*         nodeID;
+@property (readonly) NodeID*         imageID;
+
+// オブジェクト初期化
++ (PathNode*) pathNodeWithPath:(NSString*)path;
+
+// ツリーウォーキング
+- (PathNode*) nextImageNode;
+- (PathNode*) previousImageNode;
+- (PathNode*) nextFolderNode;
+- (PathNode*) previousFolderNode;
+
+// IndexPath作成
+- (NSIndexPath*) indexPath;
+
+@end

@@ -3,13 +3,43 @@
 //  DigViewer
 //
 //  Created by opiopan on 2013/01/04.
-//  Copyright (c) 2013年 opiopan. All rights reserved.
+//  Copyright (c) 2013 opiopan. All rights reserved.
 //
 
 #import "Document.h"
 
 @implementation Document
 
+@synthesize root;
+@synthesize imageTreeController;
+@synthesize imageArrayController;
+
+//-----------------------------------------------------------------------------------------
+// NSDocument クラスメソッド：ドキュメントの振る舞い
+//-----------------------------------------------------------------------------------------
++ (BOOL)autosavesDrafts
+{
+    return NO;
+}
+
++ (BOOL)autosavesInPlace
+{
+    return NO;
+}
+
++ (BOOL)preservesVersions
+{
+    return NO;
+}
+
++ (BOOL)usesUbiquitousStorage
+{
+    return NO;
+}
+
+//-----------------------------------------------------------------------------------------
+// オブジェクト初期化
+//-----------------------------------------------------------------------------------------
 - (id)init
 {
     self = [super init];
@@ -21,8 +51,6 @@
 
 - (NSString *)windowNibName
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
     return @"Document";
 }
 
@@ -32,28 +60,58 @@
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 
-+ (BOOL)autosavesInPlace
+//-----------------------------------------------------------------------------------------
+// ドキュメントロード
+//-----------------------------------------------------------------------------------------
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    return YES;
+    root = [PathNode pathNodeWithPath:[absoluteURL path]];
+    
+    return root != nil;
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
+//-----------------------------------------------------------------------------------------
+// イメージツリー・ウォーキング
+//-----------------------------------------------------------------------------------------
+- (void)moveToNextImage:(id)sender
 {
-    // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return nil;
+    [self moveToImageNode:[[imageArrayController selectedObjects][0] nextImageNode]];
 }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+- (void)moveToPreviousImage:(id)sender
 {
-    // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return YES;
+    [self moveToImageNode:[[imageArrayController selectedObjects][0] previousImageNode]];
+}
+
+- (void)moveToImageNode:(PathNode*)next
+{
+    if (next){
+        PathNode* current = [imageArrayController selectedObjects][0];
+        if (current.parent != next.parent){
+            NSIndexPath* indexPath = [next.parent indexPath];
+            [imageTreeController setSelectionIndexPath:indexPath];
+        }
+        [imageArrayController setSelectionIndex:next.indexInParent];
+    }
+}
+
+- (void)moveToNextFolder:(id)sender
+{
+    [self moveToFolderNode:[[imageTreeController selectedObjects][0] nextFolderNode]];
+}
+
+- (void)moveToPreviousFolder:(id)sender
+{
+    [self moveToFolderNode:[[imageTreeController selectedObjects][0] previousFolderNode]];
+}
+
+- (void)moveToFolderNode:(PathNode*)next
+{
+    if (next){
+        NSIndexPath* indexPath = [next indexPath];
+        [imageTreeController setSelectionIndexPath:indexPath];
+        [imageArrayController setSelectionIndex:0];
+    }
 }
 
 @end

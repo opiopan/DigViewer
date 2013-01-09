@@ -14,6 +14,11 @@
 		7B3920471696CA1800E139D0 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3920461696CA1800E139D0 /* Document.m */; };
 		7B39204A1696CA1800E139D0 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3920481696CA1800E139D0 /* Document.xib */; };
 		7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39204B1696CA1900E139D0 /* MainMenu.xib */; };
+		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
+		7B697E3F169C59A600A9E247 /* NodeID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3E169C59A600A9E247 /* NodeID.m */; };
+		7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.m */; };
+		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
+		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,16 @@
 		7B3920461696CA1800E139D0 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		7B3920491696CA1800E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		7B39204C1696CA1900E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
+		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
+		7B697E3D169C59A600A9E247 /* NodeID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeID.h; sourceTree = "<group>"; };
+		7B697E3E169C59A600A9E247 /* NodeID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeID.m; sourceTree = "<group>"; };
+		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
+		7BF678AC16983C7C00FE39B4 /* PathNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathNode.m; sourceTree = "<group>"; };
+		7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+CapabilityDetermining.h"; sourceTree = "<group>"; };
+		7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+CapabilityDetermining.m"; sourceTree = "<group>"; };
+		7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathfinderPinnedFile.h; sourceTree = "<group>"; };
+		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathfinderPinnedFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +99,11 @@
 		7B3920391696CA1800E139D0 /* DigViewer */ = {
 			isa = PBXGroup;
 			children = (
-				7B3920451696CA1800E139D0 /* Document.h */,
-				7B3920461696CA1800E139D0 /* Document.m */,
-				7B3920481696CA1800E139D0 /* Document.xib */,
-				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
+				7B3920581696FF5600E139D0 /* Models */,
+				7B39205A1696FF7500E139D0 /* Controllers */,
+				7B3920591696FF5F00E139D0 /* Views */,
+				7BF678B31699106C00FE39B4 /* Utilities */,
+				7B3920531696F50B00E139D0 /* Resources */,
 				7B39203A1696CA1800E139D0 /* Supporting Files */,
 			);
 			path = DigViewer;
@@ -103,6 +119,55 @@
 				7B3920421696CA1800E139D0 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7B3920531696F50B00E139D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B3920481696CA1800E139D0 /* Document.xib */,
+				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7B3920581696FF5600E139D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7BF678AB16983C7C00FE39B4 /* PathNode.h */,
+				7BF678AC16983C7C00FE39B4 /* PathNode.m */,
+				7B697E3D169C59A600A9E247 /* NodeID.h */,
+				7B697E3E169C59A600A9E247 /* NodeID.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		7B3920591696FF5F00E139D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B697E39169C547200A9E247 /* ImageWithTextCell.h */,
+				7B697E3A169C547200A9E247 /* ImageWithTextCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7B39205A1696FF7500E139D0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7B3920451696CA1800E139D0 /* Document.h */,
+				7B3920461696CA1800E139D0 /* Document.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7BF678B31699106C00FE39B4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */,
+				7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */,
+				7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */,
+				7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +237,11 @@
 			files = (
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
+				7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */,
+				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
+				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
+				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
+				7B697E3F169C59A600A9E247 /* NodeID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +343,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -285,6 +356,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -309,6 +381,7 @@
 				7B3920521696CA1900E139D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
