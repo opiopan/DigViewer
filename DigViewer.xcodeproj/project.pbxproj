@@ -16,6 +16,8 @@
 		7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39204B1696CA1900E139D0 /* MainMenu.xib */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E3F169C59A600A9E247 /* NodeID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3E169C59A600A9E247 /* NodeID.m */; };
+		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
+		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.m */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
@@ -40,6 +42,9 @@
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E3D169C59A600A9E247 /* NodeID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeID.h; sourceTree = "<group>"; };
 		7B697E3E169C59A600A9E247 /* NodeID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeID.m; sourceTree = "<group>"; };
+		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
+		7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingSheetController.m; sourceTree = "<group>"; };
+		7B697E52169DB8A000A9E247 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingSheet.xib; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
 		7BF678AC16983C7C00FE39B4 /* PathNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathNode.m; sourceTree = "<group>"; };
 		7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+CapabilityDetermining.h"; sourceTree = "<group>"; };
@@ -124,8 +129,9 @@
 		7B3920531696F50B00E139D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
+				7B3920481696CA1800E139D0 /* Document.xib */,
+				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -155,6 +161,8 @@
 			children = (
 				7B3920451696CA1800E139D0 /* Document.h */,
 				7B3920461696CA1800E139D0 /* Document.m */,
+				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
+				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 				7B3920441696CA1800E139D0 /* Credits.rtf in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
+				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +251,7 @@
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E3F169C59A600A9E247 /* NodeID.m in Sources */,
+				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +288,14 @@
 				7B39204C1696CA1900E139D0 /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		7B697E53169DB8A000A9E247 /* LoadingSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B697E52169DB8A000A9E247 /* en */,
+			);
+			name = LoadingSheet.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

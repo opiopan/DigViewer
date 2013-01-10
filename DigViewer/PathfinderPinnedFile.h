@@ -10,6 +10,9 @@
 
 @interface PathfinderPinnedFile : NSObject
 
+@property (readonly) NSString* path;
+@property (readonly) NSString* name;
+
 + (PathfinderPinnedFile*) pinnedFileWithPath:(NSString*) path;
 
 - (NSUInteger) count;

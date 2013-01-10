@@ -7,8 +7,11 @@
 //
 
 #import "Document.h"
+#import "LoadingSheetController.h"
 
-@implementation Document
+@implementation Document{
+    LoadingSheetController* loader;
+}
 
 @synthesize root;
 @synthesize imageTreeController;
@@ -44,7 +47,6 @@
 {
     self = [super init];
     if (self) {
-        // Add your subclass-specific initialization here.
     }
     return self;
 }
@@ -57,7 +59,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
+    [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -65,9 +67,22 @@
 //-----------------------------------------------------------------------------------------
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    root = [PathNode pathNodeWithPath:[absoluteURL path]];
-    
-    return root != nil;
+    return YES;
+}
+
+- (void)loadDocument
+{
+    loader = [[LoadingSheetController alloc] init];
+    [loader loadPath:[self.fileURL path] forWindow:self.windowForSheet modalDelegate:self
+            didEndSelector:@selector(didEndLoadingDocument:)];
+}
+
+- (void)didEndLoadingDocument:(PathNode*)node
+{
+    [self willChangeValueForKey:@"root"];
+    root = node;
+    [self didChangeValueForKey:@"root"];
+    loader = nil;
 }
 
 //-----------------------------------------------------------------------------------------

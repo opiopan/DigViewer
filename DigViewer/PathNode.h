@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "NodeID.h"
+#import "PathfinderPinnedFile.h"
+
+@interface PathNodeProgress : NSObject
+@property double progress;
+@end
 
 @interface PathNode : NSObject
 
@@ -28,7 +33,8 @@
 @property (readonly) NodeID*         imageID;
 
 // オブジェクト初期化
-+ (PathNode*) pathNodeWithPath:(NSString*)path;
++ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress;
++ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress;
 
 // ツリーウォーキング
 - (PathNode*) nextImageNode;

@@ -27,37 +27,39 @@
 //-----------------------------------------------------------------------------------------
 // オブジェクト初期化
 //-----------------------------------------------------------------------------------------
-+ (PathNode*) pathNodeWithPath:(NSString*)path
++ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress
 {
-    PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
+    return NULL;
+}
+
++ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress
+{
     PathNode* root = nil;
-    
-    if (pinnedFile){
-        // ピン留めファイルあり
-        NSArray* last = nil;
-        NSMutableArray* context = [NSMutableArray array];
-        for (int i = 0; i < [pinnedFile count]; i++){
-            if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]]){
-                NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
-                NSString* filePath = [pinnedFile absolutePathAtIndex:i];
-                if (!root){
-                    root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil];
-                    [context addObject:root];
-                }
-                int j;
-                for (j = 1;
-                     last && j < last.count - 1 && j < pathComponents.count - 1 && [last[j] isEqualToString:pathComponents[j]];
-                     j++);
-                [context[j - 1] mergePathComponents:pathComponents atIndex:j withPath:filePath context:context];
-                last = pathComponents;
+    NSArray* last = nil;
+    NSMutableArray* context = [NSMutableArray array];
+    NSUInteger lines = [pinnedFile count];
+    progress.progress = 0.0;
+    for (int i = 0; i < lines; i++){
+        if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]]){
+            NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
+            NSString* filePath = [pinnedFile absolutePathAtIndex:i];
+            if (!root){
+                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil];
+                [context addObject:root];
             }
+            int j;
+            for (j = 1;
+                 last && j < last.count - 1 && j < pathComponents.count - 1 && [last[j] isEqualToString:pathComponents[j]];
+                 j++);
+            [context[j - 1] mergePathComponents:pathComponents atIndex:j withPath:filePath context:context];
+            last = pathComponents;
         }
-    }else{
-        // ピン留めファイルなし
+        progress.progress = i * 100.0 / lines;
     }
     
     return root;
 }
+
 
 - (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip path:(NSString*)path;
 {
@@ -305,6 +307,43 @@
         }
         return 1;
     }
+}
+
+@end
+
+
+//-----------------------------------------------------------------------------------------
+// ツリー生成進捗オブジェクト
+//-----------------------------------------------------------------------------------------
+@implementation PathNodeProgress{
+    NSLock* lock;
+}
+
+@synthesize progress;
+
+- (id) init
+{
+    self = [super init];
+    if (self){
+        lock = [[NSLock alloc] init];
+    }
+    return self;
+}
+
+- (double) progress
+{
+    [lock lock];
+    double value = progress;
+    [lock unlock];
+    return value;
+}
+
+- (void) setProgress:(double)value
+{
+    [lock lock];
+    progress = value;
+    [lock unlock];
+    
 }
 
 @end

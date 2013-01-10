@@ -9,12 +9,13 @@
 #import "PathfinderPinnedFile.h"
 
 @implementation PathfinderPinnedFile {
-    NSString*  path;
     NSArray*   contents;
     NSUInteger lastIndex;
     NSString*  lastAbsolutePath;
     NSString*  lastRelativePath;
 }
+
+@synthesize path;
 
 + (PathfinderPinnedFile*) pinnedFileWithPath:(NSString*) path
 {
@@ -41,6 +42,11 @@
         lastIndex = NSNotFound;
     }
     return self;
+}
+
+- (NSString*) name
+{
+    return [path lastPathComponent];
 }
 
 - (NSUInteger) count

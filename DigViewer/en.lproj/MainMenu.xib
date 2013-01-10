@@ -710,7 +710,7 @@
 								<object class="NSMenuItem" id="713960255">
 									<reference key="NSMenu" ref="617094169"/>
 									<string key="NSTitle">Next Image</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">131072</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -719,7 +719,7 @@
 								<object class="NSMenuItem" id="150177545">
 									<reference key="NSMenu" ref="617094169"/>
 									<string key="NSTitle">Previous Image</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">131072</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -738,7 +738,7 @@
 								<object class="NSMenuItem" id="962911069">
 									<reference key="NSMenu" ref="617094169"/>
 									<string key="NSTitle">Next Folder</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">131072</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -747,7 +747,7 @@
 								<object class="NSMenuItem" id="589979562">
 									<reference key="NSMenu" ref="617094169"/>
 									<string key="NSTitle">Previous Folder</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">131072</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
