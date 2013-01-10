@@ -66,6 +66,11 @@
 - (void) showPanel
 {
     if (panel && pathNodeProgress.progress < 0.5){
+        [[NSApplication sharedApplication] beginSheet:panel
+                                       modalForWindow:modalWindow
+                                        modalDelegate:nil
+                                       didEndSelector:nil
+                                          contextInfo:nil];
         [self performSelector:@selector(updateProgress) withObject:nil afterDelay:0.1f];
     }
 }
@@ -75,11 +80,6 @@
     progress = [NSNumber numberWithDouble:pathNodeProgress.progress];
     [self didChangeValueForKey:@"progress"];
     if (panel){
-        [[NSApplication sharedApplication] beginSheet:panel
-                                       modalForWindow:modalWindow
-                                        modalDelegate:nil
-                                       didEndSelector:nil
-                                          contextInfo:nil];
         [self performSelector:@selector(updateProgress) withObject:nil afterDelay:0.1f];
     }
 }
