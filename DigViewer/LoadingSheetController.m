@@ -36,9 +36,7 @@
 
 - (void) loadPath:(NSString*)p forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
 {
-    [self willChangeValueForKey:@"name"];
-    name = [p lastPathComponent];
-    [self didChangeValueForKey:@"name"];
+    self.name = [p lastPathComponent];
     path = p;
     modalWindow = window;
     modalDelegate = delegate;
@@ -76,9 +74,7 @@
 }
 
 - (void) updateProgress{
-    [self willChangeValueForKey:@"progress"];
-    progress = [NSNumber numberWithDouble:pathNodeProgress.progress];
-    [self didChangeValueForKey:@"progress"];
+    self.progress = [NSNumber numberWithDouble:pathNodeProgress.progress];
     if (panel){
         [self performSelector:@selector(updateProgress) withObject:nil afterDelay:0.1f];
     }

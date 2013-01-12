@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
+		7B0DBEB616A01545000365F4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB416A01545000365F4 /* MainView.xib */; };
+		7B0DBEBC16A05A62000365F4 /* ObjectControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -24,6 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B0DBEB016A014B6000365F4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		7B0DBEB116A014B6000365F4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7B0DBEB516A01545000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainView.xib; sourceTree = "<group>"; };
+		7B0DBEBA16A05A62000365F4 /* ObjectControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectControllers.h; sourceTree = "<group>"; };
+		7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectControllers.m; sourceTree = "<group>"; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -132,6 +140,7 @@
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
 				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
+				7B0DBEB416A01545000365F4 /* MainView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -163,6 +172,10 @@
 				7B3920461696CA1800E139D0 /* Document.m */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
+				7B0DBEBA16A05A62000365F4 /* ObjectControllers.h */,
+				7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */,
+				7B0DBEB016A014B6000365F4 /* MainViewController.h */,
+				7B0DBEB116A014B6000365F4 /* MainViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +247,7 @@
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
+				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,12 +266,22 @@
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E3F169C59A600A9E247 /* NodeID.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
+				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
+				7B0DBEBC16A05A62000365F4 /* ObjectControllers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7B0DBEB416A01545000365F4 /* MainView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B0DBEB516A01545000365F4 /* en */,
+			);
+			name = MainView.xib;
+			sourceTree = "<group>";
+		};
 		7B39203C1696CA1800E139D0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

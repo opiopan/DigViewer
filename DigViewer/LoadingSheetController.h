@@ -11,8 +11,8 @@
 
 @interface LoadingSheetController : NSObject <NSWindowDelegate>
 
-@property (readonly) NSString* name;
-@property (readonly) NSNumber* progress;
+@property (strong) NSString* name;
+@property (strong) NSNumber* progress;
 @property (strong) IBOutlet NSPanel *panel;
 
 - (void) loadPath:(NSString*)path forWindow:(NSWindow*)window

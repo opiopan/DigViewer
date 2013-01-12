@@ -8,14 +8,15 @@
 
 #import "Document.h"
 #import "LoadingSheetController.h"
+#import "MainViewController.h"
 
 @implementation Document{
     LoadingSheetController* loader;
+    MainViewController* mainViewController;
 }
 
 @synthesize root;
-@synthesize imageTreeController;
-@synthesize imageArrayController;
+@synthesize objectControllers;
 
 //-----------------------------------------------------------------------------------------
 // NSDocument クラスメソッド：ドキュメントの振る舞い
@@ -59,6 +60,14 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
+    
+    mainViewController = [[MainViewController alloc] init];
+    mainViewController.representedObject = objectControllers;
+    NSView* view = mainViewController.view;
+    view.frame = self.placeHolder.frame;
+    [view setFrameOrigin:NSZeroPoint];
+    [self.placeHolder addSubview:view];
+    
     [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
 }
 
@@ -79,9 +88,7 @@
 
 - (void)didEndLoadingDocument:(PathNode*)node
 {
-    [self willChangeValueForKey:@"root"];
-    root = node;
-    [self didChangeValueForKey:@"root"];
+    self.root = node;
     loader = nil;
 }
 
@@ -90,42 +97,42 @@
 //-----------------------------------------------------------------------------------------
 - (void)moveToNextImage:(id)sender
 {
-    [self moveToImageNode:[[imageArrayController selectedObjects][0] nextImageNode]];
+    [self moveToImageNode:[[objectControllers.imageArrayController selectedObjects][0] nextImageNode]];
 }
 
 - (void)moveToPreviousImage:(id)sender
 {
-    [self moveToImageNode:[[imageArrayController selectedObjects][0] previousImageNode]];
+    [self moveToImageNode:[[objectControllers.imageArrayController selectedObjects][0] previousImageNode]];
 }
 
 - (void)moveToImageNode:(PathNode*)next
 {
     if (next){
-        PathNode* current = [imageArrayController selectedObjects][0];
+        PathNode* current = [objectControllers.imageArrayController selectedObjects][0];
         if (current.parent != next.parent){
             NSIndexPath* indexPath = [next.parent indexPath];
-            [imageTreeController setSelectionIndexPath:indexPath];
+            [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
         }
-        [imageArrayController setSelectionIndex:next.indexInParent];
+        [objectControllers.imageArrayController setSelectionIndex:next.indexInParent];
     }
 }
 
 - (void)moveToNextFolder:(id)sender
 {
-    [self moveToFolderNode:[[imageTreeController selectedObjects][0] nextFolderNode]];
+    [self moveToFolderNode:[[objectControllers.imageTreeController selectedObjects][0] nextFolderNode]];
 }
 
 - (void)moveToPreviousFolder:(id)sender
 {
-    [self moveToFolderNode:[[imageTreeController selectedObjects][0] previousFolderNode]];
+    [self moveToFolderNode:[[objectControllers.imageTreeController selectedObjects][0] previousFolderNode]];
 }
 
 - (void)moveToFolderNode:(PathNode*)next
 {
     if (next){
         NSIndexPath* indexPath = [next indexPath];
-        [imageTreeController setSelectionIndexPath:indexPath];
-        [imageArrayController setSelectionIndex:0];
+        [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
+        [objectControllers.imageArrayController setSelectionIndex:0];
     }
 }
 

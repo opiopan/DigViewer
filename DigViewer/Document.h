@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PathNode.h"
+#import "ObjectControllers.h"
 
 @interface Document : NSDocument
 
-@property (readonly) PathNode* root;
-@property (strong) IBOutlet NSTreeController *imageTreeController;
-@property (strong) IBOutlet NSArrayController *imageArrayController;
+@property (strong) PathNode* root;
+@property (strong) IBOutlet ObjectControllers* objectControllers;
+@property (weak) IBOutlet NSView *placeHolder;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
