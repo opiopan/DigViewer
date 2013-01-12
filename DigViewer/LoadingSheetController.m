@@ -80,9 +80,4 @@
     }
 }
 
-- (NSNumber*) progress
-{
-    return progress;
-}
-
 @end
