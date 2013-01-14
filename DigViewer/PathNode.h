@@ -32,6 +32,10 @@
 @property (readonly) NodeID*         nodeID;
 @property (readonly) NodeID*         imageID;
 
+@property (readonly) NSString*       imageUID;
+@property (readonly) NSString*       imageRepresentationType;
+@property (readonly) id              imageRepresentation;
+
 // オブジェクト初期化
 + (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress;
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress;

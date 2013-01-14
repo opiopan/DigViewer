@@ -9,6 +9,7 @@
 #import "Document.h"
 #import "LoadingSheetController.h"
 #import "MainViewController.h"
+#import "NSView+ViewControllerAssociation.h"
 
 @implementation Document{
     LoadingSheetController* loader;
@@ -63,10 +64,7 @@
     
     mainViewController = [[MainViewController alloc] init];
     mainViewController.representedObject = objectControllers;
-    NSView* view = mainViewController.view;
-    view.frame = self.placeHolder.frame;
-    [view setFrameOrigin:NSZeroPoint];
-    [self.placeHolder addSubview:view];
+    [self.placeHolder associateSubViewWithController:mainViewController];
     
     [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
 }
@@ -114,6 +112,7 @@
             [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
         }
         [objectControllers.imageArrayController setSelectionIndex:next.indexInParent];
+        [mainViewController updateRepresentationObject];
     }
 }
 
@@ -133,7 +132,21 @@
         NSIndexPath* indexPath = [next indexPath];
         [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
         [objectControllers.imageArrayController setSelectionIndex:0];
+        [mainViewController updateRepresentationObject];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// 表示形式属性
+//-----------------------------------------------------------------------------------------
+- (int) presentationViewType
+{
+    return mainViewController.presentationViewType;
+}
+
+- (void) setPresentationViewType:(int)type
+{
+    mainViewController.presentationViewType = type;
 }
 
 @end

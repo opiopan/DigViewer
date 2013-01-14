@@ -10,6 +10,15 @@
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
 		7B0DBEB616A01545000365F4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB416A01545000365F4 /* MainView.xib */; };
 		7B0DBEBC16A05A62000365F4 /* ObjectControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */; };
+		7B0DBECA16A0F665000365F4 /* FolderOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEC916A0F665000365F4 /* FolderOutlineView.m */; };
+		7B0DBECE16A0F767000365F4 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBECD16A0F767000365F4 /* ImageViewController.m */; };
+		7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */; };
+		7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBED216A0F89C000365F4 /* ImageView.xib */; };
+		7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */; };
+		7B0DBEDA16A29126000365F4 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBED916A29126000365F4 /* BaseViewController.m */; };
+		7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */; };
+		7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */; };
+		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -32,6 +41,20 @@
 		7B0DBEB516A01545000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainView.xib; sourceTree = "<group>"; };
 		7B0DBEBA16A05A62000365F4 /* ObjectControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectControllers.h; sourceTree = "<group>"; };
 		7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectControllers.m; sourceTree = "<group>"; };
+		7B0DBEC816A0F664000365F4 /* FolderOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderOutlineView.h; sourceTree = "<group>"; };
+		7B0DBEC916A0F665000365F4 /* FolderOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderOutlineView.m; sourceTree = "<group>"; };
+		7B0DBECC16A0F767000365F4 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		7B0DBECD16A0F767000365F4 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		7B0DBED016A0F7A9000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FolderOutlineView.xib; sourceTree = "<group>"; };
+		7B0DBED316A0F89C000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageView.xib; sourceTree = "<group>"; };
+		7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+ViewControllerAssociation.h"; sourceTree = "<group>"; };
+		7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+ViewControllerAssociation.m"; sourceTree = "<group>"; };
+		7B0DBED816A29125000365F4 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		7B0DBED916A29126000365F4 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailViewController.h; sourceTree = "<group>"; };
+		7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewController.m; sourceTree = "<group>"; };
+		7B0DBEDF16A297E2000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailView.xib; sourceTree = "<group>"; };
+		7B0DBEE116A2A2FD000365F4 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -66,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */,
 				7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				7B3920331696CA1800E139D0 /* Cocoa.framework */,
+				7B0DBEE116A2A2FD000365F4 /* Quartz.framework */,
 				7B3920351696CA1800E139D0 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -141,6 +166,9 @@
 				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7B0DBEB416A01545000365F4 /* MainView.xib */,
+				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
+				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
+				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -174,8 +202,16 @@
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 				7B0DBEBA16A05A62000365F4 /* ObjectControllers.h */,
 				7B0DBEBB16A05A62000365F4 /* ObjectControllers.m */,
+				7B0DBED816A29125000365F4 /* BaseViewController.h */,
+				7B0DBED916A29126000365F4 /* BaseViewController.m */,
 				7B0DBEB016A014B6000365F4 /* MainViewController.h */,
 				7B0DBEB116A014B6000365F4 /* MainViewController.m */,
+				7B0DBEC816A0F664000365F4 /* FolderOutlineView.h */,
+				7B0DBEC916A0F665000365F4 /* FolderOutlineView.m */,
+				7B0DBECC16A0F767000365F4 /* ImageViewController.h */,
+				7B0DBECD16A0F767000365F4 /* ImageViewController.m */,
+				7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */,
+				7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +221,8 @@
 			children = (
 				7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */,
 				7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */,
+				7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */,
+				7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */,
 				7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */,
 				7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */,
 			);
@@ -248,6 +286,9 @@
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
+				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
+				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
+				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +309,11 @@
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B0DBEBC16A05A62000365F4 /* ObjectControllers.m in Sources */,
+				7B0DBECA16A0F665000365F4 /* FolderOutlineView.m in Sources */,
+				7B0DBECE16A0F767000365F4 /* ImageViewController.m in Sources */,
+				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
+				7B0DBEDA16A29126000365F4 /* BaseViewController.m in Sources */,
+				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +326,30 @@
 				7B0DBEB516A01545000365F4 /* en */,
 			);
 			name = MainView.xib;
+			sourceTree = "<group>";
+		};
+		7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B0DBED016A0F7A9000365F4 /* en */,
+			);
+			name = FolderOutlineView.xib;
+			sourceTree = "<group>";
+		};
+		7B0DBED216A0F89C000365F4 /* ImageView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B0DBED316A0F89C000365F4 /* en */,
+			);
+			name = ImageView.xib;
+			sourceTree = "<group>";
+		};
+		7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B0DBEDF16A297E2000365F4 /* en */,
+			);
+			name = ThumbnailView.xib;
 			sourceTree = "<group>";
 		};
 		7B39203C1696CA1800E139D0 /* InfoPlist.strings */ = {

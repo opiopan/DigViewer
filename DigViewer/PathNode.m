@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 opiopan. All rights reserved.
 //
 
+#import <quartz/Quartz.h>
+
 #import "PathNode.h"
 #import "NodeID.h"
 #import "PathfinderPinnedFile.h"
@@ -187,6 +189,21 @@
 - (NodeID*) imageID
 {
     return [[NodeID alloc] initWithName:self.imageName image:self.imageNode.icon];
+}
+
+- (NSString*) imageUID
+{
+    return [self imagePath];
+}
+
+- (NSString*) imageRepresentationType
+{
+    return IKImageBrowserNSImageRepresentationType;
+}
+
+- (id) imageRepresentation
+{
+    return [self image];
 }
 
 //-----------------------------------------------------------------------------------------
