@@ -65,10 +65,9 @@
 							<string key="NSToolbarItemPaletteLabel">View Type</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="882469749">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {71, 25}}</string>
-								<reference key="NSSuperview"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="504972920">
@@ -177,7 +176,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="596042743"/>
 						<reference ref="114103535"/>
 						<reference ref="911887106"/>
@@ -199,7 +198,6 @@
 							<string key="NSFrameSize">{609, 480}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSClassName">NSView</string>
 						</object>
@@ -294,6 +292,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">selectionIndexPaths: self.selectionIndexePathForTree</string>
+						<reference key="source" ref="793830743"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="793830743"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">selectionIndexPaths: self.selectionIndexePathForTree</string>
+							<string key="NSBinding">selectionIndexPaths</string>
+							<string key="NSKeyPath">self.selectionIndexePathForTree</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100256</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: selection.images</string>
 						<reference key="source" ref="823269531"/>
 						<reference key="destination" ref="793830743"/>
@@ -307,6 +321,22 @@
 						</object>
 					</object>
 					<int key="connectionID">100113</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">selectionIndexes: self.selectionIndexesForImages</string>
+						<reference key="source" ref="823269531"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="823269531"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">selectionIndexes: self.selectionIndexesForImages</string>
+							<string key="NSBinding">selectionIndexes</string>
+							<string key="NSKeyPath">self.selectionIndexesForImages</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100258</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -323,6 +353,14 @@
 						<reference key="destination" ref="793830743"/>
 					</object>
 					<int key="connectionID">100237</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">documentController</string>
+						<reference key="source" ref="1013103303"/>
+						<reference key="destination" ref="512844837"/>
+					</object>
+					<int key="connectionID">100259</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -471,7 +509,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100253</int>
+			<int key="maxID">100259</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -501,10 +539,15 @@
 					<string key="className">ObjectControllers</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="documentController">NSDocument</string>
 						<string key="imageArrayController">NSArrayController</string>
 						<string key="imageTreeController">NSTreeController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="documentController">
+							<string key="name">documentController</string>
+							<string key="candidateClassName">NSDocument</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="imageArrayController">
 							<string key="name">imageArrayController</string>
 							<string key="candidateClassName">NSArrayController</string>

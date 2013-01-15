@@ -17,6 +17,8 @@
 }
 
 @synthesize root;
+@synthesize selectionIndexePathForTree;
+@synthesize selectionIndexesForImages;
 @synthesize objectControllers;
 
 //-----------------------------------------------------------------------------------------
@@ -112,7 +114,6 @@
             [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
         }
         [objectControllers.imageArrayController setSelectionIndex:next.indexInParent];
-        [mainViewController updateRepresentationObject];
     }
 }
 
@@ -132,8 +133,32 @@
         NSIndexPath* indexPath = [next indexPath];
         [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
         [objectControllers.imageArrayController setSelectionIndex:0];
-        [mainViewController updateRepresentationObject];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// 選択状態属性
+//-----------------------------------------------------------------------------------------
+- (NSArray*) selectionIndexePathForTree
+{
+    return selectionIndexePathForTree;
+}
+
+- (void)setSelectionIndexePathForTree:(NSArray *)indexPath
+{
+    selectionIndexePathForTree = indexPath;
+    [objectControllers.imageArrayController setSelectionIndex:0];
+}
+
+- (NSIndexSet*) selectionIndexesForImages
+{
+    return selectionIndexesForImages;
+}
+
+- (void)setSelectionIndexesForImages:(NSIndexSet *)indexes
+{
+    selectionIndexesForImages = indexes;
+    [mainViewController updateRepresentationObject];
 }
 
 //-----------------------------------------------------------------------------------------

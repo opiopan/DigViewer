@@ -11,4 +11,5 @@
 @interface ObjectControllers : NSObject
 @property (weak) IBOutlet NSTreeController* imageTreeController;
 @property (weak) IBOutlet NSArrayController* imageArrayController;
+@property (weak) IBOutlet NSDocument* documentController;
 @end

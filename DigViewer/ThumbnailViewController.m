@@ -7,6 +7,7 @@
 //
 
 #import "ThumbnailViewController.h"
+#import "MainViewController.h"
 
 @implementation ThumbnailViewController
 
@@ -21,6 +22,12 @@
 - (void)updateRepresentationObject
 {
     [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+}
+
+- (void) imageBrowser:(IKImageBrowserView *) aBrowser cellWasDoubleClickedAtIndex:(NSUInteger) index
+{
+    id document = [self.representedObject valueForKey:@"documentController"];
+    [document setValue:[NSNumber numberWithInt:typeImageView] forKey:@"presentationViewType"];
 }
 
 @end

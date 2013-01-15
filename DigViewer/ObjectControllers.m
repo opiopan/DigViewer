@@ -12,5 +12,6 @@
 
 @synthesize imageTreeController;
 @synthesize imageArrayController;
+@synthesize documentController;
 
 @end
