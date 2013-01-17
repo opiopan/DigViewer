@@ -59,6 +59,7 @@
     presentationViewType = type;
     representationViewController = viewControllers[type];
     [presentationPlaceholder associateSubViewWithController:representationViewController];
+    [self.view.window makeFirstResponder:representationViewController.view];
 }
 
 - (void)updateRepresentationObject

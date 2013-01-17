@@ -56,7 +56,7 @@
 										<string key="NSFrameSize">{174, 224}</string>
 										<reference key="NSSuperview" ref="246080425"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="242632202"/>
+										<reference key="NSNextKeyView" ref="1059245218"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -213,7 +213,7 @@
 						<string key="NSFrameSize">{176, 242}</string>
 						<reference key="NSSuperview" ref="38726443"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="246080425"/>
+						<reference key="NSNextKeyView" ref="242632202"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="1059245218"/>
@@ -239,7 +239,7 @@
 										<string key="NSFrameSize">{174, 219}</string>
 										<reference key="NSSuperview" ref="1052813926"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="163629151"/>
+										<reference key="NSNextKeyView" ref="830587353"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -270,7 +270,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Images</string>
+													<string key="NSContents">Current Folder</string>
 													<object class="NSFont" key="NSSupport">
 														<string key="NSName">LucidaGrande</string>
 														<double key="NSSize">11</double>
@@ -374,7 +374,7 @@
 						<string key="NSFrame">{{0, 243}, {176, 237}}</string>
 						<reference key="NSSuperview" ref="38726443"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1052813926"/>
+						<reference key="NSNextKeyView" ref="163629151"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="830587353"/>
@@ -556,15 +556,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.imageID</string>
+						<string key="label">value: arrangedObjects.nodeID</string>
 						<reference key="source" ref="270451050"/>
 						<reference key="destination" ref="823269531"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="270451050"/>
 							<reference key="NSDestination" ref="823269531"/>
-							<string key="NSLabel">value: arrangedObjects.imageID</string>
+							<string key="NSLabel">value: arrangedObjects.nodeID</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.imageID</string>
+							<string key="NSKeyPath">arrangedObjects.nodeID</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEditable</string>
 								<boolean value="YES" key="NS.object.0"/>
@@ -572,7 +572,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">100253</int>
+					<int key="connectionID">100279</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -744,7 +744,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100277</int>
+			<int key="maxID">100279</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

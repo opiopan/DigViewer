@@ -34,7 +34,7 @@
 			</object>
 			<object class="NSScrollView" id="482417475">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">268</int>
+				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSClipView" id="281433976">
 						<reference key="NSNextResponder" ref="482417475"/>
@@ -210,13 +210,13 @@
 								<string key="NSReuseIdentifierKey">_NS:24</string>
 								<bool key="constrainsToOriginalSize">NO</bool>
 								<bool key="cellsHaveSubtitle">NO</bool>
-								<bool key="cellsHaveTitle">NO</bool>
+								<bool key="cellsHaveTitle">YES</bool>
 								<bool key="outlinesCells">NO</bool>
 								<bool key="shadowsCells">YES</bool>
 								<bool key="animates">NO</bool>
 								<bool key="allowsReordering">NO</bool>
-								<bool key="allowsMultipleSelection">YES</bool>
-								<bool key="allowsEmptySelection">YES</bool>
+								<bool key="allowsMultipleSelection">NO</bool>
+								<bool key="allowsEmptySelection">NO</bool>
 								<float key="cellWidth">100</float>
 								<float key="cellHeight">100</float>
 								<reference key="dataSource"/>

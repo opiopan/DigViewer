@@ -132,7 +132,6 @@
     if (next){
         NSIndexPath* indexPath = [next indexPath];
         [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
-        [objectControllers.imageArrayController setSelectionIndex:0];
     }
 }
 
@@ -172,6 +171,11 @@
 - (void) setPresentationViewType:(int)type
 {
     mainViewController.presentationViewType = type;
+}
+
+- (void) togglePresentationView:(id)sender
+{
+    self.presentationViewType = self.presentationViewType == typeImageView ? typeThumbnailView : typeImageView;
 }
 
 @end

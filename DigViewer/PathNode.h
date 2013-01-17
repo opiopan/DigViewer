@@ -25,6 +25,7 @@
 @property (readonly) NSMutableArray* images;
 @property (readonly) NSUInteger      indexInParent;
 @property (readonly) PathNode*       imageNode;
+@property (readonly) PathNode*       imageNodeReverse;
 @property (readonly) NSString*       imagePath;
 @property (readonly) NSString*       imageName;
 @property (readonly) NSImage*        image;

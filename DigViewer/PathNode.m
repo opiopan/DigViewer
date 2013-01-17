@@ -129,14 +129,15 @@
 
 - (NSMutableArray*) images
 {
-    if (images){
-        return images;
-    }else{
-        if (!representationImage){
-            representationImage = [NSMutableArray arrayWithObject:[children objectAtIndex:0]];
+    if (!representationImage){
+        if (images){
+            representationImage = [NSMutableArray arrayWithArray:images];
+            [representationImage addObjectsFromArray:children];
+        }else{
+            representationImage = [NSMutableArray arrayWithArray:children];
         }
-        return representationImage;
     }
+    return representationImage;
 }
 
 - (PathNode*) imageNode
@@ -148,7 +149,17 @@
     }else{
         return [[children objectAtIndex:0] imageNode];
     }
-    
+}
+
+- (PathNode*) imageNodeReverse
+{
+    if (imagePath){
+        return self;
+    }else if (children){
+        return [[children lastObject] imageNodeReverse];
+    }else{
+        return [[images lastObject] imageNodeReverse];
+    }
 }
 
 - (NSString*) imagePath
@@ -172,6 +183,15 @@
     return stockedImage;
 }
 
+- (NSUInteger) indexInParent
+{
+    if (imagePath){
+        return indexInParent;
+    }else{
+        return (parent && parent->images ? parent->images.count : 0) + indexInParent;
+    }
+}
+
 - (NSImage*) icon
 {
     if (imagePath){
@@ -186,6 +206,7 @@
     return [[NodeID alloc] initWithName:name image:self.icon];
 }
 
+// IKImageBrowserItem Protocol
 - (NodeID*) imageID
 {
     return [[NodeID alloc] initWithName:self.imageName image:self.imageNode.icon];
@@ -206,58 +227,42 @@
     return [self image];
 }
 
+- (NSString *) imageTitle
+{
+    return [self name];
+}
+
 //-----------------------------------------------------------------------------------------
 // ツリー・ウォーキング
 //-----------------------------------------------------------------------------------------
 - (PathNode*) nextImageNode
 {
-    return [[self imageNode]->parent nextImageNodeOfImageAtIndex:indexInParent senderIsImageNode:YES];
+    return [[self imageNode]->parent nextImageNodeOfImageAtIndex:[self indexInParent]];
 }
 
-- (PathNode*) nextImageNodeOfImageAtIndex:(NSUInteger)index senderIsImageNode:(BOOL)isImageNode
+- (PathNode*) nextImageNodeOfImageAtIndex:(NSUInteger)index
 {
-    if (isImageNode){
-        if (images && index + 1 < images.count){
-            return images[index + 1];
-        }else if (children){
-            return [children[0] imageNode];
-        }
+    NSArray* nodes = [self images];
+    if (index + 1 ==  nodes.count){
+        return [parent nextImageNodeOfImageAtIndex:[self indexInParent]];
     }else{
-        if (children && index + 1 < children.count){
-            return [children[index + 1] imageNode];
-        }
+        return [nodes[index + 1] imageNode];
     }
-    return [parent nextImageNodeOfImageAtIndex:indexInParent senderIsImageNode:NO];
 }
 
 - (PathNode*) previousImageNode
 {
-    return [[self imageNode]->parent previousImageNodeOfImageAtIndex:indexInParent
-                                                   senderIsImageNode:imagePath != nil];
+    return [[self imageNode]->parent previousImageNodeOfImageAtIndex:[self indexInParent]];
 }
 
-- (PathNode*) previousImageNodeOfImageAtIndex:(NSUInteger)index senderIsImageNode:(BOOL)isImageNode
+- (PathNode*) previousImageNodeOfImageAtIndex:(NSUInteger)index
 {
-    if (index == NSNotFound){
-        if (children){
-            return [children.lastObject previousImageNodeOfImageAtIndex:index senderIsImageNode:NO];
-        }else if (images){
-            return [images.lastObject imageNode];
-        }
+    NSArray* nodes = [self images];
+    if (index == 0){
+        return [parent previousImageNodeOfImageAtIndex:[self indexInParent]];
     }else{
-        if (isImageNode){
-            if (index > 0){
-                return images[index - 1];
-            }
-        }else{
-            if (index > 0){
-                return [children[index - 1] previousImageNodeOfImageAtIndex:NSNotFound senderIsImageNode:NO];
-            }else if (images){
-                return [images.lastObject imageNode];
-            }
-        }
+        return [nodes[index - 1] imageNodeReverse];
     }
-    return [parent previousImageNodeOfImageAtIndex:indexInParent senderIsImageNode:NO];
 }
 
 - (PathNode*) nextFolderNode

@@ -19,6 +19,7 @@
 		7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */; };
 		7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */; };
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
+		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -55,6 +56,7 @@
 		7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewController.m; sourceTree = "<group>"; };
 		7B0DBEDF16A297E2000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailView.xib; sourceTree = "<group>"; };
 		7B0DBEE116A2A2FD000365F4 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		7B0DBEF716A81FB4000365F4 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DigViewer.icns; sourceTree = SOURCE_ROOT; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -169,6 +171,7 @@
 				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
 				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
+				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
+				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
