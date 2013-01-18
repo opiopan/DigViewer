@@ -25,13 +25,10 @@
 - (id)init
 {
     self = [super initWithNibName:@"MainView" bundle:nil];
-    if (self) {
-        [self performSelector:@selector(setupSubView) withObject:nil afterDelay:0.0f];
-    }
     return self;
 }
 
-- (void)setupSubView
+- (void)awakeFromNib
 {
     outlineViewController = [[FolderOutlineView alloc] init];
     outlineViewController.representedObject = self.representedObject;

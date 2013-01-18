@@ -122,6 +122,11 @@
     return children == nil;
 }
 
+- (BOOL) isImage
+{
+    return imagePath != nil;
+}
+
 - (PathNode*) me
 {
     return self;

@@ -7,6 +7,9 @@
 //
 
 #import "ImageViewController.h"
+#import "ClickableImageView.h"
+#import "MainViewController.h"
+#import "Document.h"
 
 @implementation ImageViewController
 
@@ -14,6 +17,19 @@
 {
     self = [super initWithNibName:@"ImageView" bundle:nil];
     return self;
+}
+
+- (void)awakeFromNib
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    imageView.delegate = self;
+}
+
+- (void)onDoubleClickableImageView:(id)sender
+{
+    ObjectControllers* controllers = self.representedObject;
+    Document* document = controllers.documentController;
+    document.presentationViewType = typeThumbnailView;
 }
 
 @end

@@ -56,7 +56,7 @@
 										<string key="NSFrameSize">{174, 224}</string>
 										<reference key="NSSuperview" ref="246080425"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="1059245218"/>
+										<reference key="NSNextKeyView" ref="242632202"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -213,7 +213,7 @@
 						<string key="NSFrameSize">{176, 242}</string>
 						<reference key="NSSuperview" ref="38726443"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="242632202"/>
+						<reference key="NSNextKeyView" ref="246080425"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="1059245218"/>
@@ -239,7 +239,7 @@
 										<string key="NSFrameSize">{174, 219}</string>
 										<reference key="NSSuperview" ref="1052813926"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="830587353"/>
+										<reference key="NSNextKeyView" ref="163629151"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -347,7 +347,6 @@
 								<string key="NSFrame">{{1, 191}, {277, 16}}</string>
 								<reference key="NSSuperview" ref="413099378"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -374,7 +373,7 @@
 						<string key="NSFrame">{{0, 243}, {176, 237}}</string>
 						<reference key="NSSuperview" ref="38726443"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="163629151"/>
+						<reference key="NSNextKeyView" ref="1052813926"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="830587353"/>
@@ -744,7 +743,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100279</int>
+			<int key="maxID">100280</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

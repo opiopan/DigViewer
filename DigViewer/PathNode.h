@@ -22,6 +22,7 @@
 @property (readonly, weak) PathNode* parent;
 @property (readonly) NSMutableArray* children;
 @property (readonly) BOOL            isLeaf;
+@property (readonly) BOOL            isImage;
 @property (readonly) NSMutableArray* images;
 @property (readonly) NSUInteger      indexInParent;
 @property (readonly) PathNode*       imageNode;

@@ -11,6 +11,9 @@
 
 @interface ThumbnailViewController : BaseViewController
 
+@property (assign) double zoomRethio;
 @property (weak) IBOutlet IKImageBrowserView *thumbnailView;
+
+- (IBAction)onDefaultSize:(id)sender;
 
 @end

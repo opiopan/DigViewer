@@ -21,5 +21,6 @@
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
+- (void)moveToFolderNode:(PathNode*)next;
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "FolderOutlineView.h"
+#import "MainViewController.h"
+#import "Document.h"
+#import "PathNode.h"
 
 @implementation FolderOutlineView
 
@@ -16,6 +19,24 @@
 {
     self = [super initWithNibName:@"FolderOutlineView" bundle:nil];
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [imageTableView setTarget:self];
+    [imageTableView setDoubleAction:@selector(onDoubleClickImageTableView:)];
+}
+
+- (void)onDoubleClickImageTableView:(id)sender
+{
+    ObjectControllers* controllers = self.representedObject;
+    PathNode* current = controllers.imageArrayController.selectedObjects[0];
+    Document* document = controllers.documentController;
+    if (current.isImage){
+        document.presentationViewType = typeImageView;
+    }else{
+        [document moveToFolderNode:current];
+    }    
 }
 
 - (void)updateRepresentationObject
