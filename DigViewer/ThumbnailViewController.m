@@ -16,7 +16,7 @@
 @synthesize zoomRethio;
 @synthesize thumbnailView;
 
-const static double defaultZoomRatio = 0.4f;
+const static double defaultZoomRatio = 100;
 
 - (id)init
 {
@@ -49,6 +49,18 @@ const static double defaultZoomRatio = 0.4f;
     }else{
         [document moveToFolderNode:current];
     }
+}
+
+- (void)setZoomRethio:(double)value
+{
+    zoomRethio = value;
+    NSSize size = {zoomRethio, zoomRethio};
+    thumbnailView.cellSize = size;
+}
+
+- (double)zoomRethio
+{
+    return zoomRethio;
 }
 
 - (IBAction)onDefaultSize:(id)sender {

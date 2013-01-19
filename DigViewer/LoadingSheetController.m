@@ -18,15 +18,18 @@
     SEL               didEndSelector;
 }
 
-@synthesize name;
+@synthesize phase;
+@synthesize isIndeterminate;
 @synthesize progress;
 @synthesize panel;
+@synthesize progressIndicator;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         pathNodeProgress = [[PathNodeProgress alloc] init];
+        isIndeterminate = YES;
         progress = [NSNumber numberWithDouble:0.0];
         [NSBundle loadNibNamed:@"LoadingSheet" owner:self];
     }
@@ -36,7 +39,6 @@
 
 - (void) loadPath:(NSString*)p forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
 {
-    self.name = [p lastPathComponent];
     path = p;
     modalWindow = window;
     modalDelegate = delegate;
@@ -46,10 +48,18 @@
     [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
 }
 
+- (void) awakeFromNib
+{
+    [progressIndicator startAnimation:self];
+}
+
 - (void) loadPinnedFileInBackground
 {
     @autoreleasepool {
+        self.phase = [NSString stringWithFormat:@"Now loading a pinned file in the folder \"%@\"...", [path lastPathComponent]];
         PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
+        self.phase = [NSString stringWithFormat:@"Now recognizing a pinned file in the folder \"%@\"", [path lastPathComponent]];
+        self.isIndeterminate = NO;
         root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
     }

@@ -11,9 +11,11 @@
 
 @interface LoadingSheetController : NSObject <NSWindowDelegate>
 
-@property (strong) NSString* name;
+@property (strong) NSString* phase;
+@property (assign) BOOL isIndeterminate;
 @property (strong) NSNumber* progress;
 @property (strong) IBOutlet NSPanel *panel;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 - (void) loadPath:(NSString*)path forWindow:(NSWindow*)window
           modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector;
