@@ -35,6 +35,7 @@
 		7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.m */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
+		7BF8E2A516AA7C9F0007E788 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8E2A416AA7C9F0007E788 /* up.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+CapabilityDetermining.m"; sourceTree = "<group>"; };
 		7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathfinderPinnedFile.h; sourceTree = "<group>"; };
 		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathfinderPinnedFile.m; sourceTree = "<group>"; };
+		7BF8E2A416AA7C9F0007E788 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = resources/up.png; sourceTree = "<group>"; };
+		7BF8E2A716AA7DEB0007E788 /* up.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = up.idraw; path = resources/up.idraw; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
+				7BF8E2A416AA7C9F0007E788 /* up.png */,
+				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
+				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

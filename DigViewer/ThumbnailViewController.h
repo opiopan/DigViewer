@@ -15,5 +15,6 @@
 @property (weak) IBOutlet IKImageBrowserView *thumbnailView;
 
 - (IBAction)onDefaultSize:(id)sender;
+- (IBAction)onUpFolder:(id)sender;
 
 @end

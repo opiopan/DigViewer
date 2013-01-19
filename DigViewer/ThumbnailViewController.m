@@ -66,4 +66,16 @@ const static double defaultZoomRatio = 100;
 - (IBAction)onDefaultSize:(id)sender {
     self.zoomRethio = defaultZoomRatio;
 }
+
+- (IBAction)onUpFolder:(id)sender {
+    ObjectControllers* controllers = self.representedObject;
+    PathNode* selected = controllers.imageArrayController.selectedObjects[0];
+    PathNode* current = selected.parent;
+    PathNode* up = current.parent;
+    if (up){
+        NSUInteger index = current.indexInParent;
+        [controllers.imageTreeController setSelectionIndexPath:up.indexPath];
+        [controllers.imageArrayController setSelectionIndex:index];
+    }
+}
 @end
