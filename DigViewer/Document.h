@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PathNode.h"
-#import "ObjectControllers.h"
 
 @interface Document : NSDocument
 
@@ -16,8 +15,9 @@
 @property (strong) NSArray* selectionIndexePathForTree;
 @property (strong) NSIndexSet* selectionIndexesForImages;
 @property (assign) int presentationViewType;
-@property (strong) IBOutlet ObjectControllers* objectControllers;
 @property (weak) IBOutlet NSView *placeHolder;
+@property (strong) IBOutlet NSTreeController *imageTreeController;
+@property (strong) IBOutlet NSArrayController *imageArrayController;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;

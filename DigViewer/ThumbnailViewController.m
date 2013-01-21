@@ -41,9 +41,8 @@ const static double defaultZoomRatio = 100;
 
 - (void) moveToSelectedNode
 {
-    ObjectControllers* controllers = self.representedObject;
-    PathNode* current = controllers.imageArrayController.selectedObjects[0];
-    Document* document = controllers.documentController;
+    Document* document = self.representedObject;
+    PathNode* current = document.imageArrayController.selectedObjects[0];
     if (current.isImage){
         document.presentationViewType = typeImageView;
     }else{
@@ -68,14 +67,14 @@ const static double defaultZoomRatio = 100;
 }
 
 - (IBAction)onUpFolder:(id)sender {
-    ObjectControllers* controllers = self.representedObject;
-    PathNode* selected = controllers.imageArrayController.selectedObjects[0];
+    Document* document = self.representedObject;
+    PathNode* selected = document.imageArrayController.selectedObjects[0];
     PathNode* current = selected.parent;
     PathNode* up = current.parent;
     if (up){
         NSUInteger index = current.indexInParent;
-        [controllers.imageTreeController setSelectionIndexPath:up.indexPath];
-        [controllers.imageArrayController setSelectionIndex:index];
+        [document.imageTreeController setSelectionIndexPath:up.indexPath];
+        [document.imageArrayController setSelectionIndex:index];
     }
 }
 @end

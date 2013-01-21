@@ -27,8 +27,7 @@
 
 - (void)onDoubleClickableImageView:(id)sender
 {
-    ObjectControllers* controllers = self.representedObject;
-    Document* document = controllers.documentController;
+    Document* document = self.representedObject;
     document.presentationViewType = typeThumbnailView;
 }
 

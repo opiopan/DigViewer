@@ -19,7 +19,8 @@
 @synthesize root;
 @synthesize selectionIndexePathForTree;
 @synthesize selectionIndexesForImages;
-@synthesize objectControllers;
+@synthesize imageTreeController;
+@synthesize imageArrayController;
 
 //-----------------------------------------------------------------------------------------
 // NSDocument クラスメソッド：ドキュメントの振る舞い
@@ -65,7 +66,7 @@
     [super windowControllerDidLoadNib:aController];
     
     mainViewController = [[MainViewController alloc] init];
-    mainViewController.representedObject = objectControllers;
+    mainViewController.representedObject = self;
     [self.placeHolder associateSubViewWithController:mainViewController];
     
     [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
@@ -97,41 +98,41 @@
 //-----------------------------------------------------------------------------------------
 - (void)moveToNextImage:(id)sender
 {
-    [self moveToImageNode:[[objectControllers.imageArrayController selectedObjects][0] nextImageNode]];
+    [self moveToImageNode:[[self.imageArrayController selectedObjects][0] nextImageNode]];
 }
 
 - (void)moveToPreviousImage:(id)sender
 {
-    [self moveToImageNode:[[objectControllers.imageArrayController selectedObjects][0] previousImageNode]];
+    [self moveToImageNode:[[self.imageArrayController selectedObjects][0] previousImageNode]];
 }
 
 - (void)moveToImageNode:(PathNode*)next
 {
     if (next){
-        PathNode* current = [objectControllers.imageArrayController selectedObjects][0];
+        PathNode* current = [imageArrayController selectedObjects][0];
         if (current.parent != next.parent){
             NSIndexPath* indexPath = [next.parent indexPath];
-            [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
+            [imageTreeController setSelectionIndexPath:indexPath];
         }
-        [objectControllers.imageArrayController setSelectionIndex:next.indexInParent];
+        [imageArrayController setSelectionIndex:next.indexInParent];
     }
 }
 
 - (void)moveToNextFolder:(id)sender
 {
-    [self moveToFolderNode:[[objectControllers.imageTreeController selectedObjects][0] nextFolderNode]];
+    [self moveToFolderNode:[[imageTreeController selectedObjects][0] nextFolderNode]];
 }
 
 - (void)moveToPreviousFolder:(id)sender
 {
-    [self moveToFolderNode:[[objectControllers.imageTreeController selectedObjects][0] previousFolderNode]];
+    [self moveToFolderNode:[[imageTreeController selectedObjects][0] previousFolderNode]];
 }
 
 - (void)moveToFolderNode:(PathNode*)next
 {
     if (next){
         NSIndexPath* indexPath = [next indexPath];
-        [objectControllers.imageTreeController setSelectionIndexPath:indexPath];
+        [imageTreeController setSelectionIndexPath:indexPath];
     }
 }
 
@@ -146,7 +147,7 @@
 - (void)setSelectionIndexePathForTree:(NSArray *)indexPath
 {
     selectionIndexePathForTree = indexPath;
-    [objectControllers.imageArrayController setSelectionIndex:0];
+    [imageArrayController setSelectionIndex:0];
 }
 
 - (NSIndexSet*) selectionIndexesForImages

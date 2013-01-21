@@ -29,9 +29,8 @@
 
 - (void)onDoubleClickImageTableView:(id)sender
 {
-    ObjectControllers* controllers = self.representedObject;
-    PathNode* current = controllers.imageArrayController.selectedObjects[0];
-    Document* document = controllers.documentController;
+    Document* document = self.representedObject;
+    PathNode* current = document.imageArrayController.selectedObjects[0];
     if (current.isImage){
         document.presentationViewType = typeImageView;
     }else{

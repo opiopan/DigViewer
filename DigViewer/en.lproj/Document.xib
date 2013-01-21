@@ -65,9 +65,10 @@
 							<string key="NSToolbarItemPaletteLabel">View Type</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="882469749">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {71, 25}}</string>
+								<reference key="NSSuperview"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="504972920">
@@ -236,20 +237,9 @@
 			<object class="NSCustomObject" id="796877042">
 				<string key="NSClassName">NSApplication</string>
 			</object>
-			<object class="NSCustomObject" id="1013103303">
-				<string key="NSClassName">ObjectControllers</string>
-			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">objectControllers</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="1013103303"/>
-					</object>
-					<int key="connectionID">100239</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">placeHolder</string>
@@ -339,30 +329,6 @@
 					<int key="connectionID">100258</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">imageArrayController</string>
-						<reference key="source" ref="1013103303"/>
-						<reference key="destination" ref="823269531"/>
-					</object>
-					<int key="connectionID">100236</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">imageTreeController</string>
-						<reference key="source" ref="1013103303"/>
-						<reference key="destination" ref="793830743"/>
-					</object>
-					<int key="connectionID">100237</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">documentController</string>
-						<reference key="source" ref="1013103303"/>
-						<reference key="destination" ref="512844837"/>
-					</object>
-					<int key="connectionID">100259</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">selectedTag: self.presentationViewType</string>
 						<reference key="source" ref="882469749"/>
@@ -439,11 +405,6 @@
 						<reference key="parent" ref="568628114"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">100235</int>
-						<reference key="object" ref="1013103303"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">100242</int>
 						<reference key="object" ref="589826106"/>
 						<array class="NSMutableArray" key="children">
@@ -493,7 +454,6 @@
 				<string key="100059.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100087.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100232.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100235.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100242.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100243.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100246.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -517,13 +477,18 @@
 					<string key="className">Document</string>
 					<string key="superclassName">NSDocument</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="objectControllers">ObjectControllers</string>
+						<string key="imageArrayController">NSArrayController</string>
+						<string key="imageTreeController">NSTreeController</string>
 						<string key="placeHolder">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="objectControllers">
-							<string key="name">objectControllers</string>
-							<string key="candidateClassName">ObjectControllers</string>
+						<object class="IBToOneOutletInfo" key="imageArrayController">
+							<string key="name">imageArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imageTreeController">
+							<string key="name">imageTreeController</string>
+							<string key="candidateClassName">NSTreeController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="placeHolder">
 							<string key="name">placeHolder</string>
@@ -533,33 +498,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/Document.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ObjectControllers</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="documentController">NSDocument</string>
-						<string key="imageArrayController">NSArrayController</string>
-						<string key="imageTreeController">NSTreeController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="documentController">
-							<string key="name">documentController</string>
-							<string key="candidateClassName">NSDocument</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageArrayController">
-							<string key="name">imageArrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageTreeController">
-							<string key="name">imageTreeController</string>
-							<string key="candidateClassName">NSTreeController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ObjectControllers.h</string>
 					</object>
 				</object>
 			</array>
