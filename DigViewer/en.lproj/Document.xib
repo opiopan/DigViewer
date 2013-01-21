@@ -67,7 +67,7 @@
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="882469749">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{0, 14}, {71, 25}}</string>
+								<string key="NSFrame">{{0, 14}, {67, 25}}</string>
 								<reference key="NSSuperview"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
@@ -101,14 +101,14 @@
 											<int key="NSSegmentItemImageScaling">0</int>
 										</object>
 									</array>
-									<int key="NSSegmentStyle">2</int>
+									<int key="NSSegmentStyle">4</int>
 								</object>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 							<nil key="NSToolbarItemImage"/>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
-							<string key="NSToolbarItemMinSize">{71, 25}</string>
+							<string key="NSToolbarItemMinSize">{67, 25}</string>
 							<string key="NSToolbarItemMaxSize">{104, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
@@ -255,6 +255,22 @@
 						<reference key="destination" ref="275939982"/>
 					</object>
 					<int key="connectionID">100241</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">imageTreeController</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="793830743"/>
+					</object>
+					<int key="connectionID">100260</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">imageArrayController</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="823269531"/>
+					</object>
+					<int key="connectionID">100261</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -469,7 +485,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100259</int>
+			<int key="maxID">100261</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
