@@ -194,5 +194,11 @@
     [mainViewController updateRepresentationObject];
 }
 
+- (void)fitImageToScreen:(id)sender
+{
+    self.isFitWindow = ! self.isFitWindow;
+    [sender setState:self.isFitWindow ? NSOnState : NSOffState];
+}
+
 
 @end
