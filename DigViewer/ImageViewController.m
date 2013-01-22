@@ -23,6 +23,14 @@
 {
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     imageView.delegate = self;
+    [self performSelector:@selector(updateRepresentationObject) withObject:nil afterDelay:0.0f];
+}
+
+- (void)updateRepresentationObject
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    Document* document = self.representedObject;
+    imageView.imageScaling = (document.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
 }
 
 - (void)onDoubleClickableImageView:(id)sender

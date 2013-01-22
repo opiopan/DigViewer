@@ -19,6 +19,7 @@
 @synthesize root;
 @synthesize selectionIndexePathForTree;
 @synthesize selectionIndexesForImages;
+@synthesize isFitWindow;
 @synthesize imageTreeController;
 @synthesize imageArrayController;
 
@@ -178,5 +179,20 @@
 {
     self.presentationViewType = self.presentationViewType == typeImageView ? typeThumbnailView : typeImageView;
 }
+
+//-----------------------------------------------------------------------------------------
+// イメージの拡大表示属性
+//-----------------------------------------------------------------------------------------
+- (BOOL) isFitWindow
+{
+    return isFitWindow;
+}
+
+- (void)setIsFitWindow:(BOOL)state
+{
+    isFitWindow = state;
+    [mainViewController updateRepresentationObject];
+}
+
 
 @end

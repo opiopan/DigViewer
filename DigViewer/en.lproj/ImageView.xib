@@ -44,7 +44,6 @@
 				<string key="NSFrameSize">{424, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSImageCell" key="NSCell" id="452224551">
@@ -52,7 +51,7 @@
 					<int key="NSCellFlags2">33554432</int>
 					<string key="NSCellIdentifier">_NS:9</string>
 					<int key="NSAlign">0</int>
-					<int key="NSScale">0</int>
+					<int key="NSScale">3</int>
 					<int key="NSStyle">0</int>
 					<bool key="NSAnimates">NO</bool>
 				</object>
@@ -208,7 +207,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100276</int>
+			<int key="maxID">100277</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
