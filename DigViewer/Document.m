@@ -137,6 +137,34 @@
     }
 }
 
+- (void)moveUpFolder:(id)sender
+{
+    if (self.presentationViewType == typeImageView){
+        self.presentationViewType = typeThumbnailView;
+    }else{
+        PathNode* selected = imageArrayController.selectedObjects[0];
+        PathNode* current = selected.parent;
+        PathNode* up = current.parent;
+        if (up){
+            NSUInteger index = current.indexInParent;
+            [imageTreeController setSelectionIndexPath:up.indexPath];
+            [imageArrayController setSelectionIndex:index];
+        }
+    }
+}
+
+- (void)moveDownFolder:(id)sender
+{
+    PathNode* selected = imageArrayController.selectedObjects[0];
+    if (selected){
+        if (selected.isImage){
+            self.presentationViewType = typeImageView;
+        }else{
+            [imageTreeController setSelectionIndexPath:selected.indexPath];
+        }
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // 選択状態属性
 //-----------------------------------------------------------------------------------------

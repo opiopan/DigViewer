@@ -67,11 +67,13 @@ const static double defaultZoomRatio = 100;
     return zoomRethio;
 }
 
-- (IBAction)onDefaultSize:(id)sender {
+- (IBAction)onDefaultSize:(id)sender
+{
     self.zoomRethio = defaultZoomRatio;
 }
 
-- (IBAction)onUpFolder:(id)sender {
+- (IBAction)onUpFolder:(id)sender
+{
     Document* document = self.representedObject;
     PathNode* selected = document.imageArrayController.selectedObjects[0];
     PathNode* current = selected.parent;
@@ -82,4 +84,5 @@ const static double defaultZoomRatio = 100;
         [document.imageArrayController setSelectionIndex:index];
     }
 }
+
 @end

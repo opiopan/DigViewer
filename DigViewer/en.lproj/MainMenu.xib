@@ -753,6 +753,34 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="176966521">
+									<reference key="NSMenu" ref="617094169"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="454986644">
+									<reference key="NSMenu" ref="617094169"/>
+									<string key="NSTitle">Down Folder</string>
+									<string key="NSKeyEquiv"></string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="589262913">
+									<reference key="NSMenu" ref="617094169"/>
+									<string key="NSTitle">Up Folder</string>
+									<string key="NSKeyEquiv"></string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 							</array>
 						</object>
 					</object>
@@ -1282,7 +1310,7 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
-								<object class="NSMenuItem" id="722278908">
+								<object class="NSMenuItem" id="535276491">
 									<reference key="NSMenu" ref="466310130"/>
 									<string key="NSTitle">Fit Image To Screen</string>
 									<string type="base64-UTF8" key="NSKeyEquiv">DQ</string>
@@ -2049,9 +2077,25 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">fitImageToScreen:</string>
 						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="722278908"/>
+						<reference key="destination" ref="535276491"/>
 					</object>
 					<int key="connectionID">556</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">moveDownFolder:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="454986644"/>
+					</object>
+					<int key="connectionID">563</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">moveUpFolder:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="589262913"/>
+					</object>
+					<int key="connectionID">564</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2527,7 +2571,7 @@
 							<reference ref="237841660"/>
 							<reference ref="292460838"/>
 							<reference ref="1064352856"/>
-							<reference ref="722278908"/>
+							<reference ref="535276491"/>
 						</array>
 						<reference key="parent" ref="586577488"/>
 					</object>
@@ -3095,6 +3139,9 @@
 							<reference ref="867792826"/>
 							<reference ref="962911069"/>
 							<reference ref="589979562"/>
+							<reference ref="454986644"/>
+							<reference ref="176966521"/>
+							<reference ref="589262913"/>
 						</array>
 						<reference key="parent" ref="78016530"/>
 					</object>
@@ -3135,8 +3182,23 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">555</int>
-						<reference key="object" ref="722278908"/>
+						<reference key="object" ref="535276491"/>
 						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">557</int>
+						<reference key="object" ref="454986644"/>
+						<reference key="parent" ref="617094169"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">558</int>
+						<reference key="object" ref="176966521"/>
+						<reference key="parent" ref="617094169"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">559</int>
+						<reference key="object" ref="589262913"/>
+						<reference key="parent" ref="617094169"/>
 					</object>
 				</array>
 			</object>
@@ -3286,6 +3348,9 @@
 				<string key="548.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="549.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="555.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="557.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="558.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="559.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3305,7 +3370,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">556</int>
+			<int key="maxID">564</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3314,10 +3379,12 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="duplicateDocument:">id</string>
 						<string key="fitImageToScreen:">id</string>
+						<string key="moveDownFolder:">id</string>
 						<string key="moveToNextFolder:">id</string>
 						<string key="moveToNextImage:">id</string>
 						<string key="moveToPreviousFolder:">id</string>
 						<string key="moveToPreviousImage:">id</string>
+						<string key="moveUpFolder:">id</string>
 						<string key="togglePresentationView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -3327,6 +3394,10 @@
 						</object>
 						<object class="IBActionInfo" key="fitImageToScreen:">
 							<string key="name">fitImageToScreen:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="moveDownFolder:">
+							<string key="name">moveDownFolder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="moveToNextFolder:">
@@ -3343,6 +3414,10 @@
 						</object>
 						<object class="IBActionInfo" key="moveToPreviousImage:">
 							<string key="name">moveToPreviousImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="moveUpFolder:">
+							<string key="name">moveUpFolder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="togglePresentationView:">
