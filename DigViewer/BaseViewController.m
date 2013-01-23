@@ -10,6 +10,11 @@
 
 @implementation BaseViewController
 
+- (NSView*) representationView;
+{
+    return self.view;
+}
+
 - (void) updateRepresentationObject
 {
 }

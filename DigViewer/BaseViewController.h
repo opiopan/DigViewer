@@ -10,6 +10,7 @@
 
 @interface BaseViewController : NSViewController
 
+- (NSView*) representationView;
 - (void) updateRepresentationObject;
 
 @end

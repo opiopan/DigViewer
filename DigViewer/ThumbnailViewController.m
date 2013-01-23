@@ -29,6 +29,11 @@ const static double defaultZoomRatio = 100;
     [self performSelector:@selector(onDefaultSize:) withObject:self afterDelay:0.0f];
 }
 
+- (NSView*)representationView;
+{
+    return thumbnailView;
+}
+
 - (void)updateRepresentationObject
 {
     [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];

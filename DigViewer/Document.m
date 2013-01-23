@@ -159,7 +159,7 @@
 - (void)setSelectionIndexesForImages:(NSIndexSet *)indexes
 {
     selectionIndexesForImages = indexes;
-    [mainViewController updateRepresentationObject];
+    [mainViewController performSelector:@selector(updateRepresentationObject) withObject:nil afterDelay:0.0f];
 }
 
 //-----------------------------------------------------------------------------------------
