@@ -8,14 +8,15 @@
 
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
+#import "NSViewController+Nested.h"
 #import "FolderOutlineView.h"
 #import "ImageViewController.h"
 #import "ThumbnailViewController.h"
 
 @implementation MainViewController {
     NSArray*                   viewControllers;
-    BaseViewController*        outlineViewController;
-    BaseViewController* __weak representationViewController;
+    NSViewController*        outlineViewController;
+    NSViewController* __weak representationViewController;
 }
 
 @synthesize presentationViewType;
@@ -37,7 +38,7 @@
     viewControllers = [NSArray arrayWithObjects:[[ImageViewController alloc] init],
                        [[ThumbnailViewController alloc] init], nil];
     for (int i = 0; i < viewControllers.count; i++){
-        BaseViewController* controller = viewControllers[i];
+        NSViewController* controller = viewControllers[i];
         controller.representedObject = self.representedObject;
     }
     self.presentationViewType = typeImageView;

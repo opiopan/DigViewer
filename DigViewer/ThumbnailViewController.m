@@ -75,14 +75,12 @@ const static double defaultZoomRatio = 100;
 - (IBAction)onUpFolder:(id)sender
 {
     Document* document = self.representedObject;
-    PathNode* selected = document.imageArrayController.selectedObjects[0];
-    PathNode* current = selected.parent;
-    PathNode* up = current.parent;
-    if (up){
-        NSUInteger index = current.indexInParent;
-        [document.imageTreeController setSelectionIndexPath:up.indexPath];
-        [document.imageArrayController setSelectionIndex:index];
-    }
+    [document moveUpFolder:sender];
+}
+
+- (IBAction)onDownFolder:(id)sender {
+    Document* document = self.representedObject;
+    [document moveDownFolder:sender];
 }
 
 @end

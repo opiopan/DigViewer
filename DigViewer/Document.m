@@ -8,6 +8,7 @@
 
 #import "Document.h"
 #import "LoadingSheetController.h"
+#import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
 

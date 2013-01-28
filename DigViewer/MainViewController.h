@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseViewController.h"
 
 enum RepresentationViewType {
     typeImageView,
     typeThumbnailView
 };
 
-@interface MainViewController : BaseViewController
+@interface MainViewController : NSViewController
 
 @property (assign) enum RepresentationViewType presentationViewType;
 @property (weak) IBOutlet NSView *outlinePlaceholder;

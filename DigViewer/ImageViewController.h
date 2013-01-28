@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseViewController.h"
 
-@interface ImageViewController : BaseViewController
+@interface ImageViewController : NSViewController
 
 @end

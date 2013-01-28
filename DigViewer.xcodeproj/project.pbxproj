@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
+		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
 		7B0DBEB616A01545000365F4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB416A01545000365F4 /* MainView.xib */; };
 		7B0DBECA16A0F665000365F4 /* FolderOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEC916A0F665000365F4 /* FolderOutlineView.m */; };
@@ -14,7 +16,6 @@
 		7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */; };
 		7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBED216A0F89C000365F4 /* ImageView.xib */; };
 		7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */; };
-		7B0DBEDA16A29126000365F4 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBED916A29126000365F4 /* BaseViewController.m */; };
 		7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */; };
 		7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */; };
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
@@ -38,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
+		7B01210716B4C6A9004AA730 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = resources/down.png; sourceTree = "<group>"; };
+		7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+Nested.h"; sourceTree = "<group>"; };
+		7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSViewController+Nested.m"; sourceTree = "<group>"; };
 		7B0DBEB016A014B6000365F4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B0DBEB116A014B6000365F4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7B0DBEB516A01545000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainView.xib; sourceTree = "<group>"; };
@@ -49,8 +54,6 @@
 		7B0DBED316A0F89C000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageView.xib; sourceTree = "<group>"; };
 		7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+ViewControllerAssociation.h"; sourceTree = "<group>"; };
 		7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+ViewControllerAssociation.m"; sourceTree = "<group>"; };
-		7B0DBED816A29125000365F4 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		7B0DBED916A29126000365F4 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailViewController.h; sourceTree = "<group>"; };
 		7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewController.m; sourceTree = "<group>"; };
 		7B0DBEDF16A297E2000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailView.xib; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
 				7BF8E2A416AA7C9F0007E788 /* up.png */,
 				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
+				7B01210616B4C6A9004AA730 /* down.idraw */,
+				7B01210716B4C6A9004AA730 /* down.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -210,8 +215,8 @@
 				7B3920461696CA1800E139D0 /* Document.m */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
-				7B0DBED816A29125000365F4 /* BaseViewController.h */,
-				7B0DBED916A29126000365F4 /* BaseViewController.m */,
+				7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */,
+				7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */,
 				7B0DBEB016A014B6000365F4 /* MainViewController.h */,
 				7B0DBEB116A014B6000365F4 /* MainViewController.m */,
 				7B0DBEC816A0F664000365F4 /* FolderOutlineView.h */,
@@ -299,6 +304,7 @@
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
+				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,9 +327,9 @@
 				7B0DBECA16A0F665000365F4 /* FolderOutlineView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.m in Sources */,
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
-				7B0DBEDA16A29126000365F4 /* BaseViewController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.m in Sources */,
+				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,7 +54,7 @@
 					<nil key="NSToolbarDelegate"/>
 					<bool key="NSToolbarPrefersToBeShown">YES</bool>
 					<bool key="NSToolbarShowsBaselineSeparator">YES</bool>
-					<bool key="NSToolbarAllowsUserCustomization">YES</bool>
+					<bool key="NSToolbarAllowsUserCustomization">NO</bool>
 					<bool key="NSToolbarAutosavesConfiguration">NO</bool>
 					<int key="NSToolbarDisplayMode">2</int>
 					<int key="NSToolbarSizeMode">1</int>
@@ -63,7 +63,7 @@
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">0CD7A4CE-76AA-46A4-B12E-A82BFDB7B6CB</characters>
 							</object>
-							<string key="NSToolbarItemLabel">View Type</string>
+							<string key="NSToolbarItemLabel"/>
 							<string key="NSToolbarItemPaletteLabel">View Type</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="882469749">
@@ -71,7 +71,7 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 14}, {67, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="504972920">
@@ -91,6 +91,7 @@
 												<string key="NSClassName">NSImage</string>
 												<string key="NSResourceName">NSQuickLookTemplate</string>
 											</object>
+											<string key="NSSegmentItemTooltip">Show the Image view</string>
 											<bool key="NSSegmentItemSelected">YES</bool>
 											<int key="NSSegmentItemImageScaling">0</int>
 										</object>
@@ -100,6 +101,7 @@
 												<string key="NSClassName">NSImage</string>
 												<string key="NSResourceName">NSIconViewTemplate</string>
 											</object>
+											<string key="NSSegmentItemTooltip">Show the Thumbnail view</string>
 											<int key="NSSegmentItemTag">1</int>
 											<int key="NSSegmentItemImageScaling">0</int>
 										</object>
@@ -112,7 +114,7 @@
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{67, 25}</string>
-							<string key="NSToolbarItemMaxSize">{104, 25}</string>
+							<string key="NSToolbarItemMaxSize">{67, 25}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
 							<int key="NSToolbarItemTag">0</int>
@@ -123,7 +125,7 @@
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">BDFD4DB4-FAE0-42D6-A8DE-6C780BCE5FAD</characters>
 							</object>
-							<string key="NSToolbarItemLabel">Fit to Window</string>
+							<string key="NSToolbarItemLabel"/>
 							<string key="NSToolbarItemPaletteLabel">Fit to Window</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSButton" key="NSToolbarItemView" id="785515459">
@@ -131,7 +133,7 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{21, 14}, {38, 25}}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:22</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295407000">

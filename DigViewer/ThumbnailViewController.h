@@ -7,14 +7,14 @@
 //
 
 #import <Quartz/Quartz.h>
-#import "BaseViewController.h"
 
-@interface ThumbnailViewController : BaseViewController
+@interface ThumbnailViewController : NSViewController
 
 @property (assign) double zoomRethio;
 @property (weak) IBOutlet IKImageBrowserView *thumbnailView;
 
 - (IBAction)onDefaultSize:(id)sender;
 - (IBAction)onUpFolder:(id)sender;
+- (IBAction)onDownFolder:(id)sender;
 
 @end
