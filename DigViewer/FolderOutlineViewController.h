@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FolderOutlineView : NSViewController
+@interface FolderOutlineViewController : NSViewController
 
 @property (weak) IBOutlet NSTableView *imageTableView;
 

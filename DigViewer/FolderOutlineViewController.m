@@ -6,12 +6,12 @@
 //  Copyright (c) 2013年 opiopan. All rights reserved.
 //
 
-#import "FolderOutlineView.h"
+#import "FolderOutlineViewController.h"
 #import "MainViewController.h"
 #import "Document.h"
 #import "PathNode.h"
 
-@implementation FolderOutlineView
+@implementation FolderOutlineViewController
 
 @synthesize imageTableView;
 

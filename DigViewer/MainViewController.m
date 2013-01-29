@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
 #import "NSViewController+Nested.h"
-#import "FolderOutlineView.h"
+#import "FolderOutlineViewController.h"
 #import "ImageViewController.h"
 #import "ThumbnailViewController.h"
 
@@ -31,7 +31,7 @@
 
 - (void)awakeFromNib
 {
-    outlineViewController = [[FolderOutlineView alloc] init];
+    outlineViewController = [[FolderOutlineViewController alloc] init];
     outlineViewController.representedObject = self.representedObject;
     [outlinePlaceholder associateSubViewWithController:outlineViewController];
 
