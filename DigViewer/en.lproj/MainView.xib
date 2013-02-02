@@ -11,11 +11,9 @@
 			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSArrayController</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSSplitView</string>
-			<string>NSTreeController</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -32,7 +30,7 @@
 				<string key="NSClassName">FirstResponder</string>
 			</object>
 			<object class="NSSplitView" id="853728096">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSCustomView" id="868175591">
@@ -40,41 +38,30 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrameSize">{198, 480}</string>
 						<reference key="NSSuperview" ref="853728096"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">NSView</string>
 					</object>
 					<object class="NSCustomView" id="442832560">
 						<reference key="NSNextResponder" ref="853728096"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{207, 0}, {402, 480}}</string>
+						<string key="NSFrame">{{208, 0}, {401, 480}}</string>
 						<reference key="NSSuperview" ref="853728096"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">NSView</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{609, 480}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<bool key="NSIsVertical">YES</bool>
-			</object>
-			<object class="NSTreeController" id="793830743">
-				<string key="NSObjectClassName">PathNode</string>
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
-				<bool key="NSAvoidsEmptySelection">YES</bool>
-				<bool key="NSPreservesSelection">YES</bool>
-				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<string key="NSTreeContentChildrenKey">children</string>
-				<string key="NSTreeContentLeafKey">isLeaf</string>
-			</object>
-			<object class="NSArrayController" id="823269531">
-				<string key="NSObjectClassName">PathNode</string>
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
-				<bool key="NSAvoidsEmptySelection">YES</bool>
-				<bool key="NSPreservesSelection">YES</bool>
-				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<bool key="NSFilterRestrictsInsertion">YES</bool>
-				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+				<int key="NSDividerStyle">3</int>
+				<object class="NSMutableDictionary" key="NSHoldingPriorities">
+					<integer value="0" key="NS.key.0"/>
+					<real value="357" key="NS.object.0"/>
+				</object>
 			</object>
 			<object class="NSCustomObject" id="796877042">
 				<string key="NSClassName">NSApplication</string>
@@ -106,104 +93,6 @@
 					</object>
 					<int key="connectionID">100281</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectionIndexPaths: representedObject.imageTreeController.selectionIndexPaths</string>
-						<reference key="source" ref="793830743"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector" id="623447049">
-							<reference key="NSSource" ref="793830743"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">selectionIndexPaths: representedObject.imageTreeController.selectionIndexPaths</string>
-							<string key="NSBinding">selectionIndexPaths</string>
-							<string key="NSKeyPath">representedObject.imageTreeController.selectionIndexPaths</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100270</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">sortDescriptors: representedObject.imageTreeController.sortDescriptors</string>
-						<reference key="source" ref="793830743"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="793830743"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">sortDescriptors: representedObject.imageTreeController.sortDescriptors</string>
-							<string key="NSBinding">sortDescriptors</string>
-							<string key="NSKeyPath">representedObject.imageTreeController.sortDescriptors</string>
-							<reference key="NSPreviousConnector" ref="623447049"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100271</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: representedObject.imageTreeController.content</string>
-						<reference key="source" ref="793830743"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="793830743"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">contentArray: representedObject.imageTreeController.content</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">representedObject.imageTreeController.content</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100275</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectionIndexes: representedObject.imageArrayController.selectionIndexes</string>
-						<reference key="source" ref="823269531"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector" id="405759152">
-							<reference key="NSSource" ref="823269531"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">selectionIndexes: representedObject.imageArrayController.selectionIndexes</string>
-							<string key="NSBinding">selectionIndexes</string>
-							<string key="NSKeyPath">representedObject.imageArrayController.selectionIndexes</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100267</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">sortDescriptors: representedObject.imageArrayController.sortDescriptors</string>
-						<reference key="source" ref="823269531"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="823269531"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">sortDescriptors: representedObject.imageArrayController.sortDescriptors</string>
-							<string key="NSBinding">sortDescriptors</string>
-							<string key="NSKeyPath">representedObject.imageArrayController.sortDescriptors</string>
-							<reference key="NSPreviousConnector" ref="405759152"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100269</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: representedObject.imageArrayController.arrangedObjects</string>
-						<reference key="source" ref="823269531"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="823269531"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">contentArray: representedObject.imageArrayController.arrangedObjects</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">representedObject.imageArrayController.arrangedObjects</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100273</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -232,16 +121,6 @@
 						<string key="objectName">Application</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">100059</int>
-						<reference key="object" ref="793830743"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100087</int>
-						<reference key="object" ref="823269531"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">100233</int>
 						<reference key="object" ref="853728096"/>
 						<array class="NSMutableArray" key="children">
@@ -266,8 +145,6 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100059.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100087.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100233.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100276.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100277.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -285,15 +162,15 @@
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="outlinePlaceholder">NSView</string>
-						<string key="representationView">NSView</string>
+						<string key="presentationPlaceholder">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="outlinePlaceholder">
 							<string key="name">outlinePlaceholder</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="representationView">
-							<string key="name">representationView</string>
+						<object class="IBToOneOutletInfo" key="presentationPlaceholder">
+							<string key="name">presentationPlaceholder</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 					</dictionary>
