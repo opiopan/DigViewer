@@ -28,6 +28,8 @@
 		7B3920471696CA1800E139D0 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3920461696CA1800E139D0 /* Document.m */; };
 		7B39204A1696CA1800E139D0 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3920481696CA1800E139D0 /* Document.xib */; };
 		7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39204B1696CA1900E139D0 /* MainMenu.xib */; };
+		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
+		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E3F169C59A600A9E247 /* NodeID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3E169C59A600A9E247 /* NodeID.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
@@ -75,6 +77,10 @@
 		7B3920461696CA1800E139D0 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		7B3920491696CA1800E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		7B39204C1696CA1900E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
+		7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
+		7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBackgroundView.h; sourceTree = "<group>"; };
+		7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicBackgroundView.m; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E3D169C59A600A9E247 /* NodeID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeID.h; sourceTree = "<group>"; };
@@ -204,6 +210,10 @@
 				7B697E3A169C547200A9E247 /* ImageWithTextCell.m */,
 				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
 				7B0DBF0316A84335000365F4 /* ClickableImageView.m */,
+				7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */,
+				7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */,
+				7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */,
+				7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -330,6 +340,8 @@
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
+				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
+				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

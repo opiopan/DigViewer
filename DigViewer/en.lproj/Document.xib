@@ -611,6 +611,14 @@
 				<string key="100291.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100295.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100299.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<object class="NSMutableDictionary" key="100301.IBAttributePlaceholdersKey">
+					<string key="NS.key.0">ToolTip</string>
+					<object class="IBToolTipAttribute" key="NS.object.0">
+						<string key="name">ToolTip</string>
+						<reference key="object" ref="771481369"/>
+						<string key="toolTip">Scale up the image that fit to the window</string>
+					</object>
+				</object>
 				<array class="NSMutableArray" key="100301.IBNSViewMetadataConstraints">
 					<reference ref="303255139"/>
 				</array>
@@ -623,6 +631,7 @@
 				<string key="100308.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBWindowTemplateEditedContentRect">{{133, 170}, {507, 413}}</string>
+				<string key="6.CustomClassName">FrameView</string>
 				<array class="NSMutableArray" key="6.IBNSViewMetadataConstraints">
 					<reference ref="425062459"/>
 					<reference ref="235692374"/>
