@@ -58,9 +58,16 @@
     @autoreleasepool {
         self.phase = [NSString stringWithFormat:@"Now loading a pinned file in the folder \"%@\"...", [path lastPathComponent]];
         PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
-        self.phase = [NSString stringWithFormat:@"Now recognizing a pinned file in the folder \"%@\"...", [path lastPathComponent]];
-        self.isIndeterminate = NO;
-        root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
+        if (pinnedFile){
+            self.phase = [NSString stringWithFormat:@"Now recognizing a pinned file in the folder \"%@\"...",
+                          [path lastPathComponent]];
+            self.isIndeterminate = NO;
+            root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
+        }else{
+            self.phase = [NSString stringWithFormat:@"Now searching image files in the folder \"%@\"...",
+                          [path lastPathComponent]];
+            root = [PathNode pathNodeWithPath:path progress:pathNodeProgress];
+        }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
     }
 }

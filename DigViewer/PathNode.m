@@ -29,11 +29,6 @@
 //-----------------------------------------------------------------------------------------
 // オブジェクト初期化
 //-----------------------------------------------------------------------------------------
-+ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress
-{
-    return NULL;
-}
-
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress
 {
     PathNode* root = nil;
@@ -63,7 +58,7 @@
 }
 
 
-- (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip path:(NSString*)path;
+- (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip path:(NSString*)path
 {
     self = [self init];
     if (self){
@@ -71,6 +66,65 @@
         parent = p;
         indexInParent = ip;
         imagePath = path;
+    }
+    return self;
+}
+
++ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress
+{
+    return [[PathNode alloc] initRecursWithPath:path parent:nil indexInParent:0 progress:progress];
+}
+
+- (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p indexInParent:(NSUInteger)ip progress:(PathNodeProgress*)progress
+{
+    self = [self init];
+    if (self){
+        name = [path lastPathComponent];
+        parent = p;
+        indexInParent = ip;
+        
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        BOOL isDirectory;
+        if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
+            if (isDirectory){
+                NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
+                for (NSString* childName in childNames){
+                    if ([childName characterAtIndex:0] == '.'){
+                        continue;
+                    }
+                    NSString* childPath = [path stringByAppendingFormat:@"/%@", childName];
+                    PathNode* child = [[PathNode alloc] initRecursWithPath:childPath
+                                                                    parent:self indexInParent:0
+                                                                  progress:progress];
+                    if (child){
+                        if (child.isImage){
+                            if (!images){
+                                images = [[NSMutableArray alloc] init];
+                            }
+                            child->indexInParent = images.count;
+                            [images addObject:child];
+                        }else{
+                            if (!children){
+                                children = [[NSMutableArray alloc] init];
+                            }
+                            child->indexInParent = children.count;
+                            [children addObject:child];
+                        }
+                    }
+                }
+                if (images.count == 0 && children.count == 0){
+                    self = nil;
+                }
+            }else{
+                if ([NSImage isSupportedFileAtPath:path]){
+                    imagePath = path;
+                }else{
+                    self = nil;
+                }
+            }
+        }else{
+            self = nil;
+        }
     }
     return self;
 }
