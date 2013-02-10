@@ -12,6 +12,7 @@
 @interface LoadingSheetController : NSObject <NSWindowDelegate>
 
 @property (strong) NSString* phase;
+@property (strong) NSString* targetFolder;
 @property (assign) BOOL isIndeterminate;
 @property (strong) NSNumber* progress;
 @property (strong) IBOutlet NSPanel *panel;

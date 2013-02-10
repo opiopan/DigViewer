@@ -19,6 +19,7 @@
 }
 
 @synthesize phase;
+@synthesize targetFolder;
 @synthesize isIndeterminate;
 @synthesize progress;
 @synthesize panel;
@@ -56,16 +57,15 @@
 - (void) loadPinnedFileInBackground
 {
     @autoreleasepool {
-        self.phase = [NSString stringWithFormat:@"Now loading a pinned file in the folder \"%@\"...", [path lastPathComponent]];
+        self.phase = @"Now loading a pinned file in the folder:";
+        self.targetFolder = path;
         PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
         if (pinnedFile){
-            self.phase = [NSString stringWithFormat:@"Now recognizing a pinned file in the folder \"%@\"...",
-                          [path lastPathComponent]];
+            self.phase = @"Now recognizing a pinned file in the folder:";
             self.isIndeterminate = NO;
             root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
         }else{
-            self.phase = [NSString stringWithFormat:@"Now searching image files in the folder \"%@\"...",
-                          [path lastPathComponent]];
+            self.phase = @"Now searching image files in the folder:",
             root = [PathNode pathNodeWithPath:path progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
@@ -92,6 +92,10 @@
 
 - (void) updateProgress{
     self.progress = [NSNumber numberWithDouble:pathNodeProgress.progress];
+    NSString* newTarget = pathNodeProgress.target;
+    if (newTarget && ![newTarget isEqual:self.targetFolder]){
+        self.targetFolder = newTarget;
+    }
     if (panel){
         [self performSelector:@selector(updateProgress) withObject:nil afterDelay:0.1f];
     }

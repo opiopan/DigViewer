@@ -12,6 +12,7 @@
 
 @interface PathNodeProgress : NSObject
 @property double progress;
+@property NSString* target;
 @end
 
 @interface PathNode : NSObject

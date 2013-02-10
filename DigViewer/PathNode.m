@@ -87,6 +87,7 @@
         BOOL isDirectory;
         if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
             if (isDirectory){
+                progress.target = path;
                 NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
                 for (NSString* childName in childNames){
                     if ([childName characterAtIndex:0] == '.'){
@@ -401,6 +402,7 @@
 }
 
 @synthesize progress;
+@synthesize target;
 
 - (id) init
 {
@@ -424,7 +426,21 @@
     [lock lock];
     progress = value;
     [lock unlock];
-    
+}
+
+- (NSString*) target
+{
+    [lock lock];
+    NSString* value = target;
+    [lock unlock];
+    return value;
+}
+
+- (void) setTarget:(NSString *)value
+{
+    [lock lock];
+    target = value;
+    [lock unlock];
 }
 
 @end
