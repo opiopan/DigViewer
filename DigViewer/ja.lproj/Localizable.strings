@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  DigViewer
+
+  Created by opiopan on 2013/02/11.
+  Copyright (c) 2013年 opiopan. All rights reserved.
+*/
+
+"Now loading a pinned file in the folder:" = "ピン留めファイルをロード中:";
+"Now recognizing a pinned file in the folder:" = "ピン留めファイルを解析中:";
+"Now searching image files in the folder:" = "画像ファイルを検索中:";

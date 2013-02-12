@@ -54,7 +54,7 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1057488810">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">Zoom</string>
 							<object class="NSFont" key="NSSupport" id="130958464">
 								<string key="NSName">LucidaGrande</string>

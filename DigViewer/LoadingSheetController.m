@@ -57,15 +57,15 @@
 - (void) loadPinnedFileInBackground
 {
     @autoreleasepool {
-        self.phase = @"Now loading a pinned file in the folder:";
+        self.phase = NSLocalizedString(@"Now loading a pinned file in the folder:", nil);
         self.targetFolder = path;
         PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
         if (pinnedFile){
-            self.phase = @"Now recognizing a pinned file in the folder:";
+            self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
             self.isIndeterminate = NO;
             root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
         }else{
-            self.phase = @"Now searching image files in the folder:",
+            self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil),
             root = [PathNode pathNodeWithPath:path progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
