@@ -63,6 +63,14 @@
     return @"Document";
 }
 
+//-----------------------------------------------------------------------------------------
+// ドキュメントロード
+//-----------------------------------------------------------------------------------------
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+    return YES;
+}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
@@ -74,14 +82,6 @@
     [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
 }
 
-//-----------------------------------------------------------------------------------------
-// ドキュメントロード
-//-----------------------------------------------------------------------------------------
-- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
-{
-    return YES;
-}
-
 - (void)loadDocument
 {
     loader = [[LoadingSheetController alloc] init];
@@ -91,7 +91,11 @@
 
 - (void)didEndLoadingDocument:(PathNode*)node
 {
-    self.root = node;
+    if (node){
+        self.root = node;
+    }else{
+        [self.windowForSheet close];
+    }
     loader = nil;
 }
 

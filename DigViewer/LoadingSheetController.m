@@ -101,4 +101,8 @@
     }
 }
 
+- (IBAction)onCancel:(id)sender {
+    pathNodeProgress.isCanceled = YES;
+}
+
 @end

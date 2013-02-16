@@ -13,6 +13,7 @@
 @interface PathNodeProgress : NSObject
 @property double progress;
 @property NSString* target;
+@property BOOL isCanceled;
 @end
 
 @interface PathNode : NSObject

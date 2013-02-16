@@ -100,6 +100,7 @@
 		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathfinderPinnedFile.m; sourceTree = "<group>"; };
 		7BF8E2A416AA7C9F0007E788 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = resources/up.png; sourceTree = "<group>"; };
 		7BF8E2A716AA7DEB0007E788 /* up.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = up.idraw; path = resources/up.idraw; sourceTree = "<group>"; };
+		7BFF729416CF4A2E00A94515 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LoadingSheet.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,13 +184,14 @@
 				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
 				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B4E8E2516C82A02001C5D09 /* Document.strings */,
-				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7B0DBEB416A01545000365F4 /* MainView.xib */,
 				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
 				7B4E8E3D16CA5478001C5D09 /* FolderOutlineView.strings */,
 				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
+				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
+				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
 				7BF8E2A416AA7C9F0007E788 /* up.png */,
 				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
@@ -345,16 +347,19 @@
 				"$(SRCROOT)/DigViewer/en.lproj/ThumbnailView.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/FolderOutlineView.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/FolderOutlineView.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/LoadingSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/LoadingSheet.xib",
 			);
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/MainMenu.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/Document.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/ThumbnailView.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/FolderOutlineView.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/LoadingSheet.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView;do\nibtool --import-strings-file DigViewer/ja.lproj/${f}.strings --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet;do\nibtool --import-strings-file DigViewer/ja.lproj/${f}.strings --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -488,6 +493,14 @@
 				7B697E52169DB8A000A9E247 /* en */,
 			);
 			name = LoadingSheet.xib;
+			sourceTree = "<group>";
+		};
+		7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BFF729416CF4A2E00A94515 /* ja */,
+			);
+			name = LoadingSheet.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

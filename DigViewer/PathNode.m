@@ -37,6 +37,9 @@
     NSUInteger lines = [pinnedFile count];
     progress.progress = 0.0;
     for (int i = 0; i < lines; i++){
+        if (progress.isCanceled){
+            return nil;
+        }
         if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]]){
             NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
             NSString* filePath = [pinnedFile absolutePathAtIndex:i];
@@ -90,6 +93,9 @@
                 progress.target = path;
                 NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
                 for (NSString* childName in childNames){
+                    if (progress.isCanceled){
+                        return nil;
+                    }
                     if ([childName characterAtIndex:0] == '.'){
                         continue;
                     }
@@ -127,7 +133,11 @@
             self = nil;
         }
     }
-    return self;
+    if (progress.isCanceled){
+        return nil;
+    }else{
+        return self;
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -403,12 +413,14 @@
 
 @synthesize progress;
 @synthesize target;
+@synthesize isCanceled;
 
 - (id) init
 {
     self = [super init];
     if (self){
         lock = [[NSLock alloc] init];
+        isCanceled = NO;
     }
     return self;
 }
@@ -440,6 +452,21 @@
 {
     [lock lock];
     target = value;
+    [lock unlock];
+}
+
+- (BOOL) isCanceled
+{
+    [lock lock];
+    BOOL value = isCanceled;
+    [lock unlock];
+    return value;
+}
+
+- (void) setIsCanceled:(BOOL)value
+{
+    [lock lock];
+    isCanceled = value;
     [lock unlock];
 }
 
