@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		7B53405E1703F3F2008AEDB6 /* Install Disk Image */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7B53405F1703F3F2008AEDB6 /* Build configuration list for PBXAggregateTarget "Install Disk Image" */;
+			buildPhases = (
+				7B5340641703F45F008AEDB6 /* ShellScript */,
+			);
+			dependencies = (
+				7B5340631703F450008AEDB6 /* PBXTargetDependency */,
+			);
+			name = "Install Disk Image";
+			productName = "Install Disk Image";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
@@ -30,6 +45,8 @@
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
+		7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */; };
+		7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E3F169C59A600A9E247 /* NodeID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3E169C59A600A9E247 /* NodeID.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
@@ -39,6 +56,16 @@
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
 		7BF8E2A516AA7C9F0007E788 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8E2A416AA7C9F0007E788 /* up.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7B5340621703F450008AEDB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B3920261696CA1800E139D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B39202E1696CA1800E139D0;
+			remoteInfo = DigViewer;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
@@ -85,6 +112,8 @@
 		7B4E8E2816C82A02001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		7B4E8E2A16C82A02001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ThumbnailView.strings; sourceTree = "<group>"; };
 		7B4E8E3E16CA5478001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FolderOutlineView.strings; sourceTree = "<group>"; };
+		7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DigViewer-in.sparseimage"; path = "DiskImageResources/DigViewer-in.sparseimage"; sourceTree = "<group>"; };
+		7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigViewerBackground.idraw; path = DiskImageResources/DigViewerBackground.idraw; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E3D169C59A600A9E247 /* NodeID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeID.h; sourceTree = "<group>"; };
@@ -162,6 +191,7 @@
 				7BF678B31699106C00FE39B4 /* Utilities */,
 				7B3920531696F50B00E139D0 /* Resources */,
 				7B39203A1696CA1800E139D0 /* Supporting Files */,
+				7B5340551703F294008AEDB6 /* Disk Image Resources */,
 			);
 			path = DigViewer;
 			sourceTree = "<group>";
@@ -249,6 +279,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		7B5340551703F294008AEDB6 /* Disk Image Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */,
+				7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */,
+			);
+			name = "Disk Image Resources";
+			sourceTree = "<group>";
+		};
 		7BF678B31699106C00FE39B4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +329,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "opiopan";
+				ORGANIZATIONNAME = opiopan;
 			};
 			buildConfigurationList = 7B3920291696CA1800E139D0 /* Build configuration list for PBXProject "DigViewer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -306,6 +345,7 @@
 			projectRoot = "";
 			targets = (
 				7B39202E1696CA1800E139D0 /* DigViewer */,
+				7B53405E1703F3F2008AEDB6 /* Install Disk Image */,
 			);
 		};
 /* End PBXProject section */
@@ -327,6 +367,8 @@
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
+				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,
+				7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +403,21 @@
 			shellPath = /bin/sh;
 			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet;do\nibtool --import-strings-file DigViewer/ja.lproj/${f}.strings --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
+		7B5340641703F45F008AEDB6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ExtractManager/DiskImageResources/DigViewer-in.sparseimage",
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/DigViewer.dmg",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PRODUCT=DigViewer\nSRC=\"${SRCROOT}/${PRODUCT}/DiskImageResources/${PRODUCT}-in.sparseimage\"\nIN=\"${DERIVED_FILE_DIR}/${PRODUCT}-in.sparseimage\"\nMP=\"${DERIVED_FILE_DIR}/mp\"\nOUT=\"${TARGET_BUILD_DIR}/${PRODUCT}.dmg\"\nrm -rf \"${DERIVED_FILE_DIR}\"\nmkdir \"${DERIVED_FILE_DIR}\"\nmkdir \"$MP\"\ncp \"$SRC\" \"$IN\"\nhdiutil attach \"$IN\" -mountpoint \"$MP\"\nrm -rf \"$MP\"/${PRODUCT}.app\ncp -r \"${TARGET_BUILD_DIR}/${PRODUCT}.app\" \"$MP\"\nhdiutil detach \"$MP\"\nrm -f \"$OUT\"\nhdiutil convert -format UDZO -o \"$OUT\" \"$IN\"\nrm -r \"$MP\"\nrm -f \"$IN\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -389,6 +446,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7B5340631703F450008AEDB6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B39202E1696CA1800E139D0 /* DigViewer */;
+			targetProxy = 7B5340621703F450008AEDB6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7B0DBEB416A01545000365F4 /* MainView.xib */ = {
@@ -585,6 +650,20 @@
 			};
 			name = Release;
 		};
+		7B5340601703F3F2008AEDB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7B5340611703F3F2008AEDB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -605,6 +684,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7B53405F1703F3F2008AEDB6 /* Build configuration list for PBXAggregateTarget "Install Disk Image" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B5340601703F3F2008AEDB6 /* Debug */,
+				7B5340611703F3F2008AEDB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
