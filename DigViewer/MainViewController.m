@@ -14,9 +14,9 @@
 #import "ThumbnailViewController.h"
 
 @implementation MainViewController {
-    NSArray*                   viewControllers;
-    NSViewController*        outlineViewController;
-    NSViewController* __weak representationViewController;
+    NSArray*          viewControllers;
+    NSViewController* outlineViewController;
+    NSViewController* representationViewController;
 }
 
 @synthesize presentationViewType;

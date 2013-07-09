@@ -4,4 +4,32 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+
+// OS X 10.7/iOS 5.1をターゲットとする場合、
+#if __MAC_OS_VERSION_MAX_ALLOWRD < 1080 || \
+    __IPHONE_OS_VERSION_MAX_ALLOWRD < 6000
+
+@interface NSArray(subscripting)
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+@end
+
+@interface NSMutableArray(subscripting)
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
+@end
+
+@interface NSDictionary(subscripting)
+- (id)objectForKeyedSubscript:(id)key;
+@end
+
+@interface NSMutableDictionary(subscripting)
+- (void)setObject:(id)obj forKeyedSubscript:(id )key;
+@end
+
+#undef YES
+#undef NO
+#define YES ((BOOL)1)
+#define NO  ((BOOL)0)
+
+#endif
+
 #endif
