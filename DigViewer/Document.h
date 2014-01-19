@@ -12,7 +12,7 @@
 @interface Document : NSDocument
 
 @property (strong) PathNode* root;
-@property (strong) NSArray* selectionIndexePathForTree;
+@property (strong) NSArray* selectionIndexPathsForTree;
 @property (strong) NSIndexSet* selectionIndexesForImages;
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;

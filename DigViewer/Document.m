@@ -18,7 +18,7 @@
 }
 
 @synthesize root;
-@synthesize selectionIndexePathForTree;
+@synthesize selectionIndexPathsForTree;
 @synthesize selectionIndexesForImages;
 @synthesize isFitWindow;
 @synthesize imageTreeController;
@@ -173,14 +173,14 @@
 //-----------------------------------------------------------------------------------------
 // 選択状態属性
 //-----------------------------------------------------------------------------------------
-- (NSArray*) selectionIndexePathForTree
+- (NSArray*) selectionIndexPathsForTree
 {
-    return selectionIndexePathForTree;
+    return selectionIndexPathsForTree;
 }
 
-- (void)setSelectionIndexePathForTree:(NSArray *)indexPath
+- (void)setSelectionIndexPathsForTree:(NSArray *)indexPath
 {
-    selectionIndexePathForTree = indexPath;
+    selectionIndexPathsForTree = indexPath;
     [imageArrayController setSelectionIndex:0];
 }
 

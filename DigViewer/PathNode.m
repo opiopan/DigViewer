@@ -276,12 +276,12 @@
     return [[NodeID alloc] initWithName:name image:self.icon];
 }
 
-// IKImageBrowserItem Protocol
 - (NodeID*) imageID
 {
     return [[NodeID alloc] initWithName:self.imageName image:self.imageNode.icon];
 }
 
+// IKImageBrowserItem Protocol
 - (NSString*) imageUID
 {
     return [self imagePath];

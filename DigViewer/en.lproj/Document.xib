@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C2034</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">13B42</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1265</string>
+		<string key="IBDocument.HIToolboxVersion">696.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -48,7 +48,7 @@
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{94, 86}</string>
 				<object class="NSView" key="NSWindowView" id="568628114">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSCustomView" id="783901728">
@@ -136,7 +136,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{609, 480}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="192014454"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
@@ -231,15 +230,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectionIndexPaths: self.selectionIndexePathForTree</string>
+						<string key="label">selectionIndexPaths: self.selectionIndexPathsForTree</string>
 						<reference key="source" ref="793830743"/>
 						<reference key="destination" ref="512844837"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="793830743"/>
 							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">selectionIndexPaths: self.selectionIndexePathForTree</string>
+							<string key="NSLabel">selectionIndexPaths: self.selectionIndexPathsForTree</string>
 							<string key="NSBinding">selectionIndexPaths</string>
-							<string key="NSKeyPath">self.selectionIndexePathForTree</string>
+							<string key="NSKeyPath">self.selectionIndexPathsForTree</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
