@@ -10,12 +10,27 @@
 #import "NodeID.h"
 #import "PathfinderPinnedFile.h"
 
+//-----------------------------------------------------------------------------------------
+// PathNodeProgress: ノードツリー進捗管理オブジェクト
+//-----------------------------------------------------------------------------------------
 @interface PathNodeProgress : NSObject
 @property double progress;
 @property NSString* target;
 @property BOOL isCanceled;
 @end
 
+//-----------------------------------------------------------------------------------------
+// PathNodeOmmitingCondition: ノードツリー生成時の除外対象
+//-----------------------------------------------------------------------------------------
+@interface PathNodeOmmitingCondition : NSObject
+@property NSDictionary* suffixes;
+@property int           maxFileSize;  // it means no limit if negative
+- (BOOL) isOmmitingImagePath:(NSString*)path;
+@end
+
+//-----------------------------------------------------------------------------------------
+// PathNode: ノードツリーの構成要素
+//-----------------------------------------------------------------------------------------
 @interface PathNode : NSObject
 
 // 属性
@@ -41,8 +56,12 @@
 @property (readonly) id              imageRepresentation;
 
 // オブジェクト初期化
-+ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress;
-+ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress;
++ (PathNode*) pathNodeWithPath:(NSString*)path
+             ommitingCondition:(PathNodeOmmitingCondition*)cond
+                      progress:(PathNodeProgress*)progress;
++ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
+                   ommitingCondition:(PathNodeOmmitingCondition*)cond
+                            progress:(PathNodeProgress*)progress;
 
 // ツリーウォーキング
 - (PathNode*) nextImageNode;

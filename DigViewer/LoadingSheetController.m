@@ -10,12 +10,13 @@
 #import "PathNode.h"
 
 @implementation LoadingSheetController{
-    NSString*         path;
-    PathNode*         root;
-    PathNodeProgress* pathNodeProgress;
-    NSWindow*         modalWindow;
-    id                modalDelegate;
-    SEL               didEndSelector;
+    NSString*                  path;
+    PathNode*                  root;
+    PathNodeProgress*          pathNodeProgress;
+    NSWindow*                  modalWindow;
+    id                         modalDelegate;
+    SEL                        didEndSelector;
+    PathNodeOmmitingCondition* condition;
 }
 
 @synthesize phase;
@@ -39,11 +40,13 @@
 }
 
 - (void) loadPath:(NSString*)p forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
+        condition:(PathNodeOmmitingCondition*)cond;
 {
     path = p;
     modalWindow = window;
     modalDelegate = delegate;
     didEndSelector = selector;
+    condition = cond;
     
     [self performSelectorInBackground:@selector(loadPinnedFileInBackground) withObject:nil];
     [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
@@ -63,10 +66,10 @@
         if (pinnedFile){
             self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
             self.isIndeterminate = NO;
-            root = [PathNode pathNodeWithPinnedFile:pinnedFile progress:pathNodeProgress];
+            root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition progress:pathNodeProgress];
         }else{
             self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil),
-            root = [PathNode pathNodeWithPath:path progress:pathNodeProgress];
+            root = [PathNode pathNodeWithPath:path  ommitingCondition:condition progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
     }

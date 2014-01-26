@@ -21,8 +21,11 @@
 @synthesize selectionIndexPathsForTree;
 @synthesize selectionIndexesForImages;
 @synthesize isFitWindow;
+@synthesize viewableImageSet;
 @synthesize imageTreeController;
 @synthesize imageArrayController;
+
+static NSDictionary* rawSuffixes = nil;
 
 //-----------------------------------------------------------------------------------------
 // NSDocument クラスメソッド：ドキュメントの振る舞い
@@ -52,6 +55,31 @@
 //-----------------------------------------------------------------------------------------
 - (id)init
 {
+    if (!rawSuffixes){
+        rawSuffixes = @{
+              @"cr2":@"raw", @"CR2":@"raw",
+              @"dng":@"raw", @"DNG":@"raw",
+              @"nef":@"raw", @"NEF":@"raw",
+              @"orf":@"raw", @"ORF":@"raw",
+              @"dcr":@"raw", @"DCR":@"raw",
+              @"raf":@"raw", @"RAF":@"raw",
+              @"mrw":@"raw", @"MRW":@"raw",
+              @"mos":@"raw", @"MOS":@"raw",
+              @"raw":@"raw", @"RAW":@"raw",
+              @"pef":@"raw", @"PEF":@"raw",
+              @"srf":@"raw", @"SRF":@"raw",
+              @"x3f":@"raw", @"X3F":@"raw",
+              @"erf":@"raw", @"ERF":@"raw",
+              @"sr2":@"raw", @"SR2":@"raw",
+              @"kdc":@"raw", @"KDC":@"raw",
+              @"mfw":@"raw", @"MFW":@"raw",
+              @"mef":@"raw", @"MEF":@"raw",
+              @"are":@"raw", @"ARE":@"raw",
+              @"rw2":@"raw", @"RW2":@"raw",
+              @"rwl":@"raw", @"rwl":@"raw",
+              @"psd":@"cpx", @"PSD":@"cpx",
+              @"tif":@"cpx", @"TIF":@"cpx", @"tiff":@"cpx", @"TIFF":@"cpx"};
+    }
     self = [super init];
     if (self) {
     }
@@ -64,7 +92,7 @@
 }
 
 //-----------------------------------------------------------------------------------------
-// ドキュメントロード
+// ドキュメントロード & Window初期化
 //-----------------------------------------------------------------------------------------
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
@@ -79,14 +107,22 @@
     mainViewController.representedObject = self;
     [self.placeHolder associateSubViewWithController:mainViewController];
     
-    [self performSelector:@selector(loadDocument) withObject:nil afterDelay:0.0f];
+    // 環境設定で設定した除外リスト情報を元にロードをスケジュール
+    NSUserDefaultsController* controller = [[NSUserDefaultsController sharedUserDefaultsController] values];
+    NSNumber* ommitType = [controller valueForKey:@"imageSetType"];
+    PathNodeOmmitingCondition* param = nil;
+    if (ommitType.intValue){
+        param = [[PathNodeOmmitingCondition alloc] init];
+        param.suffixes = rawSuffixes;
+    }
+    [self performSelector:@selector(loadDocument:) withObject:param  afterDelay:0.0f];
 }
 
-- (void)loadDocument
+- (void)loadDocument:(PathNodeOmmitingCondition*)cond
 {
     loader = [[LoadingSheetController alloc] init];
     [loader loadPath:[self.fileURL path] forWindow:self.windowForSheet modalDelegate:self
-            didEndSelector:@selector(didEndLoadingDocument:)];
+            didEndSelector:@selector(didEndLoadingDocument:) condition:cond];
 }
 
 - (void)didEndLoadingDocument:(PathNode*)node
@@ -233,5 +269,16 @@
     [sender setState:self.isFitWindow ? NSOnState : NSOffState];
 }
 
+//-----------------------------------------------------------------------------------------
+// 環境設定変更時の応答処理
+//-----------------------------------------------------------------------------------------
+- (int)viewableImageSet
+{
+    return viewableImageSet;
+}
+- (void)setViewableImageSet:(int)imageSet
+{
+    
+}
 
 @end

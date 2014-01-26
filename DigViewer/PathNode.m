@@ -29,7 +29,9 @@
 //-----------------------------------------------------------------------------------------
 // オブジェクト初期化
 //-----------------------------------------------------------------------------------------
-+ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile progress:(PathNodeProgress*)progress
++ (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
+                   ommitingCondition:(PathNodeOmmitingCondition*)cond
+                            progress:(PathNodeProgress*)progress
 {
     PathNode* root = nil;
     NSArray* last = nil;
@@ -40,7 +42,8 @@
         if (progress.isCanceled){
             return nil;
         }
-        if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]]){
+        if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]] &&
+            ! [cond isOmmitingImagePath:[pinnedFile relativePathAtIndex:i]]){
             NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
             NSString* filePath = [pinnedFile absolutePathAtIndex:i];
             if (!root){
@@ -73,12 +76,13 @@
     return self;
 }
 
-+ (PathNode*) pathNodeWithPath:(NSString*)path progress:(PathNodeProgress*)progress
++ (PathNode*) pathNodeWithPath:(NSString*)path ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
 {
-    return [[PathNode alloc] initRecursWithPath:path parent:nil indexInParent:0 progress:progress];
+    return [[PathNode alloc] initRecursWithPath:path parent:nil indexInParent:0 ommitingCondition:cond progress:progress];
 }
 
-- (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p indexInParent:(NSUInteger)ip progress:(PathNodeProgress*)progress
+- (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p indexInParent:(NSUInteger)ip
+        ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
 {
     self = [self init];
     if (self){
@@ -102,6 +106,7 @@
                     NSString* childPath = [path stringByAppendingFormat:@"/%@", childName];
                     PathNode* child = [[PathNode alloc] initRecursWithPath:childPath
                                                                     parent:self indexInParent:0
+                                                         ommitingCondition:cond
                                                                   progress:progress];
                     if (child){
                         if (child.isImage){
@@ -123,7 +128,7 @@
                     self = nil;
                 }
             }else{
-                if ([NSImage isSupportedFileAtPath:path]){
+                if ([NSImage isSupportedFileAtPath:path] && ![cond isOmmitingImagePath:path]){
                     imagePath = path;
                 }else{
                     self = nil;
@@ -468,6 +473,21 @@
     [lock lock];
     isCanceled = value;
     [lock unlock];
+}
+
+@end
+
+//-----------------------------------------------------------------------------------------
+// PathNodeOmmitingCondition: ノードツリー生成時の除外対象
+//-----------------------------------------------------------------------------------------
+@implementation PathNodeOmmitingCondition
+
+@synthesize suffixes;
+@synthesize maxFileSize;
+
+- (BOOL) isOmmitingImagePath:(NSString*)path
+{
+    return [suffixes valueForKey:[path pathExtension]];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PathfinderPinnedFile.h"
+#import "PathNode.h"
 
 @interface LoadingSheetController : NSObject <NSWindowDelegate>
 
@@ -19,6 +20,7 @@
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 - (void) loadPath:(NSString*)path forWindow:(NSWindow*)window
-          modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector;
+    modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector
+        condition:(PathNodeOmmitingCondition*)cond;
 
 @end
