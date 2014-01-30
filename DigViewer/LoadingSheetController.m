@@ -33,7 +33,7 @@
         pathNodeProgress = [[PathNodeProgress alloc] init];
         isIndeterminate = YES;
         progress = [NSNumber numberWithDouble:0.0];
-        [NSBundle loadNibNamed:@"LoadingSheet" owner:self];
+        [[NSBundle mainBundle] loadNibNamed:@"LoadingSheet" owner:self topLevelObjects:nil];
     }
     
     return self;
