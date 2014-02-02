@@ -43,7 +43,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <connections>
-                                            <binding destination="100059" name="value" keyPath="arrangedObjects.nodeID" id="100252">
+                                            <binding destination="100059" name="value" keyPath="arrangedObjects.me" id="YPO-Sz-NAJ">
                                                 <dictionary key="options">
                                                     <bool key="NSConditionallySetsEditable" value="YES"/>
                                                 </dictionary>
@@ -95,7 +95,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                         <connections>
-                                            <binding destination="100087" name="value" keyPath="arrangedObjects.nodeID" id="100279">
+                                            <binding destination="100087" name="value" keyPath="arrangedObjects.me" id="Byq-ja-3Mv">
                                                 <dictionary key="options">
                                                     <bool key="NSConditionallySetsEditable" value="YES"/>
                                                 </dictionary>
@@ -111,7 +111,7 @@
                         <rect key="frame" x="1" y="191" width="277" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" horizontal="NO" id="100248">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100248">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

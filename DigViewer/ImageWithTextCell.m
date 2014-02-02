@@ -12,7 +12,7 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	id node = [self objectValue];
-    NSImage* image = [node valueForKey:@"image"];
+    NSImage* image = [node valueForKey:@"icon"];
     NSString* name = [node valueForKey:@"name"];
     
 	[controlView lockFocus];

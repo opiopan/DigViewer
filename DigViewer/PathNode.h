@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NodeID.h"
 #import "PathfinderPinnedFile.h"
 
 //-----------------------------------------------------------------------------------------
@@ -31,7 +30,7 @@
 //-----------------------------------------------------------------------------------------
 // PathNode: ノードツリーの構成要素
 //-----------------------------------------------------------------------------------------
-@interface PathNode : NSObject
+@interface PathNode : NSObject <NSCopying>
 
 // 属性
 @property (readonly) NSString*       name;
@@ -48,8 +47,6 @@
 @property (readonly) NSString*       imageName;
 @property (readonly) NSImage*        image;
 @property (readonly) NSImage*        icon;
-@property (readonly) NodeID*         nodeID;
-@property (readonly) NodeID*         imageID;
 
 @property (readonly) NSString*       imageUID;
 @property (readonly) NSString*       imageRepresentationType;

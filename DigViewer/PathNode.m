@@ -9,7 +9,6 @@
 #import <quartz/Quartz.h>
 
 #import "PathNode.h"
-#import "NodeID.h"
 #import "PathfinderPinnedFile.h"
 #import "NSImage+CapabilityDetermining.h"
 
@@ -25,6 +24,14 @@
 @synthesize images;
 @synthesize indexInParent;
 @synthesize imagePath;
+
+//-----------------------------------------------------------------------------------------
+// NSCopyingプロトコルの実装
+//-----------------------------------------------------------------------------------------
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
 
 //-----------------------------------------------------------------------------------------
 // オブジェクト初期化
@@ -274,16 +281,6 @@
     }else{
         return [[NSWorkspace sharedWorkspace] iconForFile:@"/var"];
     }
-}
-
-- (NodeID*) nodeID
-{
-    return [[NodeID alloc] initWithName:name image:self.icon];
-}
-
-- (NodeID*) imageID
-{
-    return [[NodeID alloc] initWithName:self.imageName image:self.imageNode.icon];
 }
 
 // IKImageBrowserItem Protocol

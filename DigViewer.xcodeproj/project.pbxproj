@@ -48,7 +48,6 @@
 		7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */; };
 		7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
-		7B697E3F169C59A600A9E247 /* NodeID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3E169C59A600A9E247 /* NodeID.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.m */; };
@@ -116,8 +115,6 @@
 		7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigViewerBackground.idraw; path = DiskImageResources/DigViewerBackground.idraw; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
-		7B697E3D169C59A600A9E247 /* NodeID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeID.h; sourceTree = "<group>"; };
-		7B697E3E169C59A600A9E247 /* NodeID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeID.m; sourceTree = "<group>"; };
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
 		7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingSheetController.m; sourceTree = "<group>"; };
 		7B697E52169DB8A000A9E247 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingSheet.xib; sourceTree = "<group>"; };
@@ -237,8 +234,6 @@
 			children = (
 				7BF678AB16983C7C00FE39B4 /* PathNode.h */,
 				7BF678AC16983C7C00FE39B4 /* PathNode.m */,
-				7B697E3D169C59A600A9E247 /* NodeID.h */,
-				7B697E3E169C59A600A9E247 /* NodeID.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -431,7 +426,6 @@
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
-				7B697E3F169C59A600A9E247 /* NodeID.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
