@@ -484,7 +484,7 @@
 
 - (BOOL) isOmmitingImagePath:(NSString*)path
 {
-    return [suffixes valueForKey:[path pathExtension]];
+    return [suffixes valueForKey:[[path pathExtension] lowercaseString]];
 }
 
 @end

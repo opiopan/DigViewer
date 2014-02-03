@@ -21,7 +21,6 @@
 @synthesize selectionIndexPathsForTree;
 @synthesize selectionIndexesForImages;
 @synthesize isFitWindow;
-@synthesize viewableImageSet;
 @synthesize imageTreeController;
 @synthesize imageArrayController;
 
@@ -57,28 +56,28 @@ static NSDictionary* rawSuffixes = nil;
 {
     if (!rawSuffixes){
         rawSuffixes = @{
-              @"cr2":@"raw", @"CR2":@"raw",
-              @"dng":@"raw", @"DNG":@"raw",
-              @"nef":@"raw", @"NEF":@"raw",
-              @"orf":@"raw", @"ORF":@"raw",
-              @"dcr":@"raw", @"DCR":@"raw",
-              @"raf":@"raw", @"RAF":@"raw",
-              @"mrw":@"raw", @"MRW":@"raw",
-              @"mos":@"raw", @"MOS":@"raw",
-              @"raw":@"raw", @"RAW":@"raw",
-              @"pef":@"raw", @"PEF":@"raw",
-              @"srf":@"raw", @"SRF":@"raw",
-              @"x3f":@"raw", @"X3F":@"raw",
-              @"erf":@"raw", @"ERF":@"raw",
-              @"sr2":@"raw", @"SR2":@"raw",
-              @"kdc":@"raw", @"KDC":@"raw",
-              @"mfw":@"raw", @"MFW":@"raw",
-              @"mef":@"raw", @"MEF":@"raw",
-              @"are":@"raw", @"ARE":@"raw",
-              @"rw2":@"raw", @"RW2":@"raw",
-              @"rwl":@"raw", @"rwl":@"raw",
-              @"psd":@"cpx", @"PSD":@"cpx",
-              @"tif":@"cpx", @"TIF":@"cpx", @"tiff":@"cpx", @"TIFF":@"cpx"};
+              @"cr2":@"raw",
+              @"dng":@"raw",
+              @"nef":@"raw",
+              @"orf":@"raw",
+              @"dcr":@"raw",
+              @"raf":@"raw",
+              @"mrw":@"raw",
+              @"mos":@"raw",
+              @"raw":@"raw",
+              @"pef":@"raw",
+              @"srf":@"raw",
+              @"x3f":@"raw",
+              @"erf":@"raw",
+              @"sr2":@"raw",
+              @"kdc":@"raw",
+              @"mfw":@"raw",
+              @"mef":@"raw",
+              @"are":@"raw",
+              @"rw2":@"raw",
+              @"rwl":@"raw",
+              @"psd":@"cpx",
+              @"tif":@"cpx", @"tiff":@"cpx"};
     }
     self = [super init];
     if (self) {
@@ -267,18 +266,6 @@ static NSDictionary* rawSuffixes = nil;
 {
     self.isFitWindow = ! self.isFitWindow;
     [sender setState:self.isFitWindow ? NSOnState : NSOffState];
-}
-
-//-----------------------------------------------------------------------------------------
-// 環境設定変更時の応答処理
-//-----------------------------------------------------------------------------------------
-- (int)viewableImageSet
-{
-    return viewableImageSet;
-}
-- (void)setViewableImageSet:(int)imageSet
-{
-    
 }
 
 @end

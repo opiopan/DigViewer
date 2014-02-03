@@ -16,7 +16,6 @@
 @property (strong) NSIndexSet* selectionIndexesForImages;
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;
-@property (assign) int viewableImageSet;
 @property (weak) IBOutlet NSView *placeHolder;
 @property (strong) IBOutlet NSTreeController *imageTreeController;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
