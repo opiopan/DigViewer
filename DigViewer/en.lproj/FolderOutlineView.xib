@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FolderOutlineViewController">
             <connections>
+                <outlet property="imageArrayController" destination="100087" id="dXd-ia-1R8"/>
                 <outlet property="imageTableView" destination="100245" id="100277"/>
                 <outlet property="view" destination="100234" id="100276"/>
             </connections>

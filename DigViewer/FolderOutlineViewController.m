@@ -14,6 +14,7 @@
 @implementation FolderOutlineViewController
 
 @synthesize imageTableView;
+@synthesize imageArrayController;
 
 - (id)init
 {
@@ -25,6 +26,7 @@
 {
     [imageTableView setTarget:self];
     [imageTableView setDoubleAction:@selector(onDoubleClickImageTableView:)];
+    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
 }
 
 - (void)onDoubleClickImageTableView:(id)sender
@@ -38,9 +40,11 @@
     }    
 }
 
-- (void)updateRepresentationObject
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [imageTableView scrollRowToVisible:[imageTableView selectedRow]];
+    if (object == imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
+        [imageTableView scrollRowToVisible:[imageTableView selectedRow]];
+    }
 }
 
 @end

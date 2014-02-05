@@ -15,6 +15,7 @@
 
 @synthesize zoomRethio;
 @synthesize thumbnailView;
+@synthesize imageArrayController;
 
 const static double defaultZoomRatio = 100;
 
@@ -27,6 +28,7 @@ const static double defaultZoomRatio = 100;
 - (void)awakeFromNib
 {
     [self performSelector:@selector(onDefaultSize:) withObject:self afterDelay:0.0f];
+    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
 }
 
 - (NSView*)representationView;
@@ -34,9 +36,11 @@ const static double defaultZoomRatio = 100;
     return thumbnailView;
 }
 
-- (void)updateRepresentationObject
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+    if (object == imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
+        [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+    }
 }
 
 - (void) imageBrowser:(IKImageBrowserView *) aBrowser cellWasDoubleClickedAtIndex:(NSUInteger) index

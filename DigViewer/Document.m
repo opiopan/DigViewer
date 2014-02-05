@@ -227,7 +227,6 @@ static NSDictionary* rawSuffixes = nil;
 - (void)setSelectionIndexesForImages:(NSIndexSet *)indexes
 {
     selectionIndexesForImages = indexes;
-    [mainViewController performSelector:@selector(updateRepresentationObject) withObject:nil afterDelay:0.0f];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -259,7 +258,6 @@ static NSDictionary* rawSuffixes = nil;
 - (void)setIsFitWindow:(BOOL)state
 {
     isFitWindow = state;
-    [mainViewController updateRepresentationObject];
 }
 
 - (void)fitImageToScreen:(id)sender

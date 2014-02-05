@@ -11,6 +11,5 @@
 @interface NSViewController (Nested)
 
 - (NSView*) representationView;
-- (void) updateRepresentationObject;
 
 @end

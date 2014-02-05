@@ -58,13 +58,6 @@
     representationViewController = viewControllers[type];
     [presentationPlaceholder associateSubViewWithController:representationViewController];
     [self.view.window makeFirstResponder:representationViewController.representationView];
-    [representationViewController updateRepresentationObject];
-}
-
-- (void)updateRepresentationObject
-{
-    [outlineViewController updateRepresentationObject];
-    [representationViewController updateRepresentationObject];
 }
 
 @end

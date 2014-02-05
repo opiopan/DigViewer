@@ -23,14 +23,25 @@
 {
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     imageView.delegate = self;
-    [self performSelector:@selector(updateRepresentationObject) withObject:nil afterDelay:0.0f];
+    [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
+    Document* document = self.representedObject;
+    [document addObserver:self forKeyPath:@"isFitWindow" options:nil context:nil];
 }
 
-- (void)updateRepresentationObject
+- (void)reflectImageScaling
 {
-    ClickableImageView* imageView = (ClickableImageView*)self.view;
     Document* document = self.representedObject;
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
     imageView.imageScaling = (document.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    Document* document = self.representedObject;
+    if (object == document && [keyPath isEqualToString:@"isFitWindow"]){
+        ClickableImageView* imageView = (ClickableImageView*)self.view;
+        imageView.imageScaling = (document.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
+    }
 }
 
 - (void)onDoubleClickableImageView:(id)sender

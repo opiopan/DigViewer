@@ -15,8 +15,4 @@
     return self.view;
 }
 
-- (void) updateRepresentationObject
-{
-}
-
 @end
