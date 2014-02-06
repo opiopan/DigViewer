@@ -219,16 +219,6 @@ static NSDictionary* rawSuffixes = nil;
     [imageArrayController setSelectionIndex:0];
 }
 
-- (NSIndexSet*) selectionIndexesForImages
-{
-    return selectionIndexesForImages;
-}
-
-- (void)setSelectionIndexesForImages:(NSIndexSet *)indexes
-{
-    selectionIndexesForImages = indexes;
-}
-
 //-----------------------------------------------------------------------------------------
 // 表示形式属性
 //-----------------------------------------------------------------------------------------
@@ -248,18 +238,8 @@ static NSDictionary* rawSuffixes = nil;
 }
 
 //-----------------------------------------------------------------------------------------
-// イメージの拡大表示属性
+// イメージの拡大表示のトグル（メニューの応答処理）
 //-----------------------------------------------------------------------------------------
-- (BOOL) isFitWindow
-{
-    return isFitWindow;
-}
-
-- (void)setIsFitWindow:(BOOL)state
-{
-    isFitWindow = state;
-}
-
 - (void)fitImageToScreen:(id)sender
 {
     self.isFitWindow = ! self.isFitWindow;
