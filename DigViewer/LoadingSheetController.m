@@ -17,6 +17,9 @@
     id                         modalDelegate;
     SEL                        didEndSelector;
     PathNodeOmmitingCondition* condition;
+    NSArray*                   topLevelObjects;
+    BOOL                       isLoading;
+    BOOL                       isShowing;
 }
 
 @synthesize phase;
@@ -33,7 +36,9 @@
         pathNodeProgress = [[PathNodeProgress alloc] init];
         isIndeterminate = YES;
         progress = [NSNumber numberWithDouble:0.0];
-        [[NSBundle mainBundle] loadNibNamed:@"LoadingSheet" owner:self topLevelObjects:nil];
+        NSArray* objects = nil;
+        [[NSBundle mainBundle] loadNibNamed:@"LoadingSheet" owner:self topLevelObjects:&objects];
+        topLevelObjects = objects;
     }
     
     return self;
@@ -47,6 +52,8 @@
     modalDelegate = delegate;
     didEndSelector = selector;
     condition = cond;
+    isLoading = YES;
+    isShowing = NO;
     
     [self performSelectorInBackground:@selector(loadPinnedFileInBackground) withObject:nil];
     [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
@@ -76,14 +83,19 @@
 }
 
 - (void) didEndLoading{
-    [panel close];
+    isLoading = NO;
+    if (isShowing){
+        [panel close];
+        [[NSApplication sharedApplication] endSheet:panel returnCode:NSOKButton];
+        isShowing =NO;
+    }
     [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
-    panel = nil;
 }
 
 - (void) showPanel
 {
-    if (panel && pathNodeProgress.progress < 0.5){
+    if (isLoading && pathNodeProgress.progress < 0.5){
+        isShowing = YES;
         [[NSApplication sharedApplication] beginSheet:panel
                                        modalForWindow:modalWindow
                                         modalDelegate:nil

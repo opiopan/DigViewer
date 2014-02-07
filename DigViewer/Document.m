@@ -12,9 +12,81 @@
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
 
+//-----------------------------------------------------------------------------------------
+// UserDefaultsForModel:
+// ・ Model (PathNodeグラフ)の構造に影響するUser Defaultsを抽象化するクラス
+//-----------------------------------------------------------------------------------------
+enum ImageSetType {imageSetTypeALL = 0, imageSetTypeExceptRaw, imageSetTypeSmall, imageSetTypeAll};
+@interface UserDefaultsForModel : NSObject
+@property (assign) enum ImageSetType type;
+@property (strong) PathNodeOmmitingCondition* condition;
+@end
+
+@implementation UserDefaultsForModel
+static NSDictionary* rawSuffixes = nil;
+
+- (id)init
+{
+    if (!rawSuffixes){
+        rawSuffixes = @{
+                        @"cr2":@"raw",
+                        @"dng":@"raw",
+                        @"nef":@"raw",
+                        @"orf":@"raw",
+                        @"dcr":@"raw",
+                        @"raf":@"raw",
+                        @"mrw":@"raw",
+                        @"mos":@"raw",
+                        @"raw":@"raw",
+                        @"pef":@"raw",
+                        @"srf":@"raw",
+                        @"x3f":@"raw",
+                        @"erf":@"raw",
+                        @"sr2":@"raw",
+                        @"kdc":@"raw",
+                        @"mfw":@"raw",
+                        @"mef":@"raw",
+                        @"are":@"raw",
+                        @"rw2":@"raw",
+                        @"rwl":@"raw",
+                        @"psd":@"cpx",
+                        @"tif":@"cpx", @"tiff":@"cpx"};
+    }
+    self = [super init];
+    if (self){
+        _condition = [[PathNodeOmmitingCondition alloc] init];
+        NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+        _type = ((NSNumber*)[[controller values] valueForKey:@"imageSetType"]).intValue;
+        if (_type == imageSetTypeExceptRaw){
+            _condition.suffixes = rawSuffixes;
+        }
+    }
+    return self;
+}
+
+- (BOOL) isEqual:(id)object
+{
+    if (![[object class] isSubclassOfClass:[self class]]){
+        return NO;
+    }
+    UserDefaultsForModel* o = object;
+    if (self->_type != o->_type){
+        return NO;
+    }
+    return YES;
+}
+
+@end
+
+//-----------------------------------------------------------------------------------------
+// Document class implementation
+//-----------------------------------------------------------------------------------------
 @implementation Document{
     LoadingSheetController* loader;
     MainViewController* mainViewController;
+    UserDefaultsForModel* modelOption;
+    UserDefaultsForModel* loadingModelOption;
+    BOOL pendingReloadRequest;
 }
 
 @synthesize root;
@@ -23,8 +95,6 @@
 @synthesize isFitWindow;
 @synthesize imageTreeController;
 @synthesize imageArrayController;
-
-static NSDictionary* rawSuffixes = nil;
 
 //-----------------------------------------------------------------------------------------
 // NSDocument クラスメソッド：ドキュメントの振る舞い
@@ -54,31 +124,6 @@ static NSDictionary* rawSuffixes = nil;
 //-----------------------------------------------------------------------------------------
 - (id)init
 {
-    if (!rawSuffixes){
-        rawSuffixes = @{
-              @"cr2":@"raw",
-              @"dng":@"raw",
-              @"nef":@"raw",
-              @"orf":@"raw",
-              @"dcr":@"raw",
-              @"raf":@"raw",
-              @"mrw":@"raw",
-              @"mos":@"raw",
-              @"raw":@"raw",
-              @"pef":@"raw",
-              @"srf":@"raw",
-              @"x3f":@"raw",
-              @"erf":@"raw",
-              @"sr2":@"raw",
-              @"kdc":@"raw",
-              @"mfw":@"raw",
-              @"mef":@"raw",
-              @"are":@"raw",
-              @"rw2":@"raw",
-              @"rwl":@"raw",
-              @"psd":@"cpx",
-              @"tif":@"cpx", @"tiff":@"cpx"};
-    }
     self = [super init];
     if (self) {
     }
@@ -91,13 +136,19 @@ static NSDictionary* rawSuffixes = nil;
 }
 
 //-----------------------------------------------------------------------------------------
-// ドキュメントロード & Window初期化
+// フレームワークからのドキュメントロード指示
+//   ・なにもせずロード完了したように振る舞う
+//   ・実際のロード処理はnibのロード完了後バックグラウンドスレッドで実施
+//   ・ロード時間が長い場合にハングしたように見えるのを避けるためこのような仕様とした
 //-----------------------------------------------------------------------------------------
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
     return YES;
 }
 
+//-----------------------------------------------------------------------------------------
+// Window初期化
+//-----------------------------------------------------------------------------------------
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
@@ -106,32 +157,61 @@ static NSDictionary* rawSuffixes = nil;
     mainViewController.representedObject = self;
     [self.placeHolder associateSubViewWithController:mainViewController];
     
-    // 環境設定で設定した除外リスト情報を元にロードをスケジュール
-    NSUserDefaultsController* controller = [[NSUserDefaultsController sharedUserDefaultsController] values];
-    NSNumber* ommitType = [controller valueForKey:@"imageSetType"];
-    PathNodeOmmitingCondition* param = nil;
-    if (ommitType.intValue){
-        param = [[PathNodeOmmitingCondition alloc] init];
-        param.suffixes = rawSuffixes;
-    }
-    [self performSelector:@selector(loadDocument:) withObject:param  afterDelay:0.0f];
+    // UserDefaultsの変更に対してObserverを登録
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [controller addObserver:self forKeyPath:@"values.imageSetType" options:nil context:nil];
+    
+    // ドキュメントロードをスケジュール
+    [self performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
 }
 
-- (void)loadDocument:(PathNodeOmmitingCondition*)cond
+//-----------------------------------------------------------------------------------------
+// ドキュメントロード
+// 　・senderがselfの場合は初回ロード or Shareed User Defaults ControllerからのKVO通知
+//   ・senderがselfでない場合(MainMenuの場合)はメニューからリロードを選択
+//-----------------------------------------------------------------------------------------
+- (void)loadDocument:(id)sender
 {
+    if (loader){
+        pendingReloadRequest = (sender == self);
+        return;
+    }
+    pendingReloadRequest = NO;
+    UserDefaultsForModel* option = [[UserDefaultsForModel alloc] init];
+    if (sender == self && [modelOption isEqualTo:option]){
+        return;
+    }
+    loadingModelOption = option;
     loader = [[LoadingSheetController alloc] init];
     [loader loadPath:[self.fileURL path] forWindow:self.windowForSheet modalDelegate:self
-            didEndSelector:@selector(didEndLoadingDocument:) condition:cond];
+      didEndSelector:@selector(didEndLoadingDocument:) condition:loadingModelOption.condition];
 }
 
 - (void)didEndLoadingDocument:(PathNode*)node
 {
     if (node){
+        modelOption = loadingModelOption;
         self.root = node;
     }else{
-        [self.windowForSheet close];
+        if (!root){
+            [self.windowForSheet close];
+        }
     }
+    loadingModelOption = nil;
     loader = nil;
+    if (pendingReloadRequest){
+        [self loadDocument:self];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// オブザーバー通知
+//-----------------------------------------------------------------------------------------
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"values.imageSetType"]){
+        [self loadDocument:self];
+    }
 }
 
 //-----------------------------------------------------------------------------------------
