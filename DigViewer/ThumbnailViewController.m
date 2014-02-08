@@ -50,7 +50,7 @@ const static double defaultZoomRatio = 100;
 
 - (void) moveToSelectedNode
 {
-    Document* document = self.representedObject;
+    Document* document = [self.representedObject valueForKey:@"document"];
     PathNode* current = document.imageArrayController.selectedObjects[0];
     if (current.isImage){
         document.presentationViewType = typeImageView;
@@ -78,12 +78,12 @@ const static double defaultZoomRatio = 100;
 
 - (IBAction)onUpFolder:(id)sender
 {
-    Document* document = self.representedObject;
+    Document* document = [self.representedObject valueForKey:@"document"];
     [document moveUpFolder:sender];
 }
 
 - (IBAction)onDownFolder:(id)sender {
-    Document* document = self.representedObject;
+    Document* document = [self.representedObject valueForKey:@"document"];
     [document moveDownFolder:sender];
 }
 

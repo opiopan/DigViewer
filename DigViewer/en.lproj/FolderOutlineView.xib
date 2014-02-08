@@ -129,16 +129,16 @@
         </splitView>
         <treeController objectClassName="PathNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="100059">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.imageTreeController.content" id="100275"/>
-                <binding destination="-2" name="selectionIndexPaths" keyPath="representedObject.imageTreeController.selectionIndexPaths" id="100270"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.imageTreeController.sortDescriptors" previousBinding="100270" id="100271"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageTreeController.content" id="aui-r0-OW6"/>
+                <binding destination="-2" name="selectionIndexPaths" keyPath="representedObject.document.imageTreeController.selectionIndexPaths" id="HJW-iP-ESh"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageTreeController.sortDescriptors" previousBinding="HJW-iP-ESh" id="Iu1-da-zx5"/>
             </connections>
         </treeController>
         <arrayController objectClassName="PathNode" id="100087">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.imageArrayController.arrangedObjects" id="100273"/>
-                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.imageArrayController.selectionIndexes" id="100267"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.imageArrayController.sortDescriptors" previousBinding="100267" id="100269"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageArrayController.arrangedObjects" id="0lb-be-3yh"/>
+                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.document.imageArrayController.selectionIndexes" id="BTV-Vb-wVY"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageArrayController.sortDescriptors" previousBinding="BTV-Vb-wVY" id="H5M-BF-vAU"/>
             </connections>
         </arrayController>
         <customObject id="-3" userLabel="Application"/>

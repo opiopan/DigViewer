@@ -31,7 +31,7 @@
 
 - (void)onDoubleClickImageTableView:(id)sender
 {
-    Document* document = self.representedObject;
+    Document* document = [self.representedObject valueForKey:@"document"];
     PathNode* current = document.imageArrayController.selectedObjects[0];
     if (current.isImage){
         document.presentationViewType = typeImageView;

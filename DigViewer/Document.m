@@ -79,6 +79,27 @@ static NSDictionary* rawSuffixes = nil;
 @end
 
 //-----------------------------------------------------------------------------------------
+// Placeholder:
+// ・ Documentオブジェクトを子ビューコントローラーのrepresentedObjectに設定するための入れ物オブジェクト
+// ・ representedObjectは強参照であるためDocumentオブジェクトを直接渡すと循環参照が発生し、Windowを削除
+// 　 してもDocumentoオブジェクトは削除されない(リーク）することとなるため、ラップするオブジェクトが必要
+//-----------------------------------------------------------------------------------------
+@interface Placeholder : NSObject
+@property (weak) Document* document;
++ placeholderWithDocument:(Document*)doc;
+@end
+
+@implementation Placeholder
++ (id)placeholderWithDocument:(Document *)doc
+{
+    Placeholder* holder = [[Placeholder alloc] init];
+    holder.document = doc;
+    return holder;
+}
+@end
+
+
+//-----------------------------------------------------------------------------------------
 // Document class implementation
 //-----------------------------------------------------------------------------------------
 @implementation Document{
@@ -154,7 +175,7 @@ static NSDictionary* rawSuffixes = nil;
     [super windowControllerDidLoadNib:aController];
     
     mainViewController = [[MainViewController alloc] init];
-    mainViewController.representedObject = self;
+    mainViewController.representedObject = [Placeholder placeholderWithDocument:self];
     [self.placeHolder associateSubViewWithController:mainViewController];
     
     // UserDefaultsの変更に対してObserverを登録
@@ -163,6 +184,16 @@ static NSDictionary* rawSuffixes = nil;
     
     // ドキュメントロードをスケジュール
     [self performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
+}
+
+//-----------------------------------------------------------------------------------------
+// Windowクローズ
+//-----------------------------------------------------------------------------------------
+- (void)windowWillClose:(NSNotification *)notification
+{
+    // Observerを削除
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [controller removeObserver:self forKeyPath:@"values.imageSetType"];
 }
 
 //-----------------------------------------------------------------------------------------

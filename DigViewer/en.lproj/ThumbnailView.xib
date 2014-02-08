@@ -98,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100304">
-                        <rect key="frame" x="463" y="1" width="16" height="235"/>
+                        <rect key="frame" x="464" y="1" width="15" height="235"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
@@ -106,9 +106,9 @@
         </view>
         <arrayController objectClassName="PathNode" id="100087">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.imageArrayController.arrangedObjects" id="100273"/>
-                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.imageArrayController.selectionIndexes" id="100267"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.imageArrayController.sortDescriptors" previousBinding="100267" id="100269"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageArrayController.arrangedObjects" id="6OP-P3-3Q1"/>
+                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.document.imageArrayController.selectionIndexes" id="TL1-UA-z0H"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageArrayController.sortDescriptors" previousBinding="TL1-UA-z0H" id="L7k-nX-qDo"/>
             </connections>
         </arrayController>
         <customObject id="-3" userLabel="Application"/>
