@@ -36,6 +36,7 @@
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
 		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B0DBF0416A84335000365F4 /* ClickableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.m */; };
+		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -89,6 +90,8 @@
 		7B0DBEF716A81FB4000365F4 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DigViewer.icns; sourceTree = SOURCE_ROOT; };
 		7B0DBF0216A84335000365F4 /* ClickableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableImageView.h; sourceTree = "<group>"; };
 		7B0DBF0316A84335000365F4 /* ClickableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableImageView.m; sourceTree = "<group>"; };
+		7B30AC2418A6000F00A70555 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
+		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -258,8 +261,8 @@
 			children = (
 				7B3920451696CA1800E139D0 /* Document.h */,
 				7B3920461696CA1800E139D0 /* Document.m */,
-				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
-				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
+				7B30AC2418A6000F00A70555 /* DocumentWindowController.h */,
+				7B30AC2518A6000F00A70555 /* DocumentWindowController.m */,
 				7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */,
 				7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */,
 				7B0DBEB016A014B6000365F4 /* MainViewController.h */,
@@ -270,6 +273,8 @@
 				7B0DBECD16A0F767000365F4 /* ImageViewController.m */,
 				7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */,
 				7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */,
+				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
+				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */,

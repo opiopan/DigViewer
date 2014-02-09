@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="Document">
+        <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
             <connections>
                 <outlet property="imageArrayController" destination="100087" id="100261"/>
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
@@ -76,7 +76,7 @@
         </window>
         <treeController objectClassName="PathNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="100059">
             <connections>
-                <binding destination="-2" name="contentObject" keyPath="self.root" id="100064"/>
+                <binding destination="-2" name="contentObject" keyPath="self.document.root" id="jBT-iz-mm0"/>
                 <binding destination="-2" name="selectionIndexPaths" keyPath="self.selectionIndexPathsForTree" id="100256"/>
             </connections>
         </treeController>

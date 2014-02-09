@@ -129,16 +129,16 @@
         </splitView>
         <treeController objectClassName="PathNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="100059">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageTreeController.content" id="aui-r0-OW6"/>
-                <binding destination="-2" name="selectionIndexPaths" keyPath="representedObject.document.imageTreeController.selectionIndexPaths" id="HJW-iP-ESh"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageTreeController.sortDescriptors" previousBinding="HJW-iP-ESh" id="Iu1-da-zx5"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageTreeController.content" id="uuA-EV-xrj"/>
+                <binding destination="-2" name="selectionIndexPaths" keyPath="representedObject.controller.imageTreeController.selectionIndexPaths" id="wNq-rJ-Jb1"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageTreeController.sortDescriptors" previousBinding="wNq-rJ-Jb1" id="98D-lX-sgE"/>
             </connections>
         </treeController>
         <arrayController objectClassName="PathNode" id="100087">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageArrayController.arrangedObjects" id="0lb-be-3yh"/>
-                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.document.imageArrayController.selectionIndexes" id="BTV-Vb-wVY"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageArrayController.sortDescriptors" previousBinding="BTV-Vb-wVY" id="H5M-BF-vAU"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageArrayController.arrangedObjects" id="SmE-l9-SZf"/>
+                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.controller.imageArrayController.selectionIndexes" id="KpO-nw-ElH"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageArrayController.sortDescriptors" previousBinding="KpO-nw-ElH" id="RVy-dP-QWs"/>
             </connections>
         </arrayController>
         <customObject id="-3" userLabel="Application"/>

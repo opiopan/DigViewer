@@ -21,9 +21,9 @@
         </imageView>
         <arrayController objectClassName="PathNode" id="100087">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="representedObject.document.imageArrayController.arrangedObjects" id="CE3-A6-yVd"/>
-                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.document.imageArrayController.selectionIndexes" id="kOC-vh-yVB"/>
-                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.document.imageArrayController.sortDescriptors" previousBinding="kOC-vh-yVB" id="sk2-9g-FEW"/>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageArrayController.arrangedObjects" id="ADO-Ua-g0C"/>
+                <binding destination="-2" name="selectionIndexes" keyPath="representedObject.controller.imageArrayController.selectionIndexes" id="SBC-eW-ACz"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageArrayController.sortDescriptors" previousBinding="SBC-eW-ACz" id="EDE-qT-516"/>
             </connections>
         </arrayController>
         <customObject id="-3" userLabel="Application"/>

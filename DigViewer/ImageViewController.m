@@ -9,7 +9,7 @@
 #import "ImageViewController.h"
 #import "ClickableImageView.h"
 #import "MainViewController.h"
-#import "Document.h"
+#import "DocumentWindowController.h"
 
 @implementation ImageViewController
 
@@ -24,30 +24,30 @@
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     imageView.delegate = self;
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
-    Document* document = [self.representedObject valueForKey:@"document"];
-    [document addObserver:self forKeyPath:@"isFitWindow" options:nil context:nil];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    [controller addObserver:self forKeyPath:@"isFitWindow" options:nil context:nil];
 }
 
 - (void)reflectImageScaling
 {
-    Document* document = [self.representedObject valueForKey:@"document"];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     ClickableImageView* imageView = (ClickableImageView*)self.view;
-    imageView.imageScaling = (document.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
+    imageView.imageScaling = (controller.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    Document* document = [self.representedObject valueForKey:@"document"];
-    if (object == document && [keyPath isEqualToString:@"isFitWindow"]){
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    if (object == controller && [keyPath isEqualToString:@"isFitWindow"]){
         ClickableImageView* imageView = (ClickableImageView*)self.view;
-        imageView.imageScaling = (document.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
+        imageView.imageScaling = (controller.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
     }
 }
 
 - (void)onDoubleClickableImageView:(id)sender
 {
-    Document* document = [self.representedObject valueForKey:@"document"];
-    document.presentationViewType = typeThumbnailView;
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    controller.presentationViewType = typeThumbnailView;
 }
 
 @end

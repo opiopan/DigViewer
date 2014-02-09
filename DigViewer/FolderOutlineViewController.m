@@ -9,6 +9,7 @@
 #import "FolderOutlineViewController.h"
 #import "MainViewController.h"
 #import "Document.h"
+#import "DocumentWindowController.h"
 #import "PathNode.h"
 
 @implementation FolderOutlineViewController
@@ -31,12 +32,12 @@
 
 - (void)onDoubleClickImageTableView:(id)sender
 {
-    Document* document = [self.representedObject valueForKey:@"document"];
-    PathNode* current = document.imageArrayController.selectedObjects[0];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    PathNode* current = controller.imageArrayController.selectedObjects[0];
     if (current.isImage){
-        document.presentationViewType = typeImageView;
+        controller.presentationViewType = typeImageView;
     }else{
-        [document moveToFolderNode:current];
+        [controller moveToFolderNode:current];
     }    
 }
 
