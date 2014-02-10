@@ -19,14 +19,13 @@
 @interface RepresentedObject : NSObject
 @property (weak) Document* document;
 @property (weak) DocumentWindowController* controller;
-+ representedObjectWithDocument:(Document*)document controller:controller;
++ representedObjectWithController:controller;
 @end
 
 @implementation RepresentedObject
-+ (id)representedObjectWithDocument:(Document *)document controller:(id)controller
++ (id)representedObjectWithController:(id)controller
 {
     RepresentedObject* object = [[RepresentedObject alloc] init];
-    object.document = document;
     object.controller = controller;
     return object;
 }
@@ -62,7 +61,7 @@
     [super windowDidLoad];
     
     mainViewController = [[MainViewController alloc] init];
-    mainViewController.representedObject = [RepresentedObject representedObjectWithDocument:self.document controller:self];
+    mainViewController.representedObject = [RepresentedObject representedObjectWithController:self];
     [self.placeHolder associateSubViewWithController:mainViewController];
 
     // UserDefaultsの変更に対してObserverを登録
