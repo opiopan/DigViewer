@@ -11,7 +11,7 @@
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
-
+#import "ChildProcess.h"
 
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
@@ -203,5 +203,17 @@
     self.isFitWindow = ! self.isFitWindow;
     [sender setState:self.isFitWindow ? NSOnState : NSOffState];
 }
+
+//-----------------------------------------------------------------------------------------
+// Preview.appの起動
+//-----------------------------------------------------------------------------------------
+- (void) launchPreviewApplication:(id)sender
+{
+    PathNode* current = self.imageArrayController.selectedObjects[0];
+    ChildProcess* cmd = [ChildProcess childProcessWithFormat:@"open -a /Applications/Preview.app %@",
+                         [ChildProcess escapedString:current.imagePath]];
+    [cmd execute];
+}
+
 
 @end

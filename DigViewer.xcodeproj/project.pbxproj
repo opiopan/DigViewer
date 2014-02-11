@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		384BE6A018A9BDA2003EF5B2 /* ChildProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 384BE69F18A9BDA2003EF5B2 /* ChildProcess.m */; };
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		384BE69E18A9BDA2003EF5B2 /* ChildProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildProcess.h; sourceTree = "<group>"; };
+		384BE69F18A9BDA2003EF5B2 /* ChildProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildProcess.m; sourceTree = "<group>"; };
 		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
 		7B01210716B4C6A9004AA730 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = resources/down.png; sourceTree = "<group>"; };
 		7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+Nested.h"; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 		7BF678B31699106C00FE39B4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				384BE69E18A9BDA2003EF5B2 /* ChildProcess.h */,
+				384BE69F18A9BDA2003EF5B2 /* ChildProcess.m */,
 				7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */,
 				7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */,
 				7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */,
@@ -429,6 +434,7 @@
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */,
+				384BE6A018A9BDA2003EF5B2 /* ChildProcess.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,

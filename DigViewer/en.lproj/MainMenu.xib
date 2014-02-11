@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -89,6 +89,13 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="loadDocument:" target="-1" id="4Bp-eD-Hw7"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="oBc-eP-xBn"/>
+                            <menuItem title="Open Preview" keyEquivalent="P" id="JbI-vo-pfR">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="launchPreviewApplication:" target="-1" id="nUl-O9-ehe"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="3vT-sh-cks"/>
