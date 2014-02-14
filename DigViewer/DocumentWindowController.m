@@ -201,7 +201,12 @@
 - (void)fitImageToScreen:(id)sender
 {
     self.isFitWindow = ! self.isFitWindow;
-    [sender setState:self.isFitWindow ? NSOnState : NSOffState];
+}
+
+- (BOOL)validateForFitImageToScreen:(NSMenuItem*)menuItem
+{
+    [menuItem setState:self.isFitWindow ? NSOnState : NSOffState];
+    return YES;
 }
 
 //-----------------------------------------------------------------------------------------
