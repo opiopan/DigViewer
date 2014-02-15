@@ -57,6 +57,21 @@
                             <binding destination="-2" name="value" keyPath="self.isFitWindow" id="100313"/>
                         </connections>
                     </button>
+                    <button toolTip="Show or hide the navigation pane" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buU-Uc-P2w">
+                        <rect key="frame" x="152" y="451" width="38" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSPathTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mx6-Np-jcl">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.isCollapsedOutlineView" id="Sx3-B5-dav">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="100232" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="100273"/>
@@ -91,6 +106,7 @@
     <resources>
         <image name="NSEnterFullScreenTemplate" width="16" height="15"/>
         <image name="NSIconViewTemplate" width="11" height="10"/>
+        <image name="NSPathTemplate" width="13" height="10"/>
         <image name="NSQuickLookTemplate" width="21" height="16"/>
     </resources>
 </document>

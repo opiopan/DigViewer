@@ -16,7 +16,6 @@ enum RepresentationViewType {
 @interface MainViewController : NSViewController
 
 @property (assign) enum RepresentationViewType presentationViewType;
-@property (weak) IBOutlet NSView *outlinePlaceholder;
-@property (weak) IBOutlet NSView *presentationPlaceholder;
+@property (assign) BOOL isCollapsedOutlineView;
 
 @end

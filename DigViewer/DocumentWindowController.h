@@ -19,6 +19,7 @@
 
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;
+@property (assign) BOOL isCollapsedOutlineView;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
@@ -27,3 +28,4 @@
 - (void)moveDownFolder:(id)sender;
 
 @end
+

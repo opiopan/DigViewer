@@ -196,6 +196,34 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// アウトラインビューの折り畳み属性＆トグル処理(メニューの応答処理)
+//-----------------------------------------------------------------------------------------
+- (BOOL) isCollapsedOutlineView
+{
+    return mainViewController.isCollapsedOutlineView;
+}
+
+- (void) setIsCollapsedOutlineView:(BOOL)value
+{
+    mainViewController.isCollapsedOutlineView = value;
+}
+
+- (void) toggleCollapsedOutlineView:(id)sender
+{
+    self.isCollapsedOutlineView = !self.isCollapsedOutlineView;
+}
+
+- (BOOL)validateForToggleCollapsedOutlineView:(NSMenuItem*)menuItem
+{
+    if (self.isCollapsedOutlineView){
+        menuItem.title = NSLocalizedString(@"Show Navigation pane", nil);
+    }else{
+        menuItem.title = NSLocalizedString(@"Hide Navigation pane", nil);
+    }
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------
 // イメージの拡大表示のトグル（メニューの応答処理）
 //-----------------------------------------------------------------------------------------
 - (void)fitImageToScreen:(id)sender
