@@ -57,6 +57,7 @@
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
 		7BF8E2A516AA7C9F0007E788 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8E2A416AA7C9F0007E788 /* up.png */; };
+		7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,8 @@
 		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathfinderPinnedFile.m; sourceTree = "<group>"; };
 		7BF8E2A416AA7C9F0007E788 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = resources/up.png; sourceTree = "<group>"; };
 		7BF8E2A716AA7DEB0007E788 /* up.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = up.idraw; path = resources/up.idraw; sourceTree = "<group>"; };
+		7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+TracingResponderChain.h"; sourceTree = "<group>"; };
+		7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+TracingResponderChain.m"; sourceTree = "<group>"; };
 		7BFF729416CF4A2E00A94515 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LoadingSheet.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -258,6 +261,8 @@
 				7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */,
 				7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */,
 				7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */,
+				7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */,
+				7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.m in Sources */,
+				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,

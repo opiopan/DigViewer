@@ -11,10 +11,10 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <imageView id="100235" customClass="ClickableImageView">
+        <imageView focusRingType="none" id="100235" customClass="ClickableImageView">
             <rect key="frame" x="0.0" y="0.0" width="424" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="100236"/>
+            <imageCell key="cell" selectable="YES" editable="YES" focusRingType="none" alignment="left" imageScaling="proportionallyUpOrDown" id="100236"/>
             <connections>
                 <binding destination="100087" name="value" keyPath="selection.image" id="100251"/>
             </connections>

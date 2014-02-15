@@ -12,6 +12,7 @@
 #import "FolderOutlineViewController.h"
 #import "ImageViewController.h"
 #import "ThumbnailViewController.h"
+#import "NSWindow+TracingResponderChain.h"
 
 @implementation MainViewController {
     NSArray*          viewControllers;
@@ -42,6 +43,12 @@
         controller.representedObject = self.representedObject;
     }
     self.presentationViewType = typeImageView;
+    [self performSelector:@selector(configureOnInit) withObject:nil afterDelay:0.0];
+}
+
+- (void)configureOnInit
+{
+    [self.view.window makeFirstResponder:representationViewController.representationView];
 }
 
 - (enum RepresentationViewType) presentationViewType
@@ -51,13 +58,18 @@
 
 - (void) setPresentationViewType:(enum RepresentationViewType)type
 {
+    BOOL needToResetFirstResponder = NO;
     if (representationViewController){
+        needToResetFirstResponder = [self.view.window isBelongToResponderChain:representationViewController.view];
         [representationViewController.view removeFromSuperview];
     }
     presentationViewType = type;
     representationViewController = viewControllers[type];
     [presentationPlaceholder associateSubViewWithController:representationViewController];
-    [self.view.window makeFirstResponder:representationViewController.representationView];
+    [self.view.window recalculateKeyViewLoop];
+    if (needToResetFirstResponder){
+        [self.view.window makeFirstResponder:representationViewController.representationView];
+    }
 }
 
 @end
