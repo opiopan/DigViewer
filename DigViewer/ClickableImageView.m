@@ -8,9 +8,9 @@
 
 #import "ClickableImageView.h"
 
-@implementation ClickableImageView
-
-@synthesize delegate;
+@implementation ClickableImageView{
+    NSColor* _backgroundColor;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -21,8 +21,26 @@
 - (void)mouseUp:(NSEvent*)event
 {
     if([event clickCount] == 2) {
-        [delegate performSelector:@selector(onDoubleClickableImageView:) withObject:self afterDelay:0.0f];
+        [self.delegate performSelector:@selector(onDoubleClickableImageView:) withObject:self afterDelay:0.0f];
     }
+}
+
+- (void)drawRect:(NSRect)dirtyRect
+{
+    [self.backgroundColor setFill];
+    NSRectFill(dirtyRect);
+	[super drawRect:dirtyRect];
+}
+
+- (NSColor*)backgroundColor
+{
+    return _backgroundColor;
+}
+
+- (void)setBackgroundColor:(NSColor *)value
+{
+    _backgroundColor = value;
+    [self display];
 }
 
 @end

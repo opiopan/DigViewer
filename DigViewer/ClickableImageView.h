@@ -11,5 +11,6 @@
 @interface ClickableImageView : NSImageView
 
 @property (weak) id delegate;
+@property (copy) NSColor* backgroundColor;
 
 @end

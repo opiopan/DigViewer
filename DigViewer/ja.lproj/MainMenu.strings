@@ -170,4 +170,8 @@
 /* Class = "NSMenuItem"; title = "Open Preview"; ObjectID = "JbI-vo-pfR"; */
 "JbI-vo-pfR.title" = "プレビューを起動";
 
+/* Class = "NSTextFieldCell"; title = "Background Color:"; ObjectID = "Ag6-8R-B\
+ gM"; */
+"Ag6-8R-BgM.title" = "背景色:";
+
 
