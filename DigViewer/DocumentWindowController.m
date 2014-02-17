@@ -11,7 +11,6 @@
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
-#import "ChildProcess.h"
 
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
@@ -243,9 +242,7 @@
 - (void) launchPreviewApplication:(id)sender
 {
     PathNode* current = self.imageArrayController.selectedObjects[0];
-    ChildProcess* cmd = [ChildProcess childProcessWithFormat:@"open -a /Applications/Preview.app %@",
-                         [ChildProcess escapedString:current.imagePath]];
-    [cmd execute];
+    [[NSWorkspace sharedWorkspace] openFile:current.imagePath withApplication:@"Preview.app"];
 }
 
 //-----------------------------------------------------------------------------------------
