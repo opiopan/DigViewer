@@ -129,7 +129,7 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifSaturation, pvTypeSimple, "Saturation:", NULL, MAPDEF(saturations), NULL,
     propertyEXIF, kCGImagePropertyExifSharpness, pvTypeSimple, "Sharpness:", NULL, MAPDEF(sharpnesses), NULL,
     propertyEXIF, kCGImagePropertyExifSceneCaptureType, pvTypeSimple, "Scene Cpature Type:", NULL, MAPDEF(sceneCaptureTypes), NULL,
-    propertyEXIF, kCGImagePropertyExifSubjectDistance, pvTypeSimple, "Subject Distance Range:", NULL, MAPDEF(subjectDists), NULL,
+    propertyEXIF, kCGImagePropertyExifSubjectDistRange, pvTypeSimple, "Subject Distance Range:", NULL, MAPDEF(subjectDists), NULL,
     propertyEXIF, kCGImagePropertyExifCustomRendered, pvTypeSimple, "Special Effects:", NULL, MAPDEF(customRendereds), NULL,
 };
 
