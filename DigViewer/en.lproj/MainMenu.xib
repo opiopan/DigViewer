@@ -198,9 +198,14 @@
                 <menuItem title="View" id="295">
                     <menu key="submenu" title="View" id="296">
                         <items>
-                            <menuItem title="Toggle Navigation pane" keyEquivalent="n" id="vsU-XZ-KCe">
+                            <menuItem title="Toggle Navigator" keyEquivalent="n" id="vsU-XZ-KCe">
                                 <connections>
                                     <action selector="toggleCollapsedOutlineView:" target="-1" id="9bV-gr-9Fy"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Toggle Inspector" keyEquivalent="i" id="k9P-2l-j2v">
+                                <connections>
+                                    <action selector="toggleCollapsedInspectorView:" target="-1" id="ODS-3L-7qe"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="dK0-vV-moZ"/>

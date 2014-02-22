@@ -7,14 +7,16 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="splitView" destination="100233" id="xNl-86-61m"/>
                 <outlet property="view" destination="100233" id="100255"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <splitView dividerStyle="paneSplitter" vertical="YES" id="100233">
+        <splitView dividerStyle="thin" vertical="YES" id="100233">
             <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <connections>
+                <outlet property="delegate" destination="-2" id="ibn-AR-Z0h"/>
+            </connections>
         </splitView>
         <customObject id="-3" userLabel="Application"/>
     </objects>

@@ -11,6 +11,10 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Scale up the image that fit to the window"; ObjectID = "100301"; */
 "100301.ibShadowedToolTip" = "小さい画像をウィンドウサイズに合わせて拡大表示します";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Show or hide the navigation pane"; \
- ObjectID = "buU-Uc-P2w"; */
-"buU-Uc-P2w.ibShadowedToolTip" = "ナビゲーション ペインを表示または隠します";
+/* Class = "NSSegmentedCell"; E2t-3v-5oY.ibShadowedToolTips[0] = "Show or hide \
+ the Navigator"; ObjectID = "E2t-3v-5oY"; */
+"E2t-3v-5oY.ibShadowedToolTips[0]" = "ナビゲーターを表示または隠します";
+
+/* Class = "NSSegmentedCell"; E2t-3v-5oY.ibShadowedToolTips[1] = "Show or hide \
+ the Inspector"; ObjectID = "E2t-3v-5oY"; */
+"E2t-3v-5oY.ibShadowedToolTips[1]" = "インスペクターを表示または隠します";

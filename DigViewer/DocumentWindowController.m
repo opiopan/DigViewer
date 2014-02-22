@@ -62,6 +62,7 @@
     mainViewController = [[MainViewController alloc] init];
     mainViewController.representedObject = [RepresentedObject representedObjectWithController:self];
     [self.placeHolder associateSubViewWithController:mainViewController];
+    [self reflectValueToViewSelectionButton];
 
     // UserDefaultsの変更に対してObserverを登録
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
@@ -163,6 +164,26 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// ビュー選択ボタンと属性の同期
+//-----------------------------------------------------------------------------------------
+- (IBAction)onViewSelectionButtonDown:(id)sender
+{
+    [self reflectViewSelectionButtonToValue];
+}
+
+- (void)reflectViewSelectionButtonToValue
+{
+    mainViewController.isCollapsedOutlineView = ![self.viewSelectionButton isSelectedForSegment:0];
+    mainViewController.isCollapsedInspectorView = ![self.viewSelectionButton isSelectedForSegment:1];
+}
+
+- (void)reflectValueToViewSelectionButton
+{
+    [self.viewSelectionButton setSelected:!mainViewController.isCollapsedOutlineView forSegment:0];
+    [self.viewSelectionButton setSelected:!mainViewController.isCollapsedInspectorView forSegment:1];
+}
+
+//-----------------------------------------------------------------------------------------
 // 選択状態属性
 //-----------------------------------------------------------------------------------------
 - (NSArray*) selectionIndexPathsForTree
@@ -205,6 +226,7 @@
 - (void) setIsCollapsedOutlineView:(BOOL)value
 {
     mainViewController.isCollapsedOutlineView = value;
+    [self reflectValueToViewSelectionButton];
 }
 
 - (void) toggleCollapsedOutlineView:(id)sender
@@ -215,9 +237,38 @@
 - (BOOL)validateForToggleCollapsedOutlineView:(NSMenuItem*)menuItem
 {
     if (self.isCollapsedOutlineView){
-        menuItem.title = NSLocalizedString(@"Show Navigation pane", nil);
+        menuItem.title = NSLocalizedString(@"Show Navigator", nil);
     }else{
-        menuItem.title = NSLocalizedString(@"Hide Navigation pane", nil);
+        menuItem.title = NSLocalizedString(@"Hide Navigator", nil);
+    }
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------
+// インスペクタービューの折り畳み属性＆トグル処理(メニューの応答処理)
+//-----------------------------------------------------------------------------------------
+- (BOOL) isCollapsedInspectorView
+{
+    return mainViewController.isCollapsedInspectorView;
+}
+
+- (void) setIsCollapsedInspectorView:(BOOL)value
+{
+    mainViewController.isCollapsedInspectorView = value;
+    [self reflectValueToViewSelectionButton];
+}
+
+- (void) toggleCollapsedInspectorView:(id)sender
+{
+    self.isCollapsedInspectorView = !self.isCollapsedInspectorView;
+}
+
+- (BOOL)validateForToggleCollapsedInspectorView:(NSMenuItem*)menuItem
+{
+    if (self.isCollapsedInspectorView){
+        menuItem.title = NSLocalizedString(@"Show Inspector", nil);
+    }else{
+        menuItem.title = NSLocalizedString(@"Hide Inspector", nil);
     }
     return YES;
 }

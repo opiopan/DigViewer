@@ -14,12 +14,14 @@
 @property (strong) NSArray* selectionIndexPathsForTree;
 @property (strong) NSIndexSet* selectionIndexesForImages;
 @property (weak) IBOutlet NSView *placeHolder;
+@property (weak) IBOutlet NSSegmentedControl *viewSelectionButton;
 @property (strong) IBOutlet NSTreeController *imageTreeController;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
 
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;
 @property (assign) BOOL isCollapsedOutlineView;
+@property (assign) BOOL isCollapsedInspectorView;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;

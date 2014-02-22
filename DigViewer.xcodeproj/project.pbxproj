@@ -36,6 +36,7 @@
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
 		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B0DBF0416A84335000365F4 /* ClickableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.m */; };
+		7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AC4A718B05384004136CD /* InspectorViewController.m */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
@@ -52,6 +53,8 @@
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
+		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.m */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
@@ -92,6 +95,8 @@
 		7B0DBEF716A81FB4000365F4 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DigViewer.icns; sourceTree = SOURCE_ROOT; };
 		7B0DBF0216A84335000365F4 /* ClickableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableImageView.h; sourceTree = "<group>"; };
 		7B0DBF0316A84335000365F4 /* ClickableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableImageView.m; sourceTree = "<group>"; };
+		7B1AC4A618B05384004136CD /* InspectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorViewController.h; sourceTree = "<group>"; };
+		7B1AC4A718B05384004136CD /* InspectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorViewController.m; sourceTree = "<group>"; };
 		7B30AC2418A6000F00A70555 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
@@ -125,6 +130,10 @@
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
 		7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingSheetController.m; sourceTree = "<group>"; };
 		7B697E52169DB8A000A9E247 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingSheet.xib; sourceTree = "<group>"; };
+		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
+		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
+		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
 		7BF678AC16983C7C00FE39B4 /* PathNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathNode.m; sourceTree = "<group>"; };
 		7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+CapabilityDetermining.h"; sourceTree = "<group>"; };
@@ -226,6 +235,7 @@
 				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
+				7BC667A518B05213000CB995 /* InspectorView.xib */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
@@ -243,6 +253,8 @@
 			children = (
 				7BF678AB16983C7C00FE39B4 /* PathNode.h */,
 				7BF678AC16983C7C00FE39B4 /* PathNode.m */,
+				7B6CE7B818B3970F00CD445A /* ImageMetadata.h */,
+				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -281,6 +293,8 @@
 				7B0DBECD16A0F767000365F4 /* ImageViewController.m */,
 				7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */,
 				7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */,
+				7B1AC4A618B05384004136CD /* InspectorViewController.h */,
+				7B1AC4A718B05384004136CD /* InspectorViewController.m */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 			);
@@ -307,6 +321,7 @@
 				7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */,
 				7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */,
 				7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */,
+				7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -368,6 +383,7 @@
 				7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
+				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
@@ -444,6 +460,7 @@
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
+				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.m in Sources */,
@@ -454,6 +471,7 @@
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
+				7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +588,14 @@
 				7B697E52169DB8A000A9E247 /* en */,
 			);
 			name = LoadingSheet.xib;
+			sourceTree = "<group>";
+		};
+		7BC667A518B05213000CB995 /* InspectorView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BC667A418B05213000CB995 /* en */,
+			);
+			name = InspectorView.xib;
 			sourceTree = "<group>";
 		};
 		7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */ = {

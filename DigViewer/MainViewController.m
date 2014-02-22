@@ -12,13 +12,21 @@
 #import "FolderOutlineViewController.h"
 #import "ImageViewController.h"
 #import "ThumbnailViewController.h"
+#import "InspectorViewController.h"
 #import "NSWindow+TracingResponderChain.h"
 
 @implementation MainViewController {
     __weak NSSplitView* splitView;
     NSArray*            contentViewControllers;
     NSViewController*   outlineViewController;
+    NSViewController*   inspectorViewController;
+    CGFloat             outlineViewWidth;
+    CGFloat             inspectorViewWidth;
+    CGFloat*            dividerPosition[2];
+    int                 dividerNum;
+    BOOL                isCoordinateFlip[2];
     BOOL                isCollapsedOutlineView;
+    BOOL                isCollapsedInspectorView;
 }
 
 @synthesize presentationViewType;
@@ -33,6 +41,10 @@
     self = [super initWithNibName:@"MainView" bundle:nil];
     if (self){
         isCollapsedOutlineView = NO;
+        isCollapsedInspectorView = YES;
+        presentationViewType = typeImageView;
+        outlineViewWidth = 200;
+        inspectorViewWidth = 230;
     }
     return self;
 }
@@ -43,6 +55,8 @@
     
     outlineViewController = [[FolderOutlineViewController alloc] init];
     outlineViewController.representedObject = self.representedObject;
+    inspectorViewController = [[InspectorViewController alloc] init];
+    inspectorViewController.representedObject = self.representedObject;
 
     contentViewControllers = [NSArray arrayWithObjects:[[ImageViewController alloc] init],
                        [[ThumbnailViewController alloc] init], nil];
@@ -50,7 +64,8 @@
         NSViewController* controller = contentViewControllers[i];
         controller.representedObject = self.representedObject;
     }
-    self.presentationViewType = typeImageView;
+
+    [self arrangeSubview];
     [self performSelector:@selector(configureOnInit) withObject:nil afterDelay:0.0];
 }
 
@@ -60,7 +75,7 @@
 }
 
 //-----------------------------------------------------------------------------------------
-// サビビューの配置
+// サブビューの配置
 //-----------------------------------------------------------------------------------------
 - (void) arrangeSubview
 {
@@ -72,6 +87,9 @@
     if (outlineViewController.view.superview){
         [outlineViewController.view removeFromSuperview];
     }
+    if (inspectorViewController.view.superview){
+        [inspectorViewController.view removeFromSuperview];
+    }
     for (int i = 0; i < contentViewControllers.count; i++){
         NSViewController* controller = contentViewControllers[i];
         if (controller.view.superview){
@@ -81,13 +99,45 @@
 
     // 必要なサブビューをSplitViewに追加
     int currentViewIndex = 0;
+    dividerNum = 0;
     if (!self.isCollapsedOutlineView){
         [splitView addSubview:outlineViewController.view];
         [splitView setHoldingPriority: NSLayoutPriorityDefaultLow forSubviewAtIndex:currentViewIndex];
+        dividerPosition[dividerNum] = &outlineViewWidth;
+        isCoordinateFlip[dividerNum] = NO;
+        dividerNum++;
         currentViewIndex++;
     }
     [splitView addSubview:representedViewController.view];
     [splitView setHoldingPriority: NSLayoutPriorityFittingSizeCompression forSubviewAtIndex:currentViewIndex];
+    currentViewIndex++;
+    if (!self.isCollapsedInspectorView){
+        [splitView addSubview:inspectorViewController.view];
+        [splitView setHoldingPriority:NSLayoutPriorityDefaultLow forSubviewAtIndex:currentViewIndex];
+        dividerPosition[dividerNum] = &inspectorViewWidth;
+        isCoordinateFlip[dividerNum] = YES;
+        dividerNum++;
+        currentViewIndex++;
+    }
+
+    // divider位置を設定
+    //   なぜ2回設定しなければいけないのか?
+    //   ・NSSplitViewのdividerの座標系は摩訶不思議
+    //   ・サブビューの数でスケール変わる、divider position設定でもスケール変わる場合あり
+    //   ・特にサブビュー追加直後のposition設定で移動するため、意図した位置にdividerを設置するためには2回同じ設定が必要であった
+    for (int i = 0; i < 2; i++){
+    int dividerIndex = dividerNum - 1;
+    CGFloat frameWidth = splitView.frame.size.width;
+        if (!self.isCollapsedInspectorView){
+            CGFloat dividerMax = [splitView maxPossiblePositionOfDividerAtIndex:dividerNum - 1];
+            [splitView setPosition:(frameWidth - inspectorViewWidth) * dividerMax / frameWidth ofDividerAtIndex:dividerIndex];
+            dividerIndex--;
+        }
+        if (!self.isCollapsedOutlineView){
+            CGFloat dividerMax = [splitView maxPossiblePositionOfDividerAtIndex:dividerNum - 1];
+            [splitView setPosition:outlineViewWidth* dividerMax / frameWidth ofDividerAtIndex:dividerIndex];
+        }
+    }
     
     // キービューループの再計算とfirst responderの設定
     [self.view.window recalculateKeyViewLoop];
@@ -96,6 +146,21 @@
     }else{
         [self.view.window makeFirstResponder:representedViewController.representationView];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// divider移動通知
+//-----------------------------------------------------------------------------------------
+- (CGFloat)splitView:(NSSplitView *)view constrainSplitPosition:(CGFloat)proposedPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+    CGFloat frameWidth = view.frame.size.width;
+    CGFloat dividerMax = [view maxPossiblePositionOfDividerAtIndex:dividerNum - 1];
+    if (isCoordinateFlip[dividerIndex]){
+        *dividerPosition[dividerIndex] = (dividerMax - proposedPosition) * frameWidth / dividerMax;
+    }else{
+        *dividerPosition[dividerIndex] = proposedPosition * frameWidth / dividerMax;
+    }
+    return proposedPosition;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -123,6 +188,20 @@
 - (void) setIsCollapsedOutlineView:(BOOL)value
 {
     isCollapsedOutlineView = value;
+    [self arrangeSubview];
+}
+
+//-----------------------------------------------------------------------------------------
+// インスペクタービューの折り畳み属性
+//-----------------------------------------------------------------------------------------
+- (BOOL) isCollapsedInspectorView
+{
+    return isCollapsedInspectorView;
+}
+
+- (void) setIsCollapsedInspectorView:(BOOL)value
+{
+    isCollapsedInspectorView = value;
     [self arrangeSubview];
 }
 

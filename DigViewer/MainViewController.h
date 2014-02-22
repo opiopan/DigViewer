@@ -13,9 +13,10 @@ enum RepresentationViewType {
     typeThumbnailView
 };
 
-@interface MainViewController : NSViewController
+@interface MainViewController : NSViewController <NSSplitViewDelegate>
 
 @property (assign) enum RepresentationViewType presentationViewType;
 @property (assign) BOOL isCollapsedOutlineView;
+@property (assign) BOOL isCollapsedInspectorView;
 
 @end

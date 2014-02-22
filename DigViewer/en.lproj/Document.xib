@@ -10,6 +10,7 @@
                 <outlet property="imageArrayController" destination="100087" id="100261"/>
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
                 <outlet property="placeHolder" destination="100232" id="100240"/>
+                <outlet property="viewSelectionButton" destination="Y6C-ag-7JX" id="Sjx-Y4-Sbw"/>
                 <outlet property="window" destination="5" id="100241"/>
             </connections>
         </customObject>
@@ -57,21 +58,20 @@
                             <binding destination="-2" name="value" keyPath="self.isFitWindow" id="100313"/>
                         </connections>
                     </button>
-                    <button toolTip="Show or hide the navigation pane" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buU-Uc-P2w">
-                        <rect key="frame" x="152" y="451" width="38" height="25"/>
+                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-ag-7JX">
+                        <rect key="frame" x="151" y="451" width="67" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSPathTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mx6-Np-jcl">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                        <segmentedCell key="cell" alignment="left" style="texturedSquare" trackingMode="selectAny" id="E2t-3v-5oY">
                             <font key="font" metaFont="system"/>
-                        </buttonCell>
+                            <segments>
+                                <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
+                                <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
+                            </segments>
+                        </segmentedCell>
                         <connections>
-                            <binding destination="-2" name="value" keyPath="self.isCollapsedOutlineView" id="Sx3-B5-dav">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                </dictionary>
-                            </binding>
+                            <action selector="onViewSelectionButtonDown:" target="-2" id="O9z-Yc-tox"/>
                         </connections>
-                    </button>
+                    </segmentedControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="100232" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="100273"/>
@@ -108,5 +108,6 @@
         <image name="NSIconViewTemplate" width="11" height="10"/>
         <image name="NSPathTemplate" width="13" height="10"/>
         <image name="NSQuickLookTemplate" width="21" height="16"/>
+        <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
     </resources>
 </document>

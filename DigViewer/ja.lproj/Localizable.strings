@@ -6,8 +6,141 @@
   Copyright (c) 2013年 opiopan. All rights reserved.
 */
 
+// Loadingシート
 "Now loading a pinned file in the folder:" = "ピン留めファイルをロード中:";
 "Now recognizing a pinned file in the folder:" = "ピン留めファイルを解析中:";
 "Now searching image files in the folder:" = "画像ファイルを検索中:";
-"Show Navigation pane" = "ナビゲーション ペインを表示";
-"Hide Navigation pane" = "ナビゲーション ペインを隠す";
+
+// メニュータイトル
+"Show Navigator" = "ナビゲーターを表示";
+"Hide Navigator" = "ナビゲーターを隠す";
+"Show Inspector" = "インスペクターを表示";
+"Hide Inspector" = "インスペクターを隠す";
+
+// インスペクタービュー: 属性名
+"File Name:" = "ファイル名:";
+"Type:" = "種別:";
+"Image size:" = "画像サイズ:";
+"Date Time:" = "撮影日時:";
+"Color Profile:" = "カラープロファイル:";
+"Bit Depth:" = "ビット深度:";
+"Camera Maker:" = "カメラメーカー:";
+"Camera Model:" = "カメラモデル:";
+"Lens Maker:" = "レンズメーカー:";
+"Lens Model:" = "レンズモデル:";
+"Lens Spec:" = "レンズ仕様:";
+"Sensing Method:" = "センサー方式:";
+"Focal Length:" = "焦点距離:";
+"Focal Length in 35mm:" = "35mm換算 焦点距離:";
+"Exposure Time:" = "露出時間:";
+"Aperture:" = "絞り:";
+"ISO Speed:" = "ISO感度:";
+"Exposure Bias:" = "露出補正:";
+"Exposure Program:" = "露出プログラム:";
+"Exposure Mode:" = "露出モード:";
+"Metering Mode:" = "測光モード:";
+"Flash:" = "フラッシュ:";
+"Flash Energy:" = "フラッシュ強度:";
+"White Balance:" = "ホワイトバランス:";
+"Contrast:" = "コントラスト:";
+"Saturation:" = "彩度:";
+"Sharpness:" = "シャープネス:";
+"Scene Cpature Type:" = "撮影シーンタイプ:";
+"Subject Distance Range:" = "被写体距離レンジ:";
+"Special Effects:" = "エフェクト:";
+
+// インスペクタービュー: センサー方式
+"Unknown" = "不明";
+"Monochrome Area Sensor" = "単色平面センサー";
+"1 Chip Color Sensor" = "単板カラーセンサー";
+"2 Chip Color Sensor" = "2板カラーセンサー";
+"3 Chip Color Sensor" = "3板カラーセンサー";
+"Color Sequential Area" = "順次カラー方式平面センサー";
+"Monochrome Linear" = "単色リニアセンサー";
+"Trilinear" = "3色リニアセンサー";
+"Color Sequential Linear" = "順次カラー方式リニアセンサー";
+
+// インスペクタービュー: 露出プログラム
+"Manual" = "マニュアル";
+"Program AE" = "プログラムAE";
+"Aperture Priority AE" = "絞り優先";
+"Shutter Speed Priority AE" = "シャッタースピード優先";
+"Creative (Depth of field priority)" = "クリエイティブモード (被写界深度優先)";
+"Action (High speed priority)" = "アクションモード (高速シャッター優先)";
+"Portrait" = "ポートレートモード (人物撮影)";
+"Landscape" = "風景モード";
+
+// インスペクタービュー: 露出モード
+"Auto" = "自動";
+"Manual" = "マニュアル";
+"Auto Bracket" = "自動ブラケット";
+
+// インスペクタービュー: 測光モード
+"Average" = "平均";
+"Center Weighted Average" = "中央重点";
+"Spot" = "スポット";
+"Multi Spot" = "マルチスポット";
+"Multi Segment" = "分割測光";
+"Partial" = "分割測光";
+"Other" = "その他";
+
+// インスペクタービュー: ホワイトバランス
+
+// インスペクタービュー: コントラスト
+"Normal" = "標準";
+"Soft" = "弱い";
+"Hard" = "強い";
+
+// インスペクタービュー: 彩度
+"Low" = "低い";
+"High" = "高い";
+
+// インスペクタービュー: シャープネス
+
+// インスペクタービュー: 撮影シーンタイプ
+"Starndard" = "標準";
+"Landscape" = "風景";
+"Portrait" = "人物";
+"Night" = "夜景";
+
+// インスペクタービュー: 被写体距離レンジ
+"Macro" = "マクロ";
+"Close" = "近距離";
+"Distant" = "遠景";
+
+// インスペクタービュー: スペシャルエフェクト
+"None" = "なし";
+"Custom Processing" = "カスタムエフェクト";
+
+// インスペクタービュー: レンズ仕様
+"Fixed Focal Length" = "単焦点";
+"Zoom" = "ズーム";
+
+// インスペクタービュー: フラッシュ
+"No Flash" = "フラッシュなし";
+"Fired" = "発光";
+"Fired, Return not detected" = "発光、リターン検出せず";
+"Fired, Return detected" = "発光、リターン検出";
+"On, Did not fire" = "オン、発光せず";
+"On, Fired" = "オン、発光";
+"On, Return not detected" = "オン、リターン検出せず";
+"On, Return detected" = "オン、リターン検出";
+"Off, Did not fire" = "オフ、発光せず";
+"Off, Did not fire, Return not detected" = "オフ、発光せず、リターン検出せず";
+"Auto, Did not fire" = "オート、発光せず";
+"Auto, Fired" = "オート、発光";
+"Auto, Fired, Return not detected" = "オート、発光、リターン検出せず";
+"Auto, Fired, Return detected" = "オート、発光、リターン検出";
+"No flash function" = "フラッシュ機能なし";
+"Off, No flash function" = "オフ、ストロボ機能なし";
+"Fired, Red-eye reduction" = "発光、赤目防止";
+"Fired, Red-eye reduction, Return not detected" = "発光、赤目防止、リターン検出せず";
+"Fired, Red-eye reduction, Return detected" = "発光、赤目防止、リターン検出";
+"On, Red-eye reduction" = "オン、赤目防止";
+"On, Red-eye reduction, Return not detected" = "オン、赤目防止、リターン検出せず";
+"On, Red-eye reduction, Return detected" = "オン、赤目、リターン検出";
+"Off, Red-eye reduction" = "オフ、赤目防止";
+"Auto, Did not fire, Red-eye reduction" = "自動、発光せず、赤目防止";
+"Auto, Fired, Red-eye reduction" = "自動、発光、赤目防止";
+"Auto, Fired, Red-eye reduction, Return not detected" = "自動、発光、赤目防止、リターン検出せず";
+"Auto, Fired, Red-eye reduction, Return detected" = "自動、発光、赤目防止、リターン検出";
