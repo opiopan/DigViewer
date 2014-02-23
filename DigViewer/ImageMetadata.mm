@@ -233,48 +233,55 @@ static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
 
 static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
 {
-    static struct {
-        int         code;
-        const char* string;
-    } dic[] = {
-        0x0, "No Flash",
-        0x1, "Fired",
-        0x5, "Fired, Return not detected",
-        0x7, "Fired, Return detected",
-        0x8, "On, Did not fire",
-        0x9, "On, Fired",
-        0xd, "On, Return not detected",
-        0xf, "On, Return detected",
-        0x10, "Off, Did not fire",
-        0x14, "Off, Did not fire, Return not detected",
-        0x18, "Auto, Did not fire",
-        0x19, "Auto, Fired",
-        0x1d, "Auto, Fired, Return not detected",
-        0x1f, "Auto, Fired, Return detected",
-        0x20, "No flash function",
-        0x30, "Off, No flash function",
-        0x41, "Fired, Red-eye reduction",
-        0x45, "Fired, Red-eye reduction, Return not detected",
-        0x47, "Fired, Red-eye reduction, Return detected",
-        0x49, "On, Red-eye reduction",
-        0x4d, "On, Red-eye reduction, Return not detected",
-        0x4f, "On, Red-eye reduction, Return detected",
-        0x50, "Off, Red-eye reduction",
-        0x58, "Auto, Did not fire, Red-eye reduction",
-        0x59, "Auto, Fired, Red-eye reduction",
-        0x5d, "Auto, Fired, Red-eye reduction, Return not detected",
-        0x5f, "Auto, Fired, Red-eye reduction, Return detected"
-    };
-    
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
-    NSString* valueString = nil;
+    NSMutableString* valueString = nil;
     if (value){
         NSInteger code = value.integerValue;
-        for (int i = 0; i < sizeof(dic) / sizeof(*dic); i++){
-            if (code == dic[i].code){
-                valueString = NSLocalizedString(@(dic[i].string), nil);
-                break;
+        NSString* separator = NSLocalizedString(@", ", nil);
+        NSString* __block currentSeparator = nil;
+
+        valueString = [[NSMutableString alloc] init];
+        void (^appendString)(NSString*) = ^(NSString* string){
+            if (currentSeparator){
+                [valueString appendString:currentSeparator];
             }
+            [valueString appendString:string];
+            currentSeparator = separator;
+        };
+        
+        switch (code & 0x18){
+            case 0x8:
+                appendString(NSLocalizedString(@"On", nil));
+                break;
+            case 0x10:
+                appendString(NSLocalizedString(@"Off", nil));
+                break;
+            case 0x18:
+                appendString(NSLocalizedString(@"Auto", nil));
+                break;
+        }
+
+        if (code & 0x1){
+            appendString(NSLocalizedString(@"Fired", nil));
+        }else{
+            appendString(NSLocalizedString(@"Did not fire", nil));
+        }
+        
+        if (code & 0x20){
+            appendString(NSLocalizedString(@"No flash function", nil));
+        }
+        
+        switch(code & 0x6){
+            case 0x4:
+                appendString(NSLocalizedString(@"Return not detected", nil));
+                break;
+            case 0x6:
+                appendString(NSLocalizedString(@"Return detected", nil));
+                break;
+        }
+        
+        if (code & 0x40){
+            appendString(NSLocalizedString(@"Red-eye reduction", nil));
         }
     }
     return valueString;
