@@ -51,6 +51,7 @@ enum PropertyValueType {pvTypeSimple, pvTypeHeadOfArray, pvTypeSpecial, pvTypeSe
 
 struct TranslationRule;
 static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule);
+static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule);
@@ -110,7 +111,7 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFModel, pvTypeSimple, "Camera Model:", "%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifSensingMethod, pvTypeSimple, "Sensing Method:", NULL, MAPDEF(sensingMethods), NULL,
     propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSimple, "Lens Maker:", "%@", 0, NULL, NULL,
-    propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSimple, "Lens Model:", "%@", 0, NULL, NULL,
+    propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
     propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSimple, "Focal Length:", "%@ mm", 0, NULL, NULL,
@@ -131,6 +132,8 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifSceneCaptureType, pvTypeSimple, "Scene Cpature Type:", NULL, MAPDEF(sceneCaptureTypes), NULL,
     propertyEXIF, kCGImagePropertyExifSubjectDistRange, pvTypeSimple, "Subject Distance Range:", NULL, MAPDEF(subjectDists), NULL,
     propertyEXIF, kCGImagePropertyExifCustomRendered, pvTypeSimple, "Special Effects:", NULL, MAPDEF(customRendereds), NULL,
+    propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
+    propertyTIFF, kCGImagePropertyTIFFSoftware, pvTypeSimple, "Processing Software:", "%@", 0, NULL, NULL,
 };
 
 //-----------------------------------------------------------------------------------------
@@ -151,6 +154,26 @@ static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule)
     return rc;
 }
 
+static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
+{
+    static struct {
+        PropertyKind        dictionary;
+        CFStringRef         key;
+    }metaref[] = {
+        propertyEXIF, kCGImagePropertyExifLensModel,
+        propertyEXIFAUX, kCGImagePropertyExifAuxLensModel,
+        propertyCIFF, kCGImagePropertyCIFFLensModel,
+    };
+    NSString* value = nil;
+    for (int i = 0; i < sizeof(metaref) / sizeof(*metaref); i++){
+        value = [[meta propertiesAtIndex:metaref[i].dictionary] valueForKey:(__bridge NSString*)metaref[i].key];
+        if (value){
+            break;
+        }
+    }
+    return value;
+}
+
 static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
 {
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
@@ -167,7 +190,21 @@ static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
 
 static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
 {
-    NSArray* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    static struct {
+        PropertyKind        dictionary;
+        CFStringRef         key;
+    }metaref[] = {
+        propertyEXIF, kCGImagePropertyExifLensSpecification,
+        propertyEXIFAUX, kCGImagePropertyExifAuxLensInfo,
+        propertyDNG, kCGImagePropertyDNGLensInfo,
+    };
+    NSArray* value = nil;
+    for (int i = 0; i < sizeof(metaref) / sizeof(*metaref); i++){
+        value = [[meta propertiesAtIndex:metaref[i].dictionary] valueForKey:(__bridge NSString*)metaref[i].key];
+        if (value){
+            break;
+        }
+    }
     NSString* valueString = nil;
     if (value){
         NSNumber* fLength1 = value[0];
@@ -228,7 +265,7 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
         0x5d, "Auto, Fired, Red-eye reduction, Return not detected",
         0x5f, "Auto, Fired, Red-eye reduction, Return detected"
     };
-
+    
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
     NSString* valueString = nil;
     if (value){
@@ -273,11 +310,13 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
                 _properties[propertyDictonaryKeys[i].kind] =
                     [_properties[propertyALL] valueForKey:(__bridge NSString*)propertyDictonaryKeys[i].key];
             }
+            /*
             if (_properties[propertyEXIFAUX]){
                 NSMutableDictionary *newExif = [[NSMutableDictionary alloc] initWithDictionary:_properties[propertyEXIF]];
                 [newExif addEntriesFromDictionary:_properties[propertyEXIFAUX]];
                 _properties[propertyEXIF] = newExif;
             }
+            */
             NSNumber* x = [_properties[propertyALL] valueForKey:(__bridge NSString*)kCGImagePropertyPixelWidth];
             NSNumber* y = [_properties[propertyALL] valueForKey:(__bridge NSString*)kCGImagePropertyPixelHeight];
             if (x && y){

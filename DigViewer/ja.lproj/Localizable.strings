@@ -48,6 +48,7 @@
 "Scene Cpature Type:" = "撮影シーンタイプ:";
 "Subject Distance Range:" = "被写体距離レンジ:";
 "Special Effects:" = "エフェクト:";
+"Processing Software:" = "処理ソフトウェア:";
 
 // インスペクタービュー: センサー方式
 "Unknown" = "不明";
