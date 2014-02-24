@@ -317,13 +317,6 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
                 _properties[propertyDictonaryKeys[i].kind] =
                     [_properties[propertyALL] valueForKey:(__bridge NSString*)propertyDictonaryKeys[i].key];
             }
-            /*
-            if (_properties[propertyEXIFAUX]){
-                NSMutableDictionary *newExif = [[NSMutableDictionary alloc] initWithDictionary:_properties[propertyEXIF]];
-                [newExif addEntriesFromDictionary:_properties[propertyEXIFAUX]];
-                _properties[propertyEXIF] = newExif;
-            }
-            */
             NSNumber* x = [_properties[propertyALL] valueForKey:(__bridge NSString*)kCGImagePropertyPixelWidth];
             NSNumber* y = [_properties[propertyALL] valueForKey:(__bridge NSString*)kCGImagePropertyPixelHeight];
             if (x && y){

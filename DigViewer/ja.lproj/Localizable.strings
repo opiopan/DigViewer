@@ -82,7 +82,7 @@
 "Spot" = "スポット";
 "Multi Spot" = "マルチスポット";
 "Multi Segment" = "分割測光";
-"Partial" = "分割測光";
+"Partial" = "部分測光";
 "Other" = "その他";
 
 // インスペクタービュー: ホワイトバランス
