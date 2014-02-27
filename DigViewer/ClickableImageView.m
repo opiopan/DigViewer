@@ -18,11 +18,23 @@
     return self;
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    // editable = YESの場合、NSImageViewはmouseDownでマウスをキャプチャしてしまい
+    // mouseUpイベントが到達しないため、オーバライドする
+}
+
 - (void)mouseUp:(NSEvent*)event
 {
     if([event clickCount] == 2) {
         [self.delegate performSelector:@selector(onDoubleClickableImageView:) withObject:self afterDelay:0.0f];
     }
+}
+
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+{
+    // editable = YES時のドロップインを抑止
+    return NSDragOperationNone;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
