@@ -13,4 +13,6 @@
 @property (weak) id delegate;
 @property (copy) NSColor* backgroundColor;
 
+- (void)setCGImage:(CGImageRef)cgimage withRotation:(NSInteger)rotation;
+
 @end

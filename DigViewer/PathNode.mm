@@ -12,6 +12,7 @@
 #import "PathfinderPinnedFile.h"
 #import "NSImage+CapabilityDetermining.h"
 
+#include "CoreFoundationHelper.h"
 #include <stdlib.h>
 
 @implementation PathNode{
@@ -24,6 +25,7 @@
 @synthesize images;
 @synthesize indexInParent;
 @synthesize imagePath;
+@synthesize isRawImage;
 
 //-----------------------------------------------------------------------------------------
 // NSCopyingプロトコルの実装
@@ -79,6 +81,7 @@
         parent = p;
         indexInParent = ip;
         imagePath = path;
+        isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
     }
     return self;
 }
@@ -137,6 +140,7 @@
             }else{
                 if ([NSImage isSupportedFileAtPath:path] && ![cond isOmmitingImagePath:path]){
                     imagePath = path;
+                    isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
                 }else{
                     self = nil;
                 }
@@ -283,7 +287,10 @@
     }
 }
 
-// IKImageBrowserItem Protocol
+
+//-----------------------------------------------------------------------------------------
+// IKImageBrowserItem Protocolの実装
+//-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
     return [self imagePath];
@@ -291,12 +298,84 @@
 
 - (NSString*) imageRepresentationType
 {
-    return IKImageBrowserNSImageRepresentationType;
+    return self.imageNode.isRawImage ? IKImageBrowserCGImageRepresentationType : IKImageBrowserNSImageRepresentationType;
 }
 
 - (id) imageRepresentation
 {
-    return [self image];
+    PathNode* node = self.imageNode;
+    id rc = nil;
+    if (node.isRawImage){
+        static NSDictionary* thumbnailOption = nil;
+        if (!thumbnailOption){
+            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@384};
+        }
+        NSURL* url = [NSURL fileURLWithPath:node.imagePath];
+        ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+        CGImageRef thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+        if (!thumbnail){
+            thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+        }
+        NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+        NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+        if (orientation && orientation.intValue != 1){
+            ECGImageRef releasing(thumbnail);
+            thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+            releasing = nil;
+        }
+        rc = (__bridge_transfer id)thumbnail;
+    }else{
+        rc = node.image;
+    }
+    return rc;
+}
+
+- (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation
+{
+    // 回転後イメージを表すビットマップコンテキストを生成
+    CGSize size = CGSizeMake(CGImageGetWidth(src), CGImageGetHeight(src));
+    CGColorSpaceRef colorSpace(CGImageGetColorSpace(src));
+    CGColorSpaceRetain(colorSpace);
+    ECGContextRef context;
+    if (rotation >= 5 && rotation <= 8){
+        context.transferOwnership(CGBitmapContextCreate(NULL, size.height, size.width,
+                                                        CGImageGetBitsPerComponent(src), 0,
+                                                        colorSpace, CGImageGetBitmapInfo(src)));
+    }else{
+        context.transferOwnership(CGBitmapContextCreate(NULL, size.width, size.height,
+                                                        CGImageGetBitsPerComponent(src), 0,
+                                                        colorSpace, CGImageGetBitmapInfo(src)));
+    }
+
+    // 変換行列設定
+    switch (rotation){
+        case 1:
+        case 2:
+            /* nothing to do */
+            break;
+        case 5:
+        case 8:
+            /* 90 degrees rotation */
+            CGContextRotateCTM(context, M_PI / 2.);
+            CGContextTranslateCTM (context, 0, -size.height);
+            break;
+        case 3:
+        case 4:
+            /* 180 degrees rotation */
+            CGContextRotateCTM(context, -M_PI);
+            CGContextTranslateCTM (context, size.width, size.height);
+            break;
+        case 6:
+        case 7:
+            /* 270 degrees rotation */
+            CGContextRotateCTM(context, -M_PI / 2.);
+            CGContextTranslateCTM (context, -size.width, 0);
+            break;
+    }
+    
+    //回転後イメージを描画
+    CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), src);
+    return CGBitmapContextCreateImage(context);
 }
 
 - (NSString *) imageTitle
@@ -384,7 +463,7 @@
     NSUInteger* indexes = nil;
     NSUInteger size = [self generateIndexesInArray:&indexes withContext:1];
     NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:indexes length:size];
-    free(indexes);
+    delete[] indexes;
     return indexPath;
 }
 
@@ -397,7 +476,7 @@
         }
         return position + 1;
     }else{
-        *array = malloc(sizeof(NSUInteger) * count);
+        *array = new NSUInteger[count];
         if (*array){
             (*array)[0] = 0;
         }
@@ -484,9 +563,24 @@
 @synthesize suffixes;
 @synthesize maxFileSize;
 
+- (id) init
+{
+
+    self = [super init];
+    if (self){
+        self.isOmmitingRawImage = NO;
+        self.maxFileSize = -1;
+    }
+    return self;
+}
+
 - (BOOL) isOmmitingImagePath:(NSString*)path
 {
-    return [suffixes valueForKey:[[path pathExtension] lowercaseString]];
+    BOOL rc = NO;
+    if (self.isOmmitingRawImage){
+        rc = [NSImage isRawFileAtPath:path];
+    }
+    return rc || ([suffixes valueForKey:[[path pathExtension] lowercaseString]] != nil);
 }
 
 @end

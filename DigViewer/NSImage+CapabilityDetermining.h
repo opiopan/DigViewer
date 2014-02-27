@@ -11,5 +11,7 @@
 @interface NSImage (CapabilityDetermining)
 
 + (BOOL) isSupportedFileAtPath:(NSString*)path;
++ (NSDictionary *)rawSuffixes;
++ (BOOL) isRawFileAtPath:(NSString*)path;
 
 @end

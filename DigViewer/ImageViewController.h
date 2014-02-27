@@ -10,4 +10,6 @@
 
 @interface ImageViewController : NSViewController
 
+@property (weak) NSArrayController* IBOutlet imageArrayController;
+
 @end

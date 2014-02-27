@@ -25,6 +25,13 @@ public:
     
     operator T () const {return ref;};
 
+    ECFObjectRef& transferOwnership(T src){
+        if (ref){
+            RELEASE(ref);
+        }
+        ref = src;
+        return *this;
+    };
     ECFObjectRef& operator = (ECFObjectRef& src){
         if (ref){
             RELEASE(ref);
@@ -64,6 +71,13 @@ public:
     
     operator T () const {return ref;};
     
+    ECFBasicObjectRef& transferOwnership(T src){
+        if (ref){
+            CFRelease(ref);
+        }
+        ref = src;
+        return *this;
+    };
     ECFBasicObjectRef& operator = (ECFBasicObjectRef& src){
         if (ref){
             CFRelease(ref);
@@ -87,6 +101,7 @@ public:
 #define DEF_ECFREF_SPECIAL(T) typedef ECFObjectRef<T##Ref, T##Retain, T##Release> E##T##Ref
 
 DEF_ECFREF_BASIC(CGImageSource);
+DEF_ECFREF_BASIC(CGDataProvider);
 
 DEF_ECFREF_SPECIAL(CGContext);
 DEF_ECFREF_SPECIAL(CGColor);

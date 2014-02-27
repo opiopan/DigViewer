@@ -22,6 +22,7 @@
 // PathNodeOmmitingCondition: ノードツリー生成時の除外対象
 //-----------------------------------------------------------------------------------------
 @interface PathNodeOmmitingCondition : NSObject
+@property BOOL          isOmmitingRawImage;
 @property NSDictionary* suffixes;
 @property int           maxFileSize;  // it means no limit if negative
 - (BOOL) isOmmitingImagePath:(NSString*)path;
@@ -39,6 +40,7 @@
 @property (readonly) NSMutableArray* children;
 @property (readonly) BOOL            isLeaf;
 @property (readonly) BOOL            isImage;
+@property (readonly) BOOL            isRawImage;
 @property (readonly) NSMutableArray* images;
 @property (readonly) NSUInteger      indexInParent;
 @property (readonly) PathNode*       imageNode;

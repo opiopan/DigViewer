@@ -27,26 +27,6 @@ static NSDictionary* rawSuffixes = nil;
 {
     if (!rawSuffixes){
         rawSuffixes = @{
-                        @"cr2":@"raw",
-                        @"dng":@"raw",
-                        @"nef":@"raw",
-                        @"orf":@"raw",
-                        @"dcr":@"raw",
-                        @"raf":@"raw",
-                        @"mrw":@"raw",
-                        @"mos":@"raw",
-                        @"raw":@"raw",
-                        @"pef":@"raw",
-                        @"srf":@"raw",
-                        @"x3f":@"raw",
-                        @"erf":@"raw",
-                        @"sr2":@"raw",
-                        @"kdc":@"raw",
-                        @"mfw":@"raw",
-                        @"mef":@"raw",
-                        @"are":@"raw",
-                        @"rw2":@"raw",
-                        @"rwl":@"raw",
                         @"psd":@"cpx",
                         @"tif":@"cpx", @"tiff":@"cpx"};
     }
@@ -57,6 +37,7 @@ static NSDictionary* rawSuffixes = nil;
         _type = ((NSNumber*)[[controller values] valueForKey:@"imageSetType"]).intValue;
         if (_type == imageSetTypeExceptRaw){
             _condition.suffixes = rawSuffixes;
+            _condition.isOmmitingRawImage = YES;
         }
     }
     return self;

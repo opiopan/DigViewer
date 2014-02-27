@@ -10,6 +10,8 @@
 #import "ClickableImageView.h"
 #import "MainViewController.h"
 #import "DocumentWindowController.h"
+#import "NSImage+CapabilityDetermining.h"
+#include "CoreFoundationHelper.h"
 
 @implementation ImageViewController
 
@@ -30,6 +32,32 @@
                                                               forKeyPath:@"values.imageBackgroundColor"
                                                                  options:nil context:nil];
     [self reflectBackgroundColor];
+    [self.imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+}
+
+- (void)reflectImage
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    if (self.imageArrayController.selectedObjects.count){
+        PathNode* node = self.imageArrayController.selectedObjects[0];
+        if ([NSImage isRawFileAtPath:node.imagePath]){
+            NSURL* url = [NSURL fileURLWithPath:node.imagePath];
+            ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+            CGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, NULL));
+            if (!thumbnail){
+                imageView.image = node.image;
+                [imageView setCGImage:NULL withRotation:0];                
+            }else{
+                NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+                NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+                imageView.image = nil;
+                [imageView setCGImage:thumbnail withRotation:orientation.integerValue];
+            }
+        }else{
+            imageView.image = node.image;
+            [imageView setCGImage:NULL withRotation:0];
+        }
+    }
 }
 
 - (void)reflectImageScaling
@@ -58,6 +86,8 @@
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.imageBackgroundColor"]){
         [self reflectBackgroundColor];
+    }else if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
+        [self reflectImage];
     }
 }
 
