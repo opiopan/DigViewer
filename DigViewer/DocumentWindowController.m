@@ -110,8 +110,10 @@
     if (next){
         PathNode* current = [_imageArrayController selectedObjects][0];
         if (current.parent != next.parent){
+            NSResponder* firstResponder = self.window.firstResponder;
             NSIndexPath* indexPath = [next.parent indexPath];
             [_imageTreeController setSelectionIndexPath:indexPath];
+            [self.window makeFirstResponder:firstResponder];
         }
         [_imageArrayController setSelectionIndex:next.indexInParent];
     }
