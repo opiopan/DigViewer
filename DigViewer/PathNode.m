@@ -309,7 +309,8 @@
 //-----------------------------------------------------------------------------------------
 - (PathNode*) nextImageNode
 {
-    return [[self imageNode]->parent nextImageNodeOfImageAtIndex:[self indexInParent]];
+    PathNode* currentImage = [self imageNode];
+    return [currentImage->parent nextImageNodeOfImageAtIndex:[currentImage indexInParent]];
 }
 
 - (PathNode*) nextImageNodeOfImageAtIndex:(NSUInteger)index
@@ -324,7 +325,8 @@
 
 - (PathNode*) previousImageNode
 {
-    return [[self imageNode]->parent previousImageNodeOfImageAtIndex:[self indexInParent]];
+    PathNode* currentImage = [self imageNode];
+    return [currentImage->parent previousImageNodeOfImageAtIndex:[currentImage indexInParent]];
 }
 
 - (PathNode*) previousImageNodeOfImageAtIndex:(NSUInteger)index
