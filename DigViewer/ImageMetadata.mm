@@ -349,9 +349,9 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
                 if (rule->type == pvTypeSeparator){
                     if (validRowCount > 0 || !_name){
                         [array addObjectsFromArray:section];
-                        section = [[NSMutableArray alloc] initWithObjects:[ImageMetadataKV kvWithKey:nil value:nil], nil];
-                        validRowCount = 0;
                     }
+                    section = [[NSMutableArray alloc] initWithObjects:[ImageMetadataKV kvWithKey:nil value:nil], nil];
+                    validRowCount = 0;
                 }else{
                     keyString = NSLocalizedString(@(rule->keyName), nil);
                     if (rule->type != pvTypeSpecial){
