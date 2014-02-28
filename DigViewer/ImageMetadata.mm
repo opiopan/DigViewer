@@ -339,12 +339,20 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
         [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"File Name:", nil) value:_name]];
         [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Type:", nil) value:_type]];
         if (_properties[propertyALL] || !_name){
-            [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Image size:", nil) value:_geometry]];
+            NSMutableArray* section = [[NSMutableArray alloc] init];
+            [section addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Image size:", nil) value:_geometry]];
+            int validRowCount = _geometry ? 1 : 0;
             for (int i = 0; i < sizeof(valueTranslationRules) / sizeof(*valueTranslationRules); i++){
                 struct TranslationRule* rule = valueTranslationRules + i;
                 NSString* keyString = nil;
                 NSString* valueString = nil;
-                if (rule->type != pvTypeSeparator){
+                if (rule->type == pvTypeSeparator){
+                    if (validRowCount > 0 || !_name){
+                        [array addObjectsFromArray:section];
+                        section = [[NSMutableArray alloc] initWithObjects:[ImageMetadataKV kvWithKey:nil value:nil], nil];
+                        validRowCount = 0;
+                    }
+                }else{
                     keyString = NSLocalizedString(@(rule->keyName), nil);
                     if (rule->type != pvTypeSpecial){
                         id value = [_properties[rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
@@ -366,8 +374,12 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
                     }else{
                         valueString = rule->convert(self, rule);
                     }
+                    [section addObject:[ImageMetadataKV kvWithKey:keyString value:valueString]];
+                    validRowCount += valueString ? 1 : 0;
                 }
-                [array addObject:[ImageMetadataKV kvWithKey:keyString value:valueString]];
+            }
+            if (validRowCount > 0 || !_name){
+                [array addObjectsFromArray:section];
             }
         }
         _summary = array;
