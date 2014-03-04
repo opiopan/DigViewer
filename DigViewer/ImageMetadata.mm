@@ -55,6 +55,7 @@ static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule);
+static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule);
 
 #define MAPDEF(map) sizeof(map)/sizeof(*map), map
 static const char* sensingMethods[] = {
@@ -119,7 +120,7 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifExposureTime, pvTypeSpecial, "Exposure Time:", NULL, 0, NULL, convertExposureTime,
     propertyEXIF, kCGImagePropertyExifFNumber, pvTypeSimple, "Aperture:", "f/%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifISOSpeedRatings, pvTypeHeadOfArray, "ISO Speed:", "ISO%@", 0, NULL, NULL,
-    propertyEXIF, kCGImagePropertyExifExposureBiasValue, pvTypeSimple, "Exposure Bias:", "%@", 0, NULL, NULL,
+    propertyEXIF, kCGImagePropertyExifExposureBiasValue, pvTypeSpecial, "Exposure Bias:", NULL, 0, NULL, convertExposureBias,
     propertyEXIF, kCGImagePropertyExifExposureProgram, pvTypeSimple, "Exposure Program:", NULL, MAPDEF(exposurePrograms), NULL,
     propertyEXIF, kCGImagePropertyExifExposureMode, pvTypeSimple, "Exposure Mode:", NULL, MAPDEF(exposureModes), NULL,
     propertyEXIF, kCGImagePropertyExifMeteringMode, pvTypeSimple, "Metering Mode:", NULL, MAPDEF(meteringModes), NULL,
@@ -282,6 +283,22 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
         
         if (code & 0x40){
             appendString(NSLocalizedString(@"Red-eye reduction", nil));
+        }
+    }
+    return valueString;
+}
+
+static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
+{
+    NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    NSString* valueString = nil;
+    if (value){
+        if (value.doubleValue > 0){
+            valueString  = [NSString stringWithFormat:@"+%@ EV", value];
+        }else if (value.doubleValue < 0){
+            valueString  = [NSString stringWithFormat:@"%@ EV", value];
+        }else{
+            valueString = NSLocalizedString(@"None", nil);
         }
     }
     return valueString;
