@@ -312,18 +312,16 @@
         }
         NSURL* url = [NSURL fileURLWithPath:node.imagePath];
         ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-        CGImageRef thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+        ECGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption));
         if (!thumbnail){
             thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
         }
         NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
         NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
         if (orientation && orientation.intValue != 1){
-            ECGImageRef releasing(thumbnail);
             thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
-            releasing = nil;
         }
-        rc = (__bridge_transfer id)thumbnail;
+        rc = (__bridge_transfer id)thumbnail.transferOwnership();
     }else{
         rc = node.image;
     }
@@ -338,13 +336,13 @@
     CGColorSpaceRetain(colorSpace);
     ECGContextRef context;
     if (rotation >= 5 && rotation <= 8){
-        context.transferOwnership(CGBitmapContextCreate(NULL, size.height, size.width,
-                                                        CGImageGetBitsPerComponent(src), 0,
-                                                        colorSpace, CGImageGetBitmapInfo(src)));
+        context = CGBitmapContextCreate(NULL, size.height, size.width,
+                                        CGImageGetBitsPerComponent(src), 0,
+                                        colorSpace, CGImageGetBitmapInfo(src));
     }else{
-        context.transferOwnership(CGBitmapContextCreate(NULL, size.width, size.height,
-                                                        CGImageGetBitsPerComponent(src), 0,
-                                                        colorSpace, CGImageGetBitmapInfo(src)));
+        context = CGBitmapContextCreate(NULL, size.width, size.height,
+                                        CGImageGetBitsPerComponent(src), 0,
+                                        colorSpace, CGImageGetBitmapInfo(src));
     }
 
     // 変換行列設定
