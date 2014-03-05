@@ -38,6 +38,7 @@
 
 @implementation DocumentWindowController{
     MainViewController* mainViewController;
+    int                 transitionStateCount;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -48,6 +49,7 @@
 {
     self = [super initWithWindowNibName:@"Document"];
     if (self) {
+        transitionStateCount = 0;
     }
     return self;
 }
@@ -108,6 +110,7 @@
 - (void)moveToImageNode:(PathNode*)next
 {
     if (next){
+        [self enterTransitionState];
         PathNode* current = [_imageArrayController selectedObjects][0];
         if (current.parent != next.parent){
             NSResponder* firstResponder = self.window.firstResponder;
@@ -115,6 +118,7 @@
             [_imageTreeController setSelectionIndexPath:indexPath];
             [self.window makeFirstResponder:firstResponder];
         }
+        [self exitTransitionState];
         [_imageArrayController setSelectionIndex:next.indexInParent];
     }
 }
@@ -146,8 +150,10 @@
         PathNode* current = selected.parent;
         PathNode* up = current.parent;
         if (up){
+            [self enterTransitionState];
             NSUInteger index = current.indexInParent;
             [_imageTreeController setSelectionIndexPath:up.indexPath];
+            [self exitTransitionState];
             [_imageArrayController setSelectionIndex:index];
         }
     }
@@ -164,6 +170,25 @@
         }
     }
 }
+
+//-----------------------------------------------------------------------------------------
+// 遷移中状態属性
+//-----------------------------------------------------------------------------------------
+- (BOOL) isInTransitionState
+{
+    return transitionStateCount != 0;
+}
+
+- (void) enterTransitionState
+{
+    transitionStateCount++;
+}
+
+- (void) exitTransitionState
+{
+    transitionStateCount--;
+}
+
 
 //-----------------------------------------------------------------------------------------
 // ビュー選択ボタンと属性の同期
@@ -192,8 +217,12 @@
 
 - (void)setSelectionIndexPathsForTree:(NSArray *)indexPath
 {
+    [self enterTransitionState];
     _selectionIndexPathsForTree = indexPath;
-    [_imageArrayController setSelectionIndex:0];
+    [self exitTransitionState];
+    if (!self.isInTransitionState){
+        [_imageArrayController setSelectionIndex:0];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

@@ -25,7 +25,8 @@
 {
     _cgimage = cgimage;
     _rotation = rotation;
-    [self display];
+    [self displayIfNeeded];
+    self.needsDisplay = true;
 }
 
 

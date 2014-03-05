@@ -32,11 +32,15 @@
                                                               forKeyPath:@"values.imageBackgroundColor"
                                                                  options:nil context:nil];
     [self reflectBackgroundColor];
-    [self.imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:nil context:nil];
 }
 
 - (void)reflectImage
 {
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    if (controller.isInTransitionState){
+        return;
+    }
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     if (self.imageArrayController.selectedObjects.count){
         PathNode* node = self.imageArrayController.selectedObjects[0];
@@ -86,7 +90,7 @@
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.imageBackgroundColor"]){
         [self reflectBackgroundColor];
-    }else if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
+    }else if (object == self.imageArrayController && [keyPath isEqualToString:@"selectedObjects"]){
         [self reflectImage];
     }
 }

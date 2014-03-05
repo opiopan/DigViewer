@@ -22,6 +22,7 @@
 @property (assign) BOOL isFitWindow;
 @property (assign) BOOL isCollapsedOutlineView;
 @property (assign) BOOL isCollapsedInspectorView;
+@property (assign, readonly) BOOL isInTransitionState;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
