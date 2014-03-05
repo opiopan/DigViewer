@@ -29,6 +29,8 @@ const static double defaultZoomRatio = 100;
 {
     [self performSelector:@selector(onDefaultSize:) withObject:self afterDelay:0.0f];
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    [controller addObserver:self forKeyPath:@"presentationViewType" options:nil context:nil];
 }
 
 - (NSView*)representationView;
@@ -38,9 +40,7 @@ const static double defaultZoomRatio = 100;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
-        [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
-    }
+    [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
 }
 
 - (void) imageBrowser:(IKImageBrowserView *) aBrowser cellWasDoubleClickedAtIndex:(NSUInteger) index
