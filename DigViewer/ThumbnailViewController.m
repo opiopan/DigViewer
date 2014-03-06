@@ -31,6 +31,8 @@ const static double defaultZoomRatio = 100;
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     [controller addObserver:self forKeyPath:@"presentationViewType" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:nil context:nil];
 }
 
 - (NSView*)representationView;

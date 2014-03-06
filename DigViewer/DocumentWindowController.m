@@ -170,13 +170,10 @@
 //-----------------------------------------------------------------------------------------
 - (IBAction)onViewSelectionButtonDown:(id)sender
 {
-    [self reflectViewSelectionButtonToValue];
-}
-
-- (void)reflectViewSelectionButtonToValue
-{
-    mainViewController.isCollapsedOutlineView = ![self.viewSelectionButton isSelectedForSegment:0];
-    mainViewController.isCollapsedInspectorView = ![self.viewSelectionButton isSelectedForSegment:1];
+    BOOL outlineViewState = ![self.viewSelectionButton isSelectedForSegment:0];
+    BOOL inspectorViewState = ![self.viewSelectionButton isSelectedForSegment:1];
+    self.isCollapsedOutlineView = outlineViewState;
+    self.isCollapsedInspectorView = inspectorViewState;
 }
 
 - (void)reflectValueToViewSelectionButton
