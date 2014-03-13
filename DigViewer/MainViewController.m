@@ -82,6 +82,7 @@
     // 遷移前の状態を保持
     NSResponder* lastResponder = [self.view.window firstResponder];
     BOOL outlineViewBelongToLastResponderChain = [self.view.window isBelongToResponderChain:outlineViewController.view];
+    BOOL inspectorViewBelongToLastResponderChain = [self.view.window isBelongToResponderChain:inspectorViewController.view];
     
     // サブビューをSplitViewから除去
     if (outlineViewController.view.superview){
@@ -141,7 +142,8 @@
     
     // キービューループの再計算とfirst responderの設定
     [self.view.window recalculateKeyViewLoop];
-    if (lastResponder && outlineViewBelongToLastResponderChain && !self.isCollapsedOutlineView){
+    if ((outlineViewBelongToLastResponderChain && !self.isCollapsedOutlineView) ||
+        (inspectorViewBelongToLastResponderChain && !self.isCollapsedInspectorView)){
         [self.view.window makeFirstResponder:lastResponder];
     }else{
         [self.view.window makeFirstResponder:representedViewController.representationView];
