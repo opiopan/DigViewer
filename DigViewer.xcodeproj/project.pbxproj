@@ -40,6 +40,8 @@
 		7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC21518D86DC5007527E6 /* InfoPlistController.m */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
+		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
+		7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -54,7 +56,11 @@
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
+		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
+		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
+		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
@@ -72,6 +78,19 @@
 			remoteInfo = DigViewer;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7B9F9E8A18E7DD450042337F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
@@ -104,6 +123,10 @@
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
 		7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MenuItemValidator.m"; sourceTree = "<group>"; };
+		7B36259118DE65D4008471E2 /* FlatSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatSplitView.h; sourceTree = "<group>"; };
+		7B36259218DE65D4008471E2 /* FlatSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatSplitView.m; sourceTree = "<group>"; };
+		7B36259418DE761E008471E2 /* KeyUncapturedTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyUncapturedTabView.h; sourceTree = "<group>"; };
+		7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyUncapturedTabView.m; sourceTree = "<group>"; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -133,9 +156,13 @@
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
 		7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingSheetController.m; sourceTree = "<group>"; };
 		7B697E52169DB8A000A9E247 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingSheet.xib; sourceTree = "<group>"; };
+		7B6B3B1318E438D00004098F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
+		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
+		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
 		7BF678AC16983C7C00FE39B4 /* PathNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PathNode.mm; sourceTree = "<group>"; };
@@ -155,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */,
 				7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */,
 				7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */,
 			);
@@ -183,6 +211,7 @@
 		7B3920321696CA1800E139D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B6B3B1318E438D00004098F /* WebKit.framework */,
 				7B3920331696CA1800E139D0 /* Cocoa.framework */,
 				7B0DBEE116A2A2FD000365F4 /* Quartz.framework */,
 				7B3920351696CA1800E139D0 /* Other Frameworks */,
@@ -273,6 +302,13 @@
 				7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */,
 				7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */,
 				7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */,
+				7B36259118DE65D4008471E2 /* FlatSplitView.h */,
+				7B36259218DE65D4008471E2 /* FlatSplitView.m */,
+				7B36259418DE761E008471E2 /* KeyUncapturedTabView.h */,
+				7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */,
+				7B9F9E8418E7D91D0042337F /* GPSMapView.h */,
+				7B9F9E8518E7D91D0042337F /* GPSMapView.m */,
+				7B9F9E8718E7DBBA0042337F /* GPSMapView.js */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -343,6 +379,7 @@
 				7B39202D1696CA1800E139D0 /* Resources */,
 				7B4E8E3716C82E0B001C5D09 /* ShellScript */,
 				7BB7E29218D350FB0055DAAC /* ShellScript */,
+				7B9F9E8A18E7DD450042337F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -461,7 +498,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\n         sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n         egrep '^V[0-9\\]' | head -1 | sed 's/^V//' | sed 's/-/ /g'`\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\n            awk -v tag=V\"$VERSION\" \\\n            'BEGIN{subv=0}\n             {for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=`git show -s --format=\"%ai\" $INIT| sed 's/-.*$//'`\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\n    BUILD=\"$BUILD+\"\n    BUNDLEVERSION=\"0.0\"\n    SUBVERSION=`expr $SUBVERSION + 1`\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\n    SUFFIX=.$SUBVERSION$SUFFIX\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\n    PERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\n    PERIOD=\"$BEGIN, $END\"\nelse\n    PERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :NSHumanReadableCopyright '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\n         sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n         egrep '^V[0-9\\]' | head -1 | sed 's/^V//' | sed 's/-/ /g'`\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\n            awk -v tag=V\"$VERSION\" \\\n            'BEGIN{subv=0}\n             {for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=`git show -s --format=\"%ai\" $INIT| sed 's/-.*$//'`\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\n    BUILD=\"$BUILD+\"\n    BUNDLEVERSION=\"0.0\"\n    SUBVERSION=`expr $SUBVERSION + 1`\n    SUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\n    SUFFIX=.$SUBVERSION$SUFFIX\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\n    PERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\n    PERIOD=\"$BEGIN, $END\"\nelse\n    PERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :NSHumanReadableCopyright '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -470,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
@@ -479,9 +517,12 @@
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
+				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
+				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
+				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
 				7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */,
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,

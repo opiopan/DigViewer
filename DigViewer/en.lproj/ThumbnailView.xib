@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -28,7 +28,7 @@
                     </textFieldCell>
                 </textField>
                 <slider toolTip="Change the icon size" verticalHuggingPriority="750" id="100310">
-                    <rect key="frame" x="51" y="244" width="96" height="21"/>
+                    <rect key="frame" x="51" y="244" width="96" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <sliderCell key="cell" state="on" alignment="left" minValue="16" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="100311"/>
                     <connections>
@@ -72,15 +72,15 @@
                         <action selector="onDownFolder:" target="-2" id="100328"/>
                     </connections>
                 </button>
-                <scrollView horizontalLineScroll="120" horizontalPageScroll="10" verticalLineScroll="120" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100302">
+                <scrollView borderType="none" horizontalLineScroll="120" horizontalPageScroll="10" verticalLineScroll="120" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100302">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" copiesOnScroll="NO" id="H9S-M1-ZBf">
-                        <rect key="frame" x="1" y="1" width="478" height="235"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.60898351669311523" allowsMultipleSelection="NO" allowsEmptySelection="NO" id="100303">
-                                <rect key="frame" x="0.0" y="0.0" width="478" height="235"/>
+                            <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.60499012470245361" allowsMultipleSelection="NO" allowsEmptySelection="NO" id="100303">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <ikCellsStyle key="cellsStyleMask" none="YES" shadowed="YES" titled="YES"/>
                                 <autoresizingMask key="contentResizingMask" heightSizable="YES"/>
@@ -94,14 +94,21 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="100305">
-                        <rect key="frame" x="1" y="220" width="478" height="16"/>
+                        <rect key="frame" x="0.0" y="221" width="480" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100304">
-                        <rect key="frame" x="464" y="1" width="15" height="235"/>
+                        <rect key="frame" x="464" y="0.0" width="16" height="237"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="skn-El-j5g">
+                    <rect key="frame" x="0.0" y="235" width="480" height="5"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
             </subviews>
         </view>
         <arrayController objectClassName="PathNode" id="100087">

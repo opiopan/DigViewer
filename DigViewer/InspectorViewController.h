@@ -7,11 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GPSMapView.h"
 
 @interface InspectorViewController : NSViewController
 
+@property (assign) int viewSelector;
+
+@property (weak) IBOutlet NSTabView *tabView;
+@property (weak) IBOutlet NSView *gpsPlaceHolder;
 @property (weak) IBOutlet NSArrayController* imageArrayController;
 @property (weak) IBOutlet NSTableColumn* keyColumn;
+@property (weak) IBOutlet NSTableColumn *gpsKeyColumn;
+@property (weak) IBOutlet GPSMapView *mapView;
 @property (strong) NSArray* summary;
+@property (strong) NSArray* gpsInfo;
 
 @end

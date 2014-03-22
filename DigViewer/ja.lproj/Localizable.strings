@@ -128,3 +128,22 @@
 "Return detected" = "リターン検出";
 "No flash function" = "フラッシュ機能なし";
 "Red-eye reduction" = "赤目防止";
+
+// インスペクタービュー: GPS
+"True Direction" = "真方位";
+"Magnetic Direction" = "磁方位";
+"knot" = "ノット";
+"2D" = "2次元";
+"3D" = "3次元";
+"%@ N" = "北緯 %@";
+"%@ S" = "南緯 %@";
+"Latitude:" = "緯度:";
+"%@ E" = "東経 %@";
+"%@ W" = "西経 %@";
+"Longitude:" = "経度:";
+"Altitude:" = "高度:";
+"Image Direction:" = "撮影方向:";
+"Track Direction:" = "移動方向:";
+"Track Speed:" = "移動速度:";
+"Measure Mode:" = "測位方式:";
+"Geodetic Reference System:" = "測地系:";

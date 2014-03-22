@@ -9,6 +9,8 @@
 #import "ImageMetadata.h"
 #import "CoreFoundationHelper.h"
 
+#include <math.h>
+
 //-----------------------------------------------------------------------------------------
 // メタデータ用dictionary種別定義 ＆ データ値変換データベース
 //-----------------------------------------------------------------------------------------
@@ -313,6 +315,8 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
     NSString*       _geometry;
     NSDictionary*   _properties[propertyKindNum];
     NSArray*        _summary;
+    GPSInfo*        _gpsInfo;
+    NSArray*        _gpsInfoStrings;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -406,6 +410,150 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
 }
 
 //-----------------------------------------------------------------------------------------
+// GPS情報取得
+//-----------------------------------------------------------------------------------------
+- (GPSInfo*)gpsInfo
+{
+    NSDictionary* gps = _properties[propertyGPS];
+    if (!_gpsInfo && gps){
+        _gpsInfo = [[GPSInfo alloc] init];
+        // 緯度
+        double latitude =
+            [[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSLatitude] doubleValue] *
+            ([[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSLatitudeRef] isEqualToString:@"N"] ? 1.0 : -1.0);
+        _gpsInfo.latitude = [NSNumber numberWithDouble:latitude];
+        
+        // 経度
+        double longitude =
+            [[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSLongitude] doubleValue] *
+            ([[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSLongitudeRef] isEqualToString:@"E"] ? 1.0 : -1.0);
+        _gpsInfo.longitude = [NSNumber numberWithDouble:longitude];
+        
+        // 高度
+        NSNumber* altitudeValue = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSAltitude];
+        if (altitudeValue){
+            double altitude =
+                [altitudeValue doubleValue] *
+                ([[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSAltitudeRef] intValue] ? -1.0 : 1.0);
+            _gpsInfo.altitude = [NSNumber numberWithDouble:altitude];
+        }
+        
+        // 撮影画像の方向
+        NSNumber* imageDirectionValue = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSImgDirection];
+        if (imageDirectionValue){
+            _gpsInfo.imageDirection = imageDirectionValue;
+            _gpsInfo.imageDirectionKind =
+                [[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSImgDirectionRef] isEqualToString:@"T"] ?
+                NSLocalizedString(@"True Direction", nil) : NSLocalizedString(@"Magnetic Direction", nil);
+        }
+        
+        // 速度
+        NSNumber* headingValue = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSTrack];
+        if (headingValue){
+            _gpsInfo.heading = headingValue;
+            _gpsInfo.headingKind =
+                [[gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSTrackRef] isEqualToString:@"T"] ?
+                NSLocalizedString(@"True Direction", nil) : NSLocalizedString(@"Magnetic Direction", nil);
+            _gpsInfo.velocity = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSSpeed];
+            NSString* velocityUnit = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSSpeedRef];
+            _gpsInfo.velocityUnit = [velocityUnit isEqualToString:@"K"] ? NSLocalizedString(@"km/h", nil) :
+                                    [velocityUnit isEqualToString:@"M"] ? NSLocalizedString(@"mph", nil) :
+                                    NSLocalizedString(@"knot", nil);
+        }
+        
+        // 測位方法
+        NSString* measureMode = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSMeasureMode];
+        if (measureMode){
+            _gpsInfo.measureMode = [measureMode isEqualToString:@"2"] ? NSLocalizedString(@"2D", nil) :
+                                                                        NSLocalizedString(@"3D", nil);
+        }
+        
+        // 地図種別
+        _gpsInfo.geodeticReferenceSystem = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSMapDatum];
+    }
+    return _gpsInfo;
+}
+
+- (NSArray*)gpsInfoStrings
+{
+    GPSInfo* gpsInfo = self.gpsInfo;
+    if (!_gpsInfoStrings){
+        NSMutableArray* array = [[NSMutableArray alloc] init];
+        _gpsInfoStrings = array;
+        
+        // 緯度
+        NSString* value = nil;
+        if (gpsInfo && gpsInfo.latitude){
+            double latitude = [gpsInfo.latitude doubleValue];
+            NSString* format = latitude >= 0 ? NSLocalizedString(@"%@ N", nil) :
+                                               NSLocalizedString(@"%@ S", nil);
+            value = [NSString stringWithFormat:format, [self convertToDegrees:latitude]];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Latitude:", nil) value:value]];
+
+        // 経度
+        value = nil;
+        if (gpsInfo && gpsInfo.longitude){
+            double longitude = [gpsInfo.longitude doubleValue];
+            NSString* format = longitude >= 0 ? NSLocalizedString(@"%@ E", nil) :
+                                                NSLocalizedString(@"%@ W", nil);
+            value = [NSString stringWithFormat:format, [self convertToDegrees:longitude]];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Longitude:", nil) value:value]];
+
+        // 高度
+        value = nil;
+        if (gpsInfo && gpsInfo.altitude){
+            value = [NSString stringWithFormat:@"%.1f m", [gpsInfo.altitude doubleValue]];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Altitude:", nil) value:value]];
+        
+        // 撮影方向
+        value = nil;
+        if (gpsInfo && gpsInfo.imageDirection){
+            value = [NSString stringWithFormat:@"%.1f° (%@)", [gpsInfo.imageDirection doubleValue], gpsInfo.imageDirectionKind];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Image Direction:", nil) value:value]];
+        
+        // 速度
+        value = nil;
+        if (gpsInfo && gpsInfo.heading){
+            value = [NSString stringWithFormat:@"%.1f° (%@)", [gpsInfo.heading doubleValue], gpsInfo.headingKind];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Track Direction:", nil) value:value]];
+        value = nil;
+        if (gpsInfo && gpsInfo.velocity){
+            value = [NSString stringWithFormat:@"%.1f %@", [gpsInfo.velocity doubleValue], gpsInfo.velocityUnit];
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Track Speed:", nil) value:value]];
+
+        // 測位方法
+        value = nil;
+        if (gpsInfo && gpsInfo.measureMode){
+            value = gpsInfo.measureMode;
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Measure Mode:", nil) value:value]];
+
+        // 地図種別
+        value = nil;
+        if (gpsInfo && gpsInfo.geodeticReferenceSystem){
+            value = gpsInfo.geodeticReferenceSystem;
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Geodetic Reference System:", nil) value:value]];
+    }
+    return _gpsInfoStrings;
+}
+
+- (NSString*)convertToDegrees:(double)value
+{
+    double deg, min, sec;
+    double mod1 = modf(fabs(value), &deg);
+    double mod2 = modf(mod1 * 60, &min);
+    sec = mod2 * 60;
+    return [NSString stringWithFormat:@"%.0f° %.0f' %.3f\"", deg, min, sec];
+}
+
+//-----------------------------------------------------------------------------------------
 // 属性辞書返却
 //-----------------------------------------------------------------------------------------
 - (NSDictionary*)propertiesAtIndex:(int)index
@@ -433,5 +581,12 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
     }
     return kv;
 }
+
+@end
+
+//-----------------------------------------------------------------------------------------
+// GPS情報ラッパー
+//-----------------------------------------------------------------------------------------
+@implementation GPSInfo
 
 @end

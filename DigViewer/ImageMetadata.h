@@ -9,9 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "PathNode.h"
 
+@interface GPSInfo : NSObject
+@property NSNumber* latitude;
+@property NSNumber* longitude;
+@property NSNumber* altitude;
+@property NSNumber* imageDirection;
+@property NSString* imageDirectionKind;
+@property NSNumber* heading;
+@property NSString* headingKind;
+@property NSNumber* velocity;
+@property NSString* velocityUnit;
+@property NSString* measureMode;
+@property NSString* geodeticReferenceSystem;
+@end
+
 @interface ImageMetadata : NSObject
 
 @property (readonly) NSArray* summary;
+@property (readonly) GPSInfo* gpsInfo;
+@property (readonly) NSArray* gpsInfoStrings;
 
 - (id)initWithPathNode:(PathNode*)pathNode;
 - (NSDictionary*)propertiesAtIndex:(int)index;
