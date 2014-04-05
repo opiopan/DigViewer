@@ -19,6 +19,7 @@
 @property NSString* headingKind;
 @property NSNumber* velocity;
 @property NSString* velocityUnit;
+@property NSString* dateTime;
 @property NSString* measureMode;
 @property NSString* geodeticReferenceSystem;
 @end

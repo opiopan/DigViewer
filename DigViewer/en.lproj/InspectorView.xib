@@ -163,14 +163,14 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-we-DpE">
-                                                    <rect key="frame" x="0.0" y="441" width="343" height="135"/>
+                                                    <rect key="frame" x="0.0" y="426" width="343" height="150"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="vxn-AW-peD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="135"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="15" id="hrr-15-ccA">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="135"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
                                                                 <color key="backgroundColor" red="0.89094344430000005" green="0.89094344430000005" blue="0.89094344430000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -225,7 +225,7 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </clipView>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="135" id="Lng-qa-IhJ"/>
+                                                        <constraint firstAttribute="height" constant="150" id="Lng-qa-IhJ"/>
                                                     </constraints>
                                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="NEh-rl-GLf">
                                                         <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
@@ -237,7 +237,7 @@
                                                     </scroller>
                                                 </scrollView>
                                                 <webView translatesAutoresizingMaskIntoConstraints="NO" id="sxX-2G-pLZ" customClass="GPSMapView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="441"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="426"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                                         <nil key="identifier"/>

@@ -461,6 +461,19 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
                                     NSLocalizedString(@"knot", nil);
         }
         
+        // GPS日時
+        NSString* date = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSDateStamp];
+        if (date){
+            NSString* time = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSTimeStamp];
+            NSRange yyyy = {0, 4};
+            NSRange mm = {5, 2};
+            NSRange dd = {8, 2};
+            _gpsInfo.dateTime = [NSString stringWithFormat:@"%@/%@/%@ %@ UTC",
+                                 [date substringWithRange:yyyy], [date substringWithRange:mm], [date substringWithRange:dd],
+                                 time];
+
+        }
+        
         // 測位方法
         NSString* measureMode = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSMeasureMode];
         if (measureMode){
@@ -527,6 +540,13 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         }
         [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Track Speed:", nil) value:value]];
 
+        // 日時
+        value = nil;
+        if (gpsInfo && gpsInfo.dateTime){
+            value = gpsInfo.dateTime;
+        }
+        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"GPS Date Time:", nil) value:value]];
+        
         // 測位方法
         value = nil;
         if (gpsInfo && gpsInfo.measureMode){
@@ -550,7 +570,7 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
     double mod1 = modf(fabs(value), &deg);
     double mod2 = modf(mod1 * 60, &min);
     sec = mod2 * 60;
-    return [NSString stringWithFormat:@"%.0f° %.0f' %.3f\"", deg, min, sec];
+    return [NSString stringWithFormat:@"%.0f° %.0f' %.1f\"", deg, min, sec];
 }
 
 //-----------------------------------------------------------------------------------------

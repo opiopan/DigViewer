@@ -145,5 +145,6 @@
 "Image Direction:" = "撮影方向:";
 "Track Direction:" = "移動方向:";
 "Track Speed:" = "移動速度:";
+"GPS Date Time:" = "GPS日時:";
 "Measure Mode:" = "測位方式:";
 "Geodetic Reference System:" = "測地系:";
