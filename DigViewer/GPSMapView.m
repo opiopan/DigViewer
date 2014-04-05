@@ -9,8 +9,8 @@
 #import "GPSMapView.h"
 
 @implementation GPSMapView{
-    NSString* _apiKey;
-    GPSInfo* _gpsInfo;
+    NSString*   _apiKey;
+    GPSInfo*    _gpsInfo;
 }
 
 - (NSString*) apiKey
@@ -21,6 +21,9 @@
 - (void) setApiKey:(NSString *)apiKey
 {
     _apiKey = [apiKey copy];
+    WebScriptObject* win = [self windowScriptObject];
+    [win setValue:self forKey:@"bridge"];
+    
     NSString* htmlString = @
         "<!DOCTYPE html>"
         "<html>"
@@ -42,6 +45,7 @@
         "</html>";
     [[self mainFrame] loadHTMLString:[NSString stringWithFormat:htmlString, _apiKey]
                              baseURL:[[NSBundle mainBundle] resourceURL]];
+    [self performSelector:@selector(reflectGpsInfo) withObject:nil afterDelay:0];
 }
 
 - (GPSInfo*) gpsInfo
@@ -62,4 +66,17 @@
     [window evaluateWebScript:script];
 }
 
+- (void) reflectGpsInfo
+{
+    if (_gpsInfo){
+        self.gpsInfo = _gpsInfo;
+    }
+}
+    
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
+{
+    if (aSelector == @selector(reflectGpsInfo)) return NO;
+    return YES;
+}
+    
 @end

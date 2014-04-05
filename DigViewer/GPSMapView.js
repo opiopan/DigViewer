@@ -24,26 +24,32 @@ function initialize() {
         streetViewControl: true,
         overviewMapControl: true
     };
+    //window.bridge.reflectGpsInfo();
     if (latlng){
         mapOptions.center = latlng;
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+    window.bridge.reflectGpsInfo();
 }
 
 function setMarker(latitude, longitude) {
-    if (!latlng){
-        map.setZoom(zoomLevel);
+    if (map){
+        if (!latlng){
+            map.setZoom(zoomLevel);
+        }
+        latlng = new google.maps.LatLng(latitude, longitude);
+        if (marker){
+            marker.setMap(null);
+        }
+        marker = new google.maps.Marker({
+                                        position: latlng,
+                                        map: map
+                                        });
+        map.setCenter(latlng);
+    }else{
+        latlng = new google.maps.LatLng(latitude, longitude);
     }
-    latlng = new google.maps.LatLng(latitude, longitude);
-    if (marker){
-        marker.setMap(null);
-    }
-    marker = new google.maps.Marker({
-                                    position: latlng,
-                                    map: map
-                                    });
-    map.setCenter(latlng);
 }
 
 function resetMarker() {
