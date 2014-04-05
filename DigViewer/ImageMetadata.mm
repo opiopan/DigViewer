@@ -462,15 +462,19 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         }
         
         // GPS日時
-        NSString* date = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSDateStamp];
-        if (date){
-            NSString* time = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSTimeStamp];
-            NSRange yyyy = {0, 4};
-            NSRange mm = {5, 2};
-            NSRange dd = {8, 2};
-            _gpsInfo.dateTime = [NSString stringWithFormat:@"%@/%@/%@ %@ UTC",
-                                 [date substringWithRange:yyyy], [date substringWithRange:mm], [date substringWithRange:dd],
-                                 time];
+        NSString* time = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSTimeStamp];
+        if (time){
+            NSString* date = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSDateStamp];
+            if (date){
+                NSRange yyyy = {0, 4};
+                NSRange mm = {5, 2};
+                NSRange dd = {8, 2};
+                _gpsInfo.dateTime = [NSString stringWithFormat:@"%@/%@/%@ %@ UTC",
+                                     [date substringWithRange:yyyy], [date substringWithRange:mm], [date substringWithRange:dd],
+                                     time];
+            }else{
+                _gpsInfo.dateTime = [time stringByAppendingString:@" UTC"];
+            }
 
         }
         
