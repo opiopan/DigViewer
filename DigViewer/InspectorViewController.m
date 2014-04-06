@@ -87,8 +87,10 @@
         PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
         ImageMetadata* metadata = [[ImageMetadata alloc] initWithPathNode:current];
         self.summary = metadata.summary;
-        self.gpsInfo = metadata.gpsInfoStrings;
-        self.mapView.gpsInfo = metadata.gpsInfo;
+        if (_viewSelector == 1){
+            self.gpsInfo = metadata.gpsInfoStrings;
+            self.mapView.gpsInfo = metadata.gpsInfo;
+        }
     }
 }
 
@@ -115,6 +117,7 @@
     //マップビューを初期化
     if (_viewSelector == 1){
         [self reflectGoogleMapsApiKey];
+        [self reflectMetadata];
     }
 }
 

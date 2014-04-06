@@ -35,7 +35,7 @@
         "           #map_canvas { height: 100%% }"
         "       </style>"
         "       <script type=\"text/javascript\""
-        "           src=\"http://maps.googleapis.com/maps/api/js?key=%@&sensor=false\">"
+        "           src=\"http://maps.googleapis.com/maps/api/js?key=%@&libraries=geometry,drawing&sensor=false\">"
         "       </script>"
         "       <script type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
         "   </head>"
@@ -59,7 +59,9 @@
     WebScriptObject* window = [self windowScriptObject];
     NSString* script = nil;
     if (_gpsInfo){
-        script = [NSString stringWithFormat:@"setMarker(%@, %@);", _gpsInfo.latitude, _gpsInfo.longitude];
+        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@);",
+                  _gpsInfo.latitude, _gpsInfo.longitude,
+                  _gpsInfo.imageDirection ? _gpsInfo.imageDirection : @"null"];
     }else{
         script = @"resetMarker();";
     }
