@@ -31,7 +31,7 @@ function initialize() {
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-    google.maps.event.addListener(map, "bounds_changed", function(){setHeading();});
+    google.maps.event.addListener(map, "resize", function(){setHeading();});
     google.maps.event.addListener(map, "zoom_changed", function(){setHeading();});
     window.bridge.reflectGpsInfo();
 }
@@ -60,10 +60,10 @@ function setMarker(latitude, longitude, heading) {
 
 function resetMarker() {
     if (imageLocation){
-        zoomLevel = map.getZoom();
+        if (map){
+            zoomLevel = map.getZoom();
+        }
         imageLocation = null;
-        map.setZoom(1);
-        map.setCenter(defLatLng);
     }
     if (marker){
         marker.setMap(null);
@@ -71,6 +71,10 @@ function resetMarker() {
     }
     imageHeading = null;
     setHeading();
+    if (map){
+        map.setZoom(1);
+        map.setCenter(defLatLng);
+    }
 }
 
 function setHeading() {
