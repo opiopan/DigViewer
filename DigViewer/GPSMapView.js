@@ -31,7 +31,7 @@ function initialize() {
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-    google.maps.event.addListener(map, "resize", function(){setHeading();});
+    //google.maps.event.addListener(map, "resize", function(){setHeading();});
     google.maps.event.addListener(map, "zoom_changed", function(){setHeading();});
     window.bridge.reflectGpsInfo();
 }

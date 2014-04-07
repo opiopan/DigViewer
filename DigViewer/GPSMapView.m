@@ -45,7 +45,7 @@
         "</html>";
     [[self mainFrame] loadHTMLString:[NSString stringWithFormat:htmlString, _apiKey]
                              baseURL:[[NSBundle mainBundle] resourceURL]];
-    [self performSelector:@selector(reflectGpsInfo) withObject:nil afterDelay:0];
+    [self performSelector:@selector(reflectGpsInfo) withObject:nil afterDelay:1];
 }
 
 - (GPSInfo*) gpsInfo
@@ -80,5 +80,12 @@
     if (aSelector == @selector(reflectGpsInfo)) return NO;
     return YES;
 }
-    
+
+- (void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    WebScriptObject* window = [self windowScriptObject];
+    [window evaluateWebScript:@"setHeading();"];
+}
+
 @end
