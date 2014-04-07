@@ -7,6 +7,7 @@
 //
 
 #import "GPSMapView.h"
+#include <math.h>
 
 @implementation GPSMapView{
     NSString*   _apiKey;
@@ -45,7 +46,7 @@
         "</html>";
     [[self mainFrame] loadHTMLString:[NSString stringWithFormat:htmlString, _apiKey]
                              baseURL:[[NSBundle mainBundle] resourceURL]];
-    [self performSelector:@selector(reflectGpsInfo) withObject:nil afterDelay:0];
+    [self performSelector:@selector(reflectGpsInfo) withObject:nil afterDelay:1];
 }
 
 - (GPSInfo*) gpsInfo
@@ -59,9 +60,18 @@
     WebScriptObject* window = [self windowScriptObject];
     NSString* script = nil;
     if (_gpsInfo){
-        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@);",
+        double FOVangle = -1;
+        double FOVscale = 0;
+        if (gpsInfo.focalLengthIn35mm){
+            double sensorSize = _gpsInfo.rotation.integerValue < 5 ? 36.0 / 2.0 : 24.0 / 2.0;
+            FOVangle = atan(sensorSize / _gpsInfo.focalLengthIn35mm.doubleValue);
+            FOVscale = 1.0 / cos(FOVangle);
+            FOVangle = FOVangle * (180 / M_PI);
+        }
+        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f);",
                   _gpsInfo.latitude, _gpsInfo.longitude,
-                  _gpsInfo.imageDirection ? _gpsInfo.imageDirection : @"null"];
+                  _gpsInfo.imageDirection ? _gpsInfo.imageDirection : @"null",
+                  FOVangle, FOVscale];
     }else{
         script = @"resetMarker();";
     }
@@ -80,5 +90,12 @@
     if (aSelector == @selector(reflectGpsInfo)) return NO;
     return YES;
 }
-    
+
+- (void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    WebScriptObject* window = [self windowScriptObject];
+    [window evaluateWebScript:@"setHeading();"];
+}
+
 @end

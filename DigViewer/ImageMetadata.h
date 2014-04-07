@@ -22,6 +22,8 @@
 @property NSString* dateTime;
 @property NSString* measureMode;
 @property NSString* geodeticReferenceSystem;
+@property NSNumber* focalLengthIn35mm;
+@property NSNumber* rotation;
 @end
 
 @interface ImageMetadata : NSObject

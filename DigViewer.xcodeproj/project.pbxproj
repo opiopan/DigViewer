@@ -69,6 +69,19 @@
 		7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		7B17D21F19024B1400848FF0 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.js";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = true;
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
 		7B5340621703F450008AEDB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -382,6 +395,7 @@
 				7B9F9E8A18E7DD450042337F /* CopyFiles */,
 			);
 			buildRules = (
+				7B17D21F19024B1400848FF0 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);

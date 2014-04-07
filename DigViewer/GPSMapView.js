@@ -11,10 +11,19 @@ var imageLocation = null;
 var zoomLevel = 10;
 var imageVector = null;
 var imageHeading = null;
+var FOVangle = -1;
+var FOVscale = 0;
+var FOVgrade = 15;
+var FOVmarker = [];
 var defLatLng = new google.maps.LatLng(0, 0);
 var marker = null;
 
 function initialize() {
+    var i;
+    for (i = 0; i < FOVgrade; i++){
+        FOVmarker.push(null);
+    }
+    
     var mapOptions = {
         center: defLatLng,
         zoom: 1,
@@ -31,12 +40,12 @@ function initialize() {
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-    google.maps.event.addListener(map, "resize", function(){setHeading();});
+    //google.maps.event.addListener(map, "resize", function(){setHeading();});
     google.maps.event.addListener(map, "zoom_changed", function(){setHeading();});
     window.bridge.reflectGpsInfo();
 }
 
-function setMarker(latitude, longitude, heading) {
+function setMarker(latitude, longitude, heading, angle, scale) {
     if (map){
         if (!imageLocation){
             map.setZoom(zoomLevel);
@@ -51,6 +60,8 @@ function setMarker(latitude, longitude, heading) {
                                         });
         map.setCenter(imageLocation);
         imageHeading = heading;
+        FOVangle = angle;
+        FOVscale = scale;
         setHeading();
     }else{
         imageLocation = new google.maps.LatLng(latitude, longitude);
@@ -70,6 +81,8 @@ function resetMarker() {
         marker = null;
     }
     imageHeading = null;
+    FOVangle = -1;
+    FOVscale = 0;
     setHeading();
     if (map){
         map.setZoom(1);
@@ -82,8 +95,16 @@ function setHeading() {
         imageVector.setMap(null);
         imageVector = null;
     }
+    var i;
+    for (i = 0; i < FOVgrade; i++){
+        if (FOVmarker[i]){
+            FOVmarker[i].setMap(null);
+            FOVmarker[i] = null;
+        }
+    }
     if (imageHeading){
-        to = google.maps.geometry.spherical.computeOffset(imageLocation, headingLength(), imageHeading);
+        var vecLength = headingLength();
+        var to = google.maps.geometry.spherical.computeOffset(imageLocation, vecLength, imageHeading);
         var color = "#FF0000";
         var opacity = 0.7;
         var headArrow = {
@@ -103,6 +124,28 @@ function setHeading() {
         };
         imageVector = new google.maps.Polyline(vectorOpt);
         imageVector.setMap(map);
+        if (FOVangle > 0){
+            var color = "#FF0000";
+            var opacity = 0.6 / FOVgrade;
+            var divLength = vecLength * FOVscale / FOVgrade * 2;
+            var i;
+            for (i = 0; i < FOVgrade; i++){
+                var left = google.maps.geometry.spherical.computeOffset(imageLocation,
+                                                                        divLength * (i + 1), imageHeading - FOVangle);
+                var right = google.maps.geometry.spherical.computeOffset(imageLocation,
+                                                                        divLength * (i + 1), imageHeading + FOVangle);
+                var fovOpt = {
+                    path: [imageLocation, left, right],
+                    fillOpacity: opacity,
+                    fillColor: color,
+                    strokeColor: color,
+                    strokeOpacity: 0,
+                    strokeWeight: 1
+                };
+                FOVmarker[i] = new google.maps.Polygon(fovOpt);
+                FOVmarker[i].setMap(map);
+            }
+        }
     }
 }
 

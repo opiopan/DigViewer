@@ -414,6 +414,8 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
 //-----------------------------------------------------------------------------------------
 - (GPSInfo*)gpsInfo
 {
+    NSDictionary* base = _properties[propertyALL];
+    NSDictionary* exif = _properties[propertyEXIF];
     NSDictionary* gps = _properties[propertyGPS];
     if (!_gpsInfo && gps){
         _gpsInfo = [[GPSInfo alloc] init];
@@ -487,6 +489,10 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         
         // 地図種別
         _gpsInfo.geodeticReferenceSystem = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSMapDatum];
+        
+        // 焦点距離 (35mm換算) & 画像の向き
+        _gpsInfo.focalLengthIn35mm = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifFocalLenIn35mmFilm];
+        _gpsInfo.rotation = [base valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
     }
     return _gpsInfo;
 }
