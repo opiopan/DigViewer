@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */; };
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
@@ -61,6 +62,7 @@
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
+		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
@@ -106,6 +108,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		38C57FF1190F7E0A004D373F /* NSColor+JavascriptColorSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+JavascriptColorSpace.h"; sourceTree = "<group>"; };
+		38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+JavascriptColorSpace.m"; sourceTree = "<group>"; };
 		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
 		7B01210716B4C6A9004AA730 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = resources/down.png; sourceTree = "<group>"; };
 		7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+Nested.h"; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
 		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
+		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
+		7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesDefaultsController.m; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
 		7BF678AC16983C7C00FE39B4 /* PathNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PathNode.mm; sourceTree = "<group>"; };
@@ -349,6 +355,8 @@
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 				7B1CC21418D86DC5007527E6 /* InfoPlistController.h */,
 				7B1CC21518D86DC5007527E6 /* InfoPlistController.m */,
+				7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */,
+				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -376,6 +384,8 @@
 				7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */,
 				7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */,
 				7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */,
+				38C57FF1190F7E0A004D373F /* NSColor+JavascriptColorSpace.h */,
+				38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -529,12 +539,14 @@
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
+				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
+				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
