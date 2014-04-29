@@ -14,5 +14,7 @@
 
 @property (copy) NSString* apiKey;
 @property (strong) GPSInfo* gpsInfo;
+@property (copy) NSColor* fovColor;
+@property (copy) NSColor* arrowColor;
 
 @end
