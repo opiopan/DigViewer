@@ -17,6 +17,8 @@ var FOVgrade = 15;
 var FOVmarker = [];
 var defLatLng = new google.maps.LatLng(0, 0);
 var marker = null;
+var fovColor = null;
+var arrowColor = null;
 
 function initialize() {
     var i;
@@ -45,7 +47,7 @@ function initialize() {
     window.bridge.reflectGpsInfo();
 }
 
-function setMarker(latitude, longitude, heading, angle, scale) {
+function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc) {
     if (map){
         if (!imageLocation){
             map.setZoom(zoomLevel);
@@ -62,6 +64,16 @@ function setMarker(latitude, longitude, heading, angle, scale) {
         imageHeading = heading;
         FOVangle = angle;
         FOVscale = scale;
+        if (fovc){
+            fovColor = fovc;
+        }else{
+            fovColor = "#000000";
+        }
+        if (arrc){
+            arrowColor = arrc;
+        }else{
+            arrowColor = "#000000";
+        }
         setHeading();
     }else{
         imageLocation = new google.maps.LatLng(latitude, longitude);
@@ -105,27 +117,8 @@ function setHeading() {
     if (imageHeading){
         var vecLength = headingLength();
         var to = google.maps.geometry.spherical.computeOffset(imageLocation, vecLength, imageHeading);
-        var color = "#FF0000";
-        var opacity = 0.7;
-        var headArrow = {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            fillOpacity: opacity,
-            fillColor: color,
-            strokeColor: color,
-            strokeOpacity: opacity
-            };
-        var icon_symbol =  [{icon: headArrow, offset: '100%'}];
-        var vectorOpt = {
-            path: [imageLocation, to],
-            icons: icon_symbol,
-            strokeColor: color,
-            strokeOpacity: opacity,
-            strokeWeight: 3
-        };
-        imageVector = new google.maps.Polyline(vectorOpt);
-        imageVector.setMap(map);
         if (FOVangle > 0){
-            var color = "#FF0000";
+            var color = arrowColor;
             var opacity = 0.6 / FOVgrade;
             var divLength = vecLength * FOVscale / FOVgrade * 2;
             var i;
@@ -146,6 +139,25 @@ function setHeading() {
                 FOVmarker[i].setMap(map);
             }
         }
+        var color = fovColor;
+        var opacity = 0.7;
+        var headArrow = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            fillOpacity: opacity,
+            fillColor: color,
+            strokeColor: color,
+            strokeOpacity: opacity
+        };
+        var icon_symbol =  [{icon: headArrow, offset: '100%'}];
+        var vectorOpt = {
+            path: [imageLocation, to],
+            icons: icon_symbol,
+            strokeColor: color,
+            strokeOpacity: opacity,
+            strokeWeight: 3
+        };
+        imageVector = new google.maps.Polyline(vectorOpt);
+        imageVector.setMap(map);
     }
 }
 

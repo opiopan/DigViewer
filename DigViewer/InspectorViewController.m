@@ -62,6 +62,17 @@
     }
     [self.gpsKeyColumn setWidth:width + 10.0];
     
+    // Google Map 上に表示する矢印とfovの色を登録する & 環境設定変更を監視するobserverを登録
+    [self reflectMapFovColor];
+    [self reflectMapArrowColor];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapFovColor"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapArrowColor"
+                                                                 options:nil context:nil];
+    
+    
     // Google API Keyの変更を監視するするobserverを登録
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.googleMapsApiKey"
@@ -77,6 +88,13 @@
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.googleMapsApiKey"]){
         [self reflectGoogleMapsApiKey];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.mapFovColor"]){
+        [self reflectMapFovColor];
+    }
+    else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+             [keyPath isEqualToString:@"values.mapArrowColor"]){
+        [self reflectMapArrowColor];
     }
 }
 
@@ -91,6 +109,24 @@
             self.gpsInfo = metadata.gpsInfoStrings;
             self.mapView.gpsInfo = metadata.gpsInfo;
         }
+    }
+}
+
+- (void)reflectMapFovColor
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSData* data = [[controller values] valueForKey:@"mapFovColor"];
+    if (data){
+        self.mapView.fovColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
+    }
+}
+
+- (void)reflectMapArrowColor
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSData* data = [[controller values] valueForKey:@"mapArrowColor"];
+    if (data){
+        self.mapView.arrowColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
     }
 }
 

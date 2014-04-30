@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */; };
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
@@ -106,6 +107,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		38C57FF1190F7E0A004D373F /* NSColor+JavascriptColorSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+JavascriptColorSpace.h"; sourceTree = "<group>"; };
+		38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+JavascriptColorSpace.m"; sourceTree = "<group>"; };
 		7B01210616B4C6A9004AA730 /* down.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = down.idraw; path = resources/down.idraw; sourceTree = "<group>"; };
 		7B01210716B4C6A9004AA730 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = resources/down.png; sourceTree = "<group>"; };
 		7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+Nested.h"; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 				7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */,
 				7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */,
 				7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */,
+				38C57FF1190F7E0A004D373F /* NSColor+JavascriptColorSpace.h */,
+				38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
+				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,

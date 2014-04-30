@@ -7,11 +7,14 @@
 //
 
 #import "GPSMapView.h"
+#import "NSColor+JavascriptColorSpace.h"
 #include <math.h>
 
 @implementation GPSMapView{
     NSString*   _apiKey;
     GPSInfo*    _gpsInfo;
+    NSColor*    _fovColor;
+    NSColor*    _arrowColor;
 }
 
 - (NSString*) apiKey
@@ -68,14 +71,38 @@
             FOVscale = 1.0 / cos(FOVangle);
             FOVangle = FOVangle * (180 / M_PI);
         }
-        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f);",
+        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f, %@, %@);",
                   _gpsInfo.latitude, _gpsInfo.longitude,
                   _gpsInfo.imageDirection ? _gpsInfo.imageDirection : @"null",
-                  FOVangle, FOVscale];
+                  FOVangle, FOVscale,
+                  _fovColor ? [_fovColor javascriptColor] : @"null",
+                  _arrowColor ? [_arrowColor javascriptColor] : @"null"];
     }else{
         script = @"resetMarker();";
     }
     [window evaluateWebScript:script];
+}
+
+- (NSColor*) fovColor
+{
+    return _fovColor;
+}
+
+- (void) setFovColor:(NSColor *)fovColor
+{
+    _fovColor = [fovColor copy];
+    self.gpsInfo = _gpsInfo;
+}
+
+- (NSColor*) arrowColor
+{
+    return _arrowColor;
+}
+
+- (void) setArrowColor:(NSColor *)arrowColor
+{
+    _arrowColor = [arrowColor copy];
+    self.gpsInfo = _gpsInfo;
 }
 
 - (void) reflectGpsInfo
