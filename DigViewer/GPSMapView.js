@@ -15,12 +15,29 @@ var FOVangle = -1;
 var FOVscale = 0;
 var FOVgrade = 15;
 var FOVmarker = [];
-var defLatLng = new google.maps.LatLng(0, 0);
+var defLatLng = null;
 var marker = null;
 var fovColor = null;
 var arrowColor = null;
+var isIncompleteArrow = false;
+
+window.onload = function (){
+    //alert(window.digViewerBridge);
+    window.digViewerBridge.onLoad();
+};
+
+function setKey(key){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "http://maps.googleapis.com/maps/api/js?key=";
+    script.src += key;
+    script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
+    document.body.appendChild(script);
+}
 
 function initialize() {
+    defLatLng = new google.maps.LatLng(0, 0);
+
     var i;
     for (i = 0; i < FOVgrade; i++){
         FOVmarker.push(null);
@@ -42,9 +59,9 @@ function initialize() {
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-    //google.maps.event.addListener(map, "resize", function(){setHeading();});
+    google.maps.event.addListener(map, "bounds_changed", function(){if (isIncompleteArrow) setHeading();});
     google.maps.event.addListener(map, "zoom_changed", function(){setHeading();});
-    window.bridge.reflectGpsInfo();
+    window.digViewerBridge.reflectGpsInfo();
 }
 
 function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc) {
@@ -103,6 +120,7 @@ function resetMarker() {
 }
 
 function setHeading() {
+    isIncompleteArrow = false;
     if (imageVector){
         imageVector.setMap(null);
         imageVector = null;
@@ -114,7 +132,7 @@ function setHeading() {
             FOVmarker[i] = null;
         }
     }
-    if (imageHeading){
+    if (imageHeading || imageHeading == 0){
         var vecLength = headingLength();
         var to = google.maps.geometry.spherical.computeOffset(imageLocation, vecLength, imageHeading);
         if (FOVangle > 0){
@@ -176,6 +194,7 @@ function headingLength() {
             return height * ratio;
         }
     }else{
+        isIncompleteArrow = true;
         return 0;
     }
 }

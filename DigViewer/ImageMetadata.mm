@@ -229,7 +229,7 @@ static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
         }else{
             fNumber = [NSString stringWithFormat:@"%@-%@", fNum1, fNum2];
         }
-        valueString = [NSString stringWithFormat:@"%@ %@mm F%@", lensType, focalLength, fNumber];
+        valueString = [NSString stringWithFormat:@"%@ %@mm f/%@", lensType, focalLength, fNumber];
     }
     return valueString;
 }
