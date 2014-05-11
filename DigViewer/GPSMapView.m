@@ -50,7 +50,7 @@
         "       <script type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
         "   </head>"
         "   <body>"
-        "       <div id=\"map_canvas\" style=\"width:100%%; height:100%%\">loding...</div>"
+        "       <div id=\"map_canvas\" style=\"width:100%%; height:100%%\">loading...</div>"
         "   </body>"
         "</html>";
     [[self mainFrame] loadHTMLString:htmlString baseURL:[[NSBundle mainBundle] resourceURL]];
@@ -131,7 +131,7 @@
 
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame
 {
-    
+    NSLog(@"Javascript: %@\n", message);
 }
 
 @end

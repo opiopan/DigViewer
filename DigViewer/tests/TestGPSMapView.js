@@ -6,7 +6,7 @@ function Bridge() {
     };
 };
 
-window.bridge = new Bridge();
+window.digViewerBridge = new Bridge();
 
 function testSetKey(){
     var key = document.apikey.key.value;
