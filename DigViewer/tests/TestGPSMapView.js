@@ -12,7 +12,7 @@ function testSetKey(){
     var key = document.apikey.key.value;
     var object = document.getElementById("key_form");
     var parent = object.parentNode;
-    parent.removeChild(object);
+    //parent.removeChild(object);
     setKey(key);
 }
 

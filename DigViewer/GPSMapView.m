@@ -11,6 +11,7 @@
 #include <math.h>
 
 @implementation GPSMapView{
+    BOOL        _hasBeenLoaded;
     NSString*   _apiKey;
     GPSInfo*    _gpsInfo;
     NSColor*    _fovColor;
@@ -31,29 +32,35 @@
 
 - (void) setApiKey:(NSString *)apiKey
 {
-    self.UIDelegate = self;
     _apiKey = [apiKey copy];
-
-    WebScriptObject* win = [self windowScriptObject];
-    [win setValue:self forKey:@"digViewerBridge"];
     
-    NSString* htmlString = @
-        "<!DOCTYPE html>"
-        "<html>"
-        "   <head>"
-        "       <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\" />"
-        "       <style type=\"text/css\">"
-        "           html { height: 100%% }"
-        "           body { height: 100%%; margin: 0; padding: 0 }"
-        "           #map_canvas { height: 100%% }"
-        "       </style>"
-        "       <script type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
-        "   </head>"
-        "   <body>"
-        "       <div id=\"map_canvas\" style=\"width:100%%; height:100%%\">loading...</div>"
-        "   </body>"
-        "</html>";
-    [[self mainFrame] loadHTMLString:htmlString baseURL:[[NSBundle mainBundle] resourceURL]];
+    if (!_hasBeenLoaded){
+        self.UIDelegate = self;
+        WebScriptObject* win = [self windowScriptObject];
+        [win setValue:self forKey:@"digViewerBridge"];
+        
+        NSString* htmlString = @
+            "<!DOCTYPE html>"
+            "<html>"
+            "   <head>"
+            "       <meta class=\"DigViewer\" name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\" />"
+            "       <style class=\"DigViewer\" type=\"text/css\">"
+            "           html { height: 100%% }"
+            "           body { height: 100%%; margin: 0; padding: 0 }"
+            "           #map_canvas { height: 100%% }"
+            "       </style>"
+            "       <script class=\"DigViewer\" type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
+            "   </head>"
+            "   <body>"
+            "       <div id=\"base\">"
+            "           <div id=\"map_canvas\" style=\"width:100%%; height:100%%\">loading...</div>"
+            "       </div>"
+            "   </body>"
+            "</html>";
+        [[self mainFrame] loadHTMLString:htmlString baseURL:[[NSBundle mainBundle] resourceURL]];
+    }else{
+        [self onLoad];
+    }
 }
 
 - (void)onLoad

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
    <head>
-       <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-       <style type="text/css">
+       <meta class="DigViewer" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+       <style class="DigViewer" type="text/css">
            html { height: 100% }
            body { height: 100%; margin: 0; padding: 0 }
            #map_canvas { height: 100% }
        </style>
-       <script type="text/javascript" src="TestGPSMapView.js"></script>
-       <script type="text/javascript"
-       <script type="text/javascript" src="../GPSMapView.js"></script>
+       <script class="DigViewer" type="text/javascript" src="TestGPSMapView.js"></script>
+       <script class="DigViewer" type="text/javascript" src="../GPSMapView.js"></script>
    </head>
    <body "initializeApi()">
-       <div id="map_canvas" style="width:400px; height:300px"></div>
+       <div id="base"><div id="map_canvas" style="width:400px; height:300px"></div></div>
        <div id="input_form">
            <div id="key_form">
                <form name="apikey">

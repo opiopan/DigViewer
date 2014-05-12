@@ -27,12 +27,42 @@ window.onload = function (){
 };
 
 function setKey(key){
+    var oldCanvas = document.getElementById("map_canvas");
+    var style = oldCanvas.style.cssText;
+    
+    var base = document.getElementById("base");
+    var childs = base.childNodes;
+    for (var i = childs.length; i > 0; i--){
+        base.removeChild(childs[i - 1]);
+    }
+    
+    childs = document.body.childNodes;
+    for (var i = childs.length; i > 0; i--){
+        var node = childs[i - 1];
+        if (node.tagName == "SCRIPT"){
+            document.body.removeChild(node);
+        }
+    }
+    
+    childs = document.head.childNodes;
+    for (var i = childs.length; i > 0; i--){
+        var node = childs[i - 1];
+        if (node.className != "DigViewer"){
+            document.head.removeChild(node);
+        }
+    }
+    
+    var canvas = document.createElement("div");
+    canvas.id = "map_canvas";
+    canvas.style.cssText = style;
+    base.appendChild(canvas);
+    
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "http://maps.googleapis.com/maps/api/js?key=";
     script.src += key;
     script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
-    document.body.appendChild(script);
+    base.appendChild(script);
 }
 
 function initialize() {
