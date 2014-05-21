@@ -31,9 +31,9 @@
 
 - (void) setApiKey:(NSString *)apiKey
 {
-    self.UIDelegate = self;
     _apiKey = [apiKey copy];
 
+    self.UIDelegate = self;
     WebScriptObject* win = [self windowScriptObject];
     [win setValue:self forKey:@"digViewerBridge"];
     

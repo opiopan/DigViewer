@@ -3,33 +3,54 @@
    <head>
        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
        <style type="text/css">
-           html { height: 100% }
+           html { height: 100%; font-family: sans-serif; font-size: 10pt }
            body { height: 100%; margin: 0; padding: 0 }
+           .c_wrapper {
+               position: absolute; top: 0px; left: 0px; background: #E0E0E0
+           }
+           .c_content {
+               position: relative; top: 50%; -webkit-transform: translateY(-50%);
+               margin: 10px;
+           }
            #map_canvas { height: 100% }
+           #input_form {
+               position: absolute; left: 430px; top: 10px;
+               margin: 10px;
+           }
        </style>
        <script type="text/javascript" src="TestGPSMapView.js"></script>
-       <script type="text/javascript"
        <script type="text/javascript" src="../GPSMapView.js"></script>
    </head>
    <body "initializeApi()">
-       <div id="map_canvas" style="width:400px; height:300px"></div>
+       <div id="map_canvas" class="c_wrapper" style="width:400px; height:300px">
+           <div class="c_content" style="text-align:center">
+               Please input Google API key, then pless a [Set Key] button.
+           </div>
+       </div>
+       <div class="c_wrapper" style="width:400px; height:300px; z-index:-1">
+           <div class="c_content">
+               Google API key is invalid.
+               Please get your own key, or make sure that you specified key is correct.<br/>
+               To specify API key, please reload this page.
+           </div>
+       </div>
        <div id="input_form">
            <div id="key_form">
                <form name="apikey">
-                   <br>API key:<input type="text" name="key" value=""></input></br>
-                   <input type="button" name="key_button" value="Set Key" onclick="testSetKey()"></input>
-                   <br></br>
+                   API key:<input type="text" name="key" value=""/><br/>
+                   <input type="button" name="key_button" value="Set Key" onclick="testSetKey()"/>
+                   <br/><br/>
                </form>
            </div>
            <form name="main">
-               <br>latitude:<input type="text" name="latitude" value="35.486645"></input></br>
-               <br>longitude:<input type="text" name="longitude" value="139.477983"></input></br>
-               <br>heading:<input type="text" name="heading" value="0"></input></br>
-               <br>focal length(mm):<input type="text" name="focal_length" value="35"></input></br>
-               <br>arrow clolor:<input type="text" name="arrow_color" value="#FF0000"></input></br>
-               <br>FOV color:<input type="text" name="fov_color" value="#FF0000"></input></br>
-               <input type="button" value="Set Marker" onclick="testSetMarker()"></input>
-               <input type="button" value="Reset Marker" onclick="testResetMarker()"></input>
+               latitude:<input type="text" name="latitude" value="35.486645"/><br/>
+               longitude:<input type="text" name="longitude" value="139.477983"/><br/>
+               heading:<input type="text" name="heading" value="0"/><br/>
+               focal length(mm):<input type="text" name="focal_length" value="35"/><br/>
+               arrow clolor:<input type="text" name="arrow_color" value="#FF0000"/><br/>
+               FOV color:<input type="text" name="fov_color" value="#FF0000"/><br/>
+               <input type="button" value="Set Marker" onclick="testSetMarker()"/>
+               <input type="button" value="Reset Marker" onclick="testResetMarker()"/>
            </form>
        </div>
    </body>
