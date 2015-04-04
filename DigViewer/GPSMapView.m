@@ -65,7 +65,7 @@
         "       <div class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:-1\">"
         "           <div class=\"c_content\">"
         "               Google API key is not set or is invalid."
-        "               Please get your own key, or make sure that you specified key is correct.<br/>"
+        "               Please get your own key, or make sure that the key you specified is correct.<br/>"
         "           </div>"
         "       </div>"
         "   </body>"
