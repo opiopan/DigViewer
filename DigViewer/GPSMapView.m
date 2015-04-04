@@ -46,7 +46,7 @@
         "           html { height: 100%%; font-family: sans-serif; font-size: 10pt }"
         "           body { height: 100%%; margin: 0; padding: 0 }"
         "           .c_wrapper {"
-        "               position: relative; top: 0px; left: 0px"
+        "               position: absolute; top: 0px; left: 0px; background: #FFFFFF"
         "           }"
         "           .c_content {"
         "               position: relative; top: 50%%; -webkit-transform: translateY(-50%%);"
