@@ -16,17 +16,18 @@
 #import "NSWindow+TracingResponderChain.h"
 
 @implementation MainViewController {
-    __weak NSSplitView* splitView;
-    NSArray*            contentViewControllers;
-    NSViewController*   outlineViewController;
-    NSViewController*   inspectorViewController;
-    CGFloat             outlineViewWidth;
-    CGFloat             inspectorViewWidth;
-    CGFloat*            dividerPosition[2];
-    int                 dividerNum;
-    BOOL                isCoordinateFlip[2];
-    BOOL                isCollapsedOutlineView;
-    BOOL                isCollapsedInspectorView;
+    __weak NSSplitView*         splitView;
+    NSArray*                    contentViewControllers;
+    NSViewController*           outlineViewController;
+    InspectorViewController*    inspectorViewController;
+    InspectorViewController*    inspectorViewControllerSwapping;
+    CGFloat                     outlineViewWidth;
+    CGFloat                     inspectorViewWidth;
+    CGFloat*                    dividerPosition[2];
+    int                         dividerNum;
+    BOOL                        isCoordinateFlip[2];
+    BOOL                        isCollapsedOutlineView;
+    BOOL                        isCollapsedInspectorView;
 }
 
 @synthesize presentationViewType;
@@ -53,6 +54,7 @@
 {
     splitView = (NSSplitView*)self.view;
     
+    // サブニュー作成
     outlineViewController = [[FolderOutlineViewController alloc] init];
     outlineViewController.representedObject = self.representedObject;
     inspectorViewController = [[InspectorViewController alloc] init];
@@ -64,7 +66,14 @@
         NSViewController* controller = contentViewControllers[i];
         controller.representedObject = self.representedObject;
     }
+    
+    
+    // Google API Keyの変更を監視するするobserverを登録
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.googleMapsApiKey"
+                                                                 options:nil context:nil];
 
+    // サブビューの配置
     [self arrangeSubview];
     [self performSelector:@selector(configureOnInit) withObject:nil afterDelay:0.0];
 }
@@ -96,6 +105,14 @@
         if (controller.view.superview){
             [controller.view removeFromSuperview];
         }
+    }
+    
+    // インスペクタビューのスワップ
+    if (inspectorViewControllerSwapping){
+        inspectorViewControllerSwapping.viewSelector = inspectorViewController.viewSelector;
+        inspectorViewController = inspectorViewControllerSwapping;
+        inspectorViewControllerSwapping = nil;
+        inspectorViewBelongToLastResponderChain = false;
     }
 
     // 必要なサブビューをSplitViewに追加
@@ -206,5 +223,25 @@
     isCollapsedInspectorView = value;
     [self arrangeSubview];
 }
+
+//-----------------------------------------------------------------------------------------
+// オブザーバー応答
+// ・Google Maps APIキーが変更された際の処理
+//-----------------------------------------------------------------------------------------
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.googleMapsApiKey"]){
+        [self reflectGoogleMapsApiKey];
+    }
+}
+
+- (void)reflectGoogleMapsApiKey
+{
+    inspectorViewControllerSwapping = [[InspectorViewController alloc] init];
+    inspectorViewControllerSwapping.representedObject = self.representedObject;
+    [self arrangeSubview];
+}
+
 
 @end

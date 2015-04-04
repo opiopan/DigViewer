@@ -17,13 +17,15 @@
 @end
 
 @implementation InspectorViewController{
-    int _viewSelector;
+    int     _viewSelector;
+    bool    _initialized;
 }
 
 - (id)init
 {
     self = [super initWithNibName:@"InspectorView" bundle:nil];
     if (self) {
+        _initialized = nil;
     }
     return self;
 }
@@ -72,22 +74,22 @@
                                                               forKeyPath:@"values.mapArrowColor"
                                                                  options:nil context:nil];
     
-    
-    // Google API Keyの変更を監視するするobserverを登録
-    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:@"values.googleMapsApiKey"
-                                                                 options:nil context:nil];
     // モデル変更を検知するobserverを登録
     [self.imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    
+    // メタデータ反映
+    [self performSelector:@selector(reflectMetadata) withObject:nil afterDelay:0];
+    
+    // タブ反映
+    [self performSelector:@selector(reflectViewSelector) withObject:nil afterDelay:0];
+    
+    _initialized = true;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
         [self reflectMetadata];
-    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
-              [keyPath isEqualToString:@"values.googleMapsApiKey"]){
-        [self reflectGoogleMapsApiKey];
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.mapFovColor"]){
         [self reflectMapFovColor];
@@ -139,6 +141,11 @@
     }
 }
 
+- (void)reflectViewSelector
+{
+    self.viewSelector = self.viewSelector;
+}
+
 - (int)viewSelector
 {
     return _viewSelector;
@@ -147,13 +154,15 @@
 - (void)setViewSelector:(int)viewSelector
 {
     _viewSelector = viewSelector;
-    [self.tabView selectTabViewItemAtIndex:_viewSelector];
-    [self.view.window recalculateKeyViewLoop];
+    if (_initialized){
+        [self.tabView selectTabViewItemAtIndex:_viewSelector];
+        [self.view.window recalculateKeyViewLoop];
 
-    //マップビューを初期化
-    if (_viewSelector == 1){
-        [self reflectGoogleMapsApiKey];
-        [self reflectMetadata];
+        //マップビューを初期化
+        if (_viewSelector == 1){
+            [self reflectGoogleMapsApiKey];
+            [self reflectMetadata];
+        }
     }
 }
 
