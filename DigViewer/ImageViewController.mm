@@ -27,12 +27,12 @@
     imageView.delegate = self;
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    [controller addObserver:self forKeyPath:@"isFitWindow" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"isFitWindow" options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.imageBackgroundColor"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [self reflectBackgroundColor];
-    [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:nil context:nil];
+    [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
 }
 
 - (void)reflectImage
