@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewController.h"
+#import "NSViewController+Nested.h"
 #import "ClickableImageView.h"
 #import "MainViewController.h"
 #import "DocumentWindowController.h"
@@ -33,6 +34,14 @@
                                                                  options:0 context:nil];
     [self reflectBackgroundColor];
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+}
+
+- (void)prepareForClose
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    [controller removeObserver:self forKeyPath:@"isFitWindow"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.imageBackgroundColor"];
+    [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
 }
 
 - (void)reflectImage

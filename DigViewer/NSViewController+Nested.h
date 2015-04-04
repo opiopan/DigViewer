@@ -11,5 +11,6 @@
 @interface NSViewController (Nested)
 
 - (NSView*) representationView;
+- (void) prepareForClose;
 
 @end

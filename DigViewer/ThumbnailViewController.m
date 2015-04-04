@@ -7,6 +7,7 @@
 //
 
 #import "ThumbnailViewController.h"
+#import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "DocumentWindowController.h"
 #import "PathNode.h"
@@ -33,6 +34,15 @@ const static double defaultZoomRatio = 100;
     [controller addObserver:self forKeyPath:@"presentationViewType" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:nil context:nil];
+}
+
+- (void)prepareForClose
+{
+    [imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    [controller removeObserver:self forKeyPath:@"presentationViewType"];
+    [controller removeObserver:self forKeyPath:@"isCollapsedInspectorView"];
+    [controller removeObserver:self forKeyPath:@"isCollapsedOutlineView"];
 }
 
 - (NSView*)representationView;

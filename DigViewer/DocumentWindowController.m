@@ -82,6 +82,9 @@
     // Observerを削除
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller removeObserver:self forKeyPath:@"values.imageSetType"];
+    
+    // ビューコントローラーのクローズ準備
+    [mainViewController prepareForClose];
 }
 
 //-----------------------------------------------------------------------------------------

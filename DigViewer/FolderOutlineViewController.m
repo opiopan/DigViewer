@@ -7,6 +7,7 @@
 //
 
 #import "FolderOutlineViewController.h"
+#import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "Document.h"
 #import "DocumentWindowController.h"
@@ -28,6 +29,11 @@
     [imageTableView setTarget:self];
     [imageTableView setDoubleAction:@selector(onDoubleClickImageTableView:)];
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+}
+
+- (void)prepareForClose
+{
+    [imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
 - (void)onDoubleClickImageTableView:(id)sender

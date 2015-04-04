@@ -86,6 +86,13 @@
     _initialized = true;
 }
 
+- (void) prepareForClose
+{
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovColor"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapArrowColor"];
+    [self.imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){

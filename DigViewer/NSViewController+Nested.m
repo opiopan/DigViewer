@@ -15,4 +15,8 @@
     return self.view;
 }
 
+- (void) prepareForClose
+{
+}
+
 @end

@@ -84,6 +84,21 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// クローズ(準備)
+//-----------------------------------------------------------------------------------------
+- (void) prepareForClose
+{
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.googleMapsApiKey"];
+    
+    [outlineViewController prepareForClose];
+    [inspectorViewController prepareForClose];
+    for (int i = 0; i < contentViewControllers.count; i++){
+        NSViewController* controller = contentViewControllers[i];
+        [controller prepareForClose];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // サブビューの配置
 //-----------------------------------------------------------------------------------------
 - (void) arrangeSubview
@@ -110,6 +125,7 @@
     // インスペクタビューのスワップ
     if (inspectorViewControllerSwapping){
         inspectorViewControllerSwapping.viewSelector = inspectorViewController.viewSelector;
+        [inspectorViewController prepareForClose];
         inspectorViewController = inspectorViewControllerSwapping;
         inspectorViewControllerSwapping = nil;
         inspectorViewBelongToLastResponderChain = false;
