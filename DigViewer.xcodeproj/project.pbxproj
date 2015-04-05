@@ -65,6 +65,7 @@
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
+		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
@@ -187,6 +188,8 @@
 		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
 		7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesDefaultsController.m; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
+		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
+		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
 		7BF27648191BB25A0022E89D /* TestGPSMapView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = TestGPSMapView.html; path = tests/TestGPSMapView.html; sourceTree = "<group>"; };
 		7BF27649191BB25A0022E89D /* TestGPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = TestGPSMapView.js; path = tests/TestGPSMapView.js; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
@@ -404,6 +407,8 @@
 				7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */,
 				38C57FF1190F7E0A004D373F /* NSColor+JavascriptColorSpace.h */,
 				38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */,
+				7BD874911AD13A3C009C43BF /* NSString+escaping.h */,
+				7BD874921AD13A3C009C43BF /* NSString+escaping.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
+				7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
 				7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */,
 			);

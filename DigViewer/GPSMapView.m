@@ -9,6 +9,7 @@
 #import "GPSMapView.h"
 #import "NSColor+JavascriptColorSpace.h"
 #import "AppDelegate.h"
+#import "NSString+escaping.h"
 #include <math.h>
 
 @implementation GPSMapView{
@@ -88,7 +89,7 @@
     [[self windowScriptObject] evaluateWebScript:script];
     script = [NSString stringWithFormat:@"msgSpecifyKeyButton = \"%@\"", NSLocalizedString(@"MVMSG_SPECIFYKEYBUTTON", nil)];
     [[self windowScriptObject] evaluateWebScript:script];
-    script = [NSString stringWithFormat:@"setKey(\"%@\")", _apiKey];
+    script = [NSString stringWithFormat:@"setKey(\"%@\")", [NSString escapedStringForJavascript:_apiKey]];
     [[self windowScriptObject] evaluateWebScript:script];
 }
 
