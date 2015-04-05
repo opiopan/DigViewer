@@ -59,6 +59,7 @@
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
@@ -177,6 +178,9 @@
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B24621AD101D1008F6E64 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
 		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
@@ -338,6 +342,8 @@
 		7B39205A1696FF7500E139D0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B9B24621AD101D1008F6E64 /* AppDelegate.h */,
+				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
 				7B3920451696CA1800E139D0 /* Document.h */,
 				7B3920461696CA1800E139D0 /* Document.m */,
 				7B30AC2418A6000F00A70555 /* DocumentWindowController.h */,
@@ -560,6 +566,7 @@
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
+				7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */,
 				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
 				7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */,
@@ -645,6 +652,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7B4E8E2316C827D3001C5D09 /* ja */,
+				7B9B245F1AD0BCA5008F6E64 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

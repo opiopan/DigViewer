@@ -8,6 +8,7 @@
 
 #import "GPSMapView.h"
 #import "NSColor+JavascriptColorSpace.h"
+#import "AppDelegate.h"
 #include <math.h>
 
 @implementation GPSMapView{
@@ -21,6 +22,7 @@
 {
     if (aSelector == @selector(onLoad)) return NO;
     if (aSelector == @selector(reflectGpsInfo)) return NO;
+    if (aSelector == @selector(onSpecifyKey)) return NO;
     return YES;
 }
 
@@ -43,7 +45,7 @@
         "   <head>"
         "       <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\" />"
         "       <style type=\"text/css\">"
-        "           html { height: 100%%; font-family: sans-serif; font-size: 10pt }"
+        "           html { height: 100%%; font-family: sans-serif; font-size: 9pt }"
         "           body { height: 100%%; margin: 0; padding: 0 }"
         "           .c_wrapper {"
         "               position: absolute; top: 0px; left: 0px; background: #FFFFFF"
@@ -57,15 +59,17 @@
         "       <script type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
         "   </head>"
         "   <body>"
-        "       <div id=\"map_canvas\" class=\"c_wrapper\" style=\"width:100%%; height:100%%\">"
-        "           <div class=\"c_content\" style=\"text-align:center\">"
-        "               loading..."
-        "           </div>"
+        "       <div id=\"map_canvas\" class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:1\">"
+        "           <div id=\"primary_msg\" class=\"c_content\" style=\"text-align:center\"> </div>"
         "       </div>"
-        "       <div class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:-1\">"
-        "           <div class=\"c_content\">"
-        "               Google API key is not set or is invalid."
-        "               Please get your own key, or make sure that the key you specified is correct.<br/>"
+        "       <div class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:0\">"
+        "           <div id=\"secondary_msg\" class=\"c_content\">"
+        "               <br><br>"
+        "               <div style=\"text-align:center\">"
+        "                   <form name=\"control\">"
+        "                       <input name=\"key\" type=\"button\" value=\"Specify Key...\" onclick=\"specifyKey()\"/>"
+        "                   </form>"
+        "               </div>"
         "           </div>"
         "       </div>"
         "   </body>"
@@ -75,7 +79,16 @@
 
 - (void)onLoad
 {
-    NSString* script = [NSString stringWithFormat:@"setKey(\"%@\")", _apiKey];
+    NSString* script = nil;
+    script = [NSString stringWithFormat:@"msgLoading = \"%@\"", NSLocalizedString(@"MVMSG_LOADING", nil)];
+    [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"msgNoKey = \"%@\"", NSLocalizedString(@"MVMSG_NOKEY", nil)];
+    [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"msgInvalidKey = \"%@\"", NSLocalizedString(@"MVMSG_INVALIDKEY", nil)];
+    [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"msgSpecifyKeyButton = \"%@\"", NSLocalizedString(@"MVMSG_SPECIFYKEYBUTTON", nil)];
+    [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"setKey(\"%@\")", _apiKey];
     [[self windowScriptObject] evaluateWebScript:script];
 }
 
@@ -137,6 +150,12 @@
     if (_gpsInfo){
         self.gpsInfo = _gpsInfo;
     }
+}
+
+- (void)onSpecifyKey
+{
+    AppDelegate* appDelegate = (AppDelegate*)((NSApplication*)NSApp).delegate;
+    [appDelegate showPreferences];
 }
 
 - (void)setFrame:(NSRect)frameRect

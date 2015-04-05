@@ -143,6 +143,9 @@
 {
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     NSString* key = [[controller values] valueForKey:@"googleMapsApiKey"];
+    if (!key){
+        key = @"";
+    }
     if ([self.view superview] && ![self.mapView.apiKey isEqualToString:key]){
         self.mapView.apiKey = key;
     }

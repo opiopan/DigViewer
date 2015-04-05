@@ -178,9 +178,12 @@
 "dve-hG-0gB.title" = "Google Maps API キー:";
 
 /* Class = "NSTextFieldCell"; title = "Arrow Color:"; ObjectID = "4Gy-El-nYn"; */
-"4Gy-El-nYn.title" = "視野方向を示す矢印の色:";
+"4Gy-El-nYn.title" = "視野方向矢印の表示色:";
 
 /* Class = "NSTextFieldCell"; title = "Field of View Color:"; ObjectID = "pVb-Ov-WZk"; */
-"pVb-Ov-WZk.title" = "視野角を示す色:";
+"pVb-Ov-WZk.title" = "視野角の表示色:";
+
+/* Class = "NSButtonCell"; title = "Get API Key..."; ObjectID = "qTR-jg-kyO"; */
+ "qTR-jg-kyO.title" = "APIキーを取得...";
 
 

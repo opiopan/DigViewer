@@ -21,18 +21,34 @@ var fovColor = null;
 var arrowColor = null;
 var isIncompleteArrow = false;
 
+var msgLoading = "msgLoading";
+var msgNoKey = "msgNoKey";
+var msgInvalidKey = "msgInvalidKey";
+var msgSpecifyKeyButton = "msgSpecifyKeyButton"
+
 window.onload = function (){
-    //alert(window.digViewerBridge);
     window.digViewerBridge.onLoad();
 };
 
 function setKey(key){
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "http://maps.googleapis.com/maps/api/js?key=";
-    script.src += key;
-    script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
-    document.body.appendChild(script);
+    var primaryMsg = document.getElementById("primary_msg");
+    var secondaryMsg = document.getElementById("secondary_msg");
+    primaryMsg.firstChild.nodeValue = msgLoading;
+    if (key === ""){
+        secondaryMsg.firstChild.nodeValue = msgNoKey;
+        var object = document.getElementById("map_canvas");
+        var parent = object.parentNode;
+        parent.removeChild(object);
+    }else{
+        secondaryMsg.firstChild.nodeValue = msgInvalidKey;
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://maps.googleapis.com/maps/api/js?key=";
+        script.src += key;
+        script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
+        document.body.appendChild(script);
+    }
+    document.control.key.value = msgSpecifyKeyButton;
 }
 
 function initialize() {
@@ -197,4 +213,8 @@ function headingLength() {
         isIncompleteArrow = true;
         return 0;
     }
+}
+
+function specifyKey() {
+    window.digViewerBridge.onSpecifyKey();
 }

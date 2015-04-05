@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings (English)
+  DigViewer
+
+  Created by opiopan on 2015/04/5.
+  Copyright (c) 2015年 opiopan. All rights reserved.
+*/
+
+// マップビューでのメッセージ
+"MVMSG_LOADING" = "Loading...";
+"MVMSG_NOKEY" = "Google API key is not specified. Please specify a key at preferences window.";
+"MVMSG_INVALIDKEY" = "Specified Google API key cannot be used. Please make sure a key you specified is correct.";
+"MVMSG_SPECIFYKEYBUTTON" = "Specify API Key...";

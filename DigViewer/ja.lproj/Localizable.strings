@@ -1,5 +1,5 @@
 /* 
-  Localizable.strings
+  Localizable.strings (Japanese)
   DigViewer
 
   Created by opiopan on 2013/02/11.
@@ -148,3 +148,9 @@
 "GPS Date Time:" = "GPS日時:";
 "Measure Mode:" = "測位方式:";
 "Geodetic Reference System:" = "測地系:";
+
+// マップビューでのメッセージ
+"MVMSG_LOADING" = "ロード中...";
+"MVMSG_NOKEY" = "Google APIキーが指定されていません。環境設定ウィンドウでキーを指定してください。";
+"MVMSG_INVALIDKEY" = "指定されたGoogle APIキーは使用できません。指定したキーに誤りがないことを確認してください。";
+"MVMSG_SPECIFYKEYBUTTON" = "APIキーの設定...";

@@ -22,16 +22,14 @@
        <script type="text/javascript" src="../GPSMapView.js"></script>
    </head>
    <body "initializeApi()">
-       <div id="map_canvas" class="c_wrapper" style="width:400px; height:300px">
-           <div class="c_content" style="text-align:center">
+       <div id="map_canvas" class="c_wrapper" style="width:400px; height:300px; z-index:1">
+           <div id="primary_msg" class="c_content" style="text-align:center">
                Please input Google API key, then pless a [Set Key] button.
            </div>
        </div>
-       <div class="c_wrapper" style="width:400px; height:300px; z-index:-1">
-           <div class="c_content">
+       <div class="c_wrapper" style="width:400px; height:300px; z-index:0">
+           <div id="secondary_msg" class="c_content">
                Google API key is invalid.
-               Please get your own key, or make sure that you specified key is correct.<br/>
-               To specify API key, please reload this page.
            </div>
        </div>
        <div id="input_form">
