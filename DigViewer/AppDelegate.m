@@ -7,18 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "AppPreferences.h"
 
 @implementation AppDelegate
 
-- (IBAction)onGetApiKey:(id)sender
+- (IBAction)showPreferences:(id)sender
 {
-    NSURL* url = [NSURL URLWithString:@"https://console.developers.google.com/"];
-    [[NSWorkspace sharedWorkspace] openURL:url];
+    [NSPreferences setDefaultPreferencesClass: [AppPreferences class]];
+    [[NSPreferences sharedPreferences] showPreferencesPanel];
 }
 
-- (void)showPreferences
+- (IBAction)showMapPreferences:(id)sender
 {
-    [self.preferencesWindow makeKeyAndOrderFront:self];
+    [NSPreferences setDefaultPreferencesClass: [AppPreferences class]];
+    [[NSPreferences sharedPreferences] showPreferencesPanel];
 }
 
 @end

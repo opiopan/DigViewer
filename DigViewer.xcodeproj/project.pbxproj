@@ -64,6 +64,14 @@
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
+		7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */; };
+		7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5F81AD945460076630A /* MapPreferences.m */; };
+		7BB4E6001AD948250076630A /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5FF1AD948250076630A /* AppPreferences.m */; };
+		7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6011AD95A1C0076630A /* MapPreferences.png */; };
+		7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6051AD96D550076630A /* GeneralPreferences.xib */; };
+		7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6081AD96D610076630A /* MapPreferences.xib */; };
+		7BB4E60D1AD96EB30076630A /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */; };
+		7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E60B1AD96EB30076630A /* MapPreferences.strings */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
@@ -180,13 +188,26 @@
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7B9B24621AD101D1008F6E64 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
 		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
 		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
 		7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesDefaultsController.m; sourceTree = "<group>"; };
+		7BB4E5F01AD9252C0076630A /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
+		7BB4E5F11AD9252C0076630A /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
+		7BB4E5F41AD9431A0076630A /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
+		7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferences.m; sourceTree = "<group>"; };
+		7BB4E5F71AD945460076630A /* MapPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPreferences.h; sourceTree = "<group>"; };
+		7BB4E5F81AD945460076630A /* MapPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPreferences.m; sourceTree = "<group>"; };
+		7BB4E5FE1AD948250076630A /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
+		7BB4E5FF1AD948250076630A /* AppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPreferences.m; sourceTree = "<group>"; };
+		7BB4E6011AD95A1C0076630A /* MapPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MapPreferences.png; path = resources/MapPreferences.png; sourceTree = "<group>"; };
+		7BB4E6041AD96D550076630A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GeneralPreferences.xib; sourceTree = "<group>"; };
+		7BB4E6071AD96D610076630A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MapPreferences.xib; sourceTree = "<group>"; };
+		7BB4E60A1AD96EB30076630A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GeneralPreferences.strings; sourceTree = "<group>"; };
+		7BB4E60C1AD96EB30076630A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MapPreferences.strings; sourceTree = "<group>"; };
+		7BB4E60F1AD979C00076630A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
@@ -266,6 +287,7 @@
 				7BF678B31699106C00FE39B4 /* Utilities */,
 				7B3920531696F50B00E139D0 /* Resources */,
 				7B39203A1696CA1800E139D0 /* Supporting Files */,
+				7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */,
 				7BF27647191BB2370022E89D /* For Testing */,
 				7B5340551703F294008AEDB6 /* Disk Image Resources */,
 			);
@@ -288,6 +310,10 @@
 			children = (
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
 				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
+				7BB4E6051AD96D550076630A /* GeneralPreferences.xib */,
+				7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */,
+				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
+				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
 				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B4E8E2516C82A02001C5D09 /* Document.strings */,
 				7B0DBEB416A01545000365F4 /* MainView.xib */,
@@ -300,6 +326,7 @@
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
+				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
 				7BF8E2A416AA7C9F0007E788 /* up.png */,
 				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
 				7B01210616B4C6A9004AA730 /* down.idraw */,
@@ -345,8 +372,52 @@
 		7B39205A1696FF7500E139D0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7B9B24621AD101D1008F6E64 /* AppDelegate.h */,
+				7BB4E5F21AD936B70076630A /* Each Application */,
+				7BB4E5F31AD936F90076630A /* Each Document */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7B5340551703F294008AEDB6 /* Disk Image Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */,
+				7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */,
+			);
+			name = "Disk Image Resources";
+			sourceTree = "<group>";
+		};
+		7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				7BB4E5F01AD9252C0076630A /* NSPreferences.h */,
+				7BB4E5F11AD9252C0076630A /* NSPreferencesModule.h */,
+			);
+			name = UndocumentedFeatures;
+			sourceTree = "<group>";
+		};
+		7BB4E5F21AD936B70076630A /* Each Application */ = {
+			isa = PBXGroup;
+			children = (
+				7BB4E60F1AD979C00076630A /* AppDelegate.h */,
 				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
+				7BB4E5FE1AD948250076630A /* AppPreferences.h */,
+				7BB4E5FF1AD948250076630A /* AppPreferences.m */,
+				7BB4E5F41AD9431A0076630A /* GeneralPreferences.h */,
+				7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */,
+				7BB4E5F71AD945460076630A /* MapPreferences.h */,
+				7BB4E5F81AD945460076630A /* MapPreferences.m */,
+				7B1CC21418D86DC5007527E6 /* InfoPlistController.h */,
+				7B1CC21518D86DC5007527E6 /* InfoPlistController.m */,
+				7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */,
+				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
+			);
+			name = "Each Application";
+			sourceTree = "<group>";
+		};
+		7BB4E5F31AD936F90076630A /* Each Document */ = {
+			isa = PBXGroup;
+			children = (
 				7B3920451696CA1800E139D0 /* Document.h */,
 				7B3920461696CA1800E139D0 /* Document.m */,
 				7B30AC2418A6000F00A70555 /* DocumentWindowController.h */,
@@ -365,21 +436,8 @@
 				7B1AC4A718B05384004136CD /* InspectorViewController.m */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
-				7B1CC21418D86DC5007527E6 /* InfoPlistController.h */,
-				7B1CC21518D86DC5007527E6 /* InfoPlistController.m */,
-				7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */,
-				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
 			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		7B5340551703F294008AEDB6 /* Disk Image Resources */ = {
-			isa = PBXGroup;
-			children = (
-				7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */,
-				7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */,
-			);
-			name = "Disk Image Resources";
+			name = "Each Document";
 			sourceTree = "<group>";
 		};
 		7BF27647191BB2370022E89D /* For Testing */ = {
@@ -423,8 +481,8 @@
 				7B39202B1696CA1800E139D0 /* Sources */,
 				7B39202C1696CA1800E139D0 /* Frameworks */,
 				7B39202D1696CA1800E139D0 /* Resources */,
-				7B4E8E3716C82E0B001C5D09 /* ShellScript */,
-				7BB7E29218D350FB0055DAAC /* ShellScript */,
+				7B4E8E3716C82E0B001C5D09 /* Run Script For Creating Localized NIB */,
+				7BB7E29218D350FB0055DAAC /* Run Script For Deciding Version */,
 				7B9F9E8A18E7DD450042337F /* CopyFiles */,
 			);
 			buildRules = (
@@ -472,17 +530,22 @@
 			files = (
 				7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
+				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
+				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
+				7BB4E60D1AD96EB30076630A /* GeneralPreferences.strings in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
+				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
+				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,
 				7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */,
 			);
@@ -491,7 +554,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7B4E8E3716C82E0B001C5D09 /* ShellScript */ = {
+		7B4E8E3716C82E0B001C5D09 /* Run Script For Creating Localized NIB */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,17 +570,24 @@
 				"$(SRCROOT)/DigViewer/en.lproj/FolderOutlineView.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/LoadingSheet.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/LoadingSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/GeneralPreferences.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/GeneralPreferences.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/MapPreferences.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/MapPreferences.xib",
 			);
+			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/MainMenu.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/Document.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/ThumbnailView.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/FolderOutlineView.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/LoadingSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/GeneralPreferences.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/MapPreferences.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet;do\nibtool --import-strings-file DigViewer/ja.lproj/${f}.strings --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -534,13 +604,14 @@
 			shellPath = /bin/sh;
 			shellScript = "PRODUCT=DigViewer\nSRC=\"${SRCROOT}/${PRODUCT}/DiskImageResources/${PRODUCT}-in.sparseimage\"\nIN=\"${DERIVED_FILE_DIR}/${PRODUCT}-in.sparseimage\"\nMP=\"${DERIVED_FILE_DIR}/mp\"\nOUT=\"${TARGET_BUILD_DIR}/${PRODUCT}.dmg\"\nrm -rf \"${DERIVED_FILE_DIR}\"\nmkdir \"${DERIVED_FILE_DIR}\"\nmkdir \"$MP\"\ncp \"$SRC\" \"$IN\"\nhdiutil attach \"$IN\" -mountpoint \"$MP\"\nrm -rf \"$MP\"/${PRODUCT}.app\ncp -r \"${TARGET_BUILD_DIR}/${PRODUCT}.app\" \"$MP\"\nhdiutil detach \"$MP\"\nrm -f \"$OUT\"\nhdiutil convert -format UDZO -o \"$OUT\" \"$IN\"\nrm -r \"$MP\"\nrm -f \"$IN\"";
 		};
-		7BB7E29218D350FB0055DAAC /* ShellScript */ = {
+		7BB7E29218D350FB0055DAAC /* Run Script For Deciding Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script For Deciding Version";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +632,7 @@
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
+				7BB4E6001AD948250076630A /* AppPreferences.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
@@ -576,10 +648,12 @@
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
 				7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */,
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
+				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
+				7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
 				7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
@@ -701,6 +775,38 @@
 				7B697E52169DB8A000A9E247 /* en */,
 			);
 			name = LoadingSheet.xib;
+			sourceTree = "<group>";
+		};
+		7BB4E6051AD96D550076630A /* GeneralPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BB4E6041AD96D550076630A /* en */,
+			);
+			name = GeneralPreferences.xib;
+			sourceTree = "<group>";
+		};
+		7BB4E6081AD96D610076630A /* MapPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BB4E6071AD96D610076630A /* en */,
+			);
+			name = MapPreferences.xib;
+			sourceTree = "<group>";
+		};
+		7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BB4E60A1AD96EB30076630A /* ja */,
+			);
+			name = GeneralPreferences.strings;
+			sourceTree = "<group>";
+		};
+		7BB4E60B1AD96EB30076630A /* MapPreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BB4E60C1AD96EB30076630A /* ja */,
+			);
+			name = MapPreferences.strings;
 			sourceTree = "<group>";
 		};
 		7BC667A518B05213000CB995 /* InspectorView.xib */ = {

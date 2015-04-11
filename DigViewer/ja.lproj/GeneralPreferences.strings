@@ -1,0 +1,24 @@
+
+/* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "1td-6R-xvI"; */
+"1td-6R-xvI.title" = "MB";
+
+/* Class = "NSButtonCell"; title = "images limited by file size"; ObjectID = "8Pz-gr-tj8"; */
+"8Pz-gr-tj8.title" = "一定サイズ以上を除外";
+
+/* Class = "NSButtonCell"; title = "images kind of specified types"; ObjectID = "SRG-ZT-UJd"; */
+"SRG-ZT-UJd.title" = "指定した形式のファイルを除外";
+
+/* Class = "NSButtonCell"; title = "all images"; ObjectID = "g6w-G3-8Gt"; */
+"g6w-G3-8Gt.title" = "すべての画像ファイル";
+
+/* Class = "NSButtonCell"; title = "Customize..."; ObjectID = "gpQ-wa-IoT"; */
+"gpQ-wa-IoT.title" = "カスタマイズ...";
+
+/* Class = "NSTextFieldCell"; title = "Show:"; ObjectID = "m5R-VL-lNo"; */
+"m5R-VL-lNo.title" = "表示する画像:";
+
+/* Class = "NSButtonCell"; title = "images except raw format and complex format"; ObjectID = "nHD-nN-qMF"; */
+"nHD-nN-qMF.title" = "RAW形式と複雑なファイルを除外";
+
+/* Class = "NSTextFieldCell"; title = "Background Color:"; ObjectID = "zWe-d0-NPx"; */
+"zWe-d0-NPx.title" = "背景色:";

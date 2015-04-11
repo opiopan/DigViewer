@@ -6,6 +6,10 @@
   Copyright (c) 2013年 opiopan. All rights reserved.
 */
 
+// Preferences Panelのツールバータイトル
+"PREF_TITLE_GENERAL" = "一般";
+"PREF_TITLE_MAP" = "地図";
+
 // Loadingシート
 "Now loading a pinned file in the folder:" = "ピン留めファイルをロード中:";
 "Now recognizing a pinned file in the folder:" = "ピン留めファイルを解析中:";
@@ -151,6 +155,6 @@
 
 // マップビューでのメッセージ
 "MVMSG_LOADING" = "ロード中...";
-"MVMSG_NOKEY" = "Google APIキーが指定されていません。環境設定ウィンドウでキーを指定してください。";
+"MVMSG_NOKEY" = "Google APIキーが指定されていません。環境設定パネルでキーを指定してください。";
 "MVMSG_INVALIDKEY" = "指定されたGoogle APIキーは使用できません。指定したキーに誤りがないことを確認してください。";
 "MVMSG_SPECIFYKEYBUTTON" = "APIキーの設定...";

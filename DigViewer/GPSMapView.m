@@ -156,7 +156,7 @@
 - (void)onSpecifyKey
 {
     AppDelegate* appDelegate = (AppDelegate*)((NSApplication*)NSApp).delegate;
-    [appDelegate showPreferences];
+    [appDelegate showMapPreferences: self];
 }
 
 - (void)setFrame:(NSRect)frameRect

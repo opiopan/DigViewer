@@ -10,10 +10,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (weak) IBOutlet NSWindow *preferencesWindow;
+- (IBAction)showPreferences:(id)sender;
 
-- (IBAction)onGetApiKey:(id)sender;
-
-- (void)showPreferences;
+- (IBAction)showMapPreferences:(id)sender;
 
 @end

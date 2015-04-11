@@ -133,57 +133,11 @@
 /* Class = "NSMenuItem"; title = "Up Folder"; ObjectID = "559"; */
 "559.title" = "上のフォルダーに移動";
 
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "600"; */
-"600.title" = "環境設定";
-
-/* Class = "NSTextFieldCell"; title = "Show:"; ObjectID = "604"; */
-"604.title" = "表示する画像:";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "608"; */
-"608.title" = "Radio";
-
-/* Class = "NSButtonCell"; title = "all images"; ObjectID = "609"; */
-"609.title" = "すべての画像ファイル";
-
-/* Class = "NSButtonCell"; title = "images except raw format and complex format\
- "; ObjectID = "610"; */
-"610.title" = "RAW形式と複雑なファイルを除外";
-
-/* Class = "NSButtonCell"; title = "images limited by file size"; ObjectID = "6\
- 14"; */
-"614.title" = "一定サイズ以上を除外";
-
-/* Class = "NSButtonCell"; title = "images kind of specified types"; ObjectID =\
- "615"; */
-"615.title" = "指定した形式のファイルを除外";
-
-/* Class = "NSButtonCell"; title = "Customize..."; ObjectID = "649"; */
-"649.title" = "カスタマイズ...";
-
-/* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "729"; */
-"729.title" = "MB";
-
 /* Class = "NSMenuItem"; title = "Reload"; ObjectID = "wAU-Fd-WDi"; */
 "wAU-Fd-WDi.title" = "再読み込み";
 
 /* Class = "NSMenuItem"; title = "Open Preview"; ObjectID = "JbI-vo-pfR"; */
 "JbI-vo-pfR.title" = "プレビューを起動";
 
-/* Class = "NSTextFieldCell"; title = "Background Color:"; ObjectID = "Ag6-8R-B\
- gM"; */
-"Ag6-8R-BgM.title" = "背景色:";
-
-/* Class = "NSTextFieldCell"; title = "Google Maps API Key:"; ObjectID = "dve-h\
- G-0gB"; */
-"dve-hG-0gB.title" = "Google Maps API キー:";
-
-/* Class = "NSTextFieldCell"; title = "Arrow Color:"; ObjectID = "4Gy-El-nYn"; */
-"4Gy-El-nYn.title" = "視野方向矢印の表示色:";
-
-/* Class = "NSTextFieldCell"; title = "Field of View Color:"; ObjectID = "pVb-Ov-WZk"; */
-"pVb-Ov-WZk.title" = "視野角の表示色:";
-
-/* Class = "NSButtonCell"; title = "Get API Key..."; ObjectID = "qTR-jg-kyO"; */
- "qTR-jg-kyO.title" = "APIキーを取得...";
 
 

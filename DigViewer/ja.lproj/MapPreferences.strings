@@ -1,0 +1,18 @@
+
+/* Class = "NSTextFieldCell"; title = "DigViewer uses \"Google Maps JavaScript API v3\" to display a map and indicate location taking a photo. And you also need a Google API key to use this API.\nPlease get a API key and specify it as following steps:\n\n    1: Go to \"Google Developer Console\" by pressing \"Get API Key...\" button\n    2: Create a project and enter that project\n    3: Enable \"Google Maps JavaScript API\"\n    4: Create a API Key for \"Browser\" at \"Authentication\" page"; ObjectID = "r9B-mS-Xvj"; */
+"r9B-mS-Xvj.title" = "DigViewerは地図と撮影位置を表示するために「Google Maps JavaScript API v3」を使用しています。このAPIを使用するためには、利用者毎にGoogle APIキーが必要です。\n以下の手順に従ってAPIキーを取得し指定してください。\n\n    1: 「APIキーを取得...」ボタンを 押しGoogle Developers Consoleにアクセスします\n    2:  新規にプロジェクトを作成し、作成したプロジェクトを選択します\n    3: 「Google Maps JavaScript API」を有効にします\n    4: 「認証」ページでブラウザー用のAPIキーを作成します";
+
+/* Class = "NSButtonCell"; title = "Get API Key..."; ObjectID = "6p3-C0-V9w"; */
+"6p3-C0-V9w.title" = "APIキーを取得...";
+
+/* Class = "NSTextFieldCell"; title = "Arrow"; ObjectID = "JB4-SI-g5c"; */
+"JB4-SI-g5c.title" = "撮影方向を示す矢印";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "JX8-fD-b6Y"; */
+"JX8-fD-b6Y.title" = "表示色:";
+
+/* Class = "NSTextFieldCell"; title = "Field of View"; ObjectID = "dnI-tz-3DZ"; */
+"dnI-tz-3DZ.title" = "視野";
+
+/* Class = "NSTextFieldCell"; title = "Google API Key:"; ObjectID = "wjz-QV-3cb"; */
+"wjz-QV-3cb.title" = "Google API キー:";

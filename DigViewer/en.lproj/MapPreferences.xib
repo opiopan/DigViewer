@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MapPreferences">
+            <connections>
+                <outlet property="_preferencesView" destination="Afd-d8-fVl" id="oFK-1g-zb2"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="638" height="368"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="5" width="638" height="368"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <subviews>
+                    <box autoresizesSubviews="NO" borderType="none" id="Afd-d8-fVl">
+                        <rect key="frame" x="-3" y="-4" width="644" height="372"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                        <view key="contentView">
+                            <rect key="frame" x="0.0" y="0.0" width="644" height="357"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="T3A-G5-Mh6">
+                                    <rect key="frame" x="60" y="73" width="161" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Color:" id="JX8-fD-b6Y">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell id="f0q-Qe-2FB">
+                                    <rect key="frame" x="237" y="67" width="75" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapFovColor" id="tXq-7N-IMh">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </colorWell>
+                                <colorWell id="9Ba-9M-Idp">
+                                    <rect key="frame" x="237" y="36" width="75" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapArrowColor" id="N5I-jg-2sG">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </colorWell>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Efq-0R-UfA">
+                                    <rect key="frame" x="59" y="161" width="162" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Google API Key:" id="wjz-QV-3cb">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button verticalHuggingPriority="750" id="Fgq-Lf-AFs">
+                                    <rect key="frame" x="442" y="121" width="148" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="push" title="Get API Key..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6p3-C0-V9w">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <connections>
+                                            <action selector="onGetApiKey:" target="-2" id="W8v-8y-4cF"/>
+                                        </connections>
+                                    </buttonCell>
+                                </button>
+                                <textField verticalHuggingPriority="750" id="Ryk-Hy-vdY">
+                                    <rect key="frame" x="236" y="157" width="348" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="0fJ-h2-GNM">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.googleMapsApiKey" id="CSo-ee-2x1"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ez7-TE-6iB">
+                                    <rect key="frame" x="318" y="72" width="161" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Field of View" id="dnI-tz-3DZ">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="n2a-4n-fZB">
+                                    <rect key="frame" x="318" y="41" width="161" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Arrow" id="JB4-SI-g5c">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" id="Pax-yr-zmS">
+                                    <rect key="frame" x="60" y="213" width="526" height="136"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="r9B-mS-Xvj">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">DigViewer uses "Google Maps JavaScript API v3" to display a map and indicate location taking a photo. And you also need a Google API key to use this API.
+Please get a API key and specify it as following steps:
+
+    1: Go to "Google Developers Console" by pressing "Get API Key..." button
+    2: Create a project and enter that project
+    3: Enable "Google Maps JavaScript API"
+    4: Create a API Key for "Browser" at "Authentication" page</string>
+                                        <color key="textColor" white="0.45835291353383456" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="360" y="313"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="MyX-ZP-vVp"/>
+    </objects>
+</document>
