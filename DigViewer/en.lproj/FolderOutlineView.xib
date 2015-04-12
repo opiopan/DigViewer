@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FolderOutlineViewController">
@@ -20,12 +20,12 @@
                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100238">
                     <rect key="frame" x="0.0" y="0.0" width="176" height="242"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" id="DyG-C3-rM7">
+                    <clipView key="contentView" misplaced="YES" id="DyG-C3-rM7">
                         <rect key="frame" x="0.0" y="17" width="176" height="225"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="16" headerView="100242" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="100243" id="100239">
-                                <rect key="frame" x="0.0" y="0.0" width="176" height="225"/>
+                                <rect key="frame" x="0.0" y="0.0" width="176" height="18"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +33,7 @@
                                 <tableColumns>
                                     <tableColumn editable="NO" width="173" minWidth="16" maxWidth="1000" id="100243">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Folder Tree">
-                                            <font key="font" size="11" name="LucidaGrande"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableHeaderCell>
@@ -60,7 +60,7 @@
                         <rect key="frame" x="1" y="191" width="253" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="100241">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100241">
                         <rect key="frame" x="146" y="17" width="16" height="78"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -72,12 +72,12 @@
                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100237">
                     <rect key="frame" x="0.0" y="243" width="176" height="237"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" id="UhI-L4-jpq">
+                    <clipView key="contentView" misplaced="YES" id="UhI-L4-jpq">
                         <rect key="frame" x="0.0" y="17" width="176" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="16" headerView="100247" id="100245">
-                                <rect key="frame" x="0.0" y="0.0" width="176" height="220"/>
+                                <rect key="frame" x="0.0" y="0.0" width="176" height="18"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,6 +104,9 @@
                                         </connections>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="100087" id="028-K6-CiP"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -134,13 +137,13 @@
                 <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageTreeController.sortDescriptors" previousBinding="wNq-rJ-Jb1" id="98D-lX-sgE"/>
             </connections>
         </treeController>
-        <arrayController objectClassName="PathNode" id="100087">
+        <arrayController objectClassName="PathNode" id="100087" customClass="DraggingSourceArrayController">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageArrayController.arrangedObjects" id="SmE-l9-SZf"/>
                 <binding destination="-2" name="selectionIndexes" keyPath="representedObject.controller.imageArrayController.selectionIndexes" id="KpO-nw-ElH"/>
                 <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageArrayController.sortDescriptors" previousBinding="KpO-nw-ElH" id="RVy-dP-QWs"/>
             </connections>
         </arrayController>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
     </objects>
 </document>

@@ -29,6 +29,11 @@
     [imageTableView setTarget:self];
     [imageTableView setDoubleAction:@selector(onDoubleClickImageTableView:)];
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    
+    // Dragging sourceの登録
+    NSArray* dragSourceCapability = [NSArray arrayWithObject:NSFilenamesPboardType];
+    [imageTableView registerForDraggedTypes:dragSourceCapability];
+    [imageTableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 }
 
 - (void)prepareForClose
