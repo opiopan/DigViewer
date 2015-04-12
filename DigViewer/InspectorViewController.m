@@ -64,14 +64,30 @@
     }
     [self.gpsKeyColumn setWidth:width + 10.0];
     
-    // Google Map 上に表示する矢印とfovの色を登録する & 環境設定変更を監視するobserverを登録
+    // Google Map表示に関わる設定変更を監視するobserverを登録
     [self reflectMapFovColor];
     [self reflectMapArrowColor];
+    [self reflectMapFovGrade];
+    [self reflectMapType];
+    [self reflectMapEnableStreetView];
+    [self reflectMapMoveToHomePos];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapFovColor"
                                                                  options:nil context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapArrowColor"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapFovGrade"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapType"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapEnableStreetView"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.mapMoveToHomePos"
                                                                  options:nil context:nil];
     
     // モデル変更を検知するobserverを登録
@@ -90,6 +106,10 @@
 {
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovColor"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapArrowColor"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovGrade"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapType"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapEnableStreetView"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapMoveToHomePos"];
     [self.imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
@@ -104,6 +124,18 @@
     else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
              [keyPath isEqualToString:@"values.mapArrowColor"]){
         [self reflectMapArrowColor];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.mapFovGrade"]){
+        [self reflectMapFovGrade];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.mapType"]){
+        [self reflectMapType];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.mapEnableStreetView"]){
+        [self reflectMapEnableStreetView];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.mapMoveToHomePos"]){
+        [self reflectMapMoveToHomePos];
     }
 }
 
@@ -138,6 +170,37 @@
         self.mapView.arrowColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
     }
 }
+
+- (void)reflectMapFovGrade
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSNumber* grade = [[controller values] valueForKey:@"mapFovGrade"];
+    if (grade){
+        self.mapView.fovGrade = grade;
+    }
+}
+
+- (void)reflectMapType
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSNumber* value = [[controller values] valueForKey:@"mapType"];
+    self.mapView.mapType = value;
+}
+
+- (void)reflectMapEnableStreetView
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSNumber* value = [[controller values] valueForKey:@"mapEnableStreetView"];
+    self.mapView.enableStreetView = value.boolValue;
+}
+
+- (void)reflectMapMoveToHomePos
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSNumber* value = [[controller values] valueForKey:@"mapMoveToHomePos"];
+    self.mapView.enableHomePosition = value.boolValue;
+}
+
 
 - (void)reflectGoogleMapsApiKey
 {

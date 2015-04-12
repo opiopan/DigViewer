@@ -9,6 +9,8 @@
 #import "AppPreferences.h"
 #import "GeneralPreferences.h"
 #import "MapPreferences.h"
+#import "LensPreferences.h"
+#import "AdvancedPreferences.h"
 
 @implementation AppPreferences
 
@@ -19,6 +21,8 @@
     if (self){
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_GENERAL", nil) owner: [GeneralPreferences sharedInstance]];
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_MAP", nil) owner: [MapPreferences sharedInstance]];
+        [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_LENS", nil) owner: [LensPreferences sharedInstance]];
+        [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_ADVANCED", nil) owner: [AdvancedPreferences sharedInstance]];
     }
     return self;
 }

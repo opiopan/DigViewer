@@ -1,0 +1,15 @@
+
+/* Class = "NSTextFieldCell"; title = "By registering lens detail information to lens library, DigViewer is able to display exact feald of view angle, or to override lens information in inspector pane."; ObjectID = "btu-gX-rs6"; */
+"btu-gX-rs6.title" = "レンズの詳細情報をレンズライブラリに登録すると、地図上の視野角を正確に表示したり、EXIFのレンズ情報をオーバライドできます。";
+
+/* Class = "NSSegmentedCell"; OrQ-U3-e9d.ibShadowedToolTips[0] = "Add Lens Informaion"; ObjectID = "OrQ-U3-e9d"; */
+"OrQ-U3-e9d.ibShadowedToolTips[0]" = "レンズ情報を追加する";
+
+/* Class = "NSSegmentedCell"; OrQ-U3-e9d.ibShadowedToolTips[1] = "Remove Lens Information"; ObjectID = "OrQ-U3-e9d"; */
+"OrQ-U3-e9d.ibShadowedToolTips[1]" = "レンズ情報を削除する";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "i3p-ym-QGB"; */
+"i3p-ym-QGB.headerCell.title" = "名前";
+
+/* Class = "NSTableColumn"; headerCell.title = "Remarks"; ObjectID = "4Eh-b9-zrb"; */
+"4Eh-b9-zrb.headerCell.title" = "備考";

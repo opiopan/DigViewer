@@ -17,6 +17,8 @@
     GPSInfo*    _gpsInfo;
     NSColor*    _fovColor;
     NSColor*    _arrowColor;
+    NSNumber*   _fovGrade;
+    bool        _enableStreetView;
 }
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
@@ -89,6 +91,10 @@
     [[self windowScriptObject] evaluateWebScript:script];
     script = [NSString stringWithFormat:@"msgSpecifyKeyButton = \"%@\"", NSLocalizedString(@"MVMSG_SPECIFYKEYBUTTON", nil)];
     [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"enableStreetView = %@", _enableStreetView ? @"true" : @"false"];
+    [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"mapType = %@", _mapType];
+    [[self windowScriptObject] evaluateWebScript:script];
     script = [NSString stringWithFormat:@"setKey(\"%@\")", [NSString escapedStringForJavascript:_apiKey]];
     [[self windowScriptObject] evaluateWebScript:script];
 }
@@ -112,14 +118,15 @@
             FOVscale = 1.0 / cos(FOVangle);
             FOVangle = FOVangle * (180 / M_PI);
         }
-        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f, %@, %@);",
+        script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f, %@, %@, %@);",
                   _gpsInfo.latitude, _gpsInfo.longitude,
                   _gpsInfo.imageDirection ? _gpsInfo.imageDirection : @"null",
                   FOVangle, FOVscale,
                   _fovColor ? [_fovColor javascriptColor] : @"null",
-                  _arrowColor ? [_arrowColor javascriptColor] : @"null"];
+                  _arrowColor ? [_arrowColor javascriptColor] : @"null",
+                  _fovGrade];
     }else{
-        script = @"resetMarker();";
+        script = _enableHomePosition ? @"resetMarker(1);" : @"resetMarker(0);";
     }
     [window evaluateWebScript:script];
 }
@@ -144,6 +151,30 @@
 {
     _arrowColor = [arrowColor copy];
     self.gpsInfo = _gpsInfo;
+}
+
+- (NSNumber*) fovGrade
+{
+    return _fovGrade;
+}
+
+- (void) setFovGrade:(NSNumber *)fovGrade
+{
+    _fovGrade = fovGrade;
+    self.gpsInfo = _gpsInfo;
+}
+
+- (bool) enableStreetView
+{
+    return _enableStreetView;
+}
+
+- (void) setEnableStreetView:(bool)enableStreetView
+{
+    _enableStreetView = enableStreetView;
+    NSString* script = _enableStreetView ? @"setStreetViewControll(true)" : @"setStreetViewControll(false)";
+    WebScriptObject* window = [self windowScriptObject];
+    [window evaluateWebScript:script];
 }
 
 - (void) reflectGpsInfo

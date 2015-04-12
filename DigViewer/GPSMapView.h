@@ -16,5 +16,9 @@
 @property (strong) GPSInfo* gpsInfo;
 @property (copy) NSColor* fovColor;
 @property (copy) NSColor* arrowColor;
+@property (copy) NSNumber* fovGrade;
+@property (copy) NSNumber* mapType;
+@property bool enableStreetView;
+@property bool enableHomePosition;
 
 @end

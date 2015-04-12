@@ -14,12 +14,17 @@ var imageHeading = null;
 var FOVangle = -1;
 var FOVscale = 0;
 var FOVgrade = 30;
+var FOVgradeMax = FOVgrade;
+var LastFOVgrade = FOVgrade;
 var FOVmarker = [];
 var defLatLng = null;
 var marker = null;
 var fovColor = null;
 var arrowColor = null;
 var isIncompleteArrow = false;
+
+var mapType = 0;
+var enableStreetView = true;
 
 var msgLoading = "msgLoading";
 var msgNoKey = "msgNoKey";
@@ -58,16 +63,28 @@ function initialize() {
     for (i = 0; i < FOVgrade; i++){
         FOVmarker.push(null);
     }
+
+    var convertedMapType;
+    switch (mapType){
+        case 0:
+            convertedMapType = google.maps.MapTypeId.ROADMAP;
+            break;
+        case 1:
+            convertedMapType = google.maps.MapTypeId.TERRAIN;
+            break;
+        default:
+            convertedMapType = google.maps.MapTypeId.HYBRID;
+    }
     
     var mapOptions = {
         center: defLatLng,
         zoom: 1,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeId: convertedMapType,
         panControl: false,
         zoomControl: true,
         mapTypeControl: true,
         scaleControl: true,
-        streetViewControl: true,
+        streetViewControl: enableStreetView,
         overviewMapControl: true
     };
     if (imageLocation){
@@ -80,7 +97,7 @@ function initialize() {
     window.digViewerBridge.reflectGpsInfo();
 }
 
-function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc) {
+function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc, fovg) {
     if (map){
         if (!imageLocation){
             map.setZoom(zoomLevel);
@@ -107,6 +124,7 @@ function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc) {
         }else{
             arrowColor = "#000000";
         }
+        FOVgrade = fovg;
         setHeading();
     }else{
         imageLocation = new google.maps.LatLng(latitude, longitude);
@@ -114,12 +132,14 @@ function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc) {
     }
 }
 
-function resetMarker() {
+function resetMarker(moveToHome) {
     if (imageLocation){
         if (map){
             zoomLevel = map.getZoom();
         }
-        imageLocation = null;
+        if (moveToHome){
+            imageLocation = null;
+        }
     }
     if (marker){
         marker.setMap(null);
@@ -129,7 +149,7 @@ function resetMarker() {
     FOVangle = -1;
     FOVscale = 0;
     setHeading();
-    if (map){
+    if (map && moveToHome){
         map.setZoom(1);
         map.setCenter(defLatLng);
     }
@@ -142,7 +162,7 @@ function setHeading() {
         imageVector = null;
     }
     var i;
-    for (i = 0; i < FOVgrade; i++){
+    for (i = 0; i < LastFOVgrade; i++){
         if (FOVmarker[i]){
             FOVmarker[i].setMap(null);
             FOVmarker[i] = null;
@@ -152,6 +172,14 @@ function setHeading() {
         var vecLength = headingLength();
         var to = google.maps.geometry.spherical.computeOffset(imageLocation, vecLength, imageHeading);
         if (FOVangle > 0){
+            if (FOVgrade > FOVgradeMax){
+                var i;
+                for (i = 0; i < FOVgradeMax - FOVgrade; i++){
+                    FOVmarker.push(null);
+                }
+                FOVgradeMax = FOVgrade;
+            }
+            
             var color = fovColor;
             var opacity = 0.6 / FOVgrade;
             var divLength = vecLength * FOVscale / FOVgrade * 2;
@@ -172,6 +200,7 @@ function setHeading() {
                 FOVmarker[i] = new google.maps.Polygon(fovOpt);
                 FOVmarker[i].setMap(map);
             }
+            LastFOVgrade = FOVgrade;
         }
         var color = arrowColor;
         var opacity = 0.7;
@@ -217,4 +246,14 @@ function headingLength() {
 
 function specifyKey() {
     window.digViewerBridge.onSpecifyKey();
+}
+
+function setStreetViewControll(state) {
+    enableStreetView = state;
+    if (map){
+        var mapOptions = {
+            streetViewControl: enableStreetView
+        };
+        map.setOptions(mapOptions);
+    }
 }

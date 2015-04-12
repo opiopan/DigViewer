@@ -6,13 +6,37 @@
 "6p3-C0-V9w.title" = "APIキーを取得...";
 
 /* Class = "NSTextFieldCell"; title = "Arrow"; ObjectID = "JB4-SI-g5c"; */
-"JB4-SI-g5c.title" = "撮影方向を示す矢印";
+"JB4-SI-g5c.title" = "矢印の色";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "JX8-fD-b6Y"; */
-"JX8-fD-b6Y.title" = "表示色:";
+"JX8-fD-b6Y.title" = "撮影方向の表示:";
 
 /* Class = "NSTextFieldCell"; title = "Field of View"; ObjectID = "dnI-tz-3DZ"; */
-"dnI-tz-3DZ.title" = "視野";
+"dnI-tz-3DZ.title" = "視野の色";
 
 /* Class = "NSTextFieldCell"; title = "Google API Key:"; ObjectID = "wjz-QV-3cb"; */
 "wjz-QV-3cb.title" = "Google API キー:";
+
+/* Class = "NSTextFieldCell"; title = "Others:"; ObjectID = "534-tp-bti"; */
+"534-tp-bti.title" = "その他:";
+
+/* Class = "NSTextFieldCell"; title = "Display at opening:"; ObjectID = "Iav-pi-HYw"; */
+"Iav-pi-HYw.title" = "起動時の表示:";
+
+/* Class = "NSButtonCell"; title = "Move to home position if no GPS data"; ObjectID = "LWe-Nr-0Zp"; */
+"LWe-Nr-0Zp.title" = "GPSデータがない場合はホームポジションに移動";
+
+/* Class = "NSMenuItem"; title = "Terrain"; ObjectID = "PcZ-kM-SW8"; */
+"PcZ-kM-SW8.title" = "地形図";
+
+/* Class = "NSTextFieldCell"; title = "Gradation level"; ObjectID = "UTo-6i-984"; */
+"UTo-6i-984.title" = "グラデーション詳細度";
+
+/* Class = "NSMenuItem"; title = "Road map"; ObjectID = "V9i-Vh-5cd"; */
+"V9i-Vh-5cd.title" = "道路地図";
+
+/* Class = "NSButtonCell"; title = "Enable Google Street View"; ObjectID = "qlO-Ag-XOq"; */
+"qlO-Ag-XOq.title" = "Googleストリートビューを有効にする";
+
+/* Class = "NSMenuItem"; title = "Satellite photo"; ObjectID = "rsL-9Y-dbM"; */
+"rsL-9Y-dbM.title" = "衛星写真";

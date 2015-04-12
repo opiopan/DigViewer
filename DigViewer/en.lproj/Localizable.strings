@@ -9,6 +9,8 @@
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "General";
 "PREF_TITLE_MAP" = "Map";
+"PREF_TITLE_LENS" = "Lens";
+"PREF_TITLE_ADVANCED" = "Advanced";
 
 // マップビューでのメッセージ
 "MVMSG_LOADING" = "Loading...";

@@ -15,7 +15,14 @@
     self = [super init];
     if (self){
         NSData* redData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
-        NSDictionary* defaults = @{@"mapFovColor":redData , @"mapArrowColor":redData};
+        NSDictionary* defaults = @{@"mapFovColor":          redData ,
+                                   @"mapArrowColor":        redData,
+                                   @"mapFovGrade":          @30,
+                                   @"mapFovGradeMin":       @1,
+                                   @"mapFovGradeMax":       @100,
+                                   @"mapType":              @0,
+                                   @"mapEnableStreetView":  @true,
+                                   @"mapMoveToHomePos":     @true};
         [[[NSUserDefaultsController sharedUserDefaultsController] defaults] registerDefaults:defaults];
     }
     return self;
