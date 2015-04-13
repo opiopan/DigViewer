@@ -11,22 +11,19 @@
 @implementation ImageWithTextCell
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	id node = [self objectValue];
+    id node = [self objectValue];
     NSImage* image = [node valueForKey:@"icon"];
     NSString* name = [node valueForKey:@"name"];
     
-	[controlView lockFocus];
     NSRect target = cellFrame;
-	target.size.width = target.size.height;
-    //[icon setFlipped:YES];
-	[image drawInRect:target fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
-	
-	NSPoint p2 = cellFrame.origin;
-	p2.x += cellFrame.size.height + 4.0;
-	p2.y += 0.0;
-	NSDictionary* attrs = [self.attributedStringValue attributesAtIndex:0 effectiveRange:nil];
-	[name drawAtPoint:p2 withAttributes:attrs];
-	[controlView unlockFocus];
+    target.size.width = target.size.height;
+    [image drawInRect:target fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+    
+    NSPoint p2 = cellFrame.origin;
+    p2.x += cellFrame.size.height + 4.0;
+    p2.y += 0.0;
+    NSDictionary* attrs = [self.attributedStringValue attributesAtIndex:0 effectiveRange:nil];
+    [name drawAtPoint:p2 withAttributes:attrs];
 }
 
 @end
