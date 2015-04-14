@@ -11,6 +11,7 @@
 @interface FolderOutlineViewController : NSViewController
 
 @property (weak) IBOutlet NSTableView *imageTableView;
+@property (weak) IBOutlet NSOutlineView *folderOutlineView;
 @property (weak) IBOutlet NSArrayController *imageArrayController;
 
 @end

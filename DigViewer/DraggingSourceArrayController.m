@@ -15,35 +15,35 @@
 //-----------------------------------------------------------------------------------------
 // NSTableViewのDragging Source実装
 //-----------------------------------------------------------------------------------------
-- (BOOL)tableView:(NSTableView*)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
+- (BOOL)tableView:(NSTableView*)tableView writeRowsWithIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pboard
 {
-    PathNode* current = self.selectedObjects[0];
-    if (current.isImage){
-        NSArray* array = @[current.imagePath];
-        [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
-        [pboard setPropertyList:array forType:NSFilenamesPboardType];
-        return YES;
-    }else{
-        return NO;
-    }
+    return [self writeItemsAtIndexes:indexes toPasteboard:pboard] != 0;
 }
 
 //-----------------------------------------------------------------------------------------
 // IKImageBrowserViewのDragging Source実装
 //-----------------------------------------------------------------------------------------
-- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser
-       writeItemsAtIndexes:(NSIndexSet *)itemIndexes
-              toPasteboard:(NSPasteboard *)pasteboard
+- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser writeItemsAtIndexes:(NSIndexSet *)indexes
+              toPasteboard:(NSPasteboard *)pboard
 {
-    PathNode* current = self.selectedObjects[0];
-    if (current.isImage){
-        NSArray* array = @[current.imagePath];
-        [pasteboard declareTypes:@[NSFilenamesPboardType] owner:self];
-        [pasteboard setPropertyList:array forType:NSFilenamesPboardType];
-        return 1;
-    }else{
-        return 0;
-    }
+    return [self writeItemsAtIndexes:indexes toPasteboard:pboard];
 }
+
+//-----------------------------------------------------------------------------------------
+// NSTableViewのDragging Source実装
+//-----------------------------------------------------------------------------------------
+- (NSUInteger)writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pboard
+{
+    NSMutableArray* plist = [NSMutableArray arrayWithCapacity:indexes.count];
+    for (NSUInteger i = indexes.firstIndex; i != NSNotFound; i = [indexes indexGreaterThanIndex:i]){
+        PathNode* node = self.arrangedObjects[i];
+        [plist addObject:node.originalPath];
+    }
+    [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
+    [pboard setPropertyList:plist forType:NSFilenamesPboardType];
+    
+    return plist.count;
+}
+
 
 @end

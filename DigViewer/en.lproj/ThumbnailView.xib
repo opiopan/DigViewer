@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -79,7 +79,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.60499012470245361" allowsMultipleSelection="NO" allowsEmptySelection="NO" id="100303">
+                            <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.60499012470245361" allowsEmptySelection="NO" id="100303">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <ikCellsStyle key="cellsStyleMask" none="YES" shadowed="YES" titled="YES"/>

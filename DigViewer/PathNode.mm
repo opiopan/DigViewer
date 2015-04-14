@@ -25,6 +25,7 @@
 @synthesize images;
 @synthesize indexInParent;
 @synthesize imagePath;
+@synthesize originalPath;
 @synthesize isRawImage;
 
 //-----------------------------------------------------------------------------------------
@@ -56,7 +57,7 @@
             NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
             NSString* filePath = [pinnedFile absolutePathAtIndex:i];
             if (!root){
-                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil];
+                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil originalPath:filePath];
                 [context addObject:root];
             }
             int j;
@@ -73,7 +74,8 @@
 }
 
 
-- (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip path:(NSString*)path
+- (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip
+               path:(NSString*)path originalPath:(NSString*)op
 {
     self = [self init];
     if (self){
@@ -82,6 +84,7 @@
         indexInParent = ip;
         imagePath = path;
         isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
+        originalPath = op;
     }
     return self;
 }
@@ -97,6 +100,7 @@
     self = [self init];
     if (self){
         name = [path lastPathComponent];
+        originalPath = path;
         parent = p;
         indexInParent = ip;
         
@@ -173,7 +177,8 @@
         if (!images){
             images = [[NSMutableArray alloc] init];
         }
-        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self indexInParent:images.count path:path];
+        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self indexInParent:images.count
+                                                      path:path originalPath:path];
         [images addObject:newNode];
     }else{
         if (!children){
@@ -188,7 +193,7 @@
             }
         }
         if (!child){
-            child = [[PathNode alloc] initWithName:targetName parent:self indexInParent:children.count path:nil];
+            child = [[PathNode alloc] initWithName:targetName parent:self indexInParent:children.count path:nil originalPath:path];
             [children addObject:child];
         }
         [child mergePathComponents:components atIndex:index + 1 withPath:path context:context];

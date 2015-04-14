@@ -17,6 +17,7 @@
 
 @synthesize imageTableView;
 @synthesize imageArrayController;
+@synthesize folderOutlineView;
 
 - (id)init
 {
@@ -32,6 +33,7 @@
     
     // Dragging sourceの登録
     [imageTableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+    [folderOutlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 }
 
 - (void)prepareForClose

@@ -49,6 +49,7 @@
 @property (readonly) NSString*       imageName;
 @property (readonly) NSImage*        image;
 @property (readonly) NSImage*        icon;
+@property (readonly) NSString*       originalPath;
 
 @property (readonly) NSString*       imageUID;
 @property (readonly) NSString*       imageRepresentationType;

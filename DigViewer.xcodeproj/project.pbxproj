@@ -80,6 +80,7 @@
 		7BB4E61F1ADA0C3F0076630A /* AdvancedPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */; };
 		7BB4E6261ADA30F70076630A /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */; };
 		7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6241ADA30F70076630A /* LensPreferences.strings */; };
+		7BBEE9F21ADD4AB60047DF50 /* DraggingSourceTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
@@ -227,6 +228,8 @@
 		7BB4E6201ADA0C3F0076630A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AdvancedPreferences.xib; sourceTree = "<group>"; };
 		7BB4E6231ADA30F70076630A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AdvancedPreferences.strings; sourceTree = "<group>"; };
 		7BB4E6251ADA30F70076630A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LensPreferences.strings; sourceTree = "<group>"; };
+		7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggingSourceTreeController.h; sourceTree = "<group>"; };
+		7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggingSourceTreeController.m; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
@@ -398,6 +401,7 @@
 			children = (
 				7BB4E5F21AD936B70076630A /* Each Application */,
 				7BB4E5F31AD936F90076630A /* Each Document */,
+				7BBEE9EF1ADD49AB0047DF50 /* ModelControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -456,8 +460,6 @@
 				7B0DBEB116A014B6000365F4 /* MainViewController.m */,
 				7B0DBEC816A0F664000365F4 /* FolderOutlineViewController.h */,
 				7B0DBEC916A0F665000365F4 /* FolderOutlineViewController.m */,
-				7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */,
-				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
 				7B0DBECC16A0F767000365F4 /* ImageViewController.h */,
 				7B0DBECD16A0F767000365F4 /* ImageViewController.mm */,
 				7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */,
@@ -468,6 +470,17 @@
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
 			);
 			name = "Each Document";
+			sourceTree = "<group>";
+		};
+		7BBEE9EF1ADD49AB0047DF50 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */,
+				7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */,
+				7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */,
+				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
+			);
+			name = ModelControllers;
 			sourceTree = "<group>";
 		};
 		7BF27647191BB2370022E89D /* For Testing */ = {
@@ -690,6 +703,7 @@
 				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
 				7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */,
+				7BBEE9F21ADD4AB60047DF50 /* DraggingSourceTreeController.m in Sources */,
 				7BB4E6151ADA09B80076630A /* AdvancedPreferences.m in Sources */,
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
