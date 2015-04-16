@@ -10,4 +10,6 @@
 
 @interface DraggingSourceTreeController : NSTreeController
 
++ (void)setEnableDragging:(BOOL)enable;
+
 @end

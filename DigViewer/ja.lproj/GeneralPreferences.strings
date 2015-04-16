@@ -22,3 +22,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Background Color:"; ObjectID = "zWe-d0-NPx"; */
 "zWe-d0-NPx.title" = "背景色:";
+
+/* Class = "NSTextFieldCell"; title = "Drag & Drop:"; ObjectID = "s31-Mu-aWT"; */
+"s31-Mu-aWT.title" = "ドラッグ & ドロップ:";
+
+/* Class = "NSButtonCell"; title = "Enable drag images from DigViewer"; ObjectID = "48q-eI-blT"; */
+"48q-eI-blT.title" = "DigViewerからの画像のドラッグを許可する";
+
+/* Class = "NSButtonCell"; title = "Muti images are selectable"; ObjectID = "RKo-7i-EO8"; */
+"RKo-7i-EO8.title" = "複数画像の選択を可能とする";

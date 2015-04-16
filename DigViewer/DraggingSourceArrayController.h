@@ -10,4 +10,6 @@
 
 @interface DraggingSourceArrayController : NSArrayController
 
++ (void)setEnableDragging:(BOOL)enable;
+
 @end

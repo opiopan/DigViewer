@@ -10,14 +10,21 @@
 #import "DraggingSourceArrayController.h"
 #import "PathNode.h"
 
+static BOOL _enableDragging;
+
 @implementation DraggingSourceArrayController
+
++ (void)setEnableDragging:(BOOL)enable
+{
+    _enableDragging = enable;
+}
 
 //-----------------------------------------------------------------------------------------
 // NSTableViewのDragging Source実装
 //-----------------------------------------------------------------------------------------
 - (BOOL)tableView:(NSTableView*)tableView writeRowsWithIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pboard
 {
-    return [self writeItemsAtIndexes:indexes toPasteboard:pboard] != 0;
+    return _enableDragging && [self writeItemsAtIndexes:indexes toPasteboard:pboard] != 0;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -26,7 +33,7 @@
 - (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser writeItemsAtIndexes:(NSIndexSet *)indexes
               toPasteboard:(NSPasteboard *)pboard
 {
-    return [self writeItemsAtIndexes:indexes toPasteboard:pboard];
+    return _enableDragging ? [self writeItemsAtIndexes:indexes toPasteboard:pboard] : 0;
 }
 
 //-----------------------------------------------------------------------------------------

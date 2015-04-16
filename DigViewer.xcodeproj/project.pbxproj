@@ -401,7 +401,7 @@
 			children = (
 				7BB4E5F21AD936B70076630A /* Each Application */,
 				7BB4E5F31AD936F90076630A /* Each Document */,
-				7BBEE9EF1ADD49AB0047DF50 /* ModelControllers */,
+				7BBEE9EF1ADD49AB0047DF50 /* Model Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -472,7 +472,7 @@
 			name = "Each Document";
 			sourceTree = "<group>";
 		};
-		7BBEE9EF1ADD49AB0047DF50 /* ModelControllers */ = {
+		7BBEE9EF1ADD49AB0047DF50 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */,
@@ -480,7 +480,7 @@
 				7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */,
 				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
 			);
-			name = ModelControllers;
+			name = "Model Controllers";
 			sourceTree = "<group>";
 		};
 		7BF27647191BB2370022E89D /* For Testing */ = {

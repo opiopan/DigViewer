@@ -21,8 +21,10 @@
                                    @"mapFovGradeMin":       @1,
                                    @"mapFovGradeMax":       @100,
                                    @"mapType":              @0,
-                                   @"mapEnableStreetView":  @true,
-                                   @"mapMoveToHomePos":     @true};
+                                   @"mapEnableStreetView":  @YES,
+                                   @"mapMoveToHomePos":     @YES,
+                                   @"dndEnable":            @YES,
+                                   @"dndMultiple":          @YES};
         [[[NSUserDefaultsController sharedUserDefaultsController] defaults] registerDefaults:defaults];
     }
     return self;

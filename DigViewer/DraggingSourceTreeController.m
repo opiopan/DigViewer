@@ -9,19 +9,30 @@
 #import "DraggingSourceTreeController.h"
 #import "PathNode.h"
 
+static BOOL _enableDragging;
+
 @implementation DraggingSourceTreeController
+
++ (void)setEnableDragging:(BOOL)enable
+{
+    _enableDragging = enable;
+}
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard
 {
-    NSMutableArray* plist = [NSMutableArray arrayWithCapacity:items.count];
-    for (int i = 0; i < items.count; i++){
-        PathNode* node = [items[0] representedObject];
-        [plist addObject:node.originalPath];
+    if (_enableDragging){
+        NSMutableArray* plist = [NSMutableArray arrayWithCapacity:items.count];
+        for (int i = 0; i < items.count; i++){
+            PathNode* node = [items[0] representedObject];
+            [plist addObject:node.originalPath];
+        }
+        [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
+        [pboard setPropertyList:plist forType:NSFilenamesPboardType];
+        
+        return YES;
+    }else{
+        return NO;
     }
-    [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
-    [pboard setPropertyList:plist forType:NSFilenamesPboardType];
-    
-    return YES;
 }
 
 @end

@@ -11,6 +11,8 @@
 #import "MainViewController.h"
 #import "DocumentWindowController.h"
 #import "PathNode.h"
+#import "DraggingSourceTreeController.h"
+#import "DraggingSourceArrayController.h"
 
 @implementation ThumbnailViewController
 
@@ -34,6 +36,14 @@ const static double defaultZoomRatio = 100;
     [controller addObserver:self forKeyPath:@"presentationViewType" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.dndEnable"
+                                                                 options:nil context:nil];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.dndMultiple"
+                                                                 options:nil context:nil];
+    
+    [self reflectDnDSettings];
 }
 
 - (void)prepareForClose
@@ -43,6 +53,8 @@ const static double defaultZoomRatio = 100;
     [controller removeObserver:self forKeyPath:@"presentationViewType"];
     [controller removeObserver:self forKeyPath:@"isCollapsedInspectorView"];
     [controller removeObserver:self forKeyPath:@"isCollapsedOutlineView"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndEnable"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndMultiple"];
 }
 
 - (NSView*)representationView;
@@ -52,7 +64,20 @@ const static double defaultZoomRatio = 100;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+    if ([keyPath isEqualToString:@"values.dndMultiple"] || [keyPath isEqualToString:@"values.dndEnable"]){
+        [self reflectDnDSettings];
+    }else{
+        [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+    }
+}
+
+- (void)reflectDnDSettings
+{
+    NSNumber* enable = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"dndEnable"];
+    NSNumber* multiple = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"dndMultiple"];
+    thumbnailView.allowsMultipleSelection = enable.boolValue && multiple.boolValue;
+    [DraggingSourceArrayController setEnableDragging:enable.boolValue];
+    [DraggingSourceTreeController setEnableDragging:enable.boolValue];
 }
 
 - (void) imageBrowser:(IKImageBrowserView *) aBrowser cellWasDoubleClickedAtIndex:(NSUInteger) index
