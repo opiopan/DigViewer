@@ -331,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
+				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
 				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
@@ -483,7 +484,6 @@
 		7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */ = {
 			isa = PBXGroup;
 			children = (
-				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
 				7B3920481696CA1800E139D0 /* Document.xib */,
 				7B4E8E2516C82A02001C5D09 /* Document.strings */,
 				7B0DBEB416A01545000365F4 /* MainView.xib */,

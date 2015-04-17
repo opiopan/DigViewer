@@ -46,9 +46,6 @@
                                     <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="Vxi-24-lfg">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
-                                        <connections>
-                                            <binding destination="d80-gG-QKQ" name="value" keyPath="values.imageSetType" id="f4C-my-Xk1"/>
-                                        </connections>
                                     </buttonCell>
                                     <cells>
                                         <column>
@@ -70,6 +67,9 @@
                                             </buttonCell>
                                         </column>
                                     </cells>
+                                    <connections>
+                                        <binding destination="d80-gG-QKQ" name="selectedIndex" keyPath="values.imageSetType" id="ImB-wF-fC1"/>
+                                    </connections>
                                 </matrix>
                                 <button verticalHuggingPriority="750" id="eTw-iU-lud">
                                     <rect key="frame" x="390" y="139" width="120" height="32"/>

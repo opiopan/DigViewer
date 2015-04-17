@@ -30,5 +30,7 @@
 - (void)moveUpFolder:(id)sender;
 - (void)moveDownFolder:(id)sender;
 
+- (IBAction)refreshDocument:(id)sender;
+
 @end
 

@@ -18,3 +18,6 @@
 /* Class = "NSSegmentedCell"; E2t-3v-5oY.ibShadowedToolTips[1] = "Show or hide \
  the Inspector"; ObjectID = "E2t-3v-5oY"; */
 "E2t-3v-5oY.ibShadowedToolTips[1]" = "インスペクターを表示または隠します";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Reload document"; ObjectID = "rGL-6j-xuH"; */
+"rGL-6j-xuH.ibShadowedToolTip" = "ドキュメントを再読み込みします";
