@@ -65,12 +65,18 @@
     mainViewController.representedObject = [RepresentedObject representedObjectWithController:self];
     [self.placeHolder associateSubViewWithController:mainViewController];
     [self reflectValueToViewSelectionButton];
-
-    // UserDefaultsの変更に対してObserverを登録
+    
+     // UserDefaultsの変更に対してObserverを登録
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller addObserver:self forKeyPath:@"values.imageSetType" options:nil context:nil];
     
-    // ドキュメントロードをスケジュール
+    // オープン時の表示設定を反映
+    self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
+    self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
+    self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
+    self.isCollapsedInspectorView = ![[[controller values] valueForKey:@"defShowInspector"] boolValue];
+    
+   // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
 }
 

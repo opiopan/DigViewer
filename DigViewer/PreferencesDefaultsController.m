@@ -24,7 +24,11 @@
                                    @"mapEnableStreetView":  @YES,
                                    @"mapMoveToHomePos":     @YES,
                                    @"dndEnable":            @YES,
-                                   @"dndMultiple":          @YES};
+                                   @"dndMultiple":          @YES,
+                                   @"defImageViewType":     @0,
+                                   @"defFitToWindow":       @YES,
+                                   @"defShowNavigator":     @YES,
+                                   @"defShowInspector":     @NO};
         [[[NSUserDefaultsController sharedUserDefaultsController] defaults] registerDefaults:defaults];
     }
     return self;

@@ -331,26 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
-				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
-				7BB4E6051AD96D550076630A /* GeneralPreferences.xib */,
-				7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */,
-				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
-				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
-				7BB4E61E1ADA0C350076630A /* LensPreferences.xib */,
-				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
-				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
-				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
-				7B3920481696CA1800E139D0 /* Document.xib */,
-				7B4E8E2516C82A02001C5D09 /* Document.strings */,
-				7B0DBEB416A01545000365F4 /* MainView.xib */,
-				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
-				7B4E8E3D16CA5478001C5D09 /* FolderOutlineView.strings */,
-				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
-				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
-				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
-				7BC667A518B05213000CB995 /* InspectorView.xib */,
-				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
-				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
+				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
+				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
 				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
@@ -481,6 +463,40 @@
 				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
 			);
 			name = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		7BBEE9F31AE070D30047DF50 /* Preferences Window */ = {
+			isa = PBXGroup;
+			children = (
+				7BB4E6051AD96D550076630A /* GeneralPreferences.xib */,
+				7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */,
+				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
+				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
+				7BB4E61E1ADA0C350076630A /* LensPreferences.xib */,
+				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
+				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
+				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
+			);
+			name = "Preferences Window";
+			sourceTree = "<group>";
+		};
+		7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */ = {
+			isa = PBXGroup;
+			children = (
+				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
+				7B3920481696CA1800E139D0 /* Document.xib */,
+				7B4E8E2516C82A02001C5D09 /* Document.strings */,
+				7B0DBEB416A01545000365F4 /* MainView.xib */,
+				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
+				7B4E8E3D16CA5478001C5D09 /* FolderOutlineView.strings */,
+				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
+				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
+				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
+				7BC667A518B05213000CB995 /* InspectorView.xib */,
+				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
+				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
+			);
+			name = "Document Window and Relatives";
 			sourceTree = "<group>";
 		};
 		7BF27647191BB2370022E89D /* For Testing */ = {

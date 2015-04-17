@@ -1,0 +1,17 @@
+/* Class = "NSTextFieldCell"; title = "Configuration when open:"; ObjectID = "Htp-We-P00"; */
+"Htp-We-P00.title" = "ドキュメントオープン時の設定:";
+
+/* Class = "NSButtonCell"; title = "Display navigator"; ObjectID = "0lM-WD-sLN"; */
+"0lM-WD-sLN.title" = "ナビゲーターを表示する";
+
+/* Class = "NSButtonCell"; title = "Display inspector"; ObjectID = "1om-RW-Ek5"; */
+"1om-RW-Ek5.title" = "インスペクターを表示する";
+
+/* Class = "NSMenuItem"; title = "Display thumbnail"; ObjectID = "N43-Tg-d29"; */
+"N43-Tg-d29.title" = "サムネール表示";
+
+/* Class = "NSMenuItem"; title = "Display single image"; ObjectID = "gfy-v3-v3j"; */
+"gfy-v3-v3j.title" = "1画像表示";
+
+/* Class = "NSButtonCell"; title = "Fit to window size if image is smaller than window"; ObjectID = "wCY-en-coM"; */
+"wCY-en-coM.title" = "小さい画像をウインドウサイズに合わせて拡大表示";
