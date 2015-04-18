@@ -30,7 +30,7 @@
 "PcZ-kM-SW8.title" = "地形図";
 
 /* Class = "NSTextFieldCell"; title = "Gradation level"; ObjectID = "UTo-6i-984"; */
-"UTo-6i-984.title" = "グラデーション詳細度";
+"UTo-6i-984.title" = "グラデーション精細度";
 
 /* Class = "NSMenuItem"; title = "Road map"; ObjectID = "V9i-Vh-5cd"; */
 "V9i-Vh-5cd.title" = "道路地図";

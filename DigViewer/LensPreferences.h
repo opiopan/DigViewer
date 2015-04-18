@@ -11,4 +11,9 @@
 
 @interface LensPreferences : NSPreferencesModule
 
+@property (strong) IBOutlet NSArrayController *lensArrayController;
+@property (weak) IBOutlet NSTableView *lensProfileTableView;
+
+- (IBAction)addOrRemoveLens:(id)sender;
+
 @end

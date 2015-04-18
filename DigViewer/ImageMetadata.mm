@@ -7,6 +7,7 @@
 //
 
 #import "ImageMetadata.h"
+#import "LensLibrary.h"
 #import "CoreFoundationHelper.h"
 
 #include <math.h>
@@ -53,9 +54,10 @@ enum PropertyValueType {pvTypeSimple, pvTypeHeadOfArray, pvTypeSpecial, pvTypeSe
 
 struct TranslationRule;
 static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule);
+static NSString* convertLensMaker(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule);
+static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule);
 static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule);
 
@@ -113,7 +115,7 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFMake, pvTypeSimple, "Camera Maker:", "%@", 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFModel, pvTypeSimple, "Camera Model:", "%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifSensingMethod, pvTypeSimple, "Sensing Method:", NULL, MAPDEF(sensingMethods), NULL,
-    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSimple, "Lens Maker:", "%@", 0, NULL, NULL,
+    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSimple, "Lens Maker:", "%@", 0, NULL, convertLensMaker,
     propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
     propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
@@ -139,6 +141,8 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFSoftware, pvTypeSimple, "Processing Software:", "%@", 0, NULL, NULL,
 };
 
+#define RULE_LENS_MODEL     8
+
 //-----------------------------------------------------------------------------------------
 // 値変換関数
 //-----------------------------------------------------------------------------------------
@@ -157,6 +161,15 @@ static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule)
     return rc;
 }
 
+static NSString* convertLensMaker(ImageMetadata* meta, TranslationRule* rule)
+{
+    NSString* value = meta.associatedLensProfile.lensMake;
+    if (!value){
+        value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    }
+    return value;
+}
+
 static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
 {
     static struct {
@@ -167,7 +180,10 @@ static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
         propertyEXIFAUX, kCGImagePropertyExifAuxLensModel,
         propertyCIFF, kCGImagePropertyCIFFLensModel,
     };
-    NSString* value = nil;
+    NSString* value = meta.associatedLensProfile.lensName;
+    if (value){
+        return value;
+    }
     for (int i = 0; i < sizeof(metaref) / sizeof(*metaref); i++){
         value = [[meta propertiesAtIndex:metaref[i].dictionary] valueForKey:(__bridge NSString*)metaref[i].key];
         if (value){
@@ -177,43 +193,47 @@ static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
     return value;
 }
 
-static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
-{
-    NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
-    NSString* valueString = nil;
-    if (value){
-        if (value.doubleValue < 0.5){
-            valueString = [NSString stringWithFormat:@"1/%.f sec", 1.0 / value.doubleValue];
-        }else{
-            valueString = [NSString stringWithFormat:@"%@ sec", value];
-        }
-    }
-    return valueString;
-}
-
 static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
 {
-    static struct {
-        PropertyKind        dictionary;
-        CFStringRef         key;
-    }metaref[] = {
-        propertyEXIF, kCGImagePropertyExifLensSpecification,
-        propertyEXIFAUX, kCGImagePropertyExifAuxLensInfo,
-        propertyDNG, kCGImagePropertyDNGLensInfo,
-    };
     NSArray* value = nil;
-    for (int i = 0; i < sizeof(metaref) / sizeof(*metaref); i++){
-        value = [[meta propertiesAtIndex:metaref[i].dictionary] valueForKey:(__bridge NSString*)metaref[i].key];
+    NSNumber* fLength1 = nil;
+    NSNumber* fLength2 = nil;
+    NSNumber* fNum1 = nil;
+    NSNumber* fNum2 = nil;
+
+    Lens* associatedLens = meta.associatedLensProfile;
+    if (associatedLens){
+        fLength1 = associatedLens.focalLengthMin;
+        fLength2 = associatedLens.focalLengthMax;
+        fNum1 = associatedLens.apertureMin;
+        fNum2 = associatedLens.apertureMax;
+    }
+
+    if (!fLength1 || !fLength2 || !fNum1 || !fNum2){
+        static struct {
+            PropertyKind        dictionary;
+            CFStringRef         key;
+        }metaref[] = {
+            propertyEXIF, kCGImagePropertyExifLensSpecification,
+            propertyEXIFAUX, kCGImagePropertyExifAuxLensInfo,
+            propertyDNG, kCGImagePropertyDNGLensInfo,
+        };
+        for (int i = 0; i < sizeof(metaref) / sizeof(*metaref); i++){
+            value = [[meta propertiesAtIndex:metaref[i].dictionary] valueForKey:(__bridge NSString*)metaref[i].key];
+            if (value){
+                break;
+            }
+        }
         if (value){
-            break;
+            fLength1 = value[0];
+            fLength2 = value[1];
+            fNum1 = value[2];
+            fNum2 = value[3];
         }
     }
+    
     NSString* valueString = nil;
-    if (value){
-        NSNumber* fLength1 = value[0];
-        NSNumber* fLength2 = value[1];
-        NSNumber* fNum1 = value[2];
-        NSNumber* fNum2 = value[3];
+    if (fLength1 && fLength2 && fNum1 && fNum2){
         NSString* lensType = nil;
         NSString* focalLength = nil;
         NSString* fNumber = nil;
@@ -230,6 +250,20 @@ static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
             fNumber = [NSString stringWithFormat:@"%@-%@", fNum1, fNum2];
         }
         valueString = [NSString stringWithFormat:@"%@ %@mm f/%@", lensType, focalLength, fNumber];
+    }
+    return valueString;
+}
+
+static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
+{
+    NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    NSString* valueString = nil;
+    if (value){
+        if (value.doubleValue < 0.5){
+            valueString = [NSString stringWithFormat:@"1/%.f sec", 1.0 / value.doubleValue];
+        }else{
+            valueString = [NSString stringWithFormat:@"%@ sec", value];
+        }
     }
     return valueString;
 }
@@ -317,6 +351,7 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
     NSArray*        _summary;
     GPSInfo*        _gpsInfo;
     NSArray*        _gpsInfoStrings;
+    Lens*           _lensProfile;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -342,6 +377,17 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
             NSNumber* y = [_properties[propertyALL] valueForKey:(__bridge NSString*)kCGImagePropertyPixelHeight];
             if (x && y){
                 _geometry = [NSString stringWithFormat:@"%@ x %@", x, y];
+            }
+            
+            // レンズライブラリから対応するレンズプロファイルを検索
+            NSString* lensName = convertLensModel(self, valueTranslationRules + RULE_LENS_MODEL);
+            NSArray* lesnList = [LensLibrary sharedLensLibrary].allLensProfiles;
+            for (Lens* lens in lesnList){
+                NSString* name = lens.lensName;
+                if ([name isEqualToString:lensName]){
+                    _lensProfile = lens;
+                    break;
+                }
             }
         }else{
             _type = [workspace localizedDescriptionForType:@"public.folder"];
@@ -493,6 +539,36 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         // 焦点距離 (35mm換算) & 画像の向き
         _gpsInfo.focalLengthIn35mm = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifFocalLenIn35mmFilm];
         _gpsInfo.rotation = [base valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+        
+        // 画角
+        NSNumber* focalLength = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifFocalLength];
+        NSNumber* flMin = _lensProfile.focalLengthMin;
+        NSNumber* flMax = _lensProfile.focalLengthMax;
+        NSNumber* fovMin = _lensProfile.fovMin;
+        NSNumber* fovMax = _lensProfile.fovMax;
+        NSNumber* sensorHorizontal = _lensProfile.sensorHorizontal;
+        NSNumber* sensorVertical = _lensProfile.sensorVertical;
+        if (focalLength && fovMin && fovMax && sensorHorizontal && sensorVertical){
+            double fov = 0;
+            if (flMin.doubleValue == flMax.doubleValue){
+                fov = fovMin.doubleValue;
+            }else{
+                double ratio = (focalLength.doubleValue - flMin.doubleValue) / (flMax.doubleValue - flMin.doubleValue);
+                fov = (fovMax.doubleValue - fovMin.doubleValue) * ratio + (fovMin.doubleValue);
+            }
+            double daiagonal = sqrt(sensorVertical.doubleValue * sensorVertical.doubleValue +
+                                    sensorHorizontal.doubleValue * sensorHorizontal.doubleValue);
+            double ratioHorizontal = sensorHorizontal.doubleValue / daiagonal;
+            double ratioVertical = sensorVertical.doubleValue / daiagonal;
+            _gpsInfo.fovLong = @(fov * ratioHorizontal);
+            _gpsInfo.fovShort = @(fov * ratioVertical);
+        }else{
+            if (_gpsInfo.focalLengthIn35mm){
+                _gpsInfo.fovLong = @(atan((36.0 / 2.0) / _gpsInfo.focalLengthIn35mm.doubleValue) * (180 / M_PI) * 2);
+                _gpsInfo.fovShort = @(atan((24.0 / 2.0) / _gpsInfo.focalLengthIn35mm.doubleValue) * (180 / M_PI) * 2);
+            }
+            
+        }
     }
     return _gpsInfo;
 }
@@ -593,6 +669,14 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         properties = _properties[index];
     }
     return properties;
+}
+
+//-----------------------------------------------------------------------------------------
+// 対応するレンズライブラリのプロファイルを返却
+//-----------------------------------------------------------------------------------------
+- (Lens *)associatedLensProfile
+{
+    return _lensProfile;
 }
 
 @end

@@ -1,0 +1,45 @@
+
+/* Class = "NSTextFieldCell"; title = "Matching condition with this profile:"; ObjectID = "CYe-p7-bJQ"; */
+"CYe-p7-bJQ.title" = "このプロファイルを適用する条件:";
+
+/* Class = "NSButtonCell"; title = "Matching by custom condition"; ObjectID = "8tl-hl-DKh"; */
+"8tl-hl-DKh.title" = "詳細に条件を指定する";
+
+/* Class = "NSTextFieldCell"; title = "Focal length (mm):"; ObjectID = "Dhn-i9-Tgp"; */
+"Dhn-i9-Tgp.title" = "焦点距離 (mm):";
+
+/* Class = "NSTextFieldCell"; title = "Lens maker:"; ObjectID = "XzZ-z2-8tD"; */
+"XzZ-z2-8tD.title" = "レンズメーカー:";
+
+/* Class = "NSButtonCell"; title = "Custom conditions..."; ObjectID = "aad-Yt-YDm"; */
+"aad-Yt-YDm.title" = "詳細な条件...";
+
+/* Class = "NSTextFieldCell"; title = "FOV angle of short side (deg):"; ObjectID = "av2-kK-RNO"; */
+"av2-kK-RNO.title" = "センサー縦横比:";
+
+/* Class = "NSTextFieldCell"; title = "Profile name:"; ObjectID = "fgD-Zt-dyP"; */
+"fgD-Zt-dyP.title" = "プロファイル名:";
+
+/* Class = "NSTextFieldCell"; title = "FOV angle of long side (deg):"; ObjectID = "gDA-1K-oO8"; */
+"gDA-1K-oO8.title" = "対角線画角 (度):";
+
+/* Class = "NSButtonCell"; title = "Allowed cameras..."; ObjectID = "k5X-iP-5Na"; */
+"k5X-iP-5Na.title" = "許可するカメラ...";
+
+/* Class = "NSButtonCell"; title = "Matching by lens name and camera names"; ObjectID = "nAy-iC-Fm5"; */
+"nAy-iC-Fm5.title" = "レンズ名とカメラ名の組み合わせで判定";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qg1-Dm-q7g"; */
+"qg1-Dm-q7g.title" = "キャンセル";
+
+/* Class = "NSButtonCell"; title = "Matching by only lens name"; ObjectID = "r9F-5o-jtH"; */
+"r9F-5o-jtH.title" = "レンズ名のみで判定";
+
+/* Class = "NSTextFieldCell"; title = "Lens name:"; ObjectID = "rys-hu-Xgh"; */
+"rys-hu-Xgh.title" = "レンズ名:";
+
+/* Class = "NSTextFieldCell"; title = "Maximum aperture (F):"; ObjectID = "vY4-Ma-77J"; */
+"vY4-Ma-77J.title" = "解放F値:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "vlS-Om-2QJ"; */
+"vlS-Om-2QJ.title" = "OK";

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Camera" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="lens" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lens" inverseName="allowedCameras" inverseEntity="Lens" syncable="YES"/>
+    </entity>
+    <entity name="Lens" representedClassName="Lens" syncable="YES">
+        <attribute name="apertureMax" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="apertureMin" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="focalLengthMax" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="focalLengthMin" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fovMax" optional="YES" attributeType="Double" syncable="YES"/>
+        <attribute name="fovMin" optional="YES" attributeType="Double" syncable="YES"/>
+        <attribute name="lensMake" attributeType="String" syncable="YES"/>
+        <attribute name="lensName" attributeType="String" syncable="YES"/>
+        <attribute name="matchingType" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="sensorHorizontal" optional="YES" attributeType="Double" syncable="YES"/>
+        <attribute name="sensorVertical" optional="YES" attributeType="Double" syncable="YES"/>
+        <relationship name="allowedCameras" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Camera" inverseName="lens" inverseEntity="Camera" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Camera" positionX="18" positionY="50" width="128" height="73"/>
+        <element name="Lens" positionX="-209" positionY="-180" width="128" height="240"/>
+    </elements>
+</model>

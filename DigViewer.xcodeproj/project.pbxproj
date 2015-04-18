@@ -49,16 +49,22 @@
 		7B3920471696CA1800E139D0 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3920461696CA1800E139D0 /* Document.m */; };
 		7B39204A1696CA1800E139D0 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3920481696CA1800E139D0 /* Document.xib */; };
 		7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39204B1696CA1900E139D0 /* MainMenu.xib */; };
+		7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */; };
+		7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B3CDB4F1AE2A3AE005B6EAE /* EditLensSheet.strings */; };
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
 		7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */; };
 		7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */; };
+		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
+		7B553BC31AE1F83600618590 /* Lens.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BC21AE1F83600618590 /* Lens.m */; };
+		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
 		7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */; };
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
+		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
@@ -175,6 +181,8 @@
 		7B3920461696CA1800E139D0 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		7B3920491696CA1800E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		7B39204C1696CA1900E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7B3CDB4D1AE2A2F3005B6EAE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditLensSheet.xib; sourceTree = "<group>"; };
+		7B3CDB501AE2A3AE005B6EAE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditLensSheet.strings; sourceTree = "<group>"; };
 		7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
 		7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
 		7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBackgroundView.h; sourceTree = "<group>"; };
@@ -187,6 +195,11 @@
 		7B4E8E3E16CA5478001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FolderOutlineView.strings; sourceTree = "<group>"; };
 		7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DigViewer-in.sparseimage"; path = "DiskImageResources/DigViewer-in.sparseimage"; sourceTree = "<group>"; };
 		7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigViewerBackground.idraw; path = DiskImageResources/DigViewerBackground.idraw; sourceTree = "<group>"; };
+		7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary.xcdatamodel; sourceTree = "<group>"; };
+		7B553BC11AE1F83600618590 /* Lens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lens.h; sourceTree = "<group>"; };
+		7B553BC21AE1F83600618590 /* Lens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lens.m; sourceTree = "<group>"; };
+		7B553BF61AE211DF00618590 /* LensLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensLibrary.h; sourceTree = "<group>"; };
+		7B553BF71AE211DF00618590 /* LensLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensLibrary.m; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
@@ -195,6 +208,8 @@
 		7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggingSourceArrayController.h; sourceTree = "<group>"; };
 		7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggingSourceArrayController.m; sourceTree = "<group>"; };
 		7B6B3B1318E438D00004098F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLensSheetController.h; sourceTree = "<group>"; };
+		7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLensSheetController.m; sourceTree = "<group>"; };
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
@@ -335,12 +350,6 @@
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
 				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
-				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
-				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
-				7BF8E2A416AA7C9F0007E788 /* up.png */,
-				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
-				7B01210616B4C6A9004AA730 /* down.idraw */,
-				7B01210716B4C6A9004AA730 /* down.png */,
 				7B4E8E2416C827D3001C5D09 /* Localizable.strings */,
 			);
 			name = Resources;
@@ -349,10 +358,8 @@
 		7B3920581696FF5600E139D0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7BF678AB16983C7C00FE39B4 /* PathNode.h */,
-				7BF678AC16983C7C00FE39B4 /* PathNode.mm */,
-				7B6CE7B818B3970F00CD445A /* ImageMetadata.h */,
-				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
+				7B553BBC1AE1D21B00618590 /* Document */,
+				7B553BBD1AE1D22D00618590 /* Lens Library */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -398,6 +405,29 @@
 			name = "Disk Image Resources";
 			sourceTree = "<group>";
 		};
+		7B553BBC1AE1D21B00618590 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				7BF678AB16983C7C00FE39B4 /* PathNode.h */,
+				7BF678AC16983C7C00FE39B4 /* PathNode.mm */,
+				7B6CE7B818B3970F00CD445A /* ImageMetadata.h */,
+				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
+			);
+			name = Document;
+			sourceTree = "<group>";
+		};
+		7B553BBD1AE1D22D00618590 /* Lens Library */ = {
+			isa = PBXGroup;
+			children = (
+				7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */,
+				7B553BC11AE1F83600618590 /* Lens.h */,
+				7B553BC21AE1F83600618590 /* Lens.m */,
+				7B553BF61AE211DF00618590 /* LensLibrary.h */,
+				7B553BF71AE211DF00618590 /* LensLibrary.m */,
+			);
+			name = "Lens Library";
+			sourceTree = "<group>";
+		};
 		7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +456,8 @@
 				7B1CC21518D86DC5007527E6 /* InfoPlistController.m */,
 				7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */,
 				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
+				7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */,
+				7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */,
 			);
 			name = "Each Application";
 			sourceTree = "<group>";
@@ -477,6 +509,10 @@
 				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
 				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
 				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
+				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
+				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
+				7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */,
+				7B3CDB4F1AE2A3AE005B6EAE /* EditLensSheet.strings */,
 			);
 			name = "Preferences Window";
 			sourceTree = "<group>";
@@ -495,6 +531,10 @@
 				7BC667A518B05213000CB995 /* InspectorView.xib */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
+				7BF8E2A416AA7C9F0007E788 /* up.png */,
+				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
+				7B01210616B4C6A9004AA730 /* down.idraw */,
+				7B01210716B4C6A9004AA730 /* down.png */,
 			);
 			name = "Document Window and Relatives";
 			sourceTree = "<group>";
@@ -610,6 +650,8 @@
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
+				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
+				7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */,
 				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,
 				7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */,
 			);
@@ -642,6 +684,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/LensPreferences.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/AdvancedPreferences.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/AdvancedPreferences.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/EditLensSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/EditLensSheet.xib",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -654,10 +698,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/MapPreferences.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/LensPreferences.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/AdvancedPreferences.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditLensSheet.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -695,12 +740,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */,
+				7B553BC31AE1F83600618590 /* Lens.m in Sources */,
 				7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
+				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7BB4E6001AD948250076630A /* AppPreferences.m in Sources */,
@@ -712,6 +760,7 @@
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
+				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
@@ -800,6 +849,22 @@
 				7B39204C1696CA1900E139D0 /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B3CDB4D1AE2A2F3005B6EAE /* en */,
+			);
+			name = EditLensSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B3CDB4F1AE2A3AE005B6EAE /* EditLensSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B3CDB501AE2A3AE005B6EAE /* ja */,
+			);
+			name = EditLensSheet.strings;
 			sourceTree = "<group>";
 		};
 		7B4E8E2416C827D3001C5D09 /* Localizable.strings */ = {
@@ -1058,6 +1123,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */,
+			);
+			currentVersion = 7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */;
+			path = LensLibrary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7B3920261696CA1800E139D0 /* Project object */;
 }

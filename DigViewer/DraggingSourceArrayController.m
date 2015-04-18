@@ -37,7 +37,7 @@ static BOOL _enableDragging;
 }
 
 //-----------------------------------------------------------------------------------------
-// NSTableViewのDragging Source実装
+// Dragging Source実装本体
 //-----------------------------------------------------------------------------------------
 - (NSUInteger)writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pboard
 {

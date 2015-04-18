@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PathNode.h"
+#import "LensLibrary.h"
 
 @interface GPSInfo : NSObject
 @property NSNumber* latitude;
@@ -24,6 +25,8 @@
 @property NSString* geodeticReferenceSystem;
 @property NSNumber* focalLengthIn35mm;
 @property NSNumber* rotation;
+@property NSNumber* fovLong;
+@property NSNumber* fovShort;
 @end
 
 @interface ImageMetadata : NSObject
@@ -34,6 +37,7 @@
 
 - (id)initWithPathNode:(PathNode*)pathNode;
 - (NSDictionary*)propertiesAtIndex:(int)index;
+- (Lens*)associatedLensProfile;
 
 @end
 

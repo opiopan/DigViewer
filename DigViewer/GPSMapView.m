@@ -112,11 +112,9 @@
     if (_gpsInfo){
         double FOVangle = -1;
         double FOVscale = 0;
-        if (gpsInfo.focalLengthIn35mm){
-            double sensorSize = _gpsInfo.rotation.integerValue < 5 ? 36.0 / 2.0 : 24.0 / 2.0;
-            FOVangle = atan(sensorSize / _gpsInfo.focalLengthIn35mm.doubleValue);
-            FOVscale = 1.0 / cos(FOVangle);
-            FOVangle = FOVangle * (180 / M_PI);
+        if (gpsInfo.fovLong){
+            FOVangle = (_gpsInfo.rotation.integerValue < 5 ? _gpsInfo.fovLong.doubleValue : _gpsInfo.fovShort.doubleValue) / 2;
+            FOVscale = 1.0 / cos(FOVangle * (M_PI / 180));
         }
         script = [NSString stringWithFormat:@"setMarker(%@, %@, %@, %f, %f, %@, %@, %@);",
                   _gpsInfo.latitude, _gpsInfo.longitude,
