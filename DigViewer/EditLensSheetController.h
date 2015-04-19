@@ -27,6 +27,8 @@
 @property (strong, nonatomic) NSNumber* sensorVertical;
 @property (strong, nonatomic) NSNumber* matchingType;
 
+@property (nonatomic) BOOL isSingleFocalLength;
+
 - (IBAction)onOk:(id)sender;
 - (IBAction)onCancel:(id)sender;
 

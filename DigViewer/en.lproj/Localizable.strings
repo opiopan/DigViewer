@@ -12,6 +12,9 @@
 "PREF_TITLE_LENS" = "Lens";
 "PREF_TITLE_ADVANCED" = "Advanced";
 
+// レンズ設定シートでのメッセージ
+"LPMSG_CONF_REMOVE" = "Are you sure you want to remove selected lens profile?";
+
 // マップビューでのメッセージ
 "MVMSG_LOADING" = "Loading...";
 "MVMSG_NOKEY" = "Google API key is not specified. Please specify a key at preferences panel.";

@@ -110,13 +110,27 @@
 //-----------------------------------------------------------------------------------------
 - (void) reflectOkButtonState
 {
-    if (self.profileName.length > 0 &&
-        self.lensMaker.length > 0 &&
-        self.lensName.length > 0 &&
-        self.focalLengthMin &&
-        self.focalLengthMax &&
-        self.apertureMin &&
-        self.apertureMax){
+    if (_focalLengthMin && _focalLengthMax && _focalLengthMin.doubleValue == _focalLengthMax.doubleValue){
+        [self willChangeValueForKey:@"apertureMax"];
+        [self willChangeValueForKey:@"fovMax"];
+        self.isSingleFocalLength = YES;
+        _apertureMax = _apertureMin;
+        _fovMax = _fovMin;
+        [self didChangeValueForKey:@"apertureMax"];
+        [self didChangeValueForKey:@"fovMax"];
+    }else{
+        self.isSingleFocalLength = NO;
+    }
+
+    if (_profileName.length > 0 &&
+        _lensMaker.length > 0 &&
+        _lensName.length > 0 &&
+        _focalLengthMin &&
+        _focalLengthMax &&
+        _apertureMin &&
+        _apertureMax &&
+        ((_fovMin && _fovMax) || (!_fovMin && !_fovMax)) &&
+        ((_sensorHorizontal && _sensorVertical) || (!_sensorHorizontal && !_sensorVertical))){
         self.okButton.enabled = YES;
     }else{
         self.okButton.enabled = NO;
@@ -209,6 +223,30 @@
 - (void)setApertureMax:(NSNumber *)apertureMax
 {
     _apertureMax = apertureMax;
+    [self reflectOkButtonState];
+}
+
+- (void)setFovMin:(NSNumber *)fovMin
+{
+    _fovMin = fovMin;
+    [self reflectOkButtonState];
+}
+
+- (void)setFovMax:(NSNumber *)fovMax
+{
+    _fovMax = fovMax;
+    [self reflectOkButtonState];
+}
+
+- (void)setSensorHorizontal:(NSNumber *)sensorHorizontal
+{
+    _sensorHorizontal = sensorHorizontal;
+    [self reflectOkButtonState];
+}
+
+- (void)setSensorVertical:(NSNumber *)sensorVertical
+{
+    _sensorVertical = sensorVertical;
     [self reflectOkButtonState];
 }
 

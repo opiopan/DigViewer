@@ -56,12 +56,11 @@
         NSArray* selectedObjects = self.lensArrayController.selectedObjects;
         if (selectedObjects.count > 0){
             Lens* lens = selectedObjects[0];
-            [_lensLibrary.managedObjectContext deleteObject:lens];
-            NSError* error = nil;
-            [_lensLibrary.managedObjectContext save:&error];
-            if (error){
-                [self presentSaveError:error];
-            }
+            NSBeginAlertSheet(NSLocalizedString(@"LPMSG_CONF_REMOVE", nill),
+                              NSLocalizedString(@"OK", nil), NSLocalizedString(@"Cancel", nil),
+                              nil, _preferencesView.window,
+                              self, @selector(didEndConfirmRemovingLens:returnCode:contextInfo:), nil, nil,
+                              @"%@", lens.name);
         }
     }
 }
@@ -96,6 +95,25 @@
         }
     }
     _editLensSheet = nil;
+}
+
+//-----------------------------------------------------------------------------------------
+// レンズプロファイル削除確認応答
+//-----------------------------------------------------------------------------------------
+- (void)didEndConfirmRemovingLens:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+{
+    if (returnCode == NSAlertDefaultReturn){
+        NSArray* selectedObjects = self.lensArrayController.selectedObjects;
+        if (selectedObjects.count > 0){
+            Lens* lens = selectedObjects[0];
+            [_lensLibrary.managedObjectContext deleteObject:lens];
+            NSError* error = nil;
+            [_lensLibrary.managedObjectContext save:&error];
+            if (error){
+                [self presentSaveError:error];
+            }
+        }
+    }
 }
 
 @end

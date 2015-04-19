@@ -210,6 +210,11 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isSingleFocalLength" id="DRW-NS-aEa">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                         <binding destination="e7F-EB-nnm" name="value" keyPath="selection.apertureMax" id="NtY-tp-WnX"/>
                                     </connections>
                                 </textField>
@@ -230,6 +235,11 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isSingleFocalLength" id="0ow-NH-Hs9">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                         <binding destination="e7F-EB-nnm" name="value" keyPath="selection.fovMax" id="Y2J-va-xLs"/>
                                     </connections>
                                 </textField>
