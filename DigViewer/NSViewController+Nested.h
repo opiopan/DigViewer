@@ -11,6 +11,7 @@
 @interface NSViewController (Nested)
 
 - (NSView*) representationView;
+- (void) setIsVisible:(BOOL)isVisible;
 - (void) prepareForClose;
 
 @end

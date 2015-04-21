@@ -111,14 +111,17 @@
     // サブビューをSplitViewから除去
     if (outlineViewController.view.superview){
         [outlineViewController.view removeFromSuperview];
+        [outlineViewController setIsVisible:NO];
     }
     if (inspectorViewController.view.superview){
         [inspectorViewController.view removeFromSuperview];
+        [inspectorViewController setIsVisible:NO];
     }
     for (int i = 0; i < contentViewControllers.count; i++){
         NSViewController* controller = contentViewControllers[i];
         if (controller.view.superview){
             [controller.view removeFromSuperview];
+            [controller setIsVisible:NO];
         }
     }
     
@@ -141,10 +144,12 @@
         isCoordinateFlip[dividerNum] = NO;
         dividerNum++;
         currentViewIndex++;
+        [outlineViewController setIsVisible:YES];
     }
     [splitView addSubview:representedViewController.view];
     [splitView setHoldingPriority: NSLayoutPriorityFittingSizeCompression forSubviewAtIndex:currentViewIndex];
     currentViewIndex++;
+    [representedViewController setIsVisible:YES];
     if (!self.isCollapsedInspectorView){
         [splitView addSubview:inspectorViewController.view];
         [splitView setHoldingPriority:NSLayoutPriorityDefaultLow forSubviewAtIndex:currentViewIndex];
@@ -152,6 +157,7 @@
         isCoordinateFlip[dividerNum] = YES;
         dividerNum++;
         currentViewIndex++;
+        [inspectorViewController setIsVisible:YES];
     }
 
     // divider位置を設定

@@ -15,6 +15,10 @@
     return self.view;
 }
 
+- (void) setIsVisible:(BOOL)visible
+{
+}
+
 - (void) prepareForClose
 {
 }

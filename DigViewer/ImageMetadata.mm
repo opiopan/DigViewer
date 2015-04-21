@@ -115,7 +115,7 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFMake, pvTypeSimple, "Camera Maker:", "%@", 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFModel, pvTypeSimple, "Camera Model:", "%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifSensingMethod, pvTypeSimple, "Sensing Method:", NULL, MAPDEF(sensingMethods), NULL,
-    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSimple, "Lens Maker:", "%@", 0, NULL, convertLensMaker,
+    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSpecial, "Lens Maker:", "%@", 0, NULL, convertLensMaker,
     propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
     propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
@@ -549,6 +549,7 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
         NSNumber* sensorHorizontal = _lensProfile.sensorHorizontal;
         NSNumber* sensorVertical = _lensProfile.sensorVertical;
         if (focalLength && fovMin && fovMax && sensorHorizontal && sensorVertical){
+            // レンズプロファイルから算出
             double fov = 0;
             if (flMin.doubleValue == flMax.doubleValue){
                 fov = fovMin.doubleValue;
@@ -560,9 +561,16 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
                                     sensorHorizontal.doubleValue * sensorHorizontal.doubleValue);
             double ratioHorizontal = sensorHorizontal.doubleValue / daiagonal;
             double ratioVertical = sensorVertical.doubleValue / daiagonal;
-            _gpsInfo.fovLong = @(fov * ratioHorizontal);
-            _gpsInfo.fovShort = @(fov * ratioVertical);
+            if (fov > 150.0){
+                _gpsInfo.fovLong = @(fov * ratioHorizontal);
+                _gpsInfo.fovShort = @(fov * ratioVertical);
+            }else{
+                double flen = 1.0 / tan(fov / 2.0 * (M_PI / 180));
+                _gpsInfo.fovLong = @(atan(ratioHorizontal / flen) * (180 / M_PI) * 2);
+                _gpsInfo.fovShort = @(atan(ratioVertical / flen) * (180 / M_PI) * 2);
+            }
         }else{
+            // 焦点距離から算出
             if (_gpsInfo.focalLengthIn35mm){
                 _gpsInfo.fovLong = @(atan((36.0 / 2.0) / _gpsInfo.focalLengthIn35mm.doubleValue) * (180 / M_PI) * 2);
                 _gpsInfo.fovShort = @(atan((24.0 / 2.0) / _gpsInfo.focalLengthIn35mm.doubleValue) * (180 / M_PI) * 2);

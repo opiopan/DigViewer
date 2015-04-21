@@ -14,11 +14,16 @@
 #import "NSImage+CapabilityDetermining.h"
 #include "CoreFoundationHelper.h"
 
-@implementation ImageViewController
+@implementation ImageViewController{
+    BOOL _isVisible;
+}
 
 - (id)init
 {
     self = [super initWithNibName:@"ImageView" bundle:nil];
+    if (self){
+        _isVisible = NO;
+    }
     return self;
 }
 
@@ -34,6 +39,15 @@
                                                                  options:0 context:nil];
     [self reflectBackgroundColor];
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+}
+
+- (void)setIsVisible:(BOOL)isVisible
+{
+    BOOL lastVisiblility = _isVisible;
+    _isVisible = isVisible;
+    if (_isVisible && !lastVisiblility){
+        [self reflectImage];
+    }
 }
 
 - (void)prepareForClose
@@ -100,7 +114,9 @@
               [keyPath isEqualToString:@"values.imageBackgroundColor"]){
         [self reflectBackgroundColor];
     }else if (object == self.imageArrayController && [keyPath isEqualToString:@"selectedObjects"]){
-        [self reflectImage];
+        if (_isVisible){
+            [self reflectImage];
+        }
     }
 }
 
