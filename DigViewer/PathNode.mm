@@ -298,56 +298,80 @@
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    return [self imagePath];
+    return self.isImage ? self.imagePath : [self.imagePath stringByAppendingString:@".folder"];
 }
 
 - (NSString*) imageRepresentationType
 {
-    return self.imageNode.isRawImage ? IKImageBrowserCGImageRepresentationType : IKImageBrowserNSImageRepresentationType;
+    return self.imageNode.isRawImage || !self.isImage ? IKImageBrowserCGImageRepresentationType :
+                                                        IKImageBrowserNSImageRepresentationType;
 }
 
 - (id) imageRepresentation
 {
     PathNode* node = self.imageNode;
-    id rc = nil;
-    if (node.isRawImage){
+    
+    if (node.isRawImage || !self.isImage){
         static NSDictionary* thumbnailOption = nil;
+        static const CGFloat ThumbnailMaxSize = 384;
         if (!thumbnailOption){
-            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@384};
+            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize)};
         }
         NSURL* url = [NSURL fileURLWithPath:node.imagePath];
         ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-        ECGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption));
-        if (!thumbnail){
-            thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+        ECGImageRef thumbnail;
+        if (node.isRawImage){
+            thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+            if (thumbnail.isNULL()){
+                thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+            }
+            NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+            NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+            if (orientation && orientation.intValue != 1){
+                thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+            }
+        }else{
+            NSImage* srcImage = node.image;
+            NSSize srcSize = srcImage.size;
+            CGFloat gain = ThumbnailMaxSize / MAX(srcSize.width, srcSize.height);
+            NSSize destSize;
+            destSize.width = srcSize.width * gain;
+            destSize.height = srcSize.height * gain;
+            ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
+            ECGContextRef context(CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0,
+                                                        colorSpace, kCGImageAlphaPremultipliedLast));
+            NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
+            [NSGraphicsContext saveGraphicsState];
+            [NSGraphicsContext setCurrentContext:gc];
+            NSRect targetRect = NSZeroRect;
+            targetRect.size = destSize;
+            [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+                           fraction:1.0 respectFlipped:YES hints:nil];
+            [NSGraphicsContext restoreGraphicsState];
+            
+            thumbnail = CGBitmapContextCreateImage(context);
         }
-        NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-        NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-        if (orientation && orientation.intValue != 1){
-            thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+        
+        if (!self.isImage){
+            thumbnail = [self compositFolderImage:thumbnail];
         }
-        rc = (__bridge_transfer id)thumbnail.transferOwnership();
+        
+        return (__bridge_transfer id)thumbnail.transferOwnership();
     }else{
-        rc = node.image;
+        return node.image;
     }
-    return rc;
 }
 
 - (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation
 {
     // 回転後イメージを表すビットマップコンテキストを生成
     CGSize size = CGSizeMake(CGImageGetWidth(src), CGImageGetHeight(src));
-    CGColorSpaceRef colorSpace(CGImageGetColorSpace(src));
-    CGColorSpaceRetain(colorSpace);
+    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
     ECGContextRef context;
     if (rotation >= 5 && rotation <= 8){
-        context = CGBitmapContextCreate(NULL, size.height, size.width,
-                                        CGImageGetBitsPerComponent(src), 0,
-                                        colorSpace, CGImageGetBitmapInfo(src));
+        context = CGBitmapContextCreate(NULL, size.height, size.width, 8, 0,colorSpace, kCGImageAlphaNoneSkipLast);
     }else{
-        context = CGBitmapContextCreate(NULL, size.width, size.height,
-                                        CGImageGetBitsPerComponent(src), 0,
-                                        colorSpace, CGImageGetBitmapInfo(src));
+        context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaNoneSkipLast);
     }
 
     // 変換行列設定
@@ -378,6 +402,34 @@
     
     //回転後イメージを描画
     CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), src);
+    return CGBitmapContextCreateImage(context);
+}
+
+- (CGImageRef) compositFolderImage:(CGImageRef)src
+{
+    // コンポジット後のイメージを保持するビットマップコンテキストを作成
+    CGFloat width = src ? CGImageGetWidth(src) : 384;
+    CGFloat height = src ? CGImageGetHeight(src) : 384;
+    CGFloat normalizedLength = MAX(width, height);
+    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
+    ECGContextRef context(CGBitmapContextCreate(NULL, normalizedLength, normalizedLength, 8, 0,
+                                                colorSpace, kCGImageAlphaPremultipliedLast));
+    
+    // ソース画像を描画
+    CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2, CGImageGetWidth(src), CGImageGetHeight(src)), src);
+    
+    // フォルダー画像を描画
+    NSImage* folderImage = [NSImage imageNamed:NSImageNameFolder];
+    NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:gc];
+    NSRect targetRect = NSZeroRect;
+    targetRect.size.width = targetRect.size.height = normalizedLength / 3.0;
+    targetRect.origin.x = normalizedLength - targetRect.size.width * 1.14;
+    [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+                   fraction:1.0 respectFlipped:YES hints:nil];
+    [NSGraphicsContext restoreGraphicsState];
+    
     return CGBitmapContextCreateImage(context);
 }
 
