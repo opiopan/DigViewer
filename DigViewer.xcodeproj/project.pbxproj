@@ -71,6 +71,7 @@
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
+		7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB3327B1AEBB50700C74944 /* unavailable.png */; };
 		7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */; };
 		7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5F81AD945460076630A /* MapPreferences.m */; };
 		7BB4E6001AD948250076630A /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4E5FF1AD948250076630A /* AppPreferences.m */; };
@@ -220,6 +221,7 @@
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
 		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
 		7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesDefaultsController.m; sourceTree = "<group>"; };
+		7BB3327B1AEBB50700C74944 /* unavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unavailable.png; path = resources/unavailable.png; sourceTree = "<group>"; };
 		7BB4E5F01AD9252C0076630A /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		7BB4E5F11AD9252C0076630A /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
 		7BB4E5F41AD9431A0076630A /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		7B3920531696F50B00E139D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7BB3327B1AEBB50700C74944 /* unavailable.png */,
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
 				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
@@ -645,6 +648,7 @@
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
+				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,

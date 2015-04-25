@@ -63,6 +63,9 @@
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
                             progress:(PathNodeProgress*)progress;
 
+// イメージファイルが存在しない場合に表示するイメージ
++ (NSImage*) unavailableImage;
+
 // ツリーウォーキング
 - (PathNode*) nextImageNode;
 - (PathNode*) previousImageNode;

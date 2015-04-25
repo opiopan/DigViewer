@@ -37,6 +37,20 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// イメージファイルが存在しない場合に表示するイメージ
+//-----------------------------------------------------------------------------------------
++ (NSImage*) unavailableImage
+{
+    static NSImage* unavailableImage = nil;
+    
+    if (!unavailableImage){
+        unavailableImage = [[NSBundle mainBundle] imageForResource:@"unavailable.png"];
+    }
+    
+    return unavailableImage;
+}
+
+//-----------------------------------------------------------------------------------------
 // オブジェクト初期化
 //-----------------------------------------------------------------------------------------
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
@@ -271,7 +285,7 @@
     if (!stockedImage || ![stockedImagePath isEqualToString:path]){
         stockedImage = [[NSImage alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path]];
     }
-    return stockedImage;
+    return stockedImage ? stockedImage : [PathNode unavailableImage];
 }
 
 - (NSUInteger) indexInParent
@@ -307,49 +321,36 @@
                                                         IKImageBrowserNSImageRepresentationType;
 }
 
+static const CGFloat ThumbnailMaxSize = 384;
+
 - (id) imageRepresentation
 {
     PathNode* node = self.imageNode;
     
     if (node.isRawImage || !self.isImage){
         static NSDictionary* thumbnailOption = nil;
-        static const CGFloat ThumbnailMaxSize = 384;
         if (!thumbnailOption){
             thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize)};
         }
-        NSURL* url = [NSURL fileURLWithPath:node.imagePath];
-        ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
         ECGImageRef thumbnail;
         if (node.isRawImage){
-            thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
-            if (thumbnail.isNULL()){
-                thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
-            }
-            NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-            NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-            if (orientation && orientation.intValue != 1){
-                thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+            NSURL* url = [NSURL fileURLWithPath:node.imagePath];
+            ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+            if (!imageSource.isNULL()){
+                thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+                if (thumbnail.isNULL()){
+                    thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+                }
+                NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+                NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+                if (orientation && orientation.intValue != 1){
+                    thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+                }
+            }else{
+                thumbnail = [self CGImageFromNSImage:[PathNode unavailableImage]];
             }
         }else{
-            NSImage* srcImage = node.image;
-            NSSize srcSize = srcImage.size;
-            CGFloat gain = ThumbnailMaxSize / MAX(srcSize.width, srcSize.height);
-            NSSize destSize;
-            destSize.width = srcSize.width * gain;
-            destSize.height = srcSize.height * gain;
-            ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
-            ECGContextRef context(CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0,
-                                                        colorSpace, kCGImageAlphaPremultipliedLast));
-            NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-            [NSGraphicsContext saveGraphicsState];
-            [NSGraphicsContext setCurrentContext:gc];
-            NSRect targetRect = NSZeroRect;
-            targetRect.size = destSize;
-            [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
-                           fraction:1.0 respectFlipped:YES hints:nil];
-            [NSGraphicsContext restoreGraphicsState];
-            
-            thumbnail = CGBitmapContextCreateImage(context);
+            thumbnail = [self CGImageFromNSImage:node.image];
         }
         
         if (!self.isImage){
@@ -360,6 +361,27 @@
     }else{
         return node.image;
     }
+}
+
+- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage
+{
+    NSSize srcSize= srcImage.size;
+    CGFloat gain = ThumbnailMaxSize / MAX(srcSize.width, srcSize.height);
+    NSSize destSize;
+    destSize.width = srcSize.width * gain;
+    destSize.height = srcSize.height * gain;
+    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
+    ECGContextRef context(CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0,
+                                                colorSpace, kCGImageAlphaPremultipliedLast));
+    NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:gc];
+    NSRect targetRect = NSZeroRect;
+    targetRect.size = destSize;
+    [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+                fraction:1.0 respectFlipped:YES hints:nil];
+    [NSGraphicsContext restoreGraphicsState];
+    return CGBitmapContextCreateImage(context);
 }
 
 - (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation
@@ -408,8 +430,8 @@
 - (CGImageRef) compositFolderImage:(CGImageRef)src
 {
     // コンポジット後のイメージを保持するビットマップコンテキストを作成
-    CGFloat width = src ? CGImageGetWidth(src) : 384;
-    CGFloat height = src ? CGImageGetHeight(src) : 384;
+    CGFloat width = src ? CGImageGetWidth(src) : ThumbnailMaxSize;
+    CGFloat height = src ? CGImageGetHeight(src) : ThumbnailMaxSize;
     CGFloat normalizedLength = MAX(width, height);
     ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
     ECGContextRef context(CGBitmapContextCreate(NULL, normalizedLength, normalizedLength, 8, 0,
