@@ -30,7 +30,7 @@
                 <slider toolTip="Change the icon size" verticalHuggingPriority="750" id="100310">
                     <rect key="frame" x="51" y="244" width="96" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="16" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="100311"/>
+                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="32" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="100311"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.zoomRethio" id="100316"/>
                     </connections>

@@ -11,9 +11,12 @@
 #import "PathNode.h"
 #import "PathfinderPinnedFile.h"
 #import "NSImage+CapabilityDetermining.h"
+#import "ThumbnailConfigController.h"
 
 #include "CoreFoundationHelper.h"
 #include <stdlib.h>
+
+static ThumbnailConfigController* __weak thumbnailConfig;
 
 @implementation PathNode{
     NSMutableArray* representationImage;
@@ -53,6 +56,17 @@
 //-----------------------------------------------------------------------------------------
 // オブジェクト初期化
 //-----------------------------------------------------------------------------------------
+- (id)init
+{
+    self = [super init];
+    if (self){
+        if (!thumbnailConfig){
+            thumbnailConfig = [ThumbnailConfigController sharedController];
+        }
+    }
+    return self;
+}
+
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
                             progress:(PathNodeProgress*)progress
@@ -171,6 +185,21 @@
         return nil;
     }else{
         return self;
+    }
+}
+
++ (PathNode *)psudoPathNodeWithImagePath:(NSString *)path isFolder:(BOOL)isFolder
+{
+    PathNode* parent = nil;
+    if (isFolder){
+        parent = [[PathNode alloc] initWithName:@"image" parent:nil indexInParent:0 path:nil originalPath:path];
+    }
+    PathNode* child = [[PathNode alloc] initWithName:@"folder" parent:parent indexInParent:0 path:path originalPath:path];
+    if (isFolder){
+        parent->images = [NSMutableArray arrayWithArray:@[child]];
+        return parent;
+    }else{
+        return child;
     }
 }
 
@@ -312,7 +341,14 @@
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    return self.isImage ? self.imagePath : [self.imagePath stringByAppendingString:@".folder"];
+    if (self.isImage){
+        return self.imagePath;
+    }else{
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", thumbnailConfig.isVisibleFolderIcon,
+                                                                              thumbnailConfig.folderIconSize,
+                                                                              thumbnailConfig.folderIconOpacity];
+        return [self.imagePath stringByAppendingString:extention];
+    }
 }
 
 - (NSString*) imageRepresentationType
@@ -353,7 +389,7 @@ static const CGFloat ThumbnailMaxSize = 384;
             thumbnail = [self CGImageFromNSImage:node.image];
         }
         
-        if (!self.isImage){
+        if (!self.isImage && thumbnailConfig.isVisibleFolderIcon){
             thumbnail = [self compositFolderImage:thumbnail];
         }
         
@@ -446,10 +482,11 @@ static const CGFloat ThumbnailMaxSize = 384;
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:gc];
     NSRect targetRect = NSZeroRect;
-    targetRect.size.width = targetRect.size.height = normalizedLength / 3.0;
-    targetRect.origin.x = normalizedLength - targetRect.size.width * 1.14;
+    targetRect.size.width = targetRect.size.height = normalizedLength * thumbnailConfig.folderIconSize.doubleValue;
+    targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
     [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
-                   fraction:1.0 respectFlipped:YES hints:nil];
+                   fraction:thumbnailConfig.folderIconOpacity.doubleValue
+             respectFlipped:YES hints:nil];
     [NSGraphicsContext restoreGraphicsState];
     
     return CGBitmapContextCreateImage(context);

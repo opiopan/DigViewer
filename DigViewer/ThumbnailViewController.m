@@ -13,14 +13,13 @@
 #import "PathNode.h"
 #import "DraggingSourceTreeController.h"
 #import "DraggingSourceArrayController.h"
+#import "ThumbnailConfigController.h"
 
 @implementation ThumbnailViewController
 
 @synthesize zoomRethio;
 @synthesize thumbnailView;
 @synthesize imageArrayController;
-
-const static double defaultZoomRatio = 100;
 
 - (id)init
 {
@@ -42,6 +41,7 @@ const static double defaultZoomRatio = 100;
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndMultiple"
                                                                  options:nil context:nil];
+    [[ThumbnailConfigController sharedController] addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
     
     [self reflectDnDSettings];
 }
@@ -55,6 +55,7 @@ const static double defaultZoomRatio = 100;
     [controller removeObserver:self forKeyPath:@"isCollapsedOutlineView"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndEnable"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndMultiple"];
+    [[ThumbnailConfigController sharedController] removeObserver:self forKeyPath:@"updateCount"];
 }
 
 - (NSView*)representationView;
@@ -66,6 +67,8 @@ const static double defaultZoomRatio = 100;
 {
     if ([keyPath isEqualToString:@"values.dndMultiple"] || [keyPath isEqualToString:@"values.dndEnable"]){
         [self reflectDnDSettings];
+    }else if (object == [ThumbnailConfigController sharedController]){
+        [thumbnailView reloadData];
     }else{
         [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
     }
@@ -110,7 +113,7 @@ const static double defaultZoomRatio = 100;
 
 - (IBAction)onDefaultSize:(id)sender
 {
-    self.zoomRethio = defaultZoomRatio;
+    self.zoomRethio = [[[ThumbnailConfigController sharedController] defaultSize] doubleValue];
 }
 
 - (IBAction)onUpFolder:(id)sender

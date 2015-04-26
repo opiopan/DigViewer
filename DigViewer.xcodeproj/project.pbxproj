@@ -89,6 +89,11 @@
 		7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6241ADA30F70076630A /* LensPreferences.strings */; };
 		7BBEE9F21ADD4AB60047DF50 /* DraggingSourceTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
+		7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */; };
+		7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */; };
+		7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */; };
+		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
+		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
@@ -248,6 +253,13 @@
 		7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggingSourceTreeController.h; sourceTree = "<group>"; };
 		7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggingSourceTreeController.m; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
+		7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailConfigController.h; sourceTree = "<group>"; };
+		7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailConfigController.m; sourceTree = "<group>"; };
+		7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailSampleView.h; sourceTree = "<group>"; };
+		7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ThumbnailSampleView.mm; sourceTree = "<group>"; };
+		7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleSquare.jpg; path = resources/thumbnailSampleSquare.jpg; sourceTree = "<group>"; };
+		7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleHorizontal.jpg; path = resources/thumbnailSampleHorizontal.jpg; sourceTree = "<group>"; };
+		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
 		7BF27648191BB25A0022E89D /* TestGPSMapView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = TestGPSMapView.html; path = tests/TestGPSMapView.html; sourceTree = "<group>"; };
@@ -347,9 +359,9 @@
 		7B3920531696F50B00E139D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7BB3327B1AEBB50700C74944 /* unavailable.png */,
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
 				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
+				7BB3327B1AEBB50700C74944 /* unavailable.png */,
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
 				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
 				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
@@ -385,6 +397,8 @@
 				7B9F9E8418E7D91D0042337F /* GPSMapView.h */,
 				7B9F9E8518E7D91D0042337F /* GPSMapView.m */,
 				7B9F9E8718E7DBBA0042337F /* GPSMapView.js */,
+				7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */,
+				7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -461,6 +475,8 @@
 				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
 				7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */,
 				7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */,
+				7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */,
+				7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */,
 			);
 			name = "Each Application";
 			sourceTree = "<group>";
@@ -514,6 +530,9 @@
 				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
 				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
+				7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */,
+				7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */,
+				7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */,
 				7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */,
 				7B3CDB4F1AE2A3AE005B6EAE /* EditLensSheet.strings */,
 			);
@@ -648,6 +667,7 @@
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
+				7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
@@ -655,6 +675,8 @@
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
+				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
+				7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */,
 				7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */,
 				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,
 				7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */,
@@ -746,6 +768,7 @@
 			files = (
 				7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */,
 				7B553BC31AE1F83600618590 /* Lens.m in Sources */,
+				7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */,
 				7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
@@ -765,6 +788,7 @@
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
+				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,

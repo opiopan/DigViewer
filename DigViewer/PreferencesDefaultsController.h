@@ -10,4 +10,6 @@
 
 @interface PreferencesDefaultsController : NSObject
 
++ (NSDictionary*)defaultValues;
+
 @end

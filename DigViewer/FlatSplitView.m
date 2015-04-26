@@ -12,7 +12,7 @@
 
 - (CGFloat)dividerThickness
 {
-    return 1;
+    return 1.5;
 }
 
 - (NSColor *)dividerColor

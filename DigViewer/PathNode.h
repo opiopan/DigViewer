@@ -62,6 +62,7 @@
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
                             progress:(PathNodeProgress*)progress;
++ (PathNode*) psudoPathNodeWithImagePath:(NSString*)path isFolder:(BOOL)isFolder;
 
 // イメージファイルが存在しない場合に表示するイメージ
 + (NSImage*) unavailableImage;
