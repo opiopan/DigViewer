@@ -341,12 +341,11 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    if (self.isImage){
+    if (self.isImage || !thumbnailConfig.isVisibleFolderIcon){
         return self.imagePath;
     }else{
-        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", thumbnailConfig.isVisibleFolderIcon,
-                                                                              thumbnailConfig.folderIconSize,
-                                                                              thumbnailConfig.folderIconOpacity];
+        NSString* extention = [NSString stringWithFormat:@".folder:%@:%@", thumbnailConfig.folderIconSize,
+                                                                           thumbnailConfig.folderIconOpacity];
         return [self.imagePath stringByAppendingString:extention];
     }
 }

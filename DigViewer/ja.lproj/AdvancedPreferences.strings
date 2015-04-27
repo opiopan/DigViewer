@@ -20,13 +20,13 @@
 "4N3-FM-0Qh.title" = "デフォルトサイズ";
 
 /* Class = "NSButtonCell"; title = "Reset thumbnail settings"; ObjectID = "58r-Ew-sKR"; */
-"58r-Ew-sKR.title" = "サムネイル設定をリセット";
+"58r-Ew-sKR.title" = "サムネール設定をリセット";
 
 /* Class = "NSButtonCell"; title = "Show folder icon"; ObjectID = "6NS-tg-TGo"; */
 "6NS-tg-TGo.title" = "フォルダーアイコンを表示";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnails:"; ObjectID = "TdC-y9-Kb0"; */
-"TdC-y9-Kb0.title" = "サムネイル表示の設定:";
+"TdC-y9-Kb0.title" = "サムネール表示の設定:";
 
 /* Class = "NSTextFieldCell"; title = "Icon size"; ObjectID = "aKL-KM-knG"; */
 "aKL-KM-knG.title" = "アイコンサイズ";

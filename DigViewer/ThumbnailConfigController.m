@@ -45,11 +45,19 @@
 //-----------------------------------------------------------------------------------------
 - (void)loadDefaults
 {
+    [self willChangeValueForKey:@"thumbDefaultSize"];
+    [self willChangeValueForKey:@"thumbIsVisibleFolder"];
+    [self willChangeValueForKey:@"thumbFolderSize"];
+    [self willChangeValueForKey:@"thumbFolderOpacity"];
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
-    self.defaultSize = [defaults.values valueForKey:@"thumbDefaultSize"];
-    self.isVisibleFolderIcon = [[defaults.values valueForKey:@"thumbIsVisibleFolder"] boolValue];
-    self.folderIconSize = [defaults.values valueForKey:@"thumbFolderSize"];
-    self.folderIconOpacity = [defaults.values valueForKey:@"thumbFolderOpacity"];
+    _defaultSize = [defaults.values valueForKey:@"thumbDefaultSize"];
+    _isVisibleFolderIcon = [[defaults.values valueForKey:@"thumbIsVisibleFolder"] boolValue];
+    _folderIconSize = [defaults.values valueForKey:@"thumbFolderSize"];
+    _folderIconOpacity = [defaults.values valueForKey:@"thumbFolderOpacity"];
+    [self didChangeValueForKey:@"thumbDefaultSize"];
+    [self didChangeValueForKey:@"thumbIsVisibleFolder"];
+    [self didChangeValueForKey:@"thumbFolderSize"];
+    [self didChangeValueForKey:@"thumbFolderOpacity"];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -94,11 +102,6 @@
 //-----------------------------------------------------------------------------------------
 // プロパティの実装
 //-----------------------------------------------------------------------------------------
-- (void)setUpdateCount:(NSNumber *)updateCount
-{
-    _updateCount = updateCount;
-}
-
 - (void)setDefaultSize:(NSNumber *)defaultSize
 {
     _defaultSize = defaultSize;

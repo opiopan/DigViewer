@@ -61,6 +61,7 @@
 - (void)notifyUpdateCount:(NSNumber*)updateCount
 {
     if (updateCount.longValue != _thumbnailConfigUpdateCount){
+        _thumbnailConfigUpdateCount = updateCount.longValue;
         _thumbnailSampleView.image = (__bridge CGImageRef)([_sampleNodeForThumbnail imageRepresentation]);
     }
     if (_thumbnailConfig.defaultSize.doubleValue != _thumbnailSampleView.imageSize){
