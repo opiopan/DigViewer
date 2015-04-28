@@ -12,8 +12,11 @@
 
 + (NSDictionary *)defaultValues
 {
+    NSData* blackData = [NSArchiver archivedDataWithRootObject:[NSColor blackColor]];
     NSData* redData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
-    NSDictionary* defaults = @{@"mapFovColor":          redData ,
+    NSDictionary* defaults = @{@"imageSetType":         @0,
+                               @"imageBackgroundColor": blackData,
+                               @"mapFovColor":          redData,
                                @"mapArrowColor":        redData,
                                @"mapFovGrade":          @30,
                                @"mapFovGradeMin":       @1,

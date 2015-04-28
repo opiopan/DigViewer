@@ -597,6 +597,59 @@ static const CGFloat ThumbnailMaxSize = 384;
     }
 }
 
+//-----------------------------------------------------------------------------------------
+// portabilityがあるパスに対する操作
+//-----------------------------------------------------------------------------------------
+- (NSArray*) portablePath
+{
+    NSMutableArray* path = [[NSMutableArray alloc] init];
+    [self appendNameToPortablePath:path];
+    return path;
+}
+
+- (void) appendNameToPortablePath:(NSMutableArray*)path
+{
+    [parent appendNameToPortablePath:path];
+    [path addObject:name];
+}
+
+- (PathNode*) nearestNodeAtPortablePath:(NSArray*)path
+{
+    if ([name isEqualToString:path[0]] && path.count > 1){
+        return [self nearestNodeAtPortablePath:path indexAt:1];
+    }else{
+        return self;
+    }
+}
+
+- (PathNode*) nearestNodeAtPortablePath:(NSArray*)path indexAt:(NSInteger)index
+{
+    NSString* searchingName = path[index];
+    PathNode* candidate = nil;
+    for (candidate in children){
+        if ([candidate.name isEqualToString:searchingName]){
+            if (path.count == index + 1){
+                return candidate;
+            }else{
+                return [candidate nearestNodeAtPortablePath:path indexAt:index + 1];
+            }
+        }
+    }
+    for (candidate in images){
+        if ([candidate.name isEqualToString:searchingName]){
+            return candidate;
+        }
+    }
+    
+    if (children && children.count > 0){
+        return children[0];
+    }else if (images && images.count > 0){
+        return images[0];
+    }else{
+        return self;
+    }
+}
+
 @end
 
 

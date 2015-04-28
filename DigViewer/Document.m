@@ -151,7 +151,23 @@ static NSDictionary* rawSuffixes = nil;
 {
     if (node){
         modelOption = loadingModelOption;
+        NSArray* path = nil;
+        if (self.root){
+            PathNode* selectedNode = windowController.imageArrayController.selectedObjects[0];
+            path = [selectedNode portablePath];
+        }
         self.root = node;
+        if (path){
+            PathNode* selectedNode = [self.root nearestNodeAtPortablePath:path];
+            PathNode* parentNode = selectedNode.parent;
+            if (!parentNode){
+                parentNode = selectedNode;
+                selectedNode = nil;
+            }
+            NSIndexPath* indexPath = [parentNode indexPath];
+            windowController.imageTreeController.selectionIndexPath = indexPath;
+            windowController.imageArrayController.selectionIndex = selectedNode.indexInParent;
+        }
     }else{
         if (!root){
             [self.windowForSheet close];

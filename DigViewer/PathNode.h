@@ -76,4 +76,8 @@
 // IndexPath作成
 - (NSIndexPath*) indexPath;
 
+// portabilityがあるパスに対する操作
+- (NSArray*) portablePath;
+- (PathNode*) nearestNodeAtPortablePath:(NSArray*)path;
+
 @end
