@@ -17,7 +17,8 @@ static NSMutableDictionary* capabilities = nil;
     if (!capabilities){
         [NSImage buildCapabilityList];
     }
-    return [capabilities valueForKey:[path pathExtension]] != nil;
+    NSString* extention = [[path pathExtension] lowercaseString];
+    return [capabilities valueForKey:extention] != nil;
 }
 
 + (void) buildCapabilityList
@@ -25,11 +26,28 @@ static NSMutableDictionary* capabilities = nil;
     NSArray* types = [NSImage imageFileTypes];
     capabilities = [NSMutableDictionary dictionaryWithCapacity:types.count];
     for (int i = 0; i < types.count; i++){
-        if ([types[i] characterAtIndex:0] != '\''){
-            [capabilities setValue:@"supported" forKey:types[i]];
+        NSString* type = [types[i] lowercaseString];
+        if ([type characterAtIndex:0] != '\'' && ![capabilities valueForKey:type]){
+            NSString* tmpFileName = [NSString stringWithFormat:@"/tmp/DigViewerTmp.%@", type];
+            NSFileManager* manager = [NSFileManager defaultManager];
+            [manager createFileAtPath:tmpFileName contents:nil attributes:nil];
+            NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
+            NSError* error;
+            NSString* remarks = [workspace localizedDescriptionForType:[workspace typeOfFile:tmpFileName error:&error]];
+            [capabilities setValue:remarks forKey:type];
+            [manager removeItemAtPath:tmpFileName error:&error];
         }
     }
 }
+
++ (NSDictionary *)supportedSuffixes
+{
+    if (!capabilities){
+        [NSImage buildCapabilityList];
+    }
+    return capabilities;
+}
+
 + (NSDictionary *)rawSuffixes
 {
     static NSDictionary* _rawSuffixes = nil;

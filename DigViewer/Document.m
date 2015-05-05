@@ -7,63 +7,17 @@
 //
 
 #import "Document.h"
+#import "DocumentConfigController.h"
 #import "DocumentWindowController.h"
 #import "LoadingSheetController.h"
-
-//-----------------------------------------------------------------------------------------
-// UserDefaultsForModel:
-// ・ Model (PathNodeグラフ)の構造に影響するUser Defaultsを抽象化するクラス
-//-----------------------------------------------------------------------------------------
-enum ImageSetType {imageSetTypeALL = 0, imageSetTypeExceptRaw, imageSetTypeSmall, imageSetTypeAll};
-@interface UserDefaultsForModel : NSObject
-@property (assign) enum ImageSetType type;
-@property (strong) PathNodeOmmitingCondition* condition;
-@end
-
-@implementation UserDefaultsForModel
-static NSDictionary* rawSuffixes = nil;
-
-- (id)init
-{
-    if (!rawSuffixes){
-        rawSuffixes = @{
-                        @"psd":@"cpx",
-                        @"tif":@"cpx", @"tiff":@"cpx"};
-    }
-    self = [super init];
-    if (self){
-        _condition = [[PathNodeOmmitingCondition alloc] init];
-        NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-        _type = ((NSNumber*)[[controller values] valueForKey:@"imageSetType"]).intValue;
-        if (_type == imageSetTypeExceptRaw){
-            _condition.suffixes = rawSuffixes;
-            _condition.isOmmitingRawImage = YES;
-        }
-    }
-    return self;
-}
-
-- (BOOL) isEqual:(id)object
-{
-    if (![[object class] isSubclassOfClass:[self class]]){
-        return NO;
-    }
-    UserDefaultsForModel* o = object;
-    if (self->_type != o->_type){
-        return NO;
-    }
-    return YES;
-}
-
-@end
 
 //-----------------------------------------------------------------------------------------
 // Document class implementation
 //-----------------------------------------------------------------------------------------
 @implementation Document{
     LoadingSheetController* loader;
-    UserDefaultsForModel* modelOption;
-    UserDefaultsForModel* loadingModelOption;
+    DocumentConfigController* modelOption;
+    DocumentConfigController* loadingModelOption;
     BOOL pendingReloadRequest;
     DocumentWindowController* windowController;
 }
@@ -137,7 +91,7 @@ static NSDictionary* rawSuffixes = nil;
         return;
     }
     pendingReloadRequest = NO;
-    UserDefaultsForModel* option = [[UserDefaultsForModel alloc] init];
+    DocumentConfigController* option = [[DocumentConfigController sharedController] snapshot];
     if (sender == windowController && [modelOption isEqualTo:option]){
         return;
     }

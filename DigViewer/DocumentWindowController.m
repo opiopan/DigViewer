@@ -8,6 +8,7 @@
 
 #import "DocumentWindowController.h"
 #import "Document.h"
+#import "DocumentConfigController.h"
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
@@ -67,10 +68,11 @@
     [self reflectValueToViewSelectionButton];
     
      // UserDefaultsの変更に対してObserverを登録
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    [controller addObserver:self forKeyPath:@"values.imageSetType" options:nil context:nil];
+    DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
+    [documentConfig addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
     
     // オープン時の表示設定を反映
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
     self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
     self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
@@ -86,8 +88,8 @@
 - (void)windowWillClose:(NSNotification *)notification
 {
     // Observerを削除
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    [controller removeObserver:self forKeyPath:@"values.imageSetType"];
+    DocumentConfigController* controller = [DocumentConfigController sharedController];
+    [controller removeObserver:self forKeyPath:@"updateCount"];
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
@@ -98,7 +100,7 @@
 //-----------------------------------------------------------------------------------------
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"values.imageSetType"]){
+    if (object == [DocumentConfigController sharedController]){
         [self.document loadDocument:self];
     }
 }

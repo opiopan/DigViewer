@@ -24,7 +24,7 @@
 @interface PathNodeOmmitingCondition : NSObject
 @property BOOL          isOmmitingRawImage;
 @property NSDictionary* suffixes;
-@property int           maxFileSize;  // it means no limit if negative
+@property long          maxFileSize;  // it means no limit if negative
 - (BOOL) isOmmitingImagePath:(NSString*)path;
 @end
 

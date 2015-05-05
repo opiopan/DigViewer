@@ -8,7 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NSPreferencesModule.h"
+#import "DocumentConfigController.h"
 
 @interface GeneralPreferences : NSPreferencesModule
+
+@property (strong, nonatomic) DocumentConfigController* documentConfigController;
 
 @end

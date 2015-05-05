@@ -14,7 +14,10 @@
 {
     NSData* blackData = [NSArchiver archivedDataWithRootObject:[NSColor blackColor]];
     NSData* redData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
+    NSArray* zeroArray = [NSArray array];
     NSDictionary* defaults = @{@"imageSetType":         @0,
+                               @"imageSetMaxFileSize":  @5,
+                               @"imageSetOmittingExt":  zeroArray,
                                @"imageBackgroundColor": blackData,
                                @"mapFovColor":          redData,
                                @"mapArrowColor":        redData,

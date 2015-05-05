@@ -15,6 +15,7 @@
 
 #include "CoreFoundationHelper.h"
 #include <stdlib.h>
+#include <sys/stat.h>
 
 static ThumbnailConfigController* __weak thumbnailConfig;
 
@@ -85,7 +86,8 @@ static ThumbnailConfigController* __weak thumbnailConfig;
             NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
             NSString* filePath = [pinnedFile absolutePathAtIndex:i];
             if (!root){
-                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil originalPath:filePath];
+                NSString* rootpath = pinnedFile.path;
+                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil originalPath:rootpath];
                 [context addObject:root];
             }
             int j;
@@ -220,8 +222,8 @@ static ThumbnailConfigController* __weak thumbnailConfig;
         if (!images){
             images = [[NSMutableArray alloc] init];
         }
-        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self indexInParent:images.count
-                                                      path:path originalPath:path];
+        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self indexInParent:images.count path:path
+                                              originalPath:[originalPath stringByAppendingPathComponent:targetName]];
         [images addObject:newNode];
     }else{
         if (!children){
@@ -236,7 +238,8 @@ static ThumbnailConfigController* __weak thumbnailConfig;
             }
         }
         if (!child){
-            child = [[PathNode alloc] initWithName:targetName parent:self indexInParent:children.count path:nil originalPath:path];
+            child = [[PathNode alloc] initWithName:targetName parent:self indexInParent:children.count path:nil
+                                      originalPath:[originalPath stringByAppendingPathComponent:targetName]];
             [children addObject:child];
         }
         [child mergePathComponents:components atIndex:index + 1 withPath:path context:context];
@@ -746,7 +749,16 @@ static const CGFloat ThumbnailMaxSize = 384;
     if (self.isOmmitingRawImage){
         rc = [NSImage isRawFileAtPath:path];
     }
-    return rc || ([suffixes valueForKey:[[path pathExtension] lowercaseString]] != nil);
+    if (!rc){
+        rc = ([suffixes valueForKey:[[path pathExtension] lowercaseString]] != nil);
+    }
+    if (!rc && self.maxFileSize > 0){
+        struct stat buf;
+        if (stat(path.UTF8String, &buf) != -1 && buf.st_size > maxFileSize){
+            rc = YES;
+        }
+    }
+    return rc;
 }
 
 @end

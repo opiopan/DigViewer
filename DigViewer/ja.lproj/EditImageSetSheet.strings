@@ -1,0 +1,23 @@
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "5ra-hU-alz"; */
+"5ra-hU-alz.title" = "OK";
+
+/* Class = "NSTableColumn"; headerCell.title = "Extention"; ObjectID = "7yv-0g-eKG"; */
+"7yv-0g-eKG.headerCell.title" = "拡張子";
+
+/* Class = "NSTextFieldCell"; title = "Show:"; ObjectID = "Qhp-N4-r9s"; */
+"Qhp-N4-r9s.title" = "表示する:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Remarks"; ObjectID = "Xya-mE-msB"; */
+"Xya-mE-msB.headerCell.title" = "説明";
+
+/* Class = "NSTextFieldCell"; title = "Hidden:"; ObjectID = "dat-tF-sfK"; */
+"dat-tF-sfK.title" = "表示しない:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Remarks"; ObjectID = "pfQ-U0-ASJ"; */
+"pfQ-U0-ASJ.headerCell.title" = "説明";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "vWz-ia-9yc"; */
+"vWz-ia-9yc.title" = "キャンセル";
+
+/* Class = "NSTableColumn"; headerCell.title = "Extention"; ObjectID = "vuY-cy-cVf"; */
+"vuY-cy-cVf.headerCell.title" = "拡張子";
