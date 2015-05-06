@@ -27,6 +27,8 @@
 {
     _lensLibrary = [LensLibrary sharedLensLibrary];
     [self.lensArrayController setManagedObjectContext:_lensLibrary.managedObjectContext];
+    NSSortDescriptor* sortDescritor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [self.lensArrayController setSortDescriptors:@[sortDescritor]];
     
     [_lensProfileTableView setTarget:self];
     [_lensProfileTableView setDoubleAction:@selector(onDoubleClickLensProfileTableView:)];
