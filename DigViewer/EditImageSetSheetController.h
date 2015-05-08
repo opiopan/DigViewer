@@ -14,8 +14,8 @@
 @property (weak) IBOutlet NSArrayController* displayableListController;
 @property (weak) IBOutlet NSArrayController* omittingListController;
 
-@property (strong) NSArray* displayableList;
-@property (strong) NSArray* omittingList;
+@property (strong) NSMutableArray* displayableList;
+@property (strong) NSMutableArray* omittingList;
 @property (assign) BOOL okButtonIsEnable;
 
 - (IBAction)onAdd:(id)sender;

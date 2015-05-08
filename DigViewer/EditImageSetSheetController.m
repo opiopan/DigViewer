@@ -88,6 +88,9 @@
 
 - (void) awakeFromNib
 {
+    NSArray* sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"me" ascending:YES]];
+    _displayableListController.sortDescriptors = sortDescriptors;
+    _omittingListController.sortDescriptors = sortDescriptors;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -119,12 +122,8 @@
             [displayableList addObject:entity];
         }
     }
-    self.displayableList = [displayableList sortedArrayUsingComparator:^(id o1, id o2){
-        return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-    }];
-    self.omittingList = [omittingList sortedArrayUsingComparator:^(id o1, id o2){
-        return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-    }];
+    self.displayableList = displayableList;
+    self.omittingList = omittingList;
     
     [[NSApplication sharedApplication] beginSheet:self.panel
                                    modalForWindow:_window
@@ -155,16 +154,14 @@
 - (void)onAdd:(id)sender
 {
     if (_displayableListController.selectedObjects.count > 0){
-        NSMutableArray* displayableList = [NSMutableArray arrayWithArray:_displayableList];
-        [displayableList removeObjectsInArray:_displayableListController.selectedObjects];
-        NSMutableArray* omittingList = [NSMutableArray arrayWithArray:_omittingList];
-        [omittingList addObjectsFromArray:_displayableListController.selectedObjects];
-        self.displayableList = [displayableList sortedArrayUsingComparator:^(id o1, id o2){
-            return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-        }];
-        self.omittingList = [omittingList sortedArrayUsingComparator:^(id o1, id o2){
-            return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-        }];
+        [self willChangeValueForKey:@"displayableList"];
+        [self willChangeValueForKey:@"omittingList"];
+        NSArray* selectedObjects = [NSArray arrayWithArray:_displayableListController.selectedObjects];
+        [_displayableList removeObjectsInArray:selectedObjects];
+        [_omittingList addObjectsFromArray:selectedObjects];
+        [self didChangeValueForKey:@"displayableList"];
+        [self didChangeValueForKey:@"omittingList"];
+        _omittingListController.selectedObjects = selectedObjects;
         self.okButtonIsEnable = YES;
     }
 }
@@ -172,16 +169,14 @@
 - (void)onRemove:(id)sender
 {
     if (_omittingListController.selectedObjects.count > 0){
-        NSMutableArray* displayableList = [NSMutableArray arrayWithArray:_displayableList];
-        [displayableList addObjectsFromArray:_omittingListController.selectedObjects];
-        NSMutableArray* omittingList = [NSMutableArray arrayWithArray:_omittingList];
-        [omittingList removeObjectsInArray:_omittingListController.selectedObjects];
-        self.displayableList = [displayableList sortedArrayUsingComparator:^(id o1, id o2){
-            return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-        }];
-        self.omittingList = [omittingList sortedArrayUsingComparator:^(id o1, id o2){
-            return [((ExtentionEntity*)o1).name compare:((ExtentionEntity*)o2).name];
-        }];
+        [self willChangeValueForKey:@"displayableList"];
+        [self willChangeValueForKey:@"omittingList"];
+        NSArray* selectedObjects = [NSArray arrayWithArray:_omittingListController.selectedObjects];
+        [_omittingList removeObjectsInArray:selectedObjects];
+        [_displayableList addObjectsFromArray:selectedObjects];
+        [self didChangeValueForKey:@"displayableList"];
+        [self didChangeValueForKey:@"omittingList"];
+        _displayableListController.selectedObjects = selectedObjects;
         self.okButtonIsEnable = YES;
     }
 }
