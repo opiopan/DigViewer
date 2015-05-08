@@ -23,6 +23,8 @@
 @property (assign) BOOL isCollapsedOutlineView;
 @property (assign) BOOL isCollapsedInspectorView;
 @property (assign, readonly) BOOL isInTransitionState;
+@property (strong, nonatomic) NSImage* slideshowButtonImage;
+@property (strong, nonatomic) NSString* slideshowButtonTooltip;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
@@ -31,6 +33,8 @@
 - (void)moveDownFolder:(id)sender;
 
 - (IBAction)refreshDocument:(id)sender;
+
+- (IBAction)toggleSlideshowMode:(id)sender;
 
 @end
 

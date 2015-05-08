@@ -9,6 +9,7 @@
 #import "DocumentWindowController.h"
 #import "Document.h"
 #import "DocumentConfigController.h"
+#import "SlideshowConfigController.h"
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
@@ -40,6 +41,9 @@
 @implementation DocumentWindowController{
     MainViewController* mainViewController;
     int                 transitionStateCount;
+    SlideshowConfigController*  slideshowConfig;
+    BOOL                        isInSlideshowMode;
+    NSInteger                   slideshowCount;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -51,6 +55,9 @@
     self = [super initWithWindowNibName:@"Document"];
     if (self) {
         transitionStateCount = 0;
+        slideshowConfig = [SlideshowConfigController sharedController];
+        isInSlideshowMode = NO;
+        slideshowCount = 0;
     }
     return self;
 }
@@ -78,6 +85,9 @@
     self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
     self.isCollapsedInspectorView = ![[[controller values] valueForKey:@"defShowInspector"] boolValue];
     
+    // スライドショー状態の初期化
+    [self setSlideshowMode:NO];
+   
    // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
 }
@@ -253,6 +263,9 @@
 
 - (void) setPresentationViewType:(int)type
 {
+    if (type == typeThumbnailView && isInSlideshowMode){
+        [self setSlideshowMode:NO];
+    }
     mainViewController.presentationViewType = type;
 }
 
@@ -353,6 +366,57 @@
 - (void)moveLeft:(id)sender
 {
     [self moveToPreviousImage:sender];
+}
+
+//-----------------------------------------------------------------------------------------
+// スライドショー状態の制御
+//-----------------------------------------------------------------------------------------
+- (void)setSlideshowMode:(BOOL)slideshowMode
+{
+    isInSlideshowMode = slideshowMode;
+    slideshowCount++;
+    if (isInSlideshowMode){
+        self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"pause"];
+        self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_END", nil);
+        if (self.presentationViewType != typeImageView){
+            self.presentationViewType = typeImageView;
+        }
+        [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
+                   afterDelay:slideshowConfig.interval.doubleValue];
+    }else{
+        self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"play"];
+        self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_BEGIN", nil);
+    }
+}
+
+- (void)proceedSlideshow:(NSNumber*)count
+{
+    if (count.integerValue == slideshowCount){
+        [self moveToNextImage:self];
+        PathNode* node = _imageArrayController.selectedObjects[0];
+        PathNode* nextNode = node.nextImageNode;
+        if (nextNode){
+            [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
+                       afterDelay:slideshowConfig.interval.doubleValue];
+        }else{
+            [self setSlideshowMode:NO];
+        }
+    }
+}
+
+- (void)toggleSlideshowMode:(id)sender
+{
+    [self setSlideshowMode:!isInSlideshowMode];
+}
+
+- (BOOL)validateForToggleSlideshowMode:(NSMenuItem*)menuItem
+{
+    if (isInSlideshowMode){
+        menuItem.title = NSLocalizedString(@"End Slideshow", nil);
+    }else{
+        menuItem.title = NSLocalizedString(@"Begin Slideshow", nil);
+    }
+    return YES;
 }
 
 @end

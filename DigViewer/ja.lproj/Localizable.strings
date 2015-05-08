@@ -28,6 +28,12 @@
 "Hide Navigator" = "ナビゲーターを隠す";
 "Show Inspector" = "インスペクターを表示";
 "Hide Inspector" = "インスペクターを隠す";
+"Begin Slideshow" = "スライドショーを開始する";
+"End Slideshow" = "スライドショーを終了する";
+
+// スライドショーボタンのtool tip
+"SLIDESHOW_TOOLTIP_BEGIN" = "スライドショーを開始します";
+"SLIDESHOW_TOOLTIP_END" = "スライドショーを終了します";
 
 // インスペクタービュー: 属性名
 "File Name:" = "ファイル名:";

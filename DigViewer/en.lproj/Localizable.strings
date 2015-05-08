@@ -20,3 +20,7 @@
 "MVMSG_NOKEY" = "Google API key is not specified. Please specify a key at preferences panel.";
 "MVMSG_INVALIDKEY" = "Specified Google API key cannot be used. Please make sure a key you specified is correct.";
 "MVMSG_SPECIFYKEYBUTTON" = "Specify API Key...";
+
+// スライドショーボタンのtool tip
+"SLIDESHOW_TOOLTIP_BEGIN" = "Begin slideshow";
+"SLIDESHOW_TOOLTIP_END" = "End slideshow";

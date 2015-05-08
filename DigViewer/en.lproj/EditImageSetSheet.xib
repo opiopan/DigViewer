@@ -34,7 +34,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="V2b-k9-xKd">
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="V2b-k9-xKd">
                         <rect key="frame" x="20" y="61" width="276" height="265"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="7Yz-T2-a0X">
@@ -42,9 +42,9 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="32" headerView="n98-ls-o7w" id="bZc-yQ-05c">
-                                    <rect key="frame" x="0.0" y="0.0" width="273" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="34"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <size key="intercellSpacing" width="3" height="8"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
@@ -64,7 +64,7 @@
                                                 <binding destination="ohW-v5-i2R" name="value" keyPath="arrangedObjects.me" id="FeN-Mq-IPc"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn editable="NO" width="184" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
+                                        <tableColumn editable="NO" width="186" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -107,7 +107,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="Xvs-OW-9HT">
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="Xvs-OW-9HT">
                         <rect key="frame" x="357" y="61" width="276" height="265"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="NM0-lX-SFh">
@@ -115,9 +115,9 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="32" headerView="Yoe-0W-di7" id="XJv-Wd-PR1">
-                                    <rect key="frame" x="0.0" y="0.0" width="273" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="34"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <size key="intercellSpacing" width="3" height="8"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
@@ -141,7 +141,7 @@
                                                 </binding>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn editable="NO" width="184" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
+                                        <tableColumn editable="NO" width="186" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

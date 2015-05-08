@@ -52,7 +52,7 @@ static NSDictionary* rawSuffixes = nil;
     self = [self init];
     if (self){
         _type = ((NSNumber*)[_controller.values valueForKey:@"imageSetType"]).intValue;
-        _maxFileSize = ((NSNumber*)[_controller.values valueForKey:@"imageSetMaxFileSize"]).integerValue;
+        _maxFileSize = [_controller.values valueForKey:@"imageSetMaxFileSize"];
         _omittingExtentions = (NSArray*)[_controller.values valueForKey:@"imageSetOmittingExt"];
         _isTypeSmall = _type == imageSetTypeSmall;
         _isTypeCustom = _type == imageSetTypeCustom;
@@ -118,10 +118,10 @@ static NSDictionary* rawSuffixes = nil;
     [self didChangeValueForKey:@"isTypeCustom"];
 }
 
-- (void)setMaxFileSize:(NSInteger)maxFileSize
+- (void)setMaxFileSize:(NSNumber*)maxFileSize
 {
     _maxFileSize = maxFileSize;
-    [_controller.values setValue:[NSNumber numberWithInteger:maxFileSize] forKey:@"imageSetMaxFileSize"];
+    [_controller.values setValue:maxFileSize forKey:@"imageSetMaxFileSize"];
     self.updateCount = _updateCount + 1;
 }
 
@@ -142,7 +142,7 @@ static NSDictionary* rawSuffixes = nil;
         condition.suffixes = rawSuffixes;
         condition.isOmmitingRawImage = YES;
     }else if (_type == imageSetTypeSmall){
-        condition.maxFileSize = (long)_maxFileSize * 1024 * 1024;
+        condition.maxFileSize = _maxFileSize.longValue * 1024 * 1024;
     }else if (_type == imageSetTypeCustom){
         NSMutableDictionary* extentions = [NSMutableDictionary dictionaryWithCapacity:_omittingExtentions.count];
         for (NSString* ext in _omittingExtentions){

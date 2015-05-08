@@ -16,7 +16,7 @@ enum ImageSetType {imageSetTypeALL = 0, imageSetTypeExceptRaw, imageSetTypeSmall
 @interface DocumentConfigController : NSObject
 
 @property (assign, nonatomic) enum ImageSetType type;
-@property (assign, nonatomic) NSInteger maxFileSize;
+@property (strong, nonatomic) NSNumber* maxFileSize;
 @property (strong, nonatomic) NSArray* omittingExtentions;
 
 @property (assign, nonatomic) NSInteger updateCount;

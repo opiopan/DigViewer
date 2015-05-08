@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
@@ -55,7 +55,7 @@
                             <binding destination="-2" name="value" keyPath="self.isFitWindow" id="100313"/>
                         </connections>
                     </button>
-                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-ag-7JX">
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-ag-7JX">
                         <rect key="frame" x="151" y="451" width="67" height="25"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="E2t-3v-5oY">
                             <font key="font" metaFont="system"/>
@@ -81,6 +81,21 @@
                             <action selector="refreshDocument:" target="-2" id="pLd-IX-HCn"/>
                         </connections>
                     </button>
+                    <button toolTip="Start or stop slideshow" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zwr-KH-vth">
+                        <rect key="frame" x="238" y="451" width="38" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="nel-2M-xQW"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="play" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ck6-Qw-Dyi">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleSlideshowMode:" target="-2" id="RNc-Yu-P4W"/>
+                            <binding destination="-2" name="image" keyPath="self.slideshowButtonImage" id="uqM-dy-aM0"/>
+                            <binding destination="-2" name="toolTip" keyPath="self.slideshowButtonTooltip" previousBinding="uqM-dy-aM0" id="nUm-5f-oZE"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="100232" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="100273"/>
@@ -91,6 +106,10 @@
                     <constraint firstItem="100301" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="93" id="100304"/>
                     <constraint firstItem="100301" firstAttribute="baseline" secondItem="100290" secondAttribute="baseline" id="100305"/>
                     <constraint firstItem="100232" firstAttribute="top" secondItem="100290" secondAttribute="bottom" constant="8" symbolic="YES" id="100308"/>
+                    <constraint firstItem="zwr-KH-vth" firstAttribute="leading" secondItem="Y6C-ag-7JX" secondAttribute="trailing" constant="20" id="1x7-N9-OKi"/>
+                    <constraint firstItem="zwr-KH-vth" firstAttribute="top" secondItem="100290" secondAttribute="top" id="9SJ-Rq-L0d"/>
+                    <constraint firstItem="zwr-KH-vth" firstAttribute="top" secondItem="Y6C-ag-7JX" secondAttribute="top" id="JJ4-bK-gRW"/>
+                    <constraint firstItem="Y6C-ag-7JX" firstAttribute="leading" secondItem="100301" secondAttribute="trailing" constant="20" id="Qpi-IE-x8V"/>
                     <constraint firstAttribute="trailing" secondItem="rGL-6j-xuH" secondAttribute="trailing" constant="8" id="UKF-Tj-65Z"/>
                     <constraint firstItem="100232" firstAttribute="top" secondItem="rGL-6j-xuH" secondAttribute="bottom" constant="8" id="nS2-F3-isA"/>
                 </constraints>
@@ -121,5 +140,6 @@
         <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
+        <image name="play" width="475" height="512"/>
     </resources>
 </document>

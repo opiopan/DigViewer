@@ -31,3 +31,9 @@
 
 /* Class = "NSButtonCell"; title = "Muti images are selectable"; ObjectID = "RKo-7i-EO8"; */
 "RKo-7i-EO8.title" = "複数画像の選択を可能とする";
+
+/* Class = "NSTextFieldCell"; title = "Slideshow interval:"; ObjectID = "QU4-4I-usl"; */
+"QU4-4I-usl.title" = "スライドショー間隔:";
+
+/* Class = "NSTextFieldCell"; title = "sec"; ObjectID = "hXl-b8-oJH"; */
+"hXl-b8-oJH.title" = "秒";

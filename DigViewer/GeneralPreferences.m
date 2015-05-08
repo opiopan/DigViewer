@@ -30,6 +30,7 @@
 - (void)initializeFromDefaults
 {
     self.documentConfigController = [DocumentConfigController sharedController];
+    self.slideshowConfigController = [SlideshowConfigController sharedController];
 }
 
 //-----------------------------------------------------------------------------------------

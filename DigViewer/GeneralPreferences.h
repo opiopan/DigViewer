@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "NSPreferencesModule.h"
 #import "DocumentConfigController.h"
+#import "SlideShowConfigController.h"
 
 @interface GeneralPreferences : NSPreferencesModule
 
 @property (strong, nonatomic) DocumentConfigController* documentConfigController;
+@property (strong, nonatomic) SlideshowConfigController* slideshowConfigController;
 
 @end
