@@ -8,7 +8,9 @@
         <customObject id="-2" userLabel="File's Owner" customClass="EditImageSetSheetController">
             <connections>
                 <outlet property="displayableListController" destination="ohW-v5-i2R" id="AaX-6T-g7X"/>
+                <outlet property="displayableListView" destination="bZc-yQ-05c" id="5Kx-OE-SyE"/>
                 <outlet property="omittingListController" destination="hMD-QU-gTK" id="f9R-fv-nqZ"/>
+                <outlet property="omittingListView" destination="XJv-Wd-PR1" id="pWS-Dr-exF"/>
                 <outlet property="panel" destination="FTR-Nb-mbU" id="jwV-fN-TJR"/>
             </connections>
         </customObject>
@@ -39,14 +41,14 @@
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="32" headerView="n98-ls-o7w" id="bZc-yQ-05c">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="32" headerView="n98-ls-o7w" id="bZc-yQ-05c">
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="34"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn editable="NO" width="68" minWidth="40" maxWidth="1000" id="7yv-0g-eKG">
+                                        <tableColumn editable="NO" width="82" minWidth="40" maxWidth="1000" id="7yv-0g-eKG">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Extention">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -62,13 +64,13 @@
                                                 <binding destination="ohW-v5-i2R" name="value" keyPath="arrangedObjects.me" id="FeN-Mq-IPc"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn editable="NO" width="199" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
+                                        <tableColumn editable="NO" width="184" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Text Cell" id="OTQ-sU-rgz">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Text Cell" id="OTQ-sU-rgz" customClass="ImageWithTextCell">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -112,14 +114,14 @@
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="32" headerView="Yoe-0W-di7" id="XJv-Wd-PR1">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="32" headerView="Yoe-0W-di7" id="XJv-Wd-PR1">
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="34"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn editable="NO" width="68" minWidth="40" maxWidth="1000" id="vuY-cy-cVf">
+                                        <tableColumn editable="NO" width="82" minWidth="40" maxWidth="1000" id="vuY-cy-cVf">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Extention">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -139,13 +141,13 @@
                                                 </binding>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn editable="NO" width="199" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
+                                        <tableColumn editable="NO" width="184" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Wqv-3o-d9U">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Wqv-3o-d9U" customClass="ImageWithTextCell">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

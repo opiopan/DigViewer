@@ -13,6 +13,8 @@
 @property (strong) IBOutlet NSPanel *panel;
 @property (weak) IBOutlet NSArrayController* displayableListController;
 @property (weak) IBOutlet NSArrayController* omittingListController;
+@property (weak) IBOutlet NSTableView *displayableListView;
+@property (weak) IBOutlet NSTableView *omittingListView;
 
 @property (strong) NSMutableArray* displayableList;
 @property (strong) NSMutableArray* omittingList;

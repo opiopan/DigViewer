@@ -332,7 +332,7 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 - (NSImage*) icon
 {
     if (imagePath){
-        return [[NSWorkspace sharedWorkspace] iconForFileType:[name pathExtension]];
+        return [[NSWorkspace sharedWorkspace] iconForFileType:[name pathExtension].lowercaseString];
     }else{
         return [[NSWorkspace sharedWorkspace] iconForFile:@"/var"];
     }

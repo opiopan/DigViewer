@@ -49,12 +49,12 @@
 
 - (NSImage *)icon
 {
-    return [[NSWorkspace sharedWorkspace] iconForFileType:_name];
+    return [[NSWorkspace sharedWorkspace] iconForFileType:_name.lowercaseString];
 }
 
 - (NSString *)remarks
 {
-    return [[NSImage supportedSuffixes] valueForKey:_name];
+    return [[NSImage supportedSuffixes] valueForKey:_name.lowercaseString];
 }
 
 @end
@@ -91,6 +91,11 @@
     NSArray* sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"me" ascending:YES]];
     _displayableListController.sortDescriptors = sortDescriptors;
     _omittingListController.sortDescriptors = sortDescriptors;
+    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"remarks" ascending:YES comparator:^(id o1, id o2){
+        return [(NSString*)o1 compare:o2 options:NSCaseInsensitiveSearch];
+    }];
+    ((NSTableColumn*)_displayableListView.tableColumns[1]).sortDescriptorPrototype = sortDescriptor;
+    ((NSTableColumn*)_omittingListView.tableColumns[1]).sortDescriptorPrototype = sortDescriptor;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -115,7 +120,7 @@
                 break;
             }
         }
-        ExtentionEntity* entity = [[ExtentionEntity alloc] initWithName:extention];
+        ExtentionEntity* entity = [[ExtentionEntity alloc] initWithName:extention.uppercaseString];
         if (isOmitting){
             [omittingList addObject:entity];
         }else{
@@ -140,7 +145,7 @@
     if (returnCode == NSOKButton){
         NSMutableArray* array = [NSMutableArray arrayWithCapacity:_omittingList.count];
         for (ExtentionEntity* extention in _omittingList){
-            [array addObject:extention.name];
+            [array addObject:extention.name.lowercaseString];
         }
         [_delegate performSelector:_didEndSelector withObject:array afterDelay:0];
     }else{
