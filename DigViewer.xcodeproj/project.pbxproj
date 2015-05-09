@@ -39,7 +39,7 @@
 		7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.mm */; };
 		7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AC4A718B05384004136CD /* InspectorViewController.m */; };
 		7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC21518D86DC5007527E6 /* InfoPlistController.m */; };
-		7B23D32D1AFDB9CB00A78E77 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */; };
+		7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
 		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
@@ -55,6 +55,8 @@
 		7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B40A4191AFCFCE3006ED497 /* SlideshowConfigController.m */; };
 		7B40A41D1AFD08FD006ED497 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B40A41B1AFD08FD006ED497 /* pause.png */; };
 		7B40A41E1AFD08FD006ED497 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B40A41C1AFD08FD006ED497 /* play.png */; };
+		7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */; };
+		7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */; };
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
@@ -70,6 +72,7 @@
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
@@ -175,7 +178,7 @@
 		7B1AC4A718B05384004136CD /* InspectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorViewController.m; sourceTree = "<group>"; };
 		7B1CC21418D86DC5007527E6 /* InfoPlistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPlistController.h; sourceTree = "<group>"; };
 		7B1CC21518D86DC5007527E6 /* InfoPlistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPlistController.m; sourceTree = "<group>"; };
-		7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumbnail.png; path = resources/thumbnail.png; sourceTree = "<group>"; };
+		7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ThumbnailPreferences.png; path = resources/ThumbnailPreferences.png; sourceTree = "<group>"; };
 		7B30AC2418A6000F00A70555 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 		7B40A4191AFCFCE3006ED497 /* SlideshowConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowConfigController.m; sourceTree = "<group>"; };
 		7B40A41B1AFD08FD006ED497 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = resources/pause.png; sourceTree = "<group>"; };
 		7B40A41C1AFD08FD006ED497 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = resources/play.png; sourceTree = "<group>"; };
+		7B4400771AFDC675006CE7D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailPreferences.xib; sourceTree = "<group>"; };
+		7B44007A1AFDC697006CE7D6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ThumbnailPreferences.strings; sourceTree = "<group>"; };
 		7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
 		7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
 		7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBackgroundView.h; sourceTree = "<group>"; };
@@ -232,6 +237,8 @@
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailPreferences.h; sourceTree = "<group>"; };
+		7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailPreferences.m; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
@@ -484,6 +491,8 @@
 				7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */,
 				7BB4E5F71AD945460076630A /* MapPreferences.h */,
 				7BB4E5F81AD945460076630A /* MapPreferences.m */,
+				7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */,
+				7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */,
 				7BB4E6101ADA031A0076630A /* LensPreferences.h */,
 				7BB4E6111ADA031A0076630A /* LensPreferences.m */,
 				7BB4E6131ADA09B80076630A /* AdvancedPreferences.h */,
@@ -549,12 +558,14 @@
 				7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */,
 				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
 				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
+				7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */,
+				7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */,
 				7BB4E61E1ADA0C350076630A /* LensPreferences.xib */,
 				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
 				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
 				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
-				7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */,
+				7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */,
 				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
 				7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */,
 				7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */,
@@ -685,11 +696,13 @@
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
+				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
+				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
 				7BB4E6261ADA30F70076630A /* AdvancedPreferences.strings in Resources */,
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
@@ -699,7 +712,7 @@
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
-				7B23D32D1AFDB9CB00A78E77 /* thumbnail.png in Resources */,
+				7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */,
 				7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */,
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
@@ -749,6 +762,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/EditLensSheet.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/EditFileSetSheet.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/EditFileSetSheetSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/ThumbnailPreferences.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/ThumbnailPreferences.xib",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -763,10 +778,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/AdvancedPreferences.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditLensSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditFileSetSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/ThumbnailPreferences.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -839,6 +855,7 @@
 				7BBEE9F21ADD4AB60047DF50 /* DraggingSourceTreeController.m in Sources */,
 				7BB4E6151ADA09B80076630A /* AdvancedPreferences.m in Sources */,
 				7B0DBED716A0FE24000365F4 /* NSView+ViewControllerAssociation.m in Sources */,
+				7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */,
 				7BA81C011AF77C54001E40D7 /* EditImageSetSheetController.m in Sources */,
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
@@ -934,6 +951,22 @@
 				7B3CDB501AE2A3AE005B6EAE /* ja */,
 			);
 			name = EditLensSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B4400771AFDC675006CE7D6 /* en */,
+			);
+			name = ThumbnailPreferences.xib;
+			sourceTree = "<group>";
+		};
+		7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B44007A1AFDC697006CE7D6 /* ja */,
+			);
+			name = ThumbnailPreferences.strings;
 			sourceTree = "<group>";
 		};
 		7B4E8E2416C827D3001C5D09 /* Localizable.strings */ = {

@@ -48,16 +48,22 @@
     [self willChangeValueForKey:@"thumbDefaultSize"];
     [self willChangeValueForKey:@"thumbIsVisibleFolder"];
     [self willChangeValueForKey:@"thumbFolderSize"];
+    [self willChangeValueForKey:@"thumbFolderSizeRepresentation"];
     [self willChangeValueForKey:@"thumbFolderOpacity"];
+    [self willChangeValueForKey:@"thumbFolderOpacityRepresentation"];
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     _defaultSize = [defaults.values valueForKey:@"thumbDefaultSize"];
     _isVisibleFolderIcon = [[defaults.values valueForKey:@"thumbIsVisibleFolder"] boolValue];
     _folderIconSize = [defaults.values valueForKey:@"thumbFolderSize"];
+    _folderIconSizeRepresentation = @(((int)(_folderIconSize.doubleValue * 10000)) / 100.0);
     _folderIconOpacity = [defaults.values valueForKey:@"thumbFolderOpacity"];
+    _folderIconOpacityRepresentation = @(((int)(_folderIconOpacity.doubleValue * 10000)) / 100.0);
     [self didChangeValueForKey:@"thumbDefaultSize"];
     [self didChangeValueForKey:@"thumbIsVisibleFolder"];
     [self didChangeValueForKey:@"thumbFolderSize"];
+    [self didChangeValueForKey:@"thumbFolderSizeRepresentation"];
     [self didChangeValueForKey:@"thumbFolderOpacity"];
+    [self didChangeValueForKey:@"thumbFolderOpacityRepresentation"];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -121,6 +127,7 @@
 - (void)setFolderIconSize:(NSNumber *)folderIconSize
 {
     _folderIconSize = folderIconSize;
+    self.folderIconSizeRepresentation = @(((int)(_folderIconSize.doubleValue * 10000)) / 100.0);
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     [[defaults values] setValue:_folderIconSize forKey:@"thumbFolderSize"];
     [self incrementUpdateCount];
@@ -129,6 +136,7 @@
 - (void)setFolderIconOpacity:(NSNumber *)folderIconOpacity
 {
     _folderIconOpacity = folderIconOpacity;
+    self.folderIconOpacityRepresentation = @(((int)(_folderIconOpacity.doubleValue * 10000)) / 100.0);
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     [[defaults values] setValue:_folderIconOpacity forKey:@"thumbFolderOpacity"];
     [self incrementUpdateCount];

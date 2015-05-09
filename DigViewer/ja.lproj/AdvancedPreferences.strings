@@ -15,30 +15,3 @@
 
 /* Class = "NSButtonCell"; title = "Fit to window size if image is smaller than window"; ObjectID = "wCY-en-coM"; */
 "wCY-en-coM.title" = "小さい画像をウインドウサイズに合わせて拡大表示";
-
-/* Class = "NSTextFieldCell"; title = "Default size"; ObjectID = "4N3-FM-0Qh"; */
-"4N3-FM-0Qh.title" = "デフォルトサイズ";
-
-/* Class = "NSButtonCell"; title = "Reset thumbnail settings"; ObjectID = "58r-Ew-sKR"; */
-"58r-Ew-sKR.title" = "サムネール設定をリセット";
-
-/* Class = "NSButtonCell"; title = "Show folder icon"; ObjectID = "6NS-tg-TGo"; */
-"6NS-tg-TGo.title" = "フォルダーアイコンを表示";
-
-/* Class = "NSTextFieldCell"; title = "Thumbnails:"; ObjectID = "TdC-y9-Kb0"; */
-"TdC-y9-Kb0.title" = "サムネール表示の設定:";
-
-/* Class = "NSTextFieldCell"; title = "Icon size"; ObjectID = "aKL-KM-knG"; */
-"aKL-KM-knG.title" = "アイコンサイズ";
-
-/* Class = "NSTextFieldCell"; title = "Opacity"; ObjectID = "dxK-Ap-6Y7"; */
-"dxK-Ap-6Y7.title" = "不透明度";
-
-/* Class = "NSMenuItem"; title = "Sample: Vertical shot"; ObjectID = "TsH-F7-OBX"; */
-"TsH-F7-OBX.title" = "サンプル画像: 縦長";
-
-/* Class = "NSMenuItem"; title = "Sample: Horizontal shot"; ObjectID = "aDG-R9-OfH"; */
-"aDG-R9-OfH.title" = "サンプル画像: 横長";
-
-/* Class = "NSMenuItem"; title = "Sample: Square image"; ObjectID = "q5I-nP-SFQ"; */
-"q5I-nP-SFQ.title" = "サンプル画像: 正方形";

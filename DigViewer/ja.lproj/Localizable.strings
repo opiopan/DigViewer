@@ -12,6 +12,7 @@
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "一般";
 "PREF_TITLE_MAP" = "地図";
+"PREF_TITLE_THUMBNAIL" = "サムネール";
 "PREF_TITLE_LENS" = "レンズ";
 "PREF_TITLE_ADVANCED" = "詳細";
 

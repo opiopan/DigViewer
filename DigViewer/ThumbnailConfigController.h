@@ -17,7 +17,9 @@
 @property (strong, nonatomic) NSNumber* defaultSize;
 @property (assign, nonatomic) BOOL isVisibleFolderIcon;
 @property (strong, nonatomic) NSNumber* folderIconSize;
+@property (strong, nonatomic) NSNumber* folderIconSizeRepresentation;
 @property (strong, nonatomic) NSNumber* folderIconOpacity;
+@property (strong, nonatomic) NSNumber* folderIconOpacityRepresentation;
 
 + (id) sharedController;
 

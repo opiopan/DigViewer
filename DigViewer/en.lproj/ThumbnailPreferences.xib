@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ThumbnailPreferences">
+            <connections>
+                <outlet property="_preferencesView" destination="7Zb-tR-hWN" id="Zzo-E8-IhA"/>
+                <outlet property="thumbnailSampleView" destination="anp-MT-AZM" id="gty-aK-ZxJ"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="114" y="469" width="638" height="352"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="5" width="638" height="352"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box autoresizesSubviews="NO" borderType="none" id="7Zb-tR-hWN">
+                        <rect key="frame" x="-3" y="-4" width="644" height="356"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView">
+                            <rect key="frame" x="0.0" y="0.0" width="644" height="341"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="obt-bG-pSO">
+                                    <rect key="frame" x="26" y="233" width="202" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Folder icon:" id="TdC-y9-Kb0">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button id="BWd-yU-ruV">
+                                    <rect key="frame" x="66" y="209" width="233" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Show folder icon" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6NS-tg-TGo">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="bFJ-Ei-q7x"/>
+                                    </connections>
+                                </button>
+                                <slider verticalHuggingPriority="750" id="N4C-D6-mow">
+                                    <rect key="frame" x="66" y="288" width="201" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="32" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="zio-ki-V2Z"/>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.defaultSize" id="cdV-lv-EbV"/>
+                                    </connections>
+                                </slider>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jkc-Mq-V6h">
+                                    <rect key="frame" x="269" y="290" width="36" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="220.6" id="VW6-58-gO2">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.defaultSize" id="rQ1-vo-bYm"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="0lX-aA-VAt">
+                                    <rect key="frame" x="305" y="290" width="20" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="px" id="Vbq-DL-Bmk">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="e1X-r0-5ev">
+                                    <rect key="frame" x="26" y="314" width="254" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Default size:" id="4N3-FM-0Qh">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="akL-QX-xuy">
+                                    <rect key="frame" x="91" y="185" width="103" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Icon size:" id="aKL-KM-knG">
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Eyh-HS-CpX"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="MyX-rg-aVE">
+                                    <rect key="frame" x="228" y="167" width="34" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="88.8" id="CpF-6b-TAF">
+                                        <font key="font" metaFont="titleBar" size="12"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="dRX-Bo-GAd"/>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconSizeRepresentation" id="sUk-r7-iWA"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="YGc-uA-N1G">
+                                    <rect key="frame" x="91" y="147" width="103" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Opacity:" id="dxK-Ap-6Y7">
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Vg4-3g-f40"/>
+                                    </connections>
+                                </textField>
+                                <button verticalHuggingPriority="750" id="4OE-Oh-9mW">
+                                    <rect key="frame" x="56" y="65" width="218" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="push" title="Reset thumbnail settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="58r-Ew-sKR">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="onResetThumbnailSettings:" target="-2" id="QoN-eQ-Mhe"/>
+                                    </connections>
+                                </button>
+                                <slider verticalHuggingPriority="750" id="sZj-mZ-XVl">
+                                    <rect key="frame" x="198" y="183" width="127" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0.10000000000000001" maxValue="0.81999999999999995" doubleValue="0.33333000000000002" tickMarkPosition="above" sliderType="linear" id="WY6-PX-Wxz"/>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconSize" id="0q5-oO-mJZ"/>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="dKw-XF-s2H"/>
+                                    </connections>
+                                </slider>
+                                <slider verticalHuggingPriority="750" id="Ru2-Ug-v64">
+                                    <rect key="frame" x="198" y="145" width="127" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0.20000000000000001" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="qYv-Hp-DL7"/>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconOpacity" id="yh8-yB-NU9"/>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="2dd-HX-x5j"/>
+                                    </connections>
+                                </slider>
+                                <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="Hp4-Kf-vDF">
+                                    <rect key="frame" x="359" y="27" width="269" height="306"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <view key="contentView">
+                                        <rect key="frame" x="1" y="1" width="267" height="304"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <popUpButton verticalHuggingPriority="750" id="7mV-45-km3">
+                                                <rect key="frame" x="16" y="11" width="234" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <popUpButtonCell key="cell" type="push" title="Sample: Vertical shot" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TsH-F7-OBX" id="LyI-kF-2c4">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="Ptv-VB-Gq2">
+                                                        <items>
+                                                            <menuItem title="Sample: Square image" id="q5I-nP-SFQ"/>
+                                                            <menuItem title="Sample: Horizontal shot" id="aDG-R9-OfH"/>
+                                                            <menuItem title="Sample: Vertical shot" state="on" id="TsH-F7-OBX"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <binding destination="-2" name="selectedIndex" keyPath="self.thumbnailSampleType" id="ULL-gD-pAr"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <customView focusRingType="none" id="anp-MT-AZM" customClass="ThumbnailSampleView">
+                                                <rect key="frame" x="5" y="43" width="256" height="256"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            </customView>
+                                        </subviews>
+                                    </view>
+                                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </box>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HLM-kL-kZR">
+                                    <rect key="frame" x="260" y="167" width="34" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="%" id="ajV-zn-7rh">
+                                        <font key="font" metaFont="titleBar" size="12"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="zQI-6i-baA"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="u0X-1E-AeV">
+                                    <rect key="frame" x="228" y="129" width="34" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="88.8" id="CJk-9u-dsa">
+                                        <font key="font" metaFont="titleBar" size="12"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="RCC-qN-1Un"/>
+                                        <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconOpacityRepresentation" id="NBZ-NV-NoX"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="15E-0z-DGD">
+                                    <rect key="frame" x="260" y="129" width="34" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="%" id="TWJ-0j-j83">
+                                        <font key="font" metaFont="titleBar" size="12"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="bPA-e5-1I1"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="360" y="452"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="bpN-y2-uka"/>
+        <objectController id="fRB-4S-ZeA">
+            <connections>
+                <binding destination="-2" name="contentObject" keyPath="self.thumbnailConfig" id="8Ju-zr-0K3"/>
+            </connections>
+        </objectController>
+    </objects>
+</document>
