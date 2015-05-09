@@ -139,5 +139,13 @@
 /* Class = "NSMenuItem"; title = "Open Preview"; ObjectID = "JbI-vo-pfR"; */
 "JbI-vo-pfR.title" = "プレビューを起動";
 
+/* Class = "NSMenuItem"; title = "Toggle Inspector"; ObjectID = "k9P-2l-j2v"; */
+"k9P-2l-j2v.title" = "インスペクター表示の切り替え";
+
+/* Class = "NSMenuItem"; title = "Toggle Slideshow"; ObjectID = "rYP-b6-FaY"; */
+"rYP-b6-FaY.title" = "スライドショー表示の切り替え";
+
+/* Class = "NSMenuItem"; title = "Toggle Navigator"; ObjectID = "vsU-XZ-KCe"; */
+"vsU-XZ-KCe.title" = "ナビゲーター表示の切り替え";
 
 

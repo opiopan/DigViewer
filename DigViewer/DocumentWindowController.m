@@ -392,13 +392,12 @@
 - (void)proceedSlideshow:(NSNumber*)count
 {
     if (count.integerValue == slideshowCount){
+        [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
+                   afterDelay:slideshowConfig.interval.doubleValue];
         [self moveToNextImage:self];
         PathNode* node = _imageArrayController.selectedObjects[0];
         PathNode* nextNode = node.nextImageNode;
-        if (nextNode){
-            [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
-                       afterDelay:slideshowConfig.interval.doubleValue];
-        }else{
+        if (!nextNode){
             [self setSlideshowMode:NO];
         }
     }

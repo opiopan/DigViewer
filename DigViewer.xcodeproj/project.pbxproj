@@ -39,6 +39,7 @@
 		7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.mm */; };
 		7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AC4A718B05384004136CD /* InspectorViewController.m */; };
 		7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC21518D86DC5007527E6 /* InfoPlistController.m */; };
+		7B23D32D1AFDB9CB00A78E77 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
 		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
@@ -174,6 +175,7 @@
 		7B1AC4A718B05384004136CD /* InspectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorViewController.m; sourceTree = "<group>"; };
 		7B1CC21418D86DC5007527E6 /* InfoPlistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPlistController.h; sourceTree = "<group>"; };
 		7B1CC21518D86DC5007527E6 /* InfoPlistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPlistController.m; sourceTree = "<group>"; };
+		7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumbnail.png; path = resources/thumbnail.png; sourceTree = "<group>"; };
 		7B30AC2418A6000F00A70555 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
 				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
+				7B23D32C1AFDB9CB00A78E77 /* thumbnail.png */,
 				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
 				7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */,
 				7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */,
@@ -696,6 +699,7 @@
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
+				7B23D32D1AFDB9CB00A78E77 /* thumbnail.png in Resources */,
 				7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */,
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
