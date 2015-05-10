@@ -147,7 +147,7 @@
 {
     if (next){
         [self enterTransitionState];
-        PathNode* current = [_imageArrayController selectedObjects][0];
+        PathNode* current = [_imageTreeController.selection valueForKey:@"me"];
         if (current.parent != next.parent){
             NSResponder* firstResponder = self.window.firstResponder;
             NSIndexPath* indexPath = [next.parent indexPath];

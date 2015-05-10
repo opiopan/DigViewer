@@ -251,6 +251,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         if (!_imageChildren){
             _imageChildren = [[NSMutableArray alloc] init];
         }
+        if (!_allChildren){
+            _allChildren = [[NSMutableArray alloc] init];
+        }
         PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self path:path
                                               originalPath:[_originalPath stringByAppendingPathComponent:targetName]];
         [(NSMutableArray*)_imageChildren addObject:newNode];
@@ -258,6 +261,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }else{
         if (!_folderChildren){
             _folderChildren = [[NSMutableArray alloc] init];
+        }
+        if (!_allChildren){
+            _allChildren = [[NSMutableArray alloc] init];
         }
         PathNode* child = nil;
         for (int i = 0; i < _folderChildren.count; i++){
@@ -338,6 +344,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 
 - (NSArray*) children
 {
+    [self sortChildren];
     return _folderChildren;
 }
 
