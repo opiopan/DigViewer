@@ -15,3 +15,15 @@
 
 /* Class = "NSButtonCell"; title = "Fit to window size if image is smaller than window"; ObjectID = "wCY-en-coM"; */
 "wCY-en-coM.title" = "小さい画像をウインドウサイズに合わせて拡大表示";
+
+/* Class = "NSTextFieldCell"; title = "Sort order in folder:"; ObjectID = "h1f-21-ec7"; */
+"h1f-21-ec7.title" = "フォルダー内でのソート順:";
+
+/* Class = "NSMenuItem"; title = "Folder is prior to images"; ObjectID = "hho-JN-Bqh"; */
+"hho-JN-Bqh.title" = "フォルダーを画像より優先する";
+
+/* Class = "NSMenuItem"; title = "Folders and images are same rank"; ObjectID = "kDT-e2-ncL"; */
+"kDT-e2-ncL.title" = "フォルダーと画像を同じ優先度でソートする";
+
+/* Class = "NSMenuItem"; title = "Image is prior to folders"; ObjectID = "wun-zy-WfP"; */
+"wun-zy-WfP.title" = "画像をフォルダーより優先する";

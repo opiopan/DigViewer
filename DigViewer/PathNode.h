@@ -29,19 +29,30 @@
 @end
 
 //-----------------------------------------------------------------------------------------
+// PathNodeSortType: ソート順
+//-----------------------------------------------------------------------------------------
+enum PathNodeSortType {
+    SortTypeImageIsPrior = 0,
+    SortTypeFolderIsPrior,
+    SortTypeMix
+};
+
+//-----------------------------------------------------------------------------------------
 // PathNode: ノードツリーの構成要素
 //-----------------------------------------------------------------------------------------
 @interface PathNode : NSObject <NSCopying>
 
 // 属性
+@property (nonatomic) enum PathNodeSortType sortType;
+
 @property (readonly) NSString*       name;
 @property (readonly) PathNode*       me;
 @property (readonly, weak) PathNode* parent;
-@property (readonly) NSMutableArray* children;
+@property (readonly) NSArray*        children;
 @property (readonly) BOOL            isLeaf;
 @property (readonly) BOOL            isImage;
 @property (readonly) BOOL            isRawImage;
-@property (readonly) NSMutableArray* images;
+@property (readonly) NSArray*        images;
 @property (readonly) NSUInteger      indexInParent;
 @property (readonly) PathNode*       imageNode;
 @property (readonly) PathNode*       imageNodeReverse;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AdvancedPreferences">
@@ -15,21 +15,21 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="114" y="469" width="638" height="143"/>
+            <rect key="contentRect" x="114" y="469" width="638" height="187"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="5" width="638" height="143"/>
+                <rect key="frame" x="0.0" y="6" width="638" height="187"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" borderType="none" id="7Zb-tR-hWN">
-                        <rect key="frame" x="-3" y="-4" width="644" height="147"/>
+                        <rect key="frame" x="-3" y="-4" width="644" height="191"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="644" height="132"/>
+                            <rect key="frame" x="0.0" y="0.0" width="644" height="176"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1Mx-Cr-ajs">
-                                    <rect key="frame" x="46" y="104" width="202" height="17"/>
+                                    <rect key="frame" x="46" y="148" width="202" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Configuration when open:" id="Htp-We-P00">
                                         <font key="font" metaFont="system"/>
@@ -38,7 +38,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" id="BWM-nd-TH8">
-                                    <rect key="frame" x="252" y="99" width="234" height="26"/>
+                                    <rect key="frame" x="252" y="143" width="179" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="h6c-OO-xOE">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -55,7 +55,7 @@
                                     </connections>
                                 </popUpButton>
                                 <button id="TSJ-VX-oZs">
-                                    <rect key="frame" x="252" y="77" width="346" height="18"/>
+                                    <rect key="frame" x="252" y="121" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Fit to window size if image is smaller than window" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wCY-en-coM">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -66,7 +66,7 @@
                                     </connections>
                                 </button>
                                 <button id="h6e-tM-O0N">
-                                    <rect key="frame" x="252" y="57" width="346" height="18"/>
+                                    <rect key="frame" x="252" y="101" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Display navigator" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0lM-WD-sLN">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -77,7 +77,7 @@
                                     </connections>
                                 </button>
                                 <button id="YbN-Ef-kSK">
-                                    <rect key="frame" x="252" y="37" width="346" height="18"/>
+                                    <rect key="frame" x="252" y="81" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Display inspector" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1om-RW-Ek5">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -87,6 +87,33 @@
                                         <binding destination="bpN-y2-uka" name="value" keyPath="values.defShowInspector" id="R29-KU-sMb"/>
                                     </connections>
                                 </button>
+                                <popUpButton verticalHuggingPriority="750" id="ZJ1-fe-ybC">
+                                    <rect key="frame" x="252" y="30" width="310" height="26"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="qyz-8T-lmz">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="menu"/>
+                                        <menu key="menu" id="SVo-QZ-N5V">
+                                            <items>
+                                                <menuItem title="Image is prior to folders" id="wun-zy-WfP"/>
+                                                <menuItem title="Folder is prior to images" id="hho-JN-Bqh"/>
+                                                <menuItem title="Folders and images are same rank" id="kDT-e2-ncL"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                    <connections>
+                                        <binding destination="bpN-y2-uka" name="selectedIndex" keyPath="values.pathNodeSortType" id="4qt-tr-D1o"/>
+                                    </connections>
+                                </popUpButton>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Hmh-yu-0wO">
+                                    <rect key="frame" x="46" y="35" width="202" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Sort order in folder:" id="h1f-21-ec7">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -94,7 +121,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="360" y="347.5"/>
+            <point key="canvasLocation" x="444" y="371.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="bpN-y2-uka"/>
     </objects>

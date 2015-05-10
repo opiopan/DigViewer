@@ -77,9 +77,10 @@
      // UserDefaultsの変更に対してObserverを登録
     DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
     [documentConfig addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:nil context:nil];
     
     // オープン時の表示設定を反映
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
     self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
     self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
@@ -98,8 +99,10 @@
 - (void)windowWillClose:(NSNotification *)notification
 {
     // Observerを削除
-    DocumentConfigController* controller = [DocumentConfigController sharedController];
-    [controller removeObserver:self forKeyPath:@"updateCount"];
+    DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
+    [documentConfig removeObserver:self forKeyPath:@"updateCount"];
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [controller removeObserver:self forKeyPath:@"values.pathNodeSortType"];
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
@@ -112,6 +115,11 @@
 {
     if (object == [DocumentConfigController sharedController]){
         [self.document loadDocument:self];
+    }else if ([keyPath isEqualToString:@"values.pathNodeSortType"]){
+        PathNode* node = _imageArrayController.selectedObjects.firstObject;
+        NSUserDefaultsController* controller = object;
+        node.sortType = ((NSNumber*)[controller.values valueForKey:@"pathNodeSortType"]).intValue;
+        self.imageArrayController.content = [self.imageTreeController.selection valueForKey:@"images"];
     }
 }
 

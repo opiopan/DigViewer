@@ -40,7 +40,8 @@
                                @"thumbDefaultSize":             @100,
                                @"thumbIsVisibleFolder":         @YES,
                                @"thumbFolderSize":              @(1./3.),
-                               @"thumbFolderOpacity":           @1.0};
+                               @"thumbFolderOpacity":           @1.0,
+                               @"pathNodeSortType":             @0};
     return defaults;
 }
 

@@ -17,20 +17,29 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-static ThumbnailConfigController* __weak thumbnailConfig;
+static ThumbnailConfigController* __weak _thumbnailConfig;
 
 @implementation PathNode{
-    NSMutableArray* representationImage;
+    PathNode* __weak _rootNode;
+    struct {
+        NSInteger           updateCount;
+        PathNodeSortType    sortType;
+    }_graphConfig;
+    NSUInteger      _indexInParentForAllNodes;
+    NSUInteger      _indexInParentForSameKind;
+    NSArray*        _allChildren;
+    NSArray*        _folderChildren;
+    NSArray*        _imageChildren;
+    BOOL            _isSorted;
+    NSArray*        _representationImages;
+    NSInteger       _updateCountForRepresentationImages;
 }
 
-@synthesize name;
-@synthesize parent;
-@synthesize children;
-@synthesize images;
-@synthesize indexInParent;
-@synthesize imagePath;
-@synthesize originalPath;
-@synthesize isRawImage;
+@synthesize name = _name;
+@synthesize parent = _parent;
+@synthesize imagePath = _imagePath;
+@synthesize originalPath = _originalPath;
+@synthesize isRawImage = _isRawImage;
 
 //-----------------------------------------------------------------------------------------
 // NSCopyingプロトコルの実装
@@ -45,13 +54,13 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 + (NSImage*) unavailableImage
 {
-    static NSImage* unavailableImage = nil;
+    static NSImage* _unavailableImage = nil;
     
-    if (!unavailableImage){
-        unavailableImage = [[NSBundle mainBundle] imageForResource:@"unavailable.png"];
+    if (!_unavailableImage){
+        _unavailableImage = [[NSBundle mainBundle] imageForResource:@"unavailable.png"];
     }
     
-    return unavailableImage;
+    return _unavailableImage;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -61,8 +70,14 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 {
     self = [super init];
     if (self){
-        if (!thumbnailConfig){
-            thumbnailConfig = [ThumbnailConfigController sharedController];
+        if (!_thumbnailConfig){
+            _thumbnailConfig = [ThumbnailConfigController sharedController];
+            _indexInParentForAllNodes = -1;
+            _indexInParentForSameKind = -1;
+            _isSorted = NO;
+            _updateCountForRepresentationImages = -1;
+            _graphConfig.updateCount = 0;
+            _graphConfig.sortType = SortTypeImageIsPrior;
         }
     }
     return self;
@@ -87,7 +102,7 @@ static ThumbnailConfigController* __weak thumbnailConfig;
             NSString* filePath = [pinnedFile absolutePathAtIndex:i];
             if (!root){
                 NSString* rootpath = pinnedFile.path;
-                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil indexInParent:0 path:nil originalPath:rootpath];
+                root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil path:nil originalPath:rootpath];
                 [context addObject:root];
             }
             int j;
@@ -104,35 +119,43 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 }
 
 
-- (id) initWithName:(NSString*)n parent:(PathNode*)p indexInParent:(NSUInteger)ip
-               path:(NSString*)path originalPath:(NSString*)op
+- (id) initWithName:(NSString*)n parent:(PathNode*)p path:(NSString*)path originalPath:(NSString*)op
 {
     self = [self init];
     if (self){
-        name = n;
-        parent = p;
-        indexInParent = ip;
-        imagePath = path;
-        isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
-        originalPath = op;
+        _name = n;
+        _parent = p;
+        _imagePath = path;
+        _isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
+        _originalPath = op;
+        _rootNode = _parent ? _parent->_rootNode : self;
+        if (!_parent){
+            _indexInParentForSameKind = 0;
+            _indexInParentForAllNodes = 0;
+        }
     }
     return self;
 }
 
 + (PathNode*) pathNodeWithPath:(NSString*)path ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
 {
-    return [[PathNode alloc] initRecursWithPath:path parent:nil indexInParent:0 ommitingCondition:cond progress:progress];
+    return [[PathNode alloc] initRecursWithPath:path parent:nil ommitingCondition:cond progress:progress];
 }
 
-- (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p indexInParent:(NSUInteger)ip
+- (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p
         ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
 {
     self = [self init];
     if (self){
-        name = [path lastPathComponent];
-        originalPath = path;
-        parent = p;
-        indexInParent = ip;
+        _name = [path lastPathComponent];
+        _originalPath = path;
+        _parent = p;
+        _isSorted = YES;
+        _rootNode = _parent ? _parent->_rootNode : self;
+        if (!_parent){
+            _indexInParentForSameKind = 0;
+            _indexInParentForAllNodes = 0;
+        }
         
         NSFileManager* fileManager = [NSFileManager defaultManager];
         BOOL isDirectory;
@@ -140,7 +163,8 @@ static ThumbnailConfigController* __weak thumbnailConfig;
             if (isDirectory){
                 progress.target = path;
                 NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
-                for (NSString* childName in childNames){
+                for (NSInteger i = 0; i < childNames.count; i++){
+                    NSString* childName = childNames[i];
                     if (progress.isCanceled){
                         return nil;
                     }
@@ -149,32 +173,37 @@ static ThumbnailConfigController* __weak thumbnailConfig;
                     }
                     NSString* childPath = [path stringByAppendingFormat:@"/%@", childName];
                     PathNode* child = [[PathNode alloc] initRecursWithPath:childPath
-                                                                    parent:self indexInParent:0
+                                                                    parent:self
                                                          ommitingCondition:cond
                                                                   progress:progress];
                     if (child){
+                        if (!_allChildren){
+                            _allChildren = [[NSMutableArray alloc] init];
+                        }
+                        child->_indexInParentForAllNodes = _allChildren.count;
+                        [(NSMutableArray*)_allChildren addObject:child];
                         if (child.isImage){
-                            if (!images){
-                                images = [[NSMutableArray alloc] init];
+                            if (!_imageChildren){
+                                _imageChildren = [[NSMutableArray alloc] init];
                             }
-                            child->indexInParent = images.count;
-                            [images addObject:child];
+                            child->_indexInParentForSameKind = _imageChildren.count;
+                            [(NSMutableArray*)_imageChildren addObject:child];
                         }else{
-                            if (!children){
-                                children = [[NSMutableArray alloc] init];
+                            if (!_folderChildren){
+                                _folderChildren = [[NSMutableArray alloc] init];
                             }
-                            child->indexInParent = children.count;
-                            [children addObject:child];
+                            child->_indexInParentForSameKind = _folderChildren.count;
+                            [(NSMutableArray*)_folderChildren addObject:child];
                         }
                     }
                 }
-                if (images.count == 0 && children.count == 0){
+                if (_imageChildren.count == 0 && _folderChildren.count == 0){
                     self = nil;
                 }
             }else{
                 if ([NSImage isSupportedFileAtPath:path] && ![cond isOmmitingImagePath:path]){
-                    imagePath = path;
-                    isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
+                    _imagePath = path;
+                    _isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
                 }else{
                     self = nil;
                 }
@@ -194,11 +223,11 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 {
     PathNode* parent = nil;
     if (isFolder){
-        parent = [[PathNode alloc] initWithName:@"image" parent:nil indexInParent:0 path:nil originalPath:path];
+        parent = [[PathNode alloc] initWithName:@"image" parent:nil path:nil originalPath:path];
     }
-    PathNode* child = [[PathNode alloc] initWithName:@"folder" parent:parent indexInParent:0 path:path originalPath:path];
+    PathNode* child = [[PathNode alloc] initWithName:@"folder" parent:parent path:path originalPath:path];
     if (isFolder){
-        parent->images = [NSMutableArray arrayWithArray:@[child]];
+        parent->_imageChildren = [NSMutableArray arrayWithArray:@[child]];
         return parent;
     }else{
         return child;
@@ -219,44 +248,87 @@ static ThumbnailConfigController* __weak thumbnailConfig;
     
     NSString* targetName = components[index];
     if (index == components.count - 1){
-        if (!images){
-            images = [[NSMutableArray alloc] init];
+        if (!_imageChildren){
+            _imageChildren = [[NSMutableArray alloc] init];
         }
-        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self indexInParent:images.count path:path
-                                              originalPath:[originalPath stringByAppendingPathComponent:targetName]];
-        [images addObject:newNode];
+        PathNode* newNode = [[PathNode alloc] initWithName:targetName parent:self path:path
+                                              originalPath:[_originalPath stringByAppendingPathComponent:targetName]];
+        [(NSMutableArray*)_imageChildren addObject:newNode];
+        [(NSMutableArray*)_allChildren addObject:newNode];
     }else{
-        if (!children){
-            children = [[NSMutableArray alloc] init];
+        if (!_folderChildren){
+            _folderChildren = [[NSMutableArray alloc] init];
         }
         PathNode* child = nil;
-        for (int i = 0; i < children.count; i++){
-            PathNode* node = children[i];
+        for (int i = 0; i < _folderChildren.count; i++){
+            PathNode* node = _folderChildren[i];
             if ([node.name isEqualToString:targetName]){
                 child = node;
                 break;
             }
         }
         if (!child){
-            child = [[PathNode alloc] initWithName:targetName parent:self indexInParent:children.count path:nil
-                                      originalPath:[originalPath stringByAppendingPathComponent:targetName]];
-            [children addObject:child];
+            child = [[PathNode alloc] initWithName:targetName parent:self path:nil
+                                      originalPath:[_originalPath stringByAppendingPathComponent:targetName]];
+            [(NSMutableArray*)_folderChildren addObject:child];
+            [(NSMutableArray*)_allChildren addObject:child];
         }
         [child mergePathComponents:components atIndex:index + 1 withPath:path context:context];
     }
 }
 
 //-----------------------------------------------------------------------------------------
+// 子ノードのソート
+//-----------------------------------------------------------------------------------------
+- (void)sortChildren
+{
+    if (!_isSorted){
+        NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
+            return [o1.name compare:o2.name options:NSCaseInsensitiveSearch || NSNumericSearch];
+        };
+        _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
+        _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
+        _imageChildren = [_imageChildren sortedArrayUsingComparator:comparator];
+        for (NSInteger i = 0; i < _allChildren.count; i++){
+            PathNode* node = _allChildren[i];
+            node->_indexInParentForAllNodes = i;
+        }
+        for (NSInteger i = 0; i < _folderChildren.count; i++){
+            PathNode* node = _folderChildren[i];
+            node->_indexInParentForSameKind = i;
+        }
+        for (NSInteger i = 0; i < _imageChildren.count; i++){
+            PathNode* node = _imageChildren[i];
+            node->_indexInParentForSameKind = i;
+        }
+        _isSorted = YES;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // 属性へのアクセサ
 //-----------------------------------------------------------------------------------------
+- (void)setSortType:(enum PathNodeSortType)sortType
+{
+    if (_rootNode){
+        _rootNode->_graphConfig.sortType = sortType;
+        _rootNode->_graphConfig.updateCount++;
+    }
+}
+
+- (enum PathNodeSortType)sortType
+{
+    return _rootNode ? _rootNode->_graphConfig.sortType : SortTypeImageIsPrior;
+}
+
 - (BOOL) isLeaf
 {
-    return children == nil;
+    return _folderChildren == nil;
 }
 
 - (BOOL) isImage
 {
-    return imagePath != nil;
+    return _imagePath != nil;
 }
 
 - (PathNode*) me
@@ -264,44 +336,52 @@ static ThumbnailConfigController* __weak thumbnailConfig;
     return self;
 }
 
-- (NSMutableArray*) images
+- (NSArray*) children
 {
-    if (!representationImage){
-        if (images){
-            representationImage = [NSMutableArray arrayWithArray:images];
-            [representationImage addObjectsFromArray:children];
+    return _folderChildren;
+}
+
+- (NSArray*) images
+{
+    if (!_representationImages || _rootNode->_graphConfig.updateCount != _updateCountForRepresentationImages){
+        [self sortChildren];
+        _updateCountForRepresentationImages = _rootNode->_graphConfig.updateCount;
+        if (_rootNode->_graphConfig.sortType == SortTypeImageIsPrior){
+            _representationImages = _imageChildren ? [_imageChildren arrayByAddingObjectsFromArray:_folderChildren] :
+                                                     _folderChildren;
+        }else if (_rootNode->_graphConfig.sortType == SortTypeFolderIsPrior){
+            _representationImages = _folderChildren ? [_folderChildren arrayByAddingObjectsFromArray:_imageChildren] :
+                                                     _imageChildren;
         }else{
-            representationImage = [NSMutableArray arrayWithArray:children];
+            _representationImages = _allChildren;
         }
     }
-    return representationImage;
+    return _representationImages;
 }
 
 - (PathNode*) imageNode
 {
-    if (imagePath){
+    if (_imagePath){
         return self;
-    }else if (images){
-        return [[images objectAtIndex:0] imageNode];
     }else{
-        return [[children objectAtIndex:0] imageNode];
+        PathNode* firstChild = self.images.firstObject;
+        return firstChild.imageNode;
     }
 }
 
 - (PathNode*) imageNodeReverse
 {
-    if (imagePath){
+    if (_imagePath){
         return self;
-    }else if (children){
-        return [[children lastObject] imageNodeReverse];
     }else{
-        return [[images lastObject] imageNodeReverse];
+        PathNode* lastChild = self.images.lastObject;
+        return lastChild.imageNodeReverse;
     }
 }
 
 - (NSString*) imagePath
 {
-    return [self imageNode]->imagePath;
+    return [self imageNode]->_imagePath;
 }
 
 - (NSString*) imageName
@@ -322,17 +402,28 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 
 - (NSUInteger) indexInParent
 {
-    if (imagePath){
-        return indexInParent;
+    [_parent sortChildren];
+    if (_rootNode->_graphConfig.sortType == SortTypeImageIsPrior){
+        if (_imagePath){
+            return _indexInParentForSameKind;
+        }else{
+            return (_parent && _parent->_imageChildren ? _parent->_imageChildren.count : 0) + _indexInParentForSameKind;
+        }
+    }else if (_rootNode->_graphConfig.sortType == SortTypeFolderIsPrior){
+        if (_imagePath){
+            return (_parent && _parent->_folderChildren ? _parent->_folderChildren.count : 0) + _indexInParentForSameKind;
+        }else{
+            return _indexInParentForSameKind;
+        }
     }else{
-        return (parent && parent->images ? parent->images.count : 0) + indexInParent;
+        return _indexInParentForAllNodes;
     }
 }
 
 - (NSImage*) icon
 {
-    if (imagePath){
-        return [[NSWorkspace sharedWorkspace] iconForFileType:[name pathExtension].lowercaseString];
+    if (_imagePath){
+        return [[NSWorkspace sharedWorkspace] iconForFileType:[_name pathExtension].lowercaseString];
     }else{
         return [[NSWorkspace sharedWorkspace] iconForFile:@"/var"];
     }
@@ -344,11 +435,11 @@ static ThumbnailConfigController* __weak thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    if (self.isImage || !thumbnailConfig.isVisibleFolderIcon){
+    if (self.isImage || !_thumbnailConfig.isVisibleFolderIcon){
         return self.imagePath;
     }else{
-        NSString* extention = [NSString stringWithFormat:@".folder:%@:%@", thumbnailConfig.folderIconSize,
-                                                                           thumbnailConfig.folderIconOpacity];
+        NSString* extention = [NSString stringWithFormat:@".folder:%@:%@", _thumbnailConfig.folderIconSize,
+                                                                           _thumbnailConfig.folderIconOpacity];
         return [self.imagePath stringByAppendingString:extention];
     }
 }
@@ -391,7 +482,7 @@ static const CGFloat ThumbnailMaxSize = 384;
             thumbnail = [self CGImageFromNSImage:node.image];
         }
         
-        if (!self.isImage && thumbnailConfig.isVisibleFolderIcon){
+        if (!self.isImage && _thumbnailConfig.isVisibleFolderIcon){
             thumbnail = [self compositFolderImage:thumbnail];
         }
         
@@ -476,7 +567,8 @@ static const CGFloat ThumbnailMaxSize = 384;
                                                 colorSpace, kCGImageAlphaPremultipliedLast));
     
     // ソース画像を描画
-    CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2, CGImageGetWidth(src), CGImageGetHeight(src)), src);
+    CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2,
+                                           CGImageGetWidth(src), CGImageGetHeight(src)), src);
     
     // フォルダー画像を描画
     NSImage* folderImage = [NSImage imageNamed:NSImageNameFolder];
@@ -484,10 +576,10 @@ static const CGFloat ThumbnailMaxSize = 384;
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:gc];
     NSRect targetRect = NSZeroRect;
-    targetRect.size.width = targetRect.size.height = normalizedLength * thumbnailConfig.folderIconSize.doubleValue;
+    targetRect.size.width = targetRect.size.height = normalizedLength * _thumbnailConfig.folderIconSize.doubleValue;
     targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
     [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
-                   fraction:thumbnailConfig.folderIconOpacity.doubleValue
+                   fraction:_thumbnailConfig.folderIconOpacity.doubleValue
              respectFlipped:YES hints:nil];
     [NSGraphicsContext restoreGraphicsState];
     
@@ -505,14 +597,14 @@ static const CGFloat ThumbnailMaxSize = 384;
 - (PathNode*) nextImageNode
 {
     PathNode* currentImage = [self imageNode];
-    return [currentImage->parent nextImageNodeOfImageAtIndex:[currentImage indexInParent]];
+    return [currentImage->_parent nextImageNodeOfImageAtIndex:[currentImage indexInParent]];
 }
 
 - (PathNode*) nextImageNodeOfImageAtIndex:(NSUInteger)index
 {
     NSArray* nodes = [self images];
     if (index + 1 ==  nodes.count){
-        return [parent nextImageNodeOfImageAtIndex:[self indexInParent]];
+        return [_parent nextImageNodeOfImageAtIndex:[self indexInParent]];
     }else{
         return [nodes[index + 1] imageNode];
     }
@@ -521,14 +613,14 @@ static const CGFloat ThumbnailMaxSize = 384;
 - (PathNode*) previousImageNode
 {
     PathNode* currentImage = [self imageNode];
-    return [currentImage->parent previousImageNodeOfImageAtIndex:[currentImage indexInParent]];
+    return [currentImage->_parent previousImageNodeOfImageAtIndex:[currentImage indexInParent]];
 }
 
 - (PathNode*) previousImageNodeOfImageAtIndex:(NSUInteger)index
 {
     NSArray* nodes = [self images];
     if (index == 0){
-        return [parent previousImageNodeOfImageAtIndex:[self indexInParent]];
+        return [_parent previousImageNodeOfImageAtIndex:[self indexInParent]];
     }else{
         return [nodes[index - 1] imageNodeReverse];
     }
@@ -536,35 +628,35 @@ static const CGFloat ThumbnailMaxSize = 384;
 
 - (PathNode*) nextFolderNode
 {
-    if (imagePath){
-        return [parent nextFolderNode];
+    if (_imagePath){
+        return [_parent nextFolderNode];
     }else{
-        return [parent nextFolderNodeOfNodeAtIndex:indexInParent];
+        return [_parent nextFolderNodeOfNodeAtIndex:_indexInParentForSameKind];
     }
 }
 
 - (PathNode*) nextFolderNodeOfNodeAtIndex:(NSUInteger)index
 {
-    if (index + 1 < children.count){
-        return children[index + 1];
+    if (index + 1 < _folderChildren.count){
+        return _folderChildren[index + 1];
     }else{
-        return [parent nextFolderNodeOfNodeAtIndex:indexInParent];
+        return [_parent nextFolderNodeOfNodeAtIndex:_indexInParentForSameKind];
     }
 }
 
 - (PathNode*) previousFolderNode
 {
-    if (imagePath){
-        return [parent previousFolderNode];
+    if (_imagePath){
+        return [_parent previousFolderNode];
     }else{
-        return [parent previousFolderNodeOfNodeAtIndex:indexInParent];
+        return [_parent previousFolderNodeOfNodeAtIndex:_indexInParentForSameKind];
     }
 }
 
 - (PathNode*) previousFolderNodeOfNodeAtIndex:(NSUInteger)index
 {
     if (index > 0){
-        return children[index - 1];
+        return _folderChildren[index - 1];
     }else{
         return self;
     }
@@ -585,10 +677,10 @@ static const CGFloat ThumbnailMaxSize = 384;
 
 - (NSUInteger) generateIndexesInArray:(NSUInteger**)array withContext:(NSUInteger)count
 {
-    if (parent){
-        NSUInteger position = [parent generateIndexesInArray:array withContext:count + 1];
+    if (_parent){
+        NSUInteger position = [_parent generateIndexesInArray:array withContext:count + 1];
         if (*array){
-            (*array)[position] = indexInParent;
+            (*array)[position] = _indexInParentForSameKind;
         }
         return position + 1;
     }else{
@@ -612,13 +704,13 @@ static const CGFloat ThumbnailMaxSize = 384;
 
 - (void) appendNameToPortablePath:(NSMutableArray*)path
 {
-    [parent appendNameToPortablePath:path];
-    [path addObject:name];
+    [_parent appendNameToPortablePath:path];
+    [path addObject:_name];
 }
 
 - (PathNode*) nearestNodeAtPortablePath:(NSArray*)path
 {
-    if ([name isEqualToString:path[0]] && path.count > 1){
+    if ([_name isEqualToString:path[0]] && path.count > 1){
         return [self nearestNodeAtPortablePath:path indexAt:1];
     }else{
         return self;
@@ -629,7 +721,7 @@ static const CGFloat ThumbnailMaxSize = 384;
 {
     NSString* searchingName = path[index];
     PathNode* candidate = nil;
-    for (candidate in children){
+    for (candidate in _folderChildren){
         if ([candidate.name isEqualToString:searchingName]){
             if (path.count == index + 1){
                 return candidate;
@@ -638,16 +730,16 @@ static const CGFloat ThumbnailMaxSize = 384;
             }
         }
     }
-    for (candidate in images){
+    for (candidate in _imageChildren){
         if ([candidate.name isEqualToString:searchingName]){
             return candidate;
         }
     }
     
-    if (children && children.count > 0){
-        return children[0];
-    }else if (images && images.count > 0){
-        return images[0];
+    if (_folderChildren && _folderChildren.count > 0){
+        return _folderChildren[0];
+    }else if (_imageChildren && _imageChildren.count > 0){
+        return _imageChildren[0];
     }else{
         return self;
     }
@@ -660,66 +752,66 @@ static const CGFloat ThumbnailMaxSize = 384;
 // ツリー生成進捗オブジェクト
 //-----------------------------------------------------------------------------------------
 @implementation PathNodeProgress{
-    NSLock* lock;
+    NSLock* _lock;
 }
 
-@synthesize progress;
-@synthesize target;
-@synthesize isCanceled;
+@synthesize progress = _progress;
+@synthesize target = _target;
+@synthesize isCanceled = _isCanceled;
 
 - (id) init
 {
     self = [super init];
     if (self){
-        lock = [[NSLock alloc] init];
-        isCanceled = NO;
+        _lock = [[NSLock alloc] init];
+        _isCanceled = NO;
     }
     return self;
 }
 
 - (double) progress
 {
-    [lock lock];
-    double value = progress;
-    [lock unlock];
+    [_lock lock];
+    double value = _progress;
+    [_lock unlock];
     return value;
 }
 
 - (void) setProgress:(double)value
 {
-    [lock lock];
-    progress = value;
-    [lock unlock];
+    [_lock lock];
+    _progress = value;
+    [_lock unlock];
 }
 
 - (NSString*) target
 {
-    [lock lock];
-    NSString* value = target;
-    [lock unlock];
+    [_lock lock];
+    NSString* value = _target;
+    [_lock unlock];
     return value;
 }
 
 - (void) setTarget:(NSString *)value
 {
-    [lock lock];
-    target = value;
-    [lock unlock];
+    [_lock lock];
+    _target = value;
+    [_lock unlock];
 }
 
 - (BOOL) isCanceled
 {
-    [lock lock];
-    BOOL value = isCanceled;
-    [lock unlock];
+    [_lock lock];
+    BOOL value = _isCanceled;
+    [_lock unlock];
     return value;
 }
 
 - (void) setIsCanceled:(BOOL)value
 {
-    [lock lock];
-    isCanceled = value;
-    [lock unlock];
+    [_lock lock];
+    _isCanceled = value;
+    [_lock unlock];
 }
 
 @end
@@ -729,8 +821,8 @@ static const CGFloat ThumbnailMaxSize = 384;
 //-----------------------------------------------------------------------------------------
 @implementation PathNodeOmmitingCondition
 
-@synthesize suffixes;
-@synthesize maxFileSize;
+@synthesize suffixes = _suffixes;
+@synthesize maxFileSize = _maxFileSize;
 
 - (id) init
 {
@@ -750,11 +842,11 @@ static const CGFloat ThumbnailMaxSize = 384;
         rc = [NSImage isRawFileAtPath:path];
     }
     if (!rc){
-        rc = ([suffixes valueForKey:[[path pathExtension] lowercaseString]] != nil);
+        rc = ([_suffixes valueForKey:[[path pathExtension] lowercaseString]] != nil);
     }
     if (!rc && self.maxFileSize > 0){
         struct stat buf;
-        if (stat(path.UTF8String, &buf) != -1 && buf.st_size > maxFileSize){
+        if (stat(path.UTF8String, &buf) != -1 && buf.st_size > _maxFileSize){
             rc = YES;
         }
     }

@@ -89,6 +89,8 @@
         [[NSApplication sharedApplication] endSheet:panel returnCode:NSOKButton];
         isShowing =NO;
     }
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    root.sortType = ((NSNumber*)[[controller values] valueForKey:@"pathNodeSortType"]).intValue;
     [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
 }
 
