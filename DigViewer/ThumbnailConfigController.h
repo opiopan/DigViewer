@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+enum FolderThumbnailRepresentationType{
+    FolderThumbnailIconOnImage = 0,
+    FolderThumbnailImageInIcon,
+    FolderThumbnailOnlyImage
+};
+
 @interface ThumbnailConfigController : NSObject
 
 @property (weak, nonatomic) id delegate;
@@ -15,7 +21,8 @@
 @property (strong, nonatomic) NSNumber* updateCount;
 
 @property (strong, nonatomic) NSNumber* defaultSize;
-@property (assign, nonatomic) BOOL isVisibleFolderIcon;
+@property (assign, nonatomic) enum FolderThumbnailRepresentationType representationType;
+@property (assign, readonly, nonatomic) BOOL isVisibleFolderIcon;
 @property (strong, nonatomic) NSNumber* folderIconSize;
 @property (strong, nonatomic) NSNumber* folderIconSizeRepresentation;
 @property (strong, nonatomic) NSNumber* folderIconOpacity;

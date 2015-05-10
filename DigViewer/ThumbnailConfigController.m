@@ -46,6 +46,7 @@
 - (void)loadDefaults
 {
     [self willChangeValueForKey:@"thumbDefaultSize"];
+    [self willChangeValueForKey:@"thumbRepresentationType"];
     [self willChangeValueForKey:@"thumbIsVisibleFolder"];
     [self willChangeValueForKey:@"thumbFolderSize"];
     [self willChangeValueForKey:@"thumbFolderSizeRepresentation"];
@@ -53,12 +54,13 @@
     [self willChangeValueForKey:@"thumbFolderOpacityRepresentation"];
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     _defaultSize = [defaults.values valueForKey:@"thumbDefaultSize"];
-    _isVisibleFolderIcon = [[defaults.values valueForKey:@"thumbIsVisibleFolder"] boolValue];
+    _representationType = [[defaults.values valueForKey:@"thumbRepresentationType"] intValue];
     _folderIconSize = [defaults.values valueForKey:@"thumbFolderSize"];
     _folderIconSizeRepresentation = @(((int)(_folderIconSize.doubleValue * 10000)) / 100.0);
     _folderIconOpacity = [defaults.values valueForKey:@"thumbFolderOpacity"];
     _folderIconOpacityRepresentation = @(((int)(_folderIconOpacity.doubleValue * 10000)) / 100.0);
     [self didChangeValueForKey:@"thumbDefaultSize"];
+    [self didChangeValueForKey:@"thumbRepresentationType"];
     [self didChangeValueForKey:@"thumbIsVisibleFolder"];
     [self didChangeValueForKey:@"thumbFolderSize"];
     [self didChangeValueForKey:@"thumbFolderSizeRepresentation"];
@@ -74,7 +76,7 @@
     NSDictionary* defaults = [PreferencesDefaultsController defaultValues];
     
     self.defaultSize = [defaults valueForKey:@"thumbDefaultSize"];
-    self.isVisibleFolderIcon = [[defaults valueForKey:@"thumbIsVisibleFolder"] boolValue];
+    self.representationType = [[defaults valueForKey:@"thumbRepresentationType"] intValue];
     self.folderIconSize = [defaults valueForKey:@"thumbFolderSize"];
     self.folderIconOpacity = [defaults valueForKey:@"thumbFolderOpacity"];
 }
@@ -106,7 +108,7 @@
 }
 
 //-----------------------------------------------------------------------------------------
-// プロパティの実装
+// プロパティの実装(永続化対象)
 //-----------------------------------------------------------------------------------------
 - (void)setDefaultSize:(NSNumber *)defaultSize
 {
@@ -116,11 +118,13 @@
     [_delegate performSelector:@selector(notifyUpdateCount:) withObject:_updateCount];
 }
 
-- (void)setIsVisibleFolderIcon:(BOOL)isVisibleFolderIcon
+- (void)setRepresentationType:(enum FolderThumbnailRepresentationType)representationType
 {
-    _isVisibleFolderIcon = isVisibleFolderIcon;
+    _representationType = representationType;
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
-    [[defaults values] setValue:@(_isVisibleFolderIcon) forKey:@"thumbIsVisibleFolder"];
+    [[defaults values] setValue:@(_representationType) forKey:@"thumbRepresentationType"];
+    [self willChangeValueForKey:@"isVisibleFolderIcon"];
+    [self didChangeValueForKey:@"isVisibleFolderIcon"];
     [self incrementUpdateCount];
 }
 
@@ -140,6 +144,14 @@
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     [[defaults values] setValue:_folderIconOpacity forKey:@"thumbFolderOpacity"];
     [self incrementUpdateCount];
+}
+
+//-----------------------------------------------------------------------------------------
+// プロパティの実装(非永続化)
+//-----------------------------------------------------------------------------------------
+- (BOOL)isVisibleFolderIcon
+{
+    return _representationType == FolderThumbnailIconOnImage;
 }
 
 @end

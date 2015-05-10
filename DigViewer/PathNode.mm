@@ -442,8 +442,10 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    if (self.isImage || !_thumbnailConfig.isVisibleFolderIcon){
+    if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
         return self.imagePath;
+    }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
+        return [self.imagePath stringByAppendingString:@".folder"];
     }else{
         NSString* extention = [NSString stringWithFormat:@".folder:%@:%@", _thumbnailConfig.folderIconSize,
                                                                            _thumbnailConfig.folderIconOpacity];
@@ -489,8 +491,8 @@ static const CGFloat ThumbnailMaxSize = 384;
             thumbnail = [self CGImageFromNSImage:node.image];
         }
         
-        if (!self.isImage && _thumbnailConfig.isVisibleFolderIcon){
-            thumbnail = [self compositFolderImage:thumbnail];
+        if (!self.isImage && _thumbnailConfig.representationType != FolderThumbnailOnlyImage){
+            thumbnail = [self compositFolderImage:thumbnail compositType:_thumbnailConfig.representationType];
         }
         
         return (__bridge_transfer id)thumbnail.transferOwnership();
@@ -563,7 +565,7 @@ static const CGFloat ThumbnailMaxSize = 384;
     return CGBitmapContextCreateImage(context);
 }
 
-- (CGImageRef) compositFolderImage:(CGImageRef)src
+- (CGImageRef) compositFolderImage:(CGImageRef)src compositType:(FolderThumbnailRepresentationType)type
 {
     // コンポジット後のイメージを保持するビットマップコンテキストを作成
     CGFloat width = src ? CGImageGetWidth(src) : ThumbnailMaxSize;
@@ -572,23 +574,44 @@ static const CGFloat ThumbnailMaxSize = 384;
     ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
     ECGContextRef context(CGBitmapContextCreate(NULL, normalizedLength, normalizedLength, 8, 0,
                                                 colorSpace, kCGImageAlphaPremultipliedLast));
-    
-    // ソース画像を描画
-    CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2,
-                                           CGImageGetWidth(src), CGImageGetHeight(src)), src);
-    
-    // フォルダー画像を描画
+
+    // フォルダーアイコンイメージの取得
     NSImage* folderImage = [NSImage imageNamed:NSImageNameFolder];
-    NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-    [NSGraphicsContext saveGraphicsState];
-    [NSGraphicsContext setCurrentContext:gc];
-    NSRect targetRect = NSZeroRect;
-    targetRect.size.width = targetRect.size.height = normalizedLength * _thumbnailConfig.folderIconSize.doubleValue;
-    targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
-    [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
-                   fraction:_thumbnailConfig.folderIconOpacity.doubleValue
-             respectFlipped:YES hints:nil];
-    [NSGraphicsContext restoreGraphicsState];
+    
+    if (type == FolderThumbnailIconOnImage){
+        // ソース画像を描画
+        CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2,
+                                               CGImageGetWidth(src), CGImageGetHeight(src)), src);
+        
+        // フォルダー画像を描画
+        NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
+        [NSGraphicsContext saveGraphicsState];
+        [NSGraphicsContext setCurrentContext:gc];
+        NSRect targetRect = NSZeroRect;
+        targetRect.size.width = targetRect.size.height = normalizedLength * _thumbnailConfig.folderIconSize.doubleValue;
+        targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
+        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+                       fraction:_thumbnailConfig.folderIconOpacity.doubleValue
+                 respectFlipped:YES hints:nil];
+        [NSGraphicsContext restoreGraphicsState];
+    }else{
+        // フォルダー画像を描画
+        NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
+        [NSGraphicsContext saveGraphicsState];
+        [NSGraphicsContext setCurrentContext:gc];
+        NSRect targetRect = NSZeroRect;
+        targetRect.size.width = targetRect.size.height = normalizedLength;
+        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        [NSGraphicsContext restoreGraphicsState];
+
+        // ソース画像を描画
+        CGFloat ratio = 0.55;
+        CGFloat xOffset = (normalizedLength - width * ratio) / 2;
+        CGFloat yOffset = (normalizedLength - height * ratio) / 2 - normalizedLength * 0.05;
+        CGContextTranslateCTM (context, xOffset, yOffset);
+        CGContextScaleCTM(context, ratio, ratio);
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), src);
+    }
     
     return CGBitmapContextCreateImage(context);
 }

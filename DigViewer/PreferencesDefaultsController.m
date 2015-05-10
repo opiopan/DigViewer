@@ -38,7 +38,7 @@
                                @"defShowNavigator":             @YES,
                                @"defShowInspector":             @NO,
                                @"thumbDefaultSize":             @100,
-                               @"thumbIsVisibleFolder":         @YES,
+                               @"thumbRepresentationType":      @0,
                                @"thumbFolderSize":              @(1./3.),
                                @"thumbFolderOpacity":           @1.0,
                                @"pathNodeSortType":             @0};

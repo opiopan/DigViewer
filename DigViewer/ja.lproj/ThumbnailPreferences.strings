@@ -4,11 +4,8 @@
 /* Class = "NSButtonCell"; title = "Reset thumbnail settings"; ObjectID = "58r-Ew-sKR"; */
 "58r-Ew-sKR.title" = "サムネール設定をリセット";
 
-/* Class = "NSButtonCell"; title = "Show folder icon"; ObjectID = "6NS-tg-TGo"; */
-"6NS-tg-TGo.title" = "フォルダーアイコンを表示";
-
 /* Class = "NSTextFieldCell"; title = "Thumbnails:"; ObjectID = "TdC-y9-Kb0"; */
-"TdC-y9-Kb0.title" = "フォルダーアイコン設定:";
+"TdC-y9-Kb0.title" = "フォルダーのサムネール:";
 
 /* Class = "NSTextFieldCell"; title = "Icon size"; ObjectID = "aKL-KM-knG"; */
 "aKL-KM-knG.title" = "アイコンサイズ:";
@@ -24,3 +21,12 @@
 
 /* Class = "NSMenuItem"; title = "Sample: Square image"; ObjectID = "q5I-nP-SFQ"; */
 "q5I-nP-SFQ.title" = "サンプル画像: 正方形";
+
+/* Class = "NSMenuItem"; title = "Display only image"; ObjectID = "DbT-Dx-Znd"; */
+"DbT-Dx-Znd.title" = "画像のみ表示";
+
+/* Class = "NSMenuItem"; title = "Display image in folder icon"; ObjectID = "qeG-q3-Y5B"; */
+"qeG-q3-Y5B.title" = "アインコンの中央に画像を表示";
+
+/* Class = "NSMenuItem"; title = "Display folder icon on image"; ObjectID = "yY8-Tf-Xgi"; */
+"yY8-Tf-Xgi.title" = "画像の上にアイコンを表示";
