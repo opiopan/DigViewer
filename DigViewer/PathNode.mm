@@ -605,12 +605,16 @@ static const CGFloat ThumbnailMaxSize = 384;
         [NSGraphicsContext restoreGraphicsState];
 
         // ソース画像を描画
-        CGFloat ratio = 0.55;
-        CGFloat xOffset = (normalizedLength - width * ratio) / 2;
-        CGFloat yOffset = (normalizedLength - height * ratio) / 2 - normalizedLength * 0.05;
+        CGFloat minLength = MIN(width, height);
+        ECGImageRef clipedImage;
+        clipedImage = CGImageCreateWithImageInRect(src, CGRectMake((width - minLength) / 2,(height - minLength) / 2,
+                                                                   minLength , minLength));
+        CGFloat ratio = 0.55 * (normalizedLength / minLength);
+        CGFloat xOffset = (normalizedLength - minLength * ratio) / 2;
+        CGFloat yOffset = (normalizedLength - minLength * ratio) / 2 - normalizedLength * 0.05;
         CGContextTranslateCTM (context, xOffset, yOffset);
         CGContextScaleCTM(context, ratio, ratio);
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), src);
+        CGContextDrawImage(context, CGRectMake(0, 0, minLength , minLength), clipedImage);
     }
     
     return CGBitmapContextCreateImage(context);
