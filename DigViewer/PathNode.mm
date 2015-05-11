@@ -163,6 +163,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             if (isDirectory){
                 progress.target = path;
                 NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
+                childNames = [childNames sortedArrayUsingComparator:^(NSString* o1, NSString* o2){
+                    return [o1 compare:o2 options:NSCaseInsensitiveSearch | NSNumericSearch];
+                }];
                 for (NSInteger i = 0; i < childNames.count; i++){
                     NSString* childName = childNames[i];
                     if (progress.isCanceled){
@@ -290,7 +293,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 {
     if (!_isSorted){
         NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
-            return [o1.name compare:o2.name options:NSCaseInsensitiveSearch || NSNumericSearch];
+            return [o1.name compare:o2.name options:NSCaseInsensitiveSearch | NSNumericSearch];
         };
         _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
         _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
