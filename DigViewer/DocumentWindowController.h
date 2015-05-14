@@ -32,6 +32,8 @@
 - (void)moveUpFolder:(id)sender;
 - (void)moveDownFolder:(id)sender;
 
+- (void)setDocumentData:(PathNode*)root;
+
 - (IBAction)refreshDocument:(id)sender;
 
 - (IBAction)toggleSlideshowMode:(id)sender;

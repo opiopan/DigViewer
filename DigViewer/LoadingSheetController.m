@@ -70,13 +70,18 @@
         self.phase = NSLocalizedString(@"Now loading a pinned file in the folder:", nil);
         self.targetFolder = path;
         PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
+        NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+        PathNodeCreateOption option;
+        option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
+        option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
         if (pinnedFile){
             self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
             self.isIndeterminate = NO;
-            root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition progress:pathNodeProgress];
+            root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition
+                                             option:&option progress:pathNodeProgress];
         }else{
             self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil),
-            root = [PathNode pathNodeWithPath:path  ommitingCondition:condition progress:pathNodeProgress];
+            root = [PathNode pathNodeWithPath:path  ommitingCondition:condition option:&option progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
     }

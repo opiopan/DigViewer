@@ -38,12 +38,23 @@ enum PathNodeSortType {
 };
 
 //-----------------------------------------------------------------------------------------
+// PathNodeCreateOption:ノードツリー生成オプション
+//-----------------------------------------------------------------------------------------
+struct _PathNodeCreateOption{
+    BOOL isSortByCaseInsensitive;
+    BOOL isSortAsNumeric;
+};
+typedef struct _PathNodeCreateOption PathNodeCreateOption;
+
+//-----------------------------------------------------------------------------------------
 // PathNode: ノードツリーの構成要素
 //-----------------------------------------------------------------------------------------
 @interface PathNode : NSObject <NSCopying>
 
 // 属性
 @property (nonatomic) enum PathNodeSortType sortType;
+@property (nonatomic) BOOL isSortByCaseInsensitive;
+@property (nonatomic) BOOL isSortAsNumeric;
 
 @property (readonly) NSString*       name;
 @property (readonly) PathNode*       me;
@@ -69,11 +80,13 @@ enum PathNodeSortType {
 // オブジェクト初期化
 + (PathNode*) pathNodeWithPath:(NSString*)path
              ommitingCondition:(PathNodeOmmitingCondition*)cond
+                        option:(PathNodeCreateOption*)option
                       progress:(PathNodeProgress*)progress;
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
+                              option:(PathNodeCreateOption*)option
                             progress:(PathNodeProgress*)progress;
-+ (PathNode*) psudoPathNodeWithImagePath:(NSString*)path isFolder:(BOOL)isFolder;
++ (PathNode*) psudoPathNodeWithName:(NSString*)name imagePath:(NSString*)path isFolder:(BOOL)isFolder;
 
 // イメージファイルが存在しない場合に表示するイメージ
 + (NSImage*) unavailableImage;

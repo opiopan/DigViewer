@@ -79,6 +79,8 @@
     [documentConfig addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:nil context:nil];
     
     // オープン時の表示設定を反映
     self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
@@ -120,6 +122,56 @@
         NSUserDefaultsController* controller = object;
         node.sortType = ((NSNumber*)[controller.values valueForKey:@"pathNodeSortType"]).intValue;
         self.imageArrayController.content = [self.imageTreeController.selection valueForKey:@"images"];
+    }else if ([keyPath isEqualToString:@"values.pathNodeSortCaseInsensitive"] ||
+              [keyPath isEqualToString:@"values.pathNodeSortAsNumeric"]){
+        [self performSelector:@selector(setDocumentData:) withObject:((Document*)self.document).root afterDelay:0.3];
+        
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// ドキュメントデータ設定
+//-----------------------------------------------------------------------------------------
+- (void)setDocumentData:(PathNode *)root
+{
+    // ソート設定を最新に更新
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    PathNodeCreateOption option;
+    option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
+    option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
+    if (root.isSortByCaseInsensitive != option.isSortByCaseInsensitive || root.isSortAsNumeric != option.isSortAsNumeric){
+        root.isSortByCaseInsensitive = option.isSortByCaseInsensitive;
+        root.isSortAsNumeric = option.isSortAsNumeric;
+    }
+    
+    // ドキュメントデータ設定
+    NSArray* path = nil;
+    if (((Document*)self.document).root){
+        PathNode* selectedNode = _imageArrayController.selectedObjects[0];
+        path = [selectedNode portablePath];
+    }
+    if (path){
+        [self enterTransitionState];
+        ((Document*)self.document).root = root;
+        PathNode* selectedNode = [root nearestNodeAtPortablePath:path];
+        PathNode* parentNode = selectedNode.parent;
+        if (!parentNode){
+            parentNode = selectedNode;
+            selectedNode = nil;
+        }
+        NSIndexPath* indexPath = [parentNode indexPath];
+        if (selectedNode.indexInParent == 0){
+            [self exitTransitionState];
+            _imageTreeController.selectionIndexPath = indexPath;
+            _imageArrayController.selectionIndex = selectedNode.indexInParent;
+        }else{
+            _imageTreeController.selectionIndexPath = indexPath;
+            _imageArrayController.selectionIndex = 0;
+            [self exitTransitionState];
+            _imageArrayController.selectionIndex = selectedNode.indexInParent;
+        }
+    }else{
+        ((Document*)self.document).root = root;
     }
 }
 
@@ -148,7 +200,7 @@
     if (next){
         [self enterTransitionState];
         PathNode* current = [_imageTreeController.selection valueForKey:@"me"];
-        if (current.parent != next.parent){
+        if (current != next.parent){
             NSResponder* firstResponder = self.window.firstResponder;
             NSIndexPath* indexPath = [next.parent indexPath];
             [_imageTreeController setSelectionIndexPath:indexPath];

@@ -11,4 +11,10 @@
 
 @interface AdvancedPreferences : NSPreferencesModule
 
+@property (assign, nonatomic) NSInteger sortType;
+@property (assign, nonatomic) BOOL isCaseInsensitive;
+@property (assign, nonatomic) BOOL isSortAsNumeric;
+
+@property (strong, nonatomic) NSArray* exampleList;
+
 @end

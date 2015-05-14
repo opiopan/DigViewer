@@ -106,6 +106,7 @@
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
+		7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
 		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
@@ -288,6 +289,8 @@
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
+		7BEB80931B03A33A006F052A /* SortOmittedArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortOmittedArrayController.h; sourceTree = "<group>"; };
+		7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortOmittedArrayController.m; sourceTree = "<group>"; };
 		7BF27648191BB25A0022E89D /* TestGPSMapView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = TestGPSMapView.html; path = tests/TestGPSMapView.html; sourceTree = "<group>"; };
 		7BF27649191BB25A0022E89D /* TestGPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = TestGPSMapView.js; path = tests/TestGPSMapView.js; sourceTree = "<group>"; };
 		7BF678AB16983C7C00FE39B4 /* PathNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathNode.h; sourceTree = "<group>"; };
@@ -543,6 +546,8 @@
 				7B40A4191AFCFCE3006ED497 /* SlideshowConfigController.m */,
 				7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */,
 				7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */,
+				7BEB80931B03A33A006F052A /* SortOmittedArrayController.h */,
+				7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */,
 				7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */,
 				7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */,
 				7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */,
@@ -844,6 +849,7 @@
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
+				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,

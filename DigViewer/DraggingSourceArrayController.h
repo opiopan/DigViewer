@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SortOmittedArrayController.h"
 
-@interface DraggingSourceArrayController : NSArrayController
+@interface DraggingSourceArrayController : SortOmittedArrayController
 
 + (void)setEnableDragging:(BOOL)enable;
 

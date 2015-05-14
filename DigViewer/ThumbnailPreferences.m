@@ -74,7 +74,7 @@
     _thumbnailSampleType.longValue == 1 ? @"thumbnailSampleHorizontal" :
     @"thumbnailSampleVertical";
     NSString* imagePath = [[NSBundle mainBundle] pathForResource:resourceName ofType:@"jpg"];
-    _sampleNodeForThumbnail = [PathNode psudoPathNodeWithImagePath:imagePath isFolder:YES];
+    _sampleNodeForThumbnail = [PathNode psudoPathNodeWithName:@"dummy" imagePath:imagePath isFolder:YES];
     _thumbnailSampleView.image = (__bridge CGImageRef)([_sampleNodeForThumbnail imageRepresentation]);
 }
 

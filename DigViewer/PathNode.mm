@@ -22,17 +22,20 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 @implementation PathNode{
     PathNode* __weak _rootNode;
     struct {
-        NSInteger           updateCount;
+        NSInteger           updateCountForType;
+        NSInteger           updateCountForSort;
         PathNodeSortType    sortType;
+        BOOL                sortByCaseInsensitive;
+        BOOL                sortAsNumeric;
     }_graphConfig;
     NSUInteger      _indexInParentForAllNodes;
     NSUInteger      _indexInParentForSameKind;
     NSArray*        _allChildren;
     NSArray*        _folderChildren;
     NSArray*        _imageChildren;
-    BOOL            _isSorted;
     NSArray*        _representationImages;
     NSInteger       _updateCountForRepresentationImages;
+    NSInteger       _updateCountForSort;
 }
 
 @synthesize name = _name;
@@ -74,10 +77,13 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             _thumbnailConfig = [ThumbnailConfigController sharedController];
             _indexInParentForAllNodes = -1;
             _indexInParentForSameKind = -1;
-            _isSorted = NO;
             _updateCountForRepresentationImages = -1;
-            _graphConfig.updateCount = 0;
+            _updateCountForSort = -1;
+            _graphConfig.updateCountForType = 0;
+            _graphConfig.updateCountForSort = 0;
             _graphConfig.sortType = SortTypeImageIsPrior;
+            _graphConfig.sortByCaseInsensitive = YES;
+            _graphConfig.sortAsNumeric = YES;
         }
     }
     return self;
@@ -85,6 +91,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 
 + (PathNode*) pathNodeWithPinnedFile:(PathfinderPinnedFile*)pinnedFile
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
+                              option:(PathNodeCreateOption*)option
                             progress:(PathNodeProgress*)progress
 {
     PathNode* root = nil;
@@ -137,25 +144,31 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     return self;
 }
 
-+ (PathNode*) pathNodeWithPath:(NSString*)path ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
++ (PathNode*) pathNodeWithPath:(NSString*)path ommitingCondition:(PathNodeOmmitingCondition*)cond
+                        option:(PathNodeCreateOption*)option
+                      progress:(PathNodeProgress*)progress
 {
-    return [[PathNode alloc] initRecursWithPath:path parent:nil ommitingCondition:cond progress:progress];
+    return [[PathNode alloc] initRecursWithPath:path parent:nil ommitingCondition:cond option:option progress:progress];
 }
 
 - (id) initRecursWithPath:(NSString*)path parent:(PathNode*)p
-        ommitingCondition:(PathNodeOmmitingCondition*)cond progress:(PathNodeProgress*)progress
+        ommitingCondition:(PathNodeOmmitingCondition*)cond
+                   option:(PathNodeCreateOption*)option
+                 progress:(PathNodeProgress*)progress
 {
     self = [self init];
     if (self){
         _name = [path lastPathComponent];
         _originalPath = path;
         _parent = p;
-        _isSorted = YES;
         _rootNode = _parent ? _parent->_rootNode : self;
         if (!_parent){
             _indexInParentForSameKind = 0;
             _indexInParentForAllNodes = 0;
+            _graphConfig.sortByCaseInsensitive = option->isSortByCaseInsensitive;
+            _graphConfig.sortAsNumeric = option->isSortAsNumeric;
         }
+        _updateCountForSort = _rootNode->_graphConfig.updateCountForSort;
         
         NSFileManager* fileManager = [NSFileManager defaultManager];
         BOOL isDirectory;
@@ -163,8 +176,10 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             if (isDirectory){
                 progress.target = path;
                 NSArray* childNames = [fileManager contentsOfDirectoryAtPath:path error:nil];
+                NSStringCompareOptions sortOption = option->isSortByCaseInsensitive ? NSCaseInsensitiveSearch : 0;
+                sortOption |= option->isSortAsNumeric ? NSNumericSearch : 0;
                 childNames = [childNames sortedArrayUsingComparator:^(NSString* o1, NSString* o2){
-                    return [o1 compare:o2 options:NSCaseInsensitiveSearch | NSNumericSearch];
+                    return [o1 compare:o2 options:sortOption];
                 }];
                 for (NSInteger i = 0; i < childNames.count; i++){
                     NSString* childName = childNames[i];
@@ -178,6 +193,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
                     PathNode* child = [[PathNode alloc] initRecursWithPath:childPath
                                                                     parent:self
                                                          ommitingCondition:cond
+                                                                    option:option
                                                                   progress:progress];
                     if (child){
                         if (!_allChildren){
@@ -222,13 +238,13 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }
 }
 
-+ (PathNode *)psudoPathNodeWithImagePath:(NSString *)path isFolder:(BOOL)isFolder
++ (PathNode *)psudoPathNodeWithName:(NSString *)name imagePath:(NSString *)path isFolder:(BOOL)isFolder
 {
     PathNode* parent = nil;
     if (isFolder){
-        parent = [[PathNode alloc] initWithName:@"image" parent:nil path:nil originalPath:path];
+        parent = [[PathNode alloc] initWithName:name parent:nil path:nil originalPath:path];
     }
-    PathNode* child = [[PathNode alloc] initWithName:@"folder" parent:parent path:path originalPath:path];
+    PathNode* child = [[PathNode alloc] initWithName:name parent:parent path:path originalPath:path];
     if (isFolder){
         parent->_imageChildren = [NSMutableArray arrayWithArray:@[child]];
         return parent;
@@ -291,9 +307,11 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (void)sortChildren
 {
-    if (!_isSorted){
+    if (_updateCountForSort != _rootNode->_graphConfig.updateCountForSort){
+        NSStringCompareOptions sortOption = _rootNode->_graphConfig.sortByCaseInsensitive ? NSCaseInsensitiveSearch : 0;
+        sortOption |= _rootNode->_graphConfig.sortAsNumeric ? NSNumericSearch : 0;
         NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
-            return [o1.name compare:o2.name options:NSCaseInsensitiveSearch | NSNumericSearch];
+            return [o1.name compare:o2.name options:sortOption];
         };
         _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
         _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
@@ -310,7 +328,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             PathNode* node = _imageChildren[i];
             node->_indexInParentForSameKind = i;
         }
-        _isSorted = YES;
+        _updateCountForSort = _rootNode->_graphConfig.updateCountForSort;
     }
 }
 
@@ -321,13 +339,41 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 {
     if (_rootNode){
         _rootNode->_graphConfig.sortType = sortType;
-        _rootNode->_graphConfig.updateCount++;
+        _rootNode->_graphConfig.updateCountForType++;
     }
 }
 
 - (enum PathNodeSortType)sortType
 {
     return _rootNode ? _rootNode->_graphConfig.sortType : SortTypeImageIsPrior;
+}
+
+- (void)setIsSortByCaseInsensitive:(BOOL)isSortByCaseInsensitive
+{
+    if (_rootNode){
+        _rootNode->_graphConfig.sortByCaseInsensitive = isSortByCaseInsensitive;
+        _rootNode->_graphConfig.updateCountForType++;
+        _rootNode->_graphConfig.updateCountForSort++;
+    }
+}
+
+- (BOOL)isSortByCaseInsensitive
+{
+    return _rootNode ? _graphConfig.sortByCaseInsensitive : YES;
+}
+
+- (void)setIsSortAsNumeric:(BOOL)isSortAsNumeric
+{
+    if (_rootNode){
+        _rootNode->_graphConfig.sortAsNumeric = isSortAsNumeric;
+        _rootNode->_graphConfig.updateCountForType++;
+        _rootNode->_graphConfig.updateCountForSort++;
+    }
+}
+
+- (BOOL)isSortAsNumeric
+{
+    return _rootNode ? _graphConfig.sortAsNumeric : YES;
 }
 
 - (BOOL) isLeaf
@@ -353,9 +399,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 
 - (NSArray*) images
 {
-    if (!_representationImages || _rootNode->_graphConfig.updateCount != _updateCountForRepresentationImages){
+    if (!_representationImages || _rootNode->_graphConfig.updateCountForType != _updateCountForRepresentationImages){
         [self sortChildren];
-        _updateCountForRepresentationImages = _rootNode->_graphConfig.updateCount;
+        _updateCountForRepresentationImages = _rootNode->_graphConfig.updateCountForType;
         if (_rootNode->_graphConfig.sortType == SortTypeImageIsPrior){
             _representationImages = _imageChildren ? [_imageChildren arrayByAddingObjectsFromArray:_folderChildren] :
                                                      _folderChildren;
@@ -758,28 +804,17 @@ static const CGFloat ThumbnailMaxSize = 384;
 {
     NSString* searchingName = path[index];
     PathNode* candidate = nil;
-    for (candidate in _folderChildren){
+    for (candidate in self.images){
         if ([candidate.name isEqualToString:searchingName]){
-            if (path.count == index + 1){
+            if (candidate.isImage || path.count == index + 1){
                 return candidate;
             }else{
                 return [candidate nearestNodeAtPortablePath:path indexAt:index + 1];
             }
         }
     }
-    for (candidate in _imageChildren){
-        if ([candidate.name isEqualToString:searchingName]){
-            return candidate;
-        }
-    }
-    
-    if (_folderChildren && _folderChildren.count > 0){
-        return _folderChildren[0];
-    }else if (_imageChildren && _imageChildren.count > 0){
-        return _imageChildren[0];
-    }else{
-        return self;
-    }
+
+    return self.images.count > 0 ? self.images.firstObject : self;
 }
 
 @end

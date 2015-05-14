@@ -41,7 +41,9 @@
                                @"thumbRepresentationType":      @0,
                                @"thumbFolderSize":              @(1./3.),
                                @"thumbFolderOpacity":           @1.0,
-                               @"pathNodeSortType":             @0};
+                               @"pathNodeSortType":             @0,
+                               @"pathNodeSortCaseInsensitive":  @YES,
+                               @"pathNodeSortAsNumeric":        @YES};
     return defaults;
 }
 

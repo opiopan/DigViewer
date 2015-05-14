@@ -27,3 +27,12 @@
 
 /* Class = "NSMenuItem"; title = "Image is prior to folders"; ObjectID = "wun-zy-WfP"; */
 "wun-zy-WfP.title" = "画像をフォルダーより優先する";
+
+/* Class = "NSButtonCell"; title = "Sort by case-insensitive"; ObjectID = "enz-9p-Age"; */
+"enz-9p-Age.title" = "大文字小文字を区別しない";
+
+/* Class = "NSButtonCell"; title = "Sort as numerical value"; ObjectID = "tSx-v4-SJc"; */
+"tSx-v4-SJc.title" = "数値としてソートする";
+
+/* Class = "NSTableColumn"; headerCell.title = "Example"; ObjectID = "gfU-Ec-AFd"; */
+"gfU-Ec-AFd.headerCell.title" = "ソート例";
