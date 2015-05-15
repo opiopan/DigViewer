@@ -12,6 +12,7 @@
 #import "PathfinderPinnedFile.h"
 #import "NSImage+CapabilityDetermining.h"
 #import "ThumbnailConfigController.h"
+#import "ImageMetadata.h"
 
 #include "CoreFoundationHelper.h"
 #include <stdlib.h>
@@ -27,6 +28,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         PathNodeSortType    sortType;
         BOOL                sortByCaseInsensitive;
         BOOL                sortAsNumeric;
+        BOOL                sortByDateTime;
     }_graphConfig;
     NSUInteger      _indexInParentForAllNodes;
     NSUInteger      _indexInParentForSameKind;
@@ -167,8 +169,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             _indexInParentForAllNodes = 0;
             _graphConfig.sortByCaseInsensitive = option->isSortByCaseInsensitive;
             _graphConfig.sortAsNumeric = option->isSortAsNumeric;
+            _graphConfig.sortByDateTime = option->isSortByDateTime;
         }
-        _updateCountForSort = _rootNode->_graphConfig.updateCountForSort;
+        _updateCountForSort = _rootNode->_graphConfig.sortByDateTime ? -1 : _rootNode->_graphConfig.updateCountForSort;
         
         NSFileManager* fileManager = [NSFileManager defaultManager];
         BOOL isDirectory;
@@ -313,9 +316,19 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
             return [o1.name compare:o2.name options:sortOption];
         };
+        BOOL needSortByDateTime = ((_rootNode->_graphConfig.sortType != SortTypeMix) && _rootNode->_graphConfig.sortByDateTime);
+        NSComparisonResult (^comparatorForImage)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
+            if(needSortByDateTime){
+                NSComparisonResult rc = [o1.imageDateTime compare:o2.imageDateTime];
+                if (rc != NSOrderedSame){
+                    return rc;
+                }
+            }
+            return [o1.name compare:o2.name options:sortOption];
+        };
         _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
         _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
-        _imageChildren = [_imageChildren sortedArrayUsingComparator:comparator];
+        _imageChildren = [_imageChildren sortedArrayUsingComparator:comparatorForImage];
         for (NSInteger i = 0; i < _allChildren.count; i++){
             PathNode* node = _allChildren[i];
             node->_indexInParentForAllNodes = i;
@@ -333,7 +346,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 }
 
 //-----------------------------------------------------------------------------------------
-// 属性へのアクセサ
+// ソート設定属性へのアクセサ
 //-----------------------------------------------------------------------------------------
 - (void)setSortType:(enum PathNodeSortType)sortType
 {
@@ -376,6 +389,23 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     return _rootNode ? _graphConfig.sortAsNumeric : YES;
 }
 
+- (void)setIsSortByDateTime:(BOOL)isSortByDateTime
+{
+    if (_rootNode){
+        _rootNode->_graphConfig.sortByDateTime = isSortByDateTime;
+        _rootNode->_graphConfig.updateCountForType++;
+        _rootNode->_graphConfig.updateCountForSort++;
+    }
+}
+
+- (BOOL)isSortByDateTime
+{
+    return _rootNode ? _graphConfig.sortByDateTime : NO;
+}
+
+//-----------------------------------------------------------------------------------------
+// 属性へのアクセサ
+//-----------------------------------------------------------------------------------------
 - (BOOL) isLeaf
 {
     return _folderChildren == nil;
@@ -485,6 +515,13 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }
 }
 
+- (NSString *)imageDateTime
+{
+    if (!_imageDateTime){
+        _imageDateTime = dateTimeOfImage(self);
+    }
+    return _imageDateTime;
+}
 
 //-----------------------------------------------------------------------------------------
 // IKImageBrowserItem Protocolの実装

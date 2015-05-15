@@ -48,3 +48,5 @@
 + (id)kvWithKey:(NSString*)key value:(NSString*)value;
 
 @end
+
+extern NSString* dateTimeOfImage(PathNode* pathNode);

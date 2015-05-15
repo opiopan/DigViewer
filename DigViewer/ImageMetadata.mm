@@ -341,6 +341,23 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
 }
 
 //-----------------------------------------------------------------------------------------
+// 撮影日時抽出
+//-----------------------------------------------------------------------------------------
+extern NSString* dateTimeOfImage(PathNode* pathNode)
+{
+    if (pathNode.isImage){
+        NSURL* url = [NSURL fileURLWithPath:pathNode.imagePath];
+        ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+        NSDictionary* properties = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, 0, NULL);
+        NSDictionary* exif = [properties valueForKey:(__bridge NSString*)kCGImagePropertyExifDictionary];
+        NSString* dateTime = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifDateTimeOriginal];
+        return dateTime ? dateTime : @"x";
+    }else{
+        return nil;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // ImageMetadataクラス implementation
 //-----------------------------------------------------------------------------------------
 @implementation ImageMetadata{
@@ -378,6 +395,10 @@ static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
             if (x && y){
                 _geometry = [NSString stringWithFormat:@"%@ x %@", x, y];
             }
+            
+            // PathNodeオブジェクトの撮影日時を更新
+            NSString* dateTime = [_properties[propertyEXIF] valueForKey:(__bridge NSString*)kCGImagePropertyExifDateTimeOriginal];
+            pathNode.imageDateTime = dateTime ? dateTime : @"x";
             
             // レンズライブラリから対応するレンズプロファイルを検索
             NSString* lensName = convertLensModel(self, valueTranslationRules + RULE_LENS_MODEL);

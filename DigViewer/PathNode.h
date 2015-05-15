@@ -43,6 +43,7 @@ enum PathNodeSortType {
 struct _PathNodeCreateOption{
     BOOL isSortByCaseInsensitive;
     BOOL isSortAsNumeric;
+    BOOL isSortByDateTime;
 };
 typedef struct _PathNodeCreateOption PathNodeCreateOption;
 
@@ -55,6 +56,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 @property (nonatomic) enum PathNodeSortType sortType;
 @property (nonatomic) BOOL isSortByCaseInsensitive;
 @property (nonatomic) BOOL isSortAsNumeric;
+@property (nonatomic) BOOL isSortByDateTime;
 
 @property (readonly) NSString*       name;
 @property (readonly) PathNode*       me;
@@ -72,6 +74,8 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 @property (readonly) NSImage*        image;
 @property (readonly) NSImage*        icon;
 @property (readonly) NSString*       originalPath;
+
+@property (nonatomic) NSString*      imageDateTime;
 
 @property (readonly) NSString*       imageUID;
 @property (readonly) NSString*       imageRepresentationType;

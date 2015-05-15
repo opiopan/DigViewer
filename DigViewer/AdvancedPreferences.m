@@ -34,6 +34,8 @@
     self.sortType = [[controller.values valueForKey:@"pathNodeSortType"] integerValue];
     self.isCaseInsensitive = [[controller .values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
     self.isSortAsNumeric = [[controller .values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
+    self.isSortByDateTime = [[controller.values valueForKey:@"pathNodeSortByDateTime"] boolValue];
+    self.isEnableSortByDateTime = _sortType != 2;
     
     // ソート例配列の作成
     NSString* imagePath = [[NSBundle mainBundle] pathForImageResource:@"thumbnailSampleSquare"];
@@ -83,6 +85,7 @@
 - (void)setSortType:(NSInteger)sortType
 {
     _sortType = sortType;
+    self.isEnableSortByDateTime = _sortType != 2;
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller.values setValue:@(_sortType) forKey:@"pathNodeSortType"];
     [self sortExample];
@@ -102,6 +105,13 @@
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller.values setValue:@(_isSortAsNumeric) forKey:@"pathNodeSortAsNumeric"];
     [self sortExample];
+}
+
+- (void)setIsSortByDateTime:(BOOL)isSortByDateTime
+{
+    _isSortByDateTime = isSortByDateTime;
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [controller.values setValue:@(_isSortByDateTime) forKey:@"pathNodeSortByDateTime"];
 }
 
 @end

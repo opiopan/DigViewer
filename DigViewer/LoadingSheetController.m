@@ -74,6 +74,7 @@
         PathNodeCreateOption option;
         option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
         option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
+        option.isSortByDateTime = [[controller.values valueForKey:@"pathNodeSortByDateTime"] boolValue];
         if (pinnedFile){
             self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
             self.isIndeterminate = NO;

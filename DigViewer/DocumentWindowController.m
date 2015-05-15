@@ -81,6 +81,7 @@
     [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortByDateTime" options:nil context:nil];
     
     // オープン時の表示設定を反映
     self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
@@ -105,6 +106,9 @@
     [documentConfig removeObserver:self forKeyPath:@"updateCount"];
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller removeObserver:self forKeyPath:@"values.pathNodeSortType"];
+    [controller removeObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive"];
+    [controller removeObserver:self forKeyPath:@"values.pathNodeSortAsNumeric"];
+    [controller removeObserver:self forKeyPath:@"values.pathNodeSortByDateTime"];
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
@@ -123,9 +127,9 @@
         node.sortType = ((NSNumber*)[controller.values valueForKey:@"pathNodeSortType"]).intValue;
         self.imageArrayController.content = [self.imageTreeController.selection valueForKey:@"images"];
     }else if ([keyPath isEqualToString:@"values.pathNodeSortCaseInsensitive"] ||
-              [keyPath isEqualToString:@"values.pathNodeSortAsNumeric"]){
+              [keyPath isEqualToString:@"values.pathNodeSortAsNumeric"] ||
+              [keyPath isEqualToString:@"values.pathNodeSortByDateTime"]){
         [self performSelector:@selector(setDocumentData:) withObject:((Document*)self.document).root afterDelay:0.3];
-        
     }
 }
 
@@ -139,9 +143,13 @@
     PathNodeCreateOption option;
     option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
     option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
-    if (root.isSortByCaseInsensitive != option.isSortByCaseInsensitive || root.isSortAsNumeric != option.isSortAsNumeric){
+    option.isSortByDateTime = [[controller.values valueForKey:@"pathNodeSortByDateTime"] boolValue];
+    if (root.isSortByCaseInsensitive != option.isSortByCaseInsensitive ||
+        root.isSortAsNumeric != option.isSortAsNumeric ||
+        root.isSortByDateTime != option.isSortByDateTime){
         root.isSortByCaseInsensitive = option.isSortByCaseInsensitive;
         root.isSortAsNumeric = option.isSortAsNumeric;
+        root.isSortByDateTime = option.isSortByDateTime;
     }
     
     // ドキュメントデータ設定
