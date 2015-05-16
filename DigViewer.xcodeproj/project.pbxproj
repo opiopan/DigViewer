@@ -37,11 +37,13 @@
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
 		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.mm */; };
+		7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B18B06A1B06E545006BC48A /* datetime_on.png */; };
 		7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AC4A718B05384004136CD /* InspectorViewController.m */; };
 		7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC21518D86DC5007527E6 /* InfoPlistController.m */; };
 		7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
+		7B35D9251B06D7E2000CA4F1 /* datetime.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35D9241B06D7E2000CA4F1 /* datetime.png */; };
 		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
 		7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
@@ -175,6 +177,7 @@
 		7B0DBEF716A81FB4000365F4 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DigViewer.icns; sourceTree = SOURCE_ROOT; };
 		7B0DBF0216A84335000365F4 /* ClickableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableImageView.h; sourceTree = "<group>"; };
 		7B0DBF0316A84335000365F4 /* ClickableImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClickableImageView.mm; sourceTree = "<group>"; };
+		7B18B06A1B06E545006BC48A /* datetime_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = datetime_on.png; path = resources/datetime_on.png; sourceTree = "<group>"; };
 		7B1AC4A618B05384004136CD /* InspectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorViewController.h; sourceTree = "<group>"; };
 		7B1AC4A718B05384004136CD /* InspectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorViewController.m; sourceTree = "<group>"; };
 		7B1CC21418D86DC5007527E6 /* InfoPlistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPlistController.h; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
 		7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MenuItemValidator.m"; sourceTree = "<group>"; };
+		7B35D9241B06D7E2000CA4F1 /* datetime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = datetime.png; path = resources/datetime.png; sourceTree = "<group>"; };
 		7B36259118DE65D4008471E2 /* FlatSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatSplitView.h; sourceTree = "<group>"; };
 		7B36259218DE65D4008471E2 /* FlatSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatSplitView.m; sourceTree = "<group>"; };
 		7B36259418DE761E008471E2 /* KeyUncapturedTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyUncapturedTabView.h; sourceTree = "<group>"; };
@@ -599,6 +603,8 @@
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B40A41B1AFD08FD006ED497 /* pause.png */,
 				7B40A41C1AFD08FD006ED497 /* play.png */,
+				7B35D9241B06D7E2000CA4F1 /* datetime.png */,
+				7B18B06A1B06E545006BC48A /* datetime_on.png */,
 				7BF8E2A416AA7C9F0007E788 /* up.png */,
 				7BF8E2A716AA7DEB0007E788 /* up.idraw */,
 				7B01210616B4C6A9004AA730 /* down.idraw */,
@@ -704,6 +710,7 @@
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
+				7B35D9251B06D7E2000CA4F1 /* datetime.png in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
@@ -729,6 +736,7 @@
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
+				7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */,
 				7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */,
 				7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */,
 				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,

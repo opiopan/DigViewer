@@ -12,7 +12,7 @@
 "100320.title" = "デフォルト";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Move to parent folder"; ObjectID = "100322"; */
-"100322.ibShadowedToolTip" = "一つ上のフォルダーに移動します";
+"100322.ibShadowedToolTip" = "一つ上のフォルダに移動します";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Move to the selected folder or show full size image"; ObjectID = "100325"; */
-"100325.ibShadowedToolTip" = "選択したフォルダーに移動、または選択した画像を拡大表示します";
+"100325.ibShadowedToolTip" = "選択したフォルダに移動、または選択した画像を拡大表示します";

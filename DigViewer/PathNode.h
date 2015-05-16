@@ -43,7 +43,6 @@ enum PathNodeSortType {
 struct _PathNodeCreateOption{
     BOOL isSortByCaseInsensitive;
     BOOL isSortAsNumeric;
-    BOOL isSortByDateTime;
 };
 typedef struct _PathNodeCreateOption PathNodeCreateOption;
 

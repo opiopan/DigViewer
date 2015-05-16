@@ -25,6 +25,8 @@
 @property (assign, readonly) BOOL isInTransitionState;
 @property (strong, nonatomic) NSImage* slideshowButtonImage;
 @property (strong, nonatomic) NSString* slideshowButtonTooltip;
+@property (assign, nonatomic) BOOL sortByDateTimeButtonState;
+@property (strong, nonatomic) NSImage* sortByDateTimeButtonImage;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;
@@ -37,6 +39,7 @@
 - (IBAction)refreshDocument:(id)sender;
 
 - (IBAction)toggleSlideshowMode:(id)sender;
+- (IBAction)toggleDateTimeSort:(id)sender;
 
 @end
 

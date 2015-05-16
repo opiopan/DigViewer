@@ -21,3 +21,6 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Reload document"; ObjectID = "rGL-6j-xuH"; */
 "rGL-6j-xuH.ibShadowedToolTip" = "ドキュメントを再読み込みします";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Sort images by date & time"; ObjectID = "uou-op-3Mr"; */
+"uou-op-3Mr.ibShadowedToolTip" = "画像を撮影日時順に並べます";

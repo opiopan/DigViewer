@@ -17,25 +17,22 @@
 "wCY-en-coM.title" = "小さい画像をウインドウサイズに合わせて拡大表示";
 
 /* Class = "NSTextFieldCell"; title = "Sort order in folder:"; ObjectID = "h1f-21-ec7"; */
-"h1f-21-ec7.title" = "フォルダー内でのソート順:";
+"h1f-21-ec7.title" = "フォルダ内でのソート順:";
 
 /* Class = "NSMenuItem"; title = "Folder is prior to images"; ObjectID = "hho-JN-Bqh"; */
-"hho-JN-Bqh.title" = "フォルダーを画像より優先する";
+"hho-JN-Bqh.title" = "フォルダを画像より優先する";
 
 /* Class = "NSMenuItem"; title = "Folders and images are same rank"; ObjectID = "kDT-e2-ncL"; */
-"kDT-e2-ncL.title" = "フォルダーと画像を同じ優先度でソートする";
+"kDT-e2-ncL.title" = "フォルダと画像を同じ優先度でソートする";
 
 /* Class = "NSMenuItem"; title = "Image is prior to folders"; ObjectID = "wun-zy-WfP"; */
-"wun-zy-WfP.title" = "画像をフォルダーより優先する";
+"wun-zy-WfP.title" = "画像をフォルダより優先する";
 
 /* Class = "NSButtonCell"; title = "Sort by case-insensitive"; ObjectID = "enz-9p-Age"; */
 "enz-9p-Age.title" = "大文字小文字を区別しない";
 
 /* Class = "NSButtonCell"; title = "Sort as numerical value"; ObjectID = "tSx-v4-SJc"; */
 "tSx-v4-SJc.title" = "数値としてソートする";
-
-/* Class = "NSButtonCell"; title = "Sort by date & time of image"; ObjectID = "hVA-jr-5Xi"; */
-"hVA-jr-5Xi.title" = "画像を撮影日時順に並べる";
 
 /* Class = "NSTableColumn"; headerCell.title = "Example"; ObjectID = "gfU-Ec-AFd"; */
 "gfU-Ec-AFd.headerCell.title" = "ソート例";

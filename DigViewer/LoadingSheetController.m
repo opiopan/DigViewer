@@ -29,6 +29,9 @@
 @synthesize panel;
 @synthesize progressIndicator;
 
+//-----------------------------------------------------------------------------------------
+// 初期化
+//-----------------------------------------------------------------------------------------
 - (id)init
 {
     self = [super init];
@@ -44,6 +47,14 @@
     return self;
 }
 
+- (void) awakeFromNib
+{
+    [progressIndicator startAnimation:self];
+}
+
+//-----------------------------------------------------------------------------------------
+// ドキュメントロード
+//-----------------------------------------------------------------------------------------
 - (void) loadPath:(NSString*)p forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
         condition:(PathNodeOmmitingCondition*)cond;
 {
@@ -59,11 +70,6 @@
     [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
 }
 
-- (void) awakeFromNib
-{
-    [progressIndicator startAnimation:self];
-}
-
 - (void) loadPinnedFileInBackground
 {
     @autoreleasepool {
@@ -74,7 +80,6 @@
         PathNodeCreateOption option;
         option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
         option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
-        option.isSortByDateTime = [[controller.values valueForKey:@"pathNodeSortByDateTime"] boolValue];
         if (pinnedFile){
             self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
             self.isIndeterminate = NO;
@@ -102,7 +107,7 @@
 
 - (void) showPanel
 {
-    if (isLoading && pathNodeProgress.progress < 0.5){
+    if (isLoading && pathNodeProgress.progress < 50){
         isShowing = YES;
         [[NSApplication sharedApplication] beginSheet:panel
                                        modalForWindow:modalWindow
@@ -126,6 +131,58 @@
 
 - (IBAction)onCancel:(id)sender {
     pathNodeProgress.isCanceled = YES;
+    self.isCanceled = YES;
+}
+
+//-----------------------------------------------------------------------------------------
+// 撮影日時ロード
+//-----------------------------------------------------------------------------------------
+- (void)loadImageDateTimeForPathNode:(PathNode *)pathNode forWindow:(NSWindow *)window
+                       modalDelegate:(id)delegate didEndSelector:(SEL)selector
+{
+    root = pathNode;
+    modalWindow = window;
+    modalDelegate = delegate;
+    didEndSelector = selector;
+    isLoading = YES;
+    isShowing = NO;
+    
+    [self performSelectorInBackground:@selector(loadImageDateTimeInBackground) withObject:nil];
+    [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
+}
+
+- (void)loadImageDateTimeInBackground
+{
+    @autoreleasepool {
+        self.phase = NSLocalizedString(@"Now extracting image date time in a folder:", nil);
+        self.isIndeterminate = NO;
+        self.targetFolder = root.originalPath;
+        NSArray* children = root.images;
+        double total = children.count - root.children.count;
+        double current = 0;
+        for (PathNode* child in children){
+            if (self.isCanceled){
+                break;
+            }
+            if (child.isImage){
+                [child imageDateTime];
+                current += 100.0;
+                pathNodeProgress.progress = current / total;
+            }
+        }
+        [self performSelectorOnMainThread:@selector(didEndLoadingImageDateTime) withObject:nil waitUntilDone:NO];
+    }
+}
+
+- (void) didEndLoadingImageDateTime
+{
+    isLoading = NO;
+    if (isShowing){
+        [panel close];
+        [[NSApplication sharedApplication] endSheet:panel returnCode:NSOKButton];
+        isShowing =NO;
+    }
+    [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
 }
 
 @end

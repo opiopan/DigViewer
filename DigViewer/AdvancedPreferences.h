@@ -14,8 +14,6 @@
 @property (assign, nonatomic) NSInteger sortType;
 @property (assign, nonatomic) BOOL isCaseInsensitive;
 @property (assign, nonatomic) BOOL isSortAsNumeric;
-@property (assign, nonatomic) BOOL isSortByDateTime;
-@property (assign, nonatomic) BOOL isEnableSortByDateTime;
 
 @property (strong, nonatomic) NSArray* exampleList;
 

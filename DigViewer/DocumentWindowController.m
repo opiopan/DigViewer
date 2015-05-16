@@ -13,6 +13,7 @@
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
+#import "LoadingSheetController.h"
 
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
@@ -44,6 +45,7 @@
     SlideshowConfigController*  slideshowConfig;
     BOOL                        isInSlideshowMode;
     NSInteger                   slideshowCount;
+    LoadingSheetController*     loadingSheet;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -81,8 +83,10 @@
     [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:nil context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:nil context:nil];
-    [controller addObserver:self forKeyPath:@"values.pathNodeSortByDateTime" options:nil context:nil];
-    
+
+    // カレントフォルダ移動を追跡するためのObserverを登録
+    [_imageTreeController addObserver:self forKeyPath:@"selection" options:nil context:nil];
+
     // オープン時の表示設定を反映
     self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
     self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
@@ -91,6 +95,9 @@
     
     // スライドショー状態の初期化
     [self setSlideshowMode:NO];
+    
+    // 日時ソート状態初期化
+    self.sortByDateTimeButtonState = NO;
    
    // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -108,7 +115,7 @@
     [controller removeObserver:self forKeyPath:@"values.pathNodeSortType"];
     [controller removeObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive"];
     [controller removeObserver:self forKeyPath:@"values.pathNodeSortAsNumeric"];
-    [controller removeObserver:self forKeyPath:@"values.pathNodeSortByDateTime"];
+    [_imageTreeController removeObserver:self forKeyPath:@"selection"];
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
@@ -127,9 +134,12 @@
         node.sortType = ((NSNumber*)[controller.values valueForKey:@"pathNodeSortType"]).intValue;
         self.imageArrayController.content = [self.imageTreeController.selection valueForKey:@"images"];
     }else if ([keyPath isEqualToString:@"values.pathNodeSortCaseInsensitive"] ||
-              [keyPath isEqualToString:@"values.pathNodeSortAsNumeric"] ||
-              [keyPath isEqualToString:@"values.pathNodeSortByDateTime"]){
+              [keyPath isEqualToString:@"values.pathNodeSortAsNumeric"]){
         [self performSelector:@selector(setDocumentData:) withObject:((Document*)self.document).root afterDelay:0.3];
+        
+    }else if (object == _imageTreeController){
+        PathNode* current = [_imageTreeController.selection valueForKey:@"me"];
+        self.sortByDateTimeButtonState = current.isSortByDateTime;
     }
 }
 
@@ -143,13 +153,9 @@
     PathNodeCreateOption option;
     option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
     option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
-    option.isSortByDateTime = [[controller.values valueForKey:@"pathNodeSortByDateTime"] boolValue];
-    if (root.isSortByCaseInsensitive != option.isSortByCaseInsensitive ||
-        root.isSortAsNumeric != option.isSortAsNumeric ||
-        root.isSortByDateTime != option.isSortByDateTime){
+    if (root.isSortByCaseInsensitive != option.isSortByCaseInsensitive || root.isSortAsNumeric != option.isSortAsNumeric){
         root.isSortByCaseInsensitive = option.isSortByCaseInsensitive;
         root.isSortAsNumeric = option.isSortAsNumeric;
-        root.isSortByDateTime = option.isSortByDateTime;
     }
     
     // ドキュメントデータ設定
@@ -484,6 +490,40 @@
         menuItem.title = NSLocalizedString(@"Begin Slideshow", nil);
     }
     return YES;
+}
+
+//-----------------------------------------------------------------------------------------
+// 日時でのソート制御
+//-----------------------------------------------------------------------------------------
+- (IBAction)toggleDateTimeSort:(id)sender
+{
+    PathNode* current = [self.imageTreeController.selection valueForKey:@"me"];
+    if (_sortByDateTimeButtonState){
+        loadingSheet = [[LoadingSheetController alloc] init];
+        [loadingSheet loadImageDateTimeForPathNode:current forWindow:self.window
+                                     modalDelegate:self didEndSelector:@selector(didEndLoadDateTime:)];
+    }else{
+        [self performSelector:@selector(didEndLoadDateTime:) withObject:current afterDelay:0.0];
+    }
+}
+
+- (void)didEndLoadDateTime:(PathNode*)current
+{
+    current.isSortByDateTime = _sortByDateTimeButtonState;
+    self.imageArrayController.content = current.images;
+}
+
+- (void)setSortByDateTimeButtonState:(BOOL)sortByDateTimeButtonState
+{
+    _sortByDateTimeButtonState = sortByDateTimeButtonState;
+
+    static NSImage* offImage = nil;
+    static NSImage* onImage = nil;
+    if (!offImage){
+        offImage = [[NSBundle mainBundle] imageForResource:@"datetime"];
+        onImage = [[NSBundle mainBundle] imageForResource:@"datetime_on"];
+    }
+    self.sortByDateTimeButtonImage = _sortByDateTimeButtonState ? onImage : offImage;
 }
 
 @end

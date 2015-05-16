@@ -1,12 +1,12 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Folder Tree"; ObjectID = "100243"; */
-"100243.headerCell.title" = "フォルダー ツリー";
+"100243.headerCell.title" = "フォルダ ツリー";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "100244"; */
 "100244.title" = "Text Cell";
 
 /* Class = "NSTableColumn"; headerCell.title = "Current Folder"; ObjectID = "100249"; */
-"100249.headerCell.title" = "カレント フォルダー";
+"100249.headerCell.title" = "カレント フォルダ";
 
 /* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "100250"; */
 "100250.title" = "Text";

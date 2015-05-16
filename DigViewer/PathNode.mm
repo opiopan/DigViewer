@@ -28,7 +28,6 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         PathNodeSortType    sortType;
         BOOL                sortByCaseInsensitive;
         BOOL                sortAsNumeric;
-        BOOL                sortByDateTime;
     }_graphConfig;
     NSUInteger      _indexInParentForAllNodes;
     NSUInteger      _indexInParentForSameKind;
@@ -38,6 +37,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     NSArray*        _representationImages;
     NSInteger       _updateCountForRepresentationImages;
     NSInteger       _updateCountForSort;
+    BOOL            _isSortByDateTimeForRepresentationImages;
 }
 
 @synthesize name = _name;
@@ -81,6 +81,8 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             _indexInParentForSameKind = -1;
             _updateCountForRepresentationImages = -1;
             _updateCountForSort = -1;
+            _isSortByDateTime = NO;
+            _isSortByDateTimeForRepresentationImages = NO;
             _graphConfig.updateCountForType = 0;
             _graphConfig.updateCountForSort = 0;
             _graphConfig.sortType = SortTypeImageIsPrior;
@@ -169,9 +171,8 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             _indexInParentForAllNodes = 0;
             _graphConfig.sortByCaseInsensitive = option->isSortByCaseInsensitive;
             _graphConfig.sortAsNumeric = option->isSortAsNumeric;
-            _graphConfig.sortByDateTime = option->isSortByDateTime;
         }
-        _updateCountForSort = _rootNode->_graphConfig.sortByDateTime ? -1 : _rootNode->_graphConfig.updateCountForSort;
+        _updateCountForSort = _rootNode->_graphConfig.updateCountForSort;
         
         NSFileManager* fileManager = [NSFileManager defaultManager];
         BOOL isDirectory;
@@ -310,13 +311,14 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (void)sortChildren
 {
-    if (_updateCountForSort != _rootNode->_graphConfig.updateCountForSort){
+    if (_updateCountForSort != _rootNode->_graphConfig.updateCountForSort ||
+        _isSortByDateTime != _isSortByDateTimeForRepresentationImages){
         NSStringCompareOptions sortOption = _rootNode->_graphConfig.sortByCaseInsensitive ? NSCaseInsensitiveSearch : 0;
         sortOption |= _rootNode->_graphConfig.sortAsNumeric ? NSNumericSearch : 0;
         NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
             return [o1.name compare:o2.name options:sortOption];
         };
-        BOOL needSortByDateTime = ((_rootNode->_graphConfig.sortType != SortTypeMix) && _rootNode->_graphConfig.sortByDateTime);
+        BOOL needSortByDateTime = _isSortByDateTime;
         NSComparisonResult (^comparatorForImage)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
             if(needSortByDateTime){
                 NSComparisonResult rc = [o1.imageDateTime compare:o2.imageDateTime];
@@ -389,20 +391,6 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     return _rootNode ? _graphConfig.sortAsNumeric : YES;
 }
 
-- (void)setIsSortByDateTime:(BOOL)isSortByDateTime
-{
-    if (_rootNode){
-        _rootNode->_graphConfig.sortByDateTime = isSortByDateTime;
-        _rootNode->_graphConfig.updateCountForType++;
-        _rootNode->_graphConfig.updateCountForSort++;
-    }
-}
-
-- (BOOL)isSortByDateTime
-{
-    return _rootNode ? _graphConfig.sortByDateTime : NO;
-}
-
 //-----------------------------------------------------------------------------------------
 // 属性へのアクセサ
 //-----------------------------------------------------------------------------------------
@@ -429,9 +417,11 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 
 - (NSArray*) images
 {
-    if (!_representationImages || _rootNode->_graphConfig.updateCountForType != _updateCountForRepresentationImages){
+    if (!_representationImages || _rootNode->_graphConfig.updateCountForType != _updateCountForRepresentationImages ||
+        _isSortByDateTime != _isSortByDateTimeForRepresentationImages){
         [self sortChildren];
         _updateCountForRepresentationImages = _rootNode->_graphConfig.updateCountForType;
+        _isSortByDateTimeForRepresentationImages = _isSortByDateTime;
         if (_rootNode->_graphConfig.sortType == SortTypeImageIsPrior){
             _representationImages = _imageChildren ? [_imageChildren arrayByAddingObjectsFromArray:_folderChildren] :
                                                      _folderChildren;
