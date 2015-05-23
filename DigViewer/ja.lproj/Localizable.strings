@@ -23,7 +23,7 @@
 "Now loading a pinned file in the folder:" = "ピン留めファイルをロード中:";
 "Now recognizing a pinned file in the folder:" = "ピン留めファイルを解析中:";
 "Now searching image files in the folder:" = "画像ファイルを検索中:";
-"Now extracting image date time in a folder:" = "画像の日時情報を抽出中:";
+"Now extracting image date time in a folder:" = "画像の撮影日時を抽出中:";
 
 // メニュータイトル
 "Show Navigator" = "ナビゲーターを表示";
