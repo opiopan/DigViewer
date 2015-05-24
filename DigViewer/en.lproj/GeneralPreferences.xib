@@ -15,21 +15,21 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="418" y="523" width="638" height="337"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="638" height="418"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="6" width="638" height="337"/>
+                <rect key="frame" x="0.0" y="7" width="638" height="418"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" borderType="none" id="atp-bu-aq2">
-                        <rect key="frame" x="-3" y="-4" width="644" height="341"/>
+                        <rect key="frame" x="-3" y="-4" width="644" height="422"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="644" height="326"/>
+                            <rect key="frame" x="0.0" y="0.0" width="644" height="407"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" id="UMn-Md-AzO">
-                                    <rect key="frame" x="41" y="299" width="142" height="17"/>
+                                    <rect key="frame" x="41" y="380" width="142" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Show:" id="m5R-VL-lNo">
                                         <font key="font" metaFont="system"/>
@@ -38,7 +38,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" id="xxU-v4-nEi">
-                                    <rect key="frame" x="189" y="214" width="343" height="101"/>
+                                    <rect key="frame" x="189" y="295" width="343" height="101"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="310" height="18"/>
@@ -49,19 +49,19 @@
                                     </buttonCell>
                                     <cells>
                                         <column>
-                                            <buttonCell type="radio" title="all images" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="g6w-G3-8Gt">
+                                            <buttonCell type="radio" title="All images" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="g6w-G3-8Gt">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <buttonCell type="radio" title="images except raw format and complex format" imagePosition="left" alignment="left" inset="2" id="nHD-nN-qMF">
+                                            <buttonCell type="radio" title="Images except raw format and complex format" imagePosition="left" alignment="left" inset="2" id="nHD-nN-qMF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <buttonCell type="radio" title="images limited by file size" imagePosition="left" alignment="left" inset="2" id="8Pz-gr-tj8">
+                                            <buttonCell type="radio" title="Images limited by file size" imagePosition="left" alignment="left" inset="2" id="8Pz-gr-tj8">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <buttonCell type="radio" title="images kind of specified types" imagePosition="left" alignment="left" inset="2" id="SRG-ZT-UJd">
+                                            <buttonCell type="radio" title="Images kind of specified types" imagePosition="left" alignment="left" inset="2" id="SRG-ZT-UJd">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -71,20 +71,8 @@
                                         <binding destination="-2" name="selectedIndex" keyPath="self.documentConfigController.type" id="Dxq-id-DLu"/>
                                     </connections>
                                 </matrix>
-                                <button verticalHuggingPriority="750" id="eTw-iU-lud">
-                                    <rect key="frame" x="391" y="196" width="118" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="push" title="Customize..." bezelStyle="rounded" alignment="center" controlSize="small" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gpQ-wa-IoT">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="smallSystem"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="onCustomizeOmittingExtentions:" target="-2" id="Jnn-yb-2ak"/>
-                                        <binding destination="-2" name="enabled" keyPath="self.documentConfigController.isTypeCustom" id="b2o-xy-bNm"/>
-                                    </connections>
-                                </button>
                                 <textField verticalHuggingPriority="750" id="TJp-Af-tPl">
-                                    <rect key="frame" x="396" y="245" width="29" height="19"/>
+                                    <rect key="frame" x="411" y="326" width="29" height="19"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="WIb-8u-9c2">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="T1J-nv-BE3"/>
@@ -103,7 +91,7 @@
                                     </connections>
                                 </textField>
                                 <textField verticalHuggingPriority="750" id="MlQ-Yh-FRk">
-                                    <rect key="frame" x="426" y="244" width="38" height="17"/>
+                                    <rect key="frame" x="441" y="325" width="38" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="MB" id="1td-6R-xvI">
                                         <font key="font" metaFont="smallSystem"/>
@@ -111,8 +99,20 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <button verticalHuggingPriority="750" id="eTw-iU-lud">
+                                    <rect key="frame" x="406" y="294" width="118" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="push" title="Customize..." bezelStyle="rounded" alignment="center" controlSize="small" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gpQ-wa-IoT">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="smallSystem"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="onCustomizeOmittingExtentions:" target="-2" id="Jnn-yb-2ak"/>
+                                        <binding destination="-2" name="enabled" keyPath="self.documentConfigController.isTypeCustom" id="b2o-xy-bNm"/>
+                                    </connections>
+                                </button>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="urw-A3-Dfe">
-                                    <rect key="frame" x="41" y="156" width="142" height="17"/>
+                                    <rect key="frame" x="41" y="256" width="142" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Background color:" id="zWe-d0-NPx">
                                         <font key="font" metaFont="system"/>
@@ -120,35 +120,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="sqe-Az-lb3">
-                                    <rect key="frame" x="41" y="58" width="142" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Drag &amp; Drop:" id="s31-Mu-aWT">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Mxa-IN-raN">
-                                    <rect key="frame" x="41" y="106" width="142" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slideshow interval:" id="QU4-4I-usl">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Pxd-49-GwE">
-                                    <rect key="frame" x="232" y="106" width="142" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="sec" id="hXl-b8-oJH">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
                                 <colorWell id="5Ok-pj-yiR">
-                                    <rect key="frame" x="191" y="150" width="75" height="26"/>
+                                    <rect key="frame" x="191" y="250" width="75" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -159,31 +132,36 @@
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <button id="RlV-CS-xdE">
-                                    <rect key="frame" x="189" y="57" width="357" height="18"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dgc-O6-Gc5">
+                                    <rect key="frame" x="24" y="205" width="159" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="check" title="Enable drag images from DigViewer" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="48q-eI-blT">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Gestures:" id="wsX-Ah-txq">
                                         <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.dndEnable" id="zT2-NS-c3h"/>
-                                    </connections>
-                                </button>
-                                <button id="6PK-7a-Cls">
-                                    <rect key="frame" x="189" y="37" width="357" height="18"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="1Gq-9d-rYC">
+                                    <rect key="frame" x="211" y="156" width="361" height="42"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="check" title="Muti images are selectable" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="RKo-7i-EO8">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="o8h-wX-ldn">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <string key="title">You can magnify / reduce a image of swipe a image to move next / previous image, if gestures are enabled. However, it affect responsibility of transition between each image a litte.</string>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Mxa-IN-raN">
+                                    <rect key="frame" x="41" y="109" width="142" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slideshow interval:" id="QU4-4I-usl">
                                         <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <binding destination="d80-gG-QKQ" name="enabled" keyPath="values.dndEnable" id="if3-er-D0B"/>
-                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.dndMultiple" id="BzX-cW-eD5"/>
-                                    </connections>
-                                </button>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                                 <textField verticalHuggingPriority="750" id="nBX-HE-tNK">
-                                    <rect key="frame" x="189" y="103" width="41" height="22"/>
+                                    <rect key="frame" x="189" y="106" width="41" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="pUy-sA-h2d">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="lOP-ga-Vy4"/>
@@ -200,6 +178,58 @@
                                         <binding destination="d80-gG-QKQ" name="minValue" keyPath="values.slideshowIntervalMin" id="tlp-il-MEL"/>
                                     </connections>
                                 </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Pxd-49-GwE">
+                                    <rect key="frame" x="232" y="109" width="142" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="sec" id="hXl-b8-oJH">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="sqe-Az-lb3">
+                                    <rect key="frame" x="41" y="61" width="142" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Drag &amp; Drop:" id="s31-Mu-aWT">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button id="RlV-CS-xdE">
+                                    <rect key="frame" x="189" y="60" width="357" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Enable drag images from DigViewer" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="48q-eI-blT">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.dndEnable" id="zT2-NS-c3h"/>
+                                    </connections>
+                                </button>
+                                <button id="6PK-7a-Cls">
+                                    <rect key="frame" x="189" y="40" width="357" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Muti images are selectable" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="RKo-7i-EO8">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="d80-gG-QKQ" name="enabled" keyPath="values.dndEnable" id="if3-er-D0B"/>
+                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.dndMultiple" id="BzX-cW-eD5"/>
+                                    </connections>
+                                </button>
+                                <button id="ffA-pI-rL3">
+                                    <rect key="frame" x="189" y="204" width="337" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Enable gestures in image pane" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vr3-fW-ddr">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.gestureEnable" id="7kx-D2-f92"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -207,7 +237,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="375" y="444.5"/>
+            <point key="canvasLocation" x="375" y="485"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="d80-gG-QKQ"/>
     </objects>

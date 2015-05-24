@@ -38,6 +38,10 @@
                                                               forKeyPath:@"values.imageBackgroundColor"
                                                                  options:0 context:nil];
     [self reflectBackgroundColor];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.gestureEnable"
+                                                                 options:0 context:nil];
+    [self reflectGestureConfig];
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
 }
 
@@ -47,6 +51,9 @@
     _isVisible = isVisible;
     if (_isVisible && !lastVisiblility){
         [self reflectImage];
+    }if (!_isVisible && lastVisiblility){
+        ClickableImageView* imageView = (ClickableImageView*)self.view;
+        [imageView setImage:nil withRotation:0];
     }
 }
 
@@ -55,6 +62,7 @@
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     [controller removeObserver:self forKeyPath:@"isFitWindow"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.imageBackgroundColor"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.gestureEnable"];
     [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
 }
 
@@ -72,17 +80,14 @@
             ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
             CGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, NULL));
             if (!thumbnail){
-                imageView.image = node.image;
-                [imageView setCGImage:NULL withRotation:0];                
+                [imageView setImage:node.image withRotation:1];
             }else{
                 NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
                 NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                imageView.image = nil;
-                [imageView setCGImage:thumbnail withRotation:orientation.integerValue];
+                [imageView setImage:(__bridge id)thumbnail withRotation:orientation.integerValue];
             }
         }else{
-            imageView.image = node.image;
-            [imageView setCGImage:NULL withRotation:0];
+            [imageView setImage:node.image withRotation:1];
         }
     }
 }
@@ -104,6 +109,13 @@
    }
 }
 
+- (void)reflectGestureConfig
+{
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    imageView.isDrawingByLayer = [[[controller values] valueForKey:@"gestureEnable"] boolValue];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
@@ -113,6 +125,9 @@
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.imageBackgroundColor"]){
         [self reflectBackgroundColor];
+    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
+              [keyPath isEqualToString:@"values.gestureEnable"]){
+        [self performSelector:@selector(reflectGestureConfig) withObject:nil afterDelay:0.0];
     }else if (object == self.imageArrayController && [keyPath isEqualToString:@"selectedObjects"]){
         if (_isVisible){
             [self reflectImage];

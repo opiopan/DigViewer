@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -288,9 +288,9 @@ DQ
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DigViewer" id="ARt-57-qu2"/>
                                 </imageView>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKi-yH-WdT">
-                                    <rect key="frame" x="263" y="159" width="219" height="56"/>
+                                    <rect key="frame" x="263" y="161" width="219" height="56"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DigViewer" id="017-vO-LtC">
-                                        <font key="font" size="41" name="HelveticaNeue-Thin"/>
+                                        <font key="font" size="43" name="HelveticaNeue-UltraLight"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -299,7 +299,7 @@ DQ
                                     <rect key="frame" x="259" y="142" width="227" height="17"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
                                         <font key="font" metaFont="cellTitle"/>
-                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
@@ -347,7 +347,7 @@ This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branc
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="303.5" y="168.5"/>
+            <point key="canvasLocation" x="60.5" y="210.5"/>
         </window>
         <customObject id="I0P-4d-rdw" customClass="AppDelegate"/>
         <customObject id="pfv-YF-3Sx" userLabel="InfoPlistController" customClass="InfoPlistController"/>

@@ -11,8 +11,9 @@
 @interface ClickableImageView : NSImageView
 
 @property (weak) id delegate;
-@property (copy) NSColor* backgroundColor;
+@property (copy, nonatomic) NSColor* backgroundColor;
+@property (nonatomic) BOOL isDrawingByLayer;
 
-- (void)setCGImage:(CGImageRef)cgimage withRotation:(NSInteger)rotation;
+- (void)setImage:(id)image withRotation:(NSInteger)rotation;
 
 @end

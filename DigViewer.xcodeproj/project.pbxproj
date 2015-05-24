@@ -74,6 +74,8 @@
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */; };
+		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
@@ -242,6 +244,10 @@
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFrameLayer.h; sourceTree = "<group>"; };
+		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFrameLayer.m; sourceTree = "<group>"; };
+		7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
+		7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLayer.m; sourceTree = "<group>"; };
 		7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailPreferences.h; sourceTree = "<group>"; };
 		7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailPreferences.m; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -415,10 +421,9 @@
 		7B3920591696FF5F00E139D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B6FEED71B1093BA0077AC29 /* Image view */,
 				7B697E39169C547200A9E247 /* ImageWithTextCell.h */,
 				7B697E3A169C547200A9E247 /* ImageWithTextCell.m */,
-				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
-				7B0DBF0316A84335000365F4 /* ClickableImageView.mm */,
 				7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */,
 				7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */,
 				7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */,
@@ -476,6 +481,19 @@
 				7B553BF71AE211DF00618590 /* LensLibrary.m */,
 			);
 			name = "Lens Library";
+			sourceTree = "<group>";
+		};
+		7B6FEED71B1093BA0077AC29 /* Image view */ = {
+			isa = PBXGroup;
+			children = (
+				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
+				7B0DBF0316A84335000365F4 /* ClickableImageView.mm */,
+				7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */,
+				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */,
+				7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */,
+				7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */,
+			);
+			name = "Image view";
 			sourceTree = "<group>";
 		};
 		7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */ = {
@@ -846,6 +864,7 @@
 				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
+				7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */,
 				7BB4E6001AD948250076630A /* AppPreferences.m in Sources */,
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
@@ -860,6 +879,7 @@
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
+				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.m in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */,

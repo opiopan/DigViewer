@@ -22,6 +22,7 @@
                      @"imageSetMaxFileSizeMin":       @0.1,
                      @"imageSetOmittingExt":          zeroArray,
                      @"imageBackgroundColor":         blackData,
+                     @"gestureEnable":                @YES,
                      @"slideshowInterval":            @5,
                      @"slideshowIntervalMin":         @0.5,
                      @"slideshowIntervalDef":         @5,
