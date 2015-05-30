@@ -48,7 +48,6 @@
     _currentImage.backgroundColor = backgroundColor;
 }
 
-
 - (CGFloat)scale
 {
     return _currentImage.scale;
@@ -67,6 +66,26 @@
 - (void)fixScale
 {
     [_currentImage fixScale];
+}
+
+- (CGPoint)startPanning
+{
+    return [_currentImage startPanning];
+}
+
+- (CGPoint)transisionalOffset
+{
+    return [_currentImage transisionalOffset];
+}
+
+- (void)setTransisionalOffset:(CGPoint)offset
+{
+    [_currentImage setTransisionalOffset:offset];
+}
+
+- (void)fixOffsetWithVelocity:(CGPoint)velocity
+{
+    [_currentImage fixOffsetWithVelocity:velocity];
 }
 
 - (CGPoint)offset

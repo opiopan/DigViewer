@@ -288,7 +288,7 @@ DQ
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DigViewer" id="ARt-57-qu2"/>
                                 </imageView>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKi-yH-WdT">
-                                    <rect key="frame" x="263" y="161" width="219" height="56"/>
+                                    <rect key="frame" x="263" y="152" width="219" height="56"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DigViewer" id="017-vO-LtC">
                                         <font key="font" size="43" name="HelveticaNeue-UltraLight"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -296,7 +296,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-zy-TBg">
-                                    <rect key="frame" x="259" y="142" width="227" height="17"/>
+                                    <rect key="frame" x="259" y="133" width="227" height="17"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
                                         <font key="font" metaFont="cellTitle"/>
                                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -328,7 +328,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r1P-e4-v4i">
-                                    <rect key="frame" x="255" y="82" width="235" height="52"/>
+                                    <rect key="frame" x="255" y="73" width="235" height="52"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
                                         <font key="font" metaFont="miniSystem"/>
                                         <string key="title">Caution:

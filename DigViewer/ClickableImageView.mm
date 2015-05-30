@@ -8,6 +8,7 @@
 
 #import "ClickableImageView.h"
 #import "ImageFrameLayer.h"
+#import "TwoFingerGestureRecognizer.h"
 #include "CoreFoundationHelper.h"
 
 @implementation ClickableImageView{
@@ -17,6 +18,8 @@
     CGFloat _scale;
     
     ImageFrameLayer* _frameLayer;
+    NSMutableArray* _touchGestureRecognizers;
+    NSPoint _panningBaias;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -40,11 +43,14 @@
 {
     self.isDrawingByLayer = NO;
     
-    NSMagnificationGestureRecognizer* magnificationRecognizer = [NSMagnificationGestureRecognizer alloc];
-    magnificationRecognizer = [magnificationRecognizer initWithTarget:self action:@selector(handleMagnifyGesture:)];
-    [self addGestureRecognizer:magnificationRecognizer];
+    _touchGestureRecognizers = [NSMutableArray array];
+    TwoFingerGestureRecognizer* twoFIngerGestureRecognizer = [TwoFingerGestureRecognizer new];
+    twoFIngerGestureRecognizer.view = self;
+    twoFIngerGestureRecognizer.magnifyGestureHandler = @selector(handleMagnifyGesture:);
+    twoFIngerGestureRecognizer.panGestureHandler = @selector(handleTwoFingerPanGesture:);
+    [_touchGestureRecognizers addObject:twoFIngerGestureRecognizer];
     
-    
+    [self setAcceptsTouchEvents:YES];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -78,7 +84,7 @@
         _frameLayer = [ImageFrameLayer layer];
         _frameLayer.delegate = self;
         _frameLayer.bounds = [self bounds];
-        _frameLayer.needsDisplayOnBoundsChange = NO; // リサイズ時に再描画する
+        _frameLayer.needsDisplayOnBoundsChange = NO;
         _frameLayer.backgroundColor = _backgroundColor.CGColor;
         _frameLayer.isFitFrame = self.imageScaling == NSImageScaleProportionallyDown;
         [_frameLayer setImage:_cgimage ? (__bridge id)(CGImageRef)_cgimage : self.image withRotation:_rotation];
@@ -136,12 +142,31 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// タッチイベントをジェスチャーリコグナイザーに回送
+//-----------------------------------------------------------------------------------------
+- (void)touchesBeganWithEvent:(NSEvent *)event {
+    [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
+}
+
+- (void)touchesMovedWithEvent:(NSEvent *)event {
+    [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
+}
+
+- (void)touchesEndedWithEvent:(NSEvent *)event {
+    [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
+}
+
+- (void)touchesCancelledWithEvent:(NSEvent *)event {
+    [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
+}
+
+//-----------------------------------------------------------------------------------------
 // ジェスチャー処理
 //-----------------------------------------------------------------------------------------
-- (void)handleMagnifyGesture:(NSMagnificationGestureRecognizer*)gesture
+- (void)handleMagnifyGesture:(TwoFingerGestureRecognizer*)gesture
 {
     if (_isDrawingByLayer){
-        NSPoint pointer = [gesture locationInView:self];
+        NSPoint pointer = gesture.initialPoint;
         pointer.x -= self.frame.size.width / 2;
         pointer.y -= self.frame.size.height / 2;
         CGPoint origin = _frameLayer.offset;
@@ -169,10 +194,36 @@
         
         [_frameLayer setTransisionalScale:transisionalScale withOffset:origin];
         
-        if (gesture.state == NSGestureRecognizerStateEnded ||
-            gesture.state == NSGestureRecognizerStateCancelled ||
-            gesture.state == NSGestureRecognizerStateFailed){
+        if (gesture.state == TouchGestureStateEnded ||
+            gesture.state == TouchGestureStateCanceled ||
+            gesture.state == TouchGestureStateFailed){
             [_frameLayer fixScale];
+        }
+    }
+}
+
+- (void)handleTwoFingerPanGesture:(TwoFingerGestureRecognizer*)gesture
+{
+    if (_isDrawingByLayer){
+        static CGFloat gestureScale = 3.0;
+        
+        if (gesture.state == TouchGestureStateBegan){
+            _panningBaias = [_frameLayer startPanning];
+        }
+        
+        CGPoint offset = gesture.panningDelta;
+        offset.x = offset.x * gestureScale + _panningBaias.x;
+        offset.y = offset.y * gestureScale + _panningBaias.y;
+        
+        _frameLayer.transisionalOffset = offset;
+        
+        if (gesture.state == TouchGestureStateEnded ||
+            gesture.state == TouchGestureStateCanceled ||
+            gesture.state == TouchGestureStateFailed){
+            CGPoint velocity = gesture.panningVelocity;
+            velocity.x *= gestureScale;
+            velocity.y *= gestureScale;
+            [_frameLayer fixOffsetWithVelocity:velocity];
         }
     }
 }

@@ -59,6 +59,8 @@
 		7B40A41E1AFD08FD006ED497 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B40A41C1AFD08FD006ED497 /* play.png */; };
 		7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */; };
 		7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */; };
+		7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B467D661B12017A00969442 /* TouchGestureRecognizer.m */; };
+		7B467D6A1B12083000969442 /* TwoFingerGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B467D691B12083000969442 /* TwoFingerGestureRecognizer.m */; };
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
@@ -214,6 +216,10 @@
 		7B40A41C1AFD08FD006ED497 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = resources/play.png; sourceTree = "<group>"; };
 		7B4400771AFDC675006CE7D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailPreferences.xib; sourceTree = "<group>"; };
 		7B44007A1AFDC697006CE7D6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ThumbnailPreferences.strings; sourceTree = "<group>"; };
+		7B467D651B12017A00969442 /* TouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchGestureRecognizer.h; sourceTree = "<group>"; };
+		7B467D661B12017A00969442 /* TouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchGestureRecognizer.m; sourceTree = "<group>"; };
+		7B467D681B12083000969442 /* TwoFingerGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFingerGestureRecognizer.h; sourceTree = "<group>"; };
+		7B467D691B12083000969442 /* TwoFingerGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFingerGestureRecognizer.m; sourceTree = "<group>"; };
 		7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
 		7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
 		7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBackgroundView.h; sourceTree = "<group>"; };
@@ -422,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6FEED71B1093BA0077AC29 /* Image view */,
+				7B467D6B1B19977000969442 /* GPS view */,
 				7B697E39169C547200A9E247 /* ImageWithTextCell.h */,
 				7B697E3A169C547200A9E247 /* ImageWithTextCell.m */,
 				7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */,
@@ -432,9 +439,6 @@
 				7B36259218DE65D4008471E2 /* FlatSplitView.m */,
 				7B36259418DE761E008471E2 /* KeyUncapturedTabView.h */,
 				7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */,
-				7B9F9E8418E7D91D0042337F /* GPSMapView.h */,
-				7B9F9E8518E7D91D0042337F /* GPSMapView.m */,
-				7B9F9E8718E7DBBA0042337F /* GPSMapView.js */,
 				7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */,
 				7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */,
 			);
@@ -449,6 +453,27 @@
 				7BBEE9EF1ADD49AB0047DF50 /* Model Controllers */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7B467D641B1200BD00969442 /* Touch gesture recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				7B467D651B12017A00969442 /* TouchGestureRecognizer.h */,
+				7B467D661B12017A00969442 /* TouchGestureRecognizer.m */,
+				7B467D681B12083000969442 /* TwoFingerGestureRecognizer.h */,
+				7B467D691B12083000969442 /* TwoFingerGestureRecognizer.m */,
+			);
+			name = "Touch gesture recognizers";
+			sourceTree = "<group>";
+		};
+		7B467D6B1B19977000969442 /* GPS view */ = {
+			isa = PBXGroup;
+			children = (
+				7B9F9E8418E7D91D0042337F /* GPSMapView.h */,
+				7B9F9E8518E7D91D0042337F /* GPSMapView.m */,
+				7B9F9E8718E7DBBA0042337F /* GPSMapView.js */,
+			);
+			name = "GPS view";
 			sourceTree = "<group>";
 		};
 		7B5340551703F294008AEDB6 /* Disk Image Resources */ = {
@@ -643,6 +668,7 @@
 		7BF678B31699106C00FE39B4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7B467D641B1200BD00969442 /* Touch gesture recognizers */,
 				7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */,
 				7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */,
 				7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */,
@@ -892,9 +918,11 @@
 				7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */,
 				7BA81C011AF77C54001E40D7 /* EditImageSetSheetController.m in Sources */,
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
+				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
+				7B467D6A1B12083000969442 /* TwoFingerGestureRecognizer.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,

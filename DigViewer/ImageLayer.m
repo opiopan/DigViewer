@@ -7,13 +7,41 @@
 //
 
 #import "ImageLayer.h"
+#include <sys/time.h>
+
+//-----------------------------------------------------------------------------------------
+// μs精度通算秒
+//-----------------------------------------------------------------------------------------
+static inline NSTimeInterval nowInEpocTime(){
+    struct timeval timeval;
+    gettimeofday(&timeval, NULL);
+    return (double)timeval.tv_sec + (double)timeval.tv_usec / 1000000.0;
+}
+
+//-----------------------------------------------------------------------------------------
+// ImageLayerクラスの実装
+//-----------------------------------------------------------------------------------------
+enum _InertiaState{InertiaInrange, InertiaOutrange, InertiaCompensate, InertiaEnd};
+typedef enum _InertiaState InertiaState;
+struct _InertiaParameter{
+    InertiaState state;
+    NSTimeInterval phaseTime;
+    CGFloat velocity;
+};
+typedef struct _InertiaParameter InertiaParameter;
 
 @implementation ImageLayer{
     CALayer* _imageLayer;
     CGSize _imageSize;
     NSInteger _rotation;
+    CGAffineTransform _transform;
     CGFloat _imageRatio;
     CGSize _normalizedImageSize;
+
+    NSTimer* _timerForPanning;
+    NSTimeInterval _lastTimeForPanning;
+    InertiaParameter _inertiaX;
+    InertiaParameter _inertiaY;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -40,7 +68,7 @@
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     [super setFrame:frame];
     [self computeGeometry];
-    [self compensateOffset];
+    [self compensateOffsetWithWeight:1.0];
     [self adjustImage];
     [CATransaction commit];
 }
@@ -50,22 +78,54 @@
 //-----------------------------------------------------------------------------------------
 - (void)setImage:(id)image withRotation:(NSInteger)rotation
 {
+    [_timerForPanning invalidate];
+    
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    if ([image isKindOfClass:[NSImage class]]){
-        NSImage* img = image;
-        _imageSize.width = img.size.width;
-        _imageSize.height = img.size.height;
-    }else{
-        CGImageRef img = (__bridge CGImageRef)image;
-        _imageSize.width = CGImageGetWidth(img);
-        _imageSize.height = CGImageGetHeight(img);
-    }
     _imageLayer.contents = image;
     _rotation = rotation;
+    CGSize size;
+    if ([image isKindOfClass:[NSImage class]]){
+        NSImage* img = image;
+        size.width = img.size.width;
+        size.height = img.size.height;
+    }else{
+        CGImageRef img = (__bridge CGImageRef)image;
+        size.width = CGImageGetWidth(img);
+        size.height = CGImageGetHeight(img);
+    }
+    _transform = CGAffineTransformIdentity;
+    switch (_rotation){
+        case 1:
+        case 2:
+            /* no rotation */
+            _imageSize = size;
+            break;
+        case 5:
+        case 8:
+            /* 90 degrees rotation */
+            _imageSize.width = size.height;
+            _imageSize.height = size.width;
+            _transform = CGAffineTransformRotate(_transform, M_PI_2);
+            break;
+        case 3:
+        case 4:
+            /* 180 degrees rotation */
+            _imageSize = size;
+            _transform = CGAffineTransformRotate(_transform, M_PI);
+            break;
+        case 6:
+        case 7:
+            /* 270 degrees rotation */
+            _imageSize.width = size.height;
+            _imageSize.height = size.width;
+            _transform = CGAffineTransformRotate(_transform, M_PI_2 * 3);
+            break;
+    }
     _scale = 1.0;
     _transisionalScale = 1.0;
     _offset = CGPointZero;
+    _transisionalOffset = CGPointZero;
     [self computeGeometry];
     [self adjustImage];
     [CATransaction commit];
@@ -108,9 +168,147 @@
         _scale = 1.0;
         _offset = CGPointZero;
     }else{
-        [self compensateOffset];
+        CGPoint delta = [self compensateOffsetWithWeight:1.0];
+        _offset.x += delta.x;
+        _offset.y += delta.y;
     }
     [self adjustImage];
+}
+
+//-----------------------------------------------------------------------------------------
+// パンニング
+//-----------------------------------------------------------------------------------------
+static const CGFloat PANNING_FLICTION = 0.8;
+static const CGFloat PANNING_ATTENUATE_LAG = 0.1;
+static const CGFloat PANNING_ATTENUATE_SCALE = 8.0;
+static const CGFloat PANNING_STOP_THRESHOLD = 100;
+static const CGFloat PANNING_OUTRANGE_SCALE = 0.05;
+static const CGFloat PANNING_COMPENSATE_SPEED = 800;
+static const CGFloat PANNING_COMPENSATE_SCALE = 10;
+static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
+
+- (CGPoint)startPanning
+{
+    [_timerForPanning invalidate];
+    _offset.x += _transisionalOffset.x;
+    _offset.y += _transisionalOffset.y;
+    _transisionalOffset = CGPointZero;
+    
+    CGPoint delta = [self compensateOffsetWithWeight:1.0];
+    _offset.x += delta.x;
+    _offset.y += delta.y;
+    
+    delta.x /= -(1.0 - PANNING_FLICTION);
+    delta.y /= -(1.0 - PANNING_FLICTION);
+    
+    return delta;
+}
+
+- (void)setTransisionalOffset:(CGPoint)offset
+{
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+
+    _transisionalOffset = offset;
+    
+    CGPoint delta = [self compensateOffsetWithWeight:PANNING_FLICTION];
+    _transisionalOffset.x += delta.x;
+    _transisionalOffset.y += delta.y;
+    [self adjustImage];
+    
+    [CATransaction commit];
+}
+
+- (void)fixOffsetWithVelocity:(CGPoint)velocity
+{
+    _offset.x += _transisionalOffset.x;
+    _offset.y += _transisionalOffset.y;
+    _transisionalOffset = CGPointZero;
+    CGPoint delta = [self compensateOffsetWithWeight:1.0];
+
+    [_timerForPanning invalidate];
+    _lastTimeForPanning = nowInEpocTime();
+    _inertiaX.phaseTime = _inertiaY.phaseTime = _lastTimeForPanning;
+    _inertiaX.velocity = velocity.x;
+    _inertiaY.velocity = velocity.y;
+    _inertiaX.state = delta.x == 0 ? InertiaInrange : InertiaOutrange;
+    _inertiaY.state = delta.y == 0 ? InertiaInrange : InertiaOutrange;
+    _timerForPanning = [NSTimer scheduledTimerWithTimeInterval:0.002 target:self
+                                                      selector:@selector(proceedPanningInertia:)
+                                                      userInfo:nil repeats:YES];
+}
+
+- (void)proceedPanningInertia:(NSTimer*)timer
+{
+    NSTimeInterval now = nowInEpocTime();
+    NSTimeInterval interval = now - _lastTimeForPanning;
+    CGPoint delta = [self compensateOffsetWithWeight:1.0];
+
+    _transisionalOffset.x += [self computeDeltaOfInertia:&_inertiaX atNow:now withInterval:interval withDelta:delta.x];
+    _transisionalOffset.y += [self computeDeltaOfInertia:&_inertiaY atNow:now withInterval:interval withDelta:delta.y];
+    
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    [self adjustImage];
+    [CATransaction commit];
+
+    _lastTimeForPanning = now;
+    
+    if (_inertiaX.state == InertiaEnd && _inertiaY.state == InertiaEnd){
+        [timer invalidate];
+    }
+}
+
+- (CGFloat)computeDeltaOfInertia:(InertiaParameter*)inertia atNow:(NSTimeInterval)now
+                    withInterval:(NSTimeInterval)interval withDelta:(CGFloat)delta
+{
+    NSTimeInterval elapsed = now - inertia->phaseTime;
+    double power;
+    CGFloat rc = 0;
+
+    switch (inertia->state){
+        case InertiaInrange:
+            if (elapsed > PANNING_ATTENUATE_LAG){
+                power = pow(2, (elapsed - PANNING_ATTENUATE_LAG) * PANNING_ATTENUATE_SCALE);
+            }else{
+                power = 1.0;
+            }
+            rc = inertia->velocity * interval / power;
+            if (delta != 0){
+                inertia->state = InertiaOutrange;
+                //inertia->phaseTime = now;
+            }else if (fabs(rc / interval) < PANNING_STOP_THRESHOLD){
+                rc = 0;
+                inertia->state = InertiaEnd;
+            }
+            break;
+        case InertiaOutrange:
+            power = pow(2, elapsed * PANNING_ATTENUATE_SCALE + fabs(delta) * PANNING_OUTRANGE_SCALE);
+            rc = inertia->velocity * interval / power;
+            if (fabs(rc / interval) < PANNING_STOP_THRESHOLD){
+                rc = 0;
+                inertia->state = InertiaCompensate;
+                inertia->velocity = delta > 0 ? PANNING_COMPENSATE_SPEED : -PANNING_COMPENSATE_SPEED;
+                inertia->phaseTime = now;
+            }
+            break;
+        case InertiaCompensate:
+            if (delta > 0){
+                rc = MIN(inertia->velocity * interval, delta * PANNING_COMPENSATE_SCALE * interval);
+            }else{
+                rc = MAX(inertia->velocity * interval, delta * PANNING_COMPENSATE_SCALE * interval);
+            }
+            if ((delta > 0 && rc > delta) || (delta < 0 && rc < delta) ||
+                fabs(rc / interval) < PANNING_COMPENSATE_STOP_THRESHOLD){
+                rc = delta;
+                inertia->state = InertiaEnd;
+            }
+            break;
+        case InertiaEnd:
+            break;
+    }
+    
+    return rc;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -120,15 +318,8 @@
 {
     if ([_imageLayer contents]){
         CGRect frame = self.frame;
-        CGFloat widthRatio;
-        CGFloat heightRatio;
-        if (_rotation >= 5 && _rotation <= 8){
-            widthRatio = frame.size.width / _imageSize.height;
-            heightRatio = frame.size.height / _imageSize.width;
-        }else{
-            widthRatio = frame.size.width / _imageSize.width;
-            heightRatio = frame.size.height / _imageSize.height;
-        }
+        CGFloat widthRatio = frame.size.width / _imageSize.width;
+        CGFloat heightRatio = frame.size.height / _imageSize.height;
         _imageRatio = widthRatio < heightRatio ? widthRatio : heightRatio;
         if (_imageRatio > 1.0 && _isFitFrame){
             _imageRatio = 1.0;
@@ -141,26 +332,36 @@
 //-----------------------------------------------------------------------------------------
 // オフセット位置補正
 //-----------------------------------------------------------------------------------------
-- (void)compensateOffset
+- (CGPoint)compensateOffsetWithWeight:(CGFloat)weight
 {
     if ([_imageLayer contents]){
         CGFloat halfFrameWidth = self.frame.size.width / 2;
         CGFloat halfFrameHeight = self.frame.size.height / 2;
-        CGFloat limitX = _normalizedImageSize.width * _scale * _transisionalScale > self.frame.size.width ?
-                         _normalizedImageSize.width / 2 * _scale * _transisionalScale : halfFrameWidth;
-        CGFloat limitY = _normalizedImageSize.height * _scale * _transisionalScale > self.frame.size.height ?
-                         _normalizedImageSize.height / 2 * _scale * _transisionalScale : halfFrameHeight;
-        if (_offset.x > 0 && _offset.x - limitX > -halfFrameWidth){
-            _offset.x = limitX - halfFrameWidth;
-        }else if (_offset.x < 0 && _offset.x + limitX < halfFrameWidth){
-            _offset.x = halfFrameWidth - limitX;
+        CGFloat imageWidth = _normalizedImageSize.width;
+        CGFloat imageHeight = _normalizedImageSize.height;
+        CGFloat limitX = imageWidth * _scale * _transisionalScale > self.frame.size.width ?
+                         imageWidth / 2 * _scale * _transisionalScale : halfFrameWidth;
+        CGFloat limitY = imageHeight * _scale * _transisionalScale > self.frame.size.height ?
+                         imageHeight / 2 * _scale * _transisionalScale : halfFrameHeight;
+        CGFloat offsetX = _offset.x + _transisionalOffset.x;
+        CGFloat offsetY = _offset.y + _transisionalOffset.y;
+        CGFloat deltaX = 0;
+        CGFloat deltaY = 0;
+        if (offsetX > 0 && offsetX - limitX > -halfFrameWidth){
+            deltaX = (limitX - halfFrameWidth - offsetX) * weight;
+        }else if (offsetX < 0 && offsetX + limitX < halfFrameWidth){
+            deltaX = (halfFrameWidth - limitX - offsetX) * weight;
         }
-        if (_offset.y > 0 && _offset.y - limitY > -halfFrameHeight){
-            _offset.y = limitY - halfFrameHeight;
-        }else if (_offset.y < 0 && _offset.y + limitY < halfFrameHeight){
-            _offset.y = halfFrameHeight - limitY;
+        if (offsetY > 0 && offsetY - limitY > -halfFrameHeight){
+            deltaY = (limitY - halfFrameHeight - offsetY) * weight;
+        }else if (offsetY < 0 && offsetY + limitY < halfFrameHeight){
+            deltaY = (halfFrameHeight - limitY - offsetY) * weight;
         }
+
+        return CGPointMake(deltaX, deltaY);
     }
+    
+    return CGPointZero;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -172,40 +373,11 @@
 
         CGRect imageRect = self.frame;
         CGFloat ratio = _imageRatio * _scale * _transisionalScale;
-        CGAffineTransform transform = CGAffineTransformIdentity;
-        switch (_rotation){
-            case 1:
-            case 2:
-                /* no rotation */
-                imageRect.size.width = _imageSize.width * ratio;
-                imageRect.size.height = _imageSize.height * ratio;
-                break;
-            case 5:
-            case 8:
-                /* 90 degrees rotation */
-                imageRect.size.width = _imageSize.height * ratio;
-                imageRect.size.height = _imageSize.width * ratio;
-                transform = CGAffineTransformRotate(transform, M_PI_2);
-                break;
-            case 3:
-            case 4:
-                /* 180 degrees rotation */
-                imageRect.size.width = _imageSize.width * ratio;
-                imageRect.size.height = _imageSize.height * ratio;
-                transform = CGAffineTransformRotate(transform, M_PI);
-                break;
-            case 6:
-            case 7:
-                /* 270 degrees rotation */
-                imageRect.size.width = _imageSize.height * ratio;
-                imageRect.size.height = _imageSize.width * ratio;
-                transform = CGAffineTransformRotate(transform, M_PI_2 * 3);
-                break;
-        }
-
-        imageRect.origin.x += (self.frame.size.width - imageRect.size.width) / 2 + _offset.x;
-        imageRect.origin.y += (self.frame.size.height - imageRect.size.height) / 2 + _offset.y;
-        _imageLayer.affineTransform = transform;
+        imageRect.size.width = _imageSize.width * ratio;
+        imageRect.size.height = _imageSize.height * ratio;
+        imageRect.origin.x += (self.frame.size.width - imageRect.size.width) / 2 + _offset.x + _transisionalOffset.x;
+        imageRect.origin.y += (self.frame.size.height - imageRect.size.height) / 2 + _offset.y + _transisionalOffset.y;
+        _imageLayer.affineTransform = _transform;
         _imageLayer.frame = imageRect;
     }
 }
