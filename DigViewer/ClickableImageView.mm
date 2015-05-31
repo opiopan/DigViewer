@@ -163,6 +163,9 @@
 //-----------------------------------------------------------------------------------------
 // ジェスチャー処理
 //-----------------------------------------------------------------------------------------
+static const CGFloat MagnificationGestureScale = 5.0;
+static const CGFloat PanningGestureScale = 4.0;
+
 - (void)handleMagnifyGesture:(TwoFingerGestureRecognizer*)gesture
 {
     if (_isDrawingByLayer){
@@ -175,7 +178,7 @@
         origin.x /= (_frameLayer.scale * _frameLayer.transisionalScale);
         origin.y /= (_frameLayer.scale * _frameLayer.transisionalScale);
         
-        CGFloat magnification = gesture.magnification * 2;
+        CGFloat magnification = gesture.magnification * MagnificationGestureScale;
         CGFloat transisionalScale;
         if (magnification > 0){
             transisionalScale = (1.0 + magnification);
@@ -205,15 +208,13 @@
 - (void)handleTwoFingerPanGesture:(TwoFingerGestureRecognizer*)gesture
 {
     if (_isDrawingByLayer){
-        static CGFloat gestureScale = 3.0;
-        
         if (gesture.state == TouchGestureStateBegan){
             _panningBaias = [_frameLayer startPanning];
         }
         
         CGPoint offset = gesture.panningDelta;
-        offset.x = offset.x * gestureScale + _panningBaias.x;
-        offset.y = offset.y * gestureScale + _panningBaias.y;
+        offset.x = offset.x * PanningGestureScale + _panningBaias.x;
+        offset.y = offset.y * PanningGestureScale + _panningBaias.y;
         
         _frameLayer.transisionalOffset = offset;
         
@@ -221,15 +222,15 @@
             gesture.state == TouchGestureStateCanceled ||
             gesture.state == TouchGestureStateFailed){
             CGPoint velocity = gesture.panningVelocity;
-            velocity.x *= gestureScale;
-            velocity.y *= gestureScale;
+            velocity.x *= PanningGestureScale;
+            velocity.y *= PanningGestureScale;
             [_frameLayer fixOffsetWithVelocity:velocity];
         }
     }
 }
 
 //-----------------------------------------------------------------------------------------
-// 描画
+// 描画 (Layerモードの場合は本メソッドは呼び出されない)
 //-----------------------------------------------------------------------------------------
 - (void)drawRect:(NSRect)dirtyRect
 {

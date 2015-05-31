@@ -79,9 +79,27 @@ static NSMutableDictionary* capabilities = nil;
     return _rawSuffixes;
 }
 
++ (NSDictionary*)rasterImageSuffixes
+{
+    static NSMutableDictionary* _rasterImageSuffixes;
+    if (!_rasterImageSuffixes){
+        _rasterImageSuffixes = [NSMutableDictionary dictionaryWithDictionary:[NSImage rawSuffixes]];
+        [_rasterImageSuffixes addEntriesFromDictionary:@{
+                                                         @"jpg":@"jpeg",
+                                                         @"jpeg":@"jpeg"
+                                                         }];
+    }
+    return _rasterImageSuffixes;
+}
+
 + (BOOL) isRawFileAtPath:(NSString*)path
 {
     return [[NSImage rawSuffixes] valueForKey:[[path pathExtension] lowercaseString]] != nil;
+}
+
++ (BOOL)isRasterImageAtPath:(NSString *)path
+{
+    return [[NSImage rasterImageSuffixes] valueForKey:[[path pathExtension] lowercaseString]] != nil;
 }
 
 @end

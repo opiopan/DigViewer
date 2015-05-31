@@ -180,6 +180,7 @@ typedef struct _InertiaParameter InertiaParameter;
 // パンニング
 //-----------------------------------------------------------------------------------------
 static const CGFloat PANNING_FRICTION = 0.90;
+static const CGFloat PANNING_FRICTION_AT_END = 0.75;
 static const CGFloat PANNING_ATTENUATE_LAG = 0.25;
 static const CGFloat PANNING_ATTENUATE_SCALE = 6;
 static const CGFloat PANNING_STOP_THRESHOLD = 10;
@@ -229,10 +230,20 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
     [_timerForPanning invalidate];
     _lastTimeForPanning = nowInEpocTime();
     _inertiaX.phaseTime = _inertiaY.phaseTime = _lastTimeForPanning;
-    _inertiaX.velocity = velocity.x;
-    _inertiaY.velocity = velocity.y;
-    _inertiaX.state = delta.x == 0 ? InertiaInrange : InertiaOutrange;
-    _inertiaY.state = delta.y == 0 ? InertiaInrange : InertiaOutrange;
+    if (delta.x == 0){
+        _inertiaX.state = InertiaInrange;
+        _inertiaX.velocity = velocity.x;
+    }else{
+        _inertiaX.state = InertiaOutrange;
+        _inertiaX.velocity = velocity.x * (1.0 - PANNING_FRICTION_AT_END);
+    }
+    if (delta.y == 0){
+        _inertiaY.state = InertiaInrange;
+        _inertiaY.velocity = velocity.y;
+    }else{
+        _inertiaY.state = InertiaOutrange;
+        _inertiaY.velocity = velocity.y * (1.0 - PANNING_FRICTION_AT_END);
+    }
     _timerForPanning = [NSTimer scheduledTimerWithTimeInterval:0.002 target:self
                                                       selector:@selector(proceedPanningInertia:)
                                                       userInfo:nil repeats:YES];
@@ -285,7 +296,7 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
             }
             break;
         case InertiaOutrange:
-            inertia->velocity = inertia->velocity + delta * PANNING_OUTRANGE_SPRING * interval;
+            inertia->velocity += delta * PANNING_OUTRANGE_SPRING * interval;
             rc = inertia->velocity * interval;
             if (rc * delta >= 0){
                 rc = 0;

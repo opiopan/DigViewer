@@ -14,5 +14,6 @@
 + (NSDictionary *)supportedSuffixes;
 + (NSDictionary *)rawSuffixes;
 + (BOOL) isRawFileAtPath:(NSString*)path;
++ (BOOL) isRasterImageAtPath:(NSString*)path;
 
 @end

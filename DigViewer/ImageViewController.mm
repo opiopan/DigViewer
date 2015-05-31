@@ -84,8 +84,19 @@
             }else{
                 NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
                 NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                [imageView setImage:(__bridge id)thumbnail withRotation:orientation.integerValue];
+                [imageView setImage:(__bridge id)thumbnail withRotation:orientation ? orientation.integerValue : 1];
             }
+        }else if ([NSImage isRasterImageAtPath:node.imagePath]){
+                NSURL* url = [NSURL fileURLWithPath:node.imagePath];
+                ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+                CGImageRef image(CGImageSourceCreateImageAtIndex(imageSource, 0, NULL));
+                if (!image){
+                    [imageView setImage:node.image withRotation:1];
+                }else{
+                    NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+                    NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+                    [imageView setImage:(__bridge id)image withRotation:orientation ? orientation.integerValue : 1];
+                }
         }else{
             [imageView setImage:node.image withRotation:1];
         }
