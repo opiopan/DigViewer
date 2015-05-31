@@ -167,25 +167,25 @@ typedef struct _InertiaParameter InertiaParameter;
     if (_scale < 1.0){
         _scale = 1.0;
         _offset = CGPointZero;
+        [self adjustImage];
     }else{
         CGPoint delta = [self compensateOffsetWithWeight:1.0];
-        _offset.x += delta.x;
-        _offset.y += delta.y;
+        if (delta.x != 0 || delta.y != 0){
+            [self fixOffsetWithVelocity:CGPointZero];
+        }
     }
-    [self adjustImage];
 }
 
 //-----------------------------------------------------------------------------------------
 // パンニング
 //-----------------------------------------------------------------------------------------
-static const CGFloat PANNING_FLICTION = 0.8;
-static const CGFloat PANNING_ATTENUATE_LAG = 0.1;
-static const CGFloat PANNING_ATTENUATE_SCALE = 8.0;
-static const CGFloat PANNING_STOP_THRESHOLD = 100;
-static const CGFloat PANNING_OUTRANGE_SCALE = 0.05;
-static const CGFloat PANNING_COMPENSATE_SPEED = 800;
-static const CGFloat PANNING_COMPENSATE_SCALE = 10;
-static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
+static const CGFloat PANNING_FRICTION = 0.90;
+static const CGFloat PANNING_ATTENUATE_LAG = 0.25;
+static const CGFloat PANNING_ATTENUATE_SCALE = 6;
+static const CGFloat PANNING_STOP_THRESHOLD = 10;
+static const CGFloat PANNING_OUTRANGE_SPRING = 800;
+static const CGFloat PANNING_COMPENSATE_VISCOSITY = 110;
+static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
 
 - (CGPoint)startPanning
 {
@@ -198,8 +198,8 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
     _offset.x += delta.x;
     _offset.y += delta.y;
     
-    delta.x /= -(1.0 - PANNING_FLICTION);
-    delta.y /= -(1.0 - PANNING_FLICTION);
+    delta.x /= -(1.0 - PANNING_FRICTION);
+    delta.y /= -(1.0 - PANNING_FRICTION);
     
     return delta;
 }
@@ -211,7 +211,7 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
 
     _transisionalOffset = offset;
     
-    CGPoint delta = [self compensateOffsetWithWeight:PANNING_FLICTION];
+    CGPoint delta = [self compensateOffsetWithWeight:PANNING_FRICTION];
     _transisionalOffset.x += delta.x;
     _transisionalOffset.y += delta.y;
     [self adjustImage];
@@ -244,8 +244,8 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
     NSTimeInterval interval = now - _lastTimeForPanning;
     CGPoint delta = [self compensateOffsetWithWeight:1.0];
 
-    _transisionalOffset.x += [self computeDeltaOfInertia:&_inertiaX atNow:now withInterval:interval withDelta:delta.x];
-    _transisionalOffset.y += [self computeDeltaOfInertia:&_inertiaY atNow:now withInterval:interval withDelta:delta.y];
+    _transisionalOffset.x += [self computeDeltaOfInertia:&_inertiaX atNow:now withInterval:interval delta:delta.x];
+    _transisionalOffset.y += [self computeDeltaOfInertia:&_inertiaY atNow:now withInterval:interval delta:delta.y];
     
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
@@ -255,12 +255,13 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
     _lastTimeForPanning = now;
     
     if (_inertiaX.state == InertiaEnd && _inertiaY.state == InertiaEnd){
+        //NSLog(@"inertia end");
         [timer invalidate];
     }
 }
 
 - (CGFloat)computeDeltaOfInertia:(InertiaParameter*)inertia atNow:(NSTimeInterval)now
-                    withInterval:(NSTimeInterval)interval withDelta:(CGFloat)delta
+                    withInterval:(NSTimeInterval)interval delta:(CGFloat)delta
 {
     NSTimeInterval elapsed = now - inertia->phaseTime;
     double power;
@@ -276,30 +277,27 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 10;
             rc = inertia->velocity * interval / power;
             if (delta != 0){
                 inertia->state = InertiaOutrange;
-                //inertia->phaseTime = now;
+                inertia->phaseTime = now;
+                inertia->velocity = rc / interval;
             }else if (fabs(rc / interval) < PANNING_STOP_THRESHOLD){
                 rc = 0;
                 inertia->state = InertiaEnd;
             }
             break;
         case InertiaOutrange:
-            power = pow(2, elapsed * PANNING_ATTENUATE_SCALE + fabs(delta) * PANNING_OUTRANGE_SCALE);
-            rc = inertia->velocity * interval / power;
-            if (fabs(rc / interval) < PANNING_STOP_THRESHOLD){
+            inertia->velocity = inertia->velocity + delta * PANNING_OUTRANGE_SPRING * interval;
+            rc = inertia->velocity * interval;
+            if (rc * delta >= 0){
                 rc = 0;
                 inertia->state = InertiaCompensate;
-                inertia->velocity = delta > 0 ? PANNING_COMPENSATE_SPEED : -PANNING_COMPENSATE_SPEED;
                 inertia->phaseTime = now;
             }
             break;
         case InertiaCompensate:
-            if (delta > 0){
-                rc = MIN(inertia->velocity * interval, delta * PANNING_COMPENSATE_SCALE * interval);
-            }else{
-                rc = MAX(inertia->velocity * interval, delta * PANNING_COMPENSATE_SCALE * interval);
-            }
+            inertia->velocity += (delta * PANNING_OUTRANGE_SPRING - inertia->velocity * PANNING_COMPENSATE_VISCOSITY) * interval;
+            rc = inertia->velocity * interval;
             if ((delta > 0 && rc > delta) || (delta < 0 && rc < delta) ||
-                fabs(rc / interval) < PANNING_COMPENSATE_STOP_THRESHOLD){
+                fabs(delta) < PANNING_COMPENSATE_STOP_THRESHOLD){
                 rc = delta;
                 inertia->state = InertiaEnd;
             }
