@@ -125,11 +125,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <binding destination="d80-gG-QKQ" name="value" keyPath="values.imageBackgroundColor" id="gi0-ly-yxL">
-                                            <dictionary key="options">
-                                                <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                            </dictionary>
-                                        </binding>
+                                        <binding destination="-2" name="value" keyPath="self.imageViewConfigController.backgroundColor" id="QBh-cQ-e8g"/>
                                     </connections>
                                 </colorWell>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dgc-O6-Gc5">
@@ -146,7 +142,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="o8h-wX-ldn">
                                         <font key="font" metaFont="smallSystem"/>
-                                        <string key="title">You can magnify / reduce a image of swipe a image to move next / previous image, if gestures are enabled. However, it affect responsibility of transition between each image a litte.</string>
+                                        <string key="title">You can magnify / reduce a image or swipe a image to move next / previous image, if gestures are enabled. However, it affect responsibility of transition between each image a litte.</string>
                                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>

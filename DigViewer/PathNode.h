@@ -64,6 +64,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 @property (readonly) BOOL            isLeaf;
 @property (readonly) BOOL            isImage;
 @property (readonly) BOOL            isRawImage;
+@property (readonly) BOOL            isRasterImage;
 @property (readonly) NSArray*        images;
 @property (readonly) NSUInteger      indexInParent;
 @property (readonly) PathNode*       imageNode;

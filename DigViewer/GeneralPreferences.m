@@ -31,6 +31,7 @@
 {
     self.documentConfigController = [DocumentConfigController sharedController];
     self.slideshowConfigController = [SlideshowConfigController sharedController];
+    self.imageViewConfigController = [ImageViewConfigController sharedController];
 }
 
 //-----------------------------------------------------------------------------------------

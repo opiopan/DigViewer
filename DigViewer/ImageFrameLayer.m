@@ -13,6 +13,9 @@
     ImageLayer* _currentImage;
 }
 
+//-----------------------------------------------------------------------------------------
+// 初期化
+//-----------------------------------------------------------------------------------------
 - (instancetype)init
 {
     self = [super init];
@@ -23,6 +26,9 @@
     return self;
 }
 
+//-----------------------------------------------------------------------------------------
+// フレームサイズ変更
+//-----------------------------------------------------------------------------------------
 - (void)setFrame:(CGRect)frame
 {
     [CATransaction begin];
@@ -32,6 +38,9 @@
     [CATransaction commit];
 }
 
+//-----------------------------------------------------------------------------------------
+// カレントイメージレイヤへのルーティング
+//-----------------------------------------------------------------------------------------
 - (void)setImage:(id)image withRotation:(NSInteger)rotation
 {
     [_currentImage setImage:image withRotation:rotation];
@@ -96,6 +105,19 @@
 - (void)setOffset:(CGPoint)offset
 {
     _currentImage.offset = offset;
+}
+
+//-----------------------------------------------------------------------------------------
+// 拡大・縮小フィルター
+//-----------------------------------------------------------------------------------------
+- (void)setMagnificationFilter:(NSString *)magnificationFilter
+{
+    _currentImage.magnificationFilter = magnificationFilter;
+}
+
+- (void)setMinificationFilter:(NSString *)minificationFilter
+{
+    _currentImage.minificationFilter = minificationFilter;
 }
 
 @end

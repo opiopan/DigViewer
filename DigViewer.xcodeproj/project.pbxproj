@@ -112,6 +112,14 @@
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
+		7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */; };
+		7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6191B1F2787009619E2 /* SlideshowPreferences.xib */; };
+		7BE7B61E1B1F27B1009619E2 /* RenderingPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B61C1B1F27B1009619E2 /* RenderingPreferences.png */; };
+		7BE7B61F1B1F27B1009619E2 /* SlideshowPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B61D1B1F27B1009619E2 /* SlideshowPreferences.png */; };
+		7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7B6211B1F2842009619E2 /* RenderingPreferences.m */; };
+		7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7B6241B1F287D009619E2 /* SlideshowPreferences.m */; };
+		7BE7B6281B1F3C64009619E2 /* RenderingPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6261B1F3C64009619E2 /* RenderingPreferences.strings */; };
+		7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE7B62A1B207207009619E2 /* ImageViewConfigController.m */; };
 		7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
@@ -305,6 +313,17 @@
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
+		7BE7B6171B1F26E7009619E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RenderingPreferences.xib; sourceTree = "<group>"; };
+		7BE7B61A1B1F2787009619E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SlideshowPreferences.xib; sourceTree = "<group>"; };
+		7BE7B61C1B1F27B1009619E2 /* RenderingPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RenderingPreferences.png; path = resources/RenderingPreferences.png; sourceTree = "<group>"; };
+		7BE7B61D1B1F27B1009619E2 /* SlideshowPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SlideshowPreferences.png; path = resources/SlideshowPreferences.png; sourceTree = "<group>"; };
+		7BE7B6201B1F2842009619E2 /* RenderingPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingPreferences.h; sourceTree = "<group>"; };
+		7BE7B6211B1F2842009619E2 /* RenderingPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderingPreferences.m; sourceTree = "<group>"; };
+		7BE7B6231B1F287D009619E2 /* SlideshowPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowPreferences.h; sourceTree = "<group>"; };
+		7BE7B6241B1F287D009619E2 /* SlideshowPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowPreferences.m; sourceTree = "<group>"; };
+		7BE7B6271B1F3C64009619E2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/RenderingPreferences.strings; sourceTree = "<group>"; };
+		7BE7B6291B207207009619E2 /* ImageViewConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewConfigController.h; sourceTree = "<group>"; };
+		7BE7B62A1B207207009619E2 /* ImageViewConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewConfigController.m; sourceTree = "<group>"; };
 		7BEB80931B03A33A006F052A /* SortOmittedArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortOmittedArrayController.h; sourceTree = "<group>"; };
 		7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortOmittedArrayController.m; sourceTree = "<group>"; };
 		7BF27648191BB25A0022E89D /* TestGPSMapView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = TestGPSMapView.html; path = tests/TestGPSMapView.html; sourceTree = "<group>"; };
@@ -539,10 +558,14 @@
 				7BB4E5FF1AD948250076630A /* AppPreferences.m */,
 				7BB4E5F41AD9431A0076630A /* GeneralPreferences.h */,
 				7BB4E5F51AD9431A0076630A /* GeneralPreferences.m */,
-				7BB4E5F71AD945460076630A /* MapPreferences.h */,
-				7BB4E5F81AD945460076630A /* MapPreferences.m */,
+				7BE7B6201B1F2842009619E2 /* RenderingPreferences.h */,
+				7BE7B6211B1F2842009619E2 /* RenderingPreferences.m */,
 				7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */,
 				7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */,
+				7BE7B6231B1F287D009619E2 /* SlideshowPreferences.h */,
+				7BE7B6241B1F287D009619E2 /* SlideshowPreferences.m */,
+				7BB4E5F71AD945460076630A /* MapPreferences.h */,
+				7BB4E5F81AD945460076630A /* MapPreferences.m */,
 				7BB4E6101ADA031A0076630A /* LensPreferences.h */,
 				7BB4E6111ADA031A0076630A /* LensPreferences.m */,
 				7BB4E6131ADA09B80076630A /* AdvancedPreferences.h */,
@@ -589,6 +612,8 @@
 				7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */,
 				7BA81BF71AF513C9001E40D7 /* DocumentConfigController.h */,
 				7BA81BF81AF513C9001E40D7 /* DocumentConfigController.m */,
+				7BE7B6291B207207009619E2 /* ImageViewConfigController.h */,
+				7BE7B62A1B207207009619E2 /* ImageViewConfigController.m */,
 				7B40A4181AFCFCE3006ED497 /* SlideshowConfigController.h */,
 				7B40A4191AFCFCE3006ED497 /* SlideshowConfigController.m */,
 				7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */,
@@ -608,10 +633,13 @@
 			children = (
 				7BB4E6051AD96D550076630A /* GeneralPreferences.xib */,
 				7BB4E6091AD96EB30076630A /* GeneralPreferences.strings */,
-				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
-				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
+				7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */,
+				7BE7B6261B1F3C64009619E2 /* RenderingPreferences.strings */,
 				7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */,
 				7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */,
+				7BE7B6191B1F2787009619E2 /* SlideshowPreferences.xib */,
+				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
+				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
 				7BB4E61E1ADA0C350076630A /* LensPreferences.xib */,
 				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
 				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
@@ -619,6 +647,8 @@
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
 				7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */,
 				7BB4E6161ADA0AC70076630A /* LensPreferences.png */,
+				7BE7B61C1B1F27B1009619E2 /* RenderingPreferences.png */,
+				7BE7B61D1B1F27B1009619E2 /* SlideshowPreferences.png */,
 				7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */,
 				7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */,
 				7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */,
@@ -752,12 +782,16 @@
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
+				7BE7B61E1B1F27B1009619E2 /* RenderingPreferences.png in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
+				7BE7B61F1B1F27B1009619E2 /* SlideshowPreferences.png in Resources */,
+				7BE7B6281B1F3C64009619E2 /* RenderingPreferences.strings in Resources */,
 				7B35D9251B06D7E2000CA4F1 /* datetime.png in Resources */,
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
+				7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
 				7BB4E6261ADA30F70076630A /* AdvancedPreferences.strings in Resources */,
@@ -777,6 +811,7 @@
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
+				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
@@ -821,6 +856,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/EditFileSetSheetSheet.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/ThumbnailPreferences.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/ThumbnailPreferences.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/RenderingPreferences.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/RenderingPreferences.xib",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -836,10 +873,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditLensSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditFileSetSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/ThumbnailPreferences.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/RenderingPreferences.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences \\\n         RenderingPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -899,8 +937,11 @@
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
+				7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */,
+				7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
+				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
@@ -1166,6 +1207,30 @@
 				7BC667A418B05213000CB995 /* en */,
 			);
 			name = InspectorView.xib;
+			sourceTree = "<group>";
+		};
+		7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE7B6171B1F26E7009619E2 /* en */,
+			);
+			name = RenderingPreferences.xib;
+			sourceTree = "<group>";
+		};
+		7BE7B6191B1F2787009619E2 /* SlideshowPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE7B61A1B1F2787009619E2 /* en */,
+			);
+			name = SlideshowPreferences.xib;
+			sourceTree = "<group>";
+		};
+		7BE7B6261B1F3C64009619E2 /* RenderingPreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE7B6271B1F3C64009619E2 /* ja */,
+			);
+			name = RenderingPreferences.strings;
 			sourceTree = "<group>";
 		};
 		7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */ = {

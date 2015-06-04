@@ -52,6 +52,8 @@
     [self willChangeValueForKey:@"thumbFolderSizeRepresentation"];
     [self willChangeValueForKey:@"thumbFolderOpacity"];
     [self willChangeValueForKey:@"thumbFolderOpacityRepresentation"];
+    [self willChangeValueForKey:@"thumbUseEmbeddedThumbnail"];
+    [self willChangeValueForKey:@"thumbUseEmbeddedThumbnailRAW"];
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     _defaultSize = [defaults.values valueForKey:@"thumbDefaultSize"];
     _representationType = [[defaults.values valueForKey:@"thumbRepresentationType"] intValue];
@@ -59,6 +61,8 @@
     _folderIconSizeRepresentation = @(((int)(_folderIconSize.doubleValue * 10000)) / 100.0);
     _folderIconOpacity = [defaults.values valueForKey:@"thumbFolderOpacity"];
     _folderIconOpacityRepresentation = @(((int)(_folderIconOpacity.doubleValue * 10000)) / 100.0);
+    _useEmbeddedThumbnail = [[defaults.values valueForKey:@"thumbUseEmbeddedThumbnail"] boolValue];
+    _useEmbeddedThumbnailForRAW = [[defaults.values valueForKey:@"thumbUseEmbeddedThumbnailRAW"] boolValue];
     [self didChangeValueForKey:@"thumbDefaultSize"];
     [self didChangeValueForKey:@"thumbRepresentationType"];
     [self didChangeValueForKey:@"thumbIsVisibleFolder"];
@@ -66,6 +70,8 @@
     [self didChangeValueForKey:@"thumbFolderSizeRepresentation"];
     [self didChangeValueForKey:@"thumbFolderOpacity"];
     [self didChangeValueForKey:@"thumbFolderOpacityRepresentation"];
+    [self didChangeValueForKey:@"thumbUseEmbeddedThumbnail"];
+    [self didChangeValueForKey:@"thumbUseEmbeddedThumbnailRAW"];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -143,6 +149,22 @@
     self.folderIconOpacityRepresentation = @(((int)(_folderIconOpacity.doubleValue * 10000)) / 100.0);
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     [[defaults values] setValue:_folderIconOpacity forKey:@"thumbFolderOpacity"];
+    [self incrementUpdateCount];
+}
+
+- (void)setUseEmbeddedThumbnail:(BOOL)useEmbeddedThumbnail
+{
+    _useEmbeddedThumbnail = useEmbeddedThumbnail;
+    NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
+    [[defaults values] setValue:@(useEmbeddedThumbnail) forKey:@"thumbUseEmbeddedThumbnail"];
+    [self incrementUpdateCount];
+}
+
+- (void)setUseEmbeddedThumbnailForRAW:(BOOL)useEmbeddedThumbnailForRAW
+{
+    _useEmbeddedThumbnailForRAW = useEmbeddedThumbnailForRAW;
+    NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
+    [[defaults values] setValue:@(useEmbeddedThumbnailForRAW) forKey:@"thumbUseEmbeddedThumbnailRAW"];
     [self incrementUpdateCount];
 }
 

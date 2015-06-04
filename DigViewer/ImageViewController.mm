@@ -12,10 +12,13 @@
 #import "MainViewController.h"
 #import "DocumentWindowController.h"
 #import "NSImage+CapabilityDetermining.h"
+#import "ImageViewConfigController.h"
 #include "CoreFoundationHelper.h"
 
 @implementation ImageViewController{
     BOOL _isVisible;
+    ImageViewConfigController* _imageViewConfig;
+    BOOL _useEmbeddedThumbnailForRAW;
 }
 
 - (id)init
@@ -34,10 +37,10 @@
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     [controller addObserver:self forKeyPath:@"isFitWindow" options:0 context:nil];
-    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:@"values.imageBackgroundColor"
-                                                                 options:0 context:nil];
-    [self reflectBackgroundColor];
+    _imageViewConfig = [ImageViewConfigController sharedController];
+    [_imageViewConfig addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
+    _useEmbeddedThumbnailForRAW = _imageViewConfig.useEmbeddedThumbnailRAW;
+    [self reflectImageViewConfig];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.gestureEnable"
                                                                  options:0 context:nil];
@@ -61,7 +64,7 @@
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     [controller removeObserver:self forKeyPath:@"isFitWindow"];
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.imageBackgroundColor"];
+    [_imageViewConfig removeObserver:self forKeyPath:@"updateCount"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.gestureEnable"];
     [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
 }
@@ -75,7 +78,7 @@
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     if (self.imageArrayController.selectedObjects.count){
         PathNode* node = self.imageArrayController.selectedObjects[0];
-        if ([NSImage isRawFileAtPath:node.imagePath]){
+        if ([NSImage isRawFileAtPath:node.imagePath] && _imageViewConfig.useEmbeddedThumbnailRAW){
             NSURL* url = [NSURL fileURLWithPath:node.imagePath];
             ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
             CGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, NULL));
@@ -110,14 +113,22 @@
     imageView.imageScaling = (controller.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
 }
 
-- (void)reflectBackgroundColor
+- (void)reflectImageViewConfig
 {
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSData* data = [[controller values] valueForKey:@"imageBackgroundColor"];
-    if (data){
-        ClickableImageView* imageView = (ClickableImageView*)self.view;
-        imageView.backgroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
-   }
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    if (![imageView.backgroundColor isEqualTo:_imageViewConfig.backgroundColor]){
+        imageView.backgroundColor = _imageViewConfig.backgroundColor;
+    }
+    if (imageView.magnificationFilter != _imageViewConfig.magnificationFilter){
+        imageView.magnificationFilter = _imageViewConfig.magnificationFilter;
+    }
+    if (imageView.minificationFilter != _imageViewConfig.minificationFilter){
+        imageView.minificationFilter = _imageViewConfig.minificationFilter;
+    }
+    if (_useEmbeddedThumbnailForRAW != _imageViewConfig.useEmbeddedThumbnailRAW){
+        _useEmbeddedThumbnailForRAW = _imageViewConfig.useEmbeddedThumbnailRAW;
+        [self reflectImage];
+    }
 }
 
 - (void)reflectGestureConfig
@@ -133,9 +144,8 @@
     if (object == controller && [keyPath isEqualToString:@"isFitWindow"]){
         ClickableImageView* imageView = (ClickableImageView*)self.view;
         imageView.imageScaling = (controller.isFitWindow ? NSImageScaleProportionallyUpOrDown : NSImageScaleProportionallyDown);
-    }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
-              [keyPath isEqualToString:@"values.imageBackgroundColor"]){
-        [self reflectBackgroundColor];
+    }else if (object == [ImageViewConfigController sharedController]){
+        [self reflectImageViewConfig];
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.gestureEnable"]){
         [self performSelector:@selector(reflectGestureConfig) withObject:nil afterDelay:0.0];

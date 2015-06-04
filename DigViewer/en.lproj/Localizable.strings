@@ -8,8 +8,10 @@
 
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "General";
-"PREF_TITLE_MAP" = "Map";
+"PREF_TITLE_RENDERING" = "Rendering";
 "PREF_TITLE_THUMBNAIL" = "Thumbnail";
+"PREF_TITLE_SLIDESHOW" = "Slideshow";
+"PREF_TITLE_MAP" = "Map";
 "PREF_TITLE_LENS" = "Lens";
 "PREF_TITLE_ADVANCED" = "Advanced";
 

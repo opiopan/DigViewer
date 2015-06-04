@@ -87,6 +87,8 @@
         _frameLayer.needsDisplayOnBoundsChange = NO;
         _frameLayer.backgroundColor = _backgroundColor.CGColor;
         _frameLayer.isFitFrame = self.imageScaling == NSImageScaleProportionallyDown;
+        _frameLayer.magnificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_magnificationFilter];
+        _frameLayer.minificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_minificationFilter];
         [_frameLayer setImage:_cgimage ? (__bridge id)(CGImageRef)_cgimage : self.image withRotation:_rotation];
         [_frameLayer setNeedsDisplay];
         [self setLayer:_frameLayer];
@@ -118,6 +120,33 @@
     }
     [self display];
 }
+
+- (void)setMagnificationFilter:(ImageViewFilterType)magnificationFilter
+{
+    _magnificationFilter = magnificationFilter;
+    if (_isDrawingByLayer){
+        _frameLayer.magnificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_magnificationFilter];
+    }
+}
+
+- (void)setMinificationFilter:(ImageViewFilterType)minificationFilter
+{
+    _minificationFilter = minificationFilter;
+    if (_isDrawingByLayer){
+        _frameLayer.minificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_minificationFilter];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// ImageViewFilterTypeからCALayerのフィルタータイプへの変換
+//-----------------------------------------------------------------------------------------
+- (NSString*)CALayerFilterTypeFromImageViewFilterType:(ImageViewFilterType)type
+{
+    return type == ImageViewFilterBilinear  ? kCAFilterLinear :
+           type == ImageViewFilterTrilinear ? kCAFilterTrilinear :
+                                              kCAFilterNearest;
+}
+
 
 //-----------------------------------------------------------------------------------------
 // イベント処理

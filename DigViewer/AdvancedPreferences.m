@@ -30,10 +30,16 @@
 - (void)initializeFromDefaults
 {
     // ユーザーデフォルトの読み込み
+    [self willChangeValueForKey:@"sortType"];
+    [self willChangeValueForKey:@"isCaseInsensitive"];
+    [self willChangeValueForKey:@"isSortAsNumeric"];
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    self.sortType = [[controller.values valueForKey:@"pathNodeSortType"] integerValue];
-    self.isCaseInsensitive = [[controller .values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
-    self.isSortAsNumeric = [[controller .values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
+    _sortType = [[controller.values valueForKey:@"pathNodeSortType"] integerValue];
+    _isCaseInsensitive = [[controller .values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
+    _isSortAsNumeric = [[controller .values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
+    [self didChangeValueForKey:@"sortType"];
+    [self didChangeValueForKey:@"isCaseInsensitive"];
+    [self didChangeValueForKey:@"isSortAsNumeric"];
     
     // ソート例配列の作成
     NSString* imagePath = [[NSBundle mainBundle] pathForImageResource:@"thumbnailSampleSquare"];

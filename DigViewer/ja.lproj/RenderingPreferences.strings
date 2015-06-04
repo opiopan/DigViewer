@@ -1,0 +1,45 @@
+
+/* Class = "NSMenuItem"; title = "Bilinear interpolation"; ObjectID = "0Li-1S-ETw"; */
+"0Li-1S-ETw.title" = "バイリニア補完";
+
+/* Class = "NSMenuItem"; title = "Trilinear interpolation"; ObjectID = "CyZ-lu-tdj"; */
+"CyZ-lu-tdj.title" = "トライリニア補完";
+
+/* Class = "NSTextFieldCell"; title = "Magnification filter:"; ObjectID = "Lxb-qT-K8X"; */
+"Lxb-qT-K8X.title" = "拡大時のフィルター:";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "MAT-6g-ZxB"; */
+"MAT-6g-ZxB.title" = "なし";
+
+/* Class = "NSTextFieldCell"; title = "Thumbnail:"; ObjectID = "Npr-D8-dBX"; */
+"Npr-D8-dBX.title" = "JPEG画像の埋め込みサムネール:";
+
+/* Class = "NSTextFieldCell"; title = "Minification filter:"; ObjectID = "Qx8-lf-hyW"; */
+"Qx8-lf-hyW.title" = "縮小時のフィルター:";
+
+/* Class = "NSMenuItem"; title = "Trilinear interpolation"; ObjectID = "U5t-xX-62J"; */
+"U5t-xX-62J.title" = "トライリニア補完";
+
+/* Class = "NSMenuItem"; title = "Bilinear interpolation"; ObjectID = "fdK-Sn-Y1x"; */
+"fdK-Sn-Y1x.title" = "バイリニア補完";
+
+/* Class = "NSTextFieldCell"; title = "Displaying thumbnails will be extreamly fast if this option is enabled, at the expence of image quality when thumbnail size is large."; ObjectID = "hih-UN-f13"; */
+"hih-UN-f13.title" = "このオプションを有効にすることで、埋め込みサムネールデータを持つJPEG画像のサムネール表示速度を大幅に高速化できます。ただしサムネールサイズが大きい場合の表示品質が悪化する場合があります。";
+
+/* Class = "NSButtonCell"; title = "Use embedded thumbnail image if image type is JPEG"; ObjectID = "mT8-RE-LzO"; */
+"mT8-RE-LzO.title" = "サムネール表示で使用する";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "sMB-dA-ZHr"; */
+"sMB-dA-ZHr.title" = "なし";
+
+/* Class = "NSTextFieldCell"; title = "Serious performance problem"; ObjectID = "MAW-qW-IEh"; */
+"MAW-qW-IEh.title" = "これらのオプションを無効にした場合、深刻な性能上の問題が発生する可能性があります。\n通常、RAW画像に埋め込まれているサムネールデータは十分な品質を有しています。これらのオプションを有効にした状態で使用することを強く推奨します。";
+
+/* Class = "NSButtonCell"; title = "Use embedded thumbnail to display thumbnail"; ObjectID = "slN-vB-KE0"; */
+"slN-vB-KE0.title" = "サムネール表示で使用する";
+
+/* Class = "NSButtonCell"; title = "Use embedded thumbnail to display image"; ObjectID = "z6Q-a4-Qtl"; */
+"z6Q-a4-Qtl.title" = "画像表示で使用する";
+
+/* Class = "NSTextFieldCell"; title = "Embedded thumbnail in raw image:"; ObjectID = "6P3-zJ-A1D"; */
+"6P3-zJ-A1D.title" = "RAW画像の埋め込みサムネール:";

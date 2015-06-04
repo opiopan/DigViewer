@@ -7,6 +7,7 @@
 //
 
 #import "PreferencesDefaultsController.h"
+#import "ImageViewConfigController.h"
 
 @implementation PreferencesDefaultsController
 
@@ -22,6 +23,9 @@
                      @"imageSetMaxFileSizeMin":       @0.1,
                      @"imageSetOmittingExt":          zeroArray,
                      @"imageBackgroundColor":         blackData,
+                     @"imageMagnificationFilter":     @(ImageViewFilterBilinear),
+                     @"imageMinificationFilter":      @(ImageViewFilterBilinear),
+                     @"imageUseEmbeddedThumbnailRAW": @YES,
                      @"gestureEnable":                @YES,
                      @"slideshowInterval":            @5,
                      @"slideshowIntervalMin":         @0.5,
@@ -44,6 +48,8 @@
                      @"thumbRepresentationType":      @0,
                      @"thumbFolderSize":              @(1./3.),
                      @"thumbFolderOpacity":           @1.0,
+                     @"thumbUseEmbeddedThumbnail":    @NO,
+                     @"thumbUseEmbeddedThumbnailRAW": @YES,
                      @"pathNodeSortType":             @0,
                      @"pathNodeSortCaseInsensitive":  @YES,
                      @"pathNodeSortAsNumeric":        @YES,

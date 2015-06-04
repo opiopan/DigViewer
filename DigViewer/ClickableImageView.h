@@ -7,12 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ImageViewConfigController.h"
 
 @interface ClickableImageView : NSImageView
 
 @property (weak) id delegate;
 @property (copy, nonatomic) NSColor* backgroundColor;
 @property (nonatomic) BOOL isDrawingByLayer;
+@property (nonatomic) ImageViewFilterType magnificationFilter;
+@property (nonatomic) ImageViewFilterType minificationFilter;
 
 - (void)setImage:(id)image withRotation:(NSInteger)rotation;
 

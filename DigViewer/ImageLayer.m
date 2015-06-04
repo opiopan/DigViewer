@@ -148,6 +148,19 @@ typedef struct _InertiaParameter InertiaParameter;
 }
 
 //-----------------------------------------------------------------------------------------
+// 拡大・縮小フィルター
+//-----------------------------------------------------------------------------------------
+- (void)setMagnificationFilter:(NSString *)magnificationFilter
+{
+    _imageLayer.magnificationFilter = magnificationFilter;
+}
+
+- (void)setMinificationFilter:(NSString *)minificationFilter
+{
+    _imageLayer.minificationFilter = minificationFilter;
+}
+
+//-----------------------------------------------------------------------------------------
 // 拡大・縮小制御
 //-----------------------------------------------------------------------------------------
 - (void)setTransisionalScale:(CGFloat)transisionalScale withOffset:(CGPoint)offset
@@ -181,11 +194,12 @@ typedef struct _InertiaParameter InertiaParameter;
 //-----------------------------------------------------------------------------------------
 static const CGFloat PANNING_FRICTION = 0.90;
 static const CGFloat PANNING_FRICTION_AT_END = 0.75;
+static const CGFloat PANNING_INERTIA_THRESHOLD = 200;
 static const CGFloat PANNING_ATTENUATE_LAG = 0.25;
 static const CGFloat PANNING_ATTENUATE_SCALE = 6;
 static const CGFloat PANNING_STOP_THRESHOLD = 10;
 static const CGFloat PANNING_OUTRANGE_SPRING = 800;
-static const CGFloat PANNING_COMPENSATE_VISCOSITY = 110;
+static const CGFloat PANNING_COMPENSATE_VISCOSITY = 90;
 static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
 
 - (CGPoint)startPanning
@@ -226,6 +240,10 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
     _offset.y += _transisionalOffset.y;
     _transisionalOffset = CGPointZero;
     CGPoint delta = [self compensateOffsetWithWeight:1.0];
+    
+    if (fabs(velocity.x) < PANNING_INERTIA_THRESHOLD && fabs(velocity.y) < PANNING_INERTIA_THRESHOLD){
+        velocity = CGPointZero;
+    }
 
     [_timerForPanning invalidate];
     _lastTimeForPanning = nowInEpocTime();

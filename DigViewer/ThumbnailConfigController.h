@@ -27,6 +27,8 @@ enum FolderThumbnailRepresentationType{
 @property (strong, nonatomic) NSNumber* folderIconSizeRepresentation;
 @property (strong, nonatomic) NSNumber* folderIconOpacity;
 @property (strong, nonatomic) NSNumber* folderIconOpacityRepresentation;
+@property (assign, nonatomic) BOOL useEmbeddedThumbnail;
+@property (assign, nonatomic) BOOL useEmbeddedThumbnailForRAW;
 
 + (id) sharedController;
 

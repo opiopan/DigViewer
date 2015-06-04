@@ -138,6 +138,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _parent = p;
         _imagePath = path;
         _isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
+        _isRasterImage = path ? [NSImage isRasterImageAtPath:path] : NO;
         _originalPath = op;
         _rootNode = _parent ? _parent->_rootNode : self;
         if (!_parent){
@@ -227,6 +228,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
                 if ([NSImage isSupportedFileAtPath:path] && ![cond isOmmitingImagePath:path]){
                     _imagePath = path;
                     _isRawImage = path ? [NSImage isRawFileAtPath:path] : NO;
+                    _isRasterImage = path ? [NSImage isRasterImageAtPath:path] : NO;
                 }else{
                     self = nil;
                 }
@@ -518,21 +520,27 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 //-----------------------------------------------------------------------------------------
 - (NSString*) imageUID
 {
-    if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
+    BOOL useEmbeddedThumbs = (self.imageNode.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
+                             (!self.imageNode.isRawImage && self.imageNode.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail);
+    if ((self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage) && useEmbeddedThumbs){
+        return [self.imagePath stringByAppendingString:@".embedded"];
+    }if ((self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage) && !useEmbeddedThumbs){
         return self.imagePath;
     }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
-        return [self.imagePath stringByAppendingString:@".folder"];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d", _thumbnailConfig.useEmbeddedThumbnail];
+        return [self.imagePath stringByAppendingString:extention];
     }else{
-        NSString* extention = [NSString stringWithFormat:@".folder:%@:%@", _thumbnailConfig.folderIconSize,
-                                                                           _thumbnailConfig.folderIconOpacity];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", _thumbnailConfig.useEmbeddedThumbnail,
+                                                                              _thumbnailConfig.folderIconSize,
+                                                                              _thumbnailConfig.folderIconOpacity];
         return [self.imagePath stringByAppendingString:extention];
     }
 }
 
 - (NSString*) imageRepresentationType
 {
-    return self.imageNode.isRawImage || !self.isImage ? IKImageBrowserCGImageRepresentationType :
-                                                        IKImageBrowserNSImageRepresentationType;
+    return self.imageNode.isRasterImage || !self.isImage ? IKImageBrowserCGImageRepresentationType :
+                                                           IKImageBrowserNSImageRepresentationType;
 }
 
 static const CGFloat ThumbnailMaxSize = 384;
@@ -541,24 +549,35 @@ static const CGFloat ThumbnailMaxSize = 384;
 {
     PathNode* node = self.imageNode;
     
-    if (node.isRawImage || !self.isImage){
+    if (node.isRasterImage || !self.isImage){
         static NSDictionary* thumbnailOption = nil;
+        static NSDictionary* thumbnailOptionUsingEmbedded = nil;
         if (!thumbnailOption){
-            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize)};
+            thumbnailOptionUsingEmbedded = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize),
+                                             (__bridge NSString*)kCGImageSourceCreateThumbnailWithTransform:@(YES)};
+            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize),
+                                (__bridge NSString*)kCGImageSourceCreateThumbnailFromImageAlways:@(YES),
+                                (__bridge NSString*)kCGImageSourceCreateThumbnailWithTransform:@(YES)};
         }
         ECGImageRef thumbnail;
-        if (node.isRawImage){
+        if (node.isRasterImage){
             NSURL* url = [NSURL fileURLWithPath:node.imagePath];
             ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
             if (!imageSource.isNULL()){
-                thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+                int orientation = 1;
+                NSDictionary* option = (node.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
+                                       _thumbnailConfig.useEmbeddedThumbnail ?
+                                       thumbnailOptionUsingEmbedded : thumbnailOption;
+                thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)option);
                 if (thumbnail.isNULL()){
-                    thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)thumbnailOption);
+                    thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+                    NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
+                    NSNumber* data = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
+                    orientation = data ? data.intValue : 1;
                 }
-                NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-                NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                if (orientation && orientation.intValue != 1){
-                    thumbnail = [self rotateImage:thumbnail to:orientation.intValue];
+                if (orientation != 1 ||
+                    CGImageGetWidth(thumbnail) > ThumbnailMaxSize || CGImageGetHeight(thumbnail) > ThumbnailMaxSize){
+                    thumbnail = [self rotateImage:thumbnail to:orientation];
                 }
             }else{
                 thumbnail = [self CGImageFromNSImage:[PathNode unavailableImage]];
@@ -602,12 +621,18 @@ static const CGFloat ThumbnailMaxSize = 384;
 {
     // 回転後イメージを表すビットマップコンテキストを生成
     CGSize size = CGSizeMake(CGImageGetWidth(src), CGImageGetHeight(src));
+    CGFloat destRatio = MIN(ThumbnailMaxSize / size.width, ThumbnailMaxSize / size.height);
+    CGSize destSize = size;
+    if (destRatio < 1){
+        destSize.width *= destRatio;
+        destSize.height *= destRatio;
+    }
     ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
     ECGContextRef context;
     if (rotation >= 5 && rotation <= 8){
-        context = CGBitmapContextCreate(NULL, size.height, size.width, 8, 0,colorSpace, kCGImageAlphaNoneSkipLast);
+        context = CGBitmapContextCreate(NULL, destSize.height, destSize.width, 8, 0,colorSpace, kCGImageAlphaNoneSkipLast);
     }else{
-        context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaNoneSkipLast);
+        context = CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0, colorSpace, kCGImageAlphaNoneSkipLast);
     }
 
     // 変換行列設定
@@ -620,24 +645,24 @@ static const CGFloat ThumbnailMaxSize = 384;
         case 8:
             /* 90 degrees rotation */
             CGContextRotateCTM(context, M_PI / 2.);
-            CGContextTranslateCTM (context, 0, -size.height);
+            CGContextTranslateCTM (context, 0, -destSize.height);
             break;
         case 3:
         case 4:
             /* 180 degrees rotation */
             CGContextRotateCTM(context, -M_PI);
-            CGContextTranslateCTM (context, size.width, size.height);
+            CGContextTranslateCTM (context, -destSize.width, -destSize.height);
             break;
         case 6:
         case 7:
             /* 270 degrees rotation */
             CGContextRotateCTM(context, -M_PI / 2.);
-            CGContextTranslateCTM (context, -size.width, 0);
+            CGContextTranslateCTM (context, -destSize.width, 0);
             break;
     }
     
     //回転後イメージを描画
-    CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), src);
+    CGContextDrawImage(context, CGRectMake(0, 0, destSize.width, destSize.height), src);
     return CGBitmapContextCreateImage(context);
 }
 

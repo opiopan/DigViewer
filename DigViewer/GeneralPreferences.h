@@ -10,10 +10,13 @@
 #import "NSPreferencesModule.h"
 #import "DocumentConfigController.h"
 #import "SlideShowConfigController.h"
+#import "ImageViewConfigController.h"
+
 
 @interface GeneralPreferences : NSPreferencesModule
 
 @property (strong, nonatomic) DocumentConfigController* documentConfigController;
 @property (strong, nonatomic) SlideshowConfigController* slideshowConfigController;
+@property (strong, nonatomic) ImageViewConfigController* imageViewConfigController;
 
 @end
