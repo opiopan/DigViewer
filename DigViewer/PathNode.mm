@@ -522,15 +522,14 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 {
     BOOL useEmbeddedThumbs = (self.imageNode.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
                              (!self.imageNode.isRawImage && self.imageNode.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail);
-    if ((self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage) && useEmbeddedThumbs){
-        return [self.imagePath stringByAppendingString:@".embedded"];
-    }if ((self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage) && !useEmbeddedThumbs){
-        return self.imagePath;
+    if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
+        NSString* extention = [NSString stringWithFormat:@".file:%d", useEmbeddedThumbs];
+        return [self.imagePath stringByAppendingString:extention];
     }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
-        NSString* extention = [NSString stringWithFormat:@".folder:%d", _thumbnailConfig.useEmbeddedThumbnail];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d", useEmbeddedThumbs];
         return [self.imagePath stringByAppendingString:extention];
     }else{
-        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", _thumbnailConfig.useEmbeddedThumbnail,
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", useEmbeddedThumbs,
                                                                               _thumbnailConfig.folderIconSize,
                                                                               _thumbnailConfig.folderIconOpacity];
         return [self.imagePath stringByAppendingString:extention];
@@ -566,7 +565,7 @@ static const CGFloat ThumbnailMaxSize = 384;
             if (!imageSource.isNULL()){
                 int orientation = 1;
                 NSDictionary* option = (node.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
-                                       _thumbnailConfig.useEmbeddedThumbnail ?
+                                       (!node.isRawImage && node.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail) ?
                                        thumbnailOptionUsingEmbedded : thumbnailOption;
                 thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)option);
                 if (thumbnail.isNULL()){
