@@ -166,25 +166,30 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
     [self cancelGesture];
 }
 
+- (void)magnifyWithEvent:(NSEvent *)event
+{
+    if (_gestureKind != TwoFingerMagnification && self.state != TouchGestureStateNone){
+        self.state = TouchGestureStateChanged;
+        _gestureKind = TwoFingerMagnification;
+        [self invokeHandler];
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // ジェスチャー更新：ジェスチャー未確定時
 //-----------------------------------------------------------------------------------------
 - (void)updateGestureInNotRecognized
 {
     static const CGFloat panThreshold = 1;
-    static const CGFloat magnifyThreshold = 0.01;
     
     CGPoint COGDelta = [self COGDelta];
-    CGFloat distanceDelta = touchDistance(_currentTouches[0], _currentTouches[1]) - _initialDistance;
+    CGFloat COGDeltaX = fabs(COGDelta.x);
+    CGFloat COGDeltaY = fabs(COGDelta.y);
 
-    if (fabs(COGDelta.x) >= panThreshold || fabs(COGDelta.y) >= panThreshold){
+    if (COGDeltaX >= panThreshold || COGDeltaY >= panThreshold){
         self.state = TouchGestureStateChanged;
         _gestureKind = TwoFingerPanning;
         [self updateGestureInPanning];
-    }else if (fabs(distanceDelta) >= magnifyThreshold){
-        self.state = TouchGestureStateChanged;
-        _gestureKind = TwoFingerMagnification;
-        [self updateGestureInMagnification];
     }
 }
 

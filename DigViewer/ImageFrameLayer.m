@@ -62,6 +62,11 @@
     return _currentImage.scale;
 }
 
+- (void)setScale:(CGFloat)scale
+{
+    _currentImage.scale = scale;
+}
+
 - (CGFloat)transisionalScale
 {
     return _currentImage.transisionalScale;

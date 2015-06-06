@@ -137,6 +137,18 @@
     }
 }
 
+- (CGFloat)zoomRatio
+{
+    return _isDrawingByLayer ? _frameLayer.scale : 1.0;
+}
+
+- (void)setZoomRatio:(CGFloat)zoomRatio
+{
+    if (_isDrawingByLayer){
+        _frameLayer.scale = zoomRatio;
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // ImageViewFilterTypeからCALayerのフィルタータイプへの変換
 //-----------------------------------------------------------------------------------------
@@ -173,19 +185,28 @@
 //-----------------------------------------------------------------------------------------
 // タッチイベントをジェスチャーリコグナイザーに回送
 //-----------------------------------------------------------------------------------------
-- (void)touchesBeganWithEvent:(NSEvent *)event {
+- (void)touchesBeganWithEvent:(NSEvent *)event
+{
     [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
 }
 
-- (void)touchesMovedWithEvent:(NSEvent *)event {
+- (void)touchesMovedWithEvent:(NSEvent *)event
+{
     [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
 }
 
-- (void)touchesEndedWithEvent:(NSEvent *)event {
+- (void)touchesEndedWithEvent:(NSEvent *)event
+{
     [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
 }
 
-- (void)touchesCancelledWithEvent:(NSEvent *)event {
+- (void)touchesCancelledWithEvent:(NSEvent *)event
+{
+    [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
+}
+
+- (void)magnifyWithEvent:(NSEvent *)event
+{
     [_touchGestureRecognizers makeObjectsPerformSelector:_cmd withObject:event];
 }
 

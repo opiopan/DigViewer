@@ -148,4 +148,5 @@
 /* Class = "NSMenuItem"; title = "Toggle Navigator"; ObjectID = "vsU-XZ-KCe"; */
 "vsU-XZ-KCe.title" = "ナビゲーター表示の切り替え";
 
-
+/* Class = "NSMenuItem"; title = "Reset Zoom Ratio"; ObjectID = "458-l0-7Uu"; */
+ "458-l0-7Uu.title" = "画像表示サイズを元に戻す";

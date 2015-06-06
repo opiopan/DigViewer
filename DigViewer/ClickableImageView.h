@@ -16,6 +16,7 @@
 @property (nonatomic) BOOL isDrawingByLayer;
 @property (nonatomic) ImageViewFilterType magnificationFilter;
 @property (nonatomic) ImageViewFilterType minificationFilter;
+@property (nonatomic) CGFloat zoomRatio;
 
 - (void)setImage:(id)image withRotation:(NSInteger)rotation;
 

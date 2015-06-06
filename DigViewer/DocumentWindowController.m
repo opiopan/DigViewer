@@ -14,6 +14,7 @@
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
 #import "LoadingSheetController.h"
+#import "ImageViewController.h"
 
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
@@ -524,6 +525,28 @@
         onImage = [[NSBundle mainBundle] imageForResource:@"datetime_on"];
     }
     self.sortByDateTimeButtonImage = _sortByDateTimeButtonState ? onImage : offImage;
+}
+
+//-----------------------------------------------------------------------------------------
+// 画像拡大率のリセット
+//-----------------------------------------------------------------------------------------
+- (IBAction)resetZoomRatio:(id)sender
+{
+    NSViewController* controller = mainViewController.presentationViewController;
+    if ([controller.class isSubclassOfClass:ImageViewController.class]){
+        ((ImageViewController*)controller).zoomRatio = 1.0;
+    }
+}
+
+- (BOOL)validateForResetZoomRatio:(NSMenuItem*)menuItem
+{
+    BOOL rc = NO;
+    NSViewController* controller = mainViewController.presentationViewController;
+    if ([controller.class isSubclassOfClass:ImageViewController.class]){
+        rc = ((ImageViewController*)controller).zoomRatio != 1.0;
+    }
+    
+    return rc;
 }
 
 @end

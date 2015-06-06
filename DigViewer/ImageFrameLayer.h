@@ -11,7 +11,7 @@
 @interface ImageFrameLayer : CALayer
 
 @property (nonatomic) BOOL isFitFrame;
-@property (readonly, nonatomic) CGFloat scale;
+@property (nonatomic) CGFloat scale;
 @property (readonly, nonatomic) CGFloat transisionalScale;
 @property (nonatomic) CGPoint offset;
 @property (nonatomic) CGPoint transisionalOffset;

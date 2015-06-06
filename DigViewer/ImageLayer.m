@@ -189,6 +189,19 @@ typedef struct _InertiaParameter InertiaParameter;
     }
 }
 
+- (void)setScale:(CGFloat)scale
+{
+    _scale = scale;
+    _transisionalScale = 1.0;
+    CGPoint delta = [self compensateOffsetWithWeight:1.0];
+    _offset.x += delta.x;
+    _offset.y += delta.y;
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    [self adjustImage];
+    [CATransaction commit];
+}
+
 //-----------------------------------------------------------------------------------------
 // パンニング
 //-----------------------------------------------------------------------------------------

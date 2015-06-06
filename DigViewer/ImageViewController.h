@@ -11,5 +11,6 @@
 @interface ImageViewController : NSViewController
 
 @property (weak) NSArrayController* IBOutlet imageArrayController;
+@property (nonatomic) CGFloat zoomRatio;
 
 @end

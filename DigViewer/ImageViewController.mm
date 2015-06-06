@@ -48,6 +48,15 @@
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
 }
 
+- (void)prepareForClose
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    [controller removeObserver:self forKeyPath:@"isFitWindow"];
+    [_imageViewConfig removeObserver:self forKeyPath:@"updateCount"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.gestureEnable"];
+    [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
+}
+
 - (void)setIsVisible:(BOOL)isVisible
 {
     BOOL lastVisiblility = _isVisible;
@@ -60,13 +69,16 @@
     }
 }
 
-- (void)prepareForClose
+- (CGFloat)zoomRatio
 {
-    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    [controller removeObserver:self forKeyPath:@"isFitWindow"];
-    [_imageViewConfig removeObserver:self forKeyPath:@"updateCount"];
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.gestureEnable"];
-    [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    return imageView.zoomRatio;
+}
+
+- (void)setZoomRatio:(CGFloat)zoomRatio
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    imageView.zoomRatio = zoomRatio;
 }
 
 - (void)reflectImage

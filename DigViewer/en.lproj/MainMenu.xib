@@ -237,6 +237,12 @@ DQ
                                     <action selector="fitImageToScreen:" target="-1" id="556"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="AtW-vp-R4h"/>
+                            <menuItem title="Reset Zoom Ratio" keyEquivalent="0" id="458-l0-7Uu">
+                                <connections>
+                                    <action selector="resetZoomRatio:" target="-1" id="J7y-qo-Dmg"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
