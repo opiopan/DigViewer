@@ -146,10 +146,10 @@
         currentViewIndex++;
         [outlineViewController setIsVisible:YES];
     }
+    [representedViewController setIsVisible:YES];
     [splitView addSubview:representedViewController.view];
     [splitView setHoldingPriority: NSLayoutPriorityFittingSizeCompression forSubviewAtIndex:currentViewIndex];
     currentViewIndex++;
-    [representedViewController setIsVisible:YES];
     if (!self.isCollapsedInspectorView){
         [splitView addSubview:inspectorViewController.view];
         [splitView setHoldingPriority:NSLayoutPriorityDefaultLow forSubviewAtIndex:currentViewIndex];

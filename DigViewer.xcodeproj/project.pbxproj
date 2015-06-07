@@ -38,6 +38,8 @@
 		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.mm */; };
 		7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B18B06A1B06E545006BC48A /* datetime_on.png */; };
+		7B1AB01A1B23E36E00ED004C /* ImageRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */; };
+		7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AB01C1B240E7800ED004C /* RelationalImageAccessor.m */; };
 		7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AC4A718B05384004136CD /* InspectorViewController.m */; };
 		7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC21518D86DC5007527E6 /* InfoPlistController.m */; };
 		7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */; };
@@ -190,6 +192,10 @@
 		7B0DBF0216A84335000365F4 /* ClickableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableImageView.h; sourceTree = "<group>"; };
 		7B0DBF0316A84335000365F4 /* ClickableImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClickableImageView.mm; sourceTree = "<group>"; };
 		7B18B06A1B06E545006BC48A /* datetime_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = datetime_on.png; path = resources/datetime_on.png; sourceTree = "<group>"; };
+		7B1AB0181B23E36E00ED004C /* ImageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenderer.h; sourceTree = "<group>"; };
+		7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageRenderer.mm; sourceTree = "<group>"; };
+		7B1AB01B1B240E7800ED004C /* RelationalImageAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationalImageAccessor.h; sourceTree = "<group>"; };
+		7B1AB01C1B240E7800ED004C /* RelationalImageAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationalImageAccessor.m; sourceTree = "<group>"; };
 		7B1AC4A618B05384004136CD /* InspectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorViewController.h; sourceTree = "<group>"; };
 		7B1AC4A718B05384004136CD /* InspectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorViewController.m; sourceTree = "<group>"; };
 		7B1CC21418D86DC5007527E6 /* InfoPlistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPlistController.h; sourceTree = "<group>"; };
@@ -536,6 +542,10 @@
 				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */,
 				7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */,
 				7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */,
+				7B1AB0181B23E36E00ED004C /* ImageRenderer.h */,
+				7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */,
+				7B1AB01B1B240E7800ED004C /* RelationalImageAccessor.h */,
+				7B1AB01C1B240E7800ED004C /* RelationalImageAccessor.m */,
 			);
 			name = "Image view";
 			sourceTree = "<group>";
@@ -944,6 +954,7 @@
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
+				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.m in Sources */,
@@ -967,6 +978,7 @@
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */,
 				7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */,
+				7B1AB01A1B23E36E00ED004C /* ImageRenderer.mm in Sources */,
 				7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
 				7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */,

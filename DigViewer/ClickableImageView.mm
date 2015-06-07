@@ -7,13 +7,13 @@
 //
 
 #import "ClickableImageView.h"
+#import "ImageRenderer.h"
 #import "ImageFrameLayer.h"
 #import "TwoFingerGestureRecognizer.h"
 #include "CoreFoundationHelper.h"
 
 @implementation ClickableImageView{
-    ECGImageRef _cgimage;
-    NSInteger _rotation;
+    ImageRenderer* _renderer;
     NSColor* _backgroundColor;
     CGFloat _scale;
     
@@ -41,6 +41,8 @@
 
 - (void)initialize
 {
+    _relationalImageAccessor = [RelationalImageAccessor new];
+    
     self.isDrawingByLayer = NO;
     
     _touchGestureRecognizers = [NSMutableArray array];
@@ -56,21 +58,23 @@
 //-----------------------------------------------------------------------------------------
 // 画像登録
 //-----------------------------------------------------------------------------------------
-- (void)setImage:(id)image withRotation:(NSInteger)rotation
+- (void)setRelationalImage:(id)relationalImage
 {
-    if ([image isKindOfClass:[NSImage class]]){
-        [super setImage:image];
-        _cgimage = nil;
+    if (_relationalImage != relationalImage){
+        _relationalImage = relationalImage;
+        if (_relationalImage){
+            _renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
+        }else{
+            _renderer = [ImageRenderer imageRendererWithPath:nil];
+        }
+        _scale = 1.0;
+        [self displayIfNeeded];
+        self.needsDisplay = true;
+        if (_isDrawingByLayer){
+            [_frameLayer setImage:_renderer.image withRotation:_renderer.rotation];
+        }
     }else{
-        _cgimage = (__bridge CGImageRef)image;
-        [super setImage:nil];
-    }
-    _rotation = rotation;
-    _scale = 1.0;
-    [self displayIfNeeded];
-    self.needsDisplay = true;
-    if (_isDrawingByLayer){
-        [_frameLayer setImage:image withRotation:rotation];
+        self.zoomRatio = 1.0;
     }
 }
 
@@ -89,7 +93,7 @@
         _frameLayer.isFitFrame = self.imageScaling == NSImageScaleProportionallyDown;
         _frameLayer.magnificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_magnificationFilter];
         _frameLayer.minificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_minificationFilter];
-        [_frameLayer setImage:_cgimage ? (__bridge id)(CGImageRef)_cgimage : self.image withRotation:_rotation];
+        [_frameLayer setImage:_renderer.image withRotation:_renderer.rotation];
         [_frameLayer setNeedsDisplay];
         [self setLayer:_frameLayer];
         [self setWantsLayer:YES];
@@ -290,14 +294,21 @@ static const CGFloat PanningGestureScale = 4.0;
     
     [self.backgroundColor setFill];
     NSRectFill(dirtyRect);
-    if (_cgimage){
+    
+    if (!_renderer.image){
+        return;
+    }
+    
+    if (![[_renderer.image class] isSubclassOfClass:NSImage.class]){
+        CGImageRef cgimage = (__bridge CGImageRef)_renderer.image;
+        NSInteger rotation = _renderer.rotation;
         NSRect boundsRect = self.bounds;
-        CGSize orgSize = CGSizeMake(CGImageGetWidth(_cgimage), CGImageGetHeight(_cgimage));
+        CGSize orgSize = CGSizeMake(CGImageGetWidth(cgimage), CGImageGetHeight(cgimage));
         CGSize imageSize;
-        if (_rotation >= 5 && _rotation <=8){
-            imageSize = CGSizeMake(CGImageGetHeight(_cgimage), CGImageGetWidth(_cgimage));
+        if (rotation >= 5 && rotation <=8){
+            imageSize = CGSizeMake(CGImageGetHeight(cgimage), CGImageGetWidth(cgimage));
         }else{
-            imageSize = CGSizeMake(CGImageGetWidth(_cgimage), CGImageGetHeight(_cgimage));
+            imageSize = CGSizeMake(CGImageGetWidth(cgimage), CGImageGetHeight(cgimage));
         }
         CGFloat xRatio = boundsRect.size.width / imageSize.width;
         CGFloat yRatio = boundsRect.size.height / imageSize.height;
@@ -310,7 +321,7 @@ static const CGFloat PanningGestureScale = 4.0;
         CGFloat xOffset = (boundsRect.size.width - imageSize.width * ratio) / 2;
         CGFloat yOffset = (boundsRect.size.height - imageSize.height * ratio) / 2;
         CGContextRef context = reinterpret_cast<CGContext*>([[NSGraphicsContext currentContext] graphicsPort]);
-        switch (_rotation){
+        switch (rotation){
             case 1:
             case 2:
                 /* no rotation */
@@ -336,10 +347,11 @@ static const CGFloat PanningGestureScale = 4.0;
                 break;
         }
         CGContextScaleCTM(context, ratio, ratio);
-        CGContextDrawImage(context, CGRectMake(0, 0, orgSize.width, orgSize.height), _cgimage);
+        CGContextDrawImage(context, CGRectMake(0, 0, orgSize.width, orgSize.height), cgimage);
     }else{
+        NSImage* image = _renderer.image;
         NSRect boundsRect = self.bounds;
-        NSSize imageSize = self.image.size;
+        NSSize imageSize = image.size;
         CGFloat xRatio = boundsRect.size.width / imageSize.width;
         CGFloat yRatio = boundsRect.size.height / imageSize.height;
         CGFloat ratio;
@@ -354,7 +366,7 @@ static const CGFloat PanningGestureScale = 4.0;
         imageRect.origin.x = boundsRect.origin.x + (boundsRect.size.width - imageRect.size.width) / 2;
         imageRect.origin.y = boundsRect.origin.y + (boundsRect.size.height - imageRect.size.height) / 2;
         
-        [self.image drawInRect:imageRect];
+        [image drawInRect:imageRect];
     }
 }
 

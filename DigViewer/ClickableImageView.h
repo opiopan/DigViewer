@@ -8,16 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ImageViewConfigController.h"
+#import "RelationalImageAccessor.h"
 
 @interface ClickableImageView : NSImageView
 
 @property (weak) id delegate;
+
+@property (nonatomic) id relationalImage;
+@property (nonatomic) RelationalImageAccessor* relationalImageAccessor;
+
 @property (copy, nonatomic) NSColor* backgroundColor;
 @property (nonatomic) BOOL isDrawingByLayer;
 @property (nonatomic) ImageViewFilterType magnificationFilter;
 @property (nonatomic) ImageViewFilterType minificationFilter;
 @property (nonatomic) CGFloat zoomRatio;
-
-- (void)setImage:(id)image withRotation:(NSInteger)rotation;
 
 @end

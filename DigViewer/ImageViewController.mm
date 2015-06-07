@@ -63,9 +63,6 @@
     _isVisible = isVisible;
     if (_isVisible && !lastVisiblility){
         [self reflectImage];
-    }if (!_isVisible && lastVisiblility){
-        ClickableImageView* imageView = (ClickableImageView*)self.view;
-        [imageView setImage:nil withRotation:0];
     }
 }
 
@@ -90,31 +87,7 @@
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     if (self.imageArrayController.selectedObjects.count){
         PathNode* node = self.imageArrayController.selectedObjects[0];
-        if ([NSImage isRawFileAtPath:node.imagePath] && _imageViewConfig.useEmbeddedThumbnailRAW){
-            NSURL* url = [NSURL fileURLWithPath:node.imagePath];
-            ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-            CGImageRef thumbnail(CGImageSourceCreateThumbnailAtIndex(imageSource, 0, NULL));
-            if (!thumbnail){
-                [imageView setImage:node.image withRotation:1];
-            }else{
-                NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-                NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                [imageView setImage:(__bridge id)thumbnail withRotation:orientation ? orientation.integerValue : 1];
-            }
-        }else if ([NSImage isRasterImageAtPath:node.imagePath]){
-                NSURL* url = [NSURL fileURLWithPath:node.imagePath];
-                ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-                CGImageRef image(CGImageSourceCreateImageAtIndex(imageSource, 0, NULL));
-                if (!image){
-                    [imageView setImage:node.image withRotation:1];
-                }else{
-                    NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-                    NSNumber* orientation = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                    [imageView setImage:(__bridge id)image withRotation:orientation ? orientation.integerValue : 1];
-                }
-        }else{
-            [imageView setImage:node.image withRotation:1];
-        }
+        imageView.relationalImage = node;
     }
 }
 
