@@ -7,8 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "RelationalImageAccessor.h"
 
 @interface ImageFrameLayer : CALayer
+
+@property (nonatomic) id relationalImage;
+@property (nonatomic) RelationalImageAccessor* relationalImageAccessor;
 
 @property (nonatomic) BOOL isFitFrame;
 @property (nonatomic) CGFloat scale;
@@ -16,7 +20,6 @@
 @property (nonatomic) CGPoint offset;
 @property (nonatomic) CGPoint transisionalOffset;
 
-- (void)setImage:(id)image withRotation:(NSInteger)rotation;
 - (void)setTransisionalScale:(CGFloat)transisionalScale withOffset:(CGPoint)offset;
 - (void)fixScale;
 - (CGPoint)startPanning;

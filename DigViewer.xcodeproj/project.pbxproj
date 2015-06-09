@@ -78,7 +78,7 @@
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
-		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */; };
+		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */; };
 		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
@@ -265,7 +265,7 @@
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
 		7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFrameLayer.h; sourceTree = "<group>"; };
-		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFrameLayer.m; sourceTree = "<group>"; };
+		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageFrameLayer.mm; sourceTree = "<group>"; };
 		7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
 		7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLayer.m; sourceTree = "<group>"; };
 		7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailPreferences.h; sourceTree = "<group>"; };
@@ -539,7 +539,7 @@
 				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
 				7B0DBF0316A84335000365F4 /* ClickableImageView.mm */,
 				7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */,
-				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.m */,
+				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */,
 				7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */,
 				7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */,
 				7B1AB0181B23E36E00ED004C /* ImageRenderer.h */,
@@ -957,7 +957,7 @@
 				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
-				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.m in Sources */,
+				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */,

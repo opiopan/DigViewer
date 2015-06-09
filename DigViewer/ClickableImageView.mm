@@ -71,7 +71,7 @@
         [self displayIfNeeded];
         self.needsDisplay = true;
         if (_isDrawingByLayer){
-            [_frameLayer setImage:_renderer.image withRotation:_renderer.rotation];
+            _frameLayer.relationalImage = _relationalImage;
         }
     }else{
         self.zoomRatio = 1.0;
@@ -93,7 +93,7 @@
         _frameLayer.isFitFrame = self.imageScaling == NSImageScaleProportionallyDown;
         _frameLayer.magnificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_magnificationFilter];
         _frameLayer.minificationFilter = [self CALayerFilterTypeFromImageViewFilterType:_minificationFilter];
-        [_frameLayer setImage:_renderer.image withRotation:_renderer.rotation];
+        _frameLayer.relationalImage = _relationalImage;
         [_frameLayer setNeedsDisplay];
         [self setLayer:_frameLayer];
         [self setWantsLayer:YES];
