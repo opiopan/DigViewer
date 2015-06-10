@@ -16,6 +16,7 @@
 
 @property (nonatomic) id relationalImage;
 @property (nonatomic) RelationalImageAccessor* relationalImageAccessor;
+@property (nonatomic) SEL notifySwipeSelector;
 
 @property (copy, nonatomic) NSColor* backgroundColor;
 @property (nonatomic) BOOL isDrawingByLayer;

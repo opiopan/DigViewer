@@ -8,6 +8,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "RelationalImageAccessor.h"
+#import "ImageLayer.h"
+
+enum _ImageSwipeDirection {ImageSwipeNext, ImageSwipePrevious};
+typedef enum _ImageSwipeDirection ImageSwipeDirection;
 
 @interface ImageFrameLayer : CALayer
 
@@ -19,10 +23,17 @@
 @property (readonly, nonatomic) CGFloat transisionalScale;
 @property (nonatomic) CGPoint offset;
 @property (nonatomic) CGPoint transisionalOffset;
+@property (readonly, nonatomic) int borderCondition;
+@property (nonatomic) CGFloat swipeOffset;
+@property (readonly, nonatomic)BOOL isInSwipeInertiaMode;
+@property (nonatomic) SEL didEndSwipeSelector;
 
 - (void)setTransisionalScale:(CGFloat)transisionalScale withOffset:(CGPoint)offset;
 - (void)fixScale;
 - (CGPoint)startPanning;
 - (void)fixOffsetWithVelocity:(CGPoint)velocity;
+
+- (void)startSwipeForDirection:(ImageSwipeDirection)direction;
+- (void)fixSwipeOffsetWithVelocity:(CGFloat)velocity;
 
 @end

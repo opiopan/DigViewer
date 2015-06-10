@@ -182,7 +182,7 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
 {
     static const CGFloat panThreshold = 1;
     
-    CGPoint COGDelta = [self COGDelta];
+    CGPoint COGDelta = vecDisnormalize([self COGDelta], _initialTouches[0].deviceSize);
     CGFloat COGDeltaX = fabs(COGDelta.x);
     CGFloat COGDeltaY = fabs(COGDelta.y);
 
@@ -207,8 +207,10 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
 //-----------------------------------------------------------------------------------------
 - (void)updateGestureInPanning
 {
-    _panningDelta = [self COGDelta];
-    _panningVelocity = [self COGVelocity];
+    _normalizedPanningDelta = [self COGDelta];
+    _normalizedPanningVelocity = [self COGVelocity];
+    _panningDelta = vecDisnormalize(_normalizedPanningDelta, _initialTouches[0].deviceSize);
+    _panningVelocity = vecDisnormalize(_normalizedPanningVelocity, _initialTouches[0].deviceSize);
     [self invokeHandler];
 }
 
@@ -236,6 +238,8 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
         self.modifiers = 0;
         _panningDelta = CGPointZero;
         _panningVelocity = CGPointZero;
+        _normalizedPanningDelta = CGPointZero;
+        _normalizedPanningVelocity = CGPointZero;
         _magnification = 0;
         _rotation = 0;
         _initialTouches[0] = _initialTouches[1] = nil;
@@ -280,7 +284,7 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
     CGPoint rc;
     rc = vecDelta(touchCOG(_currentTouches[0], _currentTouches[1]), touchCOG(_initialTouches[0], _initialTouches[1]));
     
-    return vecDisnormalize(rc, _initialTouches[0].deviceSize);
+    return rc;
 }
 
 -(CGPoint)COGVelocity
@@ -293,7 +297,7 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
     rc = vecDelta(touchCOG(_currentTouches[0], _currentTouches[1]), touchCOG(_lastTouches[0], _lastTouches[1]));
     rc = vecMagnify(rc, 1.0 / (_currentTimestamp - _lastTimestamp));
     
-    return vecDisnormalize(rc, _initialTouches[0].deviceSize);
+    return rc;
 }
 
 @end

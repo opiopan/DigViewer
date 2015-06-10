@@ -12,6 +12,10 @@
 #import "TwoFingerGestureRecognizer.h"
 #include "CoreFoundationHelper.h"
 
+enum PanningMode{
+    PanningNone, PanningScroll, PanningSwipe
+};
+
 @implementation ClickableImageView{
     ImageRenderer* _renderer;
     NSColor* _backgroundColor;
@@ -19,6 +23,7 @@
     
     ImageFrameLayer* _frameLayer;
     NSMutableArray* _touchGestureRecognizers;
+    enum PanningMode _panningMode;
     NSPoint _panningBaias;
 }
 
@@ -43,6 +48,7 @@
 {
     _relationalImageAccessor = [RelationalImageAccessor new];
     
+    _panningMode = PanningNone;
     self.isDrawingByLayer = NO;
     
     _touchGestureRecognizers = [NSMutableArray array];
@@ -60,7 +66,8 @@
 //-----------------------------------------------------------------------------------------
 - (void)setRelationalImage:(id)relationalImage
 {
-    if (_relationalImage != relationalImage){
+    [self cancelGesture];
+    if (_isDrawingByLayer || _relationalImage != relationalImage){
         _relationalImage = relationalImage;
         if (_relationalImage){
             _renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
@@ -87,6 +94,7 @@
     if (_isDrawingByLayer){
         _frameLayer = [ImageFrameLayer layer];
         _frameLayer.delegate = self;
+        _frameLayer.didEndSwipeSelector = @selector(didEndSwipeWithDirection:);
         _frameLayer.bounds = [self bounds];
         _frameLayer.needsDisplayOnBoundsChange = NO;
         _frameLayer.backgroundColor = _backgroundColor.CGColor;
@@ -219,6 +227,7 @@
 //-----------------------------------------------------------------------------------------
 static const CGFloat MagnificationGestureScale = 5.0;
 static const CGFloat PanningGestureScale = 4.0;
+static const CGFloat SwipeGestureScale = 2.5;
 
 - (void)handleMagnifyGesture:(TwoFingerGestureRecognizer*)gesture
 {
@@ -262,26 +271,84 @@ static const CGFloat PanningGestureScale = 4.0;
 - (void)handleTwoFingerPanGesture:(TwoFingerGestureRecognizer*)gesture
 {
     if (_isDrawingByLayer){
+        // 二本指ジェスチャー開始時はバイアス値を取得
         if (gesture.state == TouchGestureStateBegan){
-            _panningBaias = [_frameLayer startPanning];
+            if (_frameLayer.isInSwipeInertiaMode){
+                [self cancelGesture];
+                return;
+            }else{
+                _panningBaias = [_frameLayer startPanning];
+                if (_panningBaias.x != 0 || _panningBaias.y != 0){
+                    _panningMode = PanningScroll;
+                }
+            }
+        }
+
+        // スクロールモード or スワイプモードの決定
+        if (_panningMode == PanningNone && (gesture.panningDelta.x != 0 || gesture.panningDelta.y != 0)){
+            _panningMode = PanningScroll;
+            CGFloat deltaX = gesture.panningDelta.x;
+            CGFloat deltaY = gesture.panningDelta.y;
+            int borderCondition = _frameLayer.borderCondition;
+            if (deltaX < 0 && fabs(deltaX) > fabs(deltaY) && borderCondition & ImageLayerBorderRight){
+                _panningMode = PanningSwipe;
+                [_frameLayer startSwipeForDirection:ImageSwipeNext];
+            }else if (deltaX > 0 && fabs(deltaX) > fabs(deltaY) && borderCondition & ImageLayerBorderLeft){
+                _panningMode = PanningSwipe;
+                [_frameLayer startSwipeForDirection:ImageSwipePrevious];
+            }
+        }
+
+        // スクロールモード or スワイプモードでの処理
+        if (_panningMode == PanningScroll){
+            CGPoint offset = gesture.panningDelta;
+            offset.x = offset.x * PanningGestureScale + _panningBaias.x;
+            offset.y = offset.y * PanningGestureScale + _panningBaias.y;
+            
+            _frameLayer.transisionalOffset = offset;
+        }else if (_panningMode == PanningSwipe){
+            _frameLayer.swipeOffset = gesture.normalizedPanningDelta.x * SwipeGestureScale;
         }
         
-        CGPoint offset = gesture.panningDelta;
-        offset.x = offset.x * PanningGestureScale + _panningBaias.x;
-        offset.y = offset.y * PanningGestureScale + _panningBaias.y;
-        
-        _frameLayer.transisionalOffset = offset;
-        
+        // ジェスチャー終了時のクロージング処理
         if (gesture.state == TouchGestureStateEnded ||
             gesture.state == TouchGestureStateCanceled ||
             gesture.state == TouchGestureStateFailed){
-            CGPoint velocity = gesture.panningVelocity;
-            velocity.x *= PanningGestureScale;
-            velocity.y *= PanningGestureScale;
-            [_frameLayer fixOffsetWithVelocity:velocity];
+            if (_panningMode == PanningScroll){
+                CGPoint velocity = gesture.panningVelocity;
+                velocity.x *= PanningGestureScale;
+                velocity.y *= PanningGestureScale;
+                [_frameLayer fixOffsetWithVelocity:velocity];
+            }else if (_panningMode == PanningSwipe){
+                CGPoint velocity = gesture.normalizedPanningVelocity;
+                velocity.x *= SwipeGestureScale;
+                [_frameLayer fixSwipeOffsetWithVelocity:velocity.x];
+            }
+            _panningMode = PanningNone;
         }
     }
 }
+
+- (void)cancelGesture
+{
+    for (TouchGestureRecognizer* recognizer in _touchGestureRecognizers){
+        [recognizer cancelGesture];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// スワイプによる画像切り替え通知
+//-----------------------------------------------------------------------------------------
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
+- (void)didEndSwipeWithDirection:(NSNumber*)direction
+{
+    if (_delegate && _notifySwipeSelector){
+        [_delegate performSelector:_notifySwipeSelector withObject:@(direction.intValue == ImageSwipeNext)];
+    }
+}
+#pragma clang diagnostic pop
 
 //-----------------------------------------------------------------------------------------
 // 描画 (Layerモードの場合は本メソッドは呼び出されない)

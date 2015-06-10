@@ -25,6 +25,8 @@ typedef enum _TwoFingerGestureKind TwoFingerGestureKind;
 @property (readonly, nonatomic) CGFloat magnification;
 @property (readonly, nonatomic) CGPoint panningDelta;
 @property (readonly, nonatomic) CGPoint panningVelocity;
+@property (readonly, nonatomic) CGPoint normalizedPanningDelta;
+@property (readonly, nonatomic) CGPoint normalizedPanningVelocity;
 @property (readonly, nonatomic) CGFloat rotation;
 
 @property (nonatomic) SEL magnifyGestureHandler;

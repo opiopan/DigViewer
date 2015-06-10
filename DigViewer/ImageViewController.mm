@@ -34,6 +34,7 @@
 {
     ClickableImageView* imageView = (ClickableImageView*)self.view;
     imageView.delegate = self;
+    imageView.notifySwipeSelector = @selector(onSwipeWithDirection:);
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     [controller addObserver:self forKeyPath:@"isFitWindow" options:0 context:nil];
@@ -145,6 +146,16 @@
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     controller.presentationViewType = typeThumbnailView;
+}
+
+- (void)onSwipeWithDirection:(NSNumber*)direction
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    if (direction.boolValue){
+        [controller moveToNextImage:self];
+    }else{
+        [controller moveToPreviousImage:self];
+    }
 }
 
 @end

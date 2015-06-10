@@ -161,6 +161,24 @@ typedef struct _InertiaParameter InertiaParameter;
 }
 
 //-----------------------------------------------------------------------------------------
+// 境界状態の返却
+//-----------------------------------------------------------------------------------------
+- (int)borderCondition
+{
+    int rc = 0;
+    CGSize imageSize = CGSizeMake(_normalizedImageSize.width * _scale * _transisionalScale,
+                                  _normalizedImageSize.height * _scale * _transisionalScale);
+    CGPoint offset = CGPointMake((self.frame.size.width - imageSize.width) / 2 + _offset.x + _transisionalOffset.x,
+                                 (self.frame.size.height - imageSize.height) / 2 + _offset.y + _transisionalOffset.y);
+    rc |= imageSize.width + offset.x <= self.frame.size.width ? ImageLayerBorderRight : 0;
+    rc |= offset.x >= 0 ? ImageLayerBorderLeft : 0;
+    rc |= imageSize.height + offset.y <= self.frame.size.height ? ImageLayerBorderTop : 0;
+    rc |= offset.y >= 0 ? ImageLayerBorderBottom : 0;
+    
+    return rc;
+}
+
+//-----------------------------------------------------------------------------------------
 // 拡大・縮小制御
 //-----------------------------------------------------------------------------------------
 - (void)setTransisionalScale:(CGFloat)transisionalScale withOffset:(CGPoint)offset
@@ -358,6 +376,7 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
 {
     if ([_imageLayer contents]){
         CGRect frame = self.frame;
+        frame.origin = CGPointZero;
         CGFloat widthRatio = frame.size.width / _imageSize.width;
         CGFloat heightRatio = frame.size.height / _imageSize.height;
         _imageRatio = widthRatio < heightRatio ? widthRatio : heightRatio;
@@ -412,6 +431,7 @@ static const CGFloat PANNING_COMPENSATE_STOP_THRESHOLD = 1;
     if ([_imageLayer contents]){
 
         CGRect imageRect = self.frame;
+        imageRect.origin = CGPointZero;
         CGFloat ratio = _imageRatio * _scale * _transisionalScale;
         imageRect.size.width = _imageSize.width * ratio;
         imageRect.size.height = _imageSize.height * ratio;
