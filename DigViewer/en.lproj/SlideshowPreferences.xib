@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
@@ -15,29 +15,167 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="638" height="270"/>
+            <rect key="contentRect" x="196" y="240" width="700" height="247"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="638" height="270"/>
+                <rect key="frame" x="0.0" y="-1" width="700" height="247"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="i1a-EQ-wew">
-                        <rect key="frame" x="-3" y="-4" width="644" height="276"/>
+                    <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="i1a-EQ-wew">
+                        <rect key="frame" x="-3" y="-6" width="706" height="255"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="1" y="1" width="642" height="274"/>
+                            <rect key="frame" x="1" y="1" width="704" height="253"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box autoresizesSubviews="NO" boxType="custom" borderType="none" titlePosition="noTitle" id="D0B-Uf-vge">
+                                    <rect key="frame" x="486" y="34" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <view key="contentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                    <color key="fillColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </box>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="sDo-Uk-idE">
+                                    <rect key="frame" x="45" y="209" width="120" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Interval:" id="hYh-CX-zIp">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" id="QLl-oJ-C2e">
+                                    <rect key="frame" x="171" y="206" width="41" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="Cyl-BS-C4n">
+                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="7Qr-Bl-lTv"/>
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.slideshowConfig.interval" previousBinding="WZl-va-ucI" id="LMY-3W-WFm">
+                                            <dictionary key="options">
+                                                <integer key="NSNullPlaceholder" value="5"/>
+                                            </dictionary>
+                                        </binding>
+                                        <binding destination="taV-ah-YxB" name="minValue" keyPath="values.slideshowIntervalMin" id="WZl-va-ucI"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="U32-cV-sbd">
+                                    <rect key="frame" x="214" y="209" width="107" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="sec" id="31K-zp-WLo">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="VcT-1L-l3T">
+                                    <rect key="frame" x="45" y="107" width="120" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slideshow in:" id="QIj-90-MHf">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <popUpButton verticalHuggingPriority="750" id="Mqz-PD-0u0">
+                                    <rect key="frame" x="169" y="102" width="231" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="yJF-jE-7Hm">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="menu"/>
+                                        <menu key="menu" id="qLV-F4-9ne">
+                                            <items>
+                                                <menuItem title="Main window" id="kPd-ae-GXQ"/>
+                                                <menuItem title="Fullscreen" id="HXA-jg-u6S"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                    <connections>
+                                        <binding destination="-2" name="selectedIndex" keyPath="self.slideshowConfig.viewType" id="PoW-0c-ki8"/>
+                                    </connections>
+                                </popUpButton>
+                                <button id="tBP-FE-qHd">
+                                    <rect key="frame" x="169" y="83" width="299" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Show Slideshow at the other screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="tMo-yO-K0E">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.slideshowConfig.showOnTheOtherScreen" id="VLw-kz-Qrf"/>
+                                    </connections>
+                                </button>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cH1-Lr-tcv">
+                                    <rect key="frame" x="45" y="158" width="120" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Transition effect:" id="GKm-Dl-qqE">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <popUpButton verticalHuggingPriority="750" id="m8z-ZG-6MU">
+                                    <rect key="frame" x="169" y="152" width="231" height="26"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Reveal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="BHJ-bX-saB" id="IYQ-4F-yrS">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="menu"/>
+                                        <menu key="menu" id="YHj-Jb-s8n">
+                                            <items>
+                                                <menuItem title="None" id="53w-3I-ZAi"/>
+                                                <menuItem title="Fade" id="Al6-4z-mTP"/>
+                                                <menuItem title="Move in" id="OHD-Qt-VOx"/>
+                                                <menuItem title="Push" id="0ap-fC-tpV">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
+                                                <menuItem title="Reveal" state="on" id="BHJ-bX-saB">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                    <connections>
+                                        <binding destination="-2" name="selectedIndex" keyPath="self.slideshowConfig.transition" id="iEc-tB-ir2"/>
+                                    </connections>
+                                </popUpButton>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="cfH-Ky-pAh">
+                                    <rect key="frame" x="189" y="14" width="279" height="65"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="4x1-rL-4nl">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <string key="title">When "Show Slideshow at the other scrren" option is enabled and multi display are working, Slideshow will display on the other screen of document window with fullscreen behavior.</string>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                 </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="i1a-EQ-wew" secondAttribute="bottom" id="ERg-JF-SvJ"/>
-                    <constraint firstItem="i1a-EQ-wew" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="L2f-Sb-bHK"/>
-                    <constraint firstItem="i1a-EQ-wew" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="OoO-8C-KQ1"/>
-                    <constraint firstAttribute="trailing" secondItem="i1a-EQ-wew" secondAttribute="trailing" id="x1T-oo-r2E"/>
-                </constraints>
             </view>
+            <point key="canvasLocation" x="360" y="398.5"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="taV-ah-YxB"/>
+        <menu id="Ip6-g5-Jt7">
+            <items>
+                <menuItem title="Item 1" id="AqW-4h-fPb">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Item 2" id="SJq-X9-p9k">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Item 3" id="cGR-ns-cOO">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
 </document>

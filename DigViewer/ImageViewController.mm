@@ -158,4 +158,10 @@
     }
 }
 
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    [imageView moveToDirection:direction withTransition:transition];
+}
+
 @end

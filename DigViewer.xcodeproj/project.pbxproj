@@ -71,6 +71,10 @@
 		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
 		7B553BC31AE1F83600618590 /* Lens.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BC21AE1F83600618590 /* Lens.m */; };
 		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
+		7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */; };
+		7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */; };
+		7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */; };
+		7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F11B36D83500B8D124 /* EffectByCATransition.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
@@ -78,6 +82,8 @@
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
+		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
+		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
 		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */; };
 		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
@@ -251,6 +257,14 @@
 		7B553BC21AE1F83600618590 /* Lens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lens.m; sourceTree = "<group>"; };
 		7B553BF61AE211DF00618590 /* LensLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensLibrary.h; sourceTree = "<group>"; };
 		7B553BF71AE211DF00618590 /* LensLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensLibrary.m; sourceTree = "<group>"; };
+		7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationBaseViewController.h; sourceTree = "<group>"; };
+		7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationBaseViewController.m; sourceTree = "<group>"; };
+		7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationBaseView.xib; sourceTree = "<group>"; };
+		7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionEffect.h; sourceTree = "<group>"; };
+		7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionEffect.m; sourceTree = "<group>"; };
+		7B6717EF1B36D77700B8D124 /* TransitionEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionEffects.h; sourceTree = "<group>"; };
+		7B6717F01B36D83500B8D124 /* EffectByCATransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByCATransition.h; sourceTree = "<group>"; };
+		7B6717F11B36D83500B8D124 /* EffectByCATransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByCATransition.m; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
@@ -264,6 +278,9 @@
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
+		7B6D83611B306301004A2426 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SlideshowPreferences.strings; sourceTree = "<group>"; };
+		7B6D83651B32F6DA004A2426 /* SlideshowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowController.h; sourceTree = "<group>"; };
+		7B6D83661B32F6DA004A2426 /* SlideshowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowController.m; sourceTree = "<group>"; };
 		7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFrameLayer.h; sourceTree = "<group>"; };
 		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageFrameLayer.mm; sourceTree = "<group>"; };
 		7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
@@ -408,7 +425,7 @@
 				7BF678B31699106C00FE39B4 /* Utilities */,
 				7B3920531696F50B00E139D0 /* Resources */,
 				7B39203A1696CA1800E139D0 /* Supporting Files */,
-				7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */,
+				7BB4E5EF1AD924DB0076630A /* Undocumented Features */,
 				7BF27647191BB2370022E89D /* For Testing */,
 				7B5340551703F294008AEDB6 /* Disk Image Resources */,
 			);
@@ -533,37 +550,21 @@
 			name = "Lens Library";
 			sourceTree = "<group>";
 		};
-		7B6FEED71B1093BA0077AC29 /* Image view */ = {
+		7B6717EB1B36CF1D00B8D124 /* Transition Effects */ = {
 			isa = PBXGroup;
 			children = (
-				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
-				7B0DBF0316A84335000365F4 /* ClickableImageView.mm */,
-				7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */,
-				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */,
-				7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */,
-				7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */,
-				7B1AB0181B23E36E00ED004C /* ImageRenderer.h */,
-				7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */,
-				7B1AB01B1B240E7800ED004C /* RelationalImageAccessor.h */,
-				7B1AB01C1B240E7800ED004C /* RelationalImageAccessor.m */,
+				7B6717EF1B36D77700B8D124 /* TransitionEffects.h */,
+				7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */,
+				7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */,
+				7B6717F01B36D83500B8D124 /* EffectByCATransition.h */,
+				7B6717F11B36D83500B8D124 /* EffectByCATransition.m */,
 			);
-			name = "Image view";
+			name = "Transition Effects";
 			sourceTree = "<group>";
 		};
-		7BB4E5EF1AD924DB0076630A /* UndocumentedFeatures */ = {
+		7B6D83631B32F1D6004A2426 /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
-				7BB4E5F01AD9252C0076630A /* NSPreferences.h */,
-				7BB4E5F11AD9252C0076630A /* NSPreferencesModule.h */,
-			);
-			name = UndocumentedFeatures;
-			sourceTree = "<group>";
-		};
-		7BB4E5F21AD936B70076630A /* Each Application */ = {
-			isa = PBXGroup;
-			children = (
-				7BB4E60F1AD979C00076630A /* AppDelegate.h */,
-				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
 				7BB4E5FE1AD948250076630A /* AppPreferences.h */,
 				7BB4E5FF1AD948250076630A /* AppPreferences.m */,
 				7BB4E5F41AD9431A0076630A /* GeneralPreferences.h */,
@@ -585,6 +586,53 @@
 				7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */,
 				7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */,
 			);
+			name = "Preferences Window";
+			sourceTree = "<group>";
+		};
+		7B6D83641B32F235004A2426 /* Slideshow */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D83651B32F6DA004A2426 /* SlideshowController.h */,
+				7B6D83661B32F6DA004A2426 /* SlideshowController.m */,
+				7B6717EB1B36CF1D00B8D124 /* Transition Effects */,
+			);
+			name = Slideshow;
+			sourceTree = "<group>";
+		};
+		7B6FEED71B1093BA0077AC29 /* Image view */ = {
+			isa = PBXGroup;
+			children = (
+				7B0DBF0216A84335000365F4 /* ClickableImageView.h */,
+				7B0DBF0316A84335000365F4 /* ClickableImageView.mm */,
+				7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */,
+				7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */,
+				7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */,
+				7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */,
+				7B1AB0181B23E36E00ED004C /* ImageRenderer.h */,
+				7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */,
+				7B1AB01B1B240E7800ED004C /* RelationalImageAccessor.h */,
+				7B1AB01C1B240E7800ED004C /* RelationalImageAccessor.m */,
+			);
+			name = "Image view";
+			sourceTree = "<group>";
+		};
+		7BB4E5EF1AD924DB0076630A /* Undocumented Features */ = {
+			isa = PBXGroup;
+			children = (
+				7BB4E5F01AD9252C0076630A /* NSPreferences.h */,
+				7BB4E5F11AD9252C0076630A /* NSPreferencesModule.h */,
+			);
+			name = "Undocumented Features";
+			sourceTree = "<group>";
+		};
+		7BB4E5F21AD936B70076630A /* Each Application */ = {
+			isa = PBXGroup;
+			children = (
+				7BB4E60F1AD979C00076630A /* AppDelegate.h */,
+				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
+				7B6D83631B32F1D6004A2426 /* Preferences Window */,
+				7B6D83641B32F235004A2426 /* Slideshow */,
+			);
 			name = "Each Application";
 			sourceTree = "<group>";
 		};
@@ -601,6 +649,8 @@
 				7B0DBEB116A014B6000365F4 /* MainViewController.m */,
 				7B0DBEC816A0F664000365F4 /* FolderOutlineViewController.h */,
 				7B0DBEC916A0F665000365F4 /* FolderOutlineViewController.m */,
+				7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */,
+				7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */,
 				7B0DBECC16A0F767000365F4 /* ImageViewController.h */,
 				7B0DBECD16A0F767000365F4 /* ImageViewController.mm */,
 				7B0DBEDB16A296DC000365F4 /* ThumbnailViewController.h */,
@@ -648,6 +698,7 @@
 				7B4400761AFDC675006CE7D6 /* ThumbnailPreferences.xib */,
 				7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */,
 				7BE7B6191B1F2787009619E2 /* SlideshowPreferences.xib */,
+				7B6D83601B306301004A2426 /* SlideshowPreferences.strings */,
 				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
 				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
 				7BB4E61E1ADA0C350076630A /* LensPreferences.xib */,
@@ -678,6 +729,7 @@
 				7B0DBEB416A01545000365F4 /* MainView.xib */,
 				7B0DBECF16A0F7A9000365F4 /* FolderOutlineView.xib */,
 				7B4E8E3D16CA5478001C5D09 /* FolderOutlineView.strings */,
+				7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */,
 				7B0DBED216A0F89C000365F4 /* ImageView.xib */,
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
@@ -787,6 +839,7 @@
 			files = (
 				7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */,
 				7BB4E61F1ADA0C3F0076630A /* AdvancedPreferences.xib in Resources */,
+				7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
@@ -820,6 +873,7 @@
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,
+				7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
@@ -868,6 +922,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/ThumbnailPreferences.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/RenderingPreferences.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/RenderingPreferences.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/SlideshowPreferences.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/SlideshowPreferences.xib",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -884,10 +940,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditFileSetSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/ThumbnailPreferences.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/RenderingPreferences.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SlideshowPreferences.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences \\\n         RenderingPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -947,12 +1004,15 @@
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
+				7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */,
 				7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */,
 				7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
+				7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
+				7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
 				7B40A41A1AFCFCE3006ED497 /* SlideshowConfigController.m in Sources */,
@@ -981,6 +1041,7 @@
 				7B1AB01A1B23E36E00ED004C /* ImageRenderer.mm in Sources */,
 				7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
+				7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */,
 				7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1131,6 +1192,14 @@
 				7B697E52169DB8A000A9E247 /* en */,
 			);
 			name = LoadingSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B6D83601B306301004A2426 /* SlideshowPreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B6D83611B306301004A2426 /* ja */,
+			);
+			name = SlideshowPreferences.strings;
 			sourceTree = "<group>";
 		};
 		7BA81BFE1AF73F6F001E40D7 /* EditImageSetSheet.xib */ = {

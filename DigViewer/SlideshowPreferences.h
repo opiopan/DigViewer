@@ -7,7 +7,10 @@
 //
 
 #import "NSPreferencesModule.h"
+#import "SlideshowConfigController.h"
 
 @interface SlideshowPreferences : NSPreferencesModule
+
+@property (readonly) SlideshowConfigController* slideshowConfig;
 
 @end

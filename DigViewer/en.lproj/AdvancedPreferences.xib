@@ -15,21 +15,21 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="114" y="469" width="638" height="367"/>
+            <rect key="contentRect" x="114" y="469" width="700" height="301"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="8" width="638" height="367"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="301"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" borderType="none" id="7Zb-tR-hWN">
-                        <rect key="frame" x="-3" y="-4" width="644" height="371"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="-3" y="-4" width="706" height="305"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="644" height="356"/>
+                            <rect key="frame" x="0.0" y="0.0" width="706" height="290"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1Mx-Cr-ajs">
-                                    <rect key="frame" x="46" y="328" width="202" height="17"/>
+                                    <rect key="frame" x="12" y="262" width="202" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Configuration when open:" id="Htp-We-P00">
                                         <font key="font" metaFont="system"/>
@@ -38,7 +38,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" id="BWM-nd-TH8">
-                                    <rect key="frame" x="252" y="323" width="179" height="26"/>
+                                    <rect key="frame" x="218" y="257" width="179" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="h6c-OO-xOE">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -55,7 +55,7 @@
                                     </connections>
                                 </popUpButton>
                                 <button id="TSJ-VX-oZs">
-                                    <rect key="frame" x="252" y="301" width="346" height="18"/>
+                                    <rect key="frame" x="218" y="235" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Fit to window size if image is smaller than window" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wCY-en-coM">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -66,7 +66,7 @@
                                     </connections>
                                 </button>
                                 <button id="h6e-tM-O0N">
-                                    <rect key="frame" x="252" y="281" width="346" height="18"/>
+                                    <rect key="frame" x="218" y="215" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Display navigator" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0lM-WD-sLN">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -77,7 +77,7 @@
                                     </connections>
                                 </button>
                                 <button id="YbN-Ef-kSK">
-                                    <rect key="frame" x="252" y="261" width="346" height="18"/>
+                                    <rect key="frame" x="218" y="195" width="346" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Display inspector" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1om-RW-Ek5">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -88,7 +88,7 @@
                                     </connections>
                                 </button>
                                 <popUpButton verticalHuggingPriority="750" id="ZJ1-fe-ybC">
-                                    <rect key="frame" x="252" y="210" width="310" height="26"/>
+                                    <rect key="frame" x="218" y="144" width="303" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="qyz-8T-lmz">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -106,7 +106,7 @@
                                     </connections>
                                 </popUpButton>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Hmh-yu-0wO">
-                                    <rect key="frame" x="46" y="215" width="202" height="17"/>
+                                    <rect key="frame" x="12" y="149" width="202" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Sort order in folder:" id="h1f-21-ec7">
                                         <font key="font" metaFont="system"/>
@@ -115,7 +115,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <button id="2At-14-rtm">
-                                    <rect key="frame" x="252" y="189" width="309" height="18"/>
+                                    <rect key="frame" x="218" y="123" width="309" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Sort by case-insensitive" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="enz-9p-Age">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -126,7 +126,7 @@
                                     </connections>
                                 </button>
                                 <button id="bso-wE-eo1">
-                                    <rect key="frame" x="252" y="169" width="309" height="18"/>
+                                    <rect key="frame" x="218" y="103" width="309" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Sort as numerical value" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="tSx-v4-SJc">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -137,20 +137,20 @@
                                     </connections>
                                 </button>
                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="5AY-vi-RB7">
-                                    <rect key="frame" x="353" y="23" width="206" height="132"/>
+                                    <rect key="frame" x="526" y="36" width="152" height="132"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <clipView key="contentView" id="pWF-DU-CKc">
-                                        <rect key="frame" x="1" y="17" width="204" height="114"/>
+                                        <rect key="frame" x="1" y="17" width="150" height="114"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="020-TE-6aB" id="vey-cC-7n6">
-                                                <rect key="frame" x="0.0" y="0.0" width="204" height="114"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="114"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                 <tableColumns>
-                                                    <tableColumn width="201" minWidth="40" maxWidth="1000" id="gfU-Ec-AFd">
+                                                    <tableColumn width="147" minWidth="40" maxWidth="1000" id="gfU-Ec-AFd">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Example">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -191,7 +191,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="444" y="461.5"/>
+            <point key="canvasLocation" x="444" y="428.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="bpN-y2-uka"/>
         <arrayController objectClassName="ExampleNode" editable="NO" avoidsEmptySelection="NO" id="fhQ-WP-J58" customClass="SortOmittedArrayController">

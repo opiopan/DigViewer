@@ -9,7 +9,7 @@
 #import "DocumentWindowController.h"
 #import "Document.h"
 #import "DocumentConfigController.h"
-#import "SlideshowConfigController.h"
+#import "SlideshowController.h"
 #import "NSViewController+Nested.h"
 #import "MainViewController.h"
 #import "NSView+ViewControllerAssociation.h"
@@ -43,8 +43,7 @@
 @implementation DocumentWindowController{
     MainViewController* mainViewController;
     int                 transitionStateCount;
-    SlideshowConfigController*  slideshowConfig;
-    BOOL                        isInSlideshowMode;
+    SlideshowController*        slideshowController;
     NSInteger                   slideshowCount;
     LoadingSheetController*     loadingSheet;
 }
@@ -58,8 +57,6 @@
     self = [super initWithWindowNibName:@"Document"];
     if (self) {
         transitionStateCount = 0;
-        slideshowConfig = [SlideshowConfigController sharedController];
-        isInSlideshowMode = NO;
         slideshowCount = 0;
     }
     return self;
@@ -109,6 +106,9 @@
 //-----------------------------------------------------------------------------------------
 - (void)windowWillClose:(NSNotification *)notification
 {
+    // スライドショー環境回収
+    [slideshowController cancelSlideshow];
+    
     // Observerを削除
     DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
     [documentConfig removeObserver:self forKeyPath:@"updateCount"];
@@ -338,7 +338,7 @@
 
 - (void) setPresentationViewType:(int)type
 {
-    if (type == typeThumbnailView && isInSlideshowMode){
+    if (slideshowController){
         [self setSlideshowMode:NO];
     }
     mainViewController.presentationViewType = type;
@@ -448,22 +448,50 @@
 //-----------------------------------------------------------------------------------------
 - (void)setSlideshowMode:(BOOL)slideshowMode
 {
-    isInSlideshowMode = slideshowMode;
     slideshowCount++;
-    if (isInSlideshowMode){
-        self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"pause"];
-        self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_END", nil);
-        if (self.presentationViewType != typeImageView){
-            self.presentationViewType = typeImageView;
+    if (slideshowMode){
+        SlideshowController* controller = [SlideshowController newController];
+        if (controller){
+            controller.delegate = self;
+            controller.didEndSelector = @selector(didEndSlideshow);
+            self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"pause"];
+            self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_END", nil);
+            if (self.presentationViewType != typeImageView){
+                self.presentationViewType = typeImageView;
+            }
+            NSScreen* target = [controller targetScreenWithCurrentScreen:[self.window screen]];
+            if (target && self.presentationViewType == typeImageView){
+                self.presentationViewType = typeThumbnailView;
+            }else if (!target && self.presentationViewType != typeImageView){
+                self.presentationViewType = typeImageView;
+            }
+            PathNode* node = _imageArrayController.selectedObjects[0];
+            node = node.imageNode;
+            [self moveToImageNode:node];
+            slideshowController = controller;
+            [slideshowController startSlideshowWithScreen:target
+                                          relationalImage:node
+                                         targetController:mainViewController.imageViewController];
+            [self.document addWindowController:slideshowController];
         }
-        [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
-                   afterDelay:slideshowConfig.interval.doubleValue];
     }else{
-        self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"play"];
-        self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_BEGIN", nil);
+        if (slideshowController){
+            [slideshowController cancelSlideshow];
+        }else{
+            [self didEndSlideshow];
+        }
     }
 }
 
+- (void)didEndSlideshow
+{
+    self.slideshowButtonImage = [[NSBundle mainBundle] imageForResource:@"play"];
+    self.slideshowButtonTooltip = NSLocalizedString(@"SLIDESHOW_TOOLTIP_BEGIN", nil);
+    [self.document removeWindowController:slideshowController];
+    slideshowController = nil;
+}
+
+#if 0
 - (void)proceedSlideshow:(NSNumber*)count
 {
     if (count.integerValue == slideshowCount){
@@ -477,20 +505,31 @@
         }
     }
 }
+#endif
 
 - (void)toggleSlideshowMode:(id)sender
 {
-    [self setSlideshowMode:!isInSlideshowMode];
+    [self setSlideshowMode:!slideshowController];
 }
 
 - (BOOL)validateForToggleSlideshowMode:(NSMenuItem*)menuItem
 {
-    if (isInSlideshowMode){
+    if (slideshowController){
         menuItem.title = NSLocalizedString(@"End Slideshow", nil);
     }else{
         menuItem.title = NSLocalizedString(@"Begin Slideshow", nil);
     }
     return YES;
+}
+
+//-----------------------------------------------------------------------------------------
+// escキー処理
+//-----------------------------------------------------------------------------------------
+- (void)cancelOperation:(id)sender
+{
+    if (slideshowController){
+        [slideshowController cancelSlideshow];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

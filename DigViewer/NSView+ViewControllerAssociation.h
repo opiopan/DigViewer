@@ -11,5 +11,6 @@
 @interface NSView (ViewControllerAssociation)
 
 - (void) associateSubViewWithController:(NSViewController*)controller;
+- (BOOL) isBelongToView:(NSView*)view;
 
 @end

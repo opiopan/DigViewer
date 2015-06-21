@@ -20,4 +20,14 @@
     return [NSColor lightGrayColor];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+- (void)cancelOperation:(id)sender
+{
+    if (self.delegate && _cancelOperationSelector){
+        [self.delegate performSelector:_cancelOperationSelector withObject:sender];
+    }
+}
+#pragma clang diagnostic pop
+
 @end

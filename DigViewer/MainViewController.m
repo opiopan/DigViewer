@@ -13,11 +13,14 @@
 #import "ImageViewController.h"
 #import "ThumbnailViewController.h"
 #import "InspectorViewController.h"
+#import "PresentationBaseViewController.h"
 #import "NSWindow+TracingResponderChain.h"
+#import "FlatSplitView.h"
 
 @implementation MainViewController {
-    __weak NSSplitView*         splitView;
+    __weak FlatSplitView*       splitView;
     NSArray*                    contentViewControllers;
+    NSViewController*           presentationBaseViewController;
     NSViewController*           outlineViewController;
     InspectorViewController*    inspectorViewController;
     InspectorViewController*    inspectorViewControllerSwapping;
@@ -52,13 +55,17 @@
 
 - (void)awakeFromNib
 {
-    splitView = (NSSplitView*)self.view;
+    splitView = (FlatSplitView*)self.view;
+    splitView.delegate = self;
+    splitView.cancelOperationSelector = @selector(cancelOperation:);
     
-    // サブニュー作成
+    // サブビュー作成
     outlineViewController = [[FolderOutlineViewController alloc] init];
     outlineViewController.representedObject = self.representedObject;
     inspectorViewController = [[InspectorViewController alloc] init];
     inspectorViewController.representedObject = self.representedObject;
+    presentationBaseViewController = [PresentationBaseViewController new];
+    presentationBaseViewController.representedObject = self.representedObject;
 
     contentViewControllers = [NSArray arrayWithObjects:[[ImageViewController alloc] init],
                        [[ThumbnailViewController alloc] init], nil];
@@ -119,11 +126,12 @@
     }
     for (int i = 0; i < contentViewControllers.count; i++){
         NSViewController* controller = contentViewControllers[i];
-        if (controller.view.superview){
+        if ([controller.view isBelongToView:self.view]){
             [controller.view removeFromSuperview];
             [controller setIsVisible:NO];
         }
     }
+    [presentationBaseViewController.view removeFromSuperview];
     
     // インスペクタビューのスワップ
     if (inspectorViewControllerSwapping){
@@ -146,10 +154,11 @@
         currentViewIndex++;
         [outlineViewController setIsVisible:YES];
     }
-    [representedViewController setIsVisible:YES];
-    [splitView addSubview:representedViewController.view];
+    [splitView addSubview:presentationBaseViewController.view];
     [splitView setHoldingPriority: NSLayoutPriorityFittingSizeCompression forSubviewAtIndex:currentViewIndex];
     currentViewIndex++;
+    [representedViewController setIsVisible:YES];
+    [presentationBaseViewController.view associateSubViewWithController:representedViewController];
     if (!self.isCollapsedInspectorView){
         [splitView addSubview:inspectorViewController.view];
         [splitView setHoldingPriority:NSLayoutPriorityDefaultLow forSubviewAtIndex:currentViewIndex];
@@ -226,6 +235,11 @@
     return contentViewControllers[presentationViewType];
 }
 
+- (NSViewController *)imageViewController
+{
+    return contentViewControllers[typeImageView];
+}
+
 //-----------------------------------------------------------------------------------------
 // アウトラインビューの折り畳み属性
 //-----------------------------------------------------------------------------------------
@@ -273,5 +287,12 @@
     [self arrangeSubview];
 }
 
+//-----------------------------------------------------------------------------------------
+// escボタン処理
+//-----------------------------------------------------------------------------------------
+- (void)cancelOperation:(id)sender
+{
+    [self.view.window.windowController performSelector:@selector(cancelOperation:) withObject:sender];
+}
 
 @end

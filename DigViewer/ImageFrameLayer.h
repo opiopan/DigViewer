@@ -9,9 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RelationalImageAccessor.h"
 #import "ImageLayer.h"
-
-enum _ImageSwipeDirection {ImageSwipeNext, ImageSwipePrevious};
-typedef enum _ImageSwipeDirection ImageSwipeDirection;
+#import "TransitionEffect.h"
 
 @interface ImageFrameLayer : CALayer
 
@@ -33,7 +31,9 @@ typedef enum _ImageSwipeDirection ImageSwipeDirection;
 - (CGPoint)startPanning;
 - (void)fixOffsetWithVelocity:(CGPoint)velocity;
 
-- (void)startSwipeForDirection:(ImageSwipeDirection)direction;
+- (void)startSwipeForDirection:(RelationalImageDirection)direction;
 - (void)fixSwipeOffsetWithVelocity:(CGFloat)velocity;
+
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect;
 
 @end

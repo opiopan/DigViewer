@@ -49,6 +49,8 @@ typedef enum _SwipeInertiaState SwipeInertiaState;
     NSMutableArray* _imageCache;
     dispatch_queue_t _dispatchQue;
     
+    ECGImageRef _pendingImage;
+    
     ImageCacheEntry* __weak _currentEntry;
     ImageCacheEntry* __weak _nextEntry;
     ImageCacheEntry* __weak _previousEntry;
@@ -59,7 +61,7 @@ typedef enum _SwipeInertiaState SwipeInertiaState;
     
     ImageLayer* __weak _swipingLayer;
     ImageLayer* __weak _swipeAnotherLayer;
-    ImageSwipeDirection _swipeDirection;
+    RelationalImageDirection _swipeDirection;
     CGFloat _swipeOffsetBias;
     CGFloat _swipeLeftLimit;
     CGFloat _swipeRightLimit;
@@ -100,8 +102,28 @@ static const NSInteger CACHE_SIZE = 6;
         _previousLayer.zPosition = 0;
         [self addSublayer:_previousLayer];
         _relationalImageAccessor = [RelationalImageAccessor new];
+        
+        //_pendingImage = [self pendingImage];
     }
     return self;
+}
+
+- (CGImageRef)pendingImage
+{
+    CGRect frame = [NSScreen mainScreen].frame;
+    CGFloat size = MIN(frame.size.width, frame.size.height);
+    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
+    ECGContextRef context(CGBitmapContextCreate(NULL, size, size, 8, 0,colorSpace, kCGImageAlphaNoneSkipLast));
+    
+    CGFloat lineWidth = size / 200;
+    CGFloat lineDash = size / 70;
+    CGContextSetRGBStrokeColor(context, 40, 40, 40, 255);
+    CGContextSetLineWidth(context, lineWidth);
+    CGFloat dashAttrs[]={lineDash, lineDash};
+    CGContextSetLineDash(context, 0, dashAttrs, sizeof(dashAttrs)/sizeof(*dashAttrs));
+    CGContextStrokeRect(context, CGRectMake(size / 20, size / 20, size - size / 10, size - size / 10));
+
+    return CGBitmapContextCreateImage(context);
 }
 
 //-----------------------------------------------------------------------------------------
@@ -112,69 +134,67 @@ static const NSInteger CACHE_SIZE = 6;
     [_timerForSwipe invalidate];
     _swipeInertiaState = SwipeInertiaEnd;
 
-    /*
-    if (_relationalImage == relationalImage){
-        return
-    }
-     */
-    _relationalImage = relationalImage;
-    
-    // キャッシュヒットテスト & LRU処理
-    NSInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
-        return (BOOL)(((ImageCacheEntry*)obj).imageId == relationalImage);
-    }];
-    ImageCacheEntry* current = (index == NSNotFound) ? _imageCache.firstObject : _imageCache[index];
-    [_imageCache removeObject:current];
-    [_imageCache addObject:current];
-    
-    // ラスタライズ中であれば完了まで待つ
-    if (current.state == CacheProcessing){
-        dispatch_semaphore_wait(current.semaphore, DISPATCH_TIME_FOREVER);
-    }
-
-    // レイヤーの役割交換 or ラスタライズ
-    ImageLayer* oldLayer = nil;
-    if (current == _nextEntry){
-        oldLayer = _currentLayer;
-        _currentLayer = _nextLayer;
-        _nextLayer = oldLayer;
-        _nextEntry = _currentEntry;
-        _nextEntry.state = CacheNext;
-        [self applyAttributesForLayer:_currentLayer];
-    }else if (current == _previousEntry){
-        oldLayer = _currentLayer;
-        _currentLayer = _previousLayer;
-        _previousLayer = oldLayer;
-        _previousEntry = _currentEntry;
-        _previousEntry.state = CachePrevious;
-        [self applyAttributesForLayer:_currentLayer];
-    }else{
-        if (index == NSNotFound){
-            current.imageId = _relationalImage;
-            if (_relationalImage){
-                ImageRenderer* renderer;
-                renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
-                current.image =  renderer.image;
-                current.rotation = renderer.rotation;
-            }else{
-                current.image = nil;
-                current.rotation = 1;
-            }
+    if (_relationalImage != relationalImage){
+        _relationalImage = relationalImage;
+        
+        // キャッシュヒットテスト & LRU処理
+        NSInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
+            return (BOOL)(((ImageCacheEntry*)obj).imageId == relationalImage);
+        }];
+        ImageCacheEntry* current = (index == NSNotFound) ? _imageCache.firstObject : _imageCache[index];
+        [_imageCache removeObject:current];
+        [_imageCache addObject:current];
+        
+        // ラスタライズ中であれば完了まで待つ
+        if (current.state == CacheProcessing){
+            dispatch_semaphore_wait(current.semaphore, DISPATCH_TIME_FOREVER);
         }
-        [_currentLayer setImage:current.image withRotation:current.rotation];
+        
+        // レイヤーの役割交換 or ラスタライズ
+        ImageLayer* oldLayer = nil;
+        if (current == _nextEntry){
+            oldLayer = _currentLayer;
+            _currentLayer = _nextLayer;
+            _nextLayer = oldLayer;
+            _nextEntry = _currentEntry;
+            _nextEntry.state = CacheNext;
+            [self applyAttributesForLayer:_currentLayer];
+        }else if (current == _previousEntry){
+            oldLayer = _currentLayer;
+            _currentLayer = _previousLayer;
+            _previousLayer = oldLayer;
+            _previousEntry = _currentEntry;
+            _previousEntry.state = CachePrevious;
+            [self applyAttributesForLayer:_currentLayer];
+        }else{
+            if (index == NSNotFound){
+                current.imageId = _relationalImage;
+                if (_relationalImage){
+                    ImageRenderer* renderer;
+                    renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
+                    current.image =  renderer.image;
+                    current.rotation = renderer.rotation;
+                }else{
+                    current.image = nil;
+                    current.rotation = 1;
+                }
+            }
+            [_currentLayer setImage:current.image withRotation:current.rotation];
+        }
+        current.state = CacheCurrent;
+        _currentEntry = current;
+        
+        // 表示切り替え
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+        _currentLayer.zPosition = 1;
+        _currentLayer.hidden = NO;
+        _nextLayer.zPosition = 0;
+        _nextLayer.hidden = YES;
+        _previousLayer.zPosition = 0;
+        _previousLayer.hidden = YES;
+        [CATransaction commit];
     }
-    current.state = CacheCurrent;
-    _currentEntry = current;
-    
-    // 表示切り替え
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    if (oldLayer){
-        oldLayer.zPosition = 0;
-        oldLayer.frame = CGRectZero;
-    }
-    _currentLayer.zPosition = 1;
-    [CATransaction commit];
     
     // 投機的キャッシング
     [self performSelector:@selector(fillCacheSpeculatively) withObject:nil afterDelay:0];
@@ -216,7 +236,7 @@ static const NSInteger CACHE_SIZE = 6;
             next.semaphore = dispatch_semaphore_create(0);
             
             ImageLayer* layer = _nextLayer;
-            [layer setImage:nil withRotation:1];
+            [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
             
             dispatch_async(_dispatchQue, ^(){
                 if (index == NSNotFound){
@@ -263,7 +283,7 @@ static const NSInteger CACHE_SIZE = 6;
             previous.semaphore = dispatch_semaphore_create(0);
             
             ImageLayer* layer = _previousLayer;
-            [layer setImage:nil withRotation:1];
+            [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
             
             dispatch_async(_dispatchQue, ^(){
                 if (index == NSNotFound){
@@ -324,16 +344,16 @@ static const NSInteger CACHE_SIZE = 6;
 //-----------------------------------------------------------------------------------------
 static const CGFloat SWIPE_FRICTION = 0.9;
 static const CGFloat SWIPE_POSITION_THRESHOLD = 1.0/3.0;
-static const CGFloat SWIPE_VELOCITY_THRESHOLD = 0.1;
+static const CGFloat SWIPE_VELOCITY_THRESHOLD = 1;
 static const CGFloat SWIPE_INRANGE_VELOCITY = 3;
 static const CGFloat SWIPE_OUTRANGE_SPRING = 1000;
 static const CGFloat SWIPE_OUTRANGE_VISCOSITY = 120;
 static const CGFloat SWIPE_OUTRANGE_STOP = 1;
 
-- (void)startSwipeForDirection:(ImageSwipeDirection)direction
+- (void)startSwipeForDirection:(RelationalImageDirection)direction
 {
     _swipeDirection = direction;
-    if (_swipeDirection == ImageSwipeNext){
+    if (_swipeDirection == RelationalImageNext){
         _swipingLayer = _nextEntry ? _nextLayer : _currentLayer;
         _swipeAnotherLayer = _nextEntry ? _currentLayer : nil;
         _swipeOffsetBias = _nextEntry ? self.frame.size.width : 0;
@@ -355,10 +375,12 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
         CGRect frame = self.frame;
         frame.origin.x = _swipeOffsetBias;
         _swipingLayer.frame = frame;
+        _swipingLayer.hidden = NO;
     }
     if (_swipeAnotherLayer){
         _swipeAnotherLayer.zPosition = 0.5;
         _swipeAnotherLayer.frame = self.frame;
+        _swipeAnotherLayer.hidden = NO;
     }
     [CATransaction commit];
 }
@@ -386,11 +408,11 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
     if (_swipeOffset != 0){
         if (_swipeAnotherLayer){
             _swipeInertiaState = SwipeInertiaInrange;
-            CGFloat direction = _swipeDirection == ImageSwipeNext ? -1.0 : 1.0;
+            CGFloat direction = _swipeDirection == RelationalImageNext ? -1.0 : 1.0;
             _swipeInertiaTerminalPosition = self.frame.size.width * direction;
             _swipeWillSucceed = YES;
             if (velocity * direction < 0 ||
-                (velocity * direction < SWIPE_VELOCITY_THRESHOLD && _swipeOffset < SWIPE_POSITION_THRESHOLD)){
+                (velocity * direction < SWIPE_VELOCITY_THRESHOLD && fabs(_swipeOffset) < SWIPE_POSITION_THRESHOLD)){
                 direction *= -1;
                 _swipeWillSucceed = NO;
                 _swipeInertiaTerminalPosition = 0;
@@ -435,8 +457,8 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
         _swipeInertiaVelocity += (-SWIPE_OUTRANGE_SPRING * position - _swipeInertiaVelocity * SWIPE_OUTRANGE_VISCOSITY) * interval;
         position += _swipeInertiaVelocity * interval;
         if (fabs(position) < SWIPE_OUTRANGE_STOP ||
-            (_swipeDirection == ImageSwipeNext && position > 0) ||
-            (_swipeDirection == ImageSwipePrevious && position < 0)){
+            (_swipeDirection == RelationalImageNext && position > 0) ||
+            (_swipeDirection == RelationalImagePrevious && position < 0)){
             _swipeInertiaState = SwipeInertiaEnd;
             position = 0;
         }
@@ -461,7 +483,8 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
                 [CATransaction begin];
                 [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
                 target.zPosition = 0;
-                target.frame = CGRectZero;
+                //target.frame = CGRectZero;
+                target.hidden = YES;
                 [CATransaction commit];
             }
         }
@@ -471,6 +494,47 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
 - (BOOL)isInSwipeInertiaMode
 {
     return _swipeInertiaState != SwipeInertiaEnd;
+}
+
+//-----------------------------------------------------------------------------------------
+// トランジション処理
+//-----------------------------------------------------------------------------------------
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect
+{
+    _swipeDirection = direction;
+    ImageCacheEntry* targetEntry = direction == RelationalImageNext ? _nextEntry : _previousEntry;
+    if (!targetEntry){
+        return;
+    }
+    if (targetEntry.state == CacheProcessing){
+        dispatch_semaphore_wait(targetEntry.semaphore, DISPATCH_TIME_FOREVER);
+    }
+
+    ImageLayer* target = direction == RelationalImageNext ? _nextLayer : _previousLayer;
+    id targetImage = direction == RelationalImageNext ? _nextEntry.image : _previousEntry.image;
+
+    super.backgroundColor = _imageBackgroundColor;
+    [self applyAttributesForLayer:target];
+    
+    effect.delegate = self;
+    effect.didEndSelector = @selector(didEndTransition);
+    effect.fromLayer = _currentLayer;
+    effect.fromImage = _currentEntry.image;
+    effect.toLayer = target;
+    effect.toImage = targetImage;
+    
+    [effect performTransition];
+}
+
+- (void)didEndTransition
+{
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    super.backgroundColor = [NSColor whiteColor].CGColor;
+    [CATransaction commit];
+    if (self.delegate && _didEndSwipeSelector){
+        [self.delegate performSelector:_didEndSwipeSelector withObject:@(_swipeDirection) afterDelay:0];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

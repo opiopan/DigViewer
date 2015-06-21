@@ -1,0 +1,44 @@
+
+/* Class = "NSTextFieldCell"; title = "sec"; ObjectID = "31K-zp-WLo"; */
+"31K-zp-WLo.title" = "秒";
+
+/* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "HXA-jg-u6S"; */
+"HXA-jg-u6S.title" = "フルスクリーン";
+
+/* Class = "NSTextFieldCell"; title = "Slideshow in:"; ObjectID = "QIj-90-MHf"; */
+"QIj-90-MHf.title" = "表示方式:";
+
+/* Class = "NSTextFieldCell"; title = "Interval:"; ObjectID = "hYh-CX-zIp"; */
+"hYh-CX-zIp.title" = "スライドショー間隔:";
+
+/* Class = "NSMenuItem"; title = "Main window"; ObjectID = "kPd-ae-GXQ"; */
+"kPd-ae-GXQ.title" = "メインウインドウ内";
+
+/* Class = "NSButtonCell"; title = "Show Slideshow at the other screen"; Object ID = "tMo-yO-K0E"; */
+"tMo-yO-K0E.title" = "別ディスプレー上でスライドショーを表示する";
+
+/* Class = "NSTextFieldCell"; title = ""; */
+"4x1-rL-4nl.title" = "マルチディスプレー環境で「別ディスプレー上でスライドショーを表示する」オプションを有効にした場合は、ドキュメントウィンドウとは別のディスプレーにフルスクリーン状態のスライドショーを表示します。";
+
+/* Class = "NSTextFieldCell"; title = "Transition:"; ObjectID = "GKm-Dl-qqE"; */
+"GKm-Dl-qqE.title" = "切替えエフェクト:";
+
+
+/*------------------------------------------------------------------------
+ * トランシジョン バラエティ
+ *------------------------------------------------------------------------/
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "53w-3I-ZAi"; */
+"53w-3I-ZAi.title" = "なし";
+
+/* Class = "NSMenuItem"; title = "Fade"; ObjectID = "Al6-4z-mTP"; */
+"Al6-4z-mTP.title" = "フェード";
+
+/* Class = "NSMenuItem"; title = "Move in"; ObjectID = "OHD-Qt-VOx"; */
+"OHD-Qt-VOx.title" = "ムーブイン";
+
+/* Class = "NSMenuItem"; title = "Push"; ObjectID = "0ap-fC-tpV"; */
+"0ap-fC-tpV.title" = "押し出し";
+
+/* Class = "NSMenuItem"; title = "Reveal"; ObjectID = "BHJ-bX-saB"; */
+"BHJ-bX-saB.title" = "スライド";

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+enum _RelationalImageDirection {RelationalImageNext, RelationalImagePrevious};
+typedef enum _RelationalImageDirection RelationalImageDirection;
+
 @interface RelationalImageAccessor : NSObject
 
 @property (nonatomic) SEL imagePathGetter;

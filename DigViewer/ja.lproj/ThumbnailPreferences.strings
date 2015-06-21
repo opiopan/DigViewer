@@ -13,14 +13,17 @@
 /* Class = "NSTextFieldCell"; title = "Opacity"; ObjectID = "dxK-Ap-6Y7"; */
 "dxK-Ap-6Y7.title" = "不透明度:";
 
+/* Class = "NSTextFieldCell"; title = "Sample:"; ObjectID = "yTS-25-wx6"; */
+"yTS-25-wx6.title" = "サンプル画像:";
+
 /* Class = "NSMenuItem"; title = "Sample: Vertical shot"; ObjectID = "TsH-F7-OBX"; */
-"TsH-F7-OBX.title" = "サンプル画像: 縦長";
+"TsH-F7-OBX.title" = "縦長";
 
 /* Class = "NSMenuItem"; title = "Sample: Horizontal shot"; ObjectID = "aDG-R9-OfH"; */
-"aDG-R9-OfH.title" = "サンプル画像: 横長";
+"aDG-R9-OfH.title" = "横長";
 
 /* Class = "NSMenuItem"; title = "Sample: Square image"; ObjectID = "q5I-nP-SFQ"; */
-"q5I-nP-SFQ.title" = "サンプル画像: 正方形";
+"q5I-nP-SFQ.title" = "正方形";
 
 /* Class = "NSMenuItem"; title = "Display only image"; ObjectID = "DbT-Dx-Znd"; */
 "DbT-Dx-Znd.title" = "画像のみ表示";

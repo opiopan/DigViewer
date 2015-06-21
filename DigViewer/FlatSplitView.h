@@ -10,4 +10,6 @@
 
 @interface FlatSplitView : NSSplitView
 
+@property (assign) SEL cancelOperationSelector;
+
 @end

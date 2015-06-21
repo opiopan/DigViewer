@@ -18,4 +18,14 @@
     [self addSubview:subView];
 }
 
+- (BOOL) isBelongToView:(NSView*)view
+{
+    for (NSView* current = self; current; current = current.superview){
+        if (current.superview == view){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

@@ -105,9 +105,11 @@ enum PanningMode{
         [_frameLayer setNeedsDisplay];
         [self setLayer:_frameLayer];
         [self setWantsLayer:YES];
+        self.layerUsesCoreImageFilters = YES;
     }else{
         [self setLayer:nil];
         [self setWantsLayer:NO];
+        self.layerUsesCoreImageFilters = NO;
         _frameLayer = nil;
     }
     [self display];
@@ -292,10 +294,10 @@ static const CGFloat SwipeGestureScale = 2.5;
             int borderCondition = _frameLayer.borderCondition;
             if (deltaX < 0 && fabs(deltaX) > fabs(deltaY) && borderCondition & ImageLayerBorderRight){
                 _panningMode = PanningSwipe;
-                [_frameLayer startSwipeForDirection:ImageSwipeNext];
+                [_frameLayer startSwipeForDirection:RelationalImageNext];
             }else if (deltaX > 0 && fabs(deltaX) > fabs(deltaY) && borderCondition & ImageLayerBorderLeft){
                 _panningMode = PanningSwipe;
-                [_frameLayer startSwipeForDirection:ImageSwipePrevious];
+                [_frameLayer startSwipeForDirection:RelationalImagePrevious];
             }
         }
 
@@ -337,6 +339,16 @@ static const CGFloat SwipeGestureScale = 2.5;
 }
 
 //-----------------------------------------------------------------------------------------
+// 次/前画像へのトランジションエフェクト実行
+//-----------------------------------------------------------------------------------------
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition
+{
+    if (_isDrawingByLayer){
+        [_frameLayer moveToDirection:direction withTransition:transition];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // スワイプによる画像切り替え通知
 //-----------------------------------------------------------------------------------------
 #pragma clang diagnostic push
@@ -345,7 +357,7 @@ static const CGFloat SwipeGestureScale = 2.5;
 - (void)didEndSwipeWithDirection:(NSNumber*)direction
 {
     if (_delegate && _notifySwipeSelector){
-        [_delegate performSelector:_notifySwipeSelector withObject:@(direction.intValue == ImageSwipeNext)];
+        [_delegate performSelector:_notifySwipeSelector withObject:@(direction.intValue == RelationalImageNext)];
     }
 }
 #pragma clang diagnostic pop

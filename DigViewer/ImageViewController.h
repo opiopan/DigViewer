@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RelationalImageAccessor.h"
 
 @interface ImageViewController : NSViewController
 
 @property (weak) NSArrayController* IBOutlet imageArrayController;
 @property (nonatomic) CGFloat zoomRatio;
+
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "PreferencesDefaultsController.h"
 #import "ImageViewConfigController.h"
+#import "SlideshowConfigController.h"
 
 @implementation PreferencesDefaultsController
 
@@ -30,6 +31,9 @@
                      @"slideshowInterval":            @5,
                      @"slideshowIntervalMin":         @0.5,
                      @"slideshowIntervalDef":         @5,
+                     @"slideshowTransition":          @(SlideshowTransitionFade),
+                     @"slideshowViewType":            @(SlideshowWindow),
+                     @"slideshowShowOnTheOtherScreen":@YES,
                      @"mapFovColor":                  redData,
                      @"mapArrowColor":                redData,
                      @"mapFovGrade":                  @30,

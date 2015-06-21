@@ -36,6 +36,9 @@
         _controller = [NSUserDefaultsController sharedUserDefaultsController];
         _updateCount = 0;
         _interval = [_controller.values valueForKey:@"slideshowInterval"];
+        _transition = [[_controller.values valueForKey:@"slideshowTransition"] intValue];
+        _viewType = [[_controller.values valueForKey:@"slideshowViewType"] intValue];
+        _showOnTheOtherScreen = [[_controller.values valueForKey:@"slideshowShowOnTheOtherScreen"] boolValue];
     }
     return self;
 }
@@ -50,6 +53,27 @@
     if (!_interval){
         _interval = [_controller.values valueForKey:@"slideshowInterval"];
     }
+    _updateCount++;
+}
+
+- (void)setTransition:(SlideshowTransition)transition
+{
+    _transition = transition;
+    [_controller.values setValue:@(_transition) forKey:@"slideshowTransition"];
+    _updateCount++;
+}
+
+- (void)setViewType:(SlideshowViewType)viewType
+{
+    _viewType = viewType;
+    [_controller.values setValue:@(_viewType) forKey:@"slideshowViewType"];
+    _updateCount++;
+}
+
+- (void)setShowOnTheOtherScreen:(BOOL)showOnTheOtherScreen
+{
+    _showOnTheOtherScreen = showOnTheOtherScreen;
+    [_controller.values setValue:@(_showOnTheOtherScreen) forKey:@"slideshowShowOnTheOtherScreen"];
     _updateCount++;
 }
 

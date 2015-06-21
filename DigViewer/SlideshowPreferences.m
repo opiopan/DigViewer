@@ -17,6 +17,7 @@
 {
     self = [super init];
     if (self){
+        _slideshowConfig = [SlideshowConfigController sharedController];
     }
     return self;
 }
