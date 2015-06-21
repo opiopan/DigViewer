@@ -121,7 +121,7 @@ static SlideshowController* _currentController;
     
     id nextImage = [_imageAccessor nextObjectOfObject:_relationalImage];
     if (nextImage){
-        TransitionEffect* effect = [self transitionEffect];
+        TransitionEffect* effect = [_config transitionEffect];
         [_imageViewController moveToDirection:RelationalImageNext withTransition:effect];
         _relationalImage = nextImage;
         double interval = _config.interval.doubleValue + effect.dulation;
@@ -134,22 +134,6 @@ static SlideshowController* _currentController;
     }else{
         [self cancelSlideshow];
     }
-}
-
-//-----------------------------------------------------------------------------------------
-// 遷移効果オブジェクトファクトリ
-//-----------------------------------------------------------------------------------------
-- (TransitionEffect*)transitionEffect
-{
-    static NSArray* effects;
-    if (!effects){
-        effects = @[[TransitionEffect new],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionFade],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionMoveIn],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionPush],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionReveal]];
-    }
-    return effects[_config.transition];
 }
 
 //-----------------------------------------------------------------------------------------

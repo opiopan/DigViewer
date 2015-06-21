@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TransitionEffect.h"
 
 enum _SlideshowTransition{
     SlideshowTransitionNone,
@@ -27,6 +28,7 @@ typedef enum _SlideshowViewType SlideshowViewType;
 
 @property (strong, nonatomic) NSNumber* interval;
 @property (assign, nonatomic) SlideshowTransition transition;
+@property (readonly, nonatomic) TransitionEffect* transitionEffect;
 @property (assign, nonatomic) SlideshowViewType viewType;
 @property (assign, nonatomic) BOOL showOnTheOtherScreen;
 

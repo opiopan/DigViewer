@@ -7,6 +7,7 @@
 //
 
 #import "SlideshowConfigController.h"
+#import "TransitionEffects.h"
 
 @implementation SlideshowConfigController{
     NSUserDefaultsController* _controller;
@@ -75,6 +76,22 @@
     _showOnTheOtherScreen = showOnTheOtherScreen;
     [_controller.values setValue:@(_showOnTheOtherScreen) forKey:@"slideshowShowOnTheOtherScreen"];
     _updateCount++;
+}
+
+//-----------------------------------------------------------------------------------------
+// 遷移効果オブジェクトファクトリ
+//-----------------------------------------------------------------------------------------
+- (TransitionEffect*)transitionEffect
+{
+    static NSArray* effects;
+    if (!effects){
+        effects = @[[TransitionEffect new],
+                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionFade],
+                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionMoveIn],
+                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionPush],
+                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionReveal]];
+    }
+    return effects[_transition];
 }
 
 @end
