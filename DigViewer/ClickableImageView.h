@@ -23,6 +23,7 @@
 @property (nonatomic) ImageViewFilterType magnificationFilter;
 @property (nonatomic) ImageViewFilterType minificationFilter;
 @property (nonatomic) CGFloat zoomRatio;
+@property (nonatomic) BOOL enableGesture;
 
 - (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition;
 

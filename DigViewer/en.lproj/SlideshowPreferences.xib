@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SlideshowPreferences">
             <connections>
                 <outlet property="_preferencesView" destination="i1a-EQ-wew" id="IjZ-G7-mbn"/>
+                <outlet property="focusingField" destination="QLl-oJ-C2e" id="Rj3-Z8-am0"/>
+                <outlet property="imageView" destination="7UC-XM-S7M" id="3te-mW-FzS"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -34,6 +36,13 @@
                                     <view key="contentView">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7UC-XM-S7M" customClass="ClickableImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oD9-Xb-OBW"/>
+                                            </imageView>
+                                        </subviews>
                                     </view>
                                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                     <color key="fillColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -47,7 +56,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" id="QLl-oJ-C2e">
+                                <textField verticalHuggingPriority="750" id="QLl-oJ-C2e" customClass="FocusCatchableTextField">
                                     <rect key="frame" x="171" y="206" width="41" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="Cyl-BS-C4n">

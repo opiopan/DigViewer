@@ -22,6 +22,7 @@
         self = [self init];
         if (self){
             _type = type;
+            self.dulation = 0.5;
         }
     }else{
         self = nil;
@@ -54,7 +55,7 @@
     transition.delegate = self;
     transition.startProgress = 0;
     transition.endProgress = 1.0;
-    transition.duration = 0.5;
+    transition.duration = self.dulation;
     transition.subtype = kCATransitionFromRight;
     
     switch (_type){

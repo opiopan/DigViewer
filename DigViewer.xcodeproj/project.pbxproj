@@ -75,6 +75,7 @@
 		7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */; };
 		7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */; };
 		7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F11B36D83500B8D124 /* EffectByCATransition.m */; };
+		7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
@@ -265,6 +266,8 @@
 		7B6717EF1B36D77700B8D124 /* TransitionEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionEffects.h; sourceTree = "<group>"; };
 		7B6717F01B36D83500B8D124 /* EffectByCATransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByCATransition.h; sourceTree = "<group>"; };
 		7B6717F11B36D83500B8D124 /* EffectByCATransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByCATransition.m; sourceTree = "<group>"; };
+		7B6717F31B3833D400B8D124 /* FocusCatchableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusCatchableTextField.h; sourceTree = "<group>"; };
+		7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusCatchableTextField.m; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
 		7B697E3A169C547200A9E247 /* ImageWithTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithTextCell.m; sourceTree = "<group>"; };
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
@@ -483,6 +486,8 @@
 				7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */,
 				7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */,
 				7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */,
+				7B6717F31B3833D400B8D124 /* FocusCatchableTextField.h */,
+				7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1008,6 +1013,7 @@
 				7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */,
 				7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
+				7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,

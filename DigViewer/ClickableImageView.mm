@@ -58,6 +58,8 @@ enum PanningMode{
     twoFIngerGestureRecognizer.panGestureHandler = @selector(handleTwoFingerPanGesture:);
     [_touchGestureRecognizers addObject:twoFIngerGestureRecognizer];
     
+    _enableGesture = YES;
+    
     [self setAcceptsTouchEvents:YES];
 }
 
@@ -185,7 +187,7 @@ enum PanningMode{
 
 - (void)mouseUp:(NSEvent*)event
 {
-    if([event clickCount] == 2) {
+    if([event clickCount] == 2 && [self.delegate respondsToSelector:@selector(onDoubleClickableImageView:)]) {
         [self.delegate performSelector:@selector(onDoubleClickableImageView:) withObject:self afterDelay:0.0f];
     }
 }
@@ -233,7 +235,7 @@ static const CGFloat SwipeGestureScale = 2.5;
 
 - (void)handleMagnifyGesture:(TwoFingerGestureRecognizer*)gesture
 {
-    if (_isDrawingByLayer){
+    if (_isDrawingByLayer && _enableGesture){
         NSPoint pointer = gesture.initialPoint;
         pointer.x -= self.frame.size.width / 2;
         pointer.y -= self.frame.size.height / 2;
@@ -272,7 +274,7 @@ static const CGFloat SwipeGestureScale = 2.5;
 
 - (void)handleTwoFingerPanGesture:(TwoFingerGestureRecognizer*)gesture
 {
-    if (_isDrawingByLayer){
+    if (_isDrawingByLayer && _enableGesture){
         // 二本指ジェスチャー開始時はバイアス値を取得
         if (gesture.state == TouchGestureStateBegan){
             if (_frameLayer.isInSwipeInertiaMode){

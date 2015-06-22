@@ -9,7 +9,7 @@
 #import "NSPreferencesModule.h"
 #import "SlideshowConfigController.h"
 
-@interface SlideshowPreferences : NSPreferencesModule
+@interface SlideshowPreferences : NSPreferencesModule  <NSTextFieldDelegate>
 
 @property (readonly) SlideshowConfigController* slideshowConfig;
 
