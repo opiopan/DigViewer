@@ -45,6 +45,7 @@
 		7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B23D32C1AFDB9CB00A78E77 /* ThumbnailPreferences.png */; };
 		7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2518A6000F00A70555 /* DocumentWindowController.m */; };
 		7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */; };
+		7B336EC91B399E8E00D01CA6 /* EffectByCIKernel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B336EC81B399E8E00D01CA6 /* EffectByCIKernel.m */; };
 		7B35D9251B06D7E2000CA4F1 /* datetime.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35D9241B06D7E2000CA4F1 /* datetime.png */; };
 		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
 		7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */; };
@@ -66,15 +67,13 @@
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
-		7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */; };
-		7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */ = {isa = PBXBuildFile; fileRef = 7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */; };
 		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
 		7B553BC31AE1F83600618590 /* Lens.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BC21AE1F83600618590 /* Lens.m */; };
 		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
 		7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */; };
 		7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */; };
 		7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */; };
-		7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F11B36D83500B8D124 /* EffectByCATransition.m */; };
+		7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F11B36D83500B8D124 /* BuiltinEffect.m */; };
 		7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
@@ -88,6 +87,10 @@
 		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */; };
 		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
+		7B74FB801B3AC911005BC748 /* EffectByCIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */; };
+		7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
+		7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
+		7B74FB861B3AF118005BC748 /* TestTransitionEffect.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB851B3AF118005BC748 /* TestTransitionEffect.qtz */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
@@ -148,6 +151,16 @@
 			);
 			script = true;
 		};
+		7B74FB831B3ADA7D005BC748 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.cikernel";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = true;
+		};
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +180,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */,
 				7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +226,8 @@
 		7B30AC2518A6000F00A70555 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenuItemValidator.h"; sourceTree = "<group>"; };
 		7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MenuItemValidator.m"; sourceTree = "<group>"; };
+		7B336EC71B399E8E00D01CA6 /* EffectByCIKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByCIKernel.h; sourceTree = "<group>"; };
+		7B336EC81B399E8E00D01CA6 /* EffectByCIKernel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByCIKernel.m; sourceTree = "<group>"; };
 		7B35D9241B06D7E2000CA4F1 /* datetime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = datetime.png; path = resources/datetime.png; sourceTree = "<group>"; };
 		7B36259118DE65D4008471E2 /* FlatSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatSplitView.h; sourceTree = "<group>"; };
 		7B36259218DE65D4008471E2 /* FlatSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatSplitView.m; sourceTree = "<group>"; };
@@ -264,8 +280,8 @@
 		7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionEffect.h; sourceTree = "<group>"; };
 		7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionEffect.m; sourceTree = "<group>"; };
 		7B6717EF1B36D77700B8D124 /* TransitionEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionEffects.h; sourceTree = "<group>"; };
-		7B6717F01B36D83500B8D124 /* EffectByCATransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByCATransition.h; sourceTree = "<group>"; };
-		7B6717F11B36D83500B8D124 /* EffectByCATransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByCATransition.m; sourceTree = "<group>"; };
+		7B6717F01B36D83500B8D124 /* BuiltinEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuiltinEffect.h; sourceTree = "<group>"; };
+		7B6717F11B36D83500B8D124 /* BuiltinEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuiltinEffect.m; sourceTree = "<group>"; };
 		7B6717F31B3833D400B8D124 /* FocusCatchableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusCatchableTextField.h; sourceTree = "<group>"; };
 		7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusCatchableTextField.m; sourceTree = "<group>"; };
 		7B697E39169C547200A9E247 /* ImageWithTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithTextCell.h; sourceTree = "<group>"; };
@@ -290,6 +306,10 @@
 		7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLayer.m; sourceTree = "<group>"; };
 		7B748D211AFDBC0600FDF471 /* ThumbnailPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailPreferences.h; sourceTree = "<group>"; };
 		7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailPreferences.m; sourceTree = "<group>"; };
+		7B74FB7E1B3AC911005BC748 /* EffectByCIFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByCIFilter.h; sourceTree = "<group>"; };
+		7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByCIFilter.m; sourceTree = "<group>"; };
+		7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FadeEffect.cikernel; sourceTree = "<group>"; };
+		7B74FB851B3AF118005BC748 /* TestTransitionEffect.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = TestTransitionEffect.qtz; path = tests/TestTransitionEffect.qtz; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
@@ -381,6 +401,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B336ECA1B39B32400D01CA6 /* Core Image Kernel */ = {
+			isa = PBXGroup;
+			children = (
+				7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */,
+			);
+			name = "Core Image Kernel";
+			sourceTree = "<group>";
+		};
 		7B3920241696CA1800E139D0 = {
 			isa = PBXGroup;
 			children = (
@@ -561,8 +589,13 @@
 				7B6717EF1B36D77700B8D124 /* TransitionEffects.h */,
 				7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */,
 				7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */,
-				7B6717F01B36D83500B8D124 /* EffectByCATransition.h */,
-				7B6717F11B36D83500B8D124 /* EffectByCATransition.m */,
+				7B6717F01B36D83500B8D124 /* BuiltinEffect.h */,
+				7B6717F11B36D83500B8D124 /* BuiltinEffect.m */,
+				7B74FB7E1B3AC911005BC748 /* EffectByCIFilter.h */,
+				7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */,
+				7B336EC71B399E8E00D01CA6 /* EffectByCIKernel.h */,
+				7B336EC81B399E8E00D01CA6 /* EffectByCIKernel.m */,
+				7B336ECA1B39B32400D01CA6 /* Core Image Kernel */,
 			);
 			name = "Transition Effects";
 			sourceTree = "<group>";
@@ -756,6 +789,7 @@
 		7BF27647191BB2370022E89D /* For Testing */ = {
 			isa = PBXGroup;
 			children = (
+				7B74FB851B3AF118005BC748 /* TestTransitionEffect.qtz */,
 				7BF27648191BB25A0022E89D /* TestGPSMapView.html */,
 				7BF27649191BB25A0022E89D /* TestGPSMapView.js */,
 			);
@@ -800,6 +834,7 @@
 				7B9F9E8A18E7DD450042337F /* CopyFiles */,
 			);
 			buildRules = (
+				7B74FB831B3ADA7D005BC748 /* PBXBuildRule */,
 				7B17D21F19024B1400848FF0 /* PBXBuildRule */,
 			);
 			dependencies = (
@@ -859,6 +894,7 @@
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
+				7B74FB861B3AF118005BC748 /* TestTransitionEffect.qtz in Resources */,
 				7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
@@ -885,10 +921,9 @@
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
 				7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */,
+				7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */,
 				7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */,
 				7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */,
-				7B5340581703F2BE008AEDB6 /* DigViewer-in.sparseimage in Resources */,
-				7B5340591703F2BE008AEDB6 /* DigViewerBackground.idraw in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,7 +1050,7 @@
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,
 				7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
-				7B6717F21B36D83500B8D124 /* EffectByCATransition.m in Sources */,
+				7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */,
@@ -1025,6 +1060,8 @@
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
 				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
+				7B336EC91B399E8E00D01CA6 /* EffectByCIKernel.m in Sources */,
+				7B74FB801B3AC911005BC748 /* EffectByCIFilter.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */,
 				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,

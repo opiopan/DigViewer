@@ -14,7 +14,9 @@ enum _SlideshowTransition{
     SlideshowTransitionFade,
     SlideshowTransitionMoveIn,
     SlideshowTransitionPush,
-    SlideshowTransitionReveal
+    SlideshowTransitionReveal,
+    
+    SlideshowTransitionMaxValue
 };
 typedef enum _SlideshowTransition SlideshowTransition;
 

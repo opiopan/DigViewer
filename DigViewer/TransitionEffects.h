@@ -7,4 +7,5 @@
 //
 
 #import "TransitionEffect.h"
-#import "EffectByCATransition.h"
+#import "BuiltinEffect.h"
+#import "EffectByCIKernel.h"

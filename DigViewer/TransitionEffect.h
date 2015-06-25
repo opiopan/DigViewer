@@ -13,7 +13,7 @@
 @property (weak, nonatomic) id delegate;
 @property (assign, nonatomic) SEL didEndSelector;
 
-@property (assign, nonatomic) CGFloat dulation;
+@property (assign, nonatomic) CGFloat duration;
 
 @property (nonatomic) CALayer* fromLayer;
 @property (nonatomic) CALayer* toLayer;

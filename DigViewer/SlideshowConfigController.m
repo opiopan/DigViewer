@@ -83,15 +83,23 @@
 //-----------------------------------------------------------------------------------------
 - (TransitionEffect*)transitionEffect
 {
-    static NSArray* effects;
-    if (!effects){
-        effects = @[[TransitionEffect new],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionFade],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionMoveIn],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionPush],
-                    [[EffectByCATransition alloc] initWithType:SlideshowTransitionReveal]];
+    switch (_transition) {
+        case SlideshowTransitionNone:
+            return [TransitionEffect new];
+        case SlideshowTransitionFade:
+            //return [[BuiltinEffect alloc] initWithType:SlideshowTransitionFade];
+            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"FadeEffect"
+                                                                                                ofType:@"cikernel"]
+                                                       duration:0.5];
+        case SlideshowTransitionMoveIn:
+            return [[BuiltinEffect alloc] initWithType:SlideshowTransitionMoveIn];
+        case SlideshowTransitionPush:
+            return [[BuiltinEffect alloc] initWithType:SlideshowTransitionPush];
+        case SlideshowTransitionReveal:
+            return [[BuiltinEffect alloc] initWithType:SlideshowTransitionReveal];
+        default:
+            return nil;
     }
-    return effects[_transition];
 }
 
 @end

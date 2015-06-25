@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self){
-        _dulation = 0;
+        _duration = 0;
     }
     return self;
 }

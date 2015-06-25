@@ -16,7 +16,10 @@
 
 @implementation SlideshowController{
     BOOL _canceled;
-    SlideshowConfigController * _config;
+    SlideshowConfigController* _config;
+    SlideshowTransition _transitionType;
+    TransitionEffect* _transitionEffect;
+    
     ImageViewController* _imageViewController;
     id _relationalImage;
     NSWindow* _window;
@@ -108,6 +111,9 @@ static SlideshowController* _currentController;
         [_window makeFirstResponder:_imageViewController.view];
     }
     
+    _transitionType = _config.transition;
+    _transitionEffect = _config.transitionEffect;
+    
     _timer = [NSTimer scheduledTimerWithTimeInterval:_config.interval.doubleValue target:self
                                             selector:@selector(moveToNextImage:)
                                             userInfo:nil repeats:YES];
@@ -121,10 +127,13 @@ static SlideshowController* _currentController;
     
     id nextImage = [_imageAccessor nextObjectOfObject:_relationalImage];
     if (nextImage){
-        TransitionEffect* effect = [_config transitionEffect];
-        [_imageViewController moveToDirection:RelationalImageNext withTransition:effect];
+        if (_transitionType != _config.transition){
+            _transitionType = _config.transition;
+            _transitionEffect = _config.transitionEffect;
+        }
+        [_imageViewController moveToDirection:RelationalImageNext withTransition:_transitionEffect];
         _relationalImage = nextImage;
-        double interval = _config.interval.doubleValue + effect.dulation;
+        double interval = _config.interval.doubleValue + _transitionEffect.duration;
         if (interval != _timer.timeInterval){
             [_timer invalidate];
             _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self

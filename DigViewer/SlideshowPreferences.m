@@ -34,6 +34,8 @@
 @implementation SlideshowPreferences{
     NSArray* _relationalImages;
     NSTimer* _timerForTransition;
+    SlideshowTransition _effectType;
+    TransitionEffect* _effect;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -78,6 +80,8 @@
     _imageView.relationalImage = RELATIONAL_IMAGE(0);
     
     // トランジション用タイマー駆動
+    _effectType = _slideshowConfig.transition;
+    _effect = _slideshowConfig.transitionEffect;
     [self updateTimer:self];
 }
 
@@ -100,7 +104,7 @@ static CGFloat TRANSITION_INTERVAL = 2;
         if (!_timerForTransition){
             _timerForTransition = [NSTimer scheduledTimerWithTimeInterval:TRANSITION_INTERVAL target:self
                                                                  selector:@selector(proceedTransition:)
-                                                                 userInfo:nil repeats:YES];
+                                                                 userInfo:nil repeats:NO];
         }
     }else{
         [_timerForTransition invalidate];
@@ -110,24 +114,25 @@ static CGFloat TRANSITION_INTERVAL = 2;
 
 - (void) proceedTransition:(NSTimer*)timer
 {
-    TransitionEffect* effect = _slideshowConfig.transitionEffect;
-    [_imageView moveToDirection:RelationalImageNext withTransition:effect];
-    double interval = TRANSITION_INTERVAL + effect.dulation;
-    if (![_preferencesView.window isBelongToResponderChain:_focusingField]){
-        [_timerForTransition invalidate];
-        _timerForTransition = nil;
-    }else if (_timerForTransition.timeInterval != interval){
-        [_timerForTransition invalidate];
-        _timerForTransition = [NSTimer scheduledTimerWithTimeInterval:interval target:self
-                                                             selector:@selector(proceedTransition:)
-                                                             userInfo:nil repeats:YES];
+    if (_effectType != _slideshowConfig.transition){
+        _effectType = _slideshowConfig.transition;
+        _effect = _slideshowConfig.transitionEffect;
     }
+    [_imageView moveToDirection:RelationalImageNext withTransition:_effect];
 }
 
 - (void)didEndTransition:(NSNumber*)isNext
 {
     RelationalImageForSample* next = ((RelationalImageForSample*)_imageView.relationalImage).nextImageNode;
     _imageView.relationalImage = next;
+    if (![_preferencesView.window isBelongToResponderChain:_focusingField]){
+        [_timerForTransition invalidate];
+        _timerForTransition = nil;
+    }else{
+        _timerForTransition = [NSTimer scheduledTimerWithTimeInterval:TRANSITION_INTERVAL target:self
+                                                             selector:@selector(proceedTransition:)
+                                                             userInfo:nil repeats:NO];
+    }
 }
 
 @end

@@ -44,7 +44,6 @@
     MainViewController* mainViewController;
     int                 transitionStateCount;
     SlideshowController*        slideshowController;
-    NSInteger                   slideshowCount;
     LoadingSheetController*     loadingSheet;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
@@ -57,7 +56,6 @@
     self = [super initWithWindowNibName:@"Document"];
     if (self) {
         transitionStateCount = 0;
-        slideshowCount = 0;
     }
     return self;
 }
@@ -448,7 +446,6 @@
 //-----------------------------------------------------------------------------------------
 - (void)setSlideshowMode:(BOOL)slideshowMode
 {
-    slideshowCount++;
     if (slideshowMode){
         SlideshowController* controller = [SlideshowController newController];
         if (controller){
@@ -490,22 +487,6 @@
     [self.document removeWindowController:slideshowController];
     slideshowController = nil;
 }
-
-#if 0
-- (void)proceedSlideshow:(NSNumber*)count
-{
-    if (count.integerValue == slideshowCount){
-        [self performSelector:@selector(proceedSlideshow:) withObject:@(slideshowCount)
-                   afterDelay:slideshowConfig.interval.doubleValue];
-        [self moveToNextImage:self];
-        PathNode* node = _imageArrayController.selectedObjects[0];
-        PathNode* nextNode = node.nextImageNode;
-        if (!nextNode){
-            [self setSlideshowMode:NO];
-        }
-    }
-}
-#endif
 
 - (void)toggleSlideshowMode:(id)sender
 {
