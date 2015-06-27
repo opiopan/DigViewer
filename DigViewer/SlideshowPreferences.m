@@ -10,6 +10,7 @@
 #import "FocusCatchableTextField.h"
 #import "ClickableImageView.h"
 #import "NSWindow+TracingResponderChain.h"
+#import "EditCustomEffectListController.h"
 
 //-----------------------------------------------------------------------------------------
 // トランジション用relationalImageオブジェクトの定義
@@ -34,8 +35,9 @@
 @implementation SlideshowPreferences{
     NSArray* _relationalImages;
     NSTimer* _timerForTransition;
-    SlideshowTransition _effectType;
+    NSString* _effectType;
     TransitionEffect* _effect;
+    EditCustomEffectListController* _editCustomEffectListPanel;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -94,6 +96,52 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// エフェクトの選択index属性
+//-----------------------------------------------------------------------------------------
+- (NSInteger)selectionIndexForEffect
+{
+    NSArray* effects = _slideshowConfig.allEffects;
+    for (NSInteger i = 0; i < effects.count; i++){
+        if ([[effects[i] valueForKey:@"identifier"] isEqualToString:_slideshowConfig.transition]){
+            return i;
+        }
+    }
+    return NSNotFound;
+}
+
+- (void)setSelectionIndexForEffect:(NSInteger)selectionIndexForEffect
+{
+    NSArray* effects = _slideshowConfig.allEffects;
+    if (selectionIndexForEffect >= 0 && selectionIndexForEffect < effects.count){
+        _slideshowConfig.transition = [effects[selectionIndexForEffect] valueForKey:@"identifier"];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// カスタムエフェクト編集
+//-----------------------------------------------------------------------------------------
+- (IBAction) editCustomEffectList:(id)sender
+{
+    _editCustomEffectListPanel = [EditCustomEffectListController new];
+    [_editCustomEffectListPanel editEffectList:_slideshowConfig.customEffects forWindow:_preferencesView.window
+                                 modalDelegate:self didEndSelector:@selector(didEndEditCustomEffectListSheet:)];
+}
+
+- (void)didEndEditCustomEffectListSheet:(id)object
+{
+    if (object){
+        NSString* transition = _slideshowConfig.transition;
+        _slideshowConfig.customEffects = object;
+        if (![transition isEqualToString:_slideshowConfig.transition]){
+            [self willChangeValueForKey:@"selectionIndexForEffect"];
+            [self didChangeValueForKey:@"selectionIndexForEffect"];
+        }
+        _effectType = @"";
+    }
+    _editCustomEffectListPanel = nil;
+}
+
+//-----------------------------------------------------------------------------------------
 // トランジションサンプル制御
 //-----------------------------------------------------------------------------------------
 static CGFloat TRANSITION_INTERVAL = 2;
@@ -114,7 +162,7 @@ static CGFloat TRANSITION_INTERVAL = 2;
 
 - (void) proceedTransition:(NSTimer*)timer
 {
-    if (_effectType != _slideshowConfig.transition){
+    if (![_effectType isEqualToString:_slideshowConfig.transition]){
         _effectType = _slideshowConfig.transition;
         _effect = _slideshowConfig.transitionEffect;
     }

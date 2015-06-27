@@ -11,6 +11,6 @@
 
 @interface BuiltinEffect : TransitionEffect
 
-- (instancetype)initWithType:(SlideshowTransition)type;
+- (instancetype)initWithType:(NSString*)type;
 
 @end

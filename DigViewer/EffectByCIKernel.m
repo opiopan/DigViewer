@@ -41,7 +41,6 @@
 //-----------------------------------------------------------------------------------------
 - (id)copyWithZone:(NSZone *)zone
 {
-    //FilterForTransition* copy = [[self.class allocWithZone:zone] init];
     FilterForTransition* copy = [super copyWithZone:zone];
     if (copy){
         copy->_kernel = self->_kernel;
@@ -51,7 +50,6 @@
     }
     
     return copy;
-    //return self;
 }
 
 //-----------------------------------------------------------------------------------------

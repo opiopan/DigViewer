@@ -17,7 +17,7 @@
 @implementation SlideshowController{
     BOOL _canceled;
     SlideshowConfigController* _config;
-    SlideshowTransition _transitionType;
+    NSString* _transitionType;
     TransitionEffect* _transitionEffect;
     
     ImageViewController* _imageViewController;
@@ -127,7 +127,7 @@ static SlideshowController* _currentController;
     
     id nextImage = [_imageAccessor nextObjectOfObject:_relationalImage];
     if (nextImage){
-        if (_transitionType != _config.transition){
+        if (![_transitionType isEqualToString:_config.transition]){
             _transitionType = _config.transition;
             _transitionEffect = _config.transitionEffect;
         }

@@ -1,0 +1,6 @@
+kernel vec4 fadeTransition(sampler from, sampler to, float time)
+{
+    vec4 f = sample(from, samplerCoord(from));
+    vec4 t = sample(to, samplerCoord(to));
+    return f * (1.0 - time) + t * time;
+}

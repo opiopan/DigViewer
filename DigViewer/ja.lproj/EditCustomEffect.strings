@@ -1,0 +1,21 @@
+
+/* Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "81k-gm-yE7"; */
+"81k-gm-yE7.title" = "名前:";
+
+/* Class = "NSTextFieldCell"; title = "File Type:"; ObjectID = "AO7-AP-JRj"; */
+"AO7-AP-JRj.title" = "ファイル種別:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "X0O-aB-c1K"; */
+"X0O-aB-c1K.title" = "キャンセル";
+
+/* Class = "NSTextFieldCell"; title = "sec"; ObjectID = "fBL-tP-Fp9"; */
+"fBL-tP-Fp9.title" = "秒";
+
+/* Class = "NSTextFieldCell"; title = "Custom Effect File:"; ObjectID = "nQo-F2-RUk"; */
+"nQo-F2-RUk.title" = "エフェクトファイル:";
+
+/* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "sma-R2-39P"; */
+"sma-R2-39P.title" = "持続時間:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "ylK-wa-YzZ"; */
+"ylK-wa-YzZ.title" = "OK";

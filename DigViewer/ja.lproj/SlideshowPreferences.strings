@@ -23,22 +23,5 @@
 /* Class = "NSTextFieldCell"; title = "Transition:"; ObjectID = "GKm-Dl-qqE"; */
 "GKm-Dl-qqE.title" = "切替えエフェクト:";
 
-
-/*------------------------------------------------------------------------
- * トランシジョン バラエティ
- *------------------------------------------------------------------------/
-
-/* Class = "NSMenuItem"; title = "None"; ObjectID = "53w-3I-ZAi"; */
-"53w-3I-ZAi.title" = "なし";
-
-/* Class = "NSMenuItem"; title = "Fade"; ObjectID = "Al6-4z-mTP"; */
-"Al6-4z-mTP.title" = "フェード";
-
-/* Class = "NSMenuItem"; title = "Move in"; ObjectID = "OHD-Qt-VOx"; */
-"OHD-Qt-VOx.title" = "ムーブイン";
-
-/* Class = "NSMenuItem"; title = "Push"; ObjectID = "0ap-fC-tpV"; */
-"0ap-fC-tpV.title" = "押し出し";
-
-/* Class = "NSMenuItem"; title = "Reveal"; ObjectID = "BHJ-bX-saB"; */
-"BHJ-bX-saB.title" = "スライド";
+/* Class = "NSButtonCell"; title = "Custom Effect..."; ObjectID = "1gA-LB-S3D"; */
+"1gA-LB-S3D.title" = "カスタムエフェクト...";

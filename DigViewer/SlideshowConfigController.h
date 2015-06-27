@@ -9,16 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "TransitionEffect.h"
 
-enum _SlideshowTransition{
-    SlideshowTransitionNone,
-    SlideshowTransitionFade,
-    SlideshowTransitionMoveIn,
-    SlideshowTransitionPush,
-    SlideshowTransitionReveal,
-    
-    SlideshowTransitionMaxValue
-};
-typedef enum _SlideshowTransition SlideshowTransition;
+extern NSString* kSlideshowTransitionNone;
+extern NSString* kSlideshowTransitionFade;
+extern NSString* kSlideshowTransitionMoveIn;
+extern NSString* kSlideshowTransitionPush;
+extern NSString* kSlideshowTransitionReveal;
 
 enum _SlideshowViewType{
     SlideshowWindow,
@@ -26,16 +21,22 @@ enum _SlideshowViewType{
 };
 typedef enum _SlideshowViewType SlideshowViewType;
 
+enum _EffectType {effectBuiltIn, effectCIKernel, effectQCComposition};
+typedef enum _EffectType EffectType;
+
 @interface SlideshowConfigController : NSObject
 
 @property (strong, nonatomic) NSNumber* interval;
-@property (assign, nonatomic) SlideshowTransition transition;
+@property (strong, nonatomic) NSString* transition;
 @property (readonly, nonatomic) TransitionEffect* transitionEffect;
 @property (assign, nonatomic) SlideshowViewType viewType;
 @property (assign, nonatomic) BOOL showOnTheOtherScreen;
+@property (strong, nonatomic) NSArray* customEffects;
+@property (readonly, nonatomic) NSArray* allEffects;
 
 @property (assign, readonly, nonatomic) NSInteger updateCount;
 
 + (SlideshowConfigController*)sharedController;
++ (id)customEffectWithName:(NSString*)name type:(EffectType)type path:(NSString*)path duration:(CGFloat)duration;
 
 @end

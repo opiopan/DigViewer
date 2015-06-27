@@ -12,5 +12,6 @@
 @interface SlideshowPreferences : NSPreferencesModule  <NSTextFieldDelegate>
 
 @property (readonly) SlideshowConfigController* slideshowConfig;
+@property (nonatomic) NSInteger selectionIndexForEffect;
 
 @end

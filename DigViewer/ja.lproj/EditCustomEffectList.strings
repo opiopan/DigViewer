@@ -1,0 +1,23 @@
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "BoR-7W-pvS"; */
+"BoR-7W-pvS.title" = "OK";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "Qld-fk-DWO"; */
+"Qld-fk-DWO.headerCell.title" = "名前";
+
+/* Class = "NSTableColumn"; headerCell.title = "Path"; ObjectID = "ScN-jI-CaD"; */
+"ScN-jI-CaD.headerCell.title" = "エフェクトファイル";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "TUq-is-sVJ"; */
+"TUq-is-sVJ.title" = "キャンセル";
+
+/* Class = "NSTableColumn"; headerCell.title = "Type"; ObjectID = "gqV-cw-dmR"; */
+"gqV-cw-dmR.headerCell.title" = "種別";
+
+/* Class = "NSTextFieldCell"; title = ""; ObjectID = "qmw-3F-HLd"; */
+"qmw-3F-HLd.title" = "Core Image Kernel Language プログラム、または Quartz Composer コンポジションをカスタム切り替えエフェクトとして登録し利用することができます。";
+
+/* Class = "NSSegmentedCell"; zfe-8W-UF0.ibShadowedToolTips[0] = "Add"; ObjectID = "zfe-8W-UF0"; */
+"zfe-8W-UF0.ibShadowedToolTips[0]" = "エフェクトを追加します";
+
+/* Class = "NSSegmentedCell"; zfe-8W-UF0.ibShadowedToolTips[1] = "Remove"; ObjectID = "zfe-8W-UF0"; */
+"zfe-8W-UF0.ibShadowedToolTips[1]" = "エフェクトを削除します";

@@ -15,6 +15,21 @@
 "PREF_TITLE_LENS" = "Lens";
 "PREF_TITLE_ADVANCED" = "Advanced";
 
+// スライドショー遷移エフェクト(ビルトイン)の名前
+"SlideshowTransitionNone" = "None";
+"SlideshowTransitionFade" = "Fade";
+"SlideshowTransitionMoveIn" = "Move in";
+"SlideshowTransitionPush" = "Push";
+"SlideshowTransitionReveal" = "Reveal";
+
+// カスタム遷移エフェクト種別
+"effectCIKernel" = "Core Image Filter";
+"effectQCCompositon" = "Quartz Composer";
+
+// カスタム遷移エフェクト編集時のメッセージ
+"CEMSG_ERROR_CONFLICT" = "Specified file has been already registered.";
+"CEMSG_CONF_REMOVE" = "Are you sure you want to remove selected custom effect?";
+
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "Are you sure you want to remove selected lens profile?";
 

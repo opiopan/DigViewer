@@ -9,6 +9,15 @@
 #import "BuiltinEffect.h"
 #import <Quartz/Quartz.h>
 
+ enum _SlideshowTransition{
+     SlideshowTransitionNone,
+     SlideshowTransitionFade,
+     SlideshowTransitionMoveIn,
+     SlideshowTransitionPush,
+     SlideshowTransitionReveal,
+ };
+ typedef enum _SlideshowTransition SlideshowTransition;
+
 @implementation BuiltinEffect{
     SlideshowTransition _type;
 }
@@ -16,16 +25,24 @@
 //-----------------------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------------------
-- (instancetype)initWithType:(SlideshowTransition)type
+- (instancetype)initWithType:(NSString*)type
 {
-    if (type >= SlideshowTransitionFade && type <= SlideshowTransitionReveal){
-        self = [self init];
-        if (self){
-            _type = type;
-            self.duration = 0.5;
+    self = [self init];
+    if (self){
+        self.duration = 0.5;
+        if ([type isEqualToString:kSlideshowTransitionNone]){
+            _type = SlideshowTransitionNone;
+        }else if ([type isEqualToString:kSlideshowTransitionFade]){
+            _type = SlideshowTransitionFade;
+        }else if ([type isEqualToString:kSlideshowTransitionMoveIn]){
+            _type = SlideshowTransitionMoveIn;
+        }else if ([type isEqualToString:kSlideshowTransitionPush]){
+            _type = SlideshowTransitionPush;
+        }else if ([type isEqualToString:kSlideshowTransitionReveal]){
+            _type = SlideshowTransitionReveal;
+        }else{
+            self = nil;
         }
-    }else{
-        self = nil;
     }
     return self;
 }

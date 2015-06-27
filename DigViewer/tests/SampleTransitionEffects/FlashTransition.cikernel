@@ -1,0 +1,11 @@
+kernel vec4 FlashTransition(sampler from, sampler to, float time)
+{
+	vec4 f = sample(from, samplerCoord(from));
+	vec4 t = sample(to, samplerCoord(to));
+	vec4 w = vec4(1.0, 1.0, 1.0, 1.0);
+	float nTime = time * 2.0 - 1.0;
+	float af = 1.0 + nTime;
+	float at = 1.0 - nTime;
+    return nTime < 0.0 ? f * (1.0 - af) + w * af : 
+                         t * (1.0 - at) + w * at;
+}
