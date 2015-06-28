@@ -33,6 +33,7 @@ typedef enum _EffectType EffectType;
 @property (assign, nonatomic) BOOL showOnTheOtherScreen;
 @property (strong, nonatomic) NSArray* customEffects;
 @property (readonly, nonatomic) NSArray* allEffects;
+@property (assign, nonatomic) BOOL disableSleep;
 
 @property (assign, readonly, nonatomic) NSInteger updateCount;
 

@@ -105,6 +105,7 @@ static NSString* kCustomEffectDuration = @"duration";
         _transition = [_controller.values valueForKey:@"slideshowTransitionID"];
         _viewType = [[_controller.values valueForKey:@"slideshowViewType"] intValue];
         _showOnTheOtherScreen = [[_controller.values valueForKey:@"slideshowShowOnTheOtherScreen"] boolValue];
+        _disableSleep = [[_controller.values valueForKey:@"slideshowDisableSleep"] boolValue];
         NSArray* customEffects = [_controller.values valueForKey:@"slideshowCustomEffects"];
         NSMutableArray* converted = [NSMutableArray new];
         for (NSDictionary* entry in customEffects){
@@ -165,6 +166,13 @@ static NSString* kCustomEffectDuration = @"duration";
 {
     _showOnTheOtherScreen = showOnTheOtherScreen;
     [_controller.values setValue:@(_showOnTheOtherScreen) forKey:@"slideshowShowOnTheOtherScreen"];
+    _updateCount++;
+}
+
+- (void)setDisableSleep:(BOOL)disableSleep
+{
+    _disableSleep = disableSleep;
+    [_controller.values setValue:@(_disableSleep) forKey:@"slideshowDisableSleep"];
     _updateCount++;
 }
 

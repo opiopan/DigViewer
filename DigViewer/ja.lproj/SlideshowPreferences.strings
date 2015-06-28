@@ -25,3 +25,9 @@
 
 /* Class = "NSButtonCell"; title = "Custom Effect..."; ObjectID = "1gA-LB-S3D"; */
 "1gA-LB-S3D.title" = "カスタムエフェクト...";
+
+/* Class = "NSTextFieldCell"; title = "Others:"; ObjectID = "Dy3-PG-Fc6"; */
+"Dy3-PG-Fc6.title" = "その他:";
+
+/* Class = "NSButtonCell"; title = "Disable a screen saver while slide show"; O bjectID = "laV-jy-5dd"; */
+"laV-jy-5dd.title" = "スライドショー中はスクリーセーバーとスリープを無効にする";

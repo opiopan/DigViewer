@@ -35,6 +35,7 @@
                      @"slideshowViewType":            @(SlideshowWindow),
                      @"slideshowShowOnTheOtherScreen":@YES,
                      @"slideshowCustomEffects":       @[],
+                     @"slideshowDisableSleep":        @NO,
                      @"mapFovColor":                  redData,
                      @"mapArrowColor":                redData,
                      @"mapFovGrade":                  @30,

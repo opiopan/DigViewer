@@ -34,6 +34,7 @@
             _type = SlideshowTransitionNone;
         }else if ([type isEqualToString:kSlideshowTransitionFade]){
             _type = SlideshowTransitionFade;
+            self.duration = 1.0;
         }else if ([type isEqualToString:kSlideshowTransitionMoveIn]){
             _type = SlideshowTransitionMoveIn;
         }else if ([type isEqualToString:kSlideshowTransitionPush]){

@@ -19,6 +19,8 @@
     SlideshowConfigController* _config;
     NSString* _transitionType;
     TransitionEffect* _transitionEffect;
+    NSProcessInfo* _processInfo;
+    id _activityToken;
     
     ImageViewController* _imageViewController;
     id _relationalImage;
@@ -56,6 +58,7 @@ static SlideshowController* _currentController;
         _canceled = NO;
         _config = [SlideshowConfigController sharedController];
         _imageAccessor = [RelationalImageAccessor new];
+        _processInfo = [NSProcessInfo processInfo];
     }
     return self;
 }
@@ -122,6 +125,11 @@ static SlideshowController* _currentController;
     if ([self shouldHideCursor]){
         [NSCursor hide];
     }
+    if (_config.disableSleep){
+        _activityToken = [_processInfo beginActivityWithOptions:NSActivityIdleDisplaySleepDisabled |
+                                                                NSActivityIdleSystemSleepDisabled
+                                                         reason:@"DigViewer is proceeding a slide show"];
+    }
     
     _transitionType = _config.transition;
     _transitionEffect = _config.transitionEffect;
@@ -179,6 +187,10 @@ static SlideshowController* _currentController;
     _currentController = nil;
     
     [NSCursor unhide];
+    if (_activityToken){
+        [_processInfo endActivity:_activityToken];
+        _activityToken = nil;
+    }
 }
 #pragma clang diagnostic pop
 
