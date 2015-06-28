@@ -61,6 +61,14 @@ static SlideshowController* _currentController;
 }
 
 //-----------------------------------------------------------------------------------------
+// スライドショー中にマウスカーソルを隠すべきか判定
+//-----------------------------------------------------------------------------------------
+- (BOOL)shouldHideCursor
+{
+    return _config.viewType == SlideshowFullScreen && [NSScreen screens].count == 1;
+}
+
+//-----------------------------------------------------------------------------------------
 // スライドショー対象スクリーン特定
 //-----------------------------------------------------------------------------------------
 - (NSScreen*)targetScreenWithCurrentScreen:(NSScreen*)currentScreen
@@ -109,6 +117,10 @@ static SlideshowController* _currentController;
         [_window.contentView associateSubViewWithController:_imageViewController];
         [_window makeKeyAndOrderFront:self];
         [_window makeFirstResponder:_imageViewController.view];
+    }
+    
+    if ([self shouldHideCursor]){
+        [NSCursor hide];
     }
     
     _transitionType = _config.transition;
@@ -165,6 +177,8 @@ static SlideshowController* _currentController;
         [_delegate performSelector:_didEndSelector withObject:nil];
     }
     _currentController = nil;
+    
+    [NSCursor unhide];
 }
 #pragma clang diagnostic pop
 

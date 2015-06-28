@@ -18,6 +18,7 @@
 + (SlideshowController*)newController;
 + (SlideshowController*)currentController;
 
+- (BOOL)shouldHideCursor;
 - (NSScreen*)targetScreenWithCurrentScreen:(NSScreen*)currentScreen;
 - (void)startSlideshowWithScreen:(NSScreen*)screen
                  relationalImage:(id)relationalImage
