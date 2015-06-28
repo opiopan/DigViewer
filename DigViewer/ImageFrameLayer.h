@@ -34,6 +34,6 @@
 - (void)startSwipeForDirection:(RelationalImageDirection)direction;
 - (void)fixSwipeOffsetWithVelocity:(CGFloat)velocity;
 
-- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect;
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect inScreen:(NSScreen*)screen;
 
 @end

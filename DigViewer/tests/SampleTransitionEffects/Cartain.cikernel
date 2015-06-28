@@ -1,0 +1,15 @@
+uniform float CYCLE = 7.0;
+
+kernel vec4 Cartain(sampler from, sampler to, float time, float scale)
+{
+    vec2 pos = samplerCoord(from);
+    vec2 size = samplerSize(from) * scale;
+    float mtime = time * CYCLE;
+    float threshold = float(int(mtime)) / CYCLE * size.x;
+    float translatedY = pos.y - (mtime - float(int(mtime))) * size.y;
+    vec4 f = sample(from, pos);
+    vec4 t = sample(to, samplerCoord(to));
+    vec4 i = translatedY < 0.0 ? t : sample(from, vec2(pos.x, translatedY));
+    return (size.x - pos.x) < threshold ? t :
+           (size.x - pos.x) >= threshold + size.x / CYCLE ? f : i;
+}

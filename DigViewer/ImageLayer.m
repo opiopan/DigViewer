@@ -148,6 +148,15 @@ typedef struct _InertiaParameter InertiaParameter;
 }
 
 //-----------------------------------------------------------------------------------------
+// スケールファクター設定
+//-----------------------------------------------------------------------------------------
+- (void)setContentsScale:(CGFloat)contentsScale
+{
+    [super setContentsScale:contentsScale];
+    _imageLayer.contentsScale = contentsScale;
+}
+
+//-----------------------------------------------------------------------------------------
 // 拡大・縮小フィルター
 //-----------------------------------------------------------------------------------------
 - (void)setMagnificationFilter:(NSString *)magnificationFilter

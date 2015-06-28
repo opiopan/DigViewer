@@ -15,6 +15,7 @@
 @property (nonatomic) CIImage* inputImage;
 @property (nonatomic) CIImage* inputTargetImage;
 @property (nonatomic) NSNumber* inputTime;
+@property (nonatomic) NSNumber* scale;
 - (instancetype)initWithShaderPath:(NSString*)path;
 @end
 
@@ -29,6 +30,7 @@
 {
     self = [self init];
     if (self){
+        _scale = @1.0;
         NSError* error;
         NSString* kernelProgram = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
         _kernel = [CIKernel kernelWithString:kernelProgram];
@@ -47,6 +49,7 @@
         copy->_inputImage = self->_inputImage;
         copy->_inputTargetImage = self->_inputTargetImage;
         copy->_inputTime = self->_inputTime;
+        copy->_scale = self->_scale;
     }
     
     return copy;
@@ -57,7 +60,7 @@
 //-----------------------------------------------------------------------------------------
 - (CIImage *)outputImage
 {
-    return [self apply:_kernel, _inputImage, _inputTargetImage, _inputTime,
+    return [self apply:_kernel, _inputImage, _inputTargetImage, _inputTime, _scale,
                        kCIApplyOptionDefinition, _inputImage.definition, nil];
 }
 
@@ -89,6 +92,16 @@
 - (CIFilter *)filter
 {
     return _filter;
+}
+
+//-----------------------------------------------------------------------------------------
+// レイヤー設定
+//-----------------------------------------------------------------------------------------
+- (void)setFromLayer:(CALayer *)fromLayer
+{
+    [super setFromLayer:fromLayer];
+    _filter.scale = @(self.fromLayer.contentsScale);
+    
 }
 
 @end

@@ -499,8 +499,14 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
 //-----------------------------------------------------------------------------------------
 // トランジション処理
 //-----------------------------------------------------------------------------------------
-- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect
+- (void)moveToDirection:(RelationalImageDirection)direction withTransition:(TransitionEffect*)effect inScreen:(NSScreen *)screen
 {
+    CGFloat scale = screen.backingScaleFactor;
+    self.contentsScale = scale;
+    _currentLayer.contentsScale = scale;
+    _nextLayer.contentsScale = scale;
+    _previousLayer.contentsScale = scale;
+    
     _swipeDirection = direction;
     ImageCacheEntry* targetEntry = direction == RelationalImageNext ? _nextEntry : _previousEntry;
     if (!targetEntry){

@@ -1,0 +1,8 @@
+kernel vec4 Shutter(sampler from, sampler to, float time, float scale)
+{
+	vec4 f = sample(from, samplerCoord(from));
+	vec4 t = sample(to, samplerCoord(to));
+	vec2 size = samplerSize(from) * scale;
+	float nX = (size.x - samplerCoord(from).x) / size.x;
+	return nX > time ? f : t;
+}
