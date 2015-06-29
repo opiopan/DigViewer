@@ -21,6 +21,8 @@
 "SlideshowTransitionMoveIn" = "Move in";
 "SlideshowTransitionPush" = "Push";
 "SlideshowTransitionReveal" = "Reveal";
+"SlideshowTransitionShutter" = "Shutter";
+"SlideshowTransitionCartain" = "Cartain";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";

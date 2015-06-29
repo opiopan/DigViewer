@@ -58,7 +58,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="bGh-4j-jgl" viewBased="YES" id="1T9-8A-U85">
-                                    <rect key="frame" x="0.0" y="0.0" width="534" height="228"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="534" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -159,6 +159,24 @@ DQ
                             <binding destination="-2" name="enabled" keyPath="self.isChanged" id="RhK-5B-hFt"/>
                         </connections>
                     </button>
+                    <segmentedControl verticalHuggingPriority="750" id="wFE-dr-6Pk">
+                        <rect key="frame" x="105" y="313" width="71" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="neY-fy-deb">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment toolTip="Move up a selected effect" image="up" width="32">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment toolTip="Move down a selected effect" image="down" width="32" tag="1">
+                                    <nil key="label"/>
+                                </segment>
+                            </segments>
+                        </segmentedCell>
+                        <connections>
+                            <action selector="moveUpOrDownEffect:" target="-2" id="7SN-ev-Jce"/>
+                        </connections>
+                    </segmentedControl>
                 </subviews>
             </view>
             <point key="canvasLocation" x="362" y="496.5"/>
@@ -172,5 +190,7 @@ DQ
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="down" width="256" height="256"/>
+        <image name="up" width="256" height="256"/>
     </resources>
 </document>

@@ -15,10 +15,10 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="183"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="193"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="-5" width="480" height="183"/>
+                <rect key="frame" x="0.0" y="6" width="480" height="193"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="8Ou-1R-LZF">
@@ -98,9 +98,9 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tAM-oo-emX">
                         <rect key="frame" x="175" y="86" width="287" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Uzn-8d-8vy">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Label" id="Uzn-8d-8vy">
+                            <font key="font" metaFont="cellTitle"/>
+                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
@@ -111,8 +111,8 @@
                         <rect key="frame" x="175" y="56" width="287" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="NVe-Yg-gpb">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <font key="font" metaFont="cellTitle"/>
+                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
@@ -150,7 +150,7 @@ DQ
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="360" y="369.5"/>
+            <point key="canvasLocation" x="360" y="374.5"/>
         </window>
     </objects>
 </document>

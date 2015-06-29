@@ -101,6 +101,10 @@
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
+		7BA1F9DD1B417719000D24D5 /* Cartain.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */; };
+		7BA1F9DE1B417719000D24D5 /* Shutter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
+		7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
+		7BA1F9E01B417916000D24D5 /* Cartain.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */; };
 		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
 		7BA81BF91AF513C9001E40D7 /* DocumentConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81BF81AF513C9001E40D7 /* DocumentConfigController.m */; };
 		7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BA81BFE1AF73F6F001E40D7 /* EditImageSetSheet.xib */; };
@@ -186,6 +190,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */,
+				7BA1F9E01B417916000D24D5 /* Cartain.cikernel in CopyFiles */,
 				7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */,
 				7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */,
 			);
@@ -329,6 +335,8 @@
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
 		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
+		7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Cartain.cikernel; sourceTree = "<group>"; };
+		7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Shutter.cikernel; sourceTree = "<group>"; };
 		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
 		7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesDefaultsController.m; sourceTree = "<group>"; };
 		7BA81BF71AF513C9001E40D7 /* DocumentConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentConfigController.h; sourceTree = "<group>"; };
@@ -419,6 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */,
+				7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */,
+				7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */,
 			);
 			name = "Core Image Kernel";
 			sourceTree = "<group>";
@@ -908,6 +918,7 @@
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
 				7BE7B61E1B1F27B1009619E2 /* RenderingPreferences.png in Resources */,
+				7BA1F9DE1B417719000D24D5 /* Shutter.cikernel in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7BE7B61F1B1F27B1009619E2 /* SlideshowPreferences.png in Resources */,
@@ -928,6 +939,7 @@
 				7BB4E60D1AD96EB30076630A /* GeneralPreferences.strings in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 				7B74FB9D1B3EC8DD005BC748 /* EditCustomEffect.strings in Resources */,
+				7BA1F9DD1B417719000D24D5 /* Cartain.cikernel in Resources */,
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,

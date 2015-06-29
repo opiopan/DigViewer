@@ -21,6 +21,6 @@
 @property (nonatomic) id toImage;
 
 - (void)performTransition;
-- (void)invokeDeletgateWhenDidEnd;
+- (void)invokeDelegateWhenDidEnd;
 
 @end

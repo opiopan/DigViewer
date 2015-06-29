@@ -61,7 +61,7 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    [self invokeDeletgateWhenDidEnd];
+    [self invokeDelegateWhenDidEnd];
 }
 
 //-----------------------------------------------------------------------------------------

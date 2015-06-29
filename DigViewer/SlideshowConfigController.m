@@ -14,6 +14,8 @@ NSString* kSlideshowTransitionFade = @"SlideshowTransitionFade";
 NSString* kSlideshowTransitionMoveIn = @"SlideshowTransitionMoveIn";
 NSString* kSlideshowTransitionPush = @"SlideshowTransitionPush";
 NSString* kSlideshowTransitionReveal = @"SlideshowTransitionReveal";
+NSString* kSlideshowTransitionShutter = @"SlideshowTransitionShutter";
+NSString* kSlideshowTransitionCartain = @"SlideshowTransitionCartain";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -130,7 +132,14 @@ static NSString* kCustomEffectDuration = @"duration";
                                               duration:0],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionReveal, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionReveal
-                                              duration:0]];
+                                              duration:0],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionShutter, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionShutter
+                                              duration:0],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionCartain, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionCartain
+                                              duration:0],
+                            ];
     }
     return self;
 }
@@ -229,23 +238,28 @@ static NSString* kCustomEffectDuration = @"duration";
     }
 
     if (entry.type == effectBuiltIn){
+        // ビルトインエフェクト
         if ([entry.path isEqualToString:kSlideshowTransitionNone]){
             return [TransitionEffect new];
         }else if ([entry.path isEqualToString:kSlideshowTransitionFade]){
             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionFade];
-            /*
-            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"FadeEffect"
-                                                                                                ofType:@"cikernel"]
-                                                       duration:0.5];
-             */
         }else if ([entry.path isEqualToString:kSlideshowTransitionMoveIn]){
             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionMoveIn];
         }else if ([entry.path isEqualToString:kSlideshowTransitionPush]){
             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionPush];
         }else if ([entry.path isEqualToString:kSlideshowTransitionReveal]){
             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionReveal];
+        }else if ([entry.path isEqualToString:kSlideshowTransitionShutter]){
+            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Shutter"
+                                                                                                ofType:@"cikernel"]
+                                                       duration:0.5];
+        }else if ([entry.path isEqualToString:kSlideshowTransitionCartain]){
+            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Cartain"
+                                                                                                ofType:@"cikernel"]
+                                                       duration:2.0];
         }
     }else if (entry.type == effectCIKernel){
+        // カスタムエフェクト: Core Image Kernel Language
         return [[EffectByCIKernel alloc] initWithShaderPath:entry.path duration:entry.duration];
     }else if (entry.type == effectQCComposition){
         // not impremented

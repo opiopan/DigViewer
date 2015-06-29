@@ -21,3 +21,9 @@
 
 /* Class = "NSSegmentedCell"; zfe-8W-UF0.ibShadowedToolTips[1] = "Remove"; ObjectID = "zfe-8W-UF0"; */
 "zfe-8W-UF0.ibShadowedToolTips[1]" = "エフェクトを削除します";
+
+/* Class = "NSSegmentedCell"; neY-fy-deb.ibShadowedToolTips[0] = "Move up a selected effect"; ObjectID = "neY-fy-deb"; */
+"neY-fy-deb.ibShadowedToolTips[0]" = "選択したエフェクトを上に移動します";
+
+/* Class = "NSSegmentedCell"; neY-fy-deb.ibShadowedToolTips[1] = "Move down a selected effect"; ObjectID = "neY-fy-deb"; */
+"neY-fy-deb.ibShadowedToolTips[1]" = "選択したエフェクトを下に移動します";

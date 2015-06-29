@@ -24,6 +24,9 @@
 "SlideshowTransitionMoveIn" = "ムーブイン";
 "SlideshowTransitionPush" = "押し出し";
 "SlideshowTransitionReveal" = "スライド";
+"SlideshowTransitionShutter" = "シャッター";
+"SlideshowTransitionCartain" = "カーテン";
+
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image フィルター";

@@ -132,7 +132,7 @@
                     [editSheet editEffectForWindow:panel modalDelegate:weakSelf didEndSelector:@selector(didEndEditEffect:)];
                 }else{
                     // 既に登録済み
-                    [self showAlertSheetWithMessage:NSLocalizedString(@"CEMSG_ERROR_CONFLICT", nil) andSubtext:path];
+                    [self performSelector:@selector(showConflictErrorWithSubtext:) withObject:path afterDelay:0];
                 }
             }
         }];
@@ -168,6 +168,43 @@
     }
 
     _editSheet = nil;
+}
+
+- (void)showConflictErrorWithSubtext:(NSString*)subtext
+{
+    [self showAlertSheetWithMessage:NSLocalizedString(@"CEMSG_ERROR_CONFLICT", nil) andSubtext:subtext];
+}
+
+//-----------------------------------------------------------------------------------------
+// エフェクト上下移動
+//-----------------------------------------------------------------------------------------
+- (IBAction)moveUpOrDownEffect:(id)sender
+{
+    if (_effectsArrayController.selectedObjects && _effectsArrayController.selectedObjects.count > 0){
+        id target = _effectsArrayController.selectedObjects[0];
+        NSInteger index = [_effectsForEdit indexOfObject:target];
+        NSSegmentedControl* button = sender;
+        NSInteger selectedSegment = button.selectedSegment;
+        if (selectedSegment == 0){
+            /* 上に移動 */
+            if (index > 0){
+                [_effectsForEdit removeObject:target];
+                [_effectsForEdit insertObject:target atIndex:index - 1];
+                [self willChangeValueForKey:@"effects"];
+                [self didChangeValueForKey:@"effects"];
+                self.isChanged = YES;
+            }
+        }else{
+            /* 下に移動 */
+            if (index < _effectsForEdit.count - 1){
+                [_effectsForEdit removeObject:target];
+                [_effectsForEdit insertObject:target atIndex:index + 1];
+                [self willChangeValueForKey:@"effects"];
+                [self didChangeValueForKey:@"effects"];
+                self.isChanged = YES;
+            }
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------

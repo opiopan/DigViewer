@@ -21,12 +21,12 @@
 
 - (void)performTransition
 {
-    [self invokeDeletgateWhenDidEnd];
+    [self invokeDelegateWhenDidEnd];
 }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-- (void)invokeDeletgateWhenDidEnd
+- (void)invokeDelegateWhenDidEnd
 {
     if (_delegate && _didEndSelector){
         [_delegate performSelector:_didEndSelector withObject:nil];
