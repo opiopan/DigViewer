@@ -105,35 +105,12 @@
         NSOpenPanel* openPanel = [NSOpenPanel openPanel];
         openPanel.allowedFileTypes = @[@"cikernel", @"CIKERNEL"];
         
-        NSMutableArray* effects = _effectsForEdit;
         EditCustomEffectListController* __weak weakSelf = self;
-        _editSheet = [EditCustomEffectController new];
-        NSWindow* panel = _panel;
-        EditCustomEffectController* __weak editSheet = _editSheet;
         
         [openPanel beginSheetModalForWindow:_panel completionHandler:^(NSModalResponse response){
             if (response == NSModalResponseOK){
-                NSString* path = openPanel.URL.path;
-                EffectType type;
-                if ([[[path pathExtension] lowercaseString] isEqualToString:@"cikernel"]){
-                    type = effectCIKernel;
-                }else{
-                    type = effectQCComposition;
-                }
-                id entry = [SlideshowConfigController customEffectWithName:@"" type:type path:path duration:0];
-                NSInteger index = [effects indexOfObject:entry];
-                if (index == NSNotFound){
-                    editSheet.name = [path lastPathComponent];
-                    editSheet.duration = 1.0;
-                    editSheet.path = path;
-                    editSheet.type = type;
-                    editSheet.typeString = [entry valueForKey:@"typeString"];
-                    editSheet.isChanged = YES;
-                    [editSheet editEffectForWindow:panel modalDelegate:weakSelf didEndSelector:@selector(didEndEditEffect:)];
-                }else{
-                    // 既に登録済み
-                    [self performSelector:@selector(showConflictErrorWithSubtext:) withObject:path afterDelay:0];
-                }
+                [weakSelf performSelector:@selector(addCustomEffectWithPath:)
+                               withObject:openPanel.URL.path afterDelay:0];
             }
         }];
     }else if (selectedSegment == 1){
@@ -146,6 +123,32 @@
                               self, @selector(didEndConfirmRemovingEffect:returnCode:contextInfo:), nil, nil,
                               @"%@", [effect valueForKey:@"name"]);
         }
+    }
+}
+
+
+- (void)addCustomEffectWithPath:(NSString*)path
+{
+    EffectType type;
+    if ([[[path pathExtension] lowercaseString] isEqualToString:@"cikernel"]){
+        type = effectCIKernel;
+    }else{
+        type = effectQCComposition;
+    }
+    id entry = [SlideshowConfigController customEffectWithName:@"" type:type path:path duration:0];
+    NSInteger index = [_effectsForEdit indexOfObject:entry];
+    if (index == NSNotFound){
+        _editSheet = [EditCustomEffectController new];
+        _editSheet.name = [path lastPathComponent];
+        _editSheet.duration = 1.0;
+        _editSheet.path = path;
+        _editSheet.type = type;
+        _editSheet.typeString = [entry valueForKey:@"typeString"];
+        _editSheet.isChanged = YES;
+        [_editSheet editEffectForWindow:_panel modalDelegate:self didEndSelector:@selector(didEndEditEffect:)];
+    }else{
+        // 既に登録済み
+        [self showAlertSheetWithMessage:NSLocalizedString(@"CEMSG_ERROR_CONFLICT", nil) andSubtext:path];
     }
 }
 
@@ -168,11 +171,6 @@
     }
 
     _editSheet = nil;
-}
-
-- (void)showConflictErrorWithSubtext:(NSString*)subtext
-{
-    [self showAlertSheetWithMessage:NSLocalizedString(@"CEMSG_ERROR_CONFLICT", nil) andSubtext:subtext];
 }
 
 //-----------------------------------------------------------------------------------------

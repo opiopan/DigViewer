@@ -1,0 +1,15 @@
+uniform float STAGE1 = 0.4;
+uniform float STAGE2 = (1.0 - STAGE1);
+uniform float dMAGNIFY = 1.0;
+
+kernel vec4 MagnifyFade(sampler from, sampler to, float time, float scale)
+{
+    vec2 fpos = samplerCoord(from);
+    vec2 fcenter = samplerSize(from) * scale / 2.0;
+    vec2 tpos = samplerCoord(to);
+    vec2 tcenter = samplerSize(to) * scale / 2.0;
+    float alpha = time < STAGE1 ? 0.0 : (time - STAGE1) / STAGE2;
+    vec4 f = sample(from, fpos - ((fpos - fcenter) * dMAGNIFY * time));
+    vec4 t = sample(to, tpos - ((tpos - tcenter) * dMAGNIFY* (1.0 - time)));
+    return f * (1.0 - alpha) + t * alpha;
+}
