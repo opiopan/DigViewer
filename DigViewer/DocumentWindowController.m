@@ -474,6 +474,7 @@
     }else{
         if (slideshowController){
             [slideshowController cancelSlideshow];
+            [self.document removeWindowController:slideshowController];
         }else{
             [self didEndSlideshow];
         }

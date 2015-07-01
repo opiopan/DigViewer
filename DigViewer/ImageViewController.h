@@ -15,5 +15,7 @@
 @property (nonatomic) CGFloat zoomRatio;
 
 - (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition;
+- (void)beginSlideshow;
+- (void)endSlideshow;
 
 @end

@@ -27,6 +27,8 @@ static NSString* kCustomEffectType = @"type";
 static NSString* kCustomEffectPath = @"path";
 static NSString* kCustomEffectDuration = @"duration";
 
+typedef TransitionEffect* (^EffectFactory)(id);
+
 @interface EffectEntry : NSObject
 @property (nonatomic) NSString* name;
 @property (readonly, nonatomic) NSString* identifier;
@@ -34,6 +36,7 @@ static NSString* kCustomEffectDuration = @"duration";
 @property (readonly, nonatomic) NSString* typeString;
 @property (readonly, nonatomic) NSString* path;
 @property (nonatomic) CGFloat duration;
+@property (readonly, nonatomic) EffectFactory effectFactory;
 + (EffectEntry*)entryWithName:(NSString*)name type:(EffectType)type path:(NSString*)path duration:(CGFloat)duration;
 - (instancetype)initWithName:(NSString*)name type:(EffectType)type path:(NSString*)path duration:(CGFloat)duration;
 @end
@@ -42,6 +45,12 @@ static NSString* kCustomEffectDuration = @"duration";
 + (EffectEntry *)entryWithName:(NSString *)name type:(EffectType)type path:(NSString *)path duration:(CGFloat)duration
 {
     return [[EffectEntry alloc] initWithName:name type:type path:path duration:duration];
+}
+
++ (EffectEntry *)entryWithName:(NSString *)name type:(EffectType)type path:(NSString *)path duration:(CGFloat)duration
+                 effectFactory:(EffectFactory)factory
+{
+    return [[EffectEntry alloc] initWithName:name type:type path:path duration:duration effectFactory:factory];
 }
 
 - (instancetype)initWithName:(NSString *)name type:(EffectType)type path:(NSString *)path duration:(CGFloat)duration
@@ -54,19 +63,30 @@ static NSString* kCustomEffectDuration = @"duration";
         _duration = duration;
         _typeString = NSLocalizedString(@(EffectTypeString[_type]), nil);
         _identifier = _type == effectBuiltIn ? path : [@"custom:" stringByAppendingString:path];
+        if (_type == effectCIKernel){
+            _effectFactory = ^(EffectEntry* entry){
+                return [[EffectByCIKernel alloc] initWithShaderPath:entry.path duration:entry.duration];
+            };
+        }else if (_type == effectQCComposition){
+            // Not Impremented
+        }
+    }
+    return self;
+}
+
+- (instancetype)initWithName:(NSString *)name type:(EffectType)type path:(NSString *)path duration:(CGFloat)duration
+               effectFactory:(EffectFactory)factory
+{
+    self = [self initWithName:name type:type path:path duration:duration];
+    if (self){
+        _effectFactory = factory;
     }
     return self;
 }
 
 - (BOOL)isEqual:(id)object
 {
-    if ([[object class] isSubclassOfClass:[NSString class]]){
-        return [self.identifier isEqualToString:object];
-    }else if ([[object class] isSubclassOfClass:[self class]]){
-        return [self.identifier isEqualToString:[(EffectEntry*)object identifier]];
-    }else{
-        return NO;
-    }
+    return [self.identifier isEqualToString:[(EffectEntry*)object identifier]];
 }
 
 @end
@@ -120,25 +140,52 @@ static NSString* kCustomEffectDuration = @"duration";
         
         _builtInEffects = @[[EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionNone, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionNone
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             return [TransitionEffect new];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionFade, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionFade
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionFade];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionMoveIn, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionMoveIn
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionMoveIn];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionPush, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionPush
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionPush];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionReveal, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionReveal
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionReveal];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionShutter, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionShutter
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByCIKernel alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Shutter"
+                                                                                                           ofType:@"cikernel"]
+                                                                  duration:0.5];
+                                         }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionCartain, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionCartain
-                                              duration:0],
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByCIKernel alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Cartain"
+                                                                                                           ofType:@"cikernel"]
+                                                                  duration:2.0];
+                                         }],
                             ];
     }
     return self;
@@ -233,39 +280,11 @@ static NSString* kCustomEffectDuration = @"duration";
             break;
         }
     }
-    if (!entry){
+    if (entry){
+        return entry.effectFactory(entry);
+    }else{
         return nil;
     }
-
-    if (entry.type == effectBuiltIn){
-        // ビルトインエフェクト
-        if ([entry.path isEqualToString:kSlideshowTransitionNone]){
-            return [TransitionEffect new];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionFade]){
-            return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionFade];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionMoveIn]){
-            return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionMoveIn];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionPush]){
-            return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionPush];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionReveal]){
-            return [[BuiltinEffect alloc] initWithType:kSlideshowTransitionReveal];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionShutter]){
-            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Shutter"
-                                                                                                ofType:@"cikernel"]
-                                                       duration:0.5];
-        }else if ([entry.path isEqualToString:kSlideshowTransitionCartain]){
-            return [[EffectByCIKernel alloc] initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Cartain"
-                                                                                                ofType:@"cikernel"]
-                                                       duration:2.0];
-        }
-    }else if (entry.type == effectCIKernel){
-        // カスタムエフェクト: Core Image Kernel Language
-        return [[EffectByCIKernel alloc] initWithShaderPath:entry.path duration:entry.duration];
-    }else if (entry.type == effectQCComposition){
-        // not impremented
-    }
-    
-    return nil;
 }
 
 //-----------------------------------------------------------------------------------------

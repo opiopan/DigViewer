@@ -164,4 +164,22 @@
     [imageView moveToDirection:direction withTransition:transition];
 }
 
+- (void)beginSlideshow
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    imageView.enableGesture = NO;
+    imageView.isDrawingByLayer = YES;
+    imageView.backgroundColor = [NSColor blackColor];
+    imageView.magnificationFilter = ImageViewFilterBilinear;
+    imageView.minificationFilter = ImageViewFilterTrilinear;
+}
+
+- (void)endSlideshow
+{
+    ClickableImageView* imageView = (ClickableImageView*)self.view;
+    imageView.enableGesture = YES;
+    [self reflectImageViewConfig];
+    [self reflectGestureConfig];
+}
+
 @end

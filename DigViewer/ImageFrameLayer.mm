@@ -554,11 +554,14 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
 
 - (void)setBackgroundColor:(CGColorRef)backgroundColor
 {
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     if (backgroundColor){
         CFRetain(backgroundColor);
     }
     _imageBackgroundColor = backgroundColor;
     _currentLayer.backgroundColor = backgroundColor;
+    [CATransaction commit];
 }
 
 - (CGFloat)scale

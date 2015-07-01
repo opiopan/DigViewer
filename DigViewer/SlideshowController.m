@@ -102,7 +102,8 @@ static SlideshowController* _currentController;
 {
     _relationalImage = relationalImage;
     _imageViewController = (ImageViewController*)controller;
-    [_imageViewController setIsVisible:YES];
+    _imageViewController.isVisible = YES;
+    [_imageViewController beginSlideshow];
     if (screen){
         NSRect frame = screen.frame;
         frame.origin.x = 0;
@@ -181,16 +182,17 @@ static SlideshowController* _currentController;
         [_imageViewController setIsVisible:NO];
         [self close];
     }
-    if (_delegate && _didEndSelector){
-        [_delegate performSelector:_didEndSelector withObject:nil];
-    }
-    _currentController = nil;
-    
+    [_imageViewController endSlideshow];
     [NSCursor unhide];
     if (_activityToken){
         [_processInfo endActivity:_activityToken];
         _activityToken = nil;
     }
+    if (_delegate && _didEndSelector){
+        [_delegate performSelector:_didEndSelector withObject:nil];
+    }
+    _currentController = nil;
+    
 }
 #pragma clang diagnostic pop
 
