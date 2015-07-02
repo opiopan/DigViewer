@@ -171,7 +171,7 @@
     imageView.isDrawingByLayer = YES;
     imageView.backgroundColor = [NSColor blackColor];
     imageView.magnificationFilter = ImageViewFilterBilinear;
-    imageView.minificationFilter = ImageViewFilterTrilinear;
+    imageView.minificationFilter = ImageViewFilterBilinear;
 }
 
 - (void)endSlideshow
