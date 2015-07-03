@@ -1,0 +1,23 @@
+uniform float PI = 3.1415926;
+
+kernel vec4 Mosaic2(sampler from, sampler to, float time, float scale)
+{
+    vec2 size = samplerSize(from) * scale;
+    float maxunit = (size.x > size.y ? size.x : size.y) / 5.0;
+    //float ntime = time * 2.0 - 1.0;
+    float ntime = sin((time - 0.5) * PI);
+    ntime = sin((ntime * 0.5) * PI);
+    float unit = maxunit * (ntime < 0.0 ? 1.0 + ntime : 1.0 - ntime);
+    unit = unit < 1.0 ? 1.0 : unit;
+    float xmax = float(int(size.x / unit)) * unit;
+    float ymax = float(int(size.y / unit)) * unit;
+    vec2 pos = samplerCoord(from);
+    float x = float(int(pos.x / unit)) * unit + unit / 2.0;
+    x = x > xmax ? xmax : x;
+    float y = float(int(pos.y / unit)) * unit + unit / 2.0;
+    y = y > ymax ? ymax : y;
+    vec4 color = ntime < 0.0 ? sample(from, vec2(x,y)) : sample (to, vec2(x,y));
+    float gray = color.r *  0.298912 + color.g * 0.586611 + color.b * 0.114478;
+    float mix = ntime < 0.0 ? ntime * -1.0 : ntime;
+    return color * mix + vec4(gray, gray, gray, 1.0) * (1.0 - mix);
+}
