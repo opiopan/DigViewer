@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
@@ -104,6 +104,11 @@
                                     </textFieldCell>
                                     <connections>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Eyh-HS-CpX"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="tiH-2w-2sT">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <slider verticalHuggingPriority="750" id="sZj-mZ-XVl">
@@ -126,6 +131,11 @@
                                     <connections>
                                         <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconSizeRepresentation" id="sUk-r7-iWA"/>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="dRX-Bo-GAd"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="DTc-T0-PO0">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HLM-kL-kZR">
@@ -138,6 +148,11 @@
                                     </textFieldCell>
                                     <connections>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="zQI-6i-baA"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Mdf-0N-Zdg">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="YGc-uA-N1G">
@@ -150,6 +165,11 @@
                                     </textFieldCell>
                                     <connections>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Vg4-3g-f40"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="QnA-em-R9R">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <slider verticalHuggingPriority="750" id="Ru2-Ug-v64">
@@ -172,6 +192,11 @@
                                     <connections>
                                         <binding destination="-2" name="value" keyPath="self.thumbnailConfig.folderIconOpacityRepresentation" id="NBZ-NV-NoX"/>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="RCC-qN-1Un"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="Dm4-PF-GyY">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="15E-0z-DGD">
@@ -184,6 +209,11 @@
                                     </textFieldCell>
                                     <connections>
                                         <binding destination="-2" name="enabled" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="bPA-e5-1I1"/>
+                                        <binding destination="-2" name="textColor" keyPath="self.thumbnailConfig.isVisibleFolderIcon" id="c4n-Yg-MDk">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">DisableTextColorTransformer</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textField>
                                 <button verticalHuggingPriority="750" id="4OE-Oh-9mW">

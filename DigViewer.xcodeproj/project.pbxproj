@@ -63,6 +63,7 @@
 		7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4400791AFDC697006CE7D6 /* ThumbnailPreferences.strings */; };
 		7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B467D661B12017A00969442 /* TouchGestureRecognizer.m */; };
 		7B467D6A1B12083000969442 /* TwoFingerGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B467D691B12083000969442 /* TwoFingerGestureRecognizer.m */; };
+		7B4BED981B47A6F300E20A5A /* DisableTextColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BED971B47A6F300E20A5A /* DisableTextColorTransformer.m */; };
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
@@ -274,6 +275,7 @@
 		7B467D661B12017A00969442 /* TouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchGestureRecognizer.m; sourceTree = "<group>"; };
 		7B467D681B12083000969442 /* TwoFingerGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFingerGestureRecognizer.h; sourceTree = "<group>"; };
 		7B467D691B12083000969442 /* TwoFingerGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFingerGestureRecognizer.m; sourceTree = "<group>"; };
+		7B4BED971B47A6F300E20A5A /* DisableTextColorTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisableTextColorTransformer.m; sourceTree = "<group>"; };
 		7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
 		7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
 		7B4E8E1016BEAAC3001C5D09 /* BasicBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicBackgroundView.h; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 				38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */,
 				7BD874911AD13A3C009C43BF /* NSString+escaping.h */,
 				7BD874921AD13A3C009C43BF /* NSString+escaping.m */,
+				7B4BED971B47A6F300E20A5A /* DisableTextColorTransformer.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				7BA81C011AF77C54001E40D7 /* EditImageSetSheetController.m in Sources */,
 				7B74FB8D1B3E35CA005BC748 /* SlideshowConfigController.m in Sources */,
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
+				7B4BED981B47A6F300E20A5A /* DisableTextColorTransformer.m in Sources */,
 				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,

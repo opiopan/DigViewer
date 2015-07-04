@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
@@ -330,20 +330,6 @@ DQ
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="r1P-e4-v4i">
-                                    <rect key="frame" x="13" y="95" width="235" height="48"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <string key="title">Caution:
-This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branch, and build with debug option.</string>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="pfv-YF-3Sx" name="value" keyPath="self.caution" id="wQp-nJ-y98"/>
-                                    </connections>
-                                </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HKi-yH-WdT">
                                     <rect key="frame" x="263" y="128" width="219" height="56"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -352,6 +338,20 @@ This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branc
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                </textField>
+                                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="r1P-e4-v4i">
+                                    <rect key="frame" x="251" y="113" width="242" height="81"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
+                                        <font key="font" size="12" name="Arial-BoldMT"/>
+                                        <string key="title">Caution:
+This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branch, and build with debug option.</string>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="pfv-YF-3Sx" name="value" keyPath="self.caution" id="wQp-nJ-y98"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                         </view>
