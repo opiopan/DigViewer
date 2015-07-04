@@ -23,6 +23,8 @@
 "SlideshowTransitionReveal" = "Reveal";
 "SlideshowTransitionShutter" = "Shutter";
 "SlideshowTransitionCartain" = "Cartain";
+"SlideshowTransitionMosaic" = "Mosaic";
+"SlideshowTransitionZoom" = "Zoom";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";

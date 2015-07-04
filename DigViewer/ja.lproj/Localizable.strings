@@ -26,6 +26,8 @@
 "SlideshowTransitionReveal" = "スライド";
 "SlideshowTransitionShutter" = "シャッター";
 "SlideshowTransitionCartain" = "カーテン";
+"SlideshowTransitionMosaic" = "モザイク";
+"SlideshowTransitionZoom" = "ズーム";
 
 
 // カスタム遷移エフェクト種別

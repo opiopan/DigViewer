@@ -16,6 +16,8 @@ NSString* kSlideshowTransitionPush = @"SlideshowTransitionPush";
 NSString* kSlideshowTransitionReveal = @"SlideshowTransitionReveal";
 NSString* kSlideshowTransitionShutter = @"SlideshowTransitionShutter";
 NSString* kSlideshowTransitionCartain = @"SlideshowTransitionCartain";
+NSString* kSlideshowTransitionMosaic = @"SlideshowTransitionMosaic";
+NSString* kSlideshowTransitionZoom = @"SlideshowTransitionZoom";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -183,6 +185,24 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                          effectFactory:^(EffectEntry* entry){
                                              id rc = [EffectByCIKernel alloc];
                                              return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Cartain"
+                                                                                                           ofType:@"cikernel"]
+                                                                  duration:2.0];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionMosaic, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionMosaic
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByCIKernel alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Mosaic"
+                                                                                                           ofType:@"cikernel"]
+                                                                  duration:3.0];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionZoom, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionZoom
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByCIKernel alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Zoom"
                                                                                                            ofType:@"cikernel"]
                                                                   duration:2.0];
                                          }],
