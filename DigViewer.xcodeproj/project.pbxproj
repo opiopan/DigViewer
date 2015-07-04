@@ -106,6 +106,7 @@
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
+		7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA01D441B47EA3D00ADF567 /* BlurTransition.m */; };
 		7BA1F9DD1B417719000D24D5 /* Cartain.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */; };
 		7BA1F9DE1B417719000D24D5 /* Shutter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
 		7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
@@ -345,6 +346,8 @@
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
 		7B9F9E8518E7D91D0042337F /* GPSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMapView.m; sourceTree = "<group>"; };
 		7B9F9E8718E7DBBA0042337F /* GPSMapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GPSMapView.js; sourceTree = "<group>"; };
+		7BA01D431B47EA3D00ADF567 /* BlurTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurTransition.h; sourceTree = "<group>"; };
+		7BA01D441B47EA3D00ADF567 /* BlurTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurTransition.m; sourceTree = "<group>"; };
 		7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Cartain.cikernel; sourceTree = "<group>"; };
 		7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Shutter.cikernel; sourceTree = "<group>"; };
 		7BA7AF2D1911210100BFCBE2 /* PreferencesDefaultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDefaultsController.h; sourceTree = "<group>"; };
@@ -631,6 +634,8 @@
 				7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */,
 				7B336EC71B399E8E00D01CA6 /* EffectByCIKernel.h */,
 				7B336EC81B399E8E00D01CA6 /* EffectByCIKernel.m */,
+				7BA01D431B47EA3D00ADF567 /* BlurTransition.h */,
+				7BA01D441B47EA3D00ADF567 /* BlurTransition.m */,
 				7B336ECA1B39B32400D01CA6 /* Core Image Kernel */,
 			);
 			name = "Transition Effects";
@@ -1088,6 +1093,7 @@
 				7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
+				7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,

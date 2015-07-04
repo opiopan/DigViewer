@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EditLensSheetController">
@@ -210,12 +210,12 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="e7F-EB-nnm" name="value" keyPath="selection.apertureMax" id="NtY-tp-WnX"/>
                                         <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isSingleFocalLength" id="DRW-NS-aEa">
                                             <dictionary key="options">
                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                             </dictionary>
                                         </binding>
-                                        <binding destination="e7F-EB-nnm" name="value" keyPath="selection.apertureMax" id="NtY-tp-WnX"/>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-Qk-5yU">
@@ -235,12 +235,12 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="e7F-EB-nnm" name="value" keyPath="selection.fovMax" id="Y2J-va-xLs"/>
                                         <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isSingleFocalLength" id="0ow-NH-Hs9">
                                             <dictionary key="options">
                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                             </dictionary>
                                         </binding>
-                                        <binding destination="e7F-EB-nnm" name="value" keyPath="selection.fovMax" id="Y2J-va-xLs"/>
                                     </connections>
                                 </textField>
                                 <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZd-hJ-8Y7">
@@ -270,15 +270,15 @@
                                     </cells>
                                 </matrix>
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q9g-rN-ZrT">
-                                    <rect key="frame" x="297" y="12" width="166" height="32"/>
-                                    <buttonCell key="cell" type="push" title="Allowed cameras..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k5X-iP-5Na">
+                                    <rect key="frame" x="298" y="14" width="164" height="28"/>
+                                    <buttonCell key="cell" type="push" title="Allowed cameras..." bezelStyle="rounded" alignment="center" controlSize="small" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k5X-iP-5Na">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
                                 </button>
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNW-UN-qDC">
-                                    <rect key="frame" x="463" y="12" width="150" height="32"/>
-                                    <buttonCell key="cell" type="push" title="Custom conditions..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aad-Yt-YDm">
+                                    <rect key="frame" x="464" y="14" width="148" height="28"/>
+                                    <buttonCell key="cell" type="push" title="Custom conditions..." bezelStyle="rounded" alignment="center" controlSize="small" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aad-Yt-YDm">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>

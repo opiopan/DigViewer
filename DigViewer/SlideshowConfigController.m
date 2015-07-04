@@ -18,6 +18,7 @@ NSString* kSlideshowTransitionShutter = @"SlideshowTransitionShutter";
 NSString* kSlideshowTransitionCartain = @"SlideshowTransitionCartain";
 NSString* kSlideshowTransitionMosaic = @"SlideshowTransitionMosaic";
 NSString* kSlideshowTransitionZoom = @"SlideshowTransitionZoom";
+NSString* kSlideshowTransitionBlur = @"SlideshowTransitionBlur";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -206,6 +207,12 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                                                                                            ofType:@"cikernel"]
                                                                   duration:2.0];
                                          }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionBlur, nil)
+                                                    type:effectBuiltIn path:kSlideshowTransitionBlur
+                                                duration:0
+                                           effectFactory:^(EffectEntry* entry){
+                                               return [BlurTransition new];
+                                           }],
                             ];
     }
     return self;

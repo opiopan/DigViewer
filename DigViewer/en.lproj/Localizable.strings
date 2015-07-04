@@ -25,6 +25,7 @@
 "SlideshowTransitionCartain" = "Cartain";
 "SlideshowTransitionMosaic" = "Mosaic";
 "SlideshowTransitionZoom" = "Zoom";
+"SlideshowTransitionBlur" = "Blur";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";
