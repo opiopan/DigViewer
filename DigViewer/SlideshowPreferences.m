@@ -84,7 +84,6 @@
     // トランジション用タイマー駆動
     _effectType = _slideshowConfig.transition;
     _effect = _slideshowConfig.transitionEffect;
-    [self updateTimer:self];
 }
 
 //-----------------------------------------------------------------------------------------
