@@ -37,6 +37,7 @@
 // カスタム遷移エフェクト編集時のメッセージ
 "CEMSG_ERROR_CONFLICT" = "指定されたファイルは既に登録されています。";
 "CEMSG_CONF_REMOVE" = "選択したカスタムエフェクトを削除してもよろしいですか?";
+"CEMSG_ERROR_INVALID_COMPOSITION" = "指定された Quartz Composer コンポジションファイルはDigViewerが実行できない形式です。";
 
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "選択したレンズプロファイルを削除してもよろしいですか？";

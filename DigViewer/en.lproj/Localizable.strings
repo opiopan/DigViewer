@@ -34,6 +34,7 @@
 // カスタム遷移エフェクト編集時のメッセージ
 "CEMSG_ERROR_CONFLICT" = "Specified file has been already registered.";
 "CEMSG_CONF_REMOVE" = "Are you sure you want to remove selected custom effect?";
+"CEMSG_ERROR_INVALID_COMPOSITION" = "Specified Quartz Composer Composition file is a format which DigViewer could not run.";
 
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "Are you sure you want to remove selected lens profile?";

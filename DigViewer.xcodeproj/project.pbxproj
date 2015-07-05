@@ -140,6 +140,7 @@
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
+		7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */; };
 		7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */; };
 		7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6191B1F2787009619E2 /* SlideshowPreferences.xib */; };
 		7BE7B61E1B1F27B1009619E2 /* RenderingPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B61C1B1F27B1009619E2 /* RenderingPreferences.png */; };
@@ -394,6 +395,8 @@
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
+		7BD9DEBB1B49307C005FBC5B /* EffectByQCComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByQCComposition.h; sourceTree = "<group>"; };
+		7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectByQCComposition.m; sourceTree = "<group>"; };
 		7BE7B6171B1F26E7009619E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RenderingPreferences.xib; sourceTree = "<group>"; };
 		7BE7B61A1B1F2787009619E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SlideshowPreferences.xib; sourceTree = "<group>"; };
 		7BE7B61C1B1F27B1009619E2 /* RenderingPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RenderingPreferences.png; path = resources/RenderingPreferences.png; sourceTree = "<group>"; };
@@ -634,6 +637,8 @@
 				7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */,
 				7B336EC71B399E8E00D01CA6 /* EffectByCIKernel.h */,
 				7B336EC81B399E8E00D01CA6 /* EffectByCIKernel.m */,
+				7BD9DEBB1B49307C005FBC5B /* EffectByQCComposition.h */,
+				7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */,
 				7BA01D431B47EA3D00ADF567 /* BlurTransition.h */,
 				7BA01D441B47EA3D00ADF567 /* BlurTransition.m */,
 				7B336ECA1B39B32400D01CA6 /* Core Image Kernel */,
@@ -1091,6 +1096,7 @@
 				7B553BC31AE1F83600618590 /* Lens.m in Sources */,
 				7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */,
 				7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */,
+				7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */,

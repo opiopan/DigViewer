@@ -9,6 +9,7 @@
 #import "EditCustomEffectListController.h"
 #import "SlideshowConfigController.h"
 #import "EditCustomEffectController.h"
+#import "EffectByQCComposition.h"
 
 @implementation EditCustomEffectListController{
     NSMutableArray* _effectsForEdit;
@@ -103,7 +104,7 @@
     if (selectedSegment == 0){
         // adding
         NSOpenPanel* openPanel = [NSOpenPanel openPanel];
-        openPanel.allowedFileTypes = @[@"cikernel", @"CIKERNEL"];
+        openPanel.allowedFileTypes = @[@"cikernel", @"CIKERNEL", @"qtz", @"QTZ"];
         
         EditCustomEffectListController* __weak weakSelf = self;
         
@@ -130,17 +131,24 @@
 - (void)addCustomEffectWithPath:(NSString*)path
 {
     EffectType type;
+    CGFloat duration;
     if ([[[path pathExtension] lowercaseString] isEqualToString:@"cikernel"]){
         type = effectCIKernel;
+        duration = 1.0;
     }else{
+        if (![EffectByQCComposition validateFile:path]){
+            // コンポジションファイルの仕様が不当
+            [self showAlertSheetWithMessage:NSLocalizedString(@"CEMSG_ERROR_INVALID_COMPOSITION", nil) andSubtext:path];
+        }
         type = effectQCComposition;
+        duration = 1.0;
     }
     id entry = [SlideshowConfigController customEffectWithName:@"" type:type path:path duration:0];
     NSInteger index = [_effectsForEdit indexOfObject:entry];
     if (index == NSNotFound){
         _editSheet = [EditCustomEffectController new];
         _editSheet.name = [path lastPathComponent];
-        _editSheet.duration = 1.0;
+        _editSheet.duration = duration;
         _editSheet.path = path;
         _editSheet.type = type;
         _editSheet.typeString = [entry valueForKey:@"typeString"];

@@ -9,4 +9,5 @@
 #import "TransitionEffect.h"
 #import "BuiltinEffect.h"
 #import "EffectByCIKernel.h"
+#import "EffectByQCComposition.h"
 #import "BlurTransition.h"

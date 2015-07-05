@@ -71,7 +71,9 @@ typedef TransitionEffect* (^EffectFactory)(id);
                 return [[EffectByCIKernel alloc] initWithShaderPath:entry.path duration:entry.duration];
             };
         }else if (_type == effectQCComposition){
-            // Not Impremented
+            _effectFactory = ^(EffectEntry* entry){
+                return [[EffectByQCComposition alloc] initWithShaderPath:entry.path duration:entry.duration];
+            };
         }
     }
     return self;
