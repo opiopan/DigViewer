@@ -296,7 +296,7 @@ DQ
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DigViewer" id="ARt-57-qu2"/>
                                 </imageView>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WJx-zy-TBg">
-                                    <rect key="frame" x="259" y="110" width="227" height="17"/>
+                                    <rect key="frame" x="259" y="107" width="227" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
                                         <font key="font" metaFont="cellTitle"/>
@@ -308,7 +308,7 @@ DQ
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="UNe-gV-lo7">
-                                    <rect key="frame" x="255" y="58" width="243" height="17"/>
+                                    <rect key="frame" x="255" y="56" width="243" height="19"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="sVe-Z7-my4">
                                         <font key="font" metaFont="miniSystem"/>
@@ -322,7 +322,7 @@ DQ
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WqM-DF-HkZ">
-                                    <rect key="frame" x="255" y="36" width="235" height="22"/>
+                                    <rect key="frame" x="255" y="27" width="235" height="31"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Special thanks to Ninataki for many contributions and ideas to improve DigViewer." allowsEditingTextAttributes="YES" id="R3f-cu-87c">
                                         <font key="font" metaFont="miniSystem"/>
