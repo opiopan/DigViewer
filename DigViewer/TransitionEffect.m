@@ -19,9 +19,17 @@
     return self;
 }
 
+- (void)prepareTransitionOnLayer:(CALayer *)layer
+{
+}
+
 - (void)performTransition
 {
     [self invokeDelegateWhenDidEnd];
+}
+
+- (void)cleanUpTransition
+{
 }
 
 #pragma clang diagnostic push
@@ -33,5 +41,24 @@
     }
 }
 #pragma clang diagnostic pop
+
+- (CGImageRef)CGImageFromLayer:(CALayer *)layer
+{
+    CGSize imageSize = layer.frame.size;
+    imageSize.width *= layer.contentsScale;
+    imageSize.height *= layer.contentsScale;
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    
+    CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height,
+                                                 8, 4 * imageSize.width, colorSpace,kCGImageAlphaPremultipliedLast);
+    if (context){
+        CGContextScaleCTM(context, layer.contentsScale, layer.contentsScale);
+        [layer renderInContext:context];
+        return CGBitmapContextCreateImage(context);
+    }else{
+        return nil;
+    }
+}
 
 @end

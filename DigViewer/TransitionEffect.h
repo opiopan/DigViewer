@@ -20,7 +20,12 @@
 @property (nonatomic) id fromImage;
 @property (nonatomic) id toImage;
 
+- (void)prepareTransitionOnLayer:(CALayer*)layer;
 - (void)performTransition;
+- (void)cleanUpTransition;
+
 - (void)invokeDelegateWhenDidEnd;
+
+- (CGImageRef)CGImageFromLayer:(CALayer*)layer;
 
 @end

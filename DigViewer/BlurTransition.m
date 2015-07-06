@@ -14,6 +14,8 @@
     CIFilter* _toBlur;
 }
 
+static const CGFloat MAX_RADIUS = 50;
+
 //-----------------------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------------------
@@ -33,9 +35,28 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// 遷移環境準備
+//-----------------------------------------------------------------------------------------
+- (void)prepareTransitionOnLayer:(CALayer *)layer
+{
+    // いわゆる暖機運転的なもの
+    CGImageRef image = [self CGImageFromLayer:layer];
+    CIImage* input = [CIImage imageWithCGImage:image];
+    for (int i = 0; i < MAX_RADIUS; i++){
+        [_fromBlur setValue:@100 forKey:@"inputRadius"];
+        [_fromBlur setValue:input forKey:@"inputImage"];
+        CIImage* translatedImage = [_fromBlur outputImage];
+        [_fromBlur setValue:nil forKey:@"inputImage"];
+        [_toBlur setValue:@100 forKey:@"inputRadius"];
+        [_toBlur setValue:input forKey:@"inputImage"];
+        translatedImage = [_toBlur outputImage];
+        translatedImage = nil;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // 遷移開始
 //-----------------------------------------------------------------------------------------
-static const CGFloat MAX_RADIUS = 50;
 - (void)performTransition
 {
     [CATransaction begin];
@@ -101,6 +122,18 @@ static const CGFloat MAX_RADIUS = 50;
     [CATransaction commit];
     
     [self invokeDelegateWhenDidEnd];
+}
+
+//-----------------------------------------------------------------------------------------
+// 遷移環境クリーンアップ
+//-----------------------------------------------------------------------------------------
+- (void)cleanUpTransition
+{
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    self.fromLayer.filters = nil;
+    self.toLayer.filters = nil;
+    [CATransaction commit];
 }
 
 @end

@@ -134,6 +134,7 @@ static SlideshowController* _currentController;
     
     _transitionType = _config.transition;
     _transitionEffect = _config.transitionEffect;
+    [_transitionEffect prepareTransitionOnLayer:_imageViewController.view.layer];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:_config.interval.doubleValue target:self
                                             selector:@selector(moveToNextImage:)
@@ -149,8 +150,10 @@ static SlideshowController* _currentController;
     id nextImage = [_imageAccessor nextObjectOfObject:_relationalImage];
     if (nextImage){
         if (![_transitionType isEqualToString:_config.transition]){
+            [_transitionEffect cleanUpTransition];
             _transitionType = _config.transition;
             _transitionEffect = _config.transitionEffect;
+            [_transitionEffect prepareTransitionOnLayer:_imageViewController.view.layer];
         }
         [_imageViewController moveToDirection:RelationalImageNext withTransition:_transitionEffect];
         _relationalImage = nextImage;
@@ -175,6 +178,7 @@ static SlideshowController* _currentController;
 {
     [_timer invalidate];
     _canceled = YES;
+    [_transitionEffect cleanUpTransition];
     
     if (_window){
         [self.window setFrame:NSZeroRect display:YES];

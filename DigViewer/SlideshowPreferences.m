@@ -84,6 +84,7 @@
     // トランジション用タイマー駆動
     _effectType = _slideshowConfig.transition;
     _effect = _slideshowConfig.transitionEffect;
+    [_effect prepareTransitionOnLayer:_imageView.layer];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -156,14 +157,17 @@ static CGFloat TRANSITION_INTERVAL = 2;
     }else{
         [_timerForTransition invalidate];
         _timerForTransition = nil;
+        [_effect cleanUpTransition];
     }
 }
 
 - (void) proceedTransition:(NSTimer*)timer
 {
     if (![_effectType isEqualToString:_slideshowConfig.transition]){
+        [_effect cleanUpTransition];
         _effectType = _slideshowConfig.transition;
         _effect = _slideshowConfig.transitionEffect;
+        [_effect prepareTransitionOnLayer:_imageView.layer];
     }
     [_imageView moveToDirection:RelationalImageNext withTransition:_effect];
 }
@@ -175,6 +179,7 @@ static CGFloat TRANSITION_INTERVAL = 2;
     if (![_preferencesView.window isBelongToResponderChain:_focusingField]){
         [_timerForTransition invalidate];
         _timerForTransition = nil;
+        [_effect cleanUpTransition];
     }else{
         _timerForTransition = [NSTimer scheduledTimerWithTimeInterval:TRANSITION_INTERVAL target:self
                                                              selector:@selector(proceedTransition:)
