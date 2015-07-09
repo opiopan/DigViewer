@@ -19,6 +19,9 @@ NSString* kSlideshowTransitionCartain = @"SlideshowTransitionCartain";
 NSString* kSlideshowTransitionMosaic = @"SlideshowTransitionMosaic";
 NSString* kSlideshowTransitionZoom = @"SlideshowTransitionZoom";
 NSString* kSlideshowTransitionBlur = @"SlideshowTransitionBlur";
+NSString* kSlideshowTransitionMod = @"SlideshowTransitionMod";
+NSString* kSlideshowTransitionRipple = @"SlideshowTransitionRipple";
+NSString* kSlideshowTransitionBurnOut = @"SlideshowTransitionBurnOut";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -215,6 +218,33 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                            effectFactory:^(EffectEntry* entry){
                                                return [BlurTransition new];
                                            }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionMod, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionMod
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Mod"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:1.0];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionRipple, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionRipple
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Ripple"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:1.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionBurnOut, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionBurnOut
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"BurnOut"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:5.5];
+                                         }],
                             ];
     }
     return self;

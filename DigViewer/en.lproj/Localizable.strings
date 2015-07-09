@@ -26,6 +26,9 @@
 "SlideshowTransitionMosaic" = "Mosaic";
 "SlideshowTransitionZoom" = "Zoom";
 "SlideshowTransitionBlur" = "Blur";
+"SlideshowTransitionMod" = "Modulation";
+"SlideshowTransitionRipple" = "Ripple";
+"SlideshowTransitionBurnOut" = "Burn Out";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";

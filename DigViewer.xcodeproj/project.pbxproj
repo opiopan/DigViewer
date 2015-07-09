@@ -94,7 +94,6 @@
 		7B74FB801B3AC911005BC748 /* EffectByCIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */; };
 		7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
 		7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
-		7B74FB861B3AF118005BC748 /* TestTransitionEffect.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB851B3AF118005BC748 /* TestTransitionEffect.qtz */; };
 		7B74FB8B1B3E24B4005BC748 /* EditCustomEffectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB8A1B3E24B4005BC748 /* EditCustomEffectListController.m */; };
 		7B74FB8D1B3E35CA005BC748 /* SlideshowConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB8C1B3E35CA005BC748 /* SlideshowConfigController.m */; };
 		7B74FB921B3E933A005BC748 /* EditCustomEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB911B3E933A005BC748 /* EditCustomEffectController.m */; };
@@ -134,6 +133,9 @@
 		7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BB4E6241ADA30F70076630A /* LensPreferences.strings */; };
 		7BBEE9F21ADD4AB60047DF50 /* DraggingSourceTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */; };
 		7BC667A318B05213000CB995 /* InspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC667A518B05213000CB995 /* InspectorView.xib */; };
+		7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */; };
+		7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A61B4E70B500FCFD7A /* Mod.qtz */; };
+		7BCA29AA1B4E70B500FCFD7A /* Ripple.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */; };
 		7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */; };
 		7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */; };
 		7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */; };
@@ -386,6 +388,9 @@
 		7BBEE9F01ADD4AB60047DF50 /* DraggingSourceTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggingSourceTreeController.h; sourceTree = "<group>"; };
 		7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggingSourceTreeController.m; sourceTree = "<group>"; };
 		7BC667A418B05213000CB995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InspectorView.xib; sourceTree = "<group>"; };
+		7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = BurnOut.qtz; path = resources/BurnOut.qtz; sourceTree = "<group>"; };
+		7BCA29A61B4E70B500FCFD7A /* Mod.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Mod.qtz; path = resources/Mod.qtz; sourceTree = "<group>"; };
+		7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Ripple.qtz; path = resources/Ripple.qtz; sourceTree = "<group>"; };
 		7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailConfigController.h; sourceTree = "<group>"; };
 		7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailConfigController.m; sourceTree = "<group>"; };
 		7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailSampleView.h; sourceTree = "<group>"; };
@@ -642,6 +647,7 @@
 				7BA01D431B47EA3D00ADF567 /* BlurTransition.h */,
 				7BA01D441B47EA3D00ADF567 /* BlurTransition.m */,
 				7B336ECA1B39B32400D01CA6 /* Core Image Kernel */,
+				7BCA29A41B4E703D00FCFD7A /* QC Composition */,
 			);
 			name = "Transition Effects";
 			sourceTree = "<group>";
@@ -840,6 +846,16 @@
 			name = "Document Window and Relatives";
 			sourceTree = "<group>";
 		};
+		7BCA29A41B4E703D00FCFD7A /* QC Composition */ = {
+			isa = PBXGroup;
+			children = (
+				7BCA29A61B4E70B500FCFD7A /* Mod.qtz */,
+				7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */,
+				7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */,
+			);
+			name = "QC Composition";
+			sourceTree = "<group>";
+		};
 		7BF27647191BB2370022E89D /* For Testing */ = {
 			isa = PBXGroup;
 			children = (
@@ -951,8 +967,8 @@
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
-				7B74FB861B3AF118005BC748 /* TestTransitionEffect.qtz in Resources */,
 				7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */,
+				7BCA29AA1B4E70B500FCFD7A /* Ripple.qtz in Resources */,
 				7B74FB931B3EC854005BC748 /* EditCustomEffectList.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
@@ -974,11 +990,13 @@
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
 				7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
+				7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,
 				7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
+				7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
