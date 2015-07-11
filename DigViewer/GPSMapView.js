@@ -99,6 +99,10 @@ function initialize() {
 
 function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc, fovg) {
     if (map){
+        var streetView = map.getStreetView();
+        if (streetView){
+            streetView.setVisible(false);
+        }
         if (!imageLocation){
             map.setZoom(zoomLevel);
         }
