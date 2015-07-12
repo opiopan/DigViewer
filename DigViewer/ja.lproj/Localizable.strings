@@ -32,6 +32,9 @@
 "SlideshowTransitionMod" = "変調";
 "SlideshowTransitionRipple" = "波紋";
 "SlideshowTransitionBurnOut" = "焼却";
+"SlideshowTransitionColorDivider" = "色分割";
+"SlideshowTransitionAfterImage" = "残像";
+"SlideshowTransitionDoor" = "ドア";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image フィルター";

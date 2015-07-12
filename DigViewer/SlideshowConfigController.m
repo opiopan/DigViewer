@@ -22,6 +22,9 @@ NSString* kSlideshowTransitionBlur = @"SlideshowTransitionBlur";
 NSString* kSlideshowTransitionMod = @"SlideshowTransitionMod";
 NSString* kSlideshowTransitionRipple = @"SlideshowTransitionRipple";
 NSString* kSlideshowTransitionBurnOut = @"SlideshowTransitionBurnOut";
+NSString* kSlideshowTransitionColorDivider = @"SlideshowTransitionColorDivider";
+NSString* kSlideshowTransitionAfterImage = @"SlideshowTransitionAfterImage";
+NSString* kSlideshowTransitionDoor = @"SlideshowTransitionDoor";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -244,6 +247,33 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                              return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"BurnOut"
                                                                                                            ofType:@"qtz"]
                                                                   duration:5.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionColorDivider, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionColorDivider
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"ColorDivider"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:1.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionAfterImage, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionAfterImage
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByCIKernel alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Afterimage"
+                                                                                                           ofType:@"cikernel"]
+                                                                  duration:1.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionDoor, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionDoor
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Door"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:1.5];
                                          }],
                             ];
     }

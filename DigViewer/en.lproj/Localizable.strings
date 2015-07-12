@@ -29,6 +29,9 @@
 "SlideshowTransitionMod" = "Modulation";
 "SlideshowTransitionRipple" = "Ripple";
 "SlideshowTransitionBurnOut" = "Burn Out";
+"SlideshowTransitionColorDivider" = "Color Divider";
+"SlideshowTransitionAfterImage" = "Afterimage";
+"SlideshowTransitionDoor" = "Door";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";

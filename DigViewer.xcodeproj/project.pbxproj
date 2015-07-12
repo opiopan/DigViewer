@@ -136,6 +136,10 @@
 		7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */; };
 		7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A61B4E70B500FCFD7A /* Mod.qtz */; };
 		7BCA29AA1B4E70B500FCFD7A /* Ripple.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */; };
+		7BCF7F051B527FE5001B0A7A /* Afterimage.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */; };
+		7BCF7F081B52802C001B0A7A /* ColorDivider.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F061B52802C001B0A7A /* ColorDivider.qtz */; };
+		7BCF7F091B52802C001B0A7A /* Door.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F071B52802C001B0A7A /* Door.qtz */; };
+		7BCF7F0A1B52809C001B0A7A /* Afterimage.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */; };
 		7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */; };
 		7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */; };
 		7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */; };
@@ -199,6 +203,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				7BCF7F0A1B52809C001B0A7A /* Afterimage.cikernel in CopyFiles */,
 				7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */,
 				7B661A6F1B47848000C42D2C /* Zoom.cikernel in CopyFiles */,
 				7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */,
@@ -391,6 +396,9 @@
 		7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = BurnOut.qtz; path = resources/BurnOut.qtz; sourceTree = "<group>"; };
 		7BCA29A61B4E70B500FCFD7A /* Mod.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Mod.qtz; path = resources/Mod.qtz; sourceTree = "<group>"; };
 		7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Ripple.qtz; path = resources/Ripple.qtz; sourceTree = "<group>"; };
+		7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Afterimage.cikernel; path = resources/Afterimage.cikernel; sourceTree = "<group>"; };
+		7BCF7F061B52802C001B0A7A /* ColorDivider.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = ColorDivider.qtz; path = resources/ColorDivider.qtz; sourceTree = "<group>"; };
+		7BCF7F071B52802C001B0A7A /* Door.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Door.qtz; path = resources/Door.qtz; sourceTree = "<group>"; };
 		7BD1B4FE1AEBEE93008DF5C2 /* ThumbnailConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailConfigController.h; sourceTree = "<group>"; };
 		7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailConfigController.m; sourceTree = "<group>"; };
 		7BD1B5011AEC7A4F008DF5C2 /* ThumbnailSampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailSampleView.h; sourceTree = "<group>"; };
@@ -452,6 +460,7 @@
 				7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */,
 				7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */,
 				7B661A6B1B47840A00C42D2C /* Zoom.cikernel */,
+				7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */,
 			);
 			name = "Core Image Kernel";
 			sourceTree = "<group>";
@@ -852,6 +861,8 @@
 				7BCA29A61B4E70B500FCFD7A /* Mod.qtz */,
 				7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */,
 				7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */,
+				7BCF7F061B52802C001B0A7A /* ColorDivider.qtz */,
+				7BCF7F071B52802C001B0A7A /* Door.qtz */,
 			);
 			name = "QC Composition";
 			sourceTree = "<group>";
@@ -951,6 +962,7 @@
 				7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */,
 				7BB4E61F1ADA0C3F0076630A /* AdvancedPreferences.xib in Resources */,
 				7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */,
+				7BCF7F081B52802C001B0A7A /* ColorDivider.qtz in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
@@ -984,6 +996,7 @@
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
+				7BCF7F091B52802C001B0A7A /* Door.qtz in Resources */,
 				7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */,
 				7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */,
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
@@ -997,6 +1010,7 @@
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
 				7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */,
+				7BCF7F051B527FE5001B0A7A /* Afterimage.cikernel in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
