@@ -1,0 +1,18 @@
+uniform float barCount = 25.0;
+
+kernel vec4 Afterimage(sampler from, sampler to, float time, float scale) {
+    vec2 pos = samplerCoord(from);
+    vec2 size = samplerSize(from) * scale;
+    float barWidth = size.x / barCount * 1.1;
+    float factor = time * barWidth;
+
+    float x1 = pos.x;
+    for (float i=0.0; i < barCount; i++) {
+        x1 = compare(pos.x - barWidth*(barCount - i),
+                     pos.x + i * factor, x1);
+    }
+    pos.x = x1;
+
+    return x1 >= size.x ? sample(to, samplerCoord(to)) : 
+           x1 < 0.0 ? sample(to, samplerCoord(to)) : sample(from, pos);
+}
