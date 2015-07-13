@@ -151,7 +151,6 @@ static NSString* kOutputEnd = @"outputEnd";
 
 - (void)postEndTransition
 {
-    [self cleanUpTransition];
     [self invokeDelegateWhenDidEnd];
 }
 
