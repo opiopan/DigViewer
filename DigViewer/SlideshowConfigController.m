@@ -25,6 +25,7 @@ NSString* kSlideshowTransitionBurnOut = @"SlideshowTransitionBurnOut";
 NSString* kSlideshowTransitionColorDivider = @"SlideshowTransitionColorDivider";
 NSString* kSlideshowTransitionAfterImage = @"SlideshowTransitionAfterImage";
 NSString* kSlideshowTransitionDoor = @"SlideshowTransitionDoor";
+NSString* kSlideshowTransitionTwister = @"SlideshowTransitionTwister";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -274,6 +275,15 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                              return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Door"
                                                                                                            ofType:@"qtz"]
                                                                   duration:1.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionTwister, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionTwister
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Twister"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:3.5];
                                          }],
                             ];
     }

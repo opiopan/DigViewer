@@ -25,6 +25,7 @@
 		38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C57FF2190F7E0A004D373F /* NSColor+JavascriptColorSpace.m */; };
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
+		7B066F361B57D9C400288D57 /* Twister.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B066F351B57D9C400288D57 /* Twister.qtz */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
 		7B0DBEB616A01545000365F4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB416A01545000365F4 /* MainView.xib */; };
 		7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEC916A0F665000365F4 /* FolderOutlineViewController.m */; };
@@ -222,6 +223,7 @@
 		7B01210716B4C6A9004AA730 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = resources/down.png; sourceTree = "<group>"; };
 		7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSViewController+Nested.h"; sourceTree = "<group>"; };
 		7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSViewController+Nested.m"; sourceTree = "<group>"; };
+		7B066F351B57D9C400288D57 /* Twister.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Twister.qtz; path = resources/Twister.qtz; sourceTree = "<group>"; };
 		7B0DBEB016A014B6000365F4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B0DBEB116A014B6000365F4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7B0DBEB516A01545000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainView.xib; sourceTree = "<group>"; };
@@ -858,6 +860,7 @@
 		7BCA29A41B4E703D00FCFD7A /* QC Composition */ = {
 			isa = PBXGroup;
 			children = (
+				7B066F351B57D9C400288D57 /* Twister.qtz */,
 				7BCA29A61B4E70B500FCFD7A /* Mod.qtz */,
 				7BCA29A71B4E70B500FCFD7A /* Ripple.qtz */,
 				7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */,
@@ -965,6 +968,7 @@
 				7BCF7F081B52802C001B0A7A /* ColorDivider.qtz in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
+				7B066F361B57D9C400288D57 /* Twister.qtz in Resources */,
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,

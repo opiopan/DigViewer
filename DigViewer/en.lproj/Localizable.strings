@@ -32,6 +32,7 @@
 "SlideshowTransitionColorDivider" = "Color Divider";
 "SlideshowTransitionAfterImage" = "Afterimage";
 "SlideshowTransitionDoor" = "Door";
+"SlideshowTransitionTwister" = "Twister";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";
