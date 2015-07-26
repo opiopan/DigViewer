@@ -43,3 +43,13 @@
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "vlS-Om-2QJ"; */
 "vlS-Om-2QJ.title" = "OK";
+
+/* Class = "NSBox"; title = "Required Values:"; ObjectID = "Ghl-5W-Hfr"; */
+"Ghl-5W-Hfr.title" = "必須:";
+
+/* Class = "NSBox"; title = "Optional Values:"; ObjectID = "IJO-PU-gNZ"; */
+"IJO-PU-gNZ.title" = "任意:";
+
+/* Class = "NSTextFieldCell"; title = "Focal length in 35mm (mm):"; ObjectID = \
+ "IZo-5O-cxq"; */
+"IZo-5O-cxq.title" = "35mm換算 焦点距離 (mm):";

@@ -15,6 +15,8 @@ enum LensMatchingTypeValue{
     LENS_MATCHING_BY_CUSTOM_CONDITION
 };
 
+@class Camera, Condition;
+
 @interface Lens : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
@@ -24,18 +26,20 @@ enum LensMatchingTypeValue{
 @property (nonatomic, retain) NSNumber * apertureMax;
 @property (nonatomic, retain) NSNumber * focalLengthMin;
 @property (nonatomic, retain) NSNumber * focalLengthMax;
+@property (nonatomic, retain) NSNumber * focalLengthRatio35;
 @property (nonatomic, retain) NSNumber * fovMin;
 @property (nonatomic, retain) NSNumber * fovMax;
 @property (nonatomic, retain) NSNumber * sensorHorizontal;
 @property (nonatomic, retain) NSNumber * sensorVertical;
 @property (nonatomic, retain) NSNumber * matchingType;
 @property (nonatomic, retain) NSSet *allowedCameras;
+@property (nonatomic, retain) Condition *condition;
 @end
 
 @interface Lens (CoreDataGeneratedAccessors)
 
-- (void)addAllowedCamerasObject:(NSManagedObject *)value;
-- (void)removeAllowedCamerasObject:(NSManagedObject *)value;
+- (void)addAllowedCamerasObject:(Camera *)value;
+- (void)removeAllowedCamerasObject:(Camera *)value;
 - (void)addAllowedCameras:(NSSet *)values;
 - (void)removeAllowedCameras:(NSSet *)values;
 

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString* lensName;
 @property (strong, nonatomic) NSNumber* focalLengthMin;
 @property (strong, nonatomic) NSNumber* focalLengthMax;
+@property (strong, nonatomic) NSNumber* focalLength35Min;
+@property (strong, nonatomic) NSNumber* focalLength35Max;
 @property (strong, nonatomic) NSNumber* apertureMin;
 @property (strong, nonatomic) NSNumber* apertureMax;
 @property (strong, nonatomic) NSNumber* fovMin;
@@ -28,6 +30,8 @@
 @property (strong, nonatomic) NSNumber* matchingType;
 
 @property (nonatomic) BOOL isSingleFocalLength;
+@property (nonatomic, readonly) BOOL isEnableEditCameras;
+@property (nonatomic, readonly) BOOL isEnableEditConditions;
 
 - (IBAction)onOk:(id)sender;
 - (IBAction)onCancel:(id)sender;

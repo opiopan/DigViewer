@@ -61,6 +61,9 @@
         self.sensorHorizontal = _lensForEdit.sensorHorizontal;
         self.sensorVertical = _lensForEdit.sensorVertical;
         self.matchingType = _lensForEdit.matchingType;
+        if (_lensForEdit.focalLengthMin && _lensForEdit.focalLengthRatio35){
+            self.focalLength35Min = @(_lensForEdit.focalLengthMin.doubleValue * _lensForEdit.focalLengthRatio35.doubleValue);
+        }
     }else{
         self.matchingType = @(LENS_MATCHING_BY_LENSNAME);
     }
@@ -98,6 +101,11 @@
         _lensForEdit.sensorHorizontal = self.sensorHorizontal;
         _lensForEdit.sensorVertical = self.sensorVertical;
         _lensForEdit.matchingType = self.matchingType;
+        if (self.focalLength35Min){
+            _lensForEdit.focalLengthRatio35 = @(self.focalLength35Min.doubleValue / self.focalLengthMin.doubleValue);
+        }else{
+            _lensForEdit.focalLengthRatio35 = nil;
+        }
 
         [_delegate performSelector:_didEndSelector withObject:_lensForEdit afterDelay:0];
     }else{
@@ -120,6 +128,16 @@
         [self didChangeValueForKey:@"fovMax"];
     }else{
         self.isSingleFocalLength = NO;
+    }
+    
+    if (_focalLength35Min && _focalLengthMin && _focalLengthMax){
+        [self willChangeValueForKey:@"focalLength35Max"];
+        _focalLength35Max = @(_focalLength35Min.doubleValue / _focalLengthMin.doubleValue * _focalLengthMax.doubleValue);
+        [self didChangeValueForKey:@"focalLength35Max"];
+    }else{
+        [self willChangeValueForKey:@"focalLength35Max"];
+        _focalLength35Max = nil;
+        [self didChangeValueForKey:@"focalLength35Max"];
     }
 
     if (_profileName.length > 0 &&
@@ -182,6 +200,19 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// 各編集ボタン状態
+//-----------------------------------------------------------------------------------------
+- (BOOL)isEnableEditCameras
+{
+    return _matchingType.intValue == LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME;
+}
+
+- (BOOL)isEnableEditConditions
+{
+    return _matchingType.intValue == LENS_MATCHING_BY_CUSTOM_CONDITION;
+}
+
+//-----------------------------------------------------------------------------------------
 // プロパティの設定メッソッド実装
 //-----------------------------------------------------------------------------------------
 - (void)setProfileName:(NSString *)profileName
@@ -211,6 +242,12 @@
 - (void)setFocalLengthMax:(NSNumber *)focalLengthMax
 {
     _focalLengthMax = focalLengthMax;
+    [self reflectOkButtonState];
+}
+
+- (void)setFocalLength35Min:(NSNumber *)focalLength35Min
+{
+    _focalLength35Min = focalLength35Min;
     [self reflectOkButtonState];
 }
 
@@ -248,6 +285,15 @@
 {
     _sensorVertical = sensorVertical;
     [self reflectOkButtonState];
+}
+
+- (void)setMatchingType:(NSNumber *)matchingType
+{
+    _matchingType = matchingType;
+    [self willChangeValueForKey:@"isEnableEditCameras"];
+    [self willChangeValueForKey:@"isEnableEditConditions"];
+    [self didChangeValueForKey:@"isEnableEditCameras"];
+    [self didChangeValueForKey:@"isEnableEditConditions"];
 }
 
 @end
