@@ -7,6 +7,8 @@
 //
 
 #import "EditLensSheetController.h"
+#import "EditCameraSheetController.h"
+#import "EditConditionSheetController.h"
 
 @implementation EditLensSheetController {
     Lens* _lensForEdit;
@@ -15,6 +17,14 @@
     SEL _didEndSelector;
     
     NSArray* _topLevelObjects;
+    
+    LensLibrary* __weak _lensLibrary;
+    NSMutableArray* _allowedCameras;
+    Condition* _condition;
+    Condition* _edittingCondition;
+    
+    EditCameraSheetController* _editCameraSheet;
+    EditConditionSheetController* _editConditionSheet;
 }
 
 
@@ -28,6 +38,7 @@
         NSArray* objects = nil;
         [[NSBundle mainBundle] loadNibNamed:@"EditLensSheet" owner:self topLevelObjects:&objects];
         _topLevelObjects = objects;
+        _lensLibrary = [LensLibrary sharedLensLibrary];
     }
     
     return self;
@@ -63,6 +74,13 @@
         self.matchingType = _lensForEdit.matchingType;
         if (_lensForEdit.focalLengthMin && _lensForEdit.focalLengthRatio35){
             self.focalLength35Min = @(_lensForEdit.focalLengthMin.doubleValue * _lensForEdit.focalLengthRatio35.doubleValue);
+        }
+        _allowedCameras = [NSMutableArray array];
+        for (Camera* camera in _lensForEdit.allowedCameras){
+            [_allowedCameras addObject:camera];
+        }
+        if (_lensForEdit.condition){
+            _condition = [self cloneCondition:_lensForEdit.condition];
         }
     }else{
         self.matchingType = @(LENS_MATCHING_BY_LENSNAME);
@@ -106,9 +124,19 @@
         }else{
             _lensForEdit.focalLengthRatio35 = nil;
         }
-
+        [_lensForEdit removeAllowedCameras:_lensForEdit.allowedCameras];
+        for (Camera* camera in _allowedCameras){
+            [_lensForEdit addAllowedCamerasObject:camera];
+        }
+        if (_lensForEdit.matchingType.intValue == LENS_MATCHING_BY_CUSTOM_CONDITION){
+            [_lensLibrary removeConditionRecurse:_lensForEdit.condition];
+            _lensForEdit.condition = _condition;
+        }else{
+            [_lensLibrary removeConditionRecurse:_condition];
+        }
         [_delegate performSelector:_didEndSelector withObject:_lensForEdit afterDelay:0];
     }else{
+        [_lensLibrary removeConditionRecurse:_condition];
         [_delegate performSelector:_didEndSelector withObject:nil afterDelay:0];
     }
 }
@@ -180,6 +208,78 @@
         self.sensorHorizontal = _sensorVertical;
         self.sensorVertical = tmp;
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// 条件ツリーのクローン
+//-----------------------------------------------------------------------------------------
+- (Condition*)cloneCondition:(Condition*)condition
+{
+    Condition* rc = nil;
+    if (condition){
+        rc = [_lensLibrary insertNewConditionEntity];
+        rc.conditionType = condition.conditionType;
+        rc.target = condition.target;
+        rc.operatorType = condition.operatorType;
+        rc.valueDouble = condition.valueDouble;
+        rc.valueString = condition.valueString;
+        for (Condition* child in condition.children){
+            [rc addChildrenObject:[self cloneCondition:child]];
+        }
+    }else{
+        //条件が空の場合はデフォルトのツリー（レンズ名で一致）を作成
+        rc = [_lensLibrary insertNewConditionEntity];
+        rc.conditionType = @(LFCONDITION_TYPE_OR);
+        Condition* child = [_lensLibrary insertNewConditionEntity];
+        child.conditionType = @(LFCONDITION_TYPE_COMPARISON);
+        child.target = @(LFCONDITION_TARGET_LENS_NAME);
+        child.operatorType = @(LFCONDITION_OP_EQ);
+        child.valueString = _lensName;
+        [rc addChildrenObject:child];
+    }
+    return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// カメラ編集ボタン応答
+//-----------------------------------------------------------------------------------------
+- (void)onEditCamera:(id)sender
+{
+    _editCameraSheet = [EditCameraSheetController new];
+    [_editCameraSheet editCameraList:_allowedCameras forWindow:_panel
+                       modalDelegate:self didEndSelector:@selector(didEndEditCamera:)];
+}
+
+- (void)didEndEditCamera:(id)object
+{
+    if (object){
+        _allowedCameras = object;
+    }
+    _editCameraSheet = nil;
+}
+
+//-----------------------------------------------------------------------------------------
+// 条件編集ボタン応答
+//-----------------------------------------------------------------------------------------
+- (void)onEditCondition:(id)sender
+{
+    _editConditionSheet = [EditConditionSheetController new];
+    _edittingCondition = [self cloneCondition:_condition];
+    [_editConditionSheet editCondition:_edittingCondition forWindow:_panel
+                         modalDelegate:self didEndSelector:@selector(didEndEditCondition:)];
+}
+
+- (void)didEndEditCondition:(id)object
+{
+    if (object){
+        [_lensLibrary removeConditionRecurse:_condition];
+        _condition = _edittingCondition;
+        _edittingCondition = nil;
+    }else{
+        [_lensLibrary removeConditionRecurse:_edittingCondition];
+        _edittingCondition = nil;
+    }
+    _editConditionSheet = nil;
 }
 
 //-----------------------------------------------------------------------------------------

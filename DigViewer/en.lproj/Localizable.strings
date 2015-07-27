@@ -46,6 +46,46 @@
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "Are you sure you want to remove selected lens profile?";
 
+// カメラ名設定シートでのメッセージ
+"CPMSG_WARNING_USED" = "A part of selected camera names are used by the other lens profiles. Are you sure you want to remove them?";
+"CPMSG_CONF_REMOVE" = "Are you sure you want to remove selected camera names?";
+"CPMSG_ERROR_CONFLICT" = "Specified camera name has been already registerd.";
+
+// レンズプロファイル適用条件の対象フィールド名
+"LFCONDITION_TARGET_CAMERA_MAKE" = "Camera maker";
+"LFCONDITION_TARGET_CAMERA_NAME" = "Camera model";
+"LFCONDITION_TARGET_LENS_MAKE" = "Lens maker";
+"LFCONDITION_TARGET_LENS_NAME" = "Lens model";
+"LFCONDITION_TARGET_FOCAL_LENGTH" = "Focal length";
+"LFCONDITION_TARGET_FOCAL_LENGTH35" = "Focal length in 35mm";
+"LFCONDITION_TARGET_APERTURE" = "Aperture";
+
+// レンズプロファイル適用条件の演算子名
+"LFCONDITION_OP_EQ" = "Equal to";
+"LFCONDITION_OP_NE" = "Not eual to";
+"LFCONDITION_OP_GT" = "Grater than";
+"LFCONDITION_OP_GE" = "Grater than or equal to";
+"LFCONDITION_OP_LT" = "Less than";
+"LFCONDITION_OP_LE" = "Less than or equal to";
+"LFCONDITION_OP_LEFTHAND_MATCH" = "Left-hand match";
+"LFCONDITION_OP_RIGHTHAND_MATCH" = "Right-hand match";
+"LFCONDITION_OP_PARTIAL_MATCH" = "Partial match";
+
+// レンズプロファイル適用条件のサマリー表示用フォーマットストリング
+"LFCONDITION_SUMMARY_EQ" = "If %@ is equal to %@";
+"LFCONDITION_SUMMARY_NE" = "If %@ is not equal to %@";
+"LFCONDITION_SUMMARY_GT" = "If %@ is grater than %@";
+"LFCONDITION_SUMMARY_GE" = "If %@ is grater than or equal to %@";
+"LFCONDITION_SUMMARY_LT" = "If %@ is less than %@";
+"LFCONDITION_SUMMARY_LE" = "If %@ is less than or equal to %@";
+"LFCONDITION_SUMMARY_LEFTHAND_MATCH" = "If left-hand side of %@ is matched with %@";
+"LFCONDITION_SUMMARY_RIGHTHAND_MATCH" = "If right-hand side of %@ is matched with %@";
+"LFCONDITION_SUMMARY_PARTIAL_MATCH" = "If %@ contains a sub-string %@";
+
+// レンズプロファイル適用条件編集シートでのメッセージ
+"CDMSG_ERROR_INVALID_AS_NUMERIC" = "Specified string is not correct as numeric value.";
+"CDMSG_ERROR_ONLYONE" = "Specified condition could not been removed since only one condition is exist.";
+
 // マップビューでのメッセージ
 "MVMSG_LOADING" = "Loading...";
 "MVMSG_NOKEY" = "Google API key is not specified. Please specify a key at preferences panel.";

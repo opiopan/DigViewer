@@ -9,6 +9,7 @@
 #import "ImageWithTextCell.h"
 
 @implementation ImageWithTextCell
+
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
     id node = [self objectValue];
@@ -19,8 +20,10 @@
     }else if ([[node class] isSubclassOfClass:[NSImage class]]){
         image = node;
     }else{
-        image = [node valueForKey:@"icon"];
-        name = [node valueForKey:@"name"];
+        NSString* keyForIcon = _keyForIcon ? _keyForIcon : @"icon";
+        NSString* keyForName = _keyForName ? _keyForName : @"name";
+        image = [node valueForKey:keyForIcon];
+        name = [node valueForKey:keyForName];
     }
     
     NSRect target = cellFrame;

@@ -1,0 +1,23 @@
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "5ra-hU-alz"; */
+"5ra-hU-alz.title" = "OK";
+
+/* Class = "NSTableColumn"; headerCell.title = "Camera name"; ObjectID = "7yv-0g-eKG"; */
+"7yv-0g-eKG.headerCell.title" = "カメラ名";
+
+/* Class = "NSTextFieldCell"; title = "Don't apply a lens profile:"; ObjectID = "Qhp-N4-r9s"; */
+"Qhp-N4-r9s.title" = "レンズプロファイルを適用しない:";
+
+/* Class = "NSSegmentedCell"; WA4-wK-jzp.ibShadowedToolTips[0] = "Add Camera Name"; ObjectID = "WA4-wK-jzp"; */
+"WA4-wK-jzp.ibShadowedToolTips[0]" = "カメラ名を追加";
+
+/* Class = "NSSegmentedCell"; WA4-wK-jzp.ibShadowedToolTips[1] = "Remove Camera Name"; ObjectID = "WA4-wK-jzp"; */
+"WA4-wK-jzp.ibShadowedToolTips[1]" = "カメラ名を削除";
+
+/* Class = "NSTextFieldCell"; title = "Apply a lens profile:"; ObjectID = "dat-tF-sfK"; */
+"dat-tF-sfK.title" = "レンズプロファイルを適用する:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "vWz-ia-9yc"; */
+"vWz-ia-9yc.title" = "キャンセル";
+
+/* Class = "NSTableColumn"; headerCell.title = "Camera name"; ObjectID = "vuY-cy-cVf"; */
+"vuY-cy-cVf.headerCell.title" = "カメラ名";

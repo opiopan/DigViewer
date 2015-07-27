@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SlideshowPreferences">
@@ -197,19 +197,6 @@
             <point key="canvasLocation" x="360" y="436"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="taV-ah-YxB"/>
-        <menu id="Ip6-g5-Jt7">
-            <items>
-                <menuItem title="Item 1" id="AqW-4h-fPb">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Item 2" id="SJq-X9-p9k">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Item 3" id="cGR-ns-cOO">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-            </items>
-        </menu>
         <arrayController id="F4c-9D-VQT">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.slideshowConfig.allEffects" id="Qmp-tU-aAQ"/>

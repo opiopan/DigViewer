@@ -16,14 +16,14 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="677" height="439"/>
+            <rect key="contentRect" x="196" y="240" width="677" height="449"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="-5" width="677" height="439"/>
+                <rect key="frame" x="0.0" y="-5" width="677" height="449"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" fixedFrame="YES" title="Optional Values:" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="IJO-PU-gNZ">
-                        <rect key="frame" x="17" y="149" width="643" height="112"/>
+                        <rect key="frame" x="17" y="159" width="643" height="112"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="641" height="96"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,6 +202,7 @@
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
+                            <action selector="onEditCamera:" target="-2" id="RdD-Dr-aPg"/>
                             <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isEnableEditCameras" id="zZI-G7-cwM"/>
                         </connections>
                     </button>
@@ -212,11 +213,12 @@
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
+                            <action selector="onEditCondition:" target="-2" id="hzP-n1-X9N"/>
                             <binding destination="e7F-EB-nnm" name="enabled" keyPath="selection.isEnableEditConditions" id="hUo-DT-8Gw"/>
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" fixedFrame="YES" title="Required Values:" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="Ghl-5W-Hfr">
-                        <rect key="frame" x="17" y="265" width="643" height="164"/>
+                        <rect key="frame" x="17" y="275" width="643" height="164"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="641" height="148"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -396,7 +398,7 @@ DQ
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="370.5" y="495.5"/>
+            <point key="canvasLocation" x="370.5" y="500.5"/>
         </window>
         <objectController id="e7F-EB-nnm">
             <connections>

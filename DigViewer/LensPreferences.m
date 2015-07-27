@@ -83,7 +83,7 @@
 //-----------------------------------------------------------------------------------------
 // レンズプロファイル追加・編集完了応答
 //-----------------------------------------------------------------------------------------
-- (void)didEndEditLens:(id)object
+- (void)didEndEditLens:(Lens*)object
 {
     if (object){
         NSError* error = nil;
@@ -91,6 +91,7 @@
         if (error){
             NSArray* selectedObjects = _lensArrayController.selectedObjects;
             if (selectedObjects.count > 0 && selectedObjects[0] != object){
+                [_lensLibrary removeConditionRecurse:object.condition];
                 [_lensLibrary.managedObjectContext deleteObject:object];
             }
             [self presentSaveError:error];
@@ -108,6 +109,7 @@
         NSArray* selectedObjects = self.lensArrayController.selectedObjects;
         if (selectedObjects.count > 0){
             Lens* lens = selectedObjects[0];
+            [_lensLibrary removeConditionRecurse:lens.condition];
             [_lensLibrary.managedObjectContext deleteObject:lens];
             NSError* error = nil;
             [_lensLibrary.managedObjectContext save:&error];

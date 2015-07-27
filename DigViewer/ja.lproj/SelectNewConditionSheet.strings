@@ -1,0 +1,12 @@
+
+/* Class = "NSTextFieldCell"; title = "Please select a EXIF field which is added as condition."; ObjectID = "3eW-dJ-4il"; */
+"3eW-dJ-4il.title" = "追加する条件と対応するEXIF属性を選択してください。";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "5ra-hU-alz"; */
+"5ra-hU-alz.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "EXIF field:"; ObjectID = "err-m7-tPN"; */
+"err-m7-tPN.title" = "EXIF属性:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "vWz-ia-9yc"; */
+"vWz-ia-9yc.title" = "キャンセル";

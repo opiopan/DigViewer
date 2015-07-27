@@ -1,0 +1,18 @@
+
+/* Class = "NSTextFieldCell"; title = "Please select a way to remove the group node."; ObjectID = "3eW-dJ-4il"; */
+"3eW-dJ-4il.title" = "グループノードをさ削除する方法を選択してください。";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "5ra-hU-alz"; */
+"5ra-hU-alz.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "9Ag-ki-aqN"; */
+"9Ag-ki-aqN.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Move conditions including in the group to upper group"; ObjectID = "DAF-aH-ktr"; */
+"DAF-aH-ktr.title" = "削除対象のグループ配下の条件を上位グループに移動する";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "vWz-ia-9yc"; */
+"vWz-ia-9yc.title" = "キャンセル";
+
+/* Class = "NSButtonCell"; title = "Remove all conditions including in the group also"; ObjectID = "wRc-XW-8XP"; */
+"wRc-XW-8XP.title" = "削除対象のグループ配下にある条件も同時に削除する";

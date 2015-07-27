@@ -70,10 +70,26 @@
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
 		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
 		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
-		7B5C09F51B64DBD4004FE1A0 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C09F41B64DBD4004FE1A0 /* Camera.m */; };
 		7B5C09F81B64DBD4004FE1A0 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C09F71B64DBD4004FE1A0 /* Condition.m */; };
 		7B5C09FB1B64EE26004FE1A0 /* Lens.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C09FA1B64EE26004FE1A0 /* Lens.m */; };
 		7B5C0A031B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A021B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel */; };
+		7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A0E1B651B22004FE1A0 /* Camera.m */; };
+		7B5C0A131B652BCD004FE1A0 /* EditCameraSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A111B652BCD004FE1A0 /* EditCameraSheet.xib */; };
+		7B5C0A161B65330E004FE1A0 /* EditCameraSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A151B65330E004FE1A0 /* EditCameraSheetController.m */; };
+		7B5C0A181B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A171B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel */; };
+		7B5C0A1B1B65DC87004FE1A0 /* EditCameraSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A191B65DC87004FE1A0 /* EditCameraSheet.strings */; };
+		7B5C0A1E1B65DFA3004FE1A0 /* InputCameraName.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A1C1B65DFA3004FE1A0 /* InputCameraName.xib */; };
+		7B5C0A211B65E04E004FE1A0 /* InputCameraNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A201B65E04E004FE1A0 /* InputCameraNameController.m */; };
+		7B5C0A241B661DD6004FE1A0 /* InputCameraName.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A221B661DD6004FE1A0 /* InputCameraName.strings */; };
+		7B5C0A2A1B664340004FE1A0 /* EditConditionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A281B664340004FE1A0 /* EditConditionSheet.xib */; };
+		7B5C0A2D1B66586D004FE1A0 /* EditConditionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A2C1B66586D004FE1A0 /* EditConditionSheetController.m */; };
+		7B5C0A301B676CAE004FE1A0 /* SelectNewConditionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A2E1B676CAE004FE1A0 /* SelectNewConditionSheet.xib */; };
+		7B5C0A331B676CF9004FE1A0 /* EditConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A311B676CF9004FE1A0 /* EditConditionSheet.strings */; };
+		7B5C0A361B67726D004FE1A0 /* SelectNewConditionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A351B67726D004FE1A0 /* SelectNewConditionSheetController.m */; };
+		7B5C0A391B6778D5004FE1A0 /* SelectNewConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A371B6778D5004FE1A0 /* SelectNewConditionSheet.strings */; };
+		7B5C0A3C1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A3A1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib */; };
+		7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A3E1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m */; };
+		7B5C0A421B67A424004FE1A0 /* SelectDeletingConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */; };
 		7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
 		7B661A6D1B47840A00C42D2C /* Zoom.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
@@ -306,13 +322,35 @@
 		7B553BF61AE211DF00618590 /* LensLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensLibrary.h; sourceTree = "<group>"; };
 		7B553BF71AE211DF00618590 /* LensLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensLibrary.m; sourceTree = "<group>"; };
 		7B5C09EF1B64B3B7004FE1A0 /* LensLibrary2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.xcdatamodel; sourceTree = "<group>"; };
-		7B5C09F31B64DBD4004FE1A0 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		7B5C09F41B64DBD4004FE1A0 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		7B5C09F61B64DBD4004FE1A0 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		7B5C09F71B64DBD4004FE1A0 /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		7B5C09F91B64EE25004FE1A0 /* Lens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lens.h; sourceTree = "<group>"; };
 		7B5C09FA1B64EE26004FE1A0 /* Lens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lens.m; sourceTree = "<group>"; };
 		7B5C0A021B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "LensLibraryMapping1-2.xcmappingmodel"; sourceTree = "<group>"; };
+		7B5C0A0A1B65196E004FE1A0 /* LensLibrary2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.1.xcdatamodel; sourceTree = "<group>"; };
+		7B5C0A0D1B651B22004FE1A0 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		7B5C0A0E1B651B22004FE1A0 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		7B5C0A121B652BCD004FE1A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditCameraSheet.xib; sourceTree = "<group>"; };
+		7B5C0A141B65330E004FE1A0 /* EditCameraSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCameraSheetController.h; sourceTree = "<group>"; };
+		7B5C0A151B65330E004FE1A0 /* EditCameraSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCameraSheetController.m; sourceTree = "<group>"; };
+		7B5C0A171B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "LensLibraryMapping2-2.1.xcmappingmodel"; sourceTree = "<group>"; };
+		7B5C0A1A1B65DC87004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditCameraSheet.strings; sourceTree = "<group>"; };
+		7B5C0A1D1B65DFA3004FE1A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InputCameraName.xib; sourceTree = "<group>"; };
+		7B5C0A1F1B65E04E004FE1A0 /* InputCameraNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCameraNameController.h; sourceTree = "<group>"; };
+		7B5C0A201B65E04E004FE1A0 /* InputCameraNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCameraNameController.m; sourceTree = "<group>"; };
+		7B5C0A231B661DD6004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InputCameraName.strings; sourceTree = "<group>"; };
+		7B5C0A291B664340004FE1A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditConditionSheet.xib; sourceTree = "<group>"; };
+		7B5C0A2B1B66586D004FE1A0 /* EditConditionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditConditionSheetController.h; sourceTree = "<group>"; };
+		7B5C0A2C1B66586D004FE1A0 /* EditConditionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditConditionSheetController.m; sourceTree = "<group>"; };
+		7B5C0A2F1B676CAE004FE1A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SelectNewConditionSheet.xib; sourceTree = "<group>"; };
+		7B5C0A321B676CF9004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditConditionSheet.strings; sourceTree = "<group>"; };
+		7B5C0A341B67726D004FE1A0 /* SelectNewConditionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectNewConditionSheetController.h; sourceTree = "<group>"; };
+		7B5C0A351B67726D004FE1A0 /* SelectNewConditionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectNewConditionSheetController.m; sourceTree = "<group>"; };
+		7B5C0A381B6778D5004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SelectNewConditionSheet.strings; sourceTree = "<group>"; };
+		7B5C0A3B1B679B11004FE1A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SelectDeletingConditionSheet.xib; sourceTree = "<group>"; };
+		7B5C0A3D1B679C69004FE1A0 /* SelectDeletingConditionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDeletingConditionSheetController.h; sourceTree = "<group>"; };
+		7B5C0A3E1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDeletingConditionSheetController.m; sourceTree = "<group>"; };
+		7B5C0A411B67A424004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SelectDeletingConditionSheet.strings; sourceTree = "<group>"; };
 		7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Mosaic.cikernel; sourceTree = "<group>"; };
 		7B661A6B1B47840A00C42D2C /* Zoom.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Zoom.cikernel; sourceTree = "<group>"; };
 		7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationBaseViewController.h; sourceTree = "<group>"; };
@@ -642,13 +680,13 @@
 			isa = PBXGroup;
 			children = (
 				7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */,
-				7B5C0A021B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel */,
+				7B5C0A101B651E50004FE1A0 /* Mapping Model */,
 				7B5C09F91B64EE25004FE1A0 /* Lens.h */,
 				7B5C09FA1B64EE26004FE1A0 /* Lens.m */,
+				7B5C0A0D1B651B22004FE1A0 /* Camera.h */,
+				7B5C0A0E1B651B22004FE1A0 /* Camera.m */,
 				7B5C09F61B64DBD4004FE1A0 /* Condition.h */,
 				7B5C09F71B64DBD4004FE1A0 /* Condition.m */,
-				7B5C09F31B64DBD4004FE1A0 /* Camera.h */,
-				7B5C09F41B64DBD4004FE1A0 /* Camera.m */,
 				7B553BF61AE211DF00618590 /* LensLibrary.h */,
 				7B553BF71AE211DF00618590 /* LensLibrary.m */,
 			);
@@ -686,6 +724,16 @@
 				7BB4E6241ADA30F70076630A /* LensPreferences.strings */,
 				7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */,
 				7B3CDB4F1AE2A3AE005B6EAE /* EditLensSheet.strings */,
+				7B5C0A111B652BCD004FE1A0 /* EditCameraSheet.xib */,
+				7B5C0A191B65DC87004FE1A0 /* EditCameraSheet.strings */,
+				7B5C0A1C1B65DFA3004FE1A0 /* InputCameraName.xib */,
+				7B5C0A221B661DD6004FE1A0 /* InputCameraName.strings */,
+				7B5C0A281B664340004FE1A0 /* EditConditionSheet.xib */,
+				7B5C0A311B676CF9004FE1A0 /* EditConditionSheet.strings */,
+				7B5C0A2E1B676CAE004FE1A0 /* SelectNewConditionSheet.xib */,
+				7B5C0A371B6778D5004FE1A0 /* SelectNewConditionSheet.strings */,
+				7B5C0A3A1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib */,
+				7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */,
 			);
 			name = LensPreferences;
 			sourceTree = "<group>";
@@ -721,8 +769,27 @@
 				7BB4E6111ADA031A0076630A /* LensPreferences.m */,
 				7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */,
 				7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */,
+				7B5C0A141B65330E004FE1A0 /* EditCameraSheetController.h */,
+				7B5C0A151B65330E004FE1A0 /* EditCameraSheetController.m */,
+				7B5C0A1F1B65E04E004FE1A0 /* InputCameraNameController.h */,
+				7B5C0A201B65E04E004FE1A0 /* InputCameraNameController.m */,
+				7B5C0A2B1B66586D004FE1A0 /* EditConditionSheetController.h */,
+				7B5C0A2C1B66586D004FE1A0 /* EditConditionSheetController.m */,
+				7B5C0A341B67726D004FE1A0 /* SelectNewConditionSheetController.h */,
+				7B5C0A351B67726D004FE1A0 /* SelectNewConditionSheetController.m */,
+				7B5C0A3D1B679C69004FE1A0 /* SelectDeletingConditionSheetController.h */,
+				7B5C0A3E1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m */,
 			);
 			name = LensPreferences;
+			sourceTree = "<group>";
+		};
+		7B5C0A101B651E50004FE1A0 /* Mapping Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B5C0A021B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel */,
+				7B5C0A171B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel */,
+			);
+			name = "Mapping Model";
 			sourceTree = "<group>";
 		};
 		7B6717EB1B36CF1D00B8D124 /* Transition Effects */ = {
@@ -1036,6 +1103,7 @@
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
 				7BE7B61E1B1F27B1009619E2 /* RenderingPreferences.png in Resources */,
 				7BA1F9DE1B417719000D24D5 /* Shutter.cikernel in Resources */,
+				7B5C0A421B67A424004FE1A0 /* SelectDeletingConditionSheet.strings in Resources */,
 				7BC667A318B05213000CB995 /* InspectorView.xib in Resources */,
 				7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */,
 				7BE7B61F1B1F27B1009619E2 /* SlideshowPreferences.png in Resources */,
@@ -1048,23 +1116,30 @@
 				7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */,
 				7BCA29AA1B4E70B500FCFD7A /* Ripple.qtz in Resources */,
 				7B74FB931B3EC854005BC748 /* EditCustomEffectList.xib in Resources */,
+				7B5C0A331B676CF9004FE1A0 /* EditConditionSheet.strings in Resources */,
+				7B5C0A301B676CAE004FE1A0 /* SelectNewConditionSheet.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
+				7B5C0A2A1B664340004FE1A0 /* EditConditionSheet.xib in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
 				7B74FB961B3EC85B005BC748 /* EditCustomEffect.xib in Resources */,
 				7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */,
 				7BB4E6261ADA30F70076630A /* AdvancedPreferences.strings in Resources */,
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
+				7B5C0A1E1B65DFA3004FE1A0 /* InputCameraName.xib in Resources */,
 				7B40A41D1AFD08FD006ED497 /* pause.png in Resources */,
 				7BB4E60D1AD96EB30076630A /* GeneralPreferences.strings in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 				7B74FB9D1B3EC8DD005BC748 /* EditCustomEffect.strings in Resources */,
 				7BA1F9DD1B417719000D24D5 /* Cartain.cikernel in Resources */,
+				7B5C0A391B6778D5004FE1A0 /* SelectNewConditionSheet.strings in Resources */,
+				7B5C0A3C1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib in Resources */,
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
 				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
 				7BCF7F091B52802C001B0A7A /* Door.qtz in Resources */,
 				7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */,
 				7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */,
+				7B5C0A241B661DD6004FE1A0 /* InputCameraName.strings in Resources */,
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
 				7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */,
@@ -1078,6 +1153,7 @@
 				7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */,
 				7BCF7F051B527FE5001B0A7A /* Afterimage.cikernel in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
+				7B5C0A131B652BCD004FE1A0 /* EditCameraSheet.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
@@ -1085,6 +1161,7 @@
 				7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */,
 				7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */,
 				7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */,
+				7B5C0A1B1B65DC87004FE1A0 /* EditCameraSheet.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,6 +1206,16 @@
 				"$(SRCROOT)/DigViewer/en.lproj/EditCustomEffectList.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/EditCustomEffect.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/EditCustomEffect.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/EditCameraSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/EditCameraSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/InputCameraName.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/InputCameraName.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/EditConditionSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/EditConditionSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/SelectDeletingConditionSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/SelectDeletingConditionSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/SelectNewConditionSheet.strings",
+				"$(SRCROOT)/DigViewer/ja.lproj/SelectNewConditionSheet.strings",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -1148,10 +1235,15 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SlideshowPreferences.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditCustomEffectList.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditCustomEffect.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditCameraSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InputCameraName.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditConditionSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectDeletingConditionSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectNewConditionSheet.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1198,15 +1290,18 @@
 				7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
+				7B5C0A181B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 				7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */,
 				7B3920471696CA1800E139D0 /* Document.m in Sources */,
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
 				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
+				7B5C0A361B67726D004FE1A0 /* SelectNewConditionSheetController.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */,
 				7BB4E6001AD948250076630A /* AppPreferences.m in Sources */,
+				7B5C0A2D1B66586D004FE1A0 /* EditConditionSheetController.m in Sources */,
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
@@ -1224,6 +1319,7 @@
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
+				7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
@@ -1247,9 +1343,10 @@
 				7B74FB8D1B3E35CA005BC748 /* SlideshowConfigController.m in Sources */,
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
 				7B4BED981B47A6F300E20A5A /* DisableTextColorTransformer.m in Sources */,
-				7B5C09F51B64DBD4004FE1A0 /* Camera.m in Sources */,
 				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
+				7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
+				7B5C0A211B65E04E004FE1A0 /* InputCameraNameController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
 				7B467D6A1B12083000969442 /* TwoFingerGestureRecognizer.m in Sources */,
@@ -1260,6 +1357,7 @@
 				7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */,
 				7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */,
 				7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */,
+				7B5C0A161B65330E004FE1A0 /* EditCameraSheetController.m in Sources */,
 				7B1AC4A818B05384004136CD /* InspectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1402,6 +1500,86 @@
 				7B4E8E3E16CA5478001C5D09 /* ja */,
 			);
 			name = FolderOutlineView.strings;
+			sourceTree = "<group>";
+		};
+		7B5C0A111B652BCD004FE1A0 /* EditCameraSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A121B652BCD004FE1A0 /* en */,
+			);
+			name = EditCameraSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B5C0A191B65DC87004FE1A0 /* EditCameraSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A1A1B65DC87004FE1A0 /* ja */,
+			);
+			name = EditCameraSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B5C0A1C1B65DFA3004FE1A0 /* InputCameraName.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A1D1B65DFA3004FE1A0 /* en */,
+			);
+			name = InputCameraName.xib;
+			sourceTree = "<group>";
+		};
+		7B5C0A221B661DD6004FE1A0 /* InputCameraName.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A231B661DD6004FE1A0 /* ja */,
+			);
+			name = InputCameraName.strings;
+			sourceTree = "<group>";
+		};
+		7B5C0A281B664340004FE1A0 /* EditConditionSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A291B664340004FE1A0 /* en */,
+			);
+			name = EditConditionSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B5C0A2E1B676CAE004FE1A0 /* SelectNewConditionSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A2F1B676CAE004FE1A0 /* en */,
+			);
+			name = SelectNewConditionSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B5C0A311B676CF9004FE1A0 /* EditConditionSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A321B676CF9004FE1A0 /* ja */,
+			);
+			name = EditConditionSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B5C0A371B6778D5004FE1A0 /* SelectNewConditionSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A381B6778D5004FE1A0 /* ja */,
+			);
+			name = SelectNewConditionSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B5C0A3A1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A3B1B679B11004FE1A0 /* en */,
+			);
+			name = SelectDeletingConditionSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B5C0A411B67A424004FE1A0 /* ja */,
+			);
+			name = SelectDeletingConditionSheet.strings;
 			sourceTree = "<group>";
 		};
 		7B697E53169DB8A000A9E247 /* LoadingSheet.xib */ = {
@@ -1704,10 +1882,11 @@
 		7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7B5C0A0A1B65196E004FE1A0 /* LensLibrary2.1.xcdatamodel */,
 				7B5C09EF1B64B3B7004FE1A0 /* LensLibrary2.xcdatamodel */,
 				7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */,
 			);
-			currentVersion = 7B5C09EF1B64B3B7004FE1A0 /* LensLibrary2.xcdatamodel */;
+			currentVersion = 7B5C0A0A1B65196E004FE1A0 /* LensLibrary2.1.xcdatamodel */;
 			path = LensLibrary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

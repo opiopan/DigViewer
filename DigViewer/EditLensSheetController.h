@@ -33,6 +33,8 @@
 @property (nonatomic, readonly) BOOL isEnableEditCameras;
 @property (nonatomic, readonly) BOOL isEnableEditConditions;
 
+- (IBAction)onEditCamera:(id)sender;
+- (IBAction)onEditCondition:(id)sender;
 - (IBAction)onOk:(id)sender;
 - (IBAction)onCancel:(id)sender;
 

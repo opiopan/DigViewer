@@ -10,4 +10,7 @@
 
 @interface ImageWithTextCell : NSTextFieldCell
 
+@property (nonatomic) NSString* keyForName;
+@property (nonatomic) NSString* keyForIcon;
+
 @end

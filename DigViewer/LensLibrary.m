@@ -17,6 +17,7 @@ static LensLibrary* _sharedLensLibrary;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize allLensProfiles = _allLensProfiles;
+@synthesize allCameraProfiles = _allCameraProfiles;
 
 //-----------------------------------------------------------------------------------------
 // シングルトンパタンの実装
@@ -132,11 +133,64 @@ static LensLibrary* _sharedLensLibrary;
 }
 
 //-----------------------------------------------------------------------------------------
-// 新規レンズプロファイルの挿入
+// カメラプロファイルリスト属性の実装
+//-----------------------------------------------------------------------------------------
+- (NSArray *)allCameraProfiles
+{
+    if (!_allCameraProfiles){
+        [self updateAllCameraProfiles];
+    }
+    return _allCameraProfiles;
+}
+
+- (void)updateAllCameraProfiles
+{
+    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Camera"];
+    NSError* error = nil;
+    _allCameraProfiles = [self.managedObjectContext executeFetchRequest:request error:&error];
+}
+
+//-----------------------------------------------------------------------------------------
+// オブジェクト探索
+//-----------------------------------------------------------------------------------------
+- (NSArray *)findCameraByName:(NSString*)name
+{
+    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Camera"];
+    request.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    NSError* error = nil;
+    return [self.managedObjectContext executeFetchRequest:request error:&error];
+}
+
+//-----------------------------------------------------------------------------------------
+// 新規エンティティの挿入
 //-----------------------------------------------------------------------------------------
 -(Lens*)insertNewLensEntity
 {
     return [NSEntityDescription insertNewObjectForEntityForName:@"Lens" inManagedObjectContext:self.managedObjectContext];
+}
+
+- (Camera *)insertNewCameraEntity
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:@"Camera" inManagedObjectContext:self.managedObjectContext];
+}
+
+- (Condition *)insertNewConditionEntity
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:@"Condition" inManagedObjectContext:self.managedObjectContext];
+}
+
+//-----------------------------------------------------------------------------------------
+// 条件ツリーの再帰削除
+//-----------------------------------------------------------------------------------------
+- (void)removeConditionRecurse:(Condition*)condition
+{
+    if (condition){
+        for (Condition* child in condition.children){
+            [child removeChildrenObject:child];
+            [self removeConditionRecurse:child];
+        }
+        [_managedObjectContext deleteObject:condition];
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -146,6 +200,7 @@ static LensLibrary* _sharedLensLibrary;
 {
     [self.managedObjectContext save:error];
     [self updateAllLensProfiles];
+    [self updateAllCameraProfiles];
 }
 
 @end

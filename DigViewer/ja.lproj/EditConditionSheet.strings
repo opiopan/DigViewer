@@ -1,0 +1,57 @@
+
+/* Class = "NSTabViewItem"; label = "No Selection"; ObjectID = "1Ee-RB-Pxl"; */
+"1Ee-RB-Pxl.label" = "未選択";
+
+/* Class = "NSTextFieldCell"; title = "Compare with:"; ObjectID = "1aA-2B-NMi"; */
+"1aA-2B-NMi.title" = "比較される値:";
+
+/* Class = "NSTabViewItem"; label = "Group"; ObjectID = "32A-5i-e4z"; */
+"32A-5i-e4z.label" = "グループ";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "5ra-hU-alz"; */
+"5ra-hU-alz.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "AND"; ObjectID = "B2n-en-nDD"; */
+"B2n-en-nDD.title" = "AND";
+
+/* Class = "NSButtonCell"; title = "Embed in new group"; ObjectID = "CL5-fu-6q4"; */
+"CL5-fu-6q4.title" = "新規グループに埋め込む";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "EDy-ro-bzQ"; */
+"EDy-ro-bzQ.title" = "Radio";
+
+/* Class = "NSTabViewItem"; label = "Comparison"; ObjectID = "IaM-Eg-Zjd"; */
+"IaM-Eg-Zjd.label" = "比較";
+
+/* Class = "NSTextFieldCell"; title = "No Selection"; ObjectID = "K8y-IF-ZBg"; */
+"K8y-IF-ZBg.title" = "未選択";
+
+/* Class = "NSButtonCell"; title = "NOR"; ObjectID = "Lt7-1e-5Hj"; */
+"Lt7-1e-5Hj.title" = "NOR";
+
+/* Class = "NSTextFieldCell"; title = "Summary:"; ObjectID = "UQr-jZ-gVo"; */
+"UQr-jZ-gVo.title" = "説明:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "Xu0-l8-bLc"; */
+"Xu0-l8-bLc.title" = "Box";
+
+/* Class = "NSButtonCell"; title = "NAND"; ObjectID = "aCU-nm-n3g"; */
+"aCU-nm-n3g.title" = "NAND";
+
+/* Class = "NSTextFieldCell"; title = "Comparison method:"; ObjectID = "err-m7-tPN"; */
+"err-m7-tPN.title" = "比較方法:";
+
+/* Class = "NSTextFieldCell"; title = "Grouping condition:"; ObjectID = "gCt-oL-NgA"; */
+"gCt-oL-NgA.title" = "グルーピング条件:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "gwf-ly-m4B"; */
+"gwf-ly-m4B.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Comparison for:"; ObjectID = "kVO-nc-dxw"; */
+"kVO-nc-dxw.title" = "比較対象属性:";
+
+/* Class = "NSButtonCell"; title = "OR"; ObjectID = "ogp-9M-XaD"; */
+"ogp-9M-XaD.title" = "OR";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "vWz-ia-9yc"; */
+"vWz-ia-9yc.title" = "キャンセル";

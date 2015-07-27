@@ -1,0 +1,9 @@
+
+/* Class = "NSTextFieldCell"; title = "Camera name:"; ObjectID = "81k-gm-yE7"; */
+"81k-gm-yE7.title" = "カメラ名:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "X0O-aB-c1K"; */
+"X0O-aB-c1K.title" = "キャンセル";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "ylK-wa-YzZ"; */
+"ylK-wa-YzZ.title" = "OK";
