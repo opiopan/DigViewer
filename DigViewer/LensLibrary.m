@@ -185,7 +185,11 @@ static LensLibrary* _sharedLensLibrary;
 - (void)removeConditionRecurse:(Condition*)condition
 {
     if (condition){
+        NSMutableArray* buf = [NSMutableArray array];
         for (Condition* child in condition.children){
+            [buf addObject:child];
+        }
+        for (Condition* child in buf){
             [child removeChildrenObject:child];
             [self removeConditionRecurse:child];
         }

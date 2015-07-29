@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Condition.h"
 
 enum LensMatchingTypeValue{
     LENS_MATCHING_BY_LENSNAME = 0,
@@ -42,5 +43,7 @@ enum LensMatchingTypeValue{
 - (void)removeAllowedCamerasObject:(Camera *)value;
 - (void)addAllowedCameras:(NSSet *)values;
 - (void)removeAllowedCameras:(NSSet *)values;
+
+- (BOOL)matchConditionWithProperties:(LLMatchingProperties*) properties;
 
 @end

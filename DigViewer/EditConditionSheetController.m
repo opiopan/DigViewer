@@ -46,14 +46,16 @@
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_RIGHTHAND_MATCH],
                                   @"op":@(LFCONDITION_OP_RIGHTHAND_MATCH)},
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_PARTIAL_MATCH],
-                                  @"op":@(LFCONDITION_OP_PARTIAL_MATCH)}];
+                                  @"op":@(LFCONDITION_OP_PARTIAL_MATCH)},
+                                @{@"name":[Condition stringForOperator:LFCONDITION_OP_IS_NULL], @"op":@(LFCONDITION_OP_IS_NULL)}];
 
         _operatorsForDouble = @[@{@"name":[Condition stringForOperator:LFCONDITION_OP_EQ], @"op":@(LFCONDITION_OP_EQ)},
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_NE], @"op":@(LFCONDITION_OP_NE)},
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_GT], @"op":@(LFCONDITION_OP_GT)},
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_GE], @"op":@(LFCONDITION_OP_GE)},
                                 @{@"name":[Condition stringForOperator:LFCONDITION_OP_LT], @"op":@(LFCONDITION_OP_LT)},
-                                @{@"name":[Condition stringForOperator:LFCONDITION_OP_LE], @"op":@(LFCONDITION_OP_LE)}];
+                                @{@"name":[Condition stringForOperator:LFCONDITION_OP_LE], @"op":@(LFCONDITION_OP_LE)},
+                                @{@"name":[Condition stringForOperator:LFCONDITION_OP_IS_NULL], @"op":@(LFCONDITION_OP_IS_NULL)}];
     }
     
     return self;
@@ -269,8 +271,11 @@
         }else{
             Condition* parent = current.parent;
             if (parent){
+                NSMutableArray* buf = [NSMutableArray array];
                 for (Condition* child in current.children){
-                    [current removeChildrenObject:child];
+                    [buf addObject:child];
+                }
+                for (Condition* child in buf){
                     [parent addChildrenObject:child];
                 }
                 [_lensLibrary removeConditionRecurse:current];

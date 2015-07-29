@@ -10,6 +10,8 @@
 #import "Condition.h"
 #import "Lens.h"
 
+@implementation LLMatchingProperties
+@end
 
 @implementation Condition
 
@@ -106,6 +108,9 @@
         case LFCONDITION_OP_PARTIAL_MATCH:
             key = @"LFCONDITION_SUMMARY_PARTIAL_MATCH";
             break;
+        case LFCONDITION_OP_IS_NULL:
+            key = @"LFCONDITION_SUMMARY_IS_NULL";
+            break;
     }
     NSString* format = NSLocalizedString(key, nil);
     NSString* target = [Condition stringForTarget:self.target.intValue].lowercaseString;
@@ -117,6 +122,138 @@
     }
     
     return [NSString stringWithFormat:format, target, value];
+}
+
+//-----------------------------------------------------------------------------------------
+// マッチングテスト
+//-----------------------------------------------------------------------------------------
+- (BOOL)matchConditionWithProperties:(LLMatchingProperties *)properties
+{
+    if (self.conditionType.intValue == LFCONDITION_TYPE_COMPARISON){
+        return [self compareWithProperties:properties];
+    }else{
+        BOOL rc = NO;
+        
+        switch (self.conditionType.intValue){
+            case LFCONDITION_TYPE_AND:
+            case LFCONDITION_TYPE_NAND:
+                rc = YES;
+                for (Condition* child in self.children){
+                    rc = rc && [child matchConditionWithProperties:properties];
+                    if (!rc){
+                        break;
+                    }
+                }
+                break;
+            case LFCONDITION_TYPE_OR:
+            case LFCONDITION_TYPE_NOR:
+                rc = NO;
+                for (Condition* child in self.children){
+                    rc = rc || [child matchConditionWithProperties:properties];
+                    if (rc){
+                        break;
+                    }
+                }
+                break;
+        }
+        
+        switch (self.conditionType.intValue){
+            case LFCONDITION_TYPE_NAND:
+            case LFCONDITION_TYPE_NOR:
+                rc = !rc;
+        }
+        
+        return rc;
+    }
+}
+
+- (BOOL)compareWithProperties:(LLMatchingProperties*)properties
+{
+    id value = nil;
+    switch (self.target.intValue){
+        case LFCONDITION_TARGET_CAMERA_MAKE:
+            value = properties.cameraMake;
+            break;
+        case LFCONDITION_TARGET_CAMERA_NAME:
+            value = properties.cameraModel;
+            break;
+        case LFCONDITION_TARGET_LENS_MAKE:
+            value = properties.lensMake;
+            break;
+        case LFCONDITION_TARGET_LENS_NAME:
+            value = properties.lensModel;
+            break;
+        case LFCONDITION_TARGET_FOCAL_LENGTH:
+            value = properties.focalLength;
+            break;
+        case LFCONDITION_TARGET_FOCAL_LENGTH35:
+            value = properties.focalLength35;
+            break;
+        case LFCONDITION_TARGET_APERTURE:
+            value = properties.aperture;
+            break;
+    }
+    
+    BOOL rc = NO;
+    switch (self.target.intValue){
+        case LFCONDITION_TARGET_CAMERA_MAKE:
+        case LFCONDITION_TARGET_CAMERA_NAME:
+        case LFCONDITION_TARGET_LENS_MAKE:
+        case LFCONDITION_TARGET_LENS_NAME:
+            switch (self.operatorType.intValue) {
+                case LFCONDITION_OP_EQ:
+                    rc = value && [value isEqualToString:self.valueString];
+                    break;
+                case LFCONDITION_OP_NE:
+                    rc = value || ![value isEqualToString:self.valueString];
+                    break;
+                case LFCONDITION_OP_LEFTHAND_MATCH:
+                    rc = value && [value hasPrefix:self.valueString];
+                    break;
+                case LFCONDITION_OP_RIGHTHAND_MATCH:
+                    rc = value && [value hasSuffix:self.valueString];
+                    break;
+                case LFCONDITION_OP_PARTIAL_MATCH:{
+                    NSRange initial = {NSNotFound, 0};
+                    NSRange range = value ? [((NSString*)value) rangeOfString:self.valueString] : initial;
+                    rc = range.location != NSNotFound;
+                    break;
+                case LFCONDITION_OP_IS_NULL:
+                    rc = !value;
+                    break;
+                }
+            }
+            break;
+        case LFCONDITION_TARGET_FOCAL_LENGTH:
+        case LFCONDITION_TARGET_FOCAL_LENGTH35:
+        case LFCONDITION_TARGET_APERTURE:
+            switch (self.operatorType.intValue) {
+                case LFCONDITION_OP_EQ:
+                    rc = value && [value doubleValue] == self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_NE:
+                    rc = !value || [value doubleValue] != self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_GT:
+                    rc = value && [value doubleValue] > self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_GE:
+                    rc = value && [value doubleValue] >= self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_LT:
+                    rc = value && [value doubleValue] < self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_LE:
+                    rc = value && [value doubleValue] <= self.valueDouble.doubleValue;
+                    break;
+                case LFCONDITION_OP_IS_NULL:
+                    rc = !value;
+                    break;
+            }
+            break;
+    }
+    
+    return rc;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -192,6 +329,9 @@
             break;
         case LFCONDITION_OP_PARTIAL_MATCH:
             key = @"LFCONDITION_OP_PARTIAL_MATCH";
+            break;
+        case LFCONDITION_OP_IS_NULL:
+            key = @"LFCONDITION_OP_IS_NULL";
             break;
     }
     return NSLocalizedString(key, nil);

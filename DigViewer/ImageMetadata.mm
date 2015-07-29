@@ -53,13 +53,15 @@ static struct {
 enum PropertyValueType {pvTypeSimple, pvTypeHeadOfArray, pvTypeSpecial, pvTypeSeparator};
 
 struct TranslationRule;
-static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertLensMaker(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule);
-static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule);
+static id convertDate(ImageMetadata* meta, TranslationRule* rule);
+static id convertLensMaker(ImageMetadata* meta, TranslationRule* rule);
+static id convertLensModel(ImageMetadata* meta, TranslationRule* rule);
+static id convertLensSpec(ImageMetadata* meta, TranslationRule* rule);
+static id convertFocalLength(ImageMetadata* meta, TranslationRule* rule);
+static id convertFocalLength35(ImageMetadata* meta, TranslationRule* rule);
+static id convertExposureTime(ImageMetadata* meta, TranslationRule* rule);
+static id convertFlash(ImageMetadata* meta, TranslationRule* rule);
+static id convertExposureBias(ImageMetadata* meta, TranslationRule* rule);
 
 #define MAPDEF(map) sizeof(map)/sizeof(*map), map
 static const char* sensingMethods[] = {
@@ -106,7 +108,7 @@ static struct TranslationRule{
     const char*         convertingFormat;
     int                 mapSize;
     const char**        map;
-    NSString* (*convert)(ImageMetadata* meta, TranslationRule* rule);
+    id (*convert)(ImageMetadata* meta, TranslationRule* rule);
 }valueTranslationRules[] = {
     propertyEXIF, kCGImagePropertyExifDateTimeOriginal, pvTypeSpecial, "Date Time:", NULL, 0, NULL, convertDate,
     propertyALL, kCGImagePropertyProfileName, pvTypeSimple, "Color Profile:", "%@", 0, NULL, NULL,
@@ -115,12 +117,12 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFMake, pvTypeSimple, "Camera Maker:", "%@", 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFModel, pvTypeSimple, "Camera Model:", "%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifSensingMethod, pvTypeSimple, "Sensing Method:", NULL, MAPDEF(sensingMethods), NULL,
-    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSpecial, "Lens Maker:", "%@", 0, NULL, convertLensMaker,
+    propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSpecial, "Lens Maker:", NULL, 0, NULL, convertLensMaker,
     propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
     propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
-    propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSimple, "Focal Length:", "%@ mm", 0, NULL, NULL,
-    propertyEXIF, kCGImagePropertyExifFocalLenIn35mmFilm, pvTypeSimple, "Focal Length in 35mm:", "%@ mm", 0, NULL, NULL,
+    propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSpecial, "Focal Length:", "%@ mm", 0, NULL, convertFocalLength,
+    propertyEXIF, kCGImagePropertyExifFocalLenIn35mmFilm, pvTypeSpecial, "Focal Length in 35mm:", "%@ mm", 0, NULL, convertFocalLength35,
     propertyEXIF, kCGImagePropertyExifExposureTime, pvTypeSpecial, "Exposure Time:", NULL, 0, NULL, convertExposureTime,
     propertyEXIF, kCGImagePropertyExifFNumber, pvTypeSimple, "Aperture:", "f/%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifISOSpeedRatings, pvTypeHeadOfArray, "ISO Speed:", "ISO%@", 0, NULL, NULL,
@@ -141,12 +143,18 @@ static struct TranslationRule{
     propertyTIFF, kCGImagePropertyTIFFSoftware, pvTypeSimple, "Processing Software:", "%@", 0, NULL, NULL,
 };
 
+#define RULE_CAMERA_MAKE    4
+#define RULE_CAMERA_MODEL   5
+#define RULE_LENS_MAKE      7
 #define RULE_LENS_MODEL     8
+#define RULE_FOCAL_LENGTH   11
+#define RULE_FOCAL_LENGTH35 12
+#define RULE_APERTURE       14
 
 //-----------------------------------------------------------------------------------------
 // 値変換関数
 //-----------------------------------------------------------------------------------------
-static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule)
+static id convertDate(ImageMetadata* meta, TranslationRule* rule)
 {
     NSString* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
     NSString* rc = nil;
@@ -161,7 +169,7 @@ static NSString* convertDate(ImageMetadata* meta, TranslationRule* rule)
     return rc;
 }
 
-static NSString* convertLensMaker(ImageMetadata* meta, TranslationRule* rule)
+static id convertLensMaker(ImageMetadata* meta, TranslationRule* rule)
 {
     NSString* value = meta.associatedLensProfile.lensMake;
     if (!value){
@@ -170,7 +178,7 @@ static NSString* convertLensMaker(ImageMetadata* meta, TranslationRule* rule)
     return value;
 }
 
-static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
+static id convertLensModel(ImageMetadata* meta, TranslationRule* rule)
 {
     static struct {
         PropertyKind        dictionary;
@@ -193,7 +201,7 @@ static NSString* convertLensModel(ImageMetadata* meta, TranslationRule* rule)
     return value;
 }
 
-static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
+static id convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
 {
     NSArray* value = nil;
     NSNumber* fLength1 = nil;
@@ -254,7 +262,35 @@ static NSString* convertLensSpec(ImageMetadata* meta, TranslationRule* rule)
     return valueString;
 }
 
-static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
+static id convertFocalLength(ImageMetadata* meta, TranslationRule* rule)
+{
+    NSNumber* max = meta.associatedLensProfile.focalLengthMax;
+    NSNumber* min = meta.associatedLensProfile.focalLengthMin;
+    NSNumber* value = nil;
+    if (max && min && max.doubleValue == min.doubleValue){
+        value = min;
+    }else{
+        value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    }
+    return value;
+}
+
+static id convertFocalLength35(ImageMetadata* meta, TranslationRule* rule)
+{
+    NSNumber* max = meta.associatedLensProfile.focalLengthMax;
+    NSNumber* min = meta.associatedLensProfile.focalLengthMin;
+    NSNumber* ratio = meta.associatedLensProfile.focalLengthRatio35;
+    NSNumber* value = nil;
+    if (max && min && ratio && max.doubleValue == min.doubleValue){
+        value = @(min.doubleValue * ratio.doubleValue);
+    }else{
+        value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+    }
+    return value;
+}
+
+
+static id convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
 {
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
     NSString* valueString = nil;
@@ -268,7 +304,7 @@ static NSString* convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
     return valueString;
 }
 
-static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
+static id convertFlash(ImageMetadata* meta, TranslationRule* rule)
 {
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
     NSMutableString* valueString = nil;
@@ -324,7 +360,7 @@ static NSString* convertFlash(ImageMetadata* meta, TranslationRule* rule)
     return valueString;
 }
 
-static NSString* convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
+static id convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
 {
     NSNumber* value = [[meta propertiesAtIndex:rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
     NSString* valueString = nil;
@@ -401,11 +437,23 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
             pathNode.imageDateTime = dateTime ? dateTime : @"x";
             
             // レンズライブラリから対応するレンズプロファイルを検索
-            NSString* lensName = convertLensModel(self, valueTranslationRules + RULE_LENS_MODEL);
+            LLMatchingProperties* properties = [LLMatchingProperties new];
+            ImageMetadata* __weak weakSelf = self;
+            id (^simpleValue)(int) = ^(int index){
+                struct TranslationRule* rule = valueTranslationRules + index;
+                ImageMetadata* tmpSelf = weakSelf;
+                return [tmpSelf->_properties[rule->dictionary] valueForKey:(__bridge NSString*)rule->key];
+            };
+            properties.cameraMake = simpleValue(RULE_CAMERA_MAKE);
+            properties.cameraModel = simpleValue(RULE_CAMERA_MODEL);
+            properties.lensMake = convertLensMaker(self, valueTranslationRules + RULE_LENS_MAKE);
+            properties.lensModel = convertLensModel(self, valueTranslationRules + RULE_LENS_MODEL);
+            properties.focalLength = convertFocalLength(self, valueTranslationRules + RULE_FOCAL_LENGTH);
+            properties.focalLength35 = convertFocalLength35(self, valueTranslationRules + RULE_FOCAL_LENGTH35);
+            properties.aperture = simpleValue(RULE_APERTURE);
             NSArray* lesnList = [LensLibrary sharedLensLibrary].allLensProfiles;
             for (Lens* lens in lesnList){
-                NSString* name = lens.lensName;
-                if ([name isEqualToString:lensName]){
+                if ([lens matchConditionWithProperties:properties]){
                     _lensProfile = lens;
                     break;
                 }
@@ -460,7 +508,14 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                             }
                         }
                     }else{
-                        valueString = rule->convert(self, rule);
+                        if (rule->convertingFormat){
+                            id value = rule->convert(self, rule);
+                            if (value) {
+                                valueString = [NSString stringWithFormat:@(rule->convertingFormat), value];
+                            }
+                        }else{
+                            valueString = rule->convert(self, rule);
+                        }
                     }
                     [section addObject:[ImageMetadataKV kvWithKey:keyString value:valueString]];
                     validRowCount += valueString ? 1 : 0;

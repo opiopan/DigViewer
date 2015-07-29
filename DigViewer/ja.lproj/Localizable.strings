@@ -73,6 +73,7 @@
 "LFCONDITION_OP_LEFTHAND_MATCH" = "前方一致";
 "LFCONDITION_OP_RIGHTHAND_MATCH" = "後方一致";
 "LFCONDITION_OP_PARTIAL_MATCH" = "部分一致";
+"LFCONDITION_OP_IS_NULL" = "値が空 (NULL)";
 
 // レンズプロファイル適用条件のサマリー表示用フォーマットストリング
 "LFCONDITION_SUMMARY_EQ" = "%@が%@である場合";
@@ -81,9 +82,10 @@
 "LFCONDITION_SUMMARY_GE" = "%@が%@以上の場合";
 "LFCONDITION_SUMMARY_LT" = "%@が%@より小さい場合";
 "LFCONDITION_SUMMARY_LE" = "%@が%@以下の場合";
-"LFCONDITION_SUMMARY_LEFTHAND_MATCH" = "%@が%@に前方一致する場合";
-"LFCONDITION_SUMMARY_RIGHTHAND_MATCH" = "%@が%@に後方一致する場合";
+"LFCONDITION_SUMMARY_LEFTHAND_MATCH" = "%@の先頭が%@で始まる場合";
+"LFCONDITION_SUMMARY_RIGHTHAND_MATCH" = "%@の終端が%@で終わる場合";
 "LFCONDITION_SUMMARY_PARTIAL_MATCH" = "%@の一部に文字列%@が含まれる場合";
+"LFCONDITION_SUMMARY_IS_NULL" = "%@の値が空の場合";
 
 // レンズプロファイル適用条件編集シートでのメッセージ
 "CDMSG_ERROR_INVALID_AS_NUMERIC" = "指定された値は数値として正しくありません。";

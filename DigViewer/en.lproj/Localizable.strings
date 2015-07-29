@@ -70,6 +70,7 @@
 "LFCONDITION_OP_LEFTHAND_MATCH" = "Left-hand match";
 "LFCONDITION_OP_RIGHTHAND_MATCH" = "Right-hand match";
 "LFCONDITION_OP_PARTIAL_MATCH" = "Partial match";
+"LFCONDITION_OP_IS_NULL" = "Is null";
 
 // レンズプロファイル適用条件のサマリー表示用フォーマットストリング
 "LFCONDITION_SUMMARY_EQ" = "If %@ is equal to %@";
@@ -81,6 +82,7 @@
 "LFCONDITION_SUMMARY_LEFTHAND_MATCH" = "If left-hand side of %@ is matched with %@";
 "LFCONDITION_SUMMARY_RIGHTHAND_MATCH" = "If right-hand side of %@ is matched with %@";
 "LFCONDITION_SUMMARY_PARTIAL_MATCH" = "If %@ contains a sub-string %@";
+"LFCONDITION_SUMMARY_IS_NULL" = "If %@ is null";
 
 // レンズプロファイル適用条件編集シートでのメッセージ
 "CDMSG_ERROR_INVALID_AS_NUMERIC" = "Specified string is not correct as numeric value.";

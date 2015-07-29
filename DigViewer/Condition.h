@@ -38,8 +38,19 @@ enum LFCONDITION_OP{
     LFCONDITION_OP_LE,
     LFCONDITION_OP_LEFTHAND_MATCH,
     LFCONDITION_OP_RIGHTHAND_MATCH,
-    LFCONDITION_OP_PARTIAL_MATCH
+    LFCONDITION_OP_PARTIAL_MATCH,
+    LFCONDITION_OP_IS_NULL
 };
+
+@interface LLMatchingProperties : NSObject
+@property NSString* cameraMake;
+@property NSString* cameraModel;
+@property NSString* lensMake;
+@property NSString* lensModel;
+@property NSNumber* focalLength;
+@property NSNumber* focalLength35;
+@property NSNumber* aperture;
+@end
 
 @interface Condition : NSManagedObject
 
@@ -67,6 +78,7 @@ enum LFCONDITION_OP{
 - (void)removeChildren:(NSSet *)values;
 
 - (void)updateProperties;
+- (BOOL)matchConditionWithProperties:(LLMatchingProperties*)properties;
 + (BOOL)targetIsString:(enum LFCONDITION_TARGET)target;
 + (NSString*)stringForTarget:(enum LFCONDITION_TARGET)target;
 + (NSString*)stringForOperator:(enum LFCONDITION_OP)op;
