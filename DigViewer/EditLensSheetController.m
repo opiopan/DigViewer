@@ -18,6 +18,7 @@
     
     NSArray* _topLevelObjects;
     
+    BOOL _isEdited;
     LensLibrary* __weak _lensLibrary;
     NSMutableArray* _allowedCameras;
     Condition* _condition;
@@ -86,6 +87,7 @@
         self.matchingType = @(LENS_MATCHING_BY_LENSNAME);
     }
 
+    _isEdited = NO;
     [self reflectOkButtonState];
 
     [[NSApplication sharedApplication] beginSheet:self.panel
@@ -177,7 +179,7 @@
         _apertureMax &&
         ((_fovMin && _fovMax) || (!_fovMin && !_fovMax)) &&
         ((_sensorHorizontal && _sensorVertical) || (!_sensorHorizontal && !_sensorVertical))){
-        self.okButton.enabled = YES;
+        self.okButton.enabled = _isEdited;
     }else{
         self.okButton.enabled = NO;
     }
@@ -254,6 +256,8 @@
 {
     if (object){
         _allowedCameras = object;
+        _isEdited = YES;
+        [self reflectOkButtonState];
     }
     _editCameraSheet = nil;
 }
@@ -275,6 +279,8 @@
         [_lensLibrary removeConditionRecurse:_condition];
         _condition = _edittingCondition;
         _edittingCondition = nil;
+        _isEdited = YES;
+        [self reflectOkButtonState];
     }else{
         [_lensLibrary removeConditionRecurse:_edittingCondition];
         _edittingCondition = nil;
@@ -318,82 +324,96 @@
 - (void)setProfileName:(NSString *)profileName
 {
     _profileName = profileName;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setLensMaker:(NSString *)lensMaker
 {
     _lensMaker = lensMaker;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setLensName:(NSString *)lensName
 {
     _lensName = lensName;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setFocalLengthMin:(NSNumber *)focalLengthMin
 {
     _focalLengthMin = focalLengthMin;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setFocalLengthMax:(NSNumber *)focalLengthMax
 {
     _focalLengthMax = focalLengthMax;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setFocalLength35Min:(NSNumber *)focalLength35Min
 {
     _focalLength35Min = focalLength35Min;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setApertureMin:(NSNumber *)apertureMin
 {
     _apertureMin = apertureMin;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setApertureMax:(NSNumber *)apertureMax
 {
     _apertureMax = apertureMax;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setFovMin:(NSNumber *)fovMin
 {
     _fovMin = fovMin;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setFovMax:(NSNumber *)fovMax
 {
     _fovMax = fovMax;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setSensorHorizontal:(NSNumber *)sensorHorizontal
 {
     _sensorHorizontal = sensorHorizontal;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setSensorVertical:(NSNumber *)sensorVertical
 {
     _sensorVertical = sensorVertical;
+    _isEdited = YES;
     [self reflectOkButtonState];
 }
 
 - (void)setMatchingType:(NSNumber *)matchingType
 {
     _matchingType = matchingType;
+    _isEdited = YES;
     [self willChangeValueForKey:@"isEnableEditCameras"];
     [self willChangeValueForKey:@"isEnableEditConditions"];
     [self didChangeValueForKey:@"isEnableEditCameras"];
     [self didChangeValueForKey:@"isEnableEditConditions"];
+    [self reflectOkButtonState];
 }
 
 @end
