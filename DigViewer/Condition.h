@@ -59,6 +59,7 @@ enum LFCONDITION_OP{
 @property (nonatomic, retain) NSNumber * target;
 @property (nonatomic, retain) NSNumber * valueDouble;
 @property (nonatomic, retain) NSString * valueString;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSSet *children;
 @property (nonatomic, retain) Lens *lens;
 @property (nonatomic, retain) Condition *parent;
@@ -79,6 +80,9 @@ enum LFCONDITION_OP{
 
 - (void)updateProperties;
 - (BOOL)matchConditionWithProperties:(LLMatchingProperties*)properties;
+- (NSInteger)maxChildOrder;
+- (void)shiftChildOrder:(NSInteger)amount forChildGraterThan:(NSInteger)order;
+
 + (BOOL)targetIsString:(enum LFCONDITION_TARGET)target;
 + (NSString*)stringForTarget:(enum LFCONDITION_TARGET)target;
 + (NSString*)stringForOperator:(enum LFCONDITION_OP)op;

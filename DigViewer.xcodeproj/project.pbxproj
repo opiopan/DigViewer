@@ -90,6 +90,8 @@
 		7B5C0A3C1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A3A1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib */; };
 		7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A3E1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m */; };
 		7B5C0A421B67A424004FE1A0 /* SelectDeletingConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */; };
+		7B5C0A451B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
+		7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */; };
 		7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
 		7B661A6D1B47840A00C42D2C /* Zoom.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
@@ -351,6 +353,10 @@
 		7B5C0A3D1B679C69004FE1A0 /* SelectDeletingConditionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDeletingConditionSheetController.h; sourceTree = "<group>"; };
 		7B5C0A3E1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDeletingConditionSheetController.m; sourceTree = "<group>"; };
 		7B5C0A411B67A424004FE1A0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SelectDeletingConditionSheet.strings; sourceTree = "<group>"; };
+		7B5C0A431B6A110F004FE1A0 /* LensLibrary2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.2.xcdatamodel; sourceTree = "<group>"; };
+		7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "LensLibraryMapping2.1-2.2.xcmappingmodel"; sourceTree = "<group>"; };
+		7B5C0A461B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConditionMigrationPolicy2.1-2.2.h"; sourceTree = "<group>"; };
+		7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConditionMigrationPolicy2.1-2.2.m"; sourceTree = "<group>"; };
 		7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Mosaic.cikernel; sourceTree = "<group>"; };
 		7B661A6B1B47840A00C42D2C /* Zoom.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Zoom.cikernel; sourceTree = "<group>"; };
 		7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationBaseViewController.h; sourceTree = "<group>"; };
@@ -788,6 +794,9 @@
 			children = (
 				7B5C0A021B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel */,
 				7B5C0A171B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel */,
+				7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */,
+				7B5C0A461B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.h */,
+				7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */,
 			);
 			name = "Mapping Model";
 			sourceTree = "<group>";
@@ -1307,6 +1316,7 @@
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
+				7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */,
@@ -1321,6 +1331,7 @@
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
+				7B5C0A451B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
 				7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
@@ -1882,11 +1893,12 @@
 		7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7B5C0A431B6A110F004FE1A0 /* LensLibrary2.2.xcdatamodel */,
 				7B5C0A0A1B65196E004FE1A0 /* LensLibrary2.1.xcdatamodel */,
 				7B5C09EF1B64B3B7004FE1A0 /* LensLibrary2.xcdatamodel */,
 				7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */,
 			);
-			currentVersion = 7B5C0A0A1B65196E004FE1A0 /* LensLibrary2.1.xcdatamodel */;
+			currentVersion = 7B5C0A431B6A110F004FE1A0 /* LensLibrary2.2.xcdatamodel */;
 			path = LensLibrary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

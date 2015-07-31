@@ -20,6 +20,7 @@
 @dynamic target;
 @dynamic valueDouble;
 @dynamic valueString;
+@dynamic order;
 @dynamic children;
 @dynamic lens;
 @dynamic parent;
@@ -254,6 +255,28 @@
     }
     
     return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// 子要素順序操作
+//-----------------------------------------------------------------------------------------
+- (NSInteger)maxChildOrder
+{
+    NSInteger maxOrder = 0;
+    for (Condition* child in self.children){
+        maxOrder = MAX(maxOrder, child.order.longValue);
+    }
+    return maxOrder;
+}
+
+- (void)shiftChildOrder:(NSInteger)amount forChildGraterThan:(NSInteger)order
+{
+    for (Condition* child in self.children){
+        NSInteger destination = child.order.longValue;
+        if (destination > order){
+            child.order = @(destination + amount);
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------

@@ -63,6 +63,8 @@
 
 - (void) awakeFromNib
 {
+    NSSortDescriptor* sortDescritor = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+    [_conditionTreeController setSortDescriptors:@[sortDescritor]];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -205,7 +207,16 @@
 {
     if (targetType){
         Condition* current = [_conditionTreeController.selection valueForKey:@"me"];
+        NSInteger order = 0;
         Condition* parent = current.conditionType.intValue == LFCONDITION_TYPE_COMPARISON ? current.parent : current;
+        if (current.conditionType.intValue == LFCONDITION_TYPE_COMPARISON){
+            parent = current.parent;
+            order = current.order.longValue + 1;
+            [parent shiftChildOrder:1 forChildGraterThan:current.order.longValue];
+        }else{
+            parent = current;
+            order = current.maxChildOrder + 1;
+        }
         Condition* newNode = [_lensLibrary insertNewConditionEntity];
         newNode.conditionType = @(LFCONDITION_TYPE_COMPARISON);
         newNode.target = targetType;
@@ -215,6 +226,7 @@
         }else{
             newNode.valueDouble = @0;
         }
+        newNode.order = @(order);
         [parent addChildrenObject:newNode];
         self.okButtonIsEnable = YES;
         [self updateButtonState];
@@ -275,7 +287,11 @@
                 for (Condition* child in current.children){
                     [buf addObject:child];
                 }
-                for (Condition* child in buf){
+                NSInteger base = current.order.longValue;
+                [parent shiftChildOrder:buf.count forChildGraterThan:base];
+                for (int i = 0; i < buf.count; i++){
+                    Condition* child = buf[i];
+                    child.order = @(base + i);
                     [parent addChildrenObject:child];
                 }
                 [_lensLibrary removeConditionRecurse:current];
@@ -296,6 +312,7 @@
     Condition* parent = current.parent;
     Condition* newNode = [_lensLibrary insertNewConditionEntity];
     newNode.conditionType = @(LFCONDITION_TYPE_OR);
+    newNode.order = current.order;
     if (parent){
         [parent removeChildrenObject:current];
         [newNode addChildrenObject:current];
@@ -306,6 +323,7 @@
         [newNode addChildrenObject:current];
         [self didChangeValueForKey:@"condition"];
     }
+    current.order = @(1);
     self.okButtonIsEnable = YES;
     [self updateButtonState];
     [_conditionTreeView expandItem:nil expandChildren:YES];

@@ -225,6 +225,7 @@
         rc.operatorType = condition.operatorType;
         rc.valueDouble = condition.valueDouble;
         rc.valueString = condition.valueString;
+        rc.order = condition.order;
         for (Condition* child in condition.children){
             [rc addChildrenObject:[self cloneCondition:child]];
         }
@@ -237,6 +238,7 @@
         child.target = @(LFCONDITION_TARGET_LENS_NAME);
         child.operatorType = @(LFCONDITION_OP_EQ);
         child.valueString = _lensName;
+        child.order = @1;
         [rc addChildrenObject:child];
     }
     return rc;
