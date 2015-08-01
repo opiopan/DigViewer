@@ -64,8 +64,10 @@
     
     NSDictionary* attrs = [self.attributedStringValue attributesAtIndex:0 effectiveRange:nil];
     NSPoint p2 = [self namePositionWithIcon:image cellFrame:cellFrame name:name attributes:attrs];
+    cellFrame.size.width -= p2.x - cellFrame.origin.x;
+    cellFrame.origin = p2;
     
-    [name drawAtPoint:p2 withAttributes:attrs];
+    [name drawInRect:cellFrame withAttributes:attrs];
 }
 
 - (NSRect)expansionFrameWithFrame:(NSRect)cellFrame inView:(NSView *)view
@@ -73,14 +75,12 @@
     NSImage* image = [self iconValue];
     NSString* name = [self nameValue];
     NSDictionary* attrs = [self.attributedStringValue attributesAtIndex:0 effectiveRange:nil];
+    NSRect expansionFrame = cellFrame;
     NSPoint p2 = [self namePositionWithIcon:image cellFrame:cellFrame name:name attributes:attrs];
-    cellFrame.size.width = p2.x - cellFrame.origin.x;
-    cellFrame.size.width += [name sizeWithAttributes:attrs].width;
-    if (image){
-        cellFrame.size.width += 4.0;
-    }
-    if(view.frame.size.width < cellFrame.origin.x + cellFrame.size.width){
-        return cellFrame;
+    expansionFrame.size.width = p2.x - cellFrame.origin.x;
+    expansionFrame.size.width += [name sizeWithAttributes:attrs].width;
+    if(cellFrame.origin.x + cellFrame.size.width < expansionFrame.origin.x + expansionFrame.size.width){
+        return expansionFrame;
     }else{
         return NSZeroRect;
     }
