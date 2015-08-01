@@ -33,6 +33,8 @@
 "SlideshowTransitionAfterImage" = "Afterimage";
 "SlideshowTransitionDoor" = "Door";
 "SlideshowTransitionTwister" = "Twister";
+"SlideshowTransitionCube" = "Cube";
+"SlideshowTransitionSqueeze" = "Squeeze";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";
