@@ -131,9 +131,9 @@
                                     </textFieldCell>
                                 </textField>
                                 <button verticalHuggingPriority="750" id="cUy-av-Uvn">
-                                    <rect key="frame" x="259" y="198" width="143" height="28"/>
+                                    <rect key="frame" x="223" y="198" width="179" height="28"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="push" title="Custom Effect..." bezelStyle="rounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1gA-LB-S3D">
+                                    <buttonCell key="cell" type="push" title="Plug-in Effect..." bezelStyle="rounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1gA-LB-S3D">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
