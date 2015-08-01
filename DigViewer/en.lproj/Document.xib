@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
@@ -10,128 +10,169 @@
                 <outlet property="imageArrayController" destination="100087" id="100261"/>
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
                 <outlet property="placeHolder" destination="100232" id="100240"/>
-                <outlet property="viewSelectionButton" destination="Y6C-ag-7JX" id="Sjx-Y4-Sbw"/>
+                <outlet property="toolbar" destination="WIq-XK-m9I" id="bN8-q4-Yaa"/>
+                <outlet property="viewSelectionButton" destination="ENh-J0-P5m" id="yUJ-Ve-XOl"/>
                 <outlet property="window" destination="5" id="100241"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <value key="minSize" type="size" width="94" height="86"/>
-            <view key="contentView" id="6" customClass="FrameView">
+            <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="100232">
-                        <rect key="frame" x="0.0" y="0.0" width="609" height="445"/>
+                        <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
                     </customView>
-                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100290">
-                        <rect key="frame" x="9" y="451" width="67" height="25"/>
-                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="100291">
-                            <font key="font" metaFont="system"/>
-                            <segments>
-                                <segment toolTip="Show the Image view" image="NSQuickLookTemplate" width="32"/>
-                                <segment toolTip="Show the Thumbnail view" image="NSIconViewTemplate" width="32" selected="YES" tag="1"/>
-                            </segments>
-                        </segmentedCell>
-                        <connections>
-                            <binding destination="-2" name="selectedTag" keyPath="self.presentationViewType" id="100311"/>
-                        </connections>
-                    </segmentedControl>
-                    <button toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100301">
-                        <rect key="frame" x="93" y="450" width="38" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="100307"/>
-                        </constraints>
-                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSEnterFullScreenTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100302">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <binding destination="-2" name="value" keyPath="self.isFitWindow" id="100313"/>
-                        </connections>
-                    </button>
-                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y6C-ag-7JX">
-                        <rect key="frame" x="151" y="451" width="67" height="25"/>
-                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="E2t-3v-5oY">
-                            <font key="font" metaFont="system"/>
-                            <segments>
-                                <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
-                                <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
-                            </segments>
-                        </segmentedCell>
-                        <connections>
-                            <action selector="onViewSelectionButtonDown:" target="-2" id="O9z-Yc-tox"/>
-                        </connections>
-                    </segmentedControl>
-                    <button toolTip="Reload document" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rGL-6j-xuH">
-                        <rect key="frame" x="563" y="451" width="38" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="XAl-GM-8vg"/>
-                        </constraints>
-                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eGq-1t-4Vi">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="refreshDocument:" target="-2" id="pLd-IX-HCn"/>
-                        </connections>
-                    </button>
-                    <button toolTip="Start or stop slideshow" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zwr-KH-vth">
-                        <rect key="frame" x="238" y="451" width="38" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="nel-2M-xQW"/>
-                        </constraints>
-                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="play" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ck6-Qw-Dyi">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="toggleSlideshowMode:" target="-2" id="RNc-Yu-P4W"/>
-                            <binding destination="-2" name="image" keyPath="self.slideshowButtonImage" id="uqM-dy-aM0"/>
-                            <binding destination="-2" name="toolTip" keyPath="self.slideshowButtonTooltip" previousBinding="uqM-dy-aM0" id="nUm-5f-oZE"/>
-                        </connections>
-                    </button>
-                    <button toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uou-op-3Mr">
-                        <rect key="frame" x="356" y="451" width="38" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="D7t-Op-Yy2"/>
-                        </constraints>
-                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="datetime" imagePosition="only" alignment="center" alternateImage="datetime_on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Zm-oR-kOJ">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="toggleDateTimeSort:" target="-2" id="C7h-Rl-aN8"/>
-                            <binding destination="-2" name="image" keyPath="self.sortByDateTimeButtonImage" id="PIW-Tu-UDA"/>
-                            <binding destination="-2" name="value" keyPath="self.sortByDateTimeButtonState" id="6gs-WW-MQt"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="100232" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="100273"/>
                     <constraint firstItem="100232" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="100274"/>
                     <constraint firstItem="100232" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="100276"/>
-                    <constraint firstItem="100290" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="9" id="100295"/>
-                    <constraint firstItem="100290" firstAttribute="top" secondItem="6" secondAttribute="top" constant="5" id="100299"/>
-                    <constraint firstItem="100301" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="93" id="100304"/>
-                    <constraint firstItem="100301" firstAttribute="baseline" secondItem="100290" secondAttribute="baseline" id="100305"/>
-                    <constraint firstItem="100232" firstAttribute="top" secondItem="100290" secondAttribute="bottom" constant="8" symbolic="YES" id="100308"/>
-                    <constraint firstItem="zwr-KH-vth" firstAttribute="leading" secondItem="Y6C-ag-7JX" secondAttribute="trailing" constant="20" id="1x7-N9-OKi"/>
-                    <constraint firstItem="uou-op-3Mr" firstAttribute="top" secondItem="zwr-KH-vth" secondAttribute="top" id="9QR-Gn-0We"/>
-                    <constraint firstItem="zwr-KH-vth" firstAttribute="top" secondItem="100290" secondAttribute="top" id="9SJ-Rq-L0d"/>
-                    <constraint firstItem="zwr-KH-vth" firstAttribute="top" secondItem="Y6C-ag-7JX" secondAttribute="top" id="JJ4-bK-gRW"/>
-                    <constraint firstItem="Y6C-ag-7JX" firstAttribute="leading" secondItem="100301" secondAttribute="trailing" constant="20" id="Qpi-IE-x8V"/>
-                    <constraint firstAttribute="trailing" secondItem="rGL-6j-xuH" secondAttribute="trailing" constant="8" id="UKF-Tj-65Z"/>
-                    <constraint firstItem="uou-op-3Mr" firstAttribute="leading" secondItem="zwr-KH-vth" secondAttribute="trailing" constant="80" id="ZHd-Z9-b5K"/>
-                    <constraint firstItem="100232" firstAttribute="top" secondItem="rGL-6j-xuH" secondAttribute="bottom" constant="8" id="nS2-F3-isA"/>
+                    <constraint firstItem="100232" firstAttribute="top" secondItem="6" secondAttribute="top" id="QV8-R0-g1P"/>
                 </constraints>
             </view>
-            <contentBorderThickness maxY="35"/>
+            <toolbar key="toolbar" implicitIdentifier="68DBC3C8-E711-459F-84BA-10B328A6405E" displayMode="iconOnly" sizeMode="regular" id="WIq-XK-m9I">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="F064D896-83B5-4DB0-BE3D-34AF03AB75C5" label="Image View" paletteLabel="Image View" id="SWS-gJ-pzs">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="67" height="25"/>
+                        <size key="maxSize" width="67" height="25"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="XDI-Iv-r7r">
+                            <rect key="frame" x="9" y="451" width="67" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CaW-zR-O9m">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Show the Image view" image="NSQuickLookTemplate" width="32"/>
+                                    <segment toolTip="Show the Thumbnail view" image="NSIconViewTemplate" width="32" selected="YES" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                            <connections>
+                                <binding destination="-2" name="selectedTag" keyPath="self.presentationViewType" id="2PG-oq-h4w"/>
+                            </connections>
+                        </segmentedControl>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="FB19C63D-3F5C-48AE-B83A-EB1794C1F661" label="Image Fitting" paletteLabel="Image Fitting" image="NSEnterFullScreenTemplate" id="UKe-fO-4lv">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="25"/>
+                        <size key="maxSize" width="38" height="25"/>
+                        <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" id="IT0-2I-Sqo">
+                            <rect key="frame" x="93" y="450" width="38" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="38" id="TEa-05-Y7c"/>
+                            </constraints>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSEnterFullScreenTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rsz-9d-hop">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="self.isFitWindow" id="wZB-Nf-d8W"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="93E99F49-D95B-4FC7-872C-A011EFB63943" label="Sub Pane" paletteLabel="Sub Pane" id="aOg-7W-h2L">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="67" height="25"/>
+                        <size key="maxSize" width="67" height="25"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="ENh-J0-P5m">
+                            <rect key="frame" x="151" y="451" width="67" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
+                                    <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                            <connections>
+                                <action selector="onViewSelectionButtonDown:" target="-2" id="kc1-R0-BT3"/>
+                            </connections>
+                        </segmentedControl>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="63B491D9-CD29-4914-9C33-28DF0399E0D8" label="Slide Show" paletteLabel="Slide Show" image="play" id="it6-bE-VIJ">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="25"/>
+                        <size key="maxSize" width="38" height="25"/>
+                        <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" id="XUN-ZE-OzR">
+                            <rect key="frame" x="238" y="451" width="38" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="38" id="txZ-vL-wa0"/>
+                            </constraints>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="play" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kv3-KI-sYJ">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleSlideshowMode:" target="-2" id="bkv-nF-H5G"/>
+                                <binding destination="-2" name="image" keyPath="self.slideshowButtonImage" id="vON-KQ-UPs"/>
+                                <binding destination="-2" name="toolTip" keyPath="self.slideshowButtonTooltip" previousBinding="vON-KQ-UPs" id="RYx-6I-bhV"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="697A892F-C18D-499A-BEA7-FF798136A700" label="Sort by Time" paletteLabel="Sort by Time" image="datetime" id="e2H-Y0-Zel">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="25"/>
+                        <size key="maxSize" width="38" height="25"/>
+                        <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" id="hTK-s2-ftt">
+                            <rect key="frame" x="356" y="451" width="38" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="38" id="V0X-1u-2fw"/>
+                            </constraints>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="datetime" imagePosition="only" alignment="center" alternateImage="datetime_on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n6p-4n-S5X">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleDateTimeSort:" target="-2" id="H0O-kQ-nOX"/>
+                                <binding destination="-2" name="image" keyPath="self.sortByDateTimeButtonImage" id="2gA-rZ-Pg7"/>
+                                <binding destination="-2" name="value" keyPath="self.sortByDateTimeButtonState" id="MZG-6o-xJe"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="3D385374-21EF-4DB5-BE83-D4135F316FE4" label="Reload" paletteLabel="Reload" image="NSRefreshTemplate" id="PXX-iT-9MK">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="25"/>
+                        <size key="maxSize" width="38" height="25"/>
+                        <button key="view" toolTip="Reload document" verticalHuggingPriority="750" id="LVm-bA-tJO">
+                            <rect key="frame" x="563" y="451" width="38" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="38" id="Ua2-vC-alo"/>
+                            </constraints>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cKs-9U-ps2">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="refreshDocument:" target="-2" id="ZJy-hF-Clu"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="NJR-tU-j4c"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Z9h-L5-NaX"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="SWS-gJ-pzs"/>
+                    <toolbarItem reference="UKe-fO-4lv"/>
+                    <toolbarItem reference="aOg-7W-h2L"/>
+                    <toolbarItem reference="NJR-tU-j4c"/>
+                    <toolbarItem reference="it6-bE-VIJ"/>
+                    <toolbarItem reference="NJR-tU-j4c"/>
+                    <toolbarItem reference="e2H-Y0-Zel"/>
+                    <toolbarItem reference="Z9h-L5-NaX"/>
+                    <toolbarItem reference="PXX-iT-9MK"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="17"/>
             </connections>

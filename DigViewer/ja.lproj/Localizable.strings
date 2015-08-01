@@ -102,8 +102,10 @@
 "Hide Navigator" = "ナビゲーターを隠す";
 "Show Inspector" = "インスペクターを表示";
 "Hide Inspector" = "インスペクターを隠す";
-"Begin Slideshow" = "スライドショーを開始する";
-"End Slideshow" = "スライドショーを終了する";
+"Begin Slideshow" = "スライドショーを開始";
+"End Slideshow" = "スライドショーを終了";
+"Show Toolbar" = "ツールバーを表示";
+"Hide Toolbar" = "ツールバーを隠す";
 
 // スライドショーボタンのtool tip
 "SLIDESHOW_TOOLTIP_BEGIN" = "スライドショーを開始します";

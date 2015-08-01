@@ -150,3 +150,9 @@
 
 /* Class = "NSMenuItem"; title = "Reset Zoom Ratio"; ObjectID = "458-l0-7Uu"; */
  "458-l0-7Uu.title" = "画像表示サイズを元に戻す";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "91A-i8-diT"; */
+"91A-i8-diT.title" = "ツールバーをカスタマイズする…";
+
+/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "k0N-wf-IMn"; */
+"k0N-wf-IMn.title" = "ツールバーを表示する";

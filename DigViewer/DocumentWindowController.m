@@ -38,6 +38,7 @@
 // DocumentWindowController implementation
 //-----------------------------------------------------------------------------------------
 @interface DocumentWindowController ()
+@property IBOutlet NSToolbar* toolbar;
 @end
 
 @implementation DocumentWindowController{
@@ -568,6 +569,25 @@
     }
     
     return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// ツールバー表示・非表示の制御
+//-----------------------------------------------------------------------------------------
+- (IBAction)toggleToolbar:(id)sender
+{
+    _toolbar.visible = !_toolbar.visible;
+}
+
+- (BOOL)validateForToggleToolbar:(NSMenuItem*)menuItem
+{
+    if (_toolbar.visible){
+        menuItem.title = NSLocalizedString(@"Hide Toolbar", nil);
+    }else{
+        menuItem.title = NSLocalizedString(@"Show Toolbar", nil);
+    }
+
+    return YES;
 }
 
 @end

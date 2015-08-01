@@ -28,11 +28,11 @@
     NSOpenPanel* openPanel = [NSOpenPanel openPanel];
     openPanel.canChooseDirectories = YES;
     openPanel.canChooseFiles = NO;
-    [openPanel runModal];
-    
-    NSDocumentController* controller = [NSDocumentController sharedDocumentController];
-    [controller openDocumentWithContentsOfURL:openPanel.URL display:YES
-                            completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){}];
+    if ([openPanel runModal] == NSFileHandlingPanelOKButton){
+        NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+        [controller openDocumentWithContentsOfURL:openPanel.URL display:YES
+                                completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){}];
+    }
 }
 
 @end

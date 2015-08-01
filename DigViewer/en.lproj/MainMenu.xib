@@ -209,6 +209,18 @@
                 <menuItem title="View" id="295">
                     <menu key="submenu" title="View" id="296">
                         <items>
+                            <menuItem title="Show Toolbar" enabled="NO" keyEquivalent="t" id="k0N-wf-IMn">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleToolbar:" target="-1" id="L98-V6-RnZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Customize Toolbar…" id="91A-i8-diT">
+                                <connections>
+                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="QiH-xv-KFF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="AtW-vp-R4h"/>
                             <menuItem title="Toggle Navigator" keyEquivalent="n" id="vsU-XZ-KCe">
                                 <connections>
                                     <action selector="toggleCollapsedOutlineView:" target="-1" id="9bV-gr-9Fy"/>
@@ -237,7 +249,7 @@ DQ
                                     <action selector="fitImageToScreen:" target="-1" id="556"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="AtW-vp-R4h"/>
+                            <menuItem isSeparatorItem="YES" id="4SS-E1-PAE"/>
                             <menuItem title="Reset Zoom Ratio" keyEquivalent="0" id="458-l0-7Uu">
                                 <connections>
                                     <action selector="resetZoomRatio:" target="-1" id="J7y-qo-Dmg"/>

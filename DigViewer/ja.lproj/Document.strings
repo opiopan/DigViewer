@@ -1,26 +1,60 @@
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
-"5.title" = "Window";
+/* Class = "NSSegmentedCell"; CaW-zR-O9m.ibShadowedToolTips[0] = "Show the Image view"; ObjectID = "CaW-zR-O9m"; */
+"CaW-zR-O9m.ibShadowedToolTips[0]" = "単一の画像を表示します";
 
-/* Class = "NSSegmentedCell"; 100291.ibShadowedToolTips[0] = "Show the Image view"; ObjectID = "100291"; */
-"100291.ibShadowedToolTips[0]" = "単一の画像を表示します";
+/* Class = "NSSegmentedCell"; CaW-zR-O9m.ibShadowedToolTips[1] = "Show the Thumbnail view"; ObjectID = "CaW-zR-O9m"; */
+"CaW-zR-O9m.ibShadowedToolTips[1]" = "サムネール形式で表示します";
 
-/* Class = "NSSegmentedCell"; 100291.ibShadowedToolTips[1] = "Show the Thumbnail view"; ObjectID = "100291"; */
-"100291.ibShadowedToolTips[1]" = "サムネール形式で表示します";
+/* Class = "NSButton"; ibShadowedToolTip = "Scale up the image that fit to the window"; ObjectID = "IT0-2I-Sqo"; */
+"IT0-2I-Sqo.ibShadowedToolTip" = "小さい画像をウィンドウサイズに合わせて拡大表示します";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Scale up the image that fit to the window"; ObjectID = "100301"; */
-"100301.ibShadowedToolTip" = "小さい画像をウィンドウサイズに合わせて拡大表示します";
+/* Class = "NSButton"; ibShadowedToolTip = "Reload document"; ObjectID = "LVm-bA-tJO"; */
+"LVm-bA-tJO.ibShadowedToolTip" = "ドキュメントを再読み込みします";
 
-/* Class = "NSSegmentedCell"; E2t-3v-5oY.ibShadowedToolTips[0] = "Show or hide \
- the Navigator"; ObjectID = "E2t-3v-5oY"; */
-"E2t-3v-5oY.ibShadowedToolTips[0]" = "ナビゲーターを表示または隠します";
+/* Class = "NSSegmentedCell"; jRg-Bi-fUN.ibShadowedToolTips[0] = "Show or hide the Navigator"; ObjectID = "jRg-Bi-fUN"; */
+"jRg-Bi-fUN.ibShadowedToolTips[0]" = "ナビゲーターを表示または隠します";
 
-/* Class = "NSSegmentedCell"; E2t-3v-5oY.ibShadowedToolTips[1] = "Show or hide \
- the Inspector"; ObjectID = "E2t-3v-5oY"; */
-"E2t-3v-5oY.ibShadowedToolTips[1]" = "インスペクターを表示または隠します";
+/* Class = "NSSegmentedCell"; jRg-Bi-fUN.ibShadowedToolTips[1] = "Show or hide the Inspector"; ObjectID = "jRg-Bi-fUN"; */
+"jRg-Bi-fUN.ibShadowedToolTips[1]" = "インスペクターを表示または隠します";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Reload document"; ObjectID = "rGL-6j-xuH"; */
-"rGL-6j-xuH.ibShadowedToolTip" = "ドキュメントを再読み込みします";
+/* Class = "NSButton"; ibShadowedToolTip = "Sort images by date & time"; ObjectID = "hTK-s2-ftt"; */
+"hTK-s2-ftt.ibShadowedToolTip" = "画像を撮影日時順に並べます";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Sort images by date & time"; ObjectID = "uou-op-3Mr"; */
-"uou-op-3Mr.ibShadowedToolTip" = "画像を撮影日時順に並べます";
+/* Class = "NSButton"; ibShadowedToolTip = "Start or stop slideshow"; ObjectID = "XUN-ZE-OzR"; */
+"XUN-ZE-OzR.ibShadowedToolTip" = "スライドショーを開始または終了します";
+
+/* Class = "NSToolbarItem"; label = "Reload"; ObjectID = "PXX-iT-9MK"; */
+"PXX-iT-9MK.label" = "再読込み";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Reload"; ObjectID = "PXX-iT-9MK"; */
+"PXX-iT-9MK.paletteLabel" = "再読込み";
+
+/* Class = "NSToolbarItem"; label = "Image View"; ObjectID = "SWS-gJ-pzs"; */
+"SWS-gJ-pzs.label" = "画像表示";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Image View"; ObjectID = "SWS-gJ-pzs"; */
+"SWS-gJ-pzs.paletteLabel" = "画像表示";
+
+/* Class = "NSToolbarItem"; label = "Image Fitting"; ObjectID = "UKe-fO-4lv"; */
+"UKe-fO-4lv.label" = "フィッティング";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Image Fitting"; ObjectID = "UKe-fO-4lv"; */
+"UKe-fO-4lv.paletteLabel" = "フィッティング";
+
+/* Class = "NSToolbarItem"; label = "Sub Pane"; ObjectID = "aOg-7W-h2L"; */
+"aOg-7W-h2L.label" = "サブペイン";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Sub Pane"; ObjectID = "aOg-7W-h2L"; */
+"aOg-7W-h2L.paletteLabel" = "サブペイン";
+
+/* Class = "NSToolbarItem"; label = "Sort by Time"; ObjectID = "e2H-Y0-Zel"; */
+"e2H-Y0-Zel.label" = "日時でソート";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Sort by Time"; ObjectID = "e2H-Y0-Zel"; */
+"e2H-Y0-Zel.paletteLabel" = "日時でソート";
+
+/* Class = "NSToolbarItem"; label = "Slide Show"; ObjectID = "it6-bE-VIJ"; */
+"it6-bE-VIJ.label" = "スライドショー";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Slite Show"; ObjectID = "it6-bE-VIJ"; */
+"it6-bE-VIJ.paletteLabel" = "スライドショー";
