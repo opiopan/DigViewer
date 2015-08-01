@@ -273,6 +273,7 @@
                 [_lensLibrary removeConditionRecurse:current];
                 self.okButtonIsEnable = YES;
                 [self updateButtonState];
+                [self performSelector:@selector(didEndDeletingGroup) withObject:nil afterDelay:0];
             }else{
                 NSBeginAlertSheet(NSLocalizedString(@"CDMSG_ERROR_ONLYONE", nill),
                                   NSLocalizedString(@"OK", nil), nil,
@@ -287,20 +288,31 @@
                 for (Condition* child in current.children){
                     [buf addObject:child];
                 }
+                NSArray* sbuf = [buf sortedArrayUsingComparator:^(Condition* src, Condition* dest){
+                    return [src.order compare:dest.order];
+                }];
                 NSInteger base = current.order.longValue;
-                [parent shiftChildOrder:buf.count forChildGraterThan:base];
-                for (int i = 0; i < buf.count; i++){
-                    Condition* child = buf[i];
+                [parent shiftChildOrder:sbuf.count forChildGraterThan:base];
+                for (int i = 0; i < sbuf.count; i++){
+                    Condition* child = sbuf[i];
                     child.order = @(base + i);
                     [parent addChildrenObject:child];
                 }
+                [parent removeChildrenObject:current];
                 [_lensLibrary removeConditionRecurse:current];
+                [_conditionTreeView expandItem:nil expandChildren:YES];
                 self.okButtonIsEnable = YES;
                 [self updateButtonState];
+                [self performSelector:@selector(didEndDeletingGroup) withObject:nil afterDelay:0];
             }
         }
     }
     _selectDeletingWaySheet = nil;
+}
+
+- (void)didEndDeletingGroup
+{
+    self.selectionIndexesInCondition = _selectionIndexesInCondition;
 }
 
 //-----------------------------------------------------------------------------------------
