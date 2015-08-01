@@ -10,3 +10,8 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "i3p-ym-QGB"; */
 "i3p-ym-QGB.headerCell.title" = "名前";
+/* Class = "NSTableColumn"; headerCell.title = "Lens Specification"; ObjectID = "pdN-iR-h9U"; */
+"pdN-iR-h9U.headerCell.title" = "レンズ仕様";
+
+/* Class = "NSTableColumn"; headerCell.title = "Application Condition"; ObjectI D = "Cf3-8G-vlO"; */
+"Cf3-8G-vlO.headerCell.title" = "プロファイル適用条件";
