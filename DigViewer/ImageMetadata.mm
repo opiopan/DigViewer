@@ -537,7 +537,6 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
 - (GPSInfo*)gpsInfo
 {
     NSDictionary* base = _properties[propertyALL];
-    NSDictionary* exif = _properties[propertyEXIF];
     NSDictionary* gps = _properties[propertyGPS];
     if (!_gpsInfo && gps){
         _gpsInfo = [[GPSInfo alloc] init];
@@ -613,11 +612,11 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
         _gpsInfo.geodeticReferenceSystem = [gps valueForKey:(__bridge NSString*)kCGImagePropertyGPSMapDatum];
         
         // 焦点距離 (35mm換算) & 画像の向き
-        _gpsInfo.focalLengthIn35mm = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifFocalLenIn35mmFilm];
+        _gpsInfo.focalLengthIn35mm = convertFocalLength35(self, valueTranslationRules + RULE_FOCAL_LENGTH35);
         _gpsInfo.rotation = [base valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
         
         // 画角
-        NSNumber* focalLength = [exif valueForKey:(__bridge NSString*)kCGImagePropertyExifFocalLength];
+        NSNumber* focalLength = convertFocalLength(self, valueTranslationRules + RULE_FOCAL_LENGTH);
         NSNumber* flMin = _lensProfile.focalLengthMin;
         NSNumber* flMax = _lensProfile.focalLengthMax;
         NSNumber* fovMin = _lensProfile.fovMin;

@@ -156,56 +156,6 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Navigate" id="537">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Navigate" id="538">
-                        <items>
-                            <menuItem title="Next Image" keyEquivalent="" id="539">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
-                                <connections>
-                                    <action selector="moveToNextImage:" target="-1" id="541"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Previous Image" keyEquivalent="" id="540">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
-                                <connections>
-                                    <action selector="moveToPreviousImage:" target="-1" id="542"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="543"/>
-                            <menuItem title="Next Folder" keyEquivalent="" id="544">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
-                                <connections>
-                                    <action selector="moveToNextFolder:" target="-1" id="546"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Previous Folder" keyEquivalent="" id="545">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
-                                <connections>
-                                    <action selector="moveToPreviousFolder:" target="-1" id="547"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="558"/>
-                            <menuItem title="Down Folder" keyEquivalent="" id="557">
-                                <connections>
-                                    <action selector="moveDownFolder:" target="-1" id="563"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Up Folder" keyEquivalent="" id="559">
-                                <connections>
-                                    <action selector="moveUpFolder:" target="-1" id="564"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="fDN-R7-V6P"/>
-                            <menuItem title="Toggle Slideshow" id="rYP-b6-FaY">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="toggleSlideshowMode:" target="-1" id="UvJ-Jb-S4y"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
                 <menuItem title="View" id="295">
                     <menu key="submenu" title="View" id="296">
                         <items>
@@ -253,6 +203,63 @@ DQ
                             <menuItem title="Reset Zoom Ratio" keyEquivalent="0" id="458-l0-7Uu">
                                 <connections>
                                     <action selector="resetZoomRatio:" target="-1" id="J7y-qo-Dmg"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="cYN-Df-5Wb"/>
+                            <menuItem title="Enter Full Screen" keyEquivalent="f" id="Da5-lq-aVZ">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleFullScreen:" target="-1" id="StE-i7-aiQ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Navigate" id="537">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Navigate" id="538">
+                        <items>
+                            <menuItem title="Next Image" keyEquivalent="" id="539">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                <connections>
+                                    <action selector="moveToNextImage:" target="-1" id="541"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous Image" keyEquivalent="" id="540">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                <connections>
+                                    <action selector="moveToPreviousImage:" target="-1" id="542"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="543"/>
+                            <menuItem title="Next Folder" keyEquivalent="" id="544">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                <connections>
+                                    <action selector="moveToNextFolder:" target="-1" id="546"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous Folder" keyEquivalent="" id="545">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                <connections>
+                                    <action selector="moveToPreviousFolder:" target="-1" id="547"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="558"/>
+                            <menuItem title="Down Folder" keyEquivalent="" id="557">
+                                <connections>
+                                    <action selector="moveDownFolder:" target="-1" id="563"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Up Folder" keyEquivalent="" id="559">
+                                <connections>
+                                    <action selector="moveUpFolder:" target="-1" id="564"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="fDN-R7-V6P"/>
+                            <menuItem title="Toggle Slideshow" id="rYP-b6-FaY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleSlideshowMode:" target="-1" id="UvJ-Jb-S4y"/>
                                 </connections>
                             </menuItem>
                         </items>
