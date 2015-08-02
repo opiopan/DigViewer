@@ -29,7 +29,6 @@
 @dynamic allowedCameras;
 @dynamic condition;
 
-
 //-----------------------------------------------------------------------------------------
 // プロファイル適用可否判定
 //-----------------------------------------------------------------------------------------
@@ -52,6 +51,41 @@
             break;
         case LENS_MATCHING_BY_CUSTOM_CONDITION:
             rc = [self.condition matchConditionWithProperties:properties];
+            break;
+    }
+    
+    return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// レンズプロファイルの説明用テキスト
+//-----------------------------------------------------------------------------------------
+- (NSString *)lensSpecString
+{
+    NSString* rc;
+    if (self.focalLengthMax.doubleValue == self.focalLengthMin.doubleValue){
+        rc = [NSString stringWithFormat:@"%@ %@mm f/%@", NSLocalizedString(@"Fixed Focal Length", nil),
+                                                         self.focalLengthMin, self.apertureMin ];
+    }else{
+        rc = [NSString stringWithFormat:@"%@ %@-%@mm f/%@-%@", NSLocalizedString(@"Zoom", nil),
+                                                               self.focalLengthMin, self.focalLengthMax,
+                                                               self.apertureMin, self.apertureMax];
+    }
+    return rc;
+}
+
+- (NSString *)matchingRuleString
+{
+    NSString* rc = nil;
+    switch (self.matchingType.intValue){
+        case LENS_MATCHING_BY_LENSNAME:
+            rc = NSLocalizedString(@"LENS_MATCHING_BY_LENSNAME", nil);
+            break;
+        case LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME:
+            rc =  NSLocalizedString(@"LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME", nil);
+            break;
+        case LENS_MATCHING_BY_CUSTOM_CONDITION:
+            rc = NSLocalizedString(@"LENS_MATCHING_BY_CUSTOM_CONDITION", nil);
             break;
     }
     

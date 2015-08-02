@@ -50,6 +50,8 @@
 		7B35D9251B06D7E2000CA4F1 /* datetime.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35D9241B06D7E2000CA4F1 /* datetime.png */; };
 		7B36259318DE65D4008471E2 /* FlatSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259218DE65D4008471E2 /* FlatSplitView.m */; };
 		7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */; };
+		7B36F79F1B6CF6C0006F06CB /* Cube.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B36F79D1B6CF6C0006F06CB /* Cube.qtz */; };
+		7B36F7A01B6CF6C0006F06CB /* Squeeze.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B36F79E1B6CF6C0006F06CB /* Squeeze.qtz */; };
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
@@ -284,6 +286,8 @@
 		7B36259218DE65D4008471E2 /* FlatSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatSplitView.m; sourceTree = "<group>"; };
 		7B36259418DE761E008471E2 /* KeyUncapturedTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyUncapturedTabView.h; sourceTree = "<group>"; };
 		7B36259518DE761E008471E2 /* KeyUncapturedTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyUncapturedTabView.m; sourceTree = "<group>"; };
+		7B36F79D1B6CF6C0006F06CB /* Cube.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Cube.qtz; path = resources/Cube.qtz; sourceTree = "<group>"; };
+		7B36F79E1B6CF6C0006F06CB /* Squeeze.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; name = Squeeze.qtz; path = resources/Squeeze.qtz; sourceTree = "<group>"; };
 		7B39202F1696CA1800E139D0 /* DigViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3920331696CA1800E139D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7B3920361696CA1800E139D0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -1004,6 +1008,8 @@
 				7BCA29A51B4E70B500FCFD7A /* BurnOut.qtz */,
 				7BCF7F061B52802C001B0A7A /* ColorDivider.qtz */,
 				7BCF7F071B52802C001B0A7A /* Door.qtz */,
+				7B36F79D1B6CF6C0006F06CB /* Cube.qtz */,
+				7B36F79E1B6CF6C0006F06CB /* Squeeze.qtz */,
 			);
 			name = "QC Composition";
 			sourceTree = "<group>";
@@ -1107,6 +1113,7 @@
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7B066F361B57D9C400288D57 /* Twister.qtz in Resources */,
+				7B36F7A01B6CF6C0006F06CB /* Squeeze.qtz in Resources */,
 				7BB4E6171ADA0AC70076630A /* LensPreferences.png in Resources */,
 				7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */,
 				7B4400781AFDC675006CE7D6 /* ThumbnailPreferences.xib in Resources */,
@@ -1128,6 +1135,7 @@
 				7B5C0A331B676CF9004FE1A0 /* EditConditionSheet.strings in Resources */,
 				7B5C0A301B676CAE004FE1A0 /* SelectNewConditionSheet.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
+				7B36F79F1B6CF6C0006F06CB /* Cube.qtz in Resources */,
 				7B5C0A2A1B664340004FE1A0 /* EditConditionSheet.xib in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
 				7B74FB961B3EC85B005BC748 /* EditCustomEffect.xib in Resources */,

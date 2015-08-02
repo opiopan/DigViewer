@@ -35,6 +35,10 @@ enum LensMatchingTypeValue{
 @property (nonatomic, retain) NSNumber * matchingType;
 @property (nonatomic, retain) NSSet *allowedCameras;
 @property (nonatomic, retain) Condition *condition;
+
+@property (nonatomic, readonly) NSString* lensSpecString;
+@property (nonatomic, readonly) NSString* matchingRuleString;
+
 @end
 
 @interface Lens (CoreDataGeneratedAccessors)

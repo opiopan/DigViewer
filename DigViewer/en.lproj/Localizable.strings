@@ -33,6 +33,8 @@
 "SlideshowTransitionAfterImage" = "Afterimage";
 "SlideshowTransitionDoor" = "Door";
 "SlideshowTransitionTwister" = "Twister";
+"SlideshowTransitionCube" = "Cube";
+"SlideshowTransitionSqueeze" = "Squeeze";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image Filter";
@@ -42,6 +44,11 @@
 "CEMSG_ERROR_CONFLICT" = "Specified file has been already registered.";
 "CEMSG_CONF_REMOVE" = "Are you sure you want to remove selected custom effect?";
 "CEMSG_ERROR_INVALID_COMPOSITION" = "Specified Quartz Composer Composition file is a format which DigViewer could not run.";
+
+// レンズプロファイル適用条件の表示名
+"LENS_MATCHING_BY_LENSNAME" = "By lens name";
+"LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME" = "By lens name and camera name";
+"LENS_MATCHING_BY_CUSTOM_CONDITION" = "By custom condition";
 
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "Are you sure you want to remove selected lens profile?";

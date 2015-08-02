@@ -24,7 +24,7 @@
 "GKm-Dl-qqE.title" = "切替えエフェクト:";
 
 /* Class = "NSButtonCell"; title = "Custom Effect..."; ObjectID = "1gA-LB-S3D"; */
-"1gA-LB-S3D.title" = "カスタムエフェクト...";
+"1gA-LB-S3D.title" = "プラグインエフェクト...";
 
 /* Class = "NSTextFieldCell"; title = "Others:"; ObjectID = "Dy3-PG-Fc6"; */
 "Dy3-PG-Fc6.title" = "その他:";

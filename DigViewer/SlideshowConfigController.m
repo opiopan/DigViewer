@@ -26,6 +26,8 @@ NSString* kSlideshowTransitionColorDivider = @"SlideshowTransitionColorDivider";
 NSString* kSlideshowTransitionAfterImage = @"SlideshowTransitionAfterImage";
 NSString* kSlideshowTransitionDoor = @"SlideshowTransitionDoor";
 NSString* kSlideshowTransitionTwister = @"SlideshowTransitionTwister";
+NSString* kSlideshowTransitionCube = @"SlideshowTransitionCube";
+NSString* kSlideshowTransitionSqueeze = @"SlideshowTransitionSqueeze";
 
 //=========================================================================================
 // EffectEntry: エフェクトを表すオブジェクト
@@ -284,6 +286,24 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                              return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Twister"
                                                                                                            ofType:@"qtz"]
                                                                   duration:3.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionCube, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionCube
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Cube"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:1.5];
+                                         }],
+                            [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionSqueeze, nil)
+                                                  type:effectBuiltIn path:kSlideshowTransitionSqueeze
+                                              duration:0
+                                         effectFactory:^(EffectEntry* entry){
+                                             id rc = [EffectByQCComposition alloc];
+                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Squeeze"
+                                                                                                           ofType:@"qtz"]
+                                                                  duration:4];
                                          }],
                             ];
     }

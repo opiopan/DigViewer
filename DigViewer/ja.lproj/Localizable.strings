@@ -36,6 +36,8 @@
 "SlideshowTransitionAfterImage" = "残像";
 "SlideshowTransitionDoor" = "ドア";
 "SlideshowTransitionTwister" = "ツイスター";
+"SlideshowTransitionCube" = "キューブ";
+"SlideshowTransitionSqueeze" = "スクイーズ";
 
 // カスタム遷移エフェクト種別
 "effectCIKernel" = "Core Image フィルター";
@@ -45,6 +47,11 @@
 "CEMSG_ERROR_CONFLICT" = "指定されたファイルは既に登録されています。";
 "CEMSG_CONF_REMOVE" = "選択したカスタムエフェクトを削除してもよろしいですか?";
 "CEMSG_ERROR_INVALID_COMPOSITION" = "指定された Quartz Composer コンポジションファイルはDigViewerが実行できない形式です。";
+
+// レンズプロファイル適用条件の表示名
+"LENS_MATCHING_BY_LENSNAME" = "レンズ名が一致";
+"LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME" = "レンズ名とカメラ名が一致";
+"LENS_MATCHING_BY_CUSTOM_CONDITION" = "指定された詳細条件に一致";
 
 // レンズ設定シートでのメッセージ
 "LPMSG_CONF_REMOVE" = "選択したレンズプロファイルを削除してもよろしいですか？";
