@@ -87,7 +87,7 @@
 {
     if (object){
         NSError* error = nil;
-        [_lensLibrary.managedObjectContext save:&error];
+        [_lensLibrary persistChange:&error];
         if (error){
             NSArray* selectedObjects = _lensArrayController.selectedObjects;
             if (selectedObjects.count > 0 && selectedObjects[0] != object){
@@ -112,7 +112,7 @@
             [_lensLibrary removeConditionRecurse:lens.condition];
             [_lensLibrary.managedObjectContext deleteObject:lens];
             NSError* error = nil;
-            [_lensLibrary.managedObjectContext save:&error];
+            [_lensLibrary persistChange:&error];
             if (error){
                 [self presentSaveError:error];
             }
