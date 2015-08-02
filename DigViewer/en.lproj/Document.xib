@@ -40,6 +40,25 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="68DBC3C8-E711-459F-84BA-10B328A6405E" displayMode="iconOnly" sizeMode="regular" id="WIq-XK-m9I">
                 <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="84036123-1FFA-46B3-86AB-81B28D3D28BE" label="Sub Pane" paletteLabel="Sub Pane" id="aOg-7W-h2L">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="67" height="25"/>
+                        <size key="maxSize" width="67" height="25"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="ENh-J0-P5m">
+                            <rect key="frame" x="151" y="451" width="67" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
+                                    <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
+                                </segments>
+                            </segmentedCell>
+                            <connections>
+                                <action selector="onViewSelectionButtonDown:" target="-2" id="kc1-R0-BT3"/>
+                            </connections>
+                        </segmentedControl>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="F064D896-83B5-4DB0-BE3D-34AF03AB75C5" label="Image View" paletteLabel="Image View" id="SWS-gJ-pzs">
                         <nil key="toolTip"/>
                         <size key="minSize" width="67" height="25"/>
@@ -77,25 +96,6 @@
                                 <binding destination="-2" name="value" keyPath="self.isFitWindow" id="wZB-Nf-d8W"/>
                             </connections>
                         </button>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="93E99F49-D95B-4FC7-872C-A011EFB63943" label="Sub Pane" paletteLabel="Sub Pane" id="aOg-7W-h2L">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="67" height="25"/>
-                        <size key="maxSize" width="67" height="25"/>
-                        <segmentedControl key="view" verticalHuggingPriority="750" id="ENh-J0-P5m">
-                            <rect key="frame" x="151" y="451" width="67" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
-                                <font key="font" metaFont="system"/>
-                                <segments>
-                                    <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
-                                    <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
-                                </segments>
-                            </segmentedCell>
-                            <connections>
-                                <action selector="onViewSelectionButtonDown:" target="-2" id="kc1-R0-BT3"/>
-                            </connections>
-                        </segmentedControl>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="63B491D9-CD29-4914-9C33-28DF0399E0D8" label="Slide Show" paletteLabel="Slide Show" image="play" id="it6-bE-VIJ">
                         <nil key="toolTip"/>
@@ -162,9 +162,9 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Z9h-L5-NaX"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="aOg-7W-h2L"/>
                     <toolbarItem reference="SWS-gJ-pzs"/>
                     <toolbarItem reference="UKe-fO-4lv"/>
-                    <toolbarItem reference="aOg-7W-h2L"/>
                     <toolbarItem reference="NJR-tU-j4c"/>
                     <toolbarItem reference="it6-bE-VIJ"/>
                     <toolbarItem reference="NJR-tU-j4c"/>

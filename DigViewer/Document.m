@@ -76,6 +76,7 @@
 //-----------------------------------------------------------------------------------------
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+    _documentWindowPreferences = [self loadDocumentWindowPreferencesFromURL:absoluteURL];
     return YES;
 }
 
@@ -115,6 +116,37 @@
     loader = nil;
     if (pendingReloadRequest){
         [self loadDocument:windowController];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// ドキュメントウインドウ設定のロード＆セーブ
+// 　・対象フォルダに「.DigViewer.preferences」という隠しファイルを作成
+//-----------------------------------------------------------------------------------------
+static NSString* PREFARENCES_FILE_NAME = @"/.DigViewer.preferences";
+
+- (NSDictionary*)loadDocumentWindowPreferencesFromURL:(NSURL*)url
+{
+    NSDictionary* rc = nil;
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+
+    if ([[controller.values valueForKey:@"saveWindowPreferences"] boolValue]){
+        rc = [NSDictionary dictionaryWithContentsOfFile:[url.path stringByAppendingString:PREFARENCES_FILE_NAME]];
+    }
+    
+    return rc;
+}
+
+- (void)saveDocumentWindowPreferences:(NSDictionary *)preferences
+{
+    NSString* path = [self.fileURL.path stringByAppendingString:PREFARENCES_FILE_NAME];
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    if ([[controller.values valueForKey:@"saveWindowPreferences"] boolValue]){
+        [preferences writeToFile:path atomically:NO];
+    }else{
+        NSFileManager* manager = [NSFileManager defaultManager];
+        NSError* error;
+        [manager removeItemAtPath:path error:&error];
     }
 }
 

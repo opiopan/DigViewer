@@ -13,5 +13,7 @@
 - (NSView*) representationView;
 - (void) setIsVisible:(BOOL)isVisible;
 - (void) prepareForClose;
+- (NSDictionary*)preferences;
+- (void)setPreferences:(NSDictionary*)preferences;
 
 @end

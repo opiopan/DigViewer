@@ -19,7 +19,8 @@
         NSData* blackData = [NSArchiver archivedDataWithRootObject:[NSColor blackColor]];
         NSData* redData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
         NSArray* zeroArray = [NSArray array];
-        defaults = @{@"imageSetType":                 @0,
+        defaults = @{@"saveWindowPreferences":        @YES,
+                     @"imageSetType":                 @0,
                      @"imageSetMaxFileSize":          @5,
                      @"imageSetMaxFileSizeMin":       @0.1,
                      @"imageSetOmittingExt":          zeroArray,

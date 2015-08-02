@@ -16,6 +16,19 @@
 #import "LoadingSheetController.h"
 #import "ImageViewController.h"
 
+static NSString* kCurrentImage = @"currentImage";
+static NSString* kWindowX = @"windowX";
+static NSString* kWindowY = @"windowY";
+static NSString* kWindowWidth = @"windowWidth";
+static NSString* kWindowHeight = @"windowHeight";
+static NSString* kInFullScreen = @"inFullScreen";
+static NSString* kImageViewType = @"defImageViewType";
+static NSString* kFitToWindow = @"defFitToWindow";
+static NSString* kShowNavigator = @"defShowNavigator";
+static NSString* kShowInspector = @"defShowInspector";
+static NSString* kShowToolbar = @"defShowToolbar";
+static NSString* kMainView = @"mainView";
+
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
 //-----------------------------------------------------------------------------------------
@@ -46,6 +59,7 @@
     int                 transitionStateCount;
     SlideshowController*        slideshowController;
     LoadingSheetController*     loadingSheet;
+    BOOL firstTime;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -57,6 +71,7 @@
     self = [super initWithWindowNibName:@"Document"];
     if (self) {
         transitionStateCount = 0;
+        firstTime = YES;
     }
     return self;
 }
@@ -85,10 +100,31 @@
     [_imageTreeController addObserver:self forKeyPath:@"selection" options:nil context:nil];
 
     // オープン時の表示設定を反映
-    self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
-    self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
-    self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
-    self.isCollapsedInspectorView = ![[[controller values] valueForKey:@"defShowInspector"] boolValue];
+    NSDictionary* windowPreferences = ((Document*)self.document).documentWindowPreferences;
+    if (windowPreferences){
+        NSRect rect;
+        rect.origin.x = [[windowPreferences valueForKey:kWindowX] doubleValue];
+        rect.origin.y = [[windowPreferences valueForKey:kWindowY] doubleValue];
+        rect.size.width = [[windowPreferences valueForKey:kWindowWidth] doubleValue];
+        rect.size.height = [[windowPreferences valueForKey:kWindowHeight] doubleValue];
+        [self.window setFrame:rect display:YES];
+        [mainViewController setPreferences:[windowPreferences valueForKey:kMainView]];
+        self.presentationViewType = [[windowPreferences valueForKey:kImageViewType] intValue];
+        self.isFitWindow = [[windowPreferences valueForKey:kFitToWindow] boolValue];
+        self.isCollapsedOutlineView = ![[windowPreferences valueForKey:kShowNavigator] boolValue];
+        self.isCollapsedInspectorView = ![[windowPreferences valueForKey:kShowInspector] boolValue];
+        _toolbar.visible = [[windowPreferences valueForKey:kShowToolbar] boolValue];
+        if ([[windowPreferences valueForKey:kInFullScreen] boolValue] &&
+            !(self.window.styleMask &  NSFullScreenWindowMask)){
+            [self.window toggleFullScreen:self];
+        }
+    }else{
+        self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
+        self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
+        self.isCollapsedOutlineView = ![[[controller values] valueForKey:@"defShowNavigator"] boolValue];
+        self.isCollapsedInspectorView = ![[[controller values] valueForKey:@"defShowInspector"] boolValue];
+        _toolbar.visible = YES;
+    }
     
     // スライドショー状態の初期化
     [self setSlideshowMode:NO];
@@ -105,6 +141,24 @@
 //-----------------------------------------------------------------------------------------
 - (void)windowWillClose:(NSNotification *)notification
 {
+    // 次回オープン用にWindowの設定を保存
+    NSMutableDictionary* preferences = [NSMutableDictionary dictionary];
+    Document* document = self.document;
+    PathNode* currentImage = _imageArrayController.selectedObjects[0];
+    [preferences setValue:currentImage.portablePath  forKey:kCurrentImage];
+    [preferences setValue:@(self.window.frame.origin.x) forKey:kWindowX];
+    [preferences setValue:@(self.window.frame.origin.y) forKey:kWindowY];
+    [preferences setValue:@(self.window.frame.size.width) forKey:kWindowWidth];
+    [preferences setValue:@(self.window.frame.size.height) forKey:kWindowHeight];
+    [preferences setValue:[mainViewController preferences] forKey:kMainView];
+    [preferences setValue:@(self.presentationViewType) forKey:kImageViewType];
+    [preferences setValue:@(self.isFitWindow) forKey:kFitToWindow];
+    [preferences setValue:@(!self.isCollapsedOutlineView) forKey:kShowNavigator];
+    [preferences setValue:@(!self.isCollapsedInspectorView) forKey:kShowInspector];
+    [preferences setValue:@(_toolbar.visible) forKey:kShowToolbar];
+    [preferences setValue:@(self.window.styleMask & NSFullScreenWindowMask) forKey:kInFullScreen];
+    [document saveDocumentWindowPreferences:preferences];
+    
     // スライドショー環境回収
     [slideshowController cancelSlideshow];
     
@@ -160,7 +214,11 @@
     
     // ドキュメントデータ設定
     NSArray* path = nil;
-    if (((Document*)self.document).root){
+    if (firstTime){
+        NSDictionary* windowPreferences = ((Document*)self.document).documentWindowPreferences;
+        path = [windowPreferences valueForKey:kCurrentImage];
+        firstTime = NO;
+    }else if (((Document*)self.document).root){
         PathNode* selectedNode = _imageArrayController.selectedObjects[0];
         path = [selectedNode portablePath];
     }
@@ -187,6 +245,7 @@
     }else{
         ((Document*)self.document).root = root;
     }
+    self.presentationViewType = self.presentationViewType;
 }
 
 //-----------------------------------------------------------------------------------------

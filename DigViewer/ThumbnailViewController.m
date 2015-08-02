@@ -127,4 +127,26 @@
     [controller moveDownFolder:sender];
 }
 
+//-----------------------------------------------------------------------------------------
+// View状態属性の実装
+//-----------------------------------------------------------------------------------------
+static NSString* kZoomRatio = @"zoomRatio";
+
+- (NSDictionary *)preferences
+{
+    NSDictionary* rc = @{kZoomRatio: @(zoomRethio)};
+    return rc;
+}
+
+- (void)setPreferences:(NSDictionary *)preferences
+{
+    [self performSelector:@selector(reflectPreferences:) withObject:preferences afterDelay:0];
+}
+
+- (void)reflectPreferences:(NSDictionary *)preferences
+{
+    self.zoomRethio = [[preferences valueForKey:kZoomRatio] doubleValue];
+
+}
+
 @end
