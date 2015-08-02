@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Document.h"
 
-@interface DocumentWindowController : NSWindowController
+@interface DocumentWindowController : NSWindowController <NSWindowDelegate>
 
 @property (strong) NSArray* selectionIndexPathsForTree;
 @property (strong) NSIndexSet* selectionIndexesForImages;

@@ -23,4 +23,13 @@
 {
 }
 
+- (NSDictionary *)preferences
+{
+    return @{};
+}
+
+- (void)setPreferences:(NSDictionary *)preferences
+{
+}
+
 @end

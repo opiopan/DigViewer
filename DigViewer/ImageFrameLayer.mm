@@ -197,7 +197,9 @@ static const NSInteger CACHE_SIZE = 6;
     }
     
     // 投機的キャッシング
-    [self performSelector:@selector(fillCacheSpeculatively) withObject:nil afterDelay:0];
+    if (relationalImage){
+        [self performSelector:@selector(fillCacheSpeculatively) withObject:nil afterDelay:0];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

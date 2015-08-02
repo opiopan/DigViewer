@@ -106,6 +106,37 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// View状態属性の実装
+//-----------------------------------------------------------------------------------------
+static NSString* kOutlineViewWidth = @"outlineViewWidth";
+static NSString* kInspectorViewWidth = @"inspectorViewWidth";
+static NSString* kOutlineView = @"outlineView";
+static NSString* kInspectorView = @"inspectorView";
+static NSString* kImageView = @"imageView";
+static NSString* kThumbnailView = @"thumbnailView";
+
+- (NSDictionary *)preferences
+{
+    NSDictionary* rc = @{kOutlineViewWidth: @(outlineViewWidth),
+                         kInspectorViewWidth: @(inspectorViewWidth),
+                         kOutlineView: outlineViewController.preferences,
+                         kInspectorView: inspectorViewController.preferences,
+                         kImageView: ((NSViewController*)contentViewControllers[0]).preferences,
+                         kThumbnailView: ((NSViewController*)contentViewControllers[1]).preferences};
+    return rc;
+}
+
+- (void)setPreferences:(NSDictionary *)preferences
+{
+    outlineViewWidth = [[preferences valueForKey:kOutlineViewWidth] doubleValue];
+    inspectorViewWidth = [[preferences valueForKey:kInspectorViewWidth] doubleValue];
+    [outlineViewController setPreferences:[preferences valueForKey:kOutlineView]];
+    [inspectorViewController setPreferences:[preferences valueForKey:kInspectorView]];
+    [((NSViewController*)contentViewControllers[0]) setPreferences:[preferences valueForKey:kImageView]];
+    [((NSViewController*)contentViewControllers[1]) setPreferences:[preferences valueForKey:kThumbnailView]];
+}
+
+//-----------------------------------------------------------------------------------------
 // サブビューの配置
 //-----------------------------------------------------------------------------------------
 - (void) arrangeSubview

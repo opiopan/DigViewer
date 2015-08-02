@@ -12,7 +12,9 @@
 @interface Document : NSDocument
 
 @property (strong) PathNode* root;
+@property (nonatomic, readonly) NSDictionary* documentWindowPreferences;
 
 - (void)loadDocument:(id)sender;
+- (void)saveDocumentWindowPreferences:(NSDictionary*)preferences;
 
 @end
