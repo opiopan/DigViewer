@@ -149,10 +149,15 @@ static NSString* kMainView = @"mainView";
             [self.window setFrame:rect display:YES];
             if ([[windowPreferences valueForKey:kInFullScreen] boolValue] &&
                 !(self.window.styleMask &  NSFullScreenWindowMask)){
-                [self.window toggleFullScreen:self];
+                [self performSelector:@selector(defferedEnterFullscreen) withObject:nil afterDelay:0];
             }
         }
     }
+}
+
+- (void)defferedEnterFullscreen
+{
+    [self.window toggleFullScreen:self];
 }
 
 //-----------------------------------------------------------------------------------------

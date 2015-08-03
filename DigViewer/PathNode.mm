@@ -77,18 +77,18 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     if (self){
         if (!_thumbnailConfig){
             _thumbnailConfig = [ThumbnailConfigController sharedController];
-            _indexInParentForAllNodes = -1;
-            _indexInParentForSameKind = -1;
-            _updateCountForRepresentationImages = -1;
-            _updateCountForSort = -1;
-            _isSortByDateTime = NO;
-            _isSortByDateTimeForRepresentationImages = NO;
-            _graphConfig.updateCountForType = 0;
-            _graphConfig.updateCountForSort = 0;
-            _graphConfig.sortType = SortTypeImageIsPrior;
-            _graphConfig.sortByCaseInsensitive = YES;
-            _graphConfig.sortAsNumeric = YES;
         }
+        _indexInParentForAllNodes = -1;
+        _indexInParentForSameKind = -1;
+        _updateCountForRepresentationImages = -1;
+        _updateCountForSort = -1;
+        _isSortByDateTime = NO;
+        _isSortByDateTimeForRepresentationImages = NO;
+        _graphConfig.updateCountForType = 0;
+        _graphConfig.updateCountForSort = 0;
+        _graphConfig.sortType = SortTypeImageIsPrior;
+        _graphConfig.sortByCaseInsensitive = YES;
+        _graphConfig.sortAsNumeric = YES;
     }
     return self;
 }
