@@ -93,8 +93,12 @@ static inline CGFloat touchDistance(NSTouch* touch1, NSTouch*touch2)
         _lastTouches[0] = _currentTouches[0] = _initialTouches[0];
         _lastTouches[1] = _currentTouches[1] = _initialTouches[1];
 
-        _initialPoint.x = event.locationInWindow.x - self.view.frame.origin.x;
-        _initialPoint.y = event.locationInWindow.y - self.view.frame.origin.y;
+        _initialPoint.x = event.locationInWindow.x;
+        _initialPoint.y = event.locationInWindow.y;
+        for (NSView* view = self.view; view; view = view.superview){
+            _initialPoint.x -= view.frame.origin.x;
+            _initialPoint.y -= view.frame.origin.y;
+        }
         _initialDistance = touchDistance(_initialTouches[0], _initialTouches[1]);
         
         _currentTimestamp = _lastTimestamp = event.timestamp;
