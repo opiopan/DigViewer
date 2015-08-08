@@ -250,11 +250,24 @@ static NSString* kViewSelector = @"viewSelector";
 
 - (NSDictionary *)preferences
 {
-    NSDictionary* rc = @{kMapZoomLevel: _mapView.zoomLevel,
-                         kMapType: _mapView.mapType,
-                         kMapTilt: _mapView.tilt,
-                         kViewSelector: @(self.viewSelector)};
-    return rc ? rc : _preferences;
+    NSMutableDictionary* rc = [NSMutableDictionary dictionary];
+    id value = _mapView.zoomLevel;
+    if (value){
+        [rc setObject:value forKey:kMapZoomLevel];
+    }
+    value = _mapView.mapType;
+    if (value){
+        [rc setObject:value forKey:kMapType];
+    }
+    value = _mapView.tilt;
+    if (value){
+        [rc setObject:value forKey:kMapTilt];
+    }
+    value = @(self.viewSelector);
+    if (value){
+        [rc setObject:value forKey:kViewSelector];
+    }
+    return rc;
 }
 
 - (void)setPreferences:(NSDictionary *)preferences
