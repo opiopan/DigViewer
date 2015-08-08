@@ -24,6 +24,7 @@ var arrowColor = null;
 var isIncompleteArrow = false;
 
 var mapType = 0;
+var tilt = 45;
 var enableStreetView = true;
 
 var msgLoading = "msgLoading";
@@ -72,8 +73,12 @@ function initialize() {
         case 1:
             convertedMapType = google.maps.MapTypeId.TERRAIN;
             break;
-        default:
+        case 2:
             convertedMapType = google.maps.MapTypeId.HYBRID;
+            break;
+        default:
+            convertedMapType = google.maps.MapTypeId.SATELLITE;
+            break;
     }
     
     var mapOptions = {
@@ -85,7 +90,8 @@ function initialize() {
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: enableStreetView,
-        overviewMapControl: true
+        overviewMapControl: true,
+        tilt: tilt
     };
     if (imageLocation){
         mapOptions.center = imageLocation;
@@ -137,6 +143,12 @@ function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc, fovg)
 }
 
 function resetMarker(moveToHome) {
+    if (map){
+        var streetView = map.getStreetView();
+        if (streetView){
+            streetView.setVisible(false);
+        }
+    }
     if (imageLocation){
         if (map){
             zoomLevel = map.getZoom();
@@ -259,5 +271,40 @@ function setStreetViewControll(state) {
             streetViewControl: enableStreetView
         };
         map.setOptions(mapOptions);
+    }
+}
+
+function getMapZoomLevel() {
+    if (map){
+        return map.getZoom();
+    }else{
+        return zoomLevel;
+    }
+}
+
+function getMapType() {
+    var convertedMapType;
+    if (map){
+        var value = map.getMapTypeId();
+        if (value == google.maps.MapTypeId.ROADMAP){
+            convertedMapType = 0;
+        }else if (value == google.maps.MapTypeId.TERRAIN){
+            convertedMapType = 1;
+        }else if (value == google.maps.MapTypeId.HYBRID){
+            convertedMapType = 2;
+        }else{
+            convertedMapType = 3;
+        }
+    }else{
+        convertedMapType = mapType;
+    }
+    return convertedMapType;
+}
+
+function getTilt() {
+    if (map){
+        return map.getTilt();
+    }else{
+        return tilt;
     }
 }
