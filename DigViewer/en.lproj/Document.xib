@@ -10,6 +10,7 @@
                 <outlet property="imageArrayController" destination="100087" id="100261"/>
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
                 <outlet property="placeHolder" destination="100232" id="100240"/>
+                <outlet property="shareButton" destination="axJ-VU-MXj" id="jB4-7J-Cig"/>
                 <outlet property="toolbar" destination="WIq-XK-m9I" id="bN8-q4-Yaa"/>
                 <outlet property="viewSelectionButton" destination="ENh-J0-P5m" id="yUJ-Ve-XOl"/>
                 <outlet property="window" destination="5" id="100241"/>
@@ -139,6 +140,25 @@
                             </connections>
                         </button>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="ECCEB923-9FBE-4C70-B363-4BCAB4707028" label="Share" paletteLabel="Share" image="NSShareTemplate" id="wsO-ob-iwM">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="25"/>
+                        <size key="maxSize" width="38" height="25"/>
+                        <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" id="axJ-VU-MXj">
+                            <rect key="frame" x="563" y="451" width="38" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="38" id="rp6-rt-7JM"/>
+                            </constraints>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S5z-Gb-wng">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="shareItems:" target="-2" id="iqd-Cf-oqa"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3D385374-21EF-4DB5-BE83-D4135F316FE4" label="Reload" paletteLabel="Reload" image="NSRefreshTemplate" id="PXX-iT-9MK">
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
@@ -170,6 +190,7 @@
                     <toolbarItem reference="NJR-tU-j4c"/>
                     <toolbarItem reference="e2H-Y0-Zel"/>
                     <toolbarItem reference="Z9h-L5-NaX"/>
+                    <toolbarItem reference="wsO-ob-iwM"/>
                     <toolbarItem reference="PXX-iT-9MK"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -198,6 +219,7 @@
         <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="datetime" width="512" height="512"/>
         <image name="datetime_on" width="512" height="512"/>
         <image name="play" width="475" height="512"/>

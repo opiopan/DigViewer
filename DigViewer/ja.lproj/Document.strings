@@ -58,3 +58,12 @@
 
 /* Class = "NSToolbarItem"; paletteLabel = "Slite Show"; ObjectID = "it6-bE-VIJ"; */
 "it6-bE-VIJ.paletteLabel" = "スライドショー";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Share selected items"; ObjectID = axJ-VU-MXj"; */
+"axJ-VU-MXj.ibShadowedToolTip" = "選択した項目を共有します";
+
+/* Class = "NSToolbarItem"; label = "Share"; ObjectID = "wsO-ob-iwM"; */
+"wsO-ob-iwM.label" = "共有";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Share"; ObjectID = "wsO-ob-iwM"; */
+"wsO-ob-iwM.paletteLabel" = "共有";

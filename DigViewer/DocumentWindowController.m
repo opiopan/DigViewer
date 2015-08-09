@@ -52,6 +52,7 @@ static NSString* kMainView = @"mainView";
 //-----------------------------------------------------------------------------------------
 @interface DocumentWindowController ()
 @property IBOutlet NSToolbar* toolbar;
+@property IBOutlet NSButton* shareButton;
 @end
 
 @implementation DocumentWindowController{
@@ -129,6 +130,9 @@ static NSString* kMainView = @"mainView";
     
     // 日時ソート状態初期化
     self.sortByDateTimeButtonState = NO;
+    
+    // 共有ボタンのメッセージ送信条件を設定
+    [_shareButton sendActionOn:NSLeftMouseDownMask];
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -685,6 +689,19 @@ static NSString* kMainView = @"mainView";
     }
 
     return YES;
+}
+
+//-----------------------------------------------------------------------------------------
+// 共有機能
+//-----------------------------------------------------------------------------------------
+- (IBAction)shareItems:(id)sender
+{
+    NSMutableArray* items = [NSMutableArray array];
+    for (PathNode* node in _imageArrayController.selectedObjects){
+        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
+    }
+    NSSharingServicePicker *picker = [[NSSharingServicePicker alloc] initWithItems:items];
+    [picker showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
 }
 
 @end
