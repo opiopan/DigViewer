@@ -17,7 +17,9 @@
 @property (copy) NSColor* fovColor;
 @property (copy) NSColor* arrowColor;
 @property (copy) NSNumber* fovGrade;
-@property (copy) NSNumber* mapType;
+@property (nonatomic, copy) NSNumber* mapType;
+@property (nonatomic) NSNumber* tilt;
+@property (nonatomic) NSNumber* zoomLevel;
 @property bool enableStreetView;
 @property bool enableHomePosition;
 

@@ -19,6 +19,7 @@
 @implementation InspectorViewController{
     int     _viewSelector;
     bool    _initialized;
+    NSDictionary* _preferences;
 }
 
 - (id)init
@@ -236,6 +237,58 @@
             [self reflectGoogleMapsApiKey];
             [self reflectMetadata];
         }
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// View状態属性の実装
+//-----------------------------------------------------------------------------------------
+static NSString* kMapZoomLevel = @"mapZoomLevel";
+static NSString* kMapType = @"mapType";
+static NSString* kMapTilt = @"mapTilt";
+static NSString* kViewSelector = @"viewSelector";
+
+- (NSDictionary *)preferences
+{
+    NSMutableDictionary* rc = [NSMutableDictionary dictionary];
+    id value = _mapView.zoomLevel;
+    if (value){
+        [rc setObject:value forKey:kMapZoomLevel];
+    }
+    value = _mapView.mapType;
+    if (value){
+        [rc setObject:value forKey:kMapType];
+    }
+    value = _mapView.tilt;
+    if (value){
+        [rc setObject:value forKey:kMapTilt];
+    }
+    value = @(self.viewSelector);
+    if (value){
+        [rc setObject:value forKey:kViewSelector];
+    }
+    return rc;
+}
+
+- (void)setPreferences:(NSDictionary *)preferences
+{
+    _preferences = preferences;
+    [self performSelector:@selector(reflectPreferences) withObject:nil afterDelay:0];
+}
+
+- (void)reflectPreferences
+{
+    if (self.view.superview){
+        self.viewSelector = [[_preferences valueForKey:kViewSelector] intValue];
+    }
+    if ([_preferences valueForKey:kMapZoomLevel]){
+        _mapView.zoomLevel = [_preferences valueForKey:kMapZoomLevel];
+    }
+    if ([_preferences valueForKey:kMapType]){
+        _mapView.mapType = [_preferences valueForKey:kMapType];
+    }
+    if ([_preferences valueForKey:kMapTilt]){
+        _mapView.tilt = [_preferences valueForKey:kMapTilt];
     }
 }
 

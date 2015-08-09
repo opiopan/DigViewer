@@ -60,6 +60,7 @@ static NSString* kMainView = @"mainView";
     SlideshowController*        slideshowController;
     LoadingSheetController*     loadingSheet;
     BOOL firstTime;
+    NSRect windowRectInNotFullscreen;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -114,10 +115,7 @@ static NSString* kMainView = @"mainView";
         self.isCollapsedOutlineView = ![[windowPreferences valueForKey:kShowNavigator] boolValue];
         self.isCollapsedInspectorView = ![[windowPreferences valueForKey:kShowInspector] boolValue];
         _toolbar.visible = [[windowPreferences valueForKey:kShowToolbar] boolValue];
-        if ([[windowPreferences valueForKey:kInFullScreen] boolValue] &&
-            !(self.window.styleMask &  NSFullScreenWindowMask)){
-            [self.window toggleFullScreen:self];
-        }
+        [self performSelector:@selector(defferedInitializeWindow) withObject:nil afterDelay:0];
     }else{
         self.presentationViewType = [[[controller values] valueForKey:@"defImageViewType"] intValue];
         self.isFitWindow = [[[controller values] valueForKey:@"defFitToWindow"] boolValue];
@@ -131,9 +129,35 @@ static NSString* kMainView = @"mainView";
     
     // 日時ソート状態初期化
     self.sortByDateTimeButtonState = NO;
-   
-   // ドキュメントロードをスケジュール
+    
+    // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
+}
+
+- (void)defferedInitializeWindow
+{
+    NSDictionary* windowPreferences = ((Document*)self.document).documentWindowPreferences;
+    if (windowPreferences){
+        NSRect rect;
+        rect.origin.x = [[windowPreferences valueForKey:kWindowX] doubleValue];
+        rect.origin.y = [[windowPreferences valueForKey:kWindowY] doubleValue];
+        rect.size.width = [[windowPreferences valueForKey:kWindowWidth] doubleValue];
+        rect.size.height = [[windowPreferences valueForKey:kWindowHeight] doubleValue];
+        
+        if (!([[windowPreferences valueForKey:kInFullScreen] boolValue] && self.window.styleMask &  NSFullScreenWindowMask) &&
+            !CGRectEqualToRect(rect,self.window.frame)){
+            [self.window setFrame:rect display:YES];
+            if ([[windowPreferences valueForKey:kInFullScreen] boolValue] &&
+                !(self.window.styleMask &  NSFullScreenWindowMask)){
+                [self performSelector:@selector(defferedEnterFullscreen) withObject:nil afterDelay:0];
+            }
+        }
+    }
+}
+
+- (void)defferedEnterFullscreen
+{
+    [self.window toggleFullScreen:self];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -145,11 +169,17 @@ static NSString* kMainView = @"mainView";
     NSMutableDictionary* preferences = [NSMutableDictionary dictionary];
     Document* document = self.document;
     PathNode* currentImage = _imageArrayController.selectedObjects[0];
+    NSRect windowRect;
+    if (self.window.styleMask &  NSFullScreenWindowMask){
+        windowRect = windowRectInNotFullscreen;
+    }else{
+        windowRect = self.window.frame;
+    }
     [preferences setValue:currentImage.portablePath  forKey:kCurrentImage];
-    [preferences setValue:@(self.window.frame.origin.x) forKey:kWindowX];
-    [preferences setValue:@(self.window.frame.origin.y) forKey:kWindowY];
-    [preferences setValue:@(self.window.frame.size.width) forKey:kWindowWidth];
-    [preferences setValue:@(self.window.frame.size.height) forKey:kWindowHeight];
+    [preferences setValue:@(windowRect.origin.x) forKey:kWindowX];
+    [preferences setValue:@(windowRect.origin.y) forKey:kWindowY];
+    [preferences setValue:@(windowRect.size.width) forKey:kWindowWidth];
+    [preferences setValue:@(windowRect.size.height) forKey:kWindowHeight];
     [preferences setValue:[mainViewController preferences] forKey:kMainView];
     [preferences setValue:@(self.presentationViewType) forKey:kImageViewType];
     [preferences setValue:@(self.isFitWindow) forKey:kFitToWindow];
@@ -173,6 +203,14 @@ static NSString* kMainView = @"mainView";
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
+}
+
+//-----------------------------------------------------------------------------------------
+// フルスクリーン遷移前Window位置・サイズ保存
+//-----------------------------------------------------------------------------------------
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+    windowRectInNotFullscreen = self.window.frame;
 }
 
 //-----------------------------------------------------------------------------------------

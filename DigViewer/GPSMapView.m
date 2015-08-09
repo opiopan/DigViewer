@@ -19,6 +19,7 @@
     NSColor*    _arrowColor;
     NSNumber*   _fovGrade;
     bool        _enableStreetView;
+    BOOL        _hasBeenInitialized;
 }
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
@@ -95,8 +96,16 @@
     [[self windowScriptObject] evaluateWebScript:script];
     script = [NSString stringWithFormat:@"mapType = %@", _mapType];
     [[self windowScriptObject] evaluateWebScript:script];
+    script = [NSString stringWithFormat:@"tilt = %@", _tilt];
+    [[self windowScriptObject] evaluateWebScript:script];
+    if (_zoomLevel){
+        script = [NSString stringWithFormat:@"zoomLevel = %@", _zoomLevel];
+        [[self windowScriptObject] evaluateWebScript:script];
+    }
     script = [NSString stringWithFormat:@"setKey(\"%@\")", [NSString escapedStringForJavascript:_apiKey]];
     [[self windowScriptObject] evaluateWebScript:script];
+    
+    _hasBeenInitialized = YES;
 }
 
 - (GPSInfo*) gpsInfo
@@ -173,6 +182,30 @@
     NSString* script = _enableStreetView ? @"setStreetViewControll(true)" : @"setStreetViewControll(false)";
     WebScriptObject* window = [self windowScriptObject];
     [window evaluateWebScript:script];
+}
+
+- (NSNumber *)zoomLevel
+{
+    if (_hasBeenInitialized){
+        _zoomLevel = [[self windowScriptObject] evaluateWebScript:@"getMapZoomLevel()"];
+    }
+    return _zoomLevel;
+}
+
+- (NSNumber *)tilt
+{
+    if (_hasBeenInitialized){
+        _tilt = [[self windowScriptObject] evaluateWebScript:@"getTilt()"];
+    }
+    return _tilt;
+}
+
+- (NSNumber *)mapType
+{
+    if (_hasBeenInitialized){
+        _mapType = [[self windowScriptObject] evaluateWebScript:@"getMapType()"];
+    }
+    return _mapType;
 }
 
 - (void) reflectGpsInfo
