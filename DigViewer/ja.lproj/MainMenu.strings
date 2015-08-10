@@ -136,9 +136,6 @@
 /* Class = "NSMenuItem"; title = "Reload"; ObjectID = "wAU-Fd-WDi"; */
 "wAU-Fd-WDi.title" = "再読み込み";
 
-/* Class = "NSMenuItem"; title = "Open Preview"; ObjectID = "JbI-vo-pfR"; */
-"JbI-vo-pfR.title" = "プレビューを起動";
-
 /* Class = "NSMenuItem"; title = "Toggle Inspector"; ObjectID = "k9P-2l-j2v"; */
 "k9P-2l-j2v.title" = "インスペクター表示の切り替え";
 
@@ -160,3 +157,6 @@
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "IKz-X2-8Le"; */
 "IKz-X2-8Le.title" = "共有";
 
+/* Class = "NSMenuItem"; title = "Open with Application"; ObjectID = "A5u-gg-yh\
+ n"; */
+"A5u-gg-yhn.title" = "このアプリケーションで開く";

@@ -522,15 +522,6 @@ static NSString* kMainView = @"mainView";
 }
 
 //-----------------------------------------------------------------------------------------
-// Preview.appの起動
-//-----------------------------------------------------------------------------------------
-- (void) launchPreviewApplication:(id)sender
-{
-    PathNode* current = self.imageArrayController.selectedObjects[0];
-    [[NSWorkspace sharedWorkspace] openFile:current.imagePath withApplication:@"Preview.app"];
-}
-
-//-----------------------------------------------------------------------------------------
 // カーソルキーでのノード移動
 //-----------------------------------------------------------------------------------------
 - (void)moveRight:(id)sender
@@ -711,7 +702,7 @@ static NSString* kMainView = @"mainView";
 - (BOOL)validateForPerformSharingSubMenu:(NSMenuItem*)menuItem
 {
     menuItem.submenu = [self sharingMenu];
-    return YES;
+    return menuItem.submenu != nil;
 }
 
 - (void)performSharing:(id)sender
@@ -731,15 +722,103 @@ static NSString* kMainView = @"mainView";
         [items addObject:[NSURL fileURLWithPath:node.originalPath]];
     }
     NSArray* services = [NSSharingService sharingServicesForItems:items];
-    NSMenu* menu = [[NSMenu alloc] initWithTitle:@"Sharing menu"];
-    for (NSSharingService* service in services){
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:service.title action:@selector(performSharing:) keyEquivalent:@""];
-        item.image = service.image;
-        item.representedObject = service;
-        item.target = self;
-        [menu addItem:item];
+    NSMenu* menu = nil;
+    if (services && services.count > 0){
+        menu = [[NSMenu alloc] initWithTitle:@"Sharing menu"];
+        for (NSSharingService* service in services){
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:service.title action:@selector(performSharing:) keyEquivalent:@""];
+            item.image = service.image;
+            item.representedObject = service;
+            item.target = self;
+            [menu addItem:item];
+        }
     }
     return menu;
+}
+
+//-----------------------------------------------------------------------------------------
+// 「このアプリケーションで開く」機能
+//-----------------------------------------------------------------------------------------
+static NSString* kAppName = @"name";
+static NSString* kAppURL = @"url";
+static NSString* kAppImage = @"image";
+
+- (IBAction)performOpenWithApplicationSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformOpenWithApplicationSubMenu:(NSMenuItem*)menuItem
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    NSURL* url = [NSURL fileURLWithPath:current.originalPath];
+    NSArray* apps = (__bridge NSArray*)LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll);
+    if (apps && apps.count > 0){
+        CFErrorRef error = nil;
+        NSURL* defaultApp = (__bridge NSURL*)LSCopyDefaultApplicationURLForURL((__bridge CFURLRef)url, kLSRolesAll, &error);
+        if (error){
+            CFRelease(error);
+        }
+        
+        NSMenu* menu = [[NSMenu alloc] initWithTitle:@"OpenWithApplication"];
+        NSDictionary* firstAppID = [self applicationIDForURL:defaultApp];
+        [menu addItem:[self menuItemForApplicationID:firstAppID asPrimeryItem:YES]];
+        
+        NSMutableArray* additionalApps = [NSMutableArray array];
+        for (NSURL* currentURL in apps){
+            if (![defaultApp isEqualTo: currentURL] &&
+                [currentURL.path rangeOfString:@"/Applications/"].location != NSNotFound &&
+                [currentURL.path rangeOfString:@"/Archives/"].location == NSNotFound){
+                [additionalApps addObject:[self applicationIDForURL:currentURL]];
+            }
+        }
+        if (additionalApps.count > 0){
+            [menu addItem:[NSMenuItem separatorItem]];
+            NSArray* sortedApps = [additionalApps sortedArrayUsingComparator:^(id obj1, id obj2){
+                return [((NSString*)[obj1 valueForKey:kAppName]) compare:[obj2 valueForKey:kAppName]
+                                                                 options:NSCaseInsensitiveSearch];
+            }];
+            for (NSDictionary* applicationID in sortedApps){
+                [menu addItem:[self menuItemForApplicationID:applicationID asPrimeryItem:NO]];
+            }
+        }
+
+        menuItem.submenu = menu;
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (NSDictionary*)applicationIDForURL:(NSURL*)url
+{
+    CFStringRef name;
+    LSCopyDisplayNameForURL((__bridge CFURLRef)url, &name);
+    NSImage* image = [[NSWorkspace sharedWorkspace] iconForFile:url.path];
+    [image setSize:NSMakeSize(18, 18)];
+    NSDictionary* rc = @{kAppName: (__bridge NSString*)name,
+                         kAppURL: url,
+                         kAppImage: image};
+    CFRelease(name);
+    return rc;
+}
+
+- (NSMenuItem*)menuItemForApplicationID:(NSDictionary*)applicationID asPrimeryItem:(BOOL)isPrimeryItem
+{
+    NSString* title = isPrimeryItem ? [NSString stringWithFormat:NSLocalizedString(@"MENU_DEFAULT_APPLICATION", nil),
+                                                                 [applicationID valueForKey:kAppName]]
+                                    : [applicationID valueForKey:kAppName];
+    NSMenuItem* rc = [[NSMenuItem alloc] initWithTitle:title action:@selector(performOpenWithApplication:) keyEquivalent:@""];
+    rc.target = self;
+    rc.image = [applicationID valueForKey:kAppImage];
+    rc.representedObject = [applicationID valueForKey:kAppURL];
+    return rc;
+}
+
+- (void)performOpenWithApplication:(id)sender
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    NSURL* appURL = [sender representedObject];
+    [[NSWorkspace sharedWorkspace] openFile:current.originalPath withApplication:appURL.path];
 }
 
 @end

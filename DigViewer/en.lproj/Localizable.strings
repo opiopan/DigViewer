@@ -6,6 +6,9 @@
   Copyright (c) 2015年 opiopan. All rights reserved.
 */
 
+// メインメニューテキスト
+"MENU_DEFAULT_APPLICATION" = "%@ (Default)";
+
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "General";
 "PREF_TITLE_RENDERING" = "Rendering";

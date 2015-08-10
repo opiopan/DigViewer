@@ -96,14 +96,16 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="oBc-eP-xBn"/>
-                            <menuItem title="Open Preview" keyEquivalent="P" id="JbI-vo-pfR">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                            <menuItem title="Open with Application" id="A5u-gg-yhn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open with Application" id="gEi-1e-XtO"/>
                                 <connections>
-                                    <action selector="launchPreviewApplication:" target="-1" id="nUl-O9-ehe"/>
+                                    <action selector="performOpenWithApplicationSubMenu:" target="-1" id="vqv-u5-6Jk"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Share" tag="10001" id="IKz-X2-8Le">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" id="BeL-P5-i2a"/>
                                 <connections>
                                     <action selector="performSharingSubMenu:" target="-1" id="ylc-ZD-opm"/>
                                 </connections>

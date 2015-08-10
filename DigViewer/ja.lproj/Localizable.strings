@@ -6,6 +6,9 @@
   Copyright (c) 2013年 opiopan. All rights reserved.
 */
 
+// メインメニューテキスト
+"MENU_DEFAULT_APPLICATION" = "%@ (デフォルト)";
+
 // Alertシート用ボタンタイトル
 "Cancel" = "キャンセル";
 
