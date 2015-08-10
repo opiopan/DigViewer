@@ -156,3 +156,7 @@
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "k0N-wf-IMn"; */
 "k0N-wf-IMn.title" = "ツールバーを表示する";
+
+/* Class = "NSMenuItem"; title = "Share"; ObjectID = "IKz-X2-8Le"; */
+"IKz-X2-8Le.title" = "共有";
+

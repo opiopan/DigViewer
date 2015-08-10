@@ -102,6 +102,12 @@
                                     <action selector="launchPreviewApplication:" target="-1" id="nUl-O9-ehe"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Share" tag="10001" id="IKz-X2-8Le">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performSharingSubMenu:" target="-1" id="ylc-ZD-opm"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="3vT-sh-cks"/>
                             <menuItem title="Close" keyEquivalent="w" id="73">
                                 <connections>

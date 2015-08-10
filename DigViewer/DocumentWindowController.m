@@ -704,4 +704,42 @@ static NSString* kMainView = @"mainView";
     [picker showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
 }
 
+- (IBAction)performSharingSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformSharingSubMenu:(NSMenuItem*)menuItem
+{
+    menuItem.submenu = [self sharingMenu];
+    return YES;
+}
+
+- (void)performSharing:(id)sender
+{
+    NSMutableArray* items = [NSMutableArray array];
+    for (PathNode* node in _imageArrayController.selectedObjects){
+        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
+    }
+    NSSharingService* service = [sender representedObject];
+    [service performWithItems:items];
+}
+
+- (NSMenu*)sharingMenu
+{
+    NSMutableArray* items = [NSMutableArray array];
+    for (PathNode* node in _imageArrayController.selectedObjects){
+        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
+    }
+    NSArray* services = [NSSharingService sharingServicesForItems:items];
+    NSMenu* menu = [[NSMenu alloc] initWithTitle:@"Sharing menu"];
+    for (NSSharingService* service in services){
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:service.title action:@selector(performSharing:) keyEquivalent:@""];
+        item.image = service.image;
+        item.representedObject = service;
+        item.target = self;
+        [menu addItem:item];
+    }
+    return menu;
+}
+
 @end
