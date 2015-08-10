@@ -64,6 +64,24 @@ enum PanningMode{
 }
 
 //-----------------------------------------------------------------------------------------
+// レスポンダーチェイン制御
+//-----------------------------------------------------------------------------------------
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)resignFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------
 // 画像登録
 //-----------------------------------------------------------------------------------------
 - (void)setRelationalImage:(id)relationalImage
@@ -122,7 +140,7 @@ enum PanningMode{
 //-----------------------------------------------------------------------------------------
 - (void)setImageScaling:(NSImageScaling)imageScaling
 {
-    [super setImageScaling:imageScaling];
+    _imageScaling = imageScaling;
     if (_isDrawingByLayer){
         _frameLayer.isFitFrame = self.imageScaling == NSImageScaleProportionallyDown;
     }

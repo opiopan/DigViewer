@@ -10,9 +10,11 @@
 #import "ImageViewConfigController.h"
 #import "RelationalImageAccessor.h"
 
-@interface ClickableImageView : NSImageView
+@interface ClickableImageView : NSView
 
 @property (weak) id delegate;
+
+@property (nonatomic) NSImageScaling imageScaling;
 
 @property (nonatomic) id relationalImage;
 @property (nonatomic) RelationalImageAccessor* relationalImageAccessor;

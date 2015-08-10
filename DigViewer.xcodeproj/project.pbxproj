@@ -169,6 +169,7 @@
 		7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */; };
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
+		7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */; };
 		7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */; };
@@ -465,6 +466,8 @@
 		7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleSquare.jpg; path = resources/thumbnailSampleSquare.jpg; sourceTree = "<group>"; };
 		7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleHorizontal.jpg; path = resources/thumbnailSampleHorizontal.jpg; sourceTree = "<group>"; };
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
+		7BD4BB3D1B78E116006C75BB /* EnhancedImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnhancedImageBrowserView.h; sourceTree = "<group>"; };
+		7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnhancedImageBrowserView.m; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
 		7BD9DEBB1B49307C005FBC5B /* EffectByQCComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByQCComposition.h; sourceTree = "<group>"; };
@@ -617,6 +620,8 @@
 			children = (
 				7B6FEED71B1093BA0077AC29 /* Image view */,
 				7B467D6B1B19977000969442 /* GPS view */,
+				7BD4BB3D1B78E116006C75BB /* EnhancedImageBrowserView.h */,
+				7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */,
 				7B697E39169C547200A9E247 /* ImageWithTextCell.h */,
 				7B697E3A169C547200A9E247 /* ImageWithTextCell.m */,
 				7B4E8E0D16BDD4C5001C5D09 /* FrameView.h */,
@@ -1313,6 +1318,7 @@
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
 				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
+				7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */,
 				7B5C0A361B67726D004FE1A0 /* SelectNewConditionSheetController.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,

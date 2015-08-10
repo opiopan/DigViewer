@@ -821,4 +821,23 @@ static NSString* kAppImage = @"image";
     [[NSWorkspace sharedWorkspace] openFile:current.originalPath withApplication:appURL.path];
 }
 
+//-----------------------------------------------------------------------------------------
+// コピー
+//-----------------------------------------------------------------------------------------
+- (void)copy:(id)sender
+{
+    NSMutableArray* items = [NSMutableArray array];
+    for (PathNode* node in _imageArrayController.selectedObjects){
+        [items addObject:node.originalPath];
+    }
+    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
+    [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
+    [pboard setPropertyList:items forType:NSFilenamesPboardType];
+}
+
+- (BOOL)validateForCopy:(NSMenuItem*)menuItem
+{
+    return _imageArrayController.selectedObjects.count > 0;
+}
+
 @end
