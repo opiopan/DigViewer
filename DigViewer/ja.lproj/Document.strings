@@ -67,3 +67,12 @@
 
 /* Class = "NSToolbarItem"; paletteLabel = "Share"; ObjectID = "wsO-ob-iwM"; */
 "wsO-ob-iwM.paletteLabel" = "共有";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "DIJ-rM-pxj"; */
+"DIJ-rM-pxj.title" = "コピー";
+
+/* Class = "NSMenuItem"; title = "Open with Application"; ObjectID = "Lni-bT-s5r" */
+"Lni-bT-s5r.title" = "このアプリケーションで開く";
+
+/* Class = "NSMenuItem"; title = "Share"; ObjectID = "wfP-UQ-qVO"; */
+"wfP-UQ-qVO.title" = "共有";

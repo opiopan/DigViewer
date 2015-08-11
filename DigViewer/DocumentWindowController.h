@@ -18,6 +18,8 @@
 @property (strong) IBOutlet NSTreeController *imageTreeController;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
 
+@property (nonatomic) IBOutlet NSMenu* contextMenu;
+
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;
 @property (assign) BOOL isCollapsedOutlineView;
@@ -40,6 +42,12 @@
 
 - (IBAction)toggleSlideshowMode:(id)sender;
 - (IBAction)toggleDateTimeSort:(id)sender;
+
+- (NSMenu*)openWithApplicationMenuForURL:(NSURL*)url withTarget:(id)target action:(SEL)action;
+- (void)performOpenWithApplication:(id)sender;
+- (NSMenu*)sharingMenuForItems:(NSArray*)items withTarget:(id)target action:(SEL)action;
+- (void)performSharing:(id)sender;
+- (void)copyItems:(NSArray*)items;
 
 @end
 

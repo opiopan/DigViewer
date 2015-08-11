@@ -21,6 +21,9 @@
     BOOL _useEmbeddedThumbnailForRAW;
 }
 
+//-----------------------------------------------------------------------------------------
+// 初期化
+//-----------------------------------------------------------------------------------------
 - (id)init
 {
     self = [super initWithNibName:@"ImageView" bundle:nil];
@@ -37,6 +40,7 @@
     imageView.notifySwipeSelector = @selector(onSwipeWithDirection:);
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    imageView.menu = controller.contextMenu;
     [controller addObserver:self forKeyPath:@"isFitWindow" options:0 context:nil];
     _imageViewConfig = [ImageViewConfigController sharedController];
     [_imageViewConfig addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
@@ -49,6 +53,9 @@
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
 }
 
+//-----------------------------------------------------------------------------------------
+// クローズ準備
+//-----------------------------------------------------------------------------------------
 - (void)prepareForClose
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
@@ -58,6 +65,9 @@
     [self.imageArrayController removeObserver:self forKeyPath:@"selectedObjects"];
 }
 
+//-----------------------------------------------------------------------------------------
+// 属性の実装
+//-----------------------------------------------------------------------------------------
 - (void)setIsVisible:(BOOL)isVisible
 {
     BOOL lastVisiblility = _isVisible;
@@ -79,6 +89,10 @@
     imageView.zoomRatio = zoomRatio;
 }
 
+
+//-----------------------------------------------------------------------------------------
+// キー値監視イベント毎のアップデート処理
+//-----------------------------------------------------------------------------------------
 - (void)reflectImage
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
@@ -124,6 +138,9 @@
     imageView.isDrawingByLayer = [[[controller values] valueForKey:@"gestureEnable"] boolValue];
 }
 
+//-----------------------------------------------------------------------------------------
+// キー値監視
+//-----------------------------------------------------------------------------------------
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
@@ -180,6 +197,77 @@
     imageView.enableGesture = YES;
     [self reflectImageViewConfig];
     [self reflectGestureConfig];
+}
+
+//-----------------------------------------------------------------------------------------
+// コンテキストメニュー処理: コピー
+//-----------------------------------------------------------------------------------------
+- (void)copy:(id)sender
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    NSArray* items = [[sender parentItem] representedObject];
+    [controller copyItems:items];
+    [[sender parentItem] setRepresentedObject:nil];
+}
+
+- (BOOL)validateForCopy:(NSMenuItem*)menuItem
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
+    if (items){
+        menuItem.representedObject = items;
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンテキストメニュー処理: アプリケーションで開く
+//-----------------------------------------------------------------------------------------
+- (void)performOpenWithApplicationSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformOpenWithApplicationSubMenu:(NSMenuItem*)menuItem
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
+    if (items && items.count == 1){
+        menuItem.submenu = [controller openWithApplicationMenuForURL:items[0] withTarget:controller
+                                                              action:@selector(performOpenWithApplication:)];
+        if (menuItem.submenu != nil){
+            menuItem.representedObject = items[0];
+        }
+        return menuItem.submenu != nil;
+    }else{
+        return NO;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンテキストメニュー処理: 共有
+//-----------------------------------------------------------------------------------------
+- (void)performSharingSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformSharingSubMenu:(NSMenuItem*)menuItem
+{
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
+    if (items && items > 0){
+        menuItem.submenu = [controller sharingMenuForItems:items withTarget:controller
+                                                    action:@selector(performSharing:)];
+        if (menuItem.submenu != nil){
+            menuItem.representedObject = items;
+        }
+        return menuItem.submenu != nil;
+    }else{
+        return NO;
+    }
 }
 
 @end

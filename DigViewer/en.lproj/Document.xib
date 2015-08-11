@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
             <connections>
+                <outlet property="contextMenu" destination="SPt-ii-ykI" id="8nR-ZW-PVO"/>
                 <outlet property="imageArrayController" destination="100087" id="100261"/>
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
                 <outlet property="placeHolder" destination="100232" id="100240"/>
@@ -22,7 +23,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
@@ -211,6 +212,29 @@
             </connections>
         </arrayController>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <menu id="SPt-ii-ykI">
+            <items>
+                <menuItem title="Copy" id="DIJ-rM-pxj">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copy:" target="-1" id="AH7-kR-Z6B"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="qke-Ug-VYX"/>
+                <menuItem title="Open with Application" id="Lni-bT-s5r">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="performOpenWithApplicationSubMenu:" target="-1" id="GOt-fr-Aep"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Share" id="wfP-UQ-qVO">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="performSharingSubMenu:" target="-1" id="nRz-DL-X1B"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
     <resources>
         <image name="NSEnterFullScreenTemplate" width="15" height="15"/>

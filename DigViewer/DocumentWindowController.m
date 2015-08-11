@@ -701,35 +701,36 @@ static NSString* kMainView = @"mainView";
 
 - (BOOL)validateForPerformSharingSubMenu:(NSMenuItem*)menuItem
 {
-    menuItem.submenu = [self sharingMenu];
+    NSMutableArray* items = [NSMutableArray array];
+    for (PathNode* node in _imageArrayController.selectedObjects){
+        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
+    }
+    menuItem.submenu = [self sharingMenuForItems:items withTarget:self action:@selector(performSharing:)];
+    if (menuItem.submenu != nil){
+        menuItem.representedObject = items;
+    }
     return menuItem.submenu != nil;
 }
 
 - (void)performSharing:(id)sender
 {
-    NSMutableArray* items = [NSMutableArray array];
-    for (PathNode* node in _imageArrayController.selectedObjects){
-        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
-    }
+    NSArray* items = [[((NSMenuItem*)sender) parentItem] representedObject];
     NSSharingService* service = [sender representedObject];
     [service performWithItems:items];
+    [[sender parentItem] setRepresentedObject:nil];
 }
 
-- (NSMenu*)sharingMenu
+- (NSMenu*)sharingMenuForItems:(NSArray*)items withTarget:(id)target action:(SEL)action
 {
-    NSMutableArray* items = [NSMutableArray array];
-    for (PathNode* node in _imageArrayController.selectedObjects){
-        [items addObject:[NSURL fileURLWithPath:node.originalPath]];
-    }
     NSArray* services = [NSSharingService sharingServicesForItems:items];
     NSMenu* menu = nil;
     if (services && services.count > 0){
         menu = [[NSMenu alloc] initWithTitle:@"Sharing menu"];
         for (NSSharingService* service in services){
-            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:service.title action:@selector(performSharing:) keyEquivalent:@""];
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:service.title action:action keyEquivalent:@""];
             item.image = service.image;
             item.representedObject = service;
-            item.target = self;
+            item.target = target;
             [menu addItem:item];
         }
     }
@@ -749,8 +750,31 @@ static NSString* kAppImage = @"image";
 
 - (BOOL)validateForPerformOpenWithApplicationSubMenu:(NSMenuItem*)menuItem
 {
-    PathNode* current = _imageArrayController.selectedObjects[0];
-    NSURL* url = [NSURL fileURLWithPath:current.originalPath];
+    if (_imageArrayController.selectedObjects.count == 1){
+        PathNode* current = _imageArrayController.selectedObjects[0];
+        NSURL* url = [NSURL fileURLWithPath:current.originalPath];
+        menuItem.submenu = [self openWithApplicationMenuForURL:url withTarget:self
+                                                        action:@selector(performOpenWithApplication:)];
+        if (menuItem.submenu != nil){
+            menuItem.representedObject = url;
+        }
+        return menuItem.submenu != nil;
+    }else{
+        return NO;
+    }
+}
+
+- (void)performOpenWithApplication:(id)sender
+{
+    NSURL* targetURL = [[sender parentItem] representedObject];
+    NSURL* appURL = [sender representedObject];
+    [[NSWorkspace sharedWorkspace] openFile:targetURL.path withApplication:appURL.path];
+    [[sender parentItem] setRepresentedObject:nil];
+}
+
+- (NSMenu*)openWithApplicationMenuForURL:(NSURL*)url withTarget:(id)target action:(SEL)action
+{
+    NSMenu* menu = nil;
     NSArray* apps = (__bridge NSArray*)LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll);
     if (apps && apps.count > 0){
         CFErrorRef error = nil;
@@ -759,9 +783,9 @@ static NSString* kAppImage = @"image";
             CFRelease(error);
         }
         
-        NSMenu* menu = [[NSMenu alloc] initWithTitle:@"OpenWithApplication"];
+        menu = [[NSMenu alloc] initWithTitle:@"OpenWithApplication"];
         NSDictionary* firstAppID = [self applicationIDForURL:defaultApp];
-        [menu addItem:[self menuItemForApplicationID:firstAppID asPrimeryItem:YES]];
+        [menu addItem:[self menuItemForApplicationID:firstAppID withTarget:target action:action asPrimeryItem:YES]];
         
         NSMutableArray* additionalApps = [NSMutableArray array];
         for (NSURL* currentURL in apps){
@@ -778,15 +802,11 @@ static NSString* kAppImage = @"image";
                                                                  options:NSCaseInsensitiveSearch];
             }];
             for (NSDictionary* applicationID in sortedApps){
-                [menu addItem:[self menuItemForApplicationID:applicationID asPrimeryItem:NO]];
+                [menu addItem:[self menuItemForApplicationID:applicationID withTarget:target action:action asPrimeryItem:NO]];
             }
         }
-
-        menuItem.submenu = menu;
-        return YES;
-    }else{
-        return NO;
     }
+    return menu;
 }
 
 - (NSDictionary*)applicationIDForURL:(NSURL*)url
@@ -802,23 +822,17 @@ static NSString* kAppImage = @"image";
     return rc;
 }
 
-- (NSMenuItem*)menuItemForApplicationID:(NSDictionary*)applicationID asPrimeryItem:(BOOL)isPrimeryItem
+- (NSMenuItem*)menuItemForApplicationID:(NSDictionary*)applicationID withTarget:(id)target action:(SEL)action
+                          asPrimeryItem:(BOOL)isPrimeryItem
 {
     NSString* title = isPrimeryItem ? [NSString stringWithFormat:NSLocalizedString(@"MENU_DEFAULT_APPLICATION", nil),
                                                                  [applicationID valueForKey:kAppName]]
                                     : [applicationID valueForKey:kAppName];
-    NSMenuItem* rc = [[NSMenuItem alloc] initWithTitle:title action:@selector(performOpenWithApplication:) keyEquivalent:@""];
-    rc.target = self;
+    NSMenuItem* rc = [[NSMenuItem alloc] initWithTitle:title action:action keyEquivalent:@""];
+    rc.target = target;
     rc.image = [applicationID valueForKey:kAppImage];
     rc.representedObject = [applicationID valueForKey:kAppURL];
     return rc;
-}
-
-- (void)performOpenWithApplication:(id)sender
-{
-    PathNode* current = _imageArrayController.selectedObjects[0];
-    NSURL* appURL = [sender representedObject];
-    [[NSWorkspace sharedWorkspace] openFile:current.originalPath withApplication:appURL.path];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -830,14 +844,19 @@ static NSString* kAppImage = @"image";
     for (PathNode* node in _imageArrayController.selectedObjects){
         [items addObject:node.originalPath];
     }
-    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
-    [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
-    [pboard setPropertyList:items forType:NSFilenamesPboardType];
+    [self copyItems:items];
 }
 
 - (BOOL)validateForCopy:(NSMenuItem*)menuItem
 {
     return _imageArrayController.selectedObjects.count > 0;
+}
+
+- (void)copyItems:(NSArray*)items
+{
+    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
+    [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
+    [pboard setPropertyList:items forType:NSFilenamesPboardType];
 }
 
 @end
