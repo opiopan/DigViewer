@@ -43,10 +43,8 @@
 - (IBAction)toggleSlideshowMode:(id)sender;
 - (IBAction)toggleDateTimeSort:(id)sender;
 
-- (NSMenu*)openWithApplicationMenuForURL:(NSURL*)url withTarget:(id)target action:(SEL)action;
-- (void)performOpenWithApplication:(id)sender;
-- (NSMenu*)sharingMenuForItems:(NSArray*)items withTarget:(id)target action:(SEL)action;
-- (void)performSharing:(id)sender;
+- (BOOL)addOpenWithApplicationMenuForURL:(NSURL*)url toMenuItem:(NSMenuItem*)menuItem;
+- (BOOL)addSharingMenuForItems:(NSArray*)items toMenuItem:(NSMenuItem*)menuItem;
 - (void)copyItems:(NSArray*)items;
 
 @end

@@ -15,7 +15,10 @@
 #import "DraggingSourceTreeController.h"
 #import "DraggingSourceArrayController.h"
 
-@implementation FolderOutlineViewController
+@implementation FolderOutlineViewController {
+    NSMenu* contextMenuForTableView;
+    NSMenu* contextMenuForOutlineView;
+}
 
 @synthesize imageTableView;
 @synthesize imageArrayController;
@@ -41,16 +44,23 @@
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndMultiple"
                                                                  options:nil context:nil];
-
-    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    imageTableView.menu = controller.contextMenu;
-    folderOutlineView.menu = controller.contextMenu;
     
     [self reflectDnDSettings];
 
     // Dragging sourceの登録
     [imageTableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     [folderOutlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+    
+    // コンテキストメニューを生成
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    contextMenuForTableView = [[NSMenu alloc] initWithTitle:@"Context Menu for Table View"];
+    contextMenuForOutlineView = [[NSMenu alloc] initWithTitle:@"Context Menu for Outline View"];
+    for (NSMenuItem* item in controller.contextMenu.itemArray){
+        [contextMenuForTableView addItem:[item copy]];
+        [contextMenuForOutlineView addItem:[item copy]];
+    }
+    imageTableView.menu = contextMenuForTableView;
+    folderOutlineView.menu = contextMenuForOutlineView;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -113,7 +123,7 @@
 
 - (BOOL)validateForCopy:(NSMenuItem*)menuItem
 {
-    NSArray* items = [self targetItemsOfContextMenu];
+    NSArray* items = [self targetItemsOfContextMenuForMenuItem:menuItem];
     if (items){
         menuItem.representedObject = items;
         return YES;
@@ -132,14 +142,9 @@
 - (BOOL)validateForPerformOpenWithApplicationSubMenu:(NSMenuItem*)menuItem
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    NSArray* items = [self targetItemsOfContextMenu];
+    NSArray* items = [self targetItemsOfContextMenuForMenuItem:menuItem];
     if (items && items.count == 1){
-        menuItem.submenu = [controller openWithApplicationMenuForURL:items[0] withTarget:controller
-                                                              action:@selector(performOpenWithApplication:)];
-        if (menuItem.submenu != nil){
-            menuItem.representedObject = items[0];
-        }
-        return menuItem.submenu != nil;
+        return [controller addOpenWithApplicationMenuForURL:items[0] toMenuItem:menuItem];
     }else{
         return NO;
     }
@@ -155,14 +160,9 @@
 - (BOOL)validateForPerformSharingSubMenu:(NSMenuItem*)menuItem
 {
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    NSArray* items = [self targetItemsOfContextMenu];
+    NSArray* items = [self targetItemsOfContextMenuForMenuItem:menuItem];
     if (items && items > 0){
-        menuItem.submenu = [controller sharingMenuForItems:items withTarget:controller
-                                                              action:@selector(performSharing:)];
-        if (menuItem.submenu != nil){
-            menuItem.representedObject = items;
-        }
-        return menuItem.submenu != nil;
+        return [controller addSharingMenuForItems:items toMenuItem:menuItem];
     }else{
         return NO;
     }
@@ -171,15 +171,15 @@
 //-----------------------------------------------------------------------------------------
 // コンテキストメニュー対象アイテムの特定
 //-----------------------------------------------------------------------------------------
-- (NSArray*)targetItemsOfContextMenu
+- (NSArray*)targetItemsOfContextMenuForMenuItem:(NSMenuItem*)menuItem
 {
     NSInteger indexInTable = imageTableView.clickedRow;
     NSInteger indexInOutline = folderOutlineView.clickedRow;
     NSArray* rc = nil;
-    if (indexInOutline >= 0){
+    if (menuItem.menu == contextMenuForOutlineView && indexInOutline >= 0){
         PathNode* target = [[folderOutlineView itemAtRow:indexInOutline] representedObject];
         rc = @[[NSURL fileURLWithPath:target.originalPath]];
-    }else if (indexInTable >= 0){
+    }else if (menuItem.menu == contextMenuForTableView && indexInTable >= 0){
         PathNode* target = imageArrayController.arrangedObjects[indexInTable];
         NSArray* selected = imageArrayController.selectedObjects;
         if ([selected indexOfObject:target] != NSNotFound){

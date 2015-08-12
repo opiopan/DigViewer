@@ -40,7 +40,6 @@
     imageView.notifySwipeSelector = @selector(onSwipeWithDirection:);
     [self performSelector:@selector(reflectImageScaling) withObject:nil afterDelay:0.0f];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    imageView.menu = controller.contextMenu;
     [controller addObserver:self forKeyPath:@"isFitWindow" options:0 context:nil];
     _imageViewConfig = [ImageViewConfigController sharedController];
     [_imageViewConfig addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
@@ -51,6 +50,17 @@
                                                                  options:0 context:nil];
     [self reflectGestureConfig];
     [self.imageArrayController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+    
+    // コンテキストメニューをリファレンスメニューを元に生成
+    NSMenu* menu = [[NSMenu alloc] initWithTitle:@"Context Menu in Image View"];
+    for (NSMenuItem* item in controller.contextMenu.itemArray){
+        [menu addItem:[item copy]];
+    }
+    [menu addItem:[NSMenuItem separatorItem]];
+    NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"MENU_RESET_ZOOM_RATIO", nil)
+                                                  action:@selector(resetZoomRatio:) keyEquivalent:@""];
+    [menu addItem:item];
+    imageView.menu = menu;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -235,12 +245,7 @@
     PathNode* current = _imageArrayController.selectedObjects[0];
     NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
     if (items && items.count == 1){
-        menuItem.submenu = [controller openWithApplicationMenuForURL:items[0] withTarget:controller
-                                                              action:@selector(performOpenWithApplication:)];
-        if (menuItem.submenu != nil){
-            menuItem.representedObject = items[0];
-        }
-        return menuItem.submenu != nil;
+        return [controller addOpenWithApplicationMenuForURL:items[0] toMenuItem:menuItem];
     }else{
         return NO;
     }
@@ -259,12 +264,7 @@
     PathNode* current = _imageArrayController.selectedObjects[0];
     NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
     if (items && items > 0){
-        menuItem.submenu = [controller sharingMenuForItems:items withTarget:controller
-                                                    action:@selector(performSharing:)];
-        if (menuItem.submenu != nil){
-            menuItem.representedObject = items;
-        }
-        return menuItem.submenu != nil;
+        return [controller addSharingMenuForItems:items toMenuItem:menuItem];
     }else{
         return NO;
     }

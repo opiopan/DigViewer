@@ -8,6 +8,7 @@
 
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
+"MENU_RESET_ZOOM_RATIO" = "Reset Zoom Ratio";
 
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "General";

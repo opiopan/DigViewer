@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
@@ -23,7 +23,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
@@ -214,13 +214,38 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="SPt-ii-ykI">
             <items>
+                <menuItem title="Next Image" id="26U-hy-bCw">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="moveToNextImage:" target="-1" id="7S0-mC-8fq"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Previous Image" id="0S7-Ek-g9s">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="moveToPreviousImage:" target="-1" id="LXa-aJ-ns8"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Next Folder" id="NOj-3T-wd1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="moveToNextFolder:" target="-1" id="uRZ-sp-dVr"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Previous Folder" id="42U-NN-1iX">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="moveToPreviousFolder:" target="-1" id="Vdn-bL-5dp"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="qke-Ug-VYX"/>
                 <menuItem title="Copy" id="DIJ-rM-pxj">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="copy:" target="-1" id="AH7-kR-Z6B"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="qke-Ug-VYX"/>
+                <menuItem isSeparatorItem="YES" id="bfQ-wP-Ueu"/>
                 <menuItem title="Open with Application" id="Lni-bT-s5r">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -234,6 +259,7 @@
                     </connections>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="351.5" y="702.5"/>
         </menu>
     </objects>
     <resources>

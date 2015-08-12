@@ -76,3 +76,15 @@
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "wfP-UQ-qVO"; */
 "wfP-UQ-qVO.title" = "共有";
+
+/* Class = "NSMenuItem"; title = "Previous Image"; ObjectID = "0S7-Ek-g9s"; */
+"0S7-Ek-g9s.title" = "前の画像";
+
+/* Class = "NSMenuItem"; title = "Next Image"; ObjectID = "26U-hy-bCw"; */
+"26U-hy-bCw.title" = "次の画像";
+
+/* Class = "NSMenuItem"; title = "Previous Folder"; ObjectID = "42U-NN-1iX"; */
+"42U-NN-1iX.title" = "前のフォルダ";
+
+/* Class = "NSMenuItem"; title = "Next Folder"; ObjectID = "NOj-3T-wd1"; */
+"NOj-3T-wd1.title" = "次のフォルダ";
