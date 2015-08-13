@@ -49,7 +49,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="n98-ls-o7w" id="bZc-yQ-05c">
-                                                <rect key="frame" x="0.0" y="0.0" width="258" height="247"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="258" height="19"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +106,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="Yoe-0W-di7" id="XJv-Wd-PR1">
-                                                <rect key="frame" x="0.0" y="0.0" width="258" height="247"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="258" height="19"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -228,12 +228,12 @@ DQ
             </view>
             <point key="canvasLocation" x="356.5" y="323"/>
         </window>
-        <arrayController objectClassName="Camera" avoidsEmptySelection="NO" id="ohW-v5-i2R">
+        <arrayController objectClassName="Camera" avoidsEmptySelection="NO" id="ohW-v5-i2R" userLabel="Inapply Array Controller">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.inapplicableList" id="wV6-XS-0cj"/>
             </connections>
         </arrayController>
-        <arrayController objectClassName="Camera" avoidsEmptySelection="NO" id="hMD-QU-gTK">
+        <arrayController objectClassName="Camera" avoidsEmptySelection="NO" id="hMD-QU-gTK" userLabel="Apply Array Controller">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.applicableList" id="U0c-wh-Pgi"/>
             </connections>

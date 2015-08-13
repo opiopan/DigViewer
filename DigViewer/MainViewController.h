@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InspectorViewController.h"
 
 enum RepresentationViewType {
     typeImageView,
@@ -18,6 +19,7 @@ enum RepresentationViewType {
 @property (assign) enum RepresentationViewType presentationViewType;
 @property (readonly, nonatomic) NSViewController* presentationViewController;
 @property (readonly, nonatomic) NSViewController* imageViewController;
+@property (readonly, nonatomic) InspectorViewController* inspectorViewController;
 @property (assign) BOOL isCollapsedOutlineView;
 @property (assign) BOOL isCollapsedInspectorView;
 

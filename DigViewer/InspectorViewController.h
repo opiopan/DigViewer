@@ -22,4 +22,11 @@
 @property (strong) NSArray* summary;
 @property (strong) NSArray* gpsInfo;
 
+- (IBAction)openMapWithBrowser:(id)sender;
+- (BOOL)validateForOpenMapWithBrowser:(NSMenuItem*)menuItem;
+- (IBAction)openMapWithMapApp:(id)sender;
+- (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem;
+- (IBAction)moveToPhotograhingPlace:(id)sender;
+- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem;
+
 @end

@@ -632,6 +632,9 @@ static NSString* kMainView = @"mainView";
 //-----------------------------------------------------------------------------------------
 - (IBAction)toggleDateTimeSort:(id)sender
 {
+    if ([[sender class] isSubclassOfClass:[NSMenuItem class]]){
+        self.sortByDateTimeButtonState = !self.sortByDateTimeButtonState;
+    }
     PathNode* current = [self.imageTreeController.selection valueForKey:@"me"];
     if (_sortByDateTimeButtonState){
         loadingSheet = [[LoadingSheetController alloc] init];
@@ -640,6 +643,12 @@ static NSString* kMainView = @"mainView";
     }else{
         [self performSelector:@selector(didEndLoadDateTime:) withObject:current afterDelay:0.0];
     }
+}
+
+- (BOOL)validateForToggleDateTimeSort:(NSMenuItem*)menuItem
+{
+    menuItem.state = _sortByDateTimeButtonState ? NSOnState : NSOffState;
+    return YES;
 }
 
 - (void)didEndLoadDateTime:(PathNode*)current
@@ -875,6 +884,45 @@ static NSString* kAppImage = @"image";
     NSPasteboard* pboard = [NSPasteboard generalPasteboard];
     [pboard declareTypes:@[NSFilenamesPboardType] owner:self];
     [pboard setPropertyList:items forType:NSFilenamesPboardType];
+}
+
+//-----------------------------------------------------------------------------------------
+// インスペクターのマップビューのコンテキストメニューへの回想
+//-----------------------------------------------------------------------------------------
+- (IBAction)openMapWithBrowser:(id)sender
+{
+    [mainViewController.inspectorViewController openMapWithBrowser:sender];
+}
+
+- (BOOL)validateForOpenMapWithBrowser:(NSMenuItem*)menuItem
+{
+    return !mainViewController.isCollapsedInspectorView &&
+           mainViewController.inspectorViewController.viewSelector == 1 &&
+           [mainViewController.inspectorViewController validateForOpenMapWithBrowser:menuItem];
+}
+
+- (IBAction)openMapWithMapApp:(id)sender
+{
+    [mainViewController.inspectorViewController openMapWithMapApp:sender];
+}
+
+- (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem
+{
+    return !mainViewController.isCollapsedInspectorView &&
+           mainViewController.inspectorViewController.viewSelector == 1 &&
+           [mainViewController.inspectorViewController validateForOpenMapWithMapApp:menuItem];
+}
+
+- (IBAction)moveToPhotograhingPlace:(id)sender
+{
+    [mainViewController.inspectorViewController moveToPhotograhingPlace:sender];
+}
+
+- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+{
+    return !mainViewController.isCollapsedInspectorView &&
+    mainViewController.inspectorViewController.viewSelector == 1 &&
+    [mainViewController.inspectorViewController validateForMoveToPhotograhingPlace:menuItem];
 }
 
 @end

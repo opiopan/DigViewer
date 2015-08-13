@@ -207,10 +207,42 @@ DQ
                                     <action selector="fitImageToScreen:" target="-1" id="556"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Map" id="M6J-Wn-d9f">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Map" id="QEx-JK-KyB">
+                                    <items>
+                                        <menuItem title="Open with Browser" keyEquivalent="b" id="gfU-dB-j7N">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openMapWithBrowser:" target="-1" id="yaq-zs-VDW"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open with Map" keyEquivalent="m" id="dLr-9m-1vY">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openMapWithMapApp:" target="-1" id="897-xM-5lA"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="FKf-0j-r5y"/>
+                                        <menuItem title="Move to Photograhing place  as Center" keyEquivalent="c" id="XrW-ns-0CK">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="moveToPhotograhingPlace:" target="-1" id="aAm-eQ-fmx"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="4SS-E1-PAE"/>
                             <menuItem title="Reset Zoom Ratio" keyEquivalent="0" id="458-l0-7Uu">
                                 <connections>
                                     <action selector="resetZoomRatio:" target="-1" id="J7y-qo-Dmg"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Sort by Date and Time" id="5yp-dh-8ET">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleDateTimeSort:" target="-1" id="Chv-cK-ENh"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="cYN-Df-5Wb"/>

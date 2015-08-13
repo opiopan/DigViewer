@@ -234,12 +234,12 @@ DQ
             </view>
             <point key="canvasLocation" x="356.5" y="298.5"/>
         </window>
-        <arrayController objectClassName="ExtentionEntity" avoidsEmptySelection="NO" id="ohW-v5-i2R">
+        <arrayController objectClassName="ExtentionEntity" avoidsEmptySelection="NO" id="ohW-v5-i2R" userLabel="Show Array Controller">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.displayableList" id="KUD-hN-Sm8"/>
             </connections>
         </arrayController>
-        <arrayController objectClassName="ExtentionEntity" avoidsEmptySelection="NO" id="hMD-QU-gTK">
+        <arrayController objectClassName="ExtentionEntity" avoidsEmptySelection="NO" id="hMD-QU-gTK" userLabel="Hidden Array Controller">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.omittingList" id="6v4-g5-til"/>
             </connections>

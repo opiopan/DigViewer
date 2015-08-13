@@ -428,7 +428,7 @@ static NSString* kViewSelector = @"viewSelector";
     self.mapView.gpsInfo = self.mapView.gpsInfo;
 }
 
-- (BOOL)validateMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
 {
     return self.mapView.gpsInfo != nil;
 }
