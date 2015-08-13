@@ -10,10 +10,14 @@
 #import "PathNode.h"
 #import "ImageMetadata.h"
 #import "NSWindow+TracingResponderChain.h"
+#import "InspectorArrayController.h"
 
 
 @interface InspectorViewController ()
-
+@property (nonatomic) IBOutlet NSTableView* summaryView;
+@property (nonatomic) IBOutlet NSTableView* gpsInfoView;
+@property (nonatomic) IBOutlet InspectorArrayController* summaryController;
+@property (nonatomic) IBOutlet InspectorArrayController* gpsInfoController;
 @end
 
 @implementation InspectorViewController{
@@ -22,6 +26,10 @@
     NSDictionary* _preferences;
 }
 
+
+//-----------------------------------------------------------------------------------------
+//  初期化
+//-----------------------------------------------------------------------------------------
 - (id)init
 {
     self = [super initWithNibName:@"InspectorView" bundle:nil];
@@ -99,10 +107,18 @@
     
     // タブ反映
     [self performSelector:@selector(reflectViewSelector) withObject:nil afterDelay:0];
+
+    // Dragging sourceの登録
+    [_summaryView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+    [_gpsInfoView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     
     _initialized = true;
 }
 
+
+//-----------------------------------------------------------------------------------------
+// クローズ準備
+//-----------------------------------------------------------------------------------------
 - (void) prepareForClose
 {
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovColor"];
@@ -114,6 +130,10 @@
     [self.imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
+
+//-----------------------------------------------------------------------------------------
+// キー値監視
+//-----------------------------------------------------------------------------------------
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
@@ -220,6 +240,9 @@
     self.viewSelector = self.viewSelector;
 }
 
+//-----------------------------------------------------------------------------------------
+// 表示タブ属性の実装
+//-----------------------------------------------------------------------------------------
 - (int)viewSelector
 {
     return _viewSelector;
@@ -290,6 +313,46 @@ static NSString* kViewSelector = @"viewSelector";
     if ([_preferences valueForKey:kMapTilt]){
         _mapView.tilt = [_preferences valueForKey:kMapTilt];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンテキストメニュー処理
+//-----------------------------------------------------------------------------------------
+- (IBAction)selectAll:(id)sender
+{
+    NSTableView* targetView = _viewSelector == 0 ? _summaryView : _gpsInfoView;
+    [targetView selectAll:sender];
+}
+
+- (IBAction)copyAttributes:(id)sender
+{
+    NSTableView* targetView = _viewSelector == 0 ? _summaryView : _gpsInfoView;
+    InspectorArrayController* targetController = _viewSelector == 0 ? _summaryController : _gpsInfoController;
+    NSIndexSet* indexSet = targetView.selectedRowIndexes;
+    if (targetView.clickedRow >= 0 && ![indexSet containsIndex:targetView.clickedRow]){
+        indexSet = [NSIndexSet indexSetWithIndex:targetView.clickedRow];
+    }
+    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
+    [targetController writeItemsAtIndexes:indexSet toPasteboard:pboard withOnlyValue:[sender tag]];
+}
+
+- (BOOL)validateForCopyAttributes:(NSMenuItem*)menuItem
+{
+    NSTableView* targetView = _viewSelector == 0 ? _summaryView : _gpsInfoView;
+    return targetView.clickedRow >= 0 || targetView.selectedRowIndexes.count > 0;
+}
+
+//-----------------------------------------------------------------------------------------
+// デフォルトのコピーアクション
+//-----------------------------------------------------------------------------------------
+- (void)copy:(id)sender
+{
+    [self copyAttributes:sender];
+}
+
+- (BOOL)validateForCopy:(NSMenuItem*)menuItem
+{
+    return [self validateForCopyAttributes:menuItem];
 }
 
 @end

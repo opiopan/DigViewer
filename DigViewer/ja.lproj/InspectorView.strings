@@ -1,0 +1,15 @@
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "4dL-1h-kij"; */
+"4dL-1h-kij.title" = "コピー";
+
+/* Class = "NSMenuItem"; title = "Copy Only Value"; ObjectID = "jYw-83-pn0"; */
+"jYw-83-pn0.title" = "値のみコピー";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "v8D-wx-LlG"; */
+"v8D-wx-LlG.title" = "すべて選択";
+
+/* Class = "NSMenuItem"; title = "Open with Browser"; ObjectID = "5mI-d6-ert"; */
+"5mI-d6-ert.title" = "ブラウザで開く";
+
+/* Class = "NSMenuItem"; title = "Open with Map"; ObjectID = "wJT-qr-W7I"; */
+"wJT-qr-W7I.title" = "マップを開く";

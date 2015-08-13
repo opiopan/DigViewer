@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="3338"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="InspectorViewController">
             <connections>
+                <outlet property="gpsInfoController" destination="S5D-8O-NiF" id="d4U-08-TG9"/>
+                <outlet property="gpsInfoView" destination="hrr-15-ccA" id="prR-3A-S56"/>
                 <outlet property="gpsKeyColumn" destination="uYh-IS-HTB" id="jTj-1G-QXp"/>
                 <outlet property="gpsPlaceHolder" destination="P7T-3L-YRb" id="VlJ-N9-ENC"/>
                 <outlet property="imageArrayController" destination="COi-PN-SQm" id="E4e-Zv-Sm1"/>
                 <outlet property="keyColumn" destination="thC-Z2-YU4" id="6pD-0j-Phd"/>
                 <outlet property="mapView" destination="sxX-2G-pLZ" id="Urv-p8-HqM"/>
+                <outlet property="summaryController" destination="U3M-Qx-Ilb" id="UxV-t9-Vb6"/>
+                <outlet property="summaryView" destination="E20-1g-GeM" id="kui-1p-v9J"/>
                 <outlet property="tabView" destination="kLz-Qk-Xgg" id="Dii-Y3-SpD"/>
                 <outlet property="view" destination="B6R-MO-chK" id="OVt-Gp-cuH"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <arrayController id="COi-PN-SQm" userLabel="Image Array Controller">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageArrayController.arrangedObjects" id="o1U-pL-bnM"/>
@@ -26,7 +30,7 @@
                 <binding destination="-2" name="sortDescriptors" keyPath="representedObject.controller.imageArrayController.sortDescriptors" previousBinding="TXb-T4-w9U" id="zlk-6B-4jg"/>
             </connections>
         </arrayController>
-        <arrayController avoidsEmptySelection="NO" id="U3M-Qx-Ilb" userLabel="Meta Array Controller">
+        <arrayController avoidsEmptySelection="NO" id="U3M-Qx-Ilb" userLabel="Meta Array Controller" customClass="InspectorArrayController">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.summary" id="d6G-lY-kL1"/>
             </connections>
@@ -38,18 +42,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="609"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="27K-1X-0LF">
+                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="27K-1X-0LF">
                         <rect key="frame" x="0.0" y="574" width="343" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9i-hD-e7V">
                         <rect key="frame" x="136" y="580" width="71" height="24"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <segmentedCell key="cell" alignment="left" style="rounded" trackingMode="selectOne" id="nUD-iM-gY2">
-                            <font key="font" size="10" name="LucidaGrande"/>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="nUD-iM-gY2">
+                            <font key="font" metaFont="system" size="10"/>
                             <segments>
                                 <segment label="EXIF" width="32" selected="YES"/>
                                 <segment label="GPS" width="32" tag="1"/>
@@ -61,27 +63,24 @@
                     </segmentedControl>
                     <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="kLz-Qk-Xgg" customClass="KeyUncapturedTabView">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Tab" identifier="1" id="WXM-CF-naN">
+                            <tabViewItem label="EXIF" identifier="1" id="WXM-CF-naN">
                                 <view key="view" id="sXb-2p-9cv">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1" customClass="BasicBackgroundView">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-xg-q69">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="vVv-de-ZMO">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="15" id="E20-1g-GeM">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" typeSelect="NO" rowHeight="15" id="E20-1g-GeM">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="15"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
                                                                 <color key="backgroundColor" red="0.89094344429347827" green="0.89094344429347827" blue="0.89094344429347827" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,6 +122,10 @@
                                                                         </connections>
                                                                     </tableColumn>
                                                                 </tableColumns>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="U3M-Qx-Ilb" id="unw-BF-B0f"/>
+                                                                    <outlet property="menu" destination="RBt-ny-4VC" id="eWo-97-9mn"/>
+                                                                </connections>
                                                             </tableView>
                                                         </subviews>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -153,24 +156,22 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="View" identifier="2" id="M0q-PB-nCk">
+                            <tabViewItem label="GPS" identifier="2" id="M0q-PB-nCk">
                                 <view key="view" id="P7T-3L-YRb">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="aqe-t7-af9" customClass="BasicBackgroundView">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-we-DpE">
                                                     <rect key="frame" x="0.0" y="426" width="343" height="150"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="vxn-AW-peD">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="15" id="hrr-15-ccA">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" typeSelect="NO" rowHeight="15" id="hrr-15-ccA">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="15"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
                                                                 <color key="backgroundColor" red="0.89094344430000005" green="0.89094344430000005" blue="0.89094344430000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,6 +221,10 @@
                                                                         </connections>
                                                                     </tableColumn>
                                                                 </tableColumns>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="S5D-8O-NiF" id="JT3-b7-ilx"/>
+                                                                    <outlet property="menu" destination="RBt-ny-4VC" id="1OQ-a0-JG5"/>
+                                                                </connections>
                                                             </tableView>
                                                         </subviews>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -238,7 +243,6 @@
                                                 </scrollView>
                                                 <webView translatesAutoresizingMaskIntoConstraints="NO" id="sxX-2G-pLZ" customClass="GPSMapView">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="426"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                                         <nil key="identifier"/>
                                                     </webPreferences>
@@ -281,10 +285,45 @@
             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
             <color key="fillColor" white="0.85149949596774199" alpha="1" colorSpace="calibratedWhite"/>
         </box>
-        <arrayController avoidsEmptySelection="NO" id="S5D-8O-NiF" userLabel="GPS Array Controller">
+        <arrayController avoidsEmptySelection="NO" id="S5D-8O-NiF" userLabel="GPS Array Controller" customClass="InspectorArrayController">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.gpsInfo" id="EQn-tm-MlS"/>
             </connections>
         </arrayController>
+        <menu title="Context Menu For Attributes" id="RBt-ny-4VC" userLabel="Attributes Context Menu">
+            <items>
+                <menuItem title="Copy" id="4dL-1h-kij">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyAttributes:" target="-2" id="I62-87-an1"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Copy Only Value" tag="1" id="jYw-83-pn0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyAttributes:" target="-2" id="Sfx-2d-Pcn"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="MoF-Z9-vNs"/>
+                <menuItem title="Select All" id="v8D-wx-LlG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="selectAll:" target="-2" id="bmV-m2-osW"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="685" y="149.5"/>
+        </menu>
+        <menu id="Cfl-JH-f8g" userLabel="Map Context Menu">
+            <items>
+                <menuItem title="Open with Map" id="wJT-qr-W7I">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Open with Browser" id="5mI-d6-ert">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="684" y="355.5"/>
+        </menu>
     </objects>
 </document>

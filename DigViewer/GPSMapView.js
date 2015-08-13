@@ -275,7 +275,7 @@ function setStreetViewControll(state) {
 }
 
 function getMapZoomLevel() {
-    if (map){
+    if (map && imageLocation){
         return map.getZoom();
     }else{
         return zoomLevel;

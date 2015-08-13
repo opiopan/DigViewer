@@ -94,6 +94,8 @@
 		7B5C0A421B67A424004FE1A0 /* SelectDeletingConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */; };
 		7B5C0A451B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
 		7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B61484B1B7B97AE00A03C45 /* InspectorArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */; };
+		7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B61484C1B7BA1D200A03C45 /* InspectorView.strings */; };
 		7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
 		7B661A6D1B47840A00C42D2C /* Zoom.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
@@ -362,6 +364,9 @@
 		7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "LensLibraryMapping2.1-2.2.xcmappingmodel"; sourceTree = "<group>"; };
 		7B5C0A461B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConditionMigrationPolicy2.1-2.2.h"; sourceTree = "<group>"; };
 		7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConditionMigrationPolicy2.1-2.2.m"; sourceTree = "<group>"; };
+		7B6148491B7B97AE00A03C45 /* InspectorArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorArrayController.h; sourceTree = "<group>"; };
+		7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorArrayController.m; sourceTree = "<group>"; };
+		7B61484D1B7BA1D200A03C45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InspectorView.strings; sourceTree = "<group>"; };
 		7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Mosaic.cikernel; sourceTree = "<group>"; };
 		7B661A6B1B47840A00C42D2C /* Zoom.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Zoom.cikernel; sourceTree = "<group>"; };
 		7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationBaseViewController.h; sourceTree = "<group>"; };
@@ -947,6 +952,8 @@
 				7BBEE9F11ADD4AB60047DF50 /* DraggingSourceTreeController.m */,
 				7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */,
 				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
+				7B6148491B7B97AE00A03C45 /* InspectorArrayController.h */,
+				7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -990,6 +997,7 @@
 				7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */,
 				7B4E8E2916C82A02001C5D09 /* ThumbnailView.strings */,
 				7BC667A518B05213000CB995 /* InspectorView.xib */,
+				7B61484C1B7BA1D200A03C45 /* InspectorView.strings */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B40A41B1AFD08FD006ED497 /* pause.png */,
@@ -1178,6 +1186,7 @@
 				7B5C0A131B652BCD004FE1A0 /* EditCameraSheet.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
+				7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
 				7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */,
 				7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */,
@@ -1237,7 +1246,9 @@
 				"$(SRCROOT)/DigViewer/ja.lproj/SelectDeletingConditionSheet.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/SelectDeletingConditionSheet.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/SelectNewConditionSheet.strings",
-				"$(SRCROOT)/DigViewer/ja.lproj/SelectNewConditionSheet.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/SelectNewConditionSheet.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/InspectorView.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/InspectorView.xib",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -1262,10 +1273,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/EditConditionSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectDeletingConditionSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectNewConditionSheet.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InspectorView.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet;do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1318,6 +1330,7 @@
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
 				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
+				7B61484B1B7B97AE00A03C45 /* InspectorArrayController.m in Sources */,
 				7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */,
 				7B5C0A361B67726D004FE1A0 /* SelectNewConditionSheetController.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
@@ -1605,6 +1618,14 @@
 				7B5C0A411B67A424004FE1A0 /* ja */,
 			);
 			name = SelectDeletingConditionSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B61484C1B7BA1D200A03C45 /* InspectorView.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B61484D1B7BA1D200A03C45 /* ja */,
+			);
+			name = InspectorView.strings;
 			sourceTree = "<group>";
 		};
 		7B697E53169DB8A000A9E247 /* LoadingSheet.xib */ = {
