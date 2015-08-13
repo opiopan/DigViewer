@@ -11,13 +11,16 @@
 #import "ImageMetadata.h"
 #import "NSWindow+TracingResponderChain.h"
 #import "InspectorArrayController.h"
-
+#import "DocumentWindowController.h"
+#import <MapKit/MapKit.h>
 
 @interface InspectorViewController ()
 @property (nonatomic) IBOutlet NSTableView* summaryView;
 @property (nonatomic) IBOutlet NSTableView* gpsInfoView;
 @property (nonatomic) IBOutlet InspectorArrayController* summaryController;
 @property (nonatomic) IBOutlet InspectorArrayController* gpsInfoController;
+@property (nonatomic) IBOutlet NSMenu* attributesMenu;
+@property (nonatomic) IBOutlet NSMenu* mapMenu;
 @end
 
 @implementation InspectorViewController{
@@ -111,6 +114,25 @@
     // Dragging sourceの登録
     [_summaryView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     [_gpsInfoView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+
+    // コンテキストメニューの生成＆登録
+    NSMenu* attributesMenu = [[NSMenu alloc] initWithTitle:@"summary context menu"];
+    NSMenu* mapMenu = [[NSMenu alloc] initWithTitle:@"gps info context menu"];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    NSArray* commonItems = controller.contextMenu.itemArray;
+    for (int i = 0; i < 5; i++){
+        [attributesMenu addItem:[commonItems[i] copy]];
+        [mapMenu addItem:[commonItems[i] copy]];
+    }
+    for (NSMenuItem* item in _attributesMenu.itemArray){
+        [attributesMenu addItem:[item copy]];
+    }
+    for (NSMenuItem* item in _mapMenu.itemArray){
+        [mapMenu addItem:[item copy]];
+    }
+    _summaryView.menu = attributesMenu;
+    _gpsInfoView.menu = attributesMenu;
+    _mapView.menu = mapMenu;
     
     _initialized = true;
 }
@@ -316,7 +338,7 @@ static NSString* kViewSelector = @"viewSelector";
 }
 
 //-----------------------------------------------------------------------------------------
-// コンテキストメニュー処理
+// テーブルビューのコンテキストメニュー処理
 //-----------------------------------------------------------------------------------------
 - (IBAction)selectAll:(id)sender
 {
@@ -353,6 +375,53 @@ static NSString* kViewSelector = @"viewSelector";
 - (BOOL)validateForCopy:(NSMenuItem*)menuItem
 {
     return [self validateForCopyAttributes:menuItem];
+}
+
+//-----------------------------------------------------------------------------------------
+// マップビューのコンテキストメニュー処理
+//-----------------------------------------------------------------------------------------
+- (IBAction)openMapWithBrowser:(id)sender
+{
+    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    NSString* urlString = [NSString stringWithFormat:@"http://www.google.com/maps?ll=%@,%@&z=%@&q=%@,%@",
+                           gpsInfo.latitude, gpsInfo.longitude,
+                           self.mapView.zoomLevel,
+                           gpsInfo.latitude, gpsInfo.longitude];
+    NSURL* url = [NSURL URLWithString:urlString];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+- (BOOL)validateForOpenMapWithBrowser:(NSMenuItem*)menuItem
+{
+    return self.mapView.gpsInfo != nil;
+}
+
+- (IBAction)openMapWithMapApp:(id)sender
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gpsInfo.latitude.doubleValue,
+                                                                   gpsInfo.longitude.doubleValue);
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+    [mapItem setName:current.imageNode.name];
+    
+    [mapItem openInMapsWithLaunchOptions:nil];
+}
+
+- (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem
+{
+    return self.mapView.gpsInfo != nil;
+}
+
+- (IBAction)moveToPhotograhingPlace:(id)sender
+{
+    self.mapView.gpsInfo = self.mapView.gpsInfo;
+}
+
+- (BOOL)validateMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+{
+    return self.mapView.gpsInfo != nil;
 }
 
 @end

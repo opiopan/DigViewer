@@ -37,9 +37,9 @@
         }
     }
 
-    [pboard declareTypes:@[NSPasteboardTypeString, NSPasteboardTypeTabularText] owner:self];
-    [pboard setString:plainText forType:NSPasteboardTypeString];
+    [pboard declareTypes:@[NSPasteboardTypeTabularText, NSPasteboardTypeString] owner:self];
     [pboard setString:plainText forType:NSPasteboardTypeTabularText];
+    [pboard setString:plainText forType:NSPasteboardTypeString];
     
     return indexes.count > 0;
 }
