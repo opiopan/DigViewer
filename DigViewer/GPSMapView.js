@@ -308,3 +308,23 @@ function getTilt() {
         return tilt;
     }
 }
+
+function getSpanLatitude() {
+    if (map){
+        var bounds = map.getBounds();
+        var span = bounds.toSpan();
+        return span.lat();
+    }else{
+        return null;
+    }
+}
+
+function getSpanLongitude() {
+    if (map){
+        var bounds = map.getBounds();
+        var span = bounds.toSpan();
+        return span.lng();
+    }else{
+        return null;
+    }
+}

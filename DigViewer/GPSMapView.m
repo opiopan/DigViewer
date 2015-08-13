@@ -208,6 +208,22 @@
     return _mapType;
 }
 
+- (NSNumber *)spanLatitude
+{
+    if (_hasBeenInitialized){
+        _spanLatitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLatitude()"];
+    }
+    return _spanLatitude;
+}
+
+- (NSNumber *)spanLongitude
+{
+    if (_hasBeenInitialized){
+        _spanLongitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLongitude()"];
+    }
+    return _spanLongitude;
+}
+
 - (void) reflectGpsInfo
 {
     if (_gpsInfo){

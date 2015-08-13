@@ -400,13 +400,22 @@ static NSString* kViewSelector = @"viewSelector";
 {
     PathNode* current = _imageArrayController.selectedObjects[0];
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
+
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gpsInfo.latitude.doubleValue,
                                                                    gpsInfo.longitude.doubleValue);
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
     MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
     [mapItem setName:current.imageNode.name];
     
-    [mapItem openInMapsWithLaunchOptions:nil];
+    NSNumber* spanLatitude = _mapView.spanLatitude;
+    NSNumber* spanLongitude = _mapView.spanLongitude;
+    NSDictionary* options = nil;
+    if (spanLatitude && spanLongitude){
+        MKCoordinateSpan span = {spanLatitude.doubleValue, spanLongitude.doubleValue};
+        options = @{MKLaunchOptionsMapSpanKey: [NSValue valueWithMKCoordinateSpan:span]};
+    }
+    
+    [mapItem openInMapsWithLaunchOptions:options];
 }
 
 - (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem

@@ -20,6 +20,8 @@
 @property (nonatomic, copy) NSNumber* mapType;
 @property (nonatomic) NSNumber* tilt;
 @property (nonatomic) NSNumber* zoomLevel;
+@property (nonatomic) NSNumber* spanLatitude;
+@property (nonatomic) NSNumber* spanLongitude;
 @property bool enableStreetView;
 @property bool enableHomePosition;
 
