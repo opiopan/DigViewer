@@ -12,7 +12,11 @@
 #import "NSWindow+TracingResponderChain.h"
 #import "InspectorArrayController.h"
 #import "DocumentWindowController.h"
+#import "TemporaryFileController.h"
 #import <MapKit/MapKit.h>
+#import <quartz/Quartz.h>
+
+#import "CoreFoundationHelper.h"
 
 @interface InspectorViewController ()
 @property (nonatomic) IBOutlet NSTableView* summaryView;
@@ -27,7 +31,6 @@
     bool    _initialized;
     NSDictionary* _preferences;
 }
-
 
 //-----------------------------------------------------------------------------------------
 //  初期化
@@ -84,25 +87,25 @@
     [self reflectMapMoveToHomePos];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapFovColor"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapArrowColor"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapFovGrade"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapType"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapEnableStreetView"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapMoveToHomePos"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     
     // モデル変更を検知するobserverを登録
-    [self.imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    [self.imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
     
     // メタデータ反映
     [self performSelector:@selector(reflectMetadata) withObject:nil afterDelay:0];
@@ -445,6 +448,8 @@ static NSString* kViewSelector = @"viewSelector";
 //-----------------------------------------------------------------------------------------
 // マップビューのコンテキストメニュー: Google Earth起動
 //-----------------------------------------------------------------------------------------
+static NSString* CategoryKML = @"KML";
+
 - (IBAction)openMapWithGoogleEarth:(id)sender
 {
     static NSString* format = @
@@ -452,7 +457,7 @@ static NSString* kViewSelector = @"viewSelector";
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
         "    <Placemark>"
         "        <name>%@</name>"
-        "        <description>%@</description>"
+        "        <description><![CDATA[<img src=\"%@\"/>%@]]></description>"
         "        <Point>"
         "            <altitudeMode>%@</altitudeMode>"
         "            <coordinates>%@,%@,%@</coordinates>"
@@ -483,24 +488,53 @@ static NSString* kViewSelector = @"viewSelector";
     NSNumber* spanLongitude = _mapView.spanLongitude;
     NSNumber* range;
     if (spanLatitude && spanLongitude){
-        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue) * 111000);
+        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue) * 111000 * 0.7);
     }else{
         range = @600;
     }
+    [[TemporaryFileController sharedController] cleanUpForCategory:CategoryKML];
+    NSString* thumbnailPath = [[TemporaryFileController sharedController] allocatePathWithSuffix:@".jpg"
+                                                                                     forCategory:CategoryKML];
     NSString* kmlString = [NSString stringWithFormat:format,
-                           current.imageNode.name, current.imageNode.originalPath,
+                           current.imageNode.name,
+                           thumbnailPath, current.imageNode.originalPath,
                            altMode,
                            gpsInfo.longitude, gpsInfo.latitude, altitude,
                            gpsInfo.longitude, gpsInfo.latitude, heading, range];
     NSError* error;
     static NSString* kmlPath = @"/tmp/DigViewer-work.kml";
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+    [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
     [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"];
 }
 
 - (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
 {
     return self.mapView.gpsInfo != nil;
+}
+
+- (BOOL)saveThumbnailForPlacemarkWithPath:(NSString*)path pathNode:(PathNode*)node
+{
+    // サムネールイメージ取得
+    ECGImageRef thumbnail;
+    if ([node imageRepresentationType] == IKImageBrowserCGImageRepresentationType){
+        thumbnail = (__bridge_retained CGImageRef)[node imageRepresentation];
+    }else{
+        thumbnail = [node CGImageFromNSImage:[node imageRepresentation]];
+    }
+    NSImage* image = [[NSImage alloc] initWithCGImage:thumbnail
+                                                 size:NSMakeSize(CGImageGetWidth(thumbnail)/2, CGImageGetHeight(thumbnail)/2)];
+
+    // NSImage→TIFF変換
+    NSData* tiffData = [image TIFFRepresentation];
+    NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:tiffData];
+    
+    // TIFF→JPEG変換
+    NSDictionary* option = @{NSImageCompressionFactor: @0.5};
+    NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+    
+    //ファイル出力
+    return [jpegData writeToFile:path atomically:NO];
 }
 
 @end

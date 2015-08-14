@@ -108,4 +108,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 - (NSArray*) portablePath;
 - (PathNode*) nearestNodeAtPortablePath:(NSArray*)path;
 
+// イメージ操作部品
+- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage;
+
 @end
