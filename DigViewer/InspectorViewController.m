@@ -381,7 +381,7 @@ static NSString* kViewSelector = @"viewSelector";
 }
 
 //-----------------------------------------------------------------------------------------
-// マップビューのコンテキストメニュー処理
+// マップビューのコンテキストメニュー: センタリング
 //-----------------------------------------------------------------------------------------
 - (IBAction)moveToPhotograhingPlace:(id)sender
 {
@@ -393,6 +393,9 @@ static NSString* kViewSelector = @"viewSelector";
     return self.mapView.gpsInfo != nil;
 }
 
+//-----------------------------------------------------------------------------------------
+// マップビューのコンテキストメニュー: ブラウザでGoogle Maps起動
+//-----------------------------------------------------------------------------------------
 - (IBAction)openMapWithBrowser:(id)sender
 {
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
@@ -409,6 +412,9 @@ static NSString* kViewSelector = @"viewSelector";
     return self.mapView.gpsInfo != nil;
 }
 
+//-----------------------------------------------------------------------------------------
+// マップビューのコンテキストメニュー: マップアプリ起動
+//-----------------------------------------------------------------------------------------
 - (IBAction)openMapWithMapApp:(id)sender
 {
     PathNode* current = _imageArrayController.selectedObjects[0];
@@ -436,25 +442,56 @@ static NSString* kViewSelector = @"viewSelector";
     return self.mapView.gpsInfo != nil;
 }
 
+//-----------------------------------------------------------------------------------------
+// マップビューのコンテキストメニュー: Google Earth起動
+//-----------------------------------------------------------------------------------------
 - (IBAction)openMapWithGoogleEarth:(id)sender
 {
     static NSString* format = @
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
-        "    <altitudeMode>relativeToGround</altitudeMode>"
         "    <Placemark>"
         "        <name>%@</name>"
         "        <description>%@</description>"
         "        <Point>"
-        "            <coordinates>%@,%@,0</coordinates>"
+        "            <altitudeMode>%@</altitudeMode>"
+        "            <coordinates>%@,%@,%@</coordinates>"
         "        </Point>"
+        "        <LookAt>"
+        "            <longitude>%@</longitude>"
+        "            <latitude>%@</latitude>"
+        "            <heading>%@</heading>"
+        "            <tilt>60</tilt>"
+        "            <range>%@</range>"
+        "        </LookAt>"
         "    </Placemark>"
         "</kml>";
     PathNode* current = _imageArrayController.selectedObjects[0];
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    NSNumber* altitude;
+    NSString* altMode;
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    if (gpsInfo.altitude && [[controller.values valueForKey:@"mapPassAltitudeToExternalMap"] boolValue]){
+        altitude = gpsInfo.altitude;
+        altMode = @"absolute";
+    }else{
+        altitude = @0;
+        altMode = @"clampToGround";
+    }
+    NSNumber* heading = gpsInfo.imageDirection ? gpsInfo.imageDirection : @0;
+    NSNumber* spanLatitude = _mapView.spanLatitude;
+    NSNumber* spanLongitude = _mapView.spanLongitude;
+    NSNumber* range;
+    if (spanLatitude && spanLongitude){
+        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue) * 111000);
+    }else{
+        range = @600;
+    }
     NSString* kmlString = [NSString stringWithFormat:format,
                            current.imageNode.name, current.imageNode.originalPath,
-                           gpsInfo.longitude, gpsInfo.latitude];
+                           altMode,
+                           gpsInfo.longitude, gpsInfo.latitude, altitude,
+                           gpsInfo.longitude, gpsInfo.latitude, heading, range];
     NSError* error;
     static NSString* kmlPath = @"/tmp/DigViewer-work.kml";
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];

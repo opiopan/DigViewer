@@ -40,3 +40,7 @@
 
 /* Class = "NSMenuItem"; title = "Satellite photo"; ObjectID = "rsL-9Y-dbM"; */
 "rsL-9Y-dbM.title" = "衛星写真";
+/* Class = "NSButtonCell"; title = "Pass altitude when open external map applic\
+ cation"; ObjectID = "sIl-jE-S4z"; */
+"sIl-jE-S4z.title" = "外部地図アプリをオープンする際に高度情報を渡す";
+

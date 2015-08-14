@@ -45,6 +45,7 @@
                      @"mapType":                      @0,
                      @"mapEnableStreetView":          @YES,
                      @"mapMoveToHomePos":             @YES,
+                     @"mapPassAltitudeToExternalMap": @NO,
                      @"dndEnable":                    @YES,
                      @"dndMultiple":                  @YES,
                      @"defImageViewType":             @0,
