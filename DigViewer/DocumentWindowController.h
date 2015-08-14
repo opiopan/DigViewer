@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Document.h"
+#import "ImageRepository.h"
 
 @interface DocumentWindowController : NSWindowController <NSWindowDelegate>
 
@@ -18,7 +19,9 @@
 @property (strong) IBOutlet NSTreeController *imageTreeController;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
 
+@property (nonatomic, readonly) ImageRepository* imageRepository;
 @property (nonatomic) IBOutlet NSMenu* contextMenu;
+@property (nonatomic, readonly) NSMenu* contextMenuForMap;
 
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;

@@ -20,7 +20,6 @@
 @property (nonatomic) IBOutlet InspectorArrayController* summaryController;
 @property (nonatomic) IBOutlet InspectorArrayController* gpsInfoController;
 @property (nonatomic) IBOutlet NSMenu* attributesMenu;
-@property (nonatomic) IBOutlet NSMenu* mapMenu;
 @end
 
 @implementation InspectorViewController{
@@ -120,6 +119,7 @@
     NSMenu* mapMenu = [[NSMenu alloc] initWithTitle:@"gps info context menu"];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     NSArray* commonItems = controller.contextMenu.itemArray;
+    NSArray* mapItems = controller.contextMenuForMap.itemArray;
     for (int i = 0; i < 5; i++){
         [attributesMenu addItem:[commonItems[i] copy]];
         [mapMenu addItem:[commonItems[i] copy]];
@@ -127,8 +127,11 @@
     for (NSMenuItem* item in _attributesMenu.itemArray){
         [attributesMenu addItem:[item copy]];
     }
-    for (NSMenuItem* item in _mapMenu.itemArray){
-        [mapMenu addItem:[item copy]];
+    for (NSMenuItem* source in mapItems){
+        NSMenuItem* item = [source copy];
+        item.keyEquivalent = @"";
+        item.target = self;
+        [mapMenu addItem:item];
     }
     _summaryView.menu = attributesMenu;
     _gpsInfoView.menu = attributesMenu;
@@ -380,6 +383,16 @@ static NSString* kViewSelector = @"viewSelector";
 //-----------------------------------------------------------------------------------------
 // マップビューのコンテキストメニュー処理
 //-----------------------------------------------------------------------------------------
+- (IBAction)moveToPhotograhingPlace:(id)sender
+{
+    self.mapView.gpsInfo = self.mapView.gpsInfo;
+}
+
+- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+{
+    return self.mapView.gpsInfo != nil;
+}
+
 - (IBAction)openMapWithBrowser:(id)sender
 {
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
@@ -423,12 +436,32 @@ static NSString* kViewSelector = @"viewSelector";
     return self.mapView.gpsInfo != nil;
 }
 
-- (IBAction)moveToPhotograhingPlace:(id)sender
+- (IBAction)openMapWithGoogleEarth:(id)sender
 {
-    self.mapView.gpsInfo = self.mapView.gpsInfo;
+    static NSString* format = @
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
+        "    <altitudeMode>relativeToGround</altitudeMode>"
+        "    <Placemark>"
+        "        <name>%@</name>"
+        "        <description>%@</description>"
+        "        <Point>"
+        "            <coordinates>%@,%@,0</coordinates>"
+        "        </Point>"
+        "    </Placemark>"
+        "</kml>";
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    NSString* kmlString = [NSString stringWithFormat:format,
+                           current.imageNode.name, current.imageNode.originalPath,
+                           gpsInfo.longitude, gpsInfo.latitude];
+    NSError* error;
+    static NSString* kmlPath = @"/tmp/DigViewer-work.kml";
+    [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+    [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"];
 }
 
-- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+- (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
 {
     return self.mapView.gpsInfo != nil;
 }

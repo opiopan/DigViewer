@@ -53,6 +53,7 @@ static NSString* kMainView = @"mainView";
 @interface DocumentWindowController ()
 @property IBOutlet NSToolbar* toolbar;
 @property IBOutlet NSButton* shareButton;
+@property IBOutlet NSMenu* templateContextMenuForMap;
 @end
 
 @implementation DocumentWindowController{
@@ -62,6 +63,7 @@ static NSString* kMainView = @"mainView";
     LoadingSheetController*     loadingSheet;
     BOOL firstTime;
     NSRect windowRectInNotFullscreen;
+    NSMenu* _contextMenuForMap;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -74,6 +76,7 @@ static NSString* kMainView = @"mainView";
     if (self) {
         transitionStateCount = 0;
         firstTime = YES;
+        _imageRepository = [ImageRepository sharedImageRepository];
     }
     return self;
 }
@@ -887,8 +890,57 @@ static NSString* kAppImage = @"image";
 }
 
 //-----------------------------------------------------------------------------------------
-// インスペクターのマップビューのコンテキストメニューへの回想
+// マップ用コンテキストメニュー属性の実装
 //-----------------------------------------------------------------------------------------
+- (NSMenu *)contextMenuForMap
+{
+    if (!_contextMenuForMap){
+        _contextMenuForMap = [[NSMenu alloc] initWithTitle:@"Context Menu For Map"];
+        for (NSMenuItem* item in _templateContextMenuForMap.itemArray){
+            [_contextMenuForMap addItem:[item copy]];
+        }
+        // Google Earth用アイテム追加
+        NSImage* iconvGoogleEarth = self.imageRepository.iconGoogleEarth;
+        if (iconvGoogleEarth){
+            NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"MENU_OPEN_WITH_GOOGLE_EARTH", nil)
+                                                          action:@selector(openMapWithGoogleEarth:) keyEquivalent:@""];
+            item.image = iconvGoogleEarth;
+            [_contextMenuForMap addItem:item];
+        }
+        
+    }
+    return _contextMenuForMap;
+}
+
+//-----------------------------------------------------------------------------------------
+// インスペクターのマップビューのコンテキストメニューへの回送
+//-----------------------------------------------------------------------------------------
+- (IBAction)performMapSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformMapSubMenu:(NSMenuItem*)menuItem
+{
+    if (!mainViewController.isCollapsedInspectorView && mainViewController.inspectorViewController.viewSelector == 1){
+        menuItem.submenu = self.contextMenuForMap;
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (IBAction)moveToPhotograhingPlace:(id)sender
+{
+    [mainViewController.inspectorViewController moveToPhotograhingPlace:sender];
+}
+
+- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+{
+    return !mainViewController.isCollapsedInspectorView &&
+    mainViewController.inspectorViewController.viewSelector == 1 &&
+    [mainViewController.inspectorViewController validateForMoveToPhotograhingPlace:menuItem];
+}
+
 - (IBAction)openMapWithBrowser:(id)sender
 {
     [mainViewController.inspectorViewController openMapWithBrowser:sender];
@@ -913,16 +965,16 @@ static NSString* kAppImage = @"image";
            [mainViewController.inspectorViewController validateForOpenMapWithMapApp:menuItem];
 }
 
-- (IBAction)moveToPhotograhingPlace:(id)sender
+- (IBAction)openMapWithGoogleEarth:(id)sender
 {
-    [mainViewController.inspectorViewController moveToPhotograhingPlace:sender];
+    [mainViewController.inspectorViewController openMapWithGoogleEarth:sender];
 }
 
-- (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem
+- (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
 {
     return !mainViewController.isCollapsedInspectorView &&
     mainViewController.inspectorViewController.viewSelector == 1 &&
-    [mainViewController.inspectorViewController validateForMoveToPhotograhingPlace:menuItem];
+    [mainViewController.inspectorViewController validateForOpenMapWithGoogleEarth:menuItem];
 }
 
 @end

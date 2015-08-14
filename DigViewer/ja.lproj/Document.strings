@@ -88,3 +88,12 @@
 
 /* Class = "NSMenuItem"; title = "Next Folder"; ObjectID = "NOj-3T-wd1"; */
 "NOj-3T-wd1.title" = "次のフォルダ";
+
+/* Class = "NSMenuItem"; title = "Open with Browser"; ObjectID = "5mI-d6-ert"; */
+"i6I-Si-2xr.title" = "ブラウザで開く";
+
+/* Class = "NSMenuItem"; title = "Open with Map"; ObjectID = "wJT-qr-W7I"; */
+"u2J-P6-ndu.title" = "マップで開く";
+
+/* Class = "NSMenuItem"; title = "Move to Photograhing place  as Center"; ObjectID = "RFT-mh-SWl"; */
+"fAP-Yu-QNh.title" = "撮影場所にセンタリング";

@@ -24,6 +24,8 @@
 - (BOOL)writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pboard withOnlyValue:(BOOL)writeOnlyValue
 {
     NSMutableString* plainText = [NSMutableString string];
+    NSString* fmtPTA = @"%@ \t%@";
+    NSString* fmtPTV = @"%@\n";
     for (NSUInteger i = indexes.firstIndex; i != NSNotFound; i = [indexes indexGreaterThanIndex:i]){
         id current = self.arrangedObjects[i];
         NSString* key = [current valueForKey:@"key"];
@@ -31,10 +33,12 @@
         key = key ? key : @"";
         value = value ? value : @"";
         if (writeOnlyValue){
-            [plainText appendFormat:@"%@\n", value];
+            [plainText appendFormat:fmtPTV, value];
         }else{
-            [plainText appendFormat:@"%@ \t%@\n", key, value];
+            [plainText appendFormat:fmtPTA, key, value];
         }
+        fmtPTA = @"\n%@ \t%@";
+        fmtPTV = @"\n%@\n";
     }
 
     [pboard declareTypes:@[NSPasteboardTypeTabularText, NSPasteboardTypeString] owner:self];

@@ -98,6 +98,7 @@
 		7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B61484C1B7BA1D200A03C45 /* InspectorView.strings */; };
 		7B6148501B7C78AD00A03C45 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B61484F1B7C78AD00A03C45 /* MapKit.framework */; };
 		7B6148521B7C78C600A03C45 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6148511B7C78C600A03C45 /* CoreLocation.framework */; };
+		7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6148541B7DA49E00A03C45 /* ImageRepository.m */; };
 		7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
 		7B661A6D1B47840A00C42D2C /* Zoom.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
@@ -371,6 +372,8 @@
 		7B61484D1B7BA1D200A03C45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InspectorView.strings; sourceTree = "<group>"; };
 		7B61484F1B7C78AD00A03C45 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B6148511B7C78C600A03C45 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7B6148531B7DA49E00A03C45 /* ImageRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRepository.h; sourceTree = "<group>"; };
+		7B6148541B7DA49E00A03C45 /* ImageRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRepository.m; sourceTree = "<group>"; };
 		7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Mosaic.cikernel; sourceTree = "<group>"; };
 		7B661A6B1B47840A00C42D2C /* Zoom.cikernel */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Zoom.cikernel; sourceTree = "<group>"; };
 		7B6717E61B36C86000B8D124 /* PresentationBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationBaseViewController.h; sourceTree = "<group>"; };
@@ -962,6 +965,8 @@
 				7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */,
 				7B6148491B7B97AE00A03C45 /* InspectorArrayController.h */,
 				7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */,
+				7B6148531B7DA49E00A03C45 /* ImageRepository.h */,
+				7B6148541B7DA49E00A03C45 /* ImageRepository.m */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -1348,6 +1353,7 @@
 				7B5C0A2D1B66586D004FE1A0 /* EditConditionSheetController.m in Sources */,
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
+				7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,

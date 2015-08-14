@@ -12,6 +12,7 @@
                 <outlet property="imageTreeController" destination="100059" id="100260"/>
                 <outlet property="placeHolder" destination="100232" id="100240"/>
                 <outlet property="shareButton" destination="axJ-VU-MXj" id="jB4-7J-Cig"/>
+                <outlet property="templateContextMenuForMap" destination="bTe-9X-fM6" id="RQc-xp-t5c"/>
                 <outlet property="toolbar" destination="WIq-XK-m9I" id="bN8-q4-Yaa"/>
                 <outlet property="viewSelectionButton" destination="ENh-J0-P5m" id="yUJ-Ve-XOl"/>
                 <outlet property="window" destination="5" id="100241"/>
@@ -259,7 +260,33 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="359.5" y="664.5"/>
+            <point key="canvasLocation" x="178.5" y="781.5"/>
+        </menu>
+        <menu id="bTe-9X-fM6" userLabel="Map Context Menu">
+            <items>
+                <menuItem title="Move to Photograhing place  as Center" keyEquivalent="c" id="fAP-Yu-QNh">
+                    <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                    <connections>
+                        <action selector="moveToPhotograhingPlace:" target="-1" id="PLL-rZ-AHj"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="dzp-Vv-bqH"/>
+                <menuItem title="Open with Browser" keyEquivalent="b" id="i6I-Si-2xr">
+                    <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                    <connections>
+                        <action selector="openMapWithBrowser:" target="-1" id="EGN-nw-DwY"/>
+                        <binding destination="-2" name="image" keyPath="self.imageRepository.iconBrowser" id="mok-Av-u4B"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Open with Map" keyEquivalent="m" id="u2J-P6-ndu">
+                    <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                    <connections>
+                        <action selector="openMapWithMapApp:" target="-1" id="ZIz-7s-iU5"/>
+                        <binding destination="-2" name="image" keyPath="self.imageRepository.iconMaps" id="28G-8u-EnD"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="509" y="736.5"/>
         </menu>
     </objects>
     <resources>

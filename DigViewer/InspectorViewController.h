@@ -28,5 +28,7 @@
 - (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem;
 - (IBAction)moveToPhotograhingPlace:(id)sender;
 - (BOOL)validateForMoveToPhotograhingPlace:(NSMenuItem*)menuItem;
+- (IBAction)openMapWithGoogleEarth:(id)sender;
+- (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem;
 
 @end

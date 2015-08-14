@@ -7,12 +7,3 @@
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "v8D-wx-LlG"; */
 "v8D-wx-LlG.title" = "すべて選択";
-
-/* Class = "NSMenuItem"; title = "Open with Browser"; ObjectID = "5mI-d6-ert"; */
-"5mI-d6-ert.title" = "ブラウザで開く";
-
-/* Class = "NSMenuItem"; title = "Open with Map"; ObjectID = "wJT-qr-W7I"; */
-"wJT-qr-W7I.title" = "マップで開く";
-
-/* Class = "NSMenuItem"; title = "Move to Photograhing place  as Center"; ObjectID = "RFT-mh-SWl"; */
-"RFT-mh-SWl.title" = "撮影場所にセンタリング";

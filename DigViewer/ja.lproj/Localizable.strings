@@ -9,6 +9,7 @@
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (デフォルト)";
 "MENU_RESET_ZOOM_RATIO" = "画像表示サイズを元に戻す";
+"MENU_OPEN_WITH_GOOGLE_EARTH" = "Google Earthで開く";
 
 // Alertシート用ボタンタイトル
 "Cancel" = "キャンセル";

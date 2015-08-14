@@ -15,7 +15,6 @@
                 <outlet property="gpsPlaceHolder" destination="P7T-3L-YRb" id="VlJ-N9-ENC"/>
                 <outlet property="imageArrayController" destination="COi-PN-SQm" id="E4e-Zv-Sm1"/>
                 <outlet property="keyColumn" destination="thC-Z2-YU4" id="6pD-0j-Phd"/>
-                <outlet property="mapMenu" destination="Cfl-JH-f8g" id="sjo-Yd-nGN"/>
                 <outlet property="mapView" destination="sxX-2G-pLZ" id="Urv-p8-HqM"/>
                 <outlet property="summaryController" destination="U3M-Qx-Ilb" id="UxV-t9-Vb6"/>
                 <outlet property="summaryView" destination="E20-1g-GeM" id="kui-1p-v9J"/>
@@ -314,30 +313,6 @@
                 </menuItem>
             </items>
             <point key="canvasLocation" x="662.5" y="165.5"/>
-        </menu>
-        <menu id="Cfl-JH-f8g" userLabel="Map Context Menu">
-            <items>
-                <menuItem title="Open with Browser" id="5mI-d6-ert">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="openMapWithBrowser:" target="-2" id="f5H-qL-pwY"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Open with Map" id="wJT-qr-W7I">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="openMapWithMapApp:" target="-2" id="kDe-DJ-RTm"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="FVw-Cd-YGO"/>
-                <menuItem title="Move to Photograhing place  as Center" id="RFT-mh-SWl">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="moveToPhotograhingPlace:" target="-2" id="K1B-ly-yfb"/>
-                    </connections>
-                </menuItem>
-            </items>
-            <point key="canvasLocation" x="662.5" y="288.5"/>
         </menu>
     </objects>
 </document>

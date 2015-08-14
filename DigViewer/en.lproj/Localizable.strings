@@ -9,6 +9,7 @@
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
 "MENU_RESET_ZOOM_RATIO" = "Reset Zoom Ratio";
+"MENU_OPEN_WITH_GOOGLE_EARTH" = "Open with Google Earth";
 
 // Preferences Panelのツールバータイトル
 "PREF_TITLE_GENERAL" = "General";

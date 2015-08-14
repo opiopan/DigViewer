@@ -166,12 +166,3 @@
 
 /* Class = "NSMenuItem"; title = "Map"; ObjectID = "M6J-Wn-d9f"; */
 "M6J-Wn-d9f.title" = "地図";
-
-/* Class = "NSMenuItem"; title = "Move to Photograhing place  as Center"; ObjectID = "XrW-ns-0CK"; */
-"XrW-ns-0CK.title" = "撮影場所にセンタリング";
-
-/* Class = "NSMenuItem"; title = "Open with Map"; ObjectID = "dLr-9m-1vY"; */
-"dLr-9m-1vY.title" = "マップで開く";
-
-/* Class = "NSMenuItem"; title = "Open with Browser"; ObjectID = "gfU-dB-j7N"; */
-"gfU-dB-j7N.title" = "ブラウザで開く";
