@@ -477,7 +477,7 @@ static NSString* CategoryKML = @"KML";
     // 説明テキスト(HTML flagment)生成
     NSString* description = [self descriptionForPathNode:current.imageNode];
     
-    // 表示位置、範囲、方向を抽出
+    // 表示位置、高度、範囲、方向を抽出
     NSNumber* altitude;
     NSString* altMode;
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
@@ -497,10 +497,13 @@ static NSString* CategoryKML = @"KML";
     }else{
         range = @600;
     }
+    double deltaLat = range.doubleValue * 0.4 / 111000;
+    double deltaLng = deltaLat * fabs(cos(gpsInfo.latitude.doubleValue / 180 * M_PI));
+    NSNumber* viewPointLat = @(gpsInfo.latitude.doubleValue + deltaLat * cos(heading.doubleValue / 180.0 * M_PI));
+    NSNumber* viewPointLng = @(gpsInfo.longitude.doubleValue + deltaLng * sin(heading.doubleValue / 180.0 * M_PI));
     
     //サムネール画像保存
     TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
-    [temporaryFile cleanUpForCategory:CategoryKML];
     NSString* thumbnailPath = [temporaryFile allocatePathWithSuffix:@".jpg" forCategory:CategoryKML];
     [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
 
@@ -511,7 +514,7 @@ static NSString* CategoryKML = @"KML";
                            thumbnailPath, description,
                            altMode,
                            gpsInfo.longitude, gpsInfo.latitude, altitude,
-                           gpsInfo.longitude, gpsInfo.latitude, heading, range];
+                           viewPointLng, viewPointLat, heading, range];
     NSError* error;
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
 
