@@ -8,8 +8,15 @@
 
 #import "AppDelegate.h"
 #import "AppPreferences.h"
+#import "TemporaryFileController.h"
 
 @implementation AppDelegate
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    [[TemporaryFileController sharedController] cleanUpAllCategories];
+    return NSTerminateNow;
+}
 
 - (IBAction)showPreferences:(id)sender
 {

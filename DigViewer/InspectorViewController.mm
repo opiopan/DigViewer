@@ -453,24 +453,24 @@ static NSString* CategoryKML = @"KML";
 - (IBAction)openMapWithGoogleEarth:(id)sender
 {
     static NSString* format = @
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
-        "    <Placemark>"
-        "        <name>%@</name>"
-        "        <description><![CDATA[<img src=\"%@\"/>%@]]></description>"
-        "        <Point>"
-        "            <altitudeMode>%@</altitudeMode>"
-        "            <coordinates>%@,%@,%@</coordinates>"
-        "        </Point>"
-        "        <LookAt>"
-        "            <longitude>%@</longitude>"
-        "            <latitude>%@</latitude>"
-        "            <heading>%@</heading>"
-        "            <tilt>60</tilt>"
-        "            <range>%@</range>"
-        "        </LookAt>"
-        "    </Placemark>"
-        "</kml>";
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
+        "    <Placemark>\n"
+        "        <name>%@</name>\n"
+        "        <description><![CDATA[<img src=\"%@\"/>%@]]></description>\n"
+        "        <Point>\n"
+        "            <altitudeMode>%@</altitudeMode>\n"
+        "            <coordinates>%@,%@,%@</coordinates>\n"
+        "        </Point>\n"
+        "        <LookAt>\n"
+        "            <longitude>%@</longitude>\n"
+        "            <latitude>%@</latitude>\n"
+        "            <heading>%@</heading>\n"
+        "            <tilt>60</tilt>\n"
+        "            <range>%@</range>\n"
+        "        </LookAt>\n"
+        "    </Placemark>\n"
+        "</kml>\n";
     PathNode* current = _imageArrayController.selectedObjects[0];
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
     NSNumber* altitude;
@@ -492,9 +492,10 @@ static NSString* CategoryKML = @"KML";
     }else{
         range = @600;
     }
-    [[TemporaryFileController sharedController] cleanUpForCategory:CategoryKML];
-    NSString* thumbnailPath = [[TemporaryFileController sharedController] allocatePathWithSuffix:@".jpg"
-                                                                                     forCategory:CategoryKML];
+    TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
+    [temporaryFile cleanUpForCategory:CategoryKML];
+    NSString* kmlPath = [temporaryFile allocatePathWithSuffix:@".kml" forCategory:CategoryKML];
+    NSString* thumbnailPath = [temporaryFile allocatePathWithSuffix:@".jpg" forCategory:CategoryKML];
     NSString* kmlString = [NSString stringWithFormat:format,
                            current.imageNode.name,
                            thumbnailPath, current.imageNode.originalPath,
@@ -502,9 +503,9 @@ static NSString* CategoryKML = @"KML";
                            gpsInfo.longitude, gpsInfo.latitude, altitude,
                            gpsInfo.longitude, gpsInfo.latitude, heading, range];
     NSError* error;
-    static NSString* kmlPath = @"/tmp/DigViewer-work.kml";
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
     [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
+
     [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"];
 }
 
