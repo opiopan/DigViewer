@@ -470,13 +470,22 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
 //-----------------------------------------------------------------------------------------
 - (NSArray*)summary
 {
+    return [self summaryWithFilter:nil];
+}
+
+- (NSArray*)summaryWithFilter:(NSArray*)filter
+{
     if (!_summary){
         NSMutableArray* array = [[NSMutableArray alloc] init];
-        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"File Name:", nil) value:_name]];
-        [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Type:", nil) value:_type]];
+        if (!filter){
+            [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"File Name:", nil) value:_name]];
+            [array addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Type:", nil) value:_type]];
+        }
         if (_properties[propertyALL] || !_name){
             NSMutableArray* section = [[NSMutableArray alloc] init];
-            [section addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Image size:", nil) value:_geometry]];
+            if (!filter){
+                [section addObject:[ImageMetadataKV kvWithKey:NSLocalizedString(@"Image size:", nil) value:_geometry]];
+            }
             int validRowCount = _geometry ? 1 : 0;
             for (int i = 0; i < sizeof(valueTranslationRules) / sizeof(*valueTranslationRules); i++){
                 struct TranslationRule* rule = valueTranslationRules + i;
@@ -517,8 +526,10 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                             valueString = rule->convert(self, rule);
                         }
                     }
-                    [section addObject:[ImageMetadataKV kvWithKey:keyString value:valueString]];
-                    validRowCount += valueString ? 1 : 0;
+                    if (!filter || [filter containsObject:@(i)]){
+                        [section addObject:[ImageMetadataKV kvWithKey:keyString value:valueString]];
+                        validRowCount += valueString ? 1 : 0;
+                    }
                 }
             }
             if (validRowCount > 0 || !_name){

@@ -36,6 +36,7 @@
 @property (readonly) NSArray* gpsInfoStrings;
 
 - (id)initWithPathNode:(PathNode*)pathNode;
+- (NSArray*)summaryWithFilter:(NSArray*)filter;
 - (NSDictionary*)propertiesAtIndex:(int)index;
 - (Lens*)associatedLensProfile;
 

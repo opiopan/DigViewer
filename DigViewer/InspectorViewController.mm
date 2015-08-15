@@ -473,6 +473,11 @@ static NSString* CategoryKML = @"KML";
         "</kml>\n";
     PathNode* current = _imageArrayController.selectedObjects[0];
     GPSInfo* gpsInfo = self.mapView.gpsInfo;
+
+    // 説明テキスト(HTML flagment)生成
+    NSString* description = [self descriptionForPathNode:current.imageNode];
+    
+    // 表示位置、範囲、方向を抽出
     NSNumber* altitude;
     NSString* altMode;
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
@@ -492,26 +497,51 @@ static NSString* CategoryKML = @"KML";
     }else{
         range = @600;
     }
+    
+    //サムネール画像保存
     TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
     [temporaryFile cleanUpForCategory:CategoryKML];
-    NSString* kmlPath = [temporaryFile allocatePathWithSuffix:@".kml" forCategory:CategoryKML];
     NSString* thumbnailPath = [temporaryFile allocatePathWithSuffix:@".jpg" forCategory:CategoryKML];
+    [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
+
+    //KMLファイル保存
+    NSString* kmlPath = [temporaryFile allocatePathWithSuffix:@".kml" forCategory:CategoryKML];
     NSString* kmlString = [NSString stringWithFormat:format,
                            current.imageNode.name,
-                           thumbnailPath, current.imageNode.originalPath,
+                           thumbnailPath, description,
                            altMode,
                            gpsInfo.longitude, gpsInfo.latitude, altitude,
                            gpsInfo.longitude, gpsInfo.latitude, heading, range];
     NSError* error;
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
 
+    // Google EarthでKMLファイルをオープン
     [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"];
 }
 
 - (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
 {
     return self.mapView.gpsInfo != nil;
+}
+
+- (NSString*)descriptionForPathNode:(PathNode*)node
+{
+    NSMutableString* rc = [NSMutableString string];
+    [rc appendString:@"<table align=\"center\" style=\"font-family: sans-serif\">"];
+    
+    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node];
+    NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
+    NSArray* summary = [meta summaryWithFilter:filter];
+    for (id kv in summary){
+        NSString* key = [kv valueForKey:@"key"];
+        NSString* value = [kv valueForKey:@"value"];
+        if (key){
+            [rc appendFormat:@"<tr><td align=\"right\">%@</td><td>%@</td></tr>", key, value ? value : @""];
+        }
+    }
+    
+    [rc appendString:@"</table>"];
+    return rc;
 }
 
 - (BOOL)saveThumbnailForPlacemarkWithPath:(NSString*)path pathNode:(PathNode*)node
