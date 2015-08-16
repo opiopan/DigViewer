@@ -457,7 +457,7 @@ static NSString* CategoryKML = @"KML";
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
         "    <Placemark>\n"
         "        <name>%@</name>\n"
-        "        <description><![CDATA[<img src=\"%@\"/>%@]]></description>\n"
+        "        <description><![CDATA[<img src=\"%@\" align=\"center\"/><p>%@]]></description>\n"
         "        <Point>\n"
         "            <altitudeMode>%@</altitudeMode>\n"
         "            <coordinates>%@,%@,%@</coordinates>\n"
@@ -493,12 +493,14 @@ static NSString* CategoryKML = @"KML";
     NSNumber* spanLongitude = _mapView.spanLongitude;
     NSNumber* range;
     if (spanLatitude && spanLongitude){
-        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue) * 111000 * 0.7);
+        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue * fabs(cos(gpsInfo.longitude.doubleValue)))
+                  * 111000 * 0.7);
     }else{
         range = @600;
     }
     double deltaLat = range.doubleValue * 0.4 / 111000;
-    double deltaLng = deltaLat * fabs(cos(gpsInfo.latitude.doubleValue / 180 * M_PI));
+    double compensating = fabs(cos(gpsInfo.latitude.doubleValue / 180 * M_PI));
+    double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
     NSNumber* viewPointLat = @(gpsInfo.latitude.doubleValue + deltaLat * cos(heading.doubleValue / 180.0 * M_PI));
     NSNumber* viewPointLng = @(gpsInfo.longitude.doubleValue + deltaLng * sin(heading.doubleValue / 180.0 * M_PI));
     
