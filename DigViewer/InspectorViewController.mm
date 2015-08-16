@@ -466,7 +466,7 @@ static NSString* CategoryKML = @"KML";
         "            <longitude>%@</longitude>\n"
         "            <latitude>%@</latitude>\n"
         "            <heading>%@</heading>\n"
-        "            <tilt>60</tilt>\n"
+        "            <tilt>%@</tilt>\n"
         "            <range>%@</range>\n"
         "        </LookAt>\n"
         "    </Placemark>\n"
@@ -488,7 +488,8 @@ static NSString* CategoryKML = @"KML";
         altitude = @0;
         altMode = @"clampToGround";
     }
-    NSNumber* heading = gpsInfo.imageDirection ? gpsInfo.imageDirection : @0;
+    NSNumber* heading = gpsInfo.imageDirection;
+    NSNumber* tilt = @60;
     NSNumber* spanLatitude = _mapView.spanLatitude;
     NSNumber* spanLongitude = _mapView.spanLongitude;
     NSNumber* range;
@@ -501,8 +502,17 @@ static NSString* CategoryKML = @"KML";
     double deltaLat = range.doubleValue * 0.4 / 111000;
     double compensating = fabs(cos(gpsInfo.latitude.doubleValue / 180 * M_PI));
     double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
-    NSNumber* viewPointLat = @(gpsInfo.latitude.doubleValue + deltaLat * cos(heading.doubleValue / 180.0 * M_PI));
-    NSNumber* viewPointLng = @(gpsInfo.longitude.doubleValue + deltaLng * sin(heading.doubleValue / 180.0 * M_PI));
+    NSNumber* viewPointLat = !gpsInfo.imageDirection ? gpsInfo.latitude :
+                             @(gpsInfo.latitude.doubleValue + deltaLat * cos(heading.doubleValue / 180.0 * M_PI));
+    NSNumber* viewPointLng = !gpsInfo.imageDirection ? gpsInfo.longitude :
+                             @(gpsInfo.longitude.doubleValue + deltaLng * sin(heading.doubleValue / 180.0 * M_PI));
+    if (!gpsInfo.imageDirection){
+        heading = @0;
+        tilt = @45;
+        viewPointLat = gpsInfo.latitude;
+        viewPointLng = gpsInfo.longitude;
+        
+    }
     
     //サムネール画像保存
     TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
@@ -516,7 +526,7 @@ static NSString* CategoryKML = @"KML";
                            thumbnailPath, description,
                            altMode,
                            gpsInfo.longitude, gpsInfo.latitude, altitude,
-                           viewPointLng, viewPointLat, heading, range];
+                           viewPointLng, viewPointLat, heading, tilt, range];
     NSError* error;
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
 
