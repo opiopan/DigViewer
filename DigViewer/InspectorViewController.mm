@@ -416,27 +416,93 @@ static NSString* kViewSelector = @"viewSelector";
 }
 
 //-----------------------------------------------------------------------------------------
+// 地図表示用ジオメトリ情報収集
+//-----------------------------------------------------------------------------------------
+struct _MapGeometry{
+    double latitude;
+    double longitude;
+    double altitude;
+    BOOL   isEnableAltitude;
+    double heading;
+    BOOL   isEnableHeading;
+    double spanLatitude;
+    double spanLongitude;
+    double spanLatitudeMeter;
+    double spanLongitudeMeter;
+    double viewLatitude;
+    double viewLongitude;
+    double tilt;
+};
+typedef struct _MapGeometry MapGeometry;
+
+- (MapGeometry)mapGeometory
+{
+    MapGeometry rc;
+    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    rc.latitude = gpsInfo.latitude.doubleValue;
+    rc.longitude = gpsInfo.longitude.doubleValue;
+    if (gpsInfo.altitude){
+        rc.altitude = gpsInfo.altitude.doubleValue;
+        rc.isEnableAltitude = YES;
+    }else{
+        rc.altitude = 0;
+        rc.isEnableAltitude = NO;
+    }
+    if (gpsInfo.imageDirection){
+        rc.heading = gpsInfo.imageDirection.doubleValue;
+        rc.isEnableHeading = YES;
+    }else{
+        rc.heading = 0;
+        rc.isEnableHeading = NO;
+    }
+    rc.tilt = 60;
+    NSNumber* spanLatitude = _mapView.spanLatitude;
+    NSNumber* spanLongitude = _mapView.spanLongitude;
+    if (spanLatitude && spanLongitude){
+        rc.spanLatitude = spanLatitude.doubleValue;
+        rc.spanLongitude = spanLongitude.doubleValue;
+        rc.spanLatitudeMeter = spanLatitude.doubleValue * 111000;
+        rc.spanLongitudeMeter = spanLongitude.doubleValue * fabs(cos(rc.latitude)) * 111000;
+    }else{
+        rc.spanLatitude = 600.0 / 111000.0;
+        rc.spanLongitude = 600.0 / 111000.0 / fabs(cos(gpsInfo.longitude.doubleValue));
+        rc.spanLatitudeMeter = 600.0;
+        rc.spanLongitudeMeter = 600.0;
+    }
+    double deltaLat = rc.spanLatitude * 0.4;
+    double compensating = fabs(cos(rc.latitude / 180 * M_PI));
+    double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
+    rc.viewLatitude = rc.latitude + deltaLat * cos(rc.heading / 180.0 * M_PI);
+    rc.viewLongitude = rc.longitude + deltaLng * sin(rc.heading / 180.0 * M_PI);
+    if (!rc.isEnableHeading){
+        rc.tilt = 45;
+        rc.viewLatitude = rc.latitude;
+        rc.viewLongitude = rc.longitude;
+    }
+    
+    return rc;
+}
+
+//-----------------------------------------------------------------------------------------
 // マップビューのコンテキストメニュー: マップアプリ起動
 //-----------------------------------------------------------------------------------------
 - (IBAction)openMapWithMapApp:(id)sender
 {
     PathNode* current = _imageArrayController.selectedObjects[0];
-    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    MapGeometry geometry = [self mapGeometory];
 
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gpsInfo.latitude.doubleValue,
-                                                                   gpsInfo.longitude.doubleValue);
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(geometry.latitude, geometry.longitude);
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
     MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
     [mapItem setName:current.imageNode.name];
     
-    NSNumber* spanLatitude = _mapView.spanLatitude;
-    NSNumber* spanLongitude = _mapView.spanLongitude;
-    NSDictionary* options = nil;
-    if (spanLatitude && spanLongitude){
-        MKCoordinateSpan span = {spanLatitude.doubleValue, spanLongitude.doubleValue};
-        options = @{MKLaunchOptionsMapSpanKey: [NSValue valueWithMKCoordinateSpan:span]};
-    }
-    
+    MKCoordinateSpan span = {geometry.spanLatitude, geometry.spanLongitude};
+//    CLLocationCoordinate2D coordinateView = CLLocationCoordinate2DMake(geometry.viewLatitude, geometry.viewLongitude);
+//    MKMapCamera* camera = [MKMapCamera cameraLookingAtCenterCoordinate:coordinateView
+//                                                     fromEyeCoordinate:coordinate eyeAltitude:100];
+    NSDictionary* options = @{MKLaunchOptionsMapSpanKey: [NSValue valueWithMKCoordinateSpan:span]
+                              /*, MKLaunchOptionsCameraKey: camera*/};
+
     [mapItem openInMapsWithLaunchOptions:options];
 }
 
@@ -472,47 +538,23 @@ static NSString* CategoryKML = @"KML";
         "    </Placemark>\n"
         "</kml>\n";
     PathNode* current = _imageArrayController.selectedObjects[0];
-    GPSInfo* gpsInfo = self.mapView.gpsInfo;
 
     // 説明テキスト(HTML flagment)生成
     NSString* description = [self descriptionForPathNode:current.imageNode];
     
     // 表示位置、高度、範囲、方向を抽出
+    MapGeometry geometry = [self mapGeometory];
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     NSNumber* altitude;
     NSString* altMode;
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    if (gpsInfo.altitude && [[controller.values valueForKey:@"mapPassAltitudeToExternalMap"] boolValue]){
-        altitude = gpsInfo.altitude;
+    if (geometry.isEnableAltitude && [[controller.values valueForKey:@"mapPassAltitudeToExternalMap"] boolValue]){
+        altitude = @(geometry.altitude);
         altMode = @"absolute";
     }else{
         altitude = @0;
         altMode = @"clampToGround";
     }
-    NSNumber* heading = gpsInfo.imageDirection;
-    NSNumber* tilt = @60;
-    NSNumber* spanLatitude = _mapView.spanLatitude;
-    NSNumber* spanLongitude = _mapView.spanLongitude;
-    NSNumber* range;
-    if (spanLatitude && spanLongitude){
-        range = @(MAX(spanLatitude.doubleValue, spanLongitude.doubleValue * fabs(cos(gpsInfo.longitude.doubleValue)))
-                  * 111000 * 0.7);
-    }else{
-        range = @600;
-    }
-    double deltaLat = range.doubleValue * 0.4 / 111000;
-    double compensating = fabs(cos(gpsInfo.latitude.doubleValue / 180 * M_PI));
-    double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
-    NSNumber* viewPointLat = !gpsInfo.imageDirection ? gpsInfo.latitude :
-                             @(gpsInfo.latitude.doubleValue + deltaLat * cos(heading.doubleValue / 180.0 * M_PI));
-    NSNumber* viewPointLng = !gpsInfo.imageDirection ? gpsInfo.longitude :
-                             @(gpsInfo.longitude.doubleValue + deltaLng * sin(heading.doubleValue / 180.0 * M_PI));
-    if (!gpsInfo.imageDirection){
-        heading = @0;
-        tilt = @45;
-        viewPointLat = gpsInfo.latitude;
-        viewPointLng = gpsInfo.longitude;
-        
-    }
+    NSNumber* range = @(MAX(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter));
     
     //サムネール画像保存
     TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
@@ -525,8 +567,9 @@ static NSString* CategoryKML = @"KML";
                            current.imageNode.name,
                            thumbnailPath, description,
                            altMode,
-                           gpsInfo.longitude, gpsInfo.latitude, altitude,
-                           viewPointLng, viewPointLat, heading, tilt, range];
+                           @(geometry.longitude), @(geometry.latitude), altitude,
+                           @(geometry.viewLongitude), @(geometry.viewLatitude), @(geometry.heading),
+                           @(geometry.tilt), range];
     NSError* error;
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
 
