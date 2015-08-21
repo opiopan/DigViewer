@@ -208,7 +208,7 @@
     if (targetType){
         Condition* current = [_conditionTreeController.selection valueForKey:@"me"];
         NSInteger order = 0;
-        Condition* parent = current.conditionType.intValue == LFCONDITION_TYPE_COMPARISON ? current.parent : current;
+        Condition* parent = nil;
         if (current.conditionType.intValue == LFCONDITION_TYPE_COMPARISON){
             parent = current.parent;
             order = current.order.longValue + 1;

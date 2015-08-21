@@ -52,9 +52,8 @@ static NSString* TMPDIR = @"/tmp/DigViewer-work";
 {
     NSFileManager* manager = [NSFileManager defaultManager];
     NSError* error;
-    BOOL rc;
-    rc = [manager removeItemAtPath:TMPDIR error:&error];
-    rc = [manager createDirectoryAtPath:TMPDIR withIntermediateDirectories:YES attributes:nil error:&error];
+    [manager removeItemAtPath:TMPDIR error:&error];
+    [manager createDirectoryAtPath:TMPDIR withIntermediateDirectories:YES attributes:nil error:&error];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -82,8 +81,7 @@ static NSString* TMPDIR = @"/tmp/DigViewer-work";
     NSArray* files = [_categories valueForKey:category];
     for (NSString* file in files){
         NSError* error;
-        BOOL rc;
-        rc = [manager removeItemAtPath:file error:&error];
+        [manager removeItemAtPath:file error:&error];
     }
     [_categories removeObjectForKey:category];
 }

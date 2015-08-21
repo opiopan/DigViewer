@@ -794,10 +794,11 @@ static NSString* kAppImage = @"image";
 
 - (BOOL)addOpenWithApplicationMenuForURL:(NSURL*)url toMenuItem:(NSMenuItem*)menuItem
 {
-    NSArray* apps = (__bridge NSArray*)LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll);
+    NSArray* apps = (__bridge_transfer NSArray*)LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll);
     if (apps && apps.count > 0){
         CFErrorRef error = nil;
-        NSURL* defaultApp = (__bridge NSURL*)LSCopyDefaultApplicationURLForURL((__bridge CFURLRef)url, kLSRolesAll, &error);
+        NSURL* defaultApp = (__bridge_transfer NSURL*)LSCopyDefaultApplicationURLForURL((__bridge CFURLRef)url,
+                                                                                        kLSRolesAll, &error);
         if (error){
             CFRelease(error);
         }

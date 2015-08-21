@@ -105,7 +105,7 @@
 		7B661A6F1B47848000C42D2C /* Zoom.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */; };
 		7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */; };
-		7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */; };
+		7B6717EE1B36D0E900B8D124 /* TransitionEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.mm */; };
 		7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F11B36D83500B8D124 /* BuiltinEffect.m */; };
 		7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717F41B3833D400B8D124 /* FocusCatchableTextField.m */; };
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
@@ -381,7 +381,7 @@
 		7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationBaseViewController.m; sourceTree = "<group>"; };
 		7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationBaseView.xib; sourceTree = "<group>"; };
 		7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionEffect.h; sourceTree = "<group>"; };
-		7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionEffect.m; sourceTree = "<group>"; };
+		7B6717ED1B36D0E900B8D124 /* TransitionEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TransitionEffect.mm; sourceTree = "<group>"; };
 		7B6717EF1B36D77700B8D124 /* TransitionEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionEffects.h; sourceTree = "<group>"; };
 		7B6717F01B36D83500B8D124 /* BuiltinEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuiltinEffect.h; sourceTree = "<group>"; };
 		7B6717F11B36D83500B8D124 /* BuiltinEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuiltinEffect.m; sourceTree = "<group>"; };
@@ -834,7 +834,7 @@
 			children = (
 				7B6717EF1B36D77700B8D124 /* TransitionEffects.h */,
 				7B6717EC1B36D0E900B8D124 /* TransitionEffect.h */,
-				7B6717ED1B36D0E900B8D124 /* TransitionEffect.m */,
+				7B6717ED1B36D0E900B8D124 /* TransitionEffect.mm */,
 				7B6717F01B36D83500B8D124 /* BuiltinEffect.h */,
 				7B6717F11B36D83500B8D124 /* BuiltinEffect.m */,
 				7B74FB7E1B3AC911005BC748 /* EffectByCIFilter.h */,
@@ -1378,7 +1378,7 @@
 				7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
 				7B5C0A451B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
-				7B6717EE1B36D0E900B8D124 /* TransitionEffect.m in Sources */,
+				7B6717EE1B36D0E900B8D124 /* TransitionEffect.mm in Sources */,
 				7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */,
 				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
 				7B74FB921B3E933A005BC748 /* EditCustomEffectController.m in Sources */,

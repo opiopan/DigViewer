@@ -1,5 +1,5 @@
 //
-//  TransitionEffect.m
+//  TransitionEffect.mm
 //  DigViewer
 //
 //  Created by opiopan on 2015/06/21.
@@ -7,6 +7,7 @@
 //
 
 #import "TransitionEffect.h"
+#import "CoreFoundationHelper.h"
 
 @implementation TransitionEffect
 
@@ -42,16 +43,16 @@
 }
 #pragma clang diagnostic pop
 
-- (CGImageRef)CGImageFromLayer:(CALayer *)layer
+-  (CGImageRef)CGImageFromLayer:(CALayer *)layer
 {
     CGSize imageSize = layer.frame.size;
     imageSize.width *= layer.contentsScale;
     imageSize.height *= layer.contentsScale;
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    ECGColorSpaceRef colorSpace(CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB));
     
-    CGContextRef context = CGBitmapContextCreate(NULL, imageSize.width, imageSize.height,
-                                                 8, 4 * imageSize.width, colorSpace,kCGImageAlphaPremultipliedLast);
+    ECGContextRef context(CGBitmapContextCreate(NULL, imageSize.width, imageSize.height,
+                                                8, 4 * imageSize.width, colorSpace,kCGImageAlphaPremultipliedLast));
     if (context){
         CGContextScaleCTM(context, layer.contentsScale, layer.contentsScale);
         [layer renderInContext:context];
