@@ -25,7 +25,7 @@
 {
     NSMutableString* plainText = [NSMutableString string];
     NSString* fmtPTA = @"%@ \t%@";
-    NSString* fmtPTV = @"%@\n";
+    NSString* fmtPTV = @"%@";
     for (NSUInteger i = indexes.firstIndex; i != NSNotFound; i = [indexes indexGreaterThanIndex:i]){
         id current = self.arrangedObjects[i];
         NSString* key = [current valueForKey:@"key"];
@@ -38,7 +38,7 @@
             [plainText appendFormat:fmtPTA, key, value];
         }
         fmtPTA = @"\n%@ \t%@";
-        fmtPTV = @"\n%@\n";
+        fmtPTV = @"\n%@";
     }
 
     [pboard declareTypes:@[NSPasteboardTypeTabularText, NSPasteboardTypeString] owner:self];
