@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AdvancedPreferences">
@@ -163,7 +163,11 @@
                                                         </textFieldCell>
                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         <connections>
-                                                            <binding destination="fhQ-WP-J58" name="value" keyPath="arrangedObjects.me" id="zGr-t6-3z2"/>
+                                                            <binding destination="fhQ-WP-J58" name="value" keyPath="arrangedObjects.iconAndName" id="1Hr-fK-buT">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </tableColumn>
                                                 </tableColumns>
@@ -194,7 +198,7 @@
             <point key="canvasLocation" x="444" y="428.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="bpN-y2-uka"/>
-        <arrayController objectClassName="ExampleNode" editable="NO" avoidsEmptySelection="NO" id="fhQ-WP-J58" customClass="SortOmittedArrayController">
+        <arrayController objectClassName="PathNode" editable="NO" avoidsEmptySelection="NO" id="fhQ-WP-J58" customClass="SortOmittedArrayController">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="self.exampleList" id="rxV-ny-Mt3"/>
             </connections>

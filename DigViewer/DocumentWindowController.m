@@ -175,26 +175,28 @@ static NSString* kMainView = @"mainView";
     // 次回オープン用にWindowの設定を保存
     NSMutableDictionary* preferences = [NSMutableDictionary dictionary];
     Document* document = self.document;
-    PathNode* currentImage = _imageArrayController.selectedObjects[0];
-    NSRect windowRect;
-    if (self.window.styleMask &  NSFullScreenWindowMask){
-        windowRect = windowRectInNotFullscreen;
-    }else{
-        windowRect = self.window.frame;
+    if (_imageArrayController.selectedObjects.count > 0){
+        PathNode* currentImage = _imageArrayController.selectedObjects[0];
+        NSRect windowRect;
+        if (self.window.styleMask &  NSFullScreenWindowMask){
+            windowRect = windowRectInNotFullscreen;
+        }else{
+            windowRect = self.window.frame;
+        }
+        [preferences setValue:currentImage.portablePath  forKey:kCurrentImage];
+        [preferences setValue:@(windowRect.origin.x) forKey:kWindowX];
+        [preferences setValue:@(windowRect.origin.y) forKey:kWindowY];
+        [preferences setValue:@(windowRect.size.width) forKey:kWindowWidth];
+        [preferences setValue:@(windowRect.size.height) forKey:kWindowHeight];
+        [preferences setValue:[mainViewController preferences] forKey:kMainView];
+        [preferences setValue:@(self.presentationViewType) forKey:kImageViewType];
+        [preferences setValue:@(self.isFitWindow) forKey:kFitToWindow];
+        [preferences setValue:@(!self.isCollapsedOutlineView) forKey:kShowNavigator];
+        [preferences setValue:@(!self.isCollapsedInspectorView) forKey:kShowInspector];
+        [preferences setValue:@(_toolbar.visible) forKey:kShowToolbar];
+        [preferences setValue:@(self.window.styleMask & NSFullScreenWindowMask) forKey:kInFullScreen];
+        [document saveDocumentWindowPreferences:preferences];
     }
-    [preferences setValue:currentImage.portablePath  forKey:kCurrentImage];
-    [preferences setValue:@(windowRect.origin.x) forKey:kWindowX];
-    [preferences setValue:@(windowRect.origin.y) forKey:kWindowY];
-    [preferences setValue:@(windowRect.size.width) forKey:kWindowWidth];
-    [preferences setValue:@(windowRect.size.height) forKey:kWindowHeight];
-    [preferences setValue:[mainViewController preferences] forKey:kMainView];
-    [preferences setValue:@(self.presentationViewType) forKey:kImageViewType];
-    [preferences setValue:@(self.isFitWindow) forKey:kFitToWindow];
-    [preferences setValue:@(!self.isCollapsedOutlineView) forKey:kShowNavigator];
-    [preferences setValue:@(!self.isCollapsedInspectorView) forKey:kShowInspector];
-    [preferences setValue:@(_toolbar.visible) forKey:kShowToolbar];
-    [preferences setValue:@(self.window.styleMask & NSFullScreenWindowMask) forKey:kInFullScreen];
-    [document saveDocumentWindowPreferences:preferences];
     
     // スライドショー環境回収
     [slideshowController cancelSlideshow];

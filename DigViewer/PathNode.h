@@ -49,7 +49,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 //-----------------------------------------------------------------------------------------
 // PathNode: ノードツリーの構成要素
 //-----------------------------------------------------------------------------------------
-@interface PathNode : NSObject <NSCopying>
+@interface PathNode : NSObject
 
 // 属性
 @property (nonatomic) enum PathNodeSortType sortType;
@@ -57,29 +57,30 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 @property (nonatomic) BOOL isSortAsNumeric;
 @property (nonatomic) BOOL isSortByDateTime;
 
-@property (readonly) NSString*       name;
-@property (readonly) PathNode*       me;
-@property (readonly, weak) PathNode* parent;
-@property (readonly) NSArray*        children;
-@property (readonly) BOOL            isLeaf;
-@property (readonly) BOOL            isImage;
-@property (readonly) BOOL            isRawImage;
-@property (readonly) BOOL            isRasterImage;
-@property (readonly) NSArray*        images;
-@property (readonly) NSUInteger      indexInParent;
-@property (readonly) PathNode*       imageNode;
-@property (readonly) PathNode*       imageNodeReverse;
-@property (readonly) NSString*       imagePath;
-@property (readonly) NSString*       imageName;
-@property (readonly) NSImage*        image;
-@property (readonly) NSImage*        icon;
-@property (readonly) NSString*       originalPath;
+@property (nonatomic, readonly) NSString*       name;
+@property (nonatomic, readonly) PathNode*       me;
+@property (nonatomic, readonly, weak) PathNode* parent;
+@property (nonatomic, readonly) NSArray*        children;
+@property (nonatomic, readonly) BOOL            isLeaf;
+@property (nonatomic, readonly) BOOL            isImage;
+@property (nonatomic, readonly) BOOL            isRawImage;
+@property (nonatomic, readonly) BOOL            isRasterImage;
+@property (nonatomic, readonly) NSArray*        images;
+@property (nonatomic, readonly) NSUInteger      indexInParent;
+@property (nonatomic, readonly) PathNode*       imageNode;
+@property (nonatomic, readonly) PathNode*       imageNodeReverse;
+@property (nonatomic, readonly) NSString*       imagePath;
+@property (nonatomic, readonly) NSString*       imageName;
+@property (nonatomic, readonly) NSImage*        image;
+@property (nonatomic, readonly) NSImage*        icon;
+@property (nonatomic, readonly) id              iconAndName;
+@property (nonatomic, readonly) NSString*       originalPath;
 
-@property (nonatomic) NSString*      imageDateTime;
+@property (nonatomic) NSString*                 imageDateTime;
 
-@property (readonly) NSString*       imageUID;
-@property (readonly) NSString*       imageRepresentationType;
-@property (readonly) id              imageRepresentation;
+@property (nonatomic, readonly) NSString*       imageUID;
+@property (nonatomic, readonly) NSString*       imageRepresentationType;
+@property (nonatomic, readonly) id              imageRepresentation;
 
 // オブジェクト初期化
 + (PathNode*) pathNodeWithPath:(NSString*)path

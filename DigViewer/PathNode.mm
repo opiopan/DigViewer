@@ -47,14 +47,6 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 @synthesize isRawImage = _isRawImage;
 
 //-----------------------------------------------------------------------------------------
-// NSCopyingプロトコルの実装
-//-----------------------------------------------------------------------------------------
-- (id)copyWithZone:(NSZone *)zone
-{
-    return self;
-}
-
-//-----------------------------------------------------------------------------------------
 // イメージファイルが存在しない場合に表示するイメージ
 //-----------------------------------------------------------------------------------------
 + (NSImage*) unavailableImage
@@ -505,6 +497,11 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }else{
         return [[NSWorkspace sharedWorkspace] iconForFile:@"/var"];
     }
+}
+
+- (id)iconAndName
+{
+    return @{@"icon": self.icon, @"name": self.name};
 }
 
 - (NSString *)imageDateTime
