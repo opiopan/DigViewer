@@ -660,6 +660,7 @@ static NSString* kMainView = @"mainView";
 {
     current.isSortByDateTime = _sortByDateTimeButtonState;
     self.imageArrayController.content = current.images;
+    loadingSheet = nil;
 }
 
 - (void)setSortByDateTimeButtonState:(BOOL)sortByDateTimeButtonState
