@@ -212,6 +212,19 @@ static NSString* kMainView = @"mainView";
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
+
+    // サブビューのデタッチ
+    [mainViewController detachSubviews];
+ 
+    // サブビューの解放を順番に実施
+    [self performSelector:@selector(releaseSubviews:) withObject:@0 afterDelay:0];
+}
+
+- (void)releaseSubviews:(NSNumber*)index
+{
+    if ([mainViewController cleanSubView:index.intValue]){
+        [self performSelector:@selector(releaseSubviews:) withObject:@(index.intValue + 1) afterDelay:0];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

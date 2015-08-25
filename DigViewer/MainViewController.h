@@ -23,4 +23,7 @@ enum RepresentationViewType {
 @property (assign) BOOL isCollapsedOutlineView;
 @property (assign) BOOL isCollapsedInspectorView;
 
+- (void)detachSubviews;
+- (BOOL)cleanSubView:(NSInteger)index;
+
 @end

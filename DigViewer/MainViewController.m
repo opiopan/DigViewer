@@ -106,6 +106,38 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// サブビュー回収
+//-----------------------------------------------------------------------------------------
+- (void)detachSubviews
+{
+    [presentationBaseViewController.view removeFromSuperview];
+    [outlineViewController.view removeFromSuperview];
+    [inspectorViewController.view removeFromSuperview];
+    for (int i = 0; i < contentViewControllers.count; i++){
+        NSViewController* controller = contentViewControllers[i];
+        [controller.view removeFromSuperview];
+    }
+}
+
+- (BOOL)cleanSubView:(NSInteger)index
+{
+    switch (index){
+        case 0:
+            outlineViewController = nil;
+            return YES;
+        case 1:
+            inspectorViewController = nil;
+            return YES;
+        case 2:
+            contentViewControllers = nil;
+            return YES;
+        default:
+            presentationBaseViewController = nil;
+            return NO;
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // View状態属性の実装
 //-----------------------------------------------------------------------------------------
 static NSString* kOutlineViewWidth = @"outlineViewWidth";
