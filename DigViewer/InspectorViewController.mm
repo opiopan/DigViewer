@@ -13,6 +13,8 @@
 #import "InspectorArrayController.h"
 #import "DocumentWindowController.h"
 #import "TemporaryFileController.h"
+#import "DVRemoteServer.h"
+#import "Document.h"
 #import <MapKit/MapKit.h>
 #import <quartz/Quartz.h>
 
@@ -30,6 +32,7 @@
     int     _viewSelector;
     bool    _initialized;
     NSDictionary* _preferences;
+    ImageMetadata* _metadata;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -140,6 +143,9 @@
     _gpsInfoView.menu = attributesMenu;
     _mapView.menu = mapMenu;
     
+    _mapView.delegate = self;
+    _mapView.notifyChangeZoomSelector = @selector(onChangeMapZoom:);
+
     _initialized = true;
 }
 
@@ -193,12 +199,13 @@
     NSArray* selectedObjects = [self.imageArrayController selectedObjects];
     if (selectedObjects.count > 0){
         PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
-        ImageMetadata* metadata = [[ImageMetadata alloc] initWithPathNode:current];
-        self.summary = metadata.summary;
+        _metadata = [[ImageMetadata alloc] initWithPathNode:current];
+        self.summary = _metadata.summary;
         if (_viewSelector == 1){
-            self.gpsInfo = metadata.gpsInfoStrings;
-            self.mapView.gpsInfo = metadata.gpsInfo;
+            self.gpsInfo = _metadata.gpsInfoStrings;
+            self.mapView.gpsInfo = _metadata.gpsInfo;
         }
+        [self reflectMetaToRemoteApp:current];
     }
 }
 
@@ -256,7 +263,7 @@
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     NSString* key = [[controller values] valueForKey:@"googleMapsApiKey"];
     if (!key){
-        key = @"";
+        key = @"initialize";
     }
     if ([self.view superview] && ![self.mapView.apiKey isEqualToString:key]){
         self.mapView.apiKey = key;
@@ -431,6 +438,9 @@ struct _MapGeometry{
     double spanLongitudeMeter;
     double viewLatitude;
     double viewLongitude;
+    double standLatitude;
+    double standLongitude;
+    double standAltitude;
     double tilt;
 };
 typedef struct _MapGeometry MapGeometry;
@@ -438,7 +448,7 @@ typedef struct _MapGeometry MapGeometry;
 - (MapGeometry)mapGeometory
 {
     MapGeometry rc;
-    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    GPSInfo* gpsInfo = _metadata.gpsInfo;
     rc.latitude = gpsInfo.latitude.doubleValue;
     rc.longitude = gpsInfo.longitude.doubleValue;
     if (gpsInfo.altitude){
@@ -455,9 +465,13 @@ typedef struct _MapGeometry MapGeometry;
         rc.heading = 0;
         rc.isEnableHeading = NO;
     }
-    rc.tilt = 60;
-    NSNumber* spanLatitude = _mapView.spanLatitude;
-    NSNumber* spanLongitude = _mapView.spanLongitude;
+    rc.tilt = 70;
+    NSNumber* spanLatitude = nil;
+    NSNumber* spanLongitude = nil;
+    if (_mapView.apiKey && _mapView.apiKey.length > 0){
+        spanLatitude = _mapView.spanLatitude;
+        spanLongitude = _mapView.spanLongitude;
+    }
     if (spanLatitude && spanLongitude){
         rc.spanLatitude = spanLatitude.doubleValue;
         rc.spanLongitude = spanLongitude.doubleValue;
@@ -469,17 +483,24 @@ typedef struct _MapGeometry MapGeometry;
         rc.spanLatitudeMeter = 600.0;
         rc.spanLongitudeMeter = 600.0;
     }
-    double deltaLat = rc.spanLatitude * 0.4;
+    static const double OFFSET_RATIO = 0.4;
+    double deltaLat = rc.spanLatitude * OFFSET_RATIO;
     double compensating = fabs(cos(rc.latitude / 180 * M_PI));
     double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
     rc.viewLatitude = rc.latitude + deltaLat * cos(rc.heading / 180.0 * M_PI);
     rc.viewLongitude = rc.longitude + deltaLng * sin(rc.heading / 180.0 * M_PI);
+    double standRatio = (1.5 - OFFSET_RATIO) / OFFSET_RATIO;
     if (!rc.isEnableHeading){
-        rc.tilt = 45;
+        standRatio = 1.5;
+        rc.tilt = 55;
         rc.viewLatitude = rc.latitude;
         rc.viewLongitude = rc.longitude;
     }
-    
+
+    rc.standLatitude = rc.latitude + deltaLat * standRatio * cos((rc.heading + 180) / 180.0 * M_PI);
+    rc.standLongitude = rc.longitude + deltaLng * standRatio * sin((rc.heading + 180) / 180.0 * M_PI);
+    rc.standAltitude = MAX(rc.spanLatitudeMeter, rc.spanLongitudeMeter) * 1.87 * cos(rc.tilt / 180.0 * M_PI);
+
     return rc;
 }
 
@@ -609,7 +630,7 @@ static NSString* CategoryKML = @"KML";
     if ([node imageRepresentationType] == IKImageBrowserCGImageRepresentationType){
         thumbnail = (__bridge_retained CGImageRef)[node imageRepresentation];
     }else{
-        thumbnail = [node CGImageFromNSImage:[node imageRepresentation]];
+        thumbnail = [node CGImageFromNSImage:[node imageRepresentation] withSize:0];
     }
     NSImage* image = [[NSImage alloc] initWithCGImage:thumbnail
                                                  size:NSMakeSize(CGImageGetWidth(thumbnail)/2, CGImageGetHeight(thumbnail)/2)];
@@ -624,6 +645,57 @@ static NSString* CategoryKML = @"KML";
     
     //ファイル出力
     return [jpegData writeToFile:path atomically:NO];
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリとの連携
+//-----------------------------------------------------------------------------------------
+- (void)reflectMetaToRemoteApp:(PathNode*)node
+{
+    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    Document* document = controller.document;
+    [data setValue:document.fileURL.path forKey:DVRCNMETA_DOCUMENT];
+    [data setValue:node.portablePath forKey:DVRCNMETA_ID];
+    if (_metadata.gpsInfo){
+        MapGeometry geometry = [self mapGeometory];
+        
+        [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
+        [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
+        if (geometry.isEnableAltitude){
+            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+        }
+        if (geometry.isEnableHeading){
+            [data setValue:@(geometry.heading) forKey:DVRCNMETA_HEADING];
+        }
+        [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
+        [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
+        [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
+        [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
+        [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
+        [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
+        [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
+        [data setValue:@(geometry.standLatitude) forKey:DVRCNMETA_STAND_LATITUDE];
+        [data setValue:@(geometry.standLongitude) forKey:DVRCNMETA_STAND_LONGITUDE];
+        [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
+
+        [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
+    }
+    
+    [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
+    
+    [[DVRemoteServer sharedServer] sendMeta:data];
+}
+
+//-----------------------------------------------------------------------------------------
+// マップビューのズームレベル変更通知
+//-----------------------------------------------------------------------------------------
+- (void)onChangeMapZoom:(id)sender
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    if (current){
+        [self reflectMetaToRemoteApp:current];
+    }
 }
 
 @end

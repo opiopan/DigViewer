@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "ImageMetadata.h"
 
-@interface GPSMapView : WebView
+@interface GPSMapView : WebView <WebUIDelegate>
 
 @property (copy) NSString* apiKey;
 @property (strong) GPSInfo* gpsInfo;
@@ -24,5 +24,8 @@
 @property (nonatomic) NSNumber* spanLongitude;
 @property bool enableStreetView;
 @property bool enableHomePosition;
+
+@property (weak, nonatomic) id delegate;
+@property (nonatomic) SEL notifyChangeZoomSelector;
 
 @end

@@ -102,6 +102,9 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 - (PathNode*) nextFolderNode;
 - (PathNode*) previousFolderNode;
 
+// サムネール生成
+- (id) thumbnailImage:(CGFloat)thumbnailSize;
+
 // IndexPath作成
 - (NSIndexPath*) indexPath;
 
@@ -110,6 +113,6 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 - (PathNode*) nearestNodeAtPortablePath:(NSArray*)path;
 
 // イメージ操作部品
-- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage;
+- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage withSize:(CGFloat)ThumbnailMaxSize;
 
 @end

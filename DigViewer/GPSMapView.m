@@ -27,6 +27,7 @@
     if (aSelector == @selector(onLoad)) return NO;
     if (aSelector == @selector(reflectGpsInfo)) return NO;
     if (aSelector == @selector(onSpecifyKey)) return NO;
+    if (aSelector == @selector(onChangeZoom)) return NO;
     return YES;
 }
 
@@ -235,6 +236,13 @@
 {
     AppDelegate* appDelegate = (AppDelegate*)((NSApplication*)NSApp).delegate;
     [appDelegate showMapPreferences: self];
+}
+
+- (void)onChangeZoom
+{
+    if (_delegate && _notifyChangeZoomSelector){
+        [_delegate performSelector:_notifyChangeZoomSelector withObject:self afterDelay:0];
+    }
 }
 
 - (void)setFrame:(NSRect)frameRect

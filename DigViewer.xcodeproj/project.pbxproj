@@ -36,7 +36,6 @@
 		7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */; };
 		7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEDE16A297E2000365F4 /* ThumbnailView.xib */; };
 		7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0DBEE116A2A2FD000365F4 /* Quartz.framework */; };
-		7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEF716A81FB4000365F4 /* DigViewer.icns */; };
 		7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBF0316A84335000365F4 /* ClickableImageView.mm */; };
 		7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B18B06A1B06E545006BC48A /* datetime_on.png */; };
 		7B1AB01A1B23E36E00ED004C /* ImageRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AB0191B23E36E00ED004C /* ImageRenderer.mm */; };
@@ -55,7 +54,7 @@
 		7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3920331696CA1800E139D0 /* Cocoa.framework */; };
 		7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B39203C1696CA1800E139D0 /* InfoPlist.strings */; };
 		7B3920401696CA1800E139D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B39203F1696CA1800E139D0 /* main.m */; };
-		7B3920471696CA1800E139D0 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3920461696CA1800E139D0 /* Document.m */; };
+		7B3920471696CA1800E139D0 /* Document.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B3920461696CA1800E139D0 /* Document.mm */; };
 		7B39204A1696CA1800E139D0 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3920481696CA1800E139D0 /* Document.xib */; };
 		7B39204D1696CA1900E139D0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B39204B1696CA1900E139D0 /* MainMenu.xib */; };
 		7B3CDB4C1AE2A2F3005B6EAE /* EditLensSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3CDB4E1AE2A2F3005B6EAE /* EditLensSheet.xib */; };
@@ -70,6 +69,7 @@
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
+		7B52AA461BB120330068A842 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B52AA451BB120330068A842 /* DigViewer.icns */; settings = {ASSET_TAGS = (); }; };
 		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
 		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
 		7B5C09F81B64DBD4004FE1A0 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C09F71B64DBD4004FE1A0 /* Condition.m */; };
@@ -111,6 +111,9 @@
 		7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E3A169C547200A9E247 /* ImageWithTextCell.m */; };
 		7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */; };
 		7B697E51169DB8A000A9E247 /* LoadingSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B697E53169DB8A000A9E247 /* LoadingSheet.xib */; };
+		7B6AE01A1B99DE4C00FA0335 /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE0191B99DE4C00FA0335 /* DVRemoteProtcol.m */; };
+		7B6AE01D1B99E6E500FA0335 /* DVRemoteServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE01C1B99E6E500FA0335 /* DVRemoteServer.m */; };
+		7B6AE0201B9A799A00FA0335 /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE01F1B9A799A00FA0335 /* DVRemoteSession.m */; };
 		7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */; };
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
@@ -131,6 +134,8 @@
 		7B74FB961B3EC85B005BC748 /* EditCustomEffect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB981B3EC85B005BC748 /* EditCustomEffect.xib */; };
 		7B74FB9D1B3EC8DD005BC748 /* EditCustomEffect.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB991B3EC8DD005BC748 /* EditCustomEffect.strings */; };
 		7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB9B1B3EC8DD005BC748 /* EditCustomEffectList.strings */; };
+		7B9098221BA3DDC400B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */; };
+		7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
@@ -269,7 +274,6 @@
 		7B0DBEDC16A296DC000365F4 /* ThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewController.m; sourceTree = "<group>"; };
 		7B0DBEDF16A297E2000365F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ThumbnailView.xib; sourceTree = "<group>"; };
 		7B0DBEE116A2A2FD000365F4 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		7B0DBEF716A81FB4000365F4 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DigViewer.icns; sourceTree = SOURCE_ROOT; };
 		7B0DBF0216A84335000365F4 /* ClickableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableImageView.h; sourceTree = "<group>"; };
 		7B0DBF0316A84335000365F4 /* ClickableImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClickableImageView.mm; sourceTree = "<group>"; };
 		7B18B06A1B06E545006BC48A /* datetime_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = datetime_on.png; path = resources/datetime_on.png; sourceTree = "<group>"; };
@@ -304,7 +308,7 @@
 		7B39203F1696CA1800E139D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B3920411696CA1800E139D0 /* DigViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DigViewer-Prefix.pch"; sourceTree = "<group>"; };
 		7B3920451696CA1800E139D0 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
-		7B3920461696CA1800E139D0 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		7B3920461696CA1800E139D0 /* Document.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Document.mm; sourceTree = "<group>"; };
 		7B3920491696CA1800E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		7B39204C1696CA1900E139D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7B3CDB4D1AE2A2F3005B6EAE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditLensSheet.xib; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 		7B4E8E2816C82A02001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		7B4E8E2A16C82A02001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ThumbnailView.strings; sourceTree = "<group>"; };
 		7B4E8E3E16CA5478001C5D09 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FolderOutlineView.strings; sourceTree = "<group>"; };
+		7B52AA451BB120330068A842 /* DigViewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DigViewer.icns; path = resources/DigViewer.icns; sourceTree = "<group>"; };
 		7B5340561703F2BE008AEDB6 /* DigViewer-in.sparseimage */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DigViewer-in.sparseimage"; path = "DiskImageResources/DigViewer-in.sparseimage"; sourceTree = "<group>"; };
 		7B5340571703F2BE008AEDB6 /* DigViewerBackground.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigViewerBackground.idraw; path = DiskImageResources/DigViewerBackground.idraw; sourceTree = "<group>"; };
 		7B553BBF1AE1ED0A00618590 /* LensLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary.xcdatamodel; sourceTree = "<group>"; };
@@ -392,6 +397,12 @@
 		7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingSheetController.h; sourceTree = "<group>"; };
 		7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingSheetController.m; sourceTree = "<group>"; };
 		7B697E52169DB8A000A9E247 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingSheet.xib; sourceTree = "<group>"; };
+		7B6AE0181B99DE4C00FA0335 /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVRemoteProtcol.h; sourceTree = "<group>"; };
+		7B6AE0191B99DE4C00FA0335 /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVRemoteProtcol.m; sourceTree = "<group>"; };
+		7B6AE01B1B99E6E500FA0335 /* DVRemoteServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVRemoteServer.h; sourceTree = "<group>"; };
+		7B6AE01C1B99E6E500FA0335 /* DVRemoteServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVRemoteServer.m; sourceTree = "<group>"; };
+		7B6AE01E1B9A799A00FA0335 /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVRemoteSession.h; sourceTree = "<group>"; };
+		7B6AE01F1B9A799A00FA0335 /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVRemoteSession.m; sourceTree = "<group>"; };
 		7B6AE1071ADAAEAF0039EA62 /* DraggingSourceArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggingSourceArrayController.h; sourceTree = "<group>"; };
 		7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggingSourceArrayController.m; sourceTree = "<group>"; };
 		7B6B3B1318E438D00004098F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -424,6 +435,10 @@
 		7B74FB971B3EC85B005BC748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditCustomEffect.xib; sourceTree = "<group>"; };
 		7B74FB9A1B3EC8DD005BC748 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditCustomEffect.strings; sourceTree = "<group>"; };
 		7B74FB9C1B3EC8DD005BC748 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditCustomEffectList.strings; sourceTree = "<group>"; };
+		7B9098201BA3DDC400B03FD8 /* DVRemoteBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVRemoteBrowser.h; sourceTree = "<group>"; };
+		7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVRemoteBrowser.m; sourceTree = "<group>"; };
+		7B9098301BA447E100B03FD8 /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadataKV.h; sourceTree = "<group>"; };
+		7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageMetadataKV.m; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
@@ -619,8 +634,8 @@
 				7BB3327B1AEBB50700C74944 /* unavailable.png */,
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
 				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
-				7B0DBEF716A81FB4000365F4 /* DigViewer.icns */,
 				7B4E8E2416C827D3001C5D09 /* Localizable.strings */,
+				7B52AA451BB120330068A842 /* DigViewer.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -706,6 +721,8 @@
 				7BF678AC16983C7C00FE39B4 /* PathNode.mm */,
 				7B6CE7B818B3970F00CD445A /* ImageMetadata.h */,
 				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
+				7B9098301BA447E100B03FD8 /* ImageMetadataKV.h */,
+				7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -851,6 +868,21 @@
 			name = "Transition Effects";
 			sourceTree = "<group>";
 		};
+		7B6AE0171B99DA6700FA0335 /* DV Remote Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7B6AE0181B99DE4C00FA0335 /* DVRemoteProtcol.h */,
+				7B6AE0191B99DE4C00FA0335 /* DVRemoteProtcol.m */,
+				7B6AE01B1B99E6E500FA0335 /* DVRemoteServer.h */,
+				7B6AE01C1B99E6E500FA0335 /* DVRemoteServer.m */,
+				7B9098201BA3DDC400B03FD8 /* DVRemoteBrowser.h */,
+				7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */,
+				7B6AE01E1B9A799A00FA0335 /* DVRemoteSession.h */,
+				7B6AE01F1B9A799A00FA0335 /* DVRemoteSession.m */,
+			);
+			name = "DV Remote Protocol";
+			sourceTree = "<group>";
+		};
 		7B6D83631B32F1D6004A2426 /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +948,7 @@
 				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
 				7B6D83631B32F1D6004A2426 /* Preferences Window */,
 				7B6D83641B32F235004A2426 /* Slideshow */,
+				7B6AE0171B99DA6700FA0335 /* DV Remote Protocol */,
 			);
 			name = "Each Application";
 			sourceTree = "<group>";
@@ -924,7 +957,7 @@
 			isa = PBXGroup;
 			children = (
 				7B3920451696CA1800E139D0 /* Document.h */,
-				7B3920461696CA1800E139D0 /* Document.m */,
+				7B3920461696CA1800E139D0 /* Document.mm */,
 				7B30AC2418A6000F00A70555 /* DocumentWindowController.h */,
 				7B30AC2518A6000F00A70555 /* DocumentWindowController.m */,
 				7B01210B16B68DFE004AA730 /* NSViewController+Nested.h */,
@@ -1110,7 +1143,7 @@
 		7B3920261696CA1800E139D0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = opiopan;
 			};
 			buildConfigurationList = 7B3920291696CA1800E139D0 /* Build configuration list for PBXProject "DigViewer" */;
@@ -1160,6 +1193,7 @@
 				7B0DBEB616A01545000365F4 /* MainView.xib in Resources */,
 				7B0DBED116A0F7A9000365F4 /* FolderOutlineView.xib in Resources */,
 				7BA81C041AF8B83C001E40D7 /* EditImageSetSheet.strings in Resources */,
+				7B52AA461BB120330068A842 /* DigViewer.icns in Resources */,
 				7BE7B61B1B1F2787009619E2 /* SlideshowPreferences.xib in Resources */,
 				7BCA29AA1B4E70B500FCFD7A /* Ripple.qtz in Resources */,
 				7B74FB931B3EC854005BC748 /* EditCustomEffectList.xib in Resources */,
@@ -1182,7 +1216,6 @@
 				7B5C0A391B6778D5004FE1A0 /* SelectNewConditionSheet.strings in Resources */,
 				7B5C0A3C1B679B11004FE1A0 /* SelectDeletingConditionSheet.xib in Resources */,
 				7BB4E6021AD95A1C0076630A /* MapPreferences.png in Resources */,
-				7B0DBEF816A81FB5000365F4 /* DigViewer.icns in Resources */,
 				7BF8E2A516AA7C9F0007E788 /* up.png in Resources */,
 				7BCF7F091B52802C001B0A7A /* Door.qtz in Resources */,
 				7B23D32D1AFDB9CB00A78E77 /* ThumbnailPreferences.png in Resources */,
@@ -1341,10 +1374,11 @@
 				7B5C0A031B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
 				7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
+				7B9098221BA3DDC400B03FD8 /* DVRemoteBrowser.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B5C0A181B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 				7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */,
-				7B3920471696CA1800E139D0 /* Document.m in Sources */,
+				7B3920471696CA1800E139D0 /* Document.mm in Sources */,
 				7BB4E6121ADA031A0076630A /* LensPreferences.m in Sources */,
 				7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */,
 				7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */,
@@ -1355,8 +1389,10 @@
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */,
 				7BB4E6001AD948250076630A /* AppPreferences.m in Sources */,
+				7B6AE01D1B99E6E500FA0335 /* DVRemoteServer.m in Sources */,
 				7B5C0A2D1B66586D004FE1A0 /* EditConditionSheetController.m in Sources */,
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
+				7B6AE01A1B99DE4C00FA0335 /* DVRemoteProtcol.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
@@ -1374,6 +1410,7 @@
 				7B74FB8B1B3E24B4005BC748 /* EditCustomEffectListController.m in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */,
+				7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,
@@ -1383,6 +1420,7 @@
 				7B1AB01D1B240E7800ED004C /* RelationalImageAccessor.m in Sources */,
 				7B74FB921B3E933A005BC748 /* EditCustomEffectController.m in Sources */,
 				7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */,
+				7B6AE0201B9A799A00FA0335 /* DVRemoteSession.m in Sources */,
 				7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */,
 				7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */,
 				7B336EC91B399E8E00D01CA6 /* EffectByCIKernel.m in Sources */,
@@ -1829,6 +1867,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1878,6 +1917,7 @@
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1892,6 +1932,7 @@
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

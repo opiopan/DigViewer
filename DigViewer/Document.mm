@@ -10,6 +10,10 @@
 #import "DocumentConfigController.h"
 #import "DocumentWindowController.h"
 #import "LoadingSheetController.h"
+#import "DVRemoteServer.h"
+#import "ImageRenderer.h"
+
+#include "CoreFoundationHelper.h"
 
 //-----------------------------------------------------------------------------------------
 // Document class implementation
@@ -148,6 +152,73 @@ static NSString* PREFARENCES_FILE_NAME = @"/.DigViewer.preferences";
         NSError* error;
         [manager removeItemAtPath:path error:&error];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリへのサムネール送信
+//-----------------------------------------------------------------------------------------
+static const CGFloat thumbnailSize = 256;
+- (void)sendThumbnails:(NSArray *)ids
+{
+    NSString* documentName = self.fileURL.path;
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    for (NSArray* pathID in ids){
+        PathNode* currentNode = [root nearestNodeAtPortablePath:pathID];
+        dispatch_async(que, ^(void){
+            NSImage* image;
+            id thumbnail = [currentNode thumbnailImage:thumbnailSize];
+            if ([thumbnail isKindOfClass:[NSImage class]]){
+                image = thumbnail;
+            }else{
+                ECGImageRef cgimage;
+                cgimage = (__bridge_retained CGImageRef)thumbnail;
+                image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(thumbnailSize, thumbnailSize)];
+            }
+            NSData* data = [image TIFFRepresentation];
+            NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
+            NSDictionary* option = @{NSImageCompressionFactor: @0.7};
+            NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[DVRemoteServer sharedServer] sendThumbnail:jpegData forNodeID:pathID inDocument:documentName];
+            });
+        });
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリへフルイメージを送信
+//-----------------------------------------------------------------------------------------
+- (void)sendFullImage:(NSArray *)nodeId withSize:(CGFloat)maxSize
+{
+    NSString* documentName = self.fileURL.path;
+    PathNode* currentNode = [root nearestNodeAtPortablePath:nodeId];
+    NSString* imagePath = currentNode.imagePath;
+
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(que, ^(void){
+        ImageRenderer* renderer = [ImageRenderer imageRendererWithPath: imagePath];
+        NSInteger rotation = renderer.rotation;
+        NSImage* image;
+        id fullImage = renderer.image;
+        if ([fullImage isKindOfClass:[NSImage class]]){
+            image = fullImage;
+        }else{
+            ECGImageRef cgimage;
+            cgimage = (__bridge_retained CGImageRef)fullImage;
+            image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(maxSize, maxSize)];
+        }
+
+        NSData* data = [image TIFFRepresentation];
+        NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
+        NSDictionary* option = @{NSImageCompressionFactor: @0.7};
+        NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[DVRemoteServer sharedServer] sendFullimage:jpegData forNodeID:nodeId inDocument:documentName
+                                            withRotation:rotation];
+        });
+    });
 }
 
 @end

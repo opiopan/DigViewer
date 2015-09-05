@@ -539,10 +539,17 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
                                                            IKImageBrowserNSImageRepresentationType;
 }
 
-static const CGFloat ThumbnailMaxSize = 384;
 
 - (id) imageRepresentation
 {
+    return [self thumbnailImage:0];
+}
+
+static const CGFloat ThumbnailMaxSizeDefault = 384;
+
+- (id) thumbnailImage:(CGFloat)thumbnailSize
+{
+    CGFloat ThumbnailMaxSize = thumbnailSize == 0 ? ThumbnailMaxSizeDefault : thumbnailSize;
     PathNode* node = self.imageNode;
     
     if (node.isRasterImage || !self.isImage){
@@ -562,7 +569,8 @@ static const CGFloat ThumbnailMaxSize = 384;
             if (!imageSource.isNULL()){
                 int orientation = 1;
                 NSDictionary* option = (node.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
-                                       (!node.isRawImage && node.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail) ?
+                                       (!node.isRawImage && node.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail) ||
+                                       thumbnailSize != 0 ?
                                        thumbnailOptionUsingEmbedded : thumbnailOption;
                 thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)option);
                 if (thumbnail.isNULL()){
@@ -573,17 +581,18 @@ static const CGFloat ThumbnailMaxSize = 384;
                 }
                 if (orientation != 1 ||
                     CGImageGetWidth(thumbnail) > ThumbnailMaxSize || CGImageGetHeight(thumbnail) > ThumbnailMaxSize){
-                    thumbnail = [self rotateImage:thumbnail to:orientation];
+                    thumbnail = [self rotateImage:thumbnail to:orientation withSize:ThumbnailMaxSize];
                 }
             }else{
-                thumbnail = [self CGImageFromNSImage:[PathNode unavailableImage]];
+                thumbnail = [self CGImageFromNSImage:[PathNode unavailableImage] withSize:ThumbnailMaxSize];
             }
         }else{
-            thumbnail = [self CGImageFromNSImage:node.image];
+            thumbnail = [self CGImageFromNSImage:node.image withSize:ThumbnailMaxSize];
         }
         
         if (!self.isImage && _thumbnailConfig.representationType != FolderThumbnailOnlyImage){
-            thumbnail = [self compositFolderImage:thumbnail compositType:_thumbnailConfig.representationType];
+            thumbnail = [self compositFolderImage:thumbnail compositType:_thumbnailConfig.representationType
+                                             size:ThumbnailMaxSize];
         }
         
         return (__bridge_transfer id)thumbnail.transferOwnership();
@@ -592,8 +601,12 @@ static const CGFloat ThumbnailMaxSize = 384;
     }
 }
 
-- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage
+- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage withSize:(CGFloat)ThumbnailMaxSize
 {
+    if (ThumbnailMaxSize == 0){
+        ThumbnailMaxSize = ThumbnailMaxSizeDefault;
+    }
+    
     NSSize srcSize= srcImage.size;
     CGFloat gain = ThumbnailMaxSize / MAX(srcSize.width, srcSize.height);
     NSSize destSize;
@@ -613,7 +626,7 @@ static const CGFloat ThumbnailMaxSize = 384;
     return CGBitmapContextCreateImage(context);
 }
 
-- (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation
+- (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation withSize:(CGFloat)ThumbnailMaxSize
 {
     // 回転後イメージを表すビットマップコンテキストを生成
     CGSize size = CGSizeMake(CGImageGetWidth(src), CGImageGetHeight(src));
@@ -663,6 +676,7 @@ static const CGFloat ThumbnailMaxSize = 384;
 }
 
 - (CGImageRef) compositFolderImage:(CGImageRef)src compositType:(FolderThumbnailRepresentationType)type
+                              size:(CGFloat)ThumbnailMaxSize
 {
     // コンポジット後のイメージを保持するビットマップコンテキストを作成
     CGFloat width = src ? CGImageGetWidth(src) : ThumbnailMaxSize;
