@@ -13,6 +13,7 @@
 #import "InspectorArrayController.h"
 #import "DocumentWindowController.h"
 #import "TemporaryFileController.h"
+#import "DVRemoteServer.h"
 #import <MapKit/MapKit.h>
 #import <quartz/Quartz.h>
 
@@ -30,6 +31,7 @@
     int     _viewSelector;
     bool    _initialized;
     NSDictionary* _preferences;
+    ImageMetadata* _metadata;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -193,12 +195,13 @@
     NSArray* selectedObjects = [self.imageArrayController selectedObjects];
     if (selectedObjects.count > 0){
         PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
-        ImageMetadata* metadata = [[ImageMetadata alloc] initWithPathNode:current];
-        self.summary = metadata.summary;
+        _metadata = [[ImageMetadata alloc] initWithPathNode:current];
+        self.summary = _metadata.summary;
         if (_viewSelector == 1){
-            self.gpsInfo = metadata.gpsInfoStrings;
-            self.mapView.gpsInfo = metadata.gpsInfo;
+            self.gpsInfo = _metadata.gpsInfoStrings;
+            self.mapView.gpsInfo = _metadata.gpsInfo;
         }
+        [self reflectMetaToRemoteApp];
     }
 }
 
@@ -438,7 +441,7 @@ typedef struct _MapGeometry MapGeometry;
 - (MapGeometry)mapGeometory
 {
     MapGeometry rc;
-    GPSInfo* gpsInfo = self.mapView.gpsInfo;
+    GPSInfo* gpsInfo = _metadata.gpsInfo;
     rc.latitude = gpsInfo.latitude.doubleValue;
     rc.longitude = gpsInfo.longitude.doubleValue;
     if (gpsInfo.altitude){
@@ -456,8 +459,12 @@ typedef struct _MapGeometry MapGeometry;
         rc.isEnableHeading = NO;
     }
     rc.tilt = 60;
-    NSNumber* spanLatitude = _mapView.spanLatitude;
-    NSNumber* spanLongitude = _mapView.spanLongitude;
+    NSNumber* spanLatitude = nil;
+    NSNumber* spanLongitude = nil;
+    if (_mapView.apiKey && _mapView.apiKey.length > 0){
+        spanLatitude = _mapView.spanLatitude;
+        spanLongitude = _mapView.spanLongitude;
+    }
     if (spanLatitude && spanLongitude){
         rc.spanLatitude = spanLatitude.doubleValue;
         rc.spanLongitude = spanLongitude.doubleValue;
@@ -624,6 +631,33 @@ static NSString* CategoryKML = @"KML";
     
     //ファイル出力
     return [jpegData writeToFile:path atomically:NO];
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリとの連携
+//-----------------------------------------------------------------------------------------
+- (void)reflectMetaToRemoteApp
+{
+    MapGeometry geometry = [self mapGeometory];
+    
+    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
+    [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
+    if (geometry.isEnableAltitude){
+        [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+    }
+    if (geometry.isEnableHeading){
+        [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+    }
+    [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
+    [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
+    [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
+    [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
+    [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
+    [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
+    [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
+    
+    [[DVRemoteServer sharedServer] sendMeta:data];
 }
 
 @end

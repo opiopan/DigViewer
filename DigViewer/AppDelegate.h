@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DVRemoteServer.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, DVRemoteServerDelegate>
 
 - (IBAction)showPreferences:(id)sender;
 

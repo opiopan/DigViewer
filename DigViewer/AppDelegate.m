@@ -12,6 +12,13 @@
 
 @implementation AppDelegate
 
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+    DVRemoteServer* server = [DVRemoteServer sharedServer];
+    server.delegate = self;
+    [server establishServer];
+}
+
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     [[TemporaryFileController sharedController] cleanUpAllCategories];
