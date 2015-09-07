@@ -49,8 +49,8 @@
 //-----------------------------------------------------------------------------------------
 - (BOOL)establishServer
 {
-    NSString* hostName = [NSHost currentHost].localizedName;
-    _service = [[NSNetService alloc] initWithDomain:@"" type:DVR_SERVICE_TYPE name:hostName port:0];
+    NSString* name = [NSString stringWithFormat:@"%@@%@",  NSUserName(), [NSHost currentHost].localizedName];
+    _service = [[NSNetService alloc] initWithDomain:@"" type:DVR_SERVICE_TYPE name:name port:0];
     if (_service){
         _service.delegate = self;
         if (!_runLoop){
@@ -58,7 +58,6 @@
         }
         [_service scheduleInRunLoop:_runLoop forMode:NSRunLoopCommonModes];
         [_service publishWithOptions:NSNetServiceListenForConnections];
-        NSLog(@"port: %ld\n", _service.port);
     }
     
     return !_publishingFailed;

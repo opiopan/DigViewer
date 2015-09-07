@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */; };
+		7BBA59D11B9DA59C0025B902 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59D01B9DA59C0025B902 /* ServersViewController.swift */; };
+		7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D21B9DA59C0025B902 /* Main.storyboard */; };
+		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
+		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
+		7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */; };
+		7BD72C3A1B9DB2D500DDBC1A /* DVRemoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */; };
+		7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */; };
+		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7BBA59DF1B9DA59C0025B902 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BBA59C81B9DA59C0025B902;
+			remoteInfo = DigViewerRemote;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewerRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBA59CD1B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7BBA59D01B9DA59C0025B902 /* ServersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersViewController.swift; sourceTree = "<group>"; };
+		7BBA59D31B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7BBA59D51B9DA59C0025B902 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BBA59D81B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigViewerRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBA59E31B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigViewerRemoteTests.swift; sourceTree = "<group>"; };
+		7BD72C341B9DB2D500DDBC1A /* DVRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteClient.h; path = DigViewer/DVRemoteClient.h; sourceTree = SOURCE_ROOT; };
+		7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteClient.m; path = DigViewer/DVRemoteClient.m; sourceTree = SOURCE_ROOT; };
+		7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
+		7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
+		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
+		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BBA59C61B9DA59C0025B902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBA59DB1B9DA59C0025B902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7BBA59C01B9DA59C0025B902 = {
+			isa = PBXGroup;
+			children = (
+				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
+				7BBA59E11B9DA59C0025B902 /* DigViewerRemoteTests */,
+				7BBA59CA1B9DA59C0025B902 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7BBA59CA1B9DA59C0025B902 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */,
+				7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */ = {
+			isa = PBXGroup;
+			children = (
+				7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */,
+				7BD72C3E1B9DB3FC00DDBC1A /* Controllers */,
+				7BD72C3D1B9DB3CC00DDBC1A /* Resources */,
+				7BBA59CC1B9DA59C0025B902 /* Supporting Files */,
+			);
+			path = DigViewerRemote;
+			sourceTree = "<group>";
+		};
+		7BBA59CC1B9DA59C0025B902 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59CD1B9DA59C0025B902 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7BBA59E11B9DA59C0025B902 /* DigViewerRemoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */,
+				7BBA59E21B9DA59C0025B902 /* Supporting Files */,
+			);
+			path = DigViewerRemoteTests;
+			sourceTree = "<group>";
+		};
+		7BBA59E21B9DA59C0025B902 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59E31B9DA59C0025B902 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7BD72C341B9DB2D500DDBC1A /* DVRemoteClient.h */,
+				7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */,
+				7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */,
+				7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */,
+				7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */,
+				7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */,
+			);
+			name = "DV Remote Protocol";
+			sourceTree = "<group>";
+		};
+		7BD72C3D1B9DB3CC00DDBC1A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59D21B9DA59C0025B902 /* Main.storyboard */,
+				7BBA59D51B9DA59C0025B902 /* Images.xcassets */,
+				7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7BD72C3E1B9DB3FC00DDBC1A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */,
+				7BBA59D01B9DA59C0025B902 /* ServersViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7BBA59C81B9DA59C0025B902 /* DigViewerRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BBA59E81B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemote" */;
+			buildPhases = (
+				7BBA59C51B9DA59C0025B902 /* Sources */,
+				7BBA59C61B9DA59C0025B902 /* Frameworks */,
+				7BBA59C71B9DA59C0025B902 /* Resources */,
+				7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DigViewerRemote;
+			productName = DigViewerRemote;
+			productReference = 7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7BBA59DD1B9DA59C0025B902 /* DigViewerRemoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BBA59EB1B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemoteTests" */;
+			buildPhases = (
+				7BBA59DA1B9DA59C0025B902 /* Sources */,
+				7BBA59DB1B9DA59C0025B902 /* Frameworks */,
+				7BBA59DC1B9DA59C0025B902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BBA59E01B9DA59C0025B902 /* PBXTargetDependency */,
+			);
+			name = DigViewerRemoteTests;
+			productName = DigViewerRemoteTests;
+			productReference = 7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BBA59C11B9DA59C0025B902 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = opiopan;
+				TargetAttributes = {
+					7BBA59C81B9DA59C0025B902 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					7BBA59DD1B9DA59C0025B902 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 7BBA59C81B9DA59C0025B902;
+					};
+				};
+			};
+			buildConfigurationList = 7BBA59C41B9DA59C0025B902 /* Build configuration list for PBXProject "DigViewerRemote" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7BBA59C01B9DA59C0025B902;
+			productRefGroup = 7BBA59CA1B9DA59C0025B902 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BBA59C81B9DA59C0025B902 /* DigViewerRemote */,
+				7BBA59DD1B9DA59C0025B902 /* DigViewerRemoteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BBA59C71B9DA59C0025B902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */,
+				7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */,
+				7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBA59DC1B9DA59C0025B902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script For Deciding Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=`git show -s --format=\"%ai\" $INIT| sed 's/-.*$//'`\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :NSHumanReadableCopyright '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BBA59C51B9DA59C0025B902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD72C3A1B9DB2D500DDBC1A /* DVRemoteClient.m in Sources */,
+				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
+				7BBA59D11B9DA59C0025B902 /* ServersViewController.swift in Sources */,
+				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,
+				7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBA59DA1B9DA59C0025B902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7BBA59E01B9DA59C0025B902 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BBA59C81B9DA59C0025B902 /* DigViewerRemote */;
+			targetProxy = 7BBA59DF1B9DA59C0025B902 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7BBA59D21B9DA59C0025B902 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBA59D31B9DA59C0025B902 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBA59D81B9DA59C0025B902 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7BBA59E61B9DA59C0025B902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BBA59E71B9DA59C0025B902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BBA59E91B9DA59C0025B902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DigViewerRemote/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7BBA59EA1B9DA59C0025B902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DigViewerRemote/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7BBA59EC1B9DA59C0025B902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DigViewerRemoteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigViewerRemote.app/DigViewerRemote";
+			};
+			name = Debug;
+		};
+		7BBA59ED1B9DA59C0025B902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DigViewerRemoteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigViewerRemote.app/DigViewerRemote";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BBA59C41B9DA59C0025B902 /* Build configuration list for PBXProject "DigViewerRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBA59E61B9DA59C0025B902 /* Debug */,
+				7BBA59E71B9DA59C0025B902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BBA59E81B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBA59E91B9DA59C0025B902 /* Debug */,
+				7BBA59EA1B9DA59C0025B902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BBA59EB1B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBA59EC1B9DA59C0025B902 /* Debug */,
+				7BBA59ED1B9DA59C0025B902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7BBA59C11B9DA59C0025B902 /* Project object */;
+}
