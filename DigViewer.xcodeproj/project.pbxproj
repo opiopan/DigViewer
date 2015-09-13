@@ -135,6 +135,8 @@
 		7B74FB961B3EC85B005BC748 /* EditCustomEffect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB981B3EC85B005BC748 /* EditCustomEffect.xib */; };
 		7B74FB9D1B3EC8DD005BC748 /* EditCustomEffect.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB991B3EC8DD005BC748 /* EditCustomEffect.strings */; };
 		7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB9B1B3EC8DD005BC748 /* EditCustomEffectList.strings */; };
+		7B9098221BA3DDC400B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */; };
+		7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
 		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
@@ -436,6 +438,10 @@
 		7B74FB971B3EC85B005BC748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditCustomEffect.xib; sourceTree = "<group>"; };
 		7B74FB9A1B3EC8DD005BC748 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditCustomEffect.strings; sourceTree = "<group>"; };
 		7B74FB9C1B3EC8DD005BC748 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EditCustomEffectList.strings; sourceTree = "<group>"; };
+		7B9098201BA3DDC400B03FD8 /* DVRemoteBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVRemoteBrowser.h; sourceTree = "<group>"; };
+		7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVRemoteBrowser.m; sourceTree = "<group>"; };
+		7B9098301BA447E100B03FD8 /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadataKV.h; sourceTree = "<group>"; };
+		7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageMetadataKV.m; sourceTree = "<group>"; };
 		7B9B245F1AD0BCA5008F6E64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B9B24631AD101D1008F6E64 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7B9F9E8418E7D91D0042337F /* GPSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapView.h; sourceTree = "<group>"; };
@@ -718,6 +724,8 @@
 				7BF678AC16983C7C00FE39B4 /* PathNode.mm */,
 				7B6CE7B818B3970F00CD445A /* ImageMetadata.h */,
 				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
+				7B9098301BA447E100B03FD8 /* ImageMetadataKV.h */,
+				7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -870,6 +878,8 @@
 				7B6AE0191B99DE4C00FA0335 /* DVRemoteProtcol.m */,
 				7B6AE01B1B99E6E500FA0335 /* DVRemoteServer.h */,
 				7B6AE01C1B99E6E500FA0335 /* DVRemoteServer.m */,
+				7B9098201BA3DDC400B03FD8 /* DVRemoteBrowser.h */,
+				7B9098211BA3DDC400B03FD8 /* DVRemoteBrowser.m */,
 				7B6AE0211B9AE8C000FA0335 /* DVRemoteClient.h */,
 				7B6AE0221B9AE8C000FA0335 /* DVRemoteClient.m */,
 				7B6AE01E1B9A799A00FA0335 /* DVRemoteSession.h */,
@@ -1369,6 +1379,7 @@
 				7B5C0A031B64FF5E004FE1A0 /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
 				7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */,
 				7B30AC2718A6000F00A70555 /* DocumentWindowController.m in Sources */,
+				7B9098221BA3DDC400B03FD8 /* DVRemoteBrowser.m in Sources */,
 				7B3920401696CA1800E139D0 /* main.m in Sources */,
 				7B5C0A181B65D6FF004FE1A0 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 				7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */,
@@ -1405,6 +1416,7 @@
 				7B74FB8B1B3E24B4005BC748 /* EditCustomEffectListController.m in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */,
+				7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */,
 				7BE7B6251B1F287D009619E2 /* SlideshowPreferences.m in Sources */,
 				7B5C0A0F1B651B22004FE1A0 /* Camera.m in Sources */,
 				7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */,

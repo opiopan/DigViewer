@@ -776,23 +776,6 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
 @end
 
 //-----------------------------------------------------------------------------------------
-// NSArrayController向けKey Value Store
-//-----------------------------------------------------------------------------------------
-@implementation ImageMetadataKV
-
-+ (id)kvWithKey:(NSString *)key value:(NSString *)value
-{
-    ImageMetadataKV* kv = [[ImageMetadataKV alloc] init];
-    if (kv){
-        kv.key = key;
-        kv.value = value;
-    }
-    return kv;
-}
-
-@end
-
-//-----------------------------------------------------------------------------------------
 // GPS情報ラッパー
 //-----------------------------------------------------------------------------------------
 @implementation GPSInfo

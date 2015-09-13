@@ -11,16 +11,32 @@
 
 @protocol DVRemoteClientDelegate;
 
+typedef NS_ENUM(NSUInteger, DVRClientState){
+    DVRClientDisconnected,
+    DVRClientConnecting,
+    DVRClientAuthenticating,
+    DVRClientConnected
+};
+
 //-----------------------------------------------------------------------------------------
 // DVRemoteClient宣言
 //-----------------------------------------------------------------------------------------
-@interface DVRemoteClient : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate, DVRemoteSessionDelegate>
+@interface DVRemoteClient : NSObject <NSNetServiceDelegate, DVRemoteSessionDelegate>
 
-@property (weak, nonatomic) id <DVRemoteClientDelegate> delegate;
 @property (weak, nonatomic) NSRunLoop* runLoop;
+@property (readonly) DVRClientState state;
+@property (readonly) NSString* stateString;
+@property (readonly) NSNetService* service;
+@property (readonly) NSInteger reconectCount;
+@property (readonly) NSDictionary* meta;
 
-- (void)searchServers;
++ (DVRemoteClient*)sharedClient;
+
+- (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate;
+- (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
+
 - (void)connectToServer:(NSNetService*)service;
+- (void)reconnect;
 - (void)disconnect;
 
 @end
@@ -29,7 +45,6 @@
 // デリゲートプロトコル
 //-----------------------------------------------------------------------------------------
 @protocol DVRemoteClientDelegate <NSObject>
-- (void)dvrClient:(DVRemoteClient*)client didFindServers:(NSArray*)servers;
-- (void)dvrClient:(DVRemoteClient*)client hasBeenDisconnectedByError:(NSError*)error;
+- (void)dvrClient:(DVRemoteClient*)client changeState:(DVRClientState)state;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveMeta:(NSDictionary*)meta;
 @end

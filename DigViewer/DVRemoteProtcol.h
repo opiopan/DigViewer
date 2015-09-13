@@ -11,7 +11,7 @@
 extern NSString* DVR_SERVICE_TYPE;
 extern NSString* DVR_SERVICE_NAME;
 
-enum _DVRCommand{
+typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NA = -1,
     
     // Server -> Client
@@ -19,7 +19,6 @@ enum _DVRCommand{
     // Client -> Server
     DVRC_NOTIFY_META = 1000
 };
-typedef enum _DVRCommand DVRCommand;
 
 //-----------------------------------------------------------------------------------------
 // DVRC_NOTIFY_META用 Dictionary Key文字列

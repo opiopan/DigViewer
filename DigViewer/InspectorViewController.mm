@@ -638,24 +638,29 @@ static NSString* CategoryKML = @"KML";
 //-----------------------------------------------------------------------------------------
 - (void)reflectMetaToRemoteApp
 {
-    MapGeometry geometry = [self mapGeometory];
-    
     NSMutableDictionary* data = [NSMutableDictionary dictionary];
-    [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
-    [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
-    if (geometry.isEnableAltitude){
-        [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+    if (_metadata.gpsInfo){
+        MapGeometry geometry = [self mapGeometory];
+        
+        [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
+        [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
+        if (geometry.isEnableAltitude){
+            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+        }
+        if (geometry.isEnableHeading){
+            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+        }
+        [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
+        [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
+        [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
+        [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
+        [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
+        [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
+        [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
     }
-    if (geometry.isEnableHeading){
-        [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
-    }
-    [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
-    [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
-    [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
-    [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
-    [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
-    [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
-    [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
+    
+    [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
+    [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
     
     [[DVRemoteServer sharedServer] sendMeta:data];
 }

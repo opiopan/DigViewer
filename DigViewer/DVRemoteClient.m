@@ -9,58 +9,94 @@
 #import "DVRemoteClient.h"
 
 @implementation DVRemoteClient{
-    NSNetServiceBrowser* _browser;
-    NSMutableArray* _servers;
+    NSMutableArray* _delegates;
     
     NSNetService* _serviceForSession;
     DVRemoteSession* _session;
+    
+    NSDictionary* _meta;
 }
 
 //-----------------------------------------------------------------------------------------
-// 初期化
+// シングルトンパターンの実装
+//-----------------------------------------------------------------------------------------
++ (DVRemoteClient *)sharedClient
+{
+    static DVRemoteClient* sharedClient = nil;
+    
+    if (!sharedClient){
+        sharedClient = [DVRemoteClient new];
+    }
+    
+    return sharedClient;
+}
+
+//-----------------------------------------------------------------------------------------
+// 初期化・回収
 //-----------------------------------------------------------------------------------------
 - (instancetype)init
 {
     self = [super init];
     if (self){
+        _delegates = [NSMutableArray array];
+        _state = DVRClientDisconnected;
+        _reconectCount = 0;
         _runLoop = [NSRunLoop currentRunLoop];
     }
     return self;
 }
 
-//-----------------------------------------------------------------------------------------
-// サーバ一検索
-//-----------------------------------------------------------------------------------------
-- (void)searchServers
+- (void)dealloc
 {
-    if (!_browser){
-        _servers = [NSMutableArray new];
-        _browser = [NSNetServiceBrowser new];
-        _browser.delegate = self;
-        [_browser searchForServicesOfType:DVR_SERVICE_TYPE inDomain:@""];
-    }
+    [_delegates removeAllObjects];
+    [self disconnect];
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser
-           didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
+//-----------------------------------------------------------------------------------------
+// デリゲート追加・削除
+//-----------------------------------------------------------------------------------------
+- (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate
 {
-    [_servers addObject:aNetService];
-    if (!moreComing){
-        if (_delegate){
-            [_delegate dvrClient:self didFindServers:_servers];
+    [_delegates addObject:delegate];
+}
+
+- (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate
+{
+    [_delegates removeObject:delegate];
+}
+
+//-----------------------------------------------------------------------------------------
+// 属性の実装
+//-----------------------------------------------------------------------------------------
+- (NSString *)stateString
+{
+    NSArray* descriptions = @[@"Disconnected",
+                              @"Connecting...",
+                              @"Authenticating...",
+                              @"Connected"];
+    return descriptions[_state];
+}
+
+- (NSNetService *)service
+{
+    return _serviceForSession;
+}
+
+- (NSDictionary *)meta
+{
+    return _meta;
+}
+
+//-----------------------------------------------------------------------------------------
+// 状態変更通知
+//-----------------------------------------------------------------------------------------
+- (void)notifyStateChange
+{
+    if (_delegates.count){
+        for (id <DVRemoteClientDelegate> delegate in _delegates){
+            [delegate dvrClient:self changeState:_state];
         }
-        [_browser stop];
-        _browser = nil;
     }
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didNotSearch:(NSDictionary *)errorDict
-{
-    if (_delegate){
-        [_delegate dvrClient:self didFindServers:nil];
-    }
-    [_browser stop];
-    _browser = nil;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -68,9 +104,22 @@
 //-----------------------------------------------------------------------------------------
 - (void)connectToServer:(NSNetService *)service
 {
-    if (!_serviceForSession){
+    if (_state == DVRClientDisconnected){
+        _reconectCount = 0;
         _serviceForSession = [[NSNetService alloc] initWithDomain:service.domain type:service.type name:service.name];
         _serviceForSession.delegate = self;
+        _state = DVRClientConnecting;
+        [self notifyStateChange];
+        [_serviceForSession resolveWithTimeout:5.0];
+    }
+}
+
+- (void)reconnect
+{
+    if (_state == DVRClientDisconnected){
+        _reconectCount++;
+        _state = DVRClientConnecting;
+        [self notifyStateChange];
         [_serviceForSession resolveWithTimeout:5.0];
     }
 }
@@ -83,29 +132,27 @@
     _session = [[DVRemoteSession alloc] initWithInputStream:inputStream outputStream:outputStream];
     _session.delegate = self;
     [_session scheduleInRunLoop:_runLoop];
+    _state = DVRClientConnected;
+    [self notifyStateChange];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
     [self disconnect];
-    if (_delegate){
-        [_delegate dvrClient:self hasBeenDisconnectedByError:nil];
-    }
 }
 
 - (void)disconnect
 {
-    if (_browser){
-        [_browser stop];
-        _browser = nil;
-    }
     if (_serviceForSession){
         [_serviceForSession stop];
-        _serviceForSession = nil;
     }
     if (_session){
         [_session close];
         _session = nil;
+    }
+    if (_state != DVRClientDisconnected){
+        _state = DVRClientDisconnected;
+        [self notifyStateChange];
     }
 }
 
@@ -115,9 +162,11 @@
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
     if (command == DVRC_NOTIFY_META){
-        NSDictionary* meta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (_delegate){
-            [_delegate dvrClient:self didRecieveMeta:meta];
+        _meta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_delegates.count){
+            for (id <DVRemoteClientDelegate> delegate in _delegates){
+                [delegate dvrClient:self didRecieveMeta:_meta];
+            }
         }
     }
 }
@@ -125,9 +174,6 @@
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error
 {
     [self disconnect];
-    if (_delegate){
-        [_delegate dvrClient:self hasBeenDisconnectedByError:nil];
-    }
 }
 
 @end

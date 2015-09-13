@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PathNode.h"
 #import "LensLibrary.h"
+#import "ImageMetadataKV.h"
 
 @interface GPSInfo : NSObject
 @property NSNumber* latitude;
@@ -39,14 +40,6 @@
 - (NSArray*)summaryWithFilter:(NSArray*)filter;
 - (NSDictionary*)propertiesAtIndex:(int)index;
 - (Lens*)associatedLensProfile;
-
-@end
-
-@interface ImageMetadataKV : NSObject
-@property NSString* key;
-@property NSString* value;
-
-+ (id)kvWithKey:(NSString*)key value:(NSString*)value;
 
 @end
 
