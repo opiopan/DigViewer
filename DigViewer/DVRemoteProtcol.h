@@ -15,14 +15,20 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NA = -1,
     
     // Server -> Client
+    DVRC_MOVE_NEXT_IMAGE = 1,
+    DVRC_MOVE_PREV_IMAGE,
+    DVRC_REQUEST_THUMBNAIL,
     
     // Client -> Server
-    DVRC_NOTIFY_META = 1000
+    DVRC_NOTIFY_META = 1000,
+    DVRC_NOTIFY_THUMBNAIL
 };
 
 //-----------------------------------------------------------------------------------------
 // DVRC_NOTIFY_META用 Dictionary Key文字列
 //-----------------------------------------------------------------------------------------
+extern NSString* DVRCNMETA_DOCUMENT;
+extern NSString* DVRCNMETA_ID;
 extern NSString* DVRCNMETA_LATITUDE;
 extern NSString* DVRCNMETA_LONGITUDE;
 extern NSString* DVRCNMETA_ALTITUDE;

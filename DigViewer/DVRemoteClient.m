@@ -157,6 +157,28 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// サーバーへのコマンド発行
+//-----------------------------------------------------------------------------------------
+- (void)moveToNextImage
+{
+    [self sendMoveToCommand:DVRC_MOVE_NEXT_IMAGE];
+}
+
+- (void)moveToPreviousImage
+{
+    [self sendMoveToCommand:DVRC_MOVE_PREV_IMAGE];
+}
+
+- (void)sendMoveToCommand:(DVRCommand)command
+{
+    if (_state == DVRClientConnected && _meta){
+        NSString* document = [_meta valueForKey:DVRCNMETA_DOCUMENT];
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:document];
+        [_session sendCommand:command withData:data replacingQue:NO];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // セッションからのイベント処理
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data

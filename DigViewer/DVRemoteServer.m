@@ -89,7 +89,12 @@
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
-    
+    if (command == DVRC_MOVE_PREV_IMAGE || DVRC_MOVE_NEXT_IMAGE){
+        NSString* document = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_delegate){
+            [_delegate dvrServer:self needMoveToNeighborImageOfDocument:document withDirection:command];
+        }
+    }
 }
 
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error

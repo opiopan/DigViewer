@@ -7,6 +7,11 @@
 //
 
 #import "DVRemoteSession.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <arpa/inet.h>
+#include <netinet/tcp.h>
 
 enum StreamStatus{StreamStandBy, StreamHead, StreamData};
 static const size_t HEADER_LENGTH = sizeof(int) * 2;
@@ -50,6 +55,15 @@ static NSString* QUE_ELEMENT_DATA = @"data";
         _senderStatus = StreamStandBy;
         _recieverStatus = StreamStandBy;
         _sendQue = [NSMutableArray array];
+        
+//        CFWriteStreamRef stream = (__bridge CFWriteStreamRef)_outputStream;
+//        CFDataRef data = CFWriteStreamCopyProperty(stream, kCFStreamPropertySocketNativeHandle);
+//        CFSocketNativeHandle handle;
+//        size_t length = CFDataGetLength(data);
+//        CFDataGetBytes(data, CFRangeMake(0, sizeof(handle)), (UInt8*)&handle);
+//        int yes = 1;
+//        setsockopt(handle, IPPROTO_TCP, TCP_NODELAY, (void *)&yes, sizeof(yes));
+//        CFRelease(data);
     }
     return self;
 }

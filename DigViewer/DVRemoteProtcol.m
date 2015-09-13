@@ -14,6 +14,8 @@ NSString* DVR_SERVICE_NAME = @"DigViewer Remote";
 //-----------------------------------------------------------------------------------------
 // DVRC_NOTIFY_META用 Dictionary Key文字列
 //-----------------------------------------------------------------------------------------
+NSString* DVRCNMETA_DOCUMENT = @"document";
+NSString* DVRCNMETA_ID = @"id";
 NSString* DVRCNMETA_LATITUDE = @"latitude";
 NSString* DVRCNMETA_LONGITUDE = @"longitude";
 NSString* DVRCNMETA_ALTITUDE = @"altitude";

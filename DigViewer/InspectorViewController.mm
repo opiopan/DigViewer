@@ -14,6 +14,7 @@
 #import "DocumentWindowController.h"
 #import "TemporaryFileController.h"
 #import "DVRemoteServer.h"
+#import "Document.h"
 #import <MapKit/MapKit.h>
 #import <quartz/Quartz.h>
 
@@ -201,7 +202,7 @@
             self.gpsInfo = _metadata.gpsInfoStrings;
             self.mapView.gpsInfo = _metadata.gpsInfo;
         }
-        [self reflectMetaToRemoteApp];
+        [self reflectMetaToRemoteApp:current];
     }
 }
 
@@ -636,9 +637,13 @@ static NSString* CategoryKML = @"KML";
 //-----------------------------------------------------------------------------------------
 // コンパニオンアプリとの連携
 //-----------------------------------------------------------------------------------------
-- (void)reflectMetaToRemoteApp
+- (void)reflectMetaToRemoteApp:(PathNode*)node
 {
     NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    Document* document = controller.document;
+    [data setValue:document.fileURL.path forKey:DVRCNMETA_DOCUMENT];
+    [data setValue:node.portablePath forKey:DVRCNMETA_ID];
     if (_metadata.gpsInfo){
         MapGeometry geometry = [self mapGeometory];
         

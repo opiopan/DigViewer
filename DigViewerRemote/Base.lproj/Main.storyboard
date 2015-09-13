@@ -197,17 +197,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Servers" id="24t-cj-eN7">
-                        <barButtonItem key="rightBarButtonItem" id="dll-gM-Ux4">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I8n-AX-QPg">
-                                <rect key="frame" x="529" y="7" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeServersView:" destination="rj1-As-3ds" eventType="touchUpInside" id="9fd-dc-EMI"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="dll-gM-Ux4">
+                            <connections>
+                                <action selector="closeServersView:" destination="rj1-As-3ds" id="oD2-hR-s6t"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -215,7 +208,7 @@
             </objects>
             <point key="canvasLocation" x="1203" y="-320"/>
         </scene>
-        <!--Disconnected-->
+        <!--Map-->
         <scene sceneID="85S-k6-is8">
             <objects>
                 <viewController id="KXb-Jb-PaG" customClass="MapViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
@@ -233,7 +226,25 @@
                                     <constraint firstAttribute="height" constant="44" id="0jD-qi-Aq3"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="gYL-Ek-GVV"/>
+                                    <barButtonItem image="ConfigureButton" id="G61-6W-1Ki"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bK3-Lx-1cD"/>
+                                    <barButtonItem image="LeftButton" id="8mW-Sd-QP0">
+                                        <connections>
+                                            <action selector="moveToPreviousImage:" destination="KXb-Jb-PaG" id="i8c-JN-siS"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="CenteringButton" id="vGx-ZV-uzo"/>
+                                    <barButtonItem image="RightButton" id="KqE-vG-WV3">
+                                        <connections>
+                                            <action selector="moveToNextImage:" destination="KXb-Jb-PaG" id="e3a-Zv-hOx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="MuQ-bX-EFj"/>
+                                    <barButtonItem image="ListButton" id="gYL-Ek-GVV">
+                                        <connections>
+                                            <action selector="performInformationButton:" destination="KXb-Jb-PaG" id="vWr-SF-iYV"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OqM-XB-U5S">
@@ -251,37 +262,20 @@
                             <constraint firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Disconnected" id="OlD-Vh-8Sc">
-                        <barButtonItem key="leftBarButtonItem" id="t8a-y4-8KS">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="315-PQ-VF6">
-                                <rect key="frame" x="16" y="7" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Servers">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="performServersButton:" destination="KXb-Jb-PaG" eventType="touchUpInside" id="PsI-xe-FIV"/>
-                                </connections>
-                            </button>
+                    <navigationItem key="navigationItem" title="Map" id="OlD-Vh-8Sc">
+                        <barButtonItem key="leftBarButtonItem" image="ServerButton" id="t8a-y4-8KS">
+                            <connections>
+                                <action selector="performServersButton:" destination="KXb-Jb-PaG" id="pKl-6d-EXw"/>
+                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="E2g-Wk-MPN">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xdM-MZ-PLK">
-                                <rect key="frame" x="544" y="7" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Info"/>
-                                <connections>
-                                    <action selector="performInformationButton:" destination="KXb-Jb-PaG" eventType="touchUpInside" id="Ec8-WK-3uf"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="InformationButton" id="E2g-Wk-MPN"/>
                     </navigationItem>
                     <connections>
                         <outlet property="barTitle" destination="OlD-Vh-8Sc" id="vK5-kI-cns"/>
                         <outlet property="mapView" destination="OqM-XB-U5S" id="nbh-0q-7Gk"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="AZD-Kb-uLo" kind="presentation" identifier="ModalServersView" id="iBt-Pp-e1a"/>
-                        <segue destination="AZD-Kb-uLo" kind="popoverPresentation" identifier="PopoverServersView" popoverAnchorView="315-PQ-VF6" id="0Q2-Qu-8C5">
+                        <segue destination="AZD-Kb-uLo" kind="popoverPresentation" identifier="PopoverServersView" popoverAnchorBarButtonItem="t8a-y4-8KS" id="0Q2-Qu-8C5">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -291,6 +285,15 @@
             <point key="canvasLocation" x="-425" y="-320"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CenteringButton" width="31" height="31"/>
+        <image name="ConfigureButton" width="31" height="31"/>
+        <image name="InformationButton" width="31" height="31"/>
+        <image name="LeftButton" width="31" height="31"/>
+        <image name="ListButton" width="31" height="31"/>
+        <image name="RightButton" width="31" height="31"/>
+        <image name="ServerButton" width="31" height="31"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0Q2-Qu-8C5"/>
         <segue reference="1Vi-gm-zmd"/>

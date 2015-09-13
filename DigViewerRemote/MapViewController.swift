@@ -19,6 +19,12 @@ class MapViewController: UIViewController, DVRemoteClientDelegate {
         
         navigationItem.hidesBackButton = true;
         
+//        let infoButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera,
+//                                         target: self, action: Selector("performInformationButton:"))
+//        navigationItem.rightBarButtonItem = infoButton;
+        
+        mapView!.layer.zPosition = -1;
+        
         let client = DVRemoteClient.sharedClient()
         client.addClientDelegate(self)
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
@@ -60,10 +66,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate {
         }
     }
     
+    // MARK: - ボタン応答
     //-----------------------------------------------------------------------------------------
-    // MARK: - Information ボタン
+    // Information ボタン
     //-----------------------------------------------------------------------------------------
-    @IBAction func performInformationButton(sender : UIButton) {
+    @IBAction func performInformationButton(sender : UIBarButtonItem) {
         let bounds = UIScreen.mainScreen().bounds
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         let isConnected = DVRemoteClient.sharedClient().state == .Connected
@@ -90,7 +97,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate {
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: - Servers ボタン
+    // Servers ボタン
     //-----------------------------------------------------------------------------------------
     @IBAction func performServersButton(sender : AnyObject) {
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
@@ -103,25 +110,30 @@ class MapViewController: UIViewController, DVRemoteClientDelegate {
     }
 
     //-----------------------------------------------------------------------------------------
+    // 次・前 ボタン
+    //-----------------------------------------------------------------------------------------
+    @IBAction func moveToNextImage(sender : AnyObject) {
+        DVRemoteClient.sharedClient()!.moveToNextImage()
+    }
+    
+    @IBAction func moveToPreviousImage(sender : AnyObject) {
+        DVRemoteClient.sharedClient()!.moveToPreviousImage()
+    }
+
+    //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
     }
     
+    private var annotation : MKShape? = nil;
+    
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
-//        CLLocationCoordinate2D centerCoordinate =
-//            CLLocationCoordinate2DMake([[meta valueForKey:DVRCNMETA_VIEW_LATITUDE] doubleValue],
-//                [[meta valueForKey:DVRCNMETA_VIEW_LONGITUDE] doubleValue]);
-//        CLLocationCoordinate2D fromEyeCoordinate =
-//            CLLocationCoordinate2DMake([[meta valueForKey:DVRCNMETA_LATITUDE] doubleValue],
-//                [[meta valueForKey:DVRCNMETA_LONGITUDE] doubleValue]);
-//        CLLocationDistance eyeAltitude = 50.0;
-//        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:centerCoordinate
-//            fromEyeCoordinate:fromEyeCoordinate
-//            eyeAltitude:eyeAltitude];
-//        _mapView.camera = camera;
-//        _mapView.showsBuildings = YES;
+        if (annotation != nil){
+            mapView!.removeAnnotation(annotation)
+        }
+        
         let latitude = meta[DVRCNMETA_LATITUDE] as! Double?;
         let longitude = meta[DVRCNMETA_LONGITUDE] as! Double?;
         let viewLatitude = meta[DVRCNMETA_VIEW_LATITUDE] as! Double?;
@@ -133,6 +145,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate {
             let camera = MKMapCamera(lookingAtCenterCoordinate: centerCoordinate,
                                      fromEyeCoordinate: fromEyeCoordinate, eyeAltitude: eyeAltitude)
             mapView!.camera = camera;
+
+            var nodeId = meta[DVRCNMETA_ID] as! [String]?;
+            var theRoppongiAnnotation = MKPointAnnotation()
+            theRoppongiAnnotation.coordinate = centerCoordinate
+            theRoppongiAnnotation.title = nodeId![nodeId!.count - 1]
+            annotation = theRoppongiAnnotation
+            mapView!.addAnnotation(annotation)
         }
     }
 

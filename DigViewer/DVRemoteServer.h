@@ -31,5 +31,7 @@
 // デリゲートプロトコル
 //-----------------------------------------------------------------------------------------
 @protocol DVRemoteServerDelegate <NSObject>
+- (void)dvrServer:(DVRemoteServer*)server needMoveToNeighborImageOfDocument:(NSString*)document
+    withDirection:(DVRCommand)direction;
 @end
 

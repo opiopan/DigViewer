@@ -39,6 +39,9 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)reconnect;
 - (void)disconnect;
 
+- (void)moveToNextImage;
+- (void)moveToPreviousImage;
+
 @end
 
 //-----------------------------------------------------------------------------------------

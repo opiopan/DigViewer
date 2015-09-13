@@ -29,7 +29,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         super.didReceiveMemoryWarning()
     }
 
-    @IBAction func closeServersView(sender : UIButton?){
+    @IBAction func closeServersView(sender : UIBarButtonItem?){
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
 
