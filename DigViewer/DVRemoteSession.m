@@ -113,6 +113,11 @@ static NSString* QUE_ELEMENT_DATA = @"data";
     }
     [_sendQue addObject:entry];
     [self updateSenderStatus];
+    [self performSelector:@selector(dummyProcess) withObject:nil afterDelay:0];
+}
+
+- (void)dummyProcess
+{
 }
 
 //-----------------------------------------------------------------------------------------

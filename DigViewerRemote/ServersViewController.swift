@@ -68,7 +68,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) 
         let client = DVRemoteClient.sharedClient()
         let name = servers[indexPath.row].name
         cell.textLabel!.text = name

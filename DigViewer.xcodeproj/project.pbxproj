@@ -1148,7 +1148,7 @@
 		7B3920261696CA1800E139D0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = opiopan;
 			};
 			buildConfigurationList = 7B3920291696CA1800E139D0 /* Build configuration list for PBXProject "DigViewer" */;
@@ -1873,6 +1873,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1922,6 +1923,7 @@
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1936,6 +1938,7 @@
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

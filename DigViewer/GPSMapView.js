@@ -49,9 +49,8 @@ function setKey(key){
         secondaryMsg.firstChild.nodeValue = msgInvalidKey;
         var script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "http://maps.googleapis.com/maps/api/js?key=";
-        script.src += key;
-        script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
+        script.src = "http://maps.googleapis.com/maps/api/js?";
+        script.src += "libraries=geometry,drawing&sensor=false&callback=initialize";
         document.body.appendChild(script);
     }
     document.control.key.value = msgSpecifyKeyButton;

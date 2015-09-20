@@ -260,7 +260,7 @@
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     NSString* key = [[controller values] valueForKey:@"googleMapsApiKey"];
     if (!key){
-        key = @"";
+        key = @"initialize";
     }
     if ([self.view superview] && ![self.mapView.apiKey isEqualToString:key]){
         self.mapView.apiKey = key;
@@ -435,6 +435,9 @@ struct _MapGeometry{
     double spanLongitudeMeter;
     double viewLatitude;
     double viewLongitude;
+    double standLatitude;
+    double standLongitude;
+    double standAltitude;
     double tilt;
 };
 typedef struct _MapGeometry MapGeometry;
@@ -459,7 +462,7 @@ typedef struct _MapGeometry MapGeometry;
         rc.heading = 0;
         rc.isEnableHeading = NO;
     }
-    rc.tilt = 60;
+    rc.tilt = 70;
     NSNumber* spanLatitude = nil;
     NSNumber* spanLongitude = nil;
     if (_mapView.apiKey && _mapView.apiKey.length > 0){
@@ -477,17 +480,22 @@ typedef struct _MapGeometry MapGeometry;
         rc.spanLatitudeMeter = 600.0;
         rc.spanLongitudeMeter = 600.0;
     }
-    double deltaLat = rc.spanLatitude * 0.4;
+    static const double OFFSET_RATIO = 0.4;
+    double deltaLat = rc.spanLatitude * OFFSET_RATIO;
     double compensating = fabs(cos(rc.latitude / 180 * M_PI));
     double deltaLng = compensating == 0 ? deltaLat : deltaLat / compensating;
     rc.viewLatitude = rc.latitude + deltaLat * cos(rc.heading / 180.0 * M_PI);
     rc.viewLongitude = rc.longitude + deltaLng * sin(rc.heading / 180.0 * M_PI);
+    double standRatio = (1.5 - OFFSET_RATIO) / OFFSET_RATIO;
     if (!rc.isEnableHeading){
+        standRatio = 1.5;
         rc.tilt = 45;
         rc.viewLatitude = rc.latitude;
         rc.viewLongitude = rc.longitude;
     }
-    
+    rc.standLatitude = rc.latitude + deltaLat * standRatio * cos((rc.heading + 180) / 180.0 * M_PI);
+    rc.standLongitude = rc.longitude + deltaLng * standRatio * sin((rc.heading + 180) / 180.0 * M_PI);
+    rc.standAltitude = rc.spanLatitudeMeter * 0.25 * tan(rc.tilt / 180.0 * M_PI);
     return rc;
 }
 
@@ -653,7 +661,7 @@ static NSString* CategoryKML = @"KML";
             [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
         }
         if (geometry.isEnableHeading){
-            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+            [data setValue:@(geometry.heading) forKey:DVRCNMETA_HEADING];
         }
         [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
         [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
@@ -662,6 +670,9 @@ static NSString* CategoryKML = @"KML";
         [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
         [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
         [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
+        [data setValue:@(geometry.standLatitude) forKey:DVRCNMETA_STAND_LATITUDE];
+        [data setValue:@(geometry.standLongitude) forKey:DVRCNMETA_STAND_LONGITUDE];
+        [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
     }
     
     [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];

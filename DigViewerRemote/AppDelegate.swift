@@ -46,9 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     }
 
     //-----------------------------------------------------------------------------------------
-    // DVRemoteClientDelegateプロトコル
+    // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
-    // MARK: DVRemoteClientDelegate
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         
     }

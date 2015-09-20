@@ -16,7 +16,7 @@ class InfomationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
+        let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
         if let newController = controller{
             self.addChildViewController(newController)
             newController.view.frame = placeholder!.bounds;
@@ -37,14 +37,14 @@ class InfomationViewController: UIViewController {
     func viewControllerForSegmentIndex(index:Int) -> UIViewController?{
         let viewIdentifiers = ["ExifViewController", "ImageListViewController"]
         if let storyboard = self.storyboard{
-            return storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as! UIViewController?
+            return storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?
         }
         return nil
     }
     
     @IBAction func segmentChange(sender:UISegmentedControl){
-        let options = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.TransitionFlipFromRight]
-        var controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
+//        let options = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.TransitionFlipFromRight]
+        let controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
         if let newController = controller{
             self.addChildViewController(newController);
             currentViewController!.view.removeFromSuperview()

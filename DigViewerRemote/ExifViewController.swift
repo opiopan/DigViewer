@@ -69,7 +69,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath) 
         let entry = exifData[indexPath.row]
         cell.textLabel!.text = entry.key
         cell.detailTextLabel!.text = entry.value
