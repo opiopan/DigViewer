@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MapPreferences">
@@ -15,37 +16,21 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="700" height="499"/>
+            <rect key="contentRect" x="196" y="240" width="700" height="296"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="6" width="700" height="499"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="296"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 <subviews>
                     <box autoresizesSubviews="NO" borderType="none" id="Afd-d8-fVl">
-                        <rect key="frame" x="-3" y="-4" width="706" height="503"/>
+                        <rect key="frame" x="-3" y="16" width="706" height="280"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="706" height="488"/>
+                        <view key="contentView" id="g8H-HY-ouW">
+                            <rect key="frame" x="0.0" y="0.0" width="706" height="265"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" id="Pax-yr-zmS">
-                                    <rect key="frame" x="91" y="344" width="526" height="136"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="r9B-mS-Xvj">
-                                        <font key="font" metaFont="system"/>
-                                        <string key="title">DigViewer uses "Google Maps JavaScript API v3" to display a map and indicate location taking a photo. And you also need a Google API key to use this API.
-Please get a API key and specify it as following steps:
-
-    1: Go to "Google Developers Console" by pressing "Get API Key..." button
-    2: Create a project and enter that project
-    3: Enable "Google Maps JavaScript API"
-    4: Create a API Key for "Browser" at "Authentication" page</string>
-                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="T3A-G5-Mh6">
-                                    <rect key="frame" x="91" y="220" width="161" height="17"/>
+                                    <rect key="frame" x="90" y="228" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Exposure direction:" id="JX8-fD-b6Y">
                                         <font key="font" metaFont="system"/>
@@ -54,7 +39,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="F0j-m8-0Zg">
-                                    <rect key="frame" x="349" y="161" width="268" height="17"/>
+                                    <rect key="frame" x="348" y="169" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Gradation level" id="UTo-6i-984">
                                         <font key="font" metaFont="system"/>
@@ -63,7 +48,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <colorWell id="f0q-Qe-2FB">
-                                    <rect key="frame" x="268" y="214" width="75" height="23"/>
+                                    <rect key="frame" x="267" y="222" width="75" height="23"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -75,7 +60,7 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </colorWell>
                                 <colorWell id="9Ba-9M-Idp">
-                                    <rect key="frame" x="268" y="185" width="75" height="23"/>
+                                    <rect key="frame" x="267" y="193" width="75" height="23"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -86,40 +71,8 @@ Please get a API key and specify it as following steps:
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Efq-0R-UfA">
-                                    <rect key="frame" x="90" y="292" width="162" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Google API Key:" id="wjz-QV-3cb">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <button verticalHuggingPriority="750" id="Fgq-Lf-AFs">
-                                    <rect key="frame" x="492" y="256" width="128" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="push" title="Get API key..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6p3-C0-V9w">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="smallSystem"/>
-                                        <connections>
-                                            <action selector="onGetApiKey:" target="-2" id="W8v-8y-4cF"/>
-                                        </connections>
-                                    </buttonCell>
-                                </button>
-                                <textField verticalHuggingPriority="750" id="Ryk-Hy-vdY">
-                                    <rect key="frame" x="267" y="288" width="348" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="0fJ-h2-GNM">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.googleMapsApiKey" id="CSo-ee-2x1"/>
-                                    </connections>
-                                </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ez7-TE-6iB">
-                                    <rect key="frame" x="349" y="217" width="268" height="17"/>
+                                    <rect key="frame" x="348" y="225" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Field of view color" id="dnI-tz-3DZ">
                                         <font key="font" metaFont="system"/>
@@ -128,7 +81,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="n2a-4n-fZB">
-                                    <rect key="frame" x="349" y="188" width="268" height="17"/>
+                                    <rect key="frame" x="348" y="196" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Arrow color" id="JB4-SI-g5c">
                                         <font key="font" metaFont="system"/>
@@ -137,7 +90,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" id="o8K-nA-nR4">
-                                    <rect key="frame" x="266" y="109" width="268" height="26"/>
+                                    <rect key="frame" x="265" y="117" width="268" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="eX5-eA-djm">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -155,7 +108,7 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </popUpButton>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dn4-nJ-MlM">
-                                    <rect key="frame" x="91" y="116" width="161" height="17"/>
+                                    <rect key="frame" x="90" y="124" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Display at opening:" id="Iav-pi-HYw">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
@@ -164,7 +117,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="5GI-SZ-eBp">
-                                    <rect key="frame" x="91" y="69" width="161" height="17"/>
+                                    <rect key="frame" x="90" y="77" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Others:" id="534-tp-bti">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
@@ -173,7 +126,7 @@ Please get a API key and specify it as following steps:
                                     </textFieldCell>
                                 </textField>
                                 <button id="lAg-TP-ygJ">
-                                    <rect key="frame" x="266" y="68" width="313" height="18"/>
+                                    <rect key="frame" x="265" y="76" width="313" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Enable Google Street View" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qlO-Ag-XOq">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -184,7 +137,7 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </button>
                                 <button id="pSV-HE-kiL">
-                                    <rect key="frame" x="266" y="48" width="313" height="18"/>
+                                    <rect key="frame" x="265" y="56" width="313" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Move to home position if no GPS data" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LWe-Nr-0Zp">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -195,7 +148,7 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" id="7WS-Z2-Lo2">
-                                    <rect key="frame" x="268" y="158" width="75" height="22"/>
+                                    <rect key="frame" x="267" y="166" width="75" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="BsN-7f-7i8">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Skb-Lg-cIX"/>
@@ -214,7 +167,7 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </textField>
                                 <button id="96A-Vs-OS6">
-                                    <rect key="frame" x="266" y="28" width="351" height="18"/>
+                                    <rect key="frame" x="265" y="36" width="351" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Pass altitude when open external map appliccation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sIl-jE-S4z">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -231,7 +184,7 @@ Please get a API key and specify it as following steps:
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="360" y="378.5"/>
+            <point key="canvasLocation" x="360" y="277"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="MyX-ZP-vVp"/>
     </objects>

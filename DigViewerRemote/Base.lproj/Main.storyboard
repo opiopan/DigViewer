@@ -104,7 +104,19 @@
                     <view key="view" contentMode="scaleToFill" id="soL-1J-bLl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auc-OZ-1LV">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="auc-OZ-1LV" secondAttribute="trailing" id="HG2-jl-mr4"/>
+                            <constraint firstItem="auc-OZ-1LV" firstAttribute="leading" secondItem="soL-1J-bLl" secondAttribute="leading" id="Jma-Im-aMZ"/>
+                            <constraint firstItem="auc-OZ-1LV" firstAttribute="top" secondItem="JcS-mR-2pL" secondAttribute="bottom" id="nuP-jN-QmN"/>
+                            <constraint firstItem="LAu-gW-p1G" firstAttribute="top" secondItem="auc-OZ-1LV" secondAttribute="bottom" id="pP4-Ej-Mmv"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OYS-Pw-etK">
                         <nil key="title"/>
@@ -121,7 +133,7 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="placeholder" destination="soL-1J-bLl" id="uBk-Gp-wdU"/>
+                        <outlet property="placeholder" destination="auc-OZ-1LV" id="OrC-3l-0p3"/>
                         <outlet property="segmentedControll" destination="naq-Lb-RYa" id="2l8-BW-Oxe"/>
                     </connections>
                 </viewController>
@@ -306,6 +318,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0Q2-Qu-8C5"/>
-        <segue reference="1Vi-gm-zmd"/>
+        <segue reference="mAB-uM-i7s"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -15,25 +15,28 @@ class InfomationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        segmentedControll!.selectedSegmentIndex = 0;
         
-        let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
-        if let newController = controller{
-            self.addChildViewController(newController)
-            newController.view.frame = placeholder!.bounds;
-            placeholder!.addSubview(newController.view)
-            currentViewController = newController;
-        }
+        let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+        dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+            let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
+            if let newController = controller{
+                let frame = self.placeholder!.bounds
+                self.addChildViewController(newController)
+                newController.view.frame = frame
+                self.placeholder!.addSubview(newController.view)
+                self.currentViewController = newController;
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    
     //-----------------------------------------------------------------------------------------
-    // コンテントビュー切り替え
+    // MARK: - コンテントビュー切り替え
     //-----------------------------------------------------------------------------------------
-    // MARK: Changing content view
     func viewControllerForSegmentIndex(index:Int) -> UIViewController?{
         let viewIdentifiers = ["ExifViewController", "ImageListViewController"]
         if let storyboard = self.storyboard{
@@ -43,29 +46,24 @@ class InfomationViewController: UIViewController {
     }
     
     @IBAction func segmentChange(sender:UISegmentedControl){
-//        let options = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.TransitionFlipFromRight]
+        let options = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.TransitionFlipFromRight]
         let controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
         if let newController = controller{
             self.addChildViewController(newController);
-            currentViewController!.view.removeFromSuperview()
-            newController.view.frame = self.placeholder!.bounds
-            self.placeholder!.addSubview(newController.view)
-            currentViewController!.removeFromParentViewController()
-            self.currentViewController = newController
-//            self.transitionFromViewController(
-//                currentViewController!, toViewController: newController, duration: 0.5,
-//                options: options[sender.selectedSegmentIndex],
-//                animations: {[unowned self]() -> Void  in
-//                    self.currentViewController!.view .removeFromSuperview()
-//                    newController.view.frame = self.placeholder!.bounds
-//                    self.placeholder?.addSubview(newController.view)
-//                },
-//                completion: {[unowned self](result : Bool) -> Void in
-//                    newController.didMoveToParentViewController(self)
-//                    self.currentViewController!.removeFromParentViewController()
-//                    self.currentViewController = newController
-//                }
-//            )
+            self.transitionFromViewController(
+                currentViewController!, toViewController: newController, duration: 0.5,
+                options: options[sender.selectedSegmentIndex],
+                animations: {[unowned self]() -> Void  in
+                    self.currentViewController!.view .removeFromSuperview()
+                    newController.view.frame = self.placeholder!.bounds
+                    self.placeholder?.addSubview(newController.view)
+                },
+                completion: {[unowned self](result : Bool) -> Void in
+                    newController.didMoveToParentViewController(self)
+                    self.currentViewController!.removeFromParentViewController()
+                    self.currentViewController = newController
+                }
+            )
         }
     }
 }
