@@ -143,6 +143,9 @@
     _gpsInfoView.menu = attributesMenu;
     _mapView.menu = mapMenu;
     
+    _mapView.delegate = self;
+    _mapView.notifyChangeZoomSelector = @selector(onChangeMapZoom:);
+
     _initialized = true;
 }
 
@@ -681,6 +684,17 @@ static NSString* CategoryKML = @"KML";
     [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
     
     [[DVRemoteServer sharedServer] sendMeta:data];
+}
+
+//-----------------------------------------------------------------------------------------
+// マップビューのズームレベル変更通知
+//-----------------------------------------------------------------------------------------
+- (void)onChangeMapZoom:(id)sender
+{
+    PathNode* current = _imageArrayController.selectedObjects[0];
+    if (current){
+        [self reflectMetaToRemoteApp:current];
+    }
 }
 
 @end

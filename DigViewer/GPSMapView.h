@@ -25,4 +25,7 @@
 @property bool enableStreetView;
 @property bool enableHomePosition;
 
+@property (weak, nonatomic) id delegate;
+@property (nonatomic) SEL notifyChangeZoomSelector;
+
 @end

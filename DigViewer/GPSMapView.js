@@ -98,7 +98,7 @@ function initialize() {
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
     google.maps.event.addListener(map, "bounds_changed", function(){if (isIncompleteArrow) setHeading();});
-    google.maps.event.addListener(map, "zoom_changed", function(){setHeading();});
+    google.maps.event.addListener(map, "zoom_changed", function(){setHeading(); window.digViewerBridge.onChangeZoom()});
     window.digViewerBridge.reflectGpsInfo();
 }
 
