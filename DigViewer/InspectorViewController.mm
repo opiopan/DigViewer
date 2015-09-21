@@ -493,9 +493,11 @@ typedef struct _MapGeometry MapGeometry;
         rc.viewLatitude = rc.latitude;
         rc.viewLongitude = rc.longitude;
     }
+
     rc.standLatitude = rc.latitude + deltaLat * standRatio * cos((rc.heading + 180) / 180.0 * M_PI);
     rc.standLongitude = rc.longitude + deltaLng * standRatio * sin((rc.heading + 180) / 180.0 * M_PI);
-    rc.standAltitude = rc.spanLatitudeMeter * 0.25 * tan(rc.tilt / 180.0 * M_PI);
+    rc.standAltitude = MAX(rc.spanLatitudeMeter, rc.spanLongitudeMeter) * 1.87 * cos(rc.tilt / 180.0 * M_PI);
+
     return rc;
 }
 

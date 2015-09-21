@@ -76,5 +76,4 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
 
         return cell
     }
-
 }
