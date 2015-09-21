@@ -49,10 +49,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        
+        if state == .Disconnected && client.reconectCount < 10 {
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue(), {() -> Void in client.reconnect()})
+        }
     }
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
+        restrictLock()
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - ロック禁止期間の制御
+    //-----------------------------------------------------------------------------------------
+    private var timeToStartLock : dispatch_time_t = 0
+    private var isInvokedLockTimer = false
+    
+    func restrictLock() {
+        timeToStartLock = dispatch_time(DISPATCH_TIME_NOW, Int64(60 * Double(NSEC_PER_SEC)))
+        if (!isInvokedLockTimer){
+            isInvokedLockTimer = true
+            UIApplication.sharedApplication().idleTimerDisabled = true
+            waitForTimeToStartLock()
+        }
+    }
+    
+    func waitForTimeToStartLock() {
+        dispatch_after(timeToStartLock, dispatch_get_main_queue(), {[unowned self]() -> Void in
+            let now = dispatch_time(DISPATCH_TIME_NOW, 0)
+            if (now > self.timeToStartLock){
+                UIApplication.sharedApplication().idleTimerDisabled = false
+            }else{
+                self.waitForTimeToStartLock()
+            }
+        })
     }
 }
 

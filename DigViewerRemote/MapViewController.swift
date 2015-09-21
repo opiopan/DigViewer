@@ -9,23 +9,25 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate, ConfigurationControllerDelegate {
     
     @IBOutlet var barTitle : UINavigationItem? = nil
     @IBOutlet var mapView : MKMapView? = nil
 
+    private let configController = ConfigurationController.sharedController
+    private var show3DView = true;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true;
         
-//        let infoButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera,
-//                                         target: self, action: Selector("performInformationButton:"))
-//        navigationItem.rightBarButtonItem = infoButton;
+        configController.registerObserver(self)
+        show3DView = configController.map3DView
         
         mapView!.layer.zPosition = -1;
-        mapView!.mapType = MKMapType.HybridFlyover;
         mapView!.delegate = self
+        reflectUserDefaults()
         
         let client = DVRemoteClient.sharedClient()
         client.addClientDelegate(self)
@@ -37,11 +39,32 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     deinit{
         DVRemoteClient.sharedClient().removeClientDelegate(self)
+        configController.unregisterObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - User Defaultsの反映
+    //-----------------------------------------------------------------------------------------
+    func reflectUserDefaults() {
+        if configController.mapType == .Map {
+            mapView!.mapType = .Standard
+        }else{
+            mapView!.mapType = configController.mapShowLabel ? .HybridFlyover : .SatelliteFlyover
+        }
+        
+        if configController.map3DView != show3DView {
+            show3DView = configController.map3DView
+            moveToDefaultPosition(self)
+        }
+    }
+    
+    func notifyUpdateConfiguration(configuration: ConfigurationController) {
+        reflectUserDefaults()
     }
     
     //-----------------------------------------------------------------------------------------
@@ -119,6 +142,19 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     @IBAction func moveToPreviousImage(sender : AnyObject) {
         DVRemoteClient.sharedClient()!.moveToPreviousImage()
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // 設定ボタン
+    //-----------------------------------------------------------------------------------------
+    @IBAction func configureApp(sender : AnyObject) {
+        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
+            traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
+        if isReguler {
+            performSegueWithIdentifier("PopoverConfigurationView", sender: sender)
+        }else{
+            performSegueWithIdentifier("ModalConfigurationView", sender: sender)
+        }
     }
 
     //-----------------------------------------------------------------------------------------
@@ -223,7 +259,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var grandAltitude : Double? = nil
     
     @IBAction func moveToDefaultPosition(sender : AnyObject?) {
-        if (isUpdatedLocation){
+        if (isUpdatedLocation || !configController.map3DView){
             let region = MKCoordinateRegionMake(photoCoordinate!, mapSpan!)
             mapView!.setRegion(region, animated: true)
         }else{
