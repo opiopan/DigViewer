@@ -37,10 +37,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         client.addClientDelegate(self)
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
         if let name = ConfigurationController.sharedController.establishedConnection {
-            client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
+                client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+            })
         }else{
             firstConnecting = false;
-            performServersButton(self)
+            self.performServersButton(self)
         }
 
     }

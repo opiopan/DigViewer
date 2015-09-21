@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) NSNetService* service;
 @property (readonly) NSInteger reconectCount;
 @property (readonly) NSDictionary* meta;
+@property (readonly) NSDictionary* templateMeta;
 
 + (DVRemoteClient*)sharedClient;
 

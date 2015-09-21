@@ -183,7 +183,9 @@
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
-    if (command == DVRC_NOTIFY_META){
+    if (command == DVRC_NOTIFY_TEMPLATE_META){
+        _templateMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }else if (command == DVRC_NOTIFY_META){
         _meta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_delegates.count){
             for (id <DVRemoteClientDelegate> delegate in _delegates){

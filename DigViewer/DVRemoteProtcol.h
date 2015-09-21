@@ -14,13 +14,14 @@ extern NSString* DVR_SERVICE_NAME;
 typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NA = -1,
     
-    // Server -> Client
+    // Client -> Server
     DVRC_MOVE_NEXT_IMAGE = 1,
     DVRC_MOVE_PREV_IMAGE,
     DVRC_REQUEST_THUMBNAIL,
     
-    // Client -> Server
+    // Server -> Client
     DVRC_NOTIFY_META = 1000,
+    DVRC_NOTIFY_TEMPLATE_META,
     DVRC_NOTIFY_THUMBNAIL
 };
 

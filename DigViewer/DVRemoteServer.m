@@ -7,6 +7,8 @@
 //
 
 #import "DVRemoteServer.h"
+#import "PathNode.h"
+#import "ImageMetadata.h"
 
 @implementation DVRemoteServer{
     BOOL _publishingFailed;
@@ -15,6 +17,7 @@
     NSMutableArray* _authorizedSessions;
     
     NSData* _currentMeta;
+    NSData* _templateMeta;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -40,6 +43,12 @@
     if (self){
         _publishingFailed = NO;
         _authorizedSessions = [NSMutableArray array];
+        
+        ImageMetadata* meta = [[ImageMetadata alloc] init];
+        NSArray* summary = meta.summary;
+        NSArray* gpsInfo = meta.gpsInfoStrings;
+        NSDictionary* templateMeta = @{DVRCNMETA_SUMMARY:summary, DVRCNMETA_GPS_SUMMARY:gpsInfo};
+        _templateMeta = [NSKeyedArchiver archivedDataWithRootObject:templateMeta];
     }
     return self;
 }
@@ -78,8 +87,9 @@
     [_authorizedSessions addObject:session];
     session.delegate = self;
     [session scheduleInRunLoop:_runLoop];
+    [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
     if (_currentMeta){
-        [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:YES];
+        [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
     }
 }
 
