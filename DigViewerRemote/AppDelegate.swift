@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        DVRemoteClient.sharedClient().addClientDelegate(self)
+        let client = DVRemoteClient.sharedClient()
+        client.addClientDelegate(self)
         return true
     }
 
@@ -52,6 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
         if state == .Disconnected && client.reconectCount < 10 {
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(time, dispatch_get_main_queue(), {() -> Void in client.reconnect()})
+        }else if state == .Connected {
+            ConfigurationController.sharedController.establishedConnection = client.service.name
         }
     }
     
@@ -79,6 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
             let now = dispatch_time(DISPATCH_TIME_NOW, 0)
             if (now > self.timeToStartLock){
                 UIApplication.sharedApplication().idleTimerDisabled = false
+                self.isInvokedLockTimer = false
             }else{
                 self.waitForTimeToStartLock()
             }

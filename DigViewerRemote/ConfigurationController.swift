@@ -13,6 +13,7 @@ import UIKit
 // MARK: ユーザデフォルトキー名 / 列挙型定義
 //-----------------------------------------------------------------------------------------
 private struct UserDefaults {
+    static let EstablishedConnection = "EstablishedConnection";
     static let MapType = "MapType";
     static let MapShowLabel = "MapShowLabel";
     static let Map3DView = "Map3DView"
@@ -51,6 +52,7 @@ class ConfigurationController: NSObject {
         ]
         let controller = NSUserDefaults.standardUserDefaults()
         controller.registerDefaults(defaults)
+        establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
         mapType = MapType(rawValue : controller.valueForKey(UserDefaults.MapType) as! Int)!
         mapShowLabel = controller.valueForKey(UserDefaults.MapShowLabel) as! Bool
         map3DView = controller.valueForKey(UserDefaults.Map3DView) as! Bool
@@ -85,6 +87,13 @@ class ConfigurationController: NSObject {
     //-----------------------------------------------------------------------------------------
     // MARK: - プロパティの実装
     //-----------------------------------------------------------------------------------------
+    var establishedConnection : String? {
+        didSet{
+            let controller = NSUserDefaults.standardUserDefaults()
+            controller.setValue(establishedConnection, forKey: UserDefaults.EstablishedConnection)
+            updateConfiguration()
+        }
+    }
     var mapType : MapType {
         didSet{
             let controller = NSUserDefaults.standardUserDefaults()

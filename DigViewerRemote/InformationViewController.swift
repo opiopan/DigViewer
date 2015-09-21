@@ -16,7 +16,7 @@ class InfomationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentedControll!.selectedSegmentIndex = 0;
-        
+
         let time = dispatch_time(DISPATCH_TIME_NOW, 0)
         dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
             let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
@@ -46,7 +46,7 @@ class InfomationViewController: UIViewController {
     }
     
     @IBAction func segmentChange(sender:UISegmentedControl){
-        let options = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.TransitionFlipFromRight]
+        let options = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.TransitionFlipFromLeft]
         let controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
         if let newController = controller{
             self.addChildViewController(newController);

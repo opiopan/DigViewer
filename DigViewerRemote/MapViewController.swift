@@ -16,14 +16,18 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
 
     private let configController = ConfigurationController.sharedController
     private var show3DView = true;
+    private var firstConnecting = true;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        splitViewController!.maximumPrimaryColumnWidth = 320
         
         navigationItem.hidesBackButton = true;
         
         configController.registerObserver(self)
         show3DView = configController.map3DView
+        
         
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
@@ -32,9 +36,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         let client = DVRemoteClient.sharedClient()
         client.addClientDelegate(self)
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
-        if client.state == .Disconnected {
+        if let name = ConfigurationController.sharedController.establishedConnection {
+            client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+        }else{
+            firstConnecting = false;
             performServersButton(self)
         }
+
     }
     
     deinit{
@@ -162,6 +170,12 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
+        if client.state == .Disconnected && firstConnecting {
+            performServersButton(self)
+            firstConnecting = false;
+        }else if client.state == .Connected {
+            firstConnecting = false;
+        }
     }
     
     private var annotation : MKShape? = nil
