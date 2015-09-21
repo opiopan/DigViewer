@@ -10,6 +10,7 @@
 		7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B467F731B9F15A1005719E7 /* MapKit.framework */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
 		7B52AA3D1BB0126D0068A842 /* InspectorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3C1BB0126D0068A842 /* InspectorTableView.swift */; settings = {ASSET_TAGS = (); }; };
+		7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */; settings = {ASSET_TAGS = (); }; };
 		7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6753941BA3BFEA005CC069 /* ServersViewController.swift */; };
 		7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -42,6 +43,7 @@
 		7B467F731B9F15A1005719E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B52AA3C1BB0126D0068A842 /* InspectorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorTableView.swift; sourceTree = "<group>"; };
+		7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
 		7B6753941BA3BFEA005CC069 /* ServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersViewController.swift; sourceTree = "<group>"; };
 		7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				7B52AA3C1BB0126D0068A842 /* InspectorTableView.swift */,
+				7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
 				7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */,
 				7BD72C3A1B9DB2D500DDBC1A /* DVRemoteClient.m in Sources */,
+				7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */,
 				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
 				7B52AA3D1BB0126D0068A842 /* InspectorTableView.swift in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,

@@ -492,7 +492,7 @@ typedef struct _MapGeometry MapGeometry;
     double standRatio = (1.5 - OFFSET_RATIO) / OFFSET_RATIO;
     if (!rc.isEnableHeading){
         standRatio = 1.5;
-        rc.tilt = 45;
+        rc.tilt = 55;
         rc.viewLatitude = rc.latitude;
         rc.viewLongitude = rc.longitude;
     }

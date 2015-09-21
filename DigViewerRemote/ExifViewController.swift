@@ -53,7 +53,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
         exifData = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
         gpsData = meta[DVRCNMETA_GPS_SUMMARY] as! [ImageMetadataKV]
         sectionCount = 1
-        rowCount = exifData.count
+        rowCount = exifData.count + (gpsData.count > 0 ? gpsData.count + 1 : 0)
         tableView.reloadData()
     }
 
@@ -69,11 +69,54 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath) 
-        let entry = exifData[indexPath.row]
-        cell.textLabel!.text = entry.key
-        cell.detailTextLabel!.text = entry.value
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath) as! LabelArrangableCell
+        var entry : ImageMetadataKV? = nil
+        if indexPath.row < exifData.count {
+            entry = exifData[indexPath.row]
+        }else if indexPath.row > exifData.count {
+            entry = gpsData[indexPath.row - exifData.count - 1]
+        }
+        if entry != nil {
+            cell.textLabel!.text = entry!.key
+            cell.detailTextLabel!.text = entry!.value
+            cell.textLabelWidth = firstFieldWidth(cell)
+        }else{
+            cell.textLabel!.text = ""
+            cell.detailTextLabel!.text = ""
+        }
 
         return cell
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 一列目のサイズ算出
+    //-----------------------------------------------------------------------------------------
+    private var calculatedFirstFieldWidth : Double? = nil
+    
+    private func firstFieldWidth(cell : UITableViewCell) -> Double {
+        if let width = calculatedFirstFieldWidth {
+            return width
+        }else{
+            let font = cell.textLabel!.font
+            let attributes = [NSFontAttributeName : font]
+            let meta = DVRemoteClient.sharedClient().templateMeta
+            let exif = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
+            let gps = meta[DVRCNMETA_GPS_SUMMARY] as! [ImageMetadataKV]
+            var width : Double = 0
+            for entry in exif {
+                if let key = entry.key {
+                    let size = (key as NSString).sizeWithAttributes(attributes)
+                    width = max(width, Double(size.width))
+                }
+            }
+            for entry in gps {
+                if let key = entry.key {
+                    let size = (key as NSString).sizeWithAttributes(attributes)
+                    width = max(width, Double(size.width))
+                }
+            }
+            calculatedFirstFieldWidth = width
+            return calculatedFirstFieldWidth!
+        }
     }
 }
