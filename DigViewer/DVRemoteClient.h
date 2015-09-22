@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "DVRemoteSession.h"
 
 @protocol DVRemoteClientDelegate;
@@ -30,6 +31,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) NSInteger reconectCount;
 @property (readonly) NSDictionary* meta;
 @property (readonly) NSDictionary* templateMeta;
+@property (readonly) UIImage* thumbnail;
 
 + (DVRemoteClient*)sharedClient;
 
@@ -51,4 +53,6 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @protocol DVRemoteClientDelegate <NSObject>
 - (void)dvrClient:(DVRemoteClient*)client changeState:(DVRClientState)state;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveMeta:(NSDictionary*)meta;
+@optional
+- (void)dvrClient:(DVRemoteClient*)client didRecieveCurrentThumbnail:(UIImage*)thumbnail;
 @end

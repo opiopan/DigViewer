@@ -630,7 +630,7 @@ static NSString* CategoryKML = @"KML";
     if ([node imageRepresentationType] == IKImageBrowserCGImageRepresentationType){
         thumbnail = (__bridge_retained CGImageRef)[node imageRepresentation];
     }else{
-        thumbnail = [node CGImageFromNSImage:[node imageRepresentation]];
+        thumbnail = [node CGImageFromNSImage:[node imageRepresentation] withSize:0];
     }
     NSImage* image = [[NSImage alloc] initWithCGImage:thumbnail
                                                  size:NSMakeSize(CGImageGetWidth(thumbnail)/2, CGImageGetHeight(thumbnail)/2)];
@@ -678,10 +678,11 @@ static NSString* CategoryKML = @"KML";
         [data setValue:@(geometry.standLatitude) forKey:DVRCNMETA_STAND_LATITUDE];
         [data setValue:@(geometry.standLongitude) forKey:DVRCNMETA_STAND_LONGITUDE];
         [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
+
+        [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
     }
     
     [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
-    [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
     
     [[DVRemoteServer sharedServer] sendMeta:data];
 }

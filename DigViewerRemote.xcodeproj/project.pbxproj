@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */; settings = {ASSET_TAGS = (); }; };
 		7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B467F731B9F15A1005719E7 /* MapKit.framework */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
 		7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
 		7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7B467F731B9F15A1005719E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				7B52AA431BB0DE700068A842 /* InspectorTableView.swift */,
 				7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */,
+				7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */,
 				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,
+				7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,

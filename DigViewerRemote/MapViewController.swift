@@ -15,8 +15,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     @IBOutlet var mapView : MKMapView? = nil
 
     private let configController = ConfigurationController.sharedController
-    private var show3DView = true;
-    private var firstConnecting = true;
+    private var show3DView = true
+    private var firstConnecting = true
+    
+    private var thumbnailView : UIImageView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         configController.registerObserver(self)
         show3DView = configController.map3DView
         
+        thumbnailView = UIImageView.init(frame: CGRectMake(0, 0, 64, 64));
+        thumbnailView!.contentMode = UIViewContentMode.ScaleAspectFill
         
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
@@ -217,10 +221,18 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             theRoppongiAnnotation.coordinate = photoCoordinate!
             theRoppongiAnnotation.title = nodeId![nodeId!.count - 1]
             annotation = theRoppongiAnnotation
+            thumbnailView!.image = client.thumbnail;
             mapView!.addAnnotation(annotation!)
             
             willStatToMove()
             moveToDefaultPosition(self)
+        }
+    }
+    
+    func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
+        thumbnailView!.image = thumbnail
+        if (annotation != nil){
+            mapView!.selectAnnotation(annotation!, animated:true)
         }
     }
     
@@ -346,5 +358,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             })
         })
         task.resume()
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - アノテーションカスタマイズ
+    //-----------------------------------------------------------------------------------------
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]){
+        for view : MKAnnotationView in views {
+            view.leftCalloutAccessoryView = thumbnailView!
+            view.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
+        }
     }
 }

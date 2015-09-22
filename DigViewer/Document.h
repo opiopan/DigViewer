@@ -17,4 +17,6 @@
 - (void)loadDocument:(id)sender;
 - (void)saveDocumentWindowPreferences:(NSDictionary*)preferences;
 
+- (void)sendThumbnails:(NSArray*)ids;
+
 @end

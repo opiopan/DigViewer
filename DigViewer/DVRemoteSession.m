@@ -109,7 +109,9 @@ static NSString* QUE_ELEMENT_DATA = @"data";
 {
     NSDictionary* entry = data ? @{QUE_ELEMENT_COMMAND: @(command), QUE_ELEMENT_DATA: data} : @{QUE_ELEMENT_COMMAND: @(command)};
     if (isReplacingQue){
-        [_sendQue removeLastObject];
+        if ([[[_sendQue lastObject] valueForKey:QUE_ELEMENT_COMMAND] intValue] == command){
+            [_sendQue removeLastObject];
+        }
     }
     [_sendQue addObject:entry];
     [self updateSenderStatus];

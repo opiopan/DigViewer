@@ -10,6 +10,9 @@
 #import "DocumentConfigController.h"
 #import "DocumentWindowController.h"
 #import "LoadingSheetController.h"
+#import "DVRemoteServer.h"
+
+#include "CoreFoundationHelper.h"
 
 //-----------------------------------------------------------------------------------------
 // Document class implementation
@@ -147,6 +150,34 @@ static NSString* PREFARENCES_FILE_NAME = @"/.DigViewer.preferences";
         NSFileManager* manager = [NSFileManager defaultManager];
         NSError* error;
         [manager removeItemAtPath:path error:&error];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリへのサムネール送信
+//-----------------------------------------------------------------------------------------
+static const CGFloat thumbnailSize = 128;
+- (void)sendThumbnails:(NSArray *)ids
+{
+    NSString* documentName = self.fileURL.path;
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    for (NSArray* pathID in ids){
+        PathNode* currentNode = [root nearestNodeAtPortablePath:pathID];
+        dispatch_async(que, ^(void){
+            NSImage* image;
+            id thumbnail = [currentNode thumbnailImage:thumbnailSize];
+            if ([thumbnail isKindOfClass:[NSImage class]]){
+                image = thumbnail;
+            }else{
+                ECGImageRef cgimage;
+                cgimage = (__bridge_retained CGImageRef)thumbnail;
+                image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(thumbnailSize, thumbnailSize)];
+            }
+            NSData* data = [image TIFFRepresentation];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[DVRemoteServer sharedServer] sendThumbnail:data forNodeID:pathID inDocument:documentName];
+            });
+        });
     }
 }
 

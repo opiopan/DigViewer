@@ -72,4 +72,13 @@
     }
 }
 
+- (void)dvrServer:(DVRemoteServer *)server needSendThumbnails:(NSArray *)ids forDocument:(NSString *)documentName
+{
+    NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+    Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
+    if (document){
+        [document sendThumbnails:ids];
+    }
+}
+
 @end

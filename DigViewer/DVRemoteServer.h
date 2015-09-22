@@ -24,6 +24,7 @@
 
 - (BOOL)establishServer;
 - (void)sendMeta:(NSDictionary*)meta;
+- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName;
 
 @end
 
@@ -33,5 +34,6 @@
 @protocol DVRemoteServerDelegate <NSObject>
 - (void)dvrServer:(DVRemoteServer*)server needMoveToNeighborImageOfDocument:(NSString*)document
     withDirection:(DVRCommand)direction;
+- (void)dvrServer:(DVRemoteServer*)server needSendThumbnails:(NSArray*)ids forDocument:(NSString*)document;
 @end
 

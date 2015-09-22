@@ -99,10 +99,16 @@
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
-    if (command == DVRC_MOVE_PREV_IMAGE || DVRC_MOVE_NEXT_IMAGE){
+    if (command == DVRC_MOVE_PREV_IMAGE || command == DVRC_MOVE_NEXT_IMAGE){
         NSString* document = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_delegate){
             [_delegate dvrServer:self needMoveToNeighborImageOfDocument:document withDirection:command];
+        }
+    }else if (command == DVRC_REQUEST_THUMBNAIL){
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_delegate){
+            [_delegate dvrServer:self needSendThumbnails:[args valueForKey:DVRCNMETA_IDS]
+                     forDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
         }
     }
 }
@@ -122,6 +128,21 @@
     for (DVRemoteSession* session in _authorizedSessions){
         [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:YES];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// サムネール送信
+//-----------------------------------------------------------------------------------------
+- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
+{
+    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                           DVRCNMETA_ID: nodeID,
+                           DVRCNMETA_THUMBNAIL: thumbnail};
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+    for (DVRemoteSession* session in _authorizedSessions){
+        [session sendCommand:DVRC_NOTIFY_THUMBNAIL withData:data replacingQue:YES];
+    }
+    
 }
 
 @end

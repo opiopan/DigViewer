@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, DVRCommand){
 //-----------------------------------------------------------------------------------------
 extern NSString* DVRCNMETA_DOCUMENT;
 extern NSString* DVRCNMETA_ID;
+extern NSString* DVRCNMETA_IDS;
 extern NSString* DVRCNMETA_LATITUDE;
 extern NSString* DVRCNMETA_LONGITUDE;
 extern NSString* DVRCNMETA_ALTITUDE;
@@ -46,3 +47,4 @@ extern NSString* DVRCNMETA_STAND_ALTITUDE;
 extern NSString* DVRCNMETA_TILT;
 extern NSString* DVRCNMETA_SUMMARY;
 extern NSString* DVRCNMETA_GPS_SUMMARY;
+extern NSString* DVRCNMETA_THUMBNAIL;

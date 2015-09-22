@@ -16,6 +16,7 @@ NSString* DVR_SERVICE_NAME = @"DigViewer Remote";
 //-----------------------------------------------------------------------------------------
 NSString* DVRCNMETA_DOCUMENT = @"document";
 NSString* DVRCNMETA_ID = @"id";
+NSString* DVRCNMETA_IDS = @"ids";
 NSString* DVRCNMETA_LATITUDE = @"latitude";
 NSString* DVRCNMETA_LONGITUDE = @"longitude";
 NSString* DVRCNMETA_ALTITUDE = @"altitude";
@@ -32,3 +33,4 @@ NSString* DVRCNMETA_STAND_ALTITUDE = @"standaAltitude";
 NSString* DVRCNMETA_TILT = @"tilt";
 NSString* DVRCNMETA_SUMMARY = @"summary";
 NSString* DVRCNMETA_GPS_SUMMARY = @"gpsSummary";
+NSString* DVRCNMETA_THUMBNAIL = @"thumbnail";

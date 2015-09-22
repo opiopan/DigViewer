@@ -51,10 +51,22 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         exifData = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
-        gpsData = meta[DVRCNMETA_GPS_SUMMARY] as! [ImageMetadataKV]
+        if let tmp = meta[DVRCNMETA_GPS_SUMMARY]{
+            gpsData = tmp as! [ImageMetadataKV]
+        }else{
+            gpsData = nil
+        }
         sectionCount = 1
-        rowCount = exifData.count + (gpsData.count > 0 ? gpsData.count + 1 : 0)
+        let gpsDataCount = gpsData == nil ? 0 : gpsData.count
+        rowCount = exifData.count - 1 + (gpsDataCount > 0 ? gpsDataCount + 1 : 0)
         tableView.reloadData()
+    }
+    
+    func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
+        let index = NSIndexPath.init(forRow: 0, inSection: 0)
+        if let cell = tableView!.cellForRowAtIndexPath(index) {
+            (cell as! InspectorImageCell).thumbnailView.image = thumbnail
+        }
     }
 
     //-----------------------------------------------------------------------------------------
@@ -68,21 +80,37 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
         return rowCount
     }
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return indexPath.row == 0 ? CGFloat(160) : CGFloat(20)
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath) as! LabelArrangableCell
+        let cell = indexPath.row == 0 ?
+                   tableView.dequeueReusableCellWithIdentifier("ImageCell", forIndexPath: indexPath) :
+                   tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath)
         var entry : ImageMetadataKV? = nil
-        if indexPath.row < exifData.count {
-            entry = exifData[indexPath.row]
-        }else if indexPath.row > exifData.count {
-            entry = gpsData[indexPath.row - exifData.count - 1]
+        if indexPath.row == 0 {
+            entry = exifData[0]
+        }else if indexPath.row > 0 && indexPath.row < exifData.count - 1{
+            entry = exifData[indexPath.row + 1]
+        }else if indexPath.row >= exifData.count {
+            entry = gpsData[indexPath.row - exifData.count]
         }
-        if entry != nil {
-            cell.textLabel!.text = entry!.key
-            cell.detailTextLabel!.text = entry!.value
-            cell.textLabelWidth = firstFieldWidth(cell)
+        if indexPath.row == 0 {
+            let imageCell = cell as! InspectorImageCell
+            let entry2 = exifData[1]
+            imageCell.mainLabel!.text = entry!.value
+            imageCell.subLabel!.text = entry2.value
+            imageCell.thumbnailView!.image = DVRemoteClient.sharedClient().thumbnail
         }else{
-            cell.textLabel!.text = ""
-            cell.detailTextLabel!.text = ""
+            if entry != nil {
+                cell.textLabel!.text = entry!.key
+                cell.detailTextLabel!.text = entry!.value
+                (cell as! LabelArrangableCell).textLabelWidth = firstFieldWidth(cell)
+            }else{
+                cell.textLabel!.text = ""
+                cell.detailTextLabel!.text = ""
+            }
         }
 
         return cell

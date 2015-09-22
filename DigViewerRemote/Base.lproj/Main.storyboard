@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bqX-2x-2CQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -81,6 +82,51 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="90" id="sgA-gJ-CBZ" customClass="InspectorImageCell" customModule="DigViewerRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="40" width="600" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sgA-gJ-CBZ" id="FZx-3G-azk">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-aK-uvS">
+                                            <rect key="frame" x="8" y="4" width="82" height="82"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="4xn-aK-uvS" secondAttribute="height" multiplier="1:1" id="7hd-u2-YBh"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VNA-UE-H2Q">
+                                            <rect key="frame" x="98" y="28" width="40" height="34"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVo-7N-avT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gP8-DJ-i9d">
+                                                    <rect key="frame" x="0.0" y="20" width="40" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4xn-aK-uvS" firstAttribute="top" secondItem="FZx-3G-azk" secondAttribute="top" constant="4" id="31Q-Ze-D0i"/>
+                                        <constraint firstItem="VNA-UE-H2Q" firstAttribute="centerY" secondItem="FZx-3G-azk" secondAttribute="centerY" id="Ceu-kG-uVn"/>
+                                        <constraint firstItem="4xn-aK-uvS" firstAttribute="leading" secondItem="FZx-3G-azk" secondAttribute="leading" constant="8" id="Xuo-rU-0dR"/>
+                                        <constraint firstItem="VNA-UE-H2Q" firstAttribute="leading" secondItem="4xn-aK-uvS" secondAttribute="trailing" constant="8" id="ZJ2-vJ-ThG"/>
+                                        <constraint firstAttribute="bottom" secondItem="4xn-aK-uvS" secondAttribute="bottom" constant="4" id="dUR-oe-hBo"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="mainLabel" destination="sVo-7N-avT" id="zYH-GI-irt"/>
+                                    <outlet property="subLabel" destination="gP8-DJ-i9d" id="wZH-Hh-He2"/>
+                                    <outlet property="thumbnailView" destination="4xn-aK-uvS" id="AA3-7c-bXm"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

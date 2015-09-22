@@ -186,10 +186,31 @@
     if (command == DVRC_NOTIFY_TEMPLATE_META){
         _templateMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }else if (command == DVRC_NOTIFY_META){
-        _meta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSDictionary* newMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (![self compareWithMeta:_meta andMeta:newMeta]){
+            _meta = newMeta;
+            _thumbnail = nil;
+            NSDictionary* reqDict = @{DVRCNMETA_DOCUMENT: [_meta valueForKey:DVRCNMETA_DOCUMENT],
+                                      DVRCNMETA_IDS: @[[_meta valueForKey:DVRCNMETA_ID]]};
+            NSData* reqData = [NSKeyedArchiver archivedDataWithRootObject:reqDict];
+            [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:reqData replacingQue:NO];
+        }else{
+            _meta = newMeta;
+        }
         if (_delegates.count){
             for (id <DVRemoteClientDelegate> delegate in _delegates){
                 [delegate dvrClient:self didRecieveMeta:_meta];
+            }
+        }
+    }else if (command == DVRC_NOTIFY_THUMBNAIL){
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if ([self compareWithMeta:_meta andMeta:args] && !_thumbnail){
+            NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
+            _thumbnail = [UIImage imageWithData:tiffData];
+            for (id <DVRemoteClientDelegate> delegate in _delegates){
+                if ([delegate respondsToSelector:@selector(dvrClient:didRecieveCurrentThumbnail:)]){
+                    [delegate dvrClient:self didRecieveCurrentThumbnail:_thumbnail];
+                }
             }
         }
     }
@@ -198,6 +219,32 @@
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error
 {
     [self disconnect];
+}
+
+//-----------------------------------------------------------------------------------------
+// メタ比較
+//-----------------------------------------------------------------------------------------
+- (BOOL) compareWithMeta:(NSDictionary*)meta1 andMeta:(NSDictionary*)meta2
+{
+    BOOL rc = YES;
+    
+    NSString* doc1 = [meta1 valueForKey:DVRCNMETA_DOCUMENT];
+    NSString* doc2 = [meta2 valueForKey:DVRCNMETA_DOCUMENT];
+    NSArray* path1 = [meta1 valueForKey:DVRCNMETA_ID];
+    NSArray* path2 = [meta2 valueForKey:DVRCNMETA_ID];
+    
+    if ([doc1 isEqualToString:doc2] && path1.count == path2.count){
+        for (int i = 0; i < path1.count; i++){
+            if (![path1[i] isEqualToString:path2[i]]){
+                rc = NO;
+                break;
+            }
+        }
+    }else{
+        rc = NO;
+    }
+    
+    return rc;
 }
 
 @end
