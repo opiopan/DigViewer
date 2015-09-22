@@ -223,6 +223,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             annotation = theRoppongiAnnotation
             thumbnailView!.image = client.thumbnail;
             mapView!.addAnnotation(annotation!)
+            mapView!.selectAnnotation(annotation!, animated:true)
             
             willStatToMove()
             moveToDefaultPosition(self)
@@ -231,9 +232,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
         thumbnailView!.image = thumbnail
-        if (annotation != nil){
-            mapView!.selectAnnotation(annotation!, animated:true)
-        }
+//        if (annotation != nil){
+//            mapView!.selectAnnotation(annotation!, animated:true)
+//        }
     }
     
     //-----------------------------------------------------------------------------------------
@@ -366,7 +367,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]){
         for view : MKAnnotationView in views {
             view.leftCalloutAccessoryView = thumbnailView!
-            view.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
+            let button = UIButton.init(type:UIButtonType.DetailDisclosure)
+            button.addTarget(self, action: "viewFullImage:", forControlEvents: .TouchUpInside)
+            view.rightCalloutAccessoryView = button
         }
+    }
+    
+    func viewFullImage(sender: AnyObject) {
+        performSegueWithIdentifier("FullImageView", sender: sender)
     }
 }

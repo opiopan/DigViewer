@@ -115,6 +115,12 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
 
         return cell
     }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == 0){
+            performSegueWithIdentifier("FullImageView", sender: tableView)
+        }
+    }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 一列目のサイズ算出
