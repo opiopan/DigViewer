@@ -156,7 +156,7 @@ static NSString* PREFARENCES_FILE_NAME = @"/.DigViewer.preferences";
 //-----------------------------------------------------------------------------------------
 // コンパニオンアプリへのサムネール送信
 //-----------------------------------------------------------------------------------------
-static const CGFloat thumbnailSize = 128;
+static const CGFloat thumbnailSize = 256;
 - (void)sendThumbnails:(NSArray *)ids
 {
     NSString* documentName = self.fileURL.path;
@@ -174,8 +174,12 @@ static const CGFloat thumbnailSize = 128;
                 image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(thumbnailSize, thumbnailSize)];
             }
             NSData* data = [image TIFFRepresentation];
+            NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
+            NSDictionary* option = @{NSImageCompressionFactor: @0.7};
+            NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [[DVRemoteServer sharedServer] sendThumbnail:data forNodeID:pathID inDocument:documentName];
+                [[DVRemoteServer sharedServer] sendThumbnail:jpegData forNodeID:pathID inDocument:documentName];
             });
         });
     }
