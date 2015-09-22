@@ -277,16 +277,20 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     @IBAction func moveToDefaultPosition(sender : AnyObject?) {
         if (isUpdatedLocation || !configController.map3DView){
-            let region = MKCoordinateRegionMake(photoCoordinate!, mapSpan!)
-            mapView!.setRegion(region, animated: true)
+            if photoCoordinate != nil && mapSpan != nil {
+                let region = MKCoordinateRegionMake(photoCoordinate!, mapSpan!)
+                mapView!.setRegion(region, animated: true)
+            }
         }else{
-            let camera = MKMapCamera();
-            camera.centerCoordinate = centerCoordinate!
-            camera.heading = cameraHeading == nil ? 0 : cameraHeading!
-            camera.altitude = cameraAltitude!
-            camera.pitch = cameraTilt
-            
-            mapView!.setCamera(camera, animated: true)
+            if centerCoordinate != nil && cameraAltitude != nil {
+                let camera = MKMapCamera();
+                camera.centerCoordinate = centerCoordinate!
+                camera.heading = cameraHeading == nil ? 0 : cameraHeading!
+                camera.altitude = cameraAltitude!
+                camera.pitch = cameraTilt
+                
+                mapView!.setCamera(camera, animated: true)
+            }
         }
     }
     
