@@ -13,7 +13,9 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     private var targetDocument : String? = nil
     private var targetPath : [String]? = nil
     
-    @IBOutlet var imageView : UIImageView? = nil
+    @IBOutlet weak var imageView : UIImageView? = nil
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var LoadingLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,17 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         }
         
         if let image = DVRemoteClient.sharedClient().fullImageForID(targetPath, inDocument: targetDocument, withMaxSize: 2048) {
+            indicatorView.layer.zPosition = -1;
+            LoadingLabel.layer.zPosition = -1;
             applyImage(image, rotation: DVRemoteClient.sharedClient().imageRotation)
+            let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+            dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+                self.applyTransform(self.imageView!.bounds.size)
+            })
+        }else{
+            indicatorView.layer.zPosition = 1;
+            LoadingLabel.layer.zPosition = 1;
+            indicatorView.startAnimating()
         }
     }
     
@@ -60,26 +72,41 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
+    private var imageSize : CGSize = CGSizeMake(0, 0)
+    private var imageTransform :  CGAffineTransform = CGAffineTransformIdentity
+    
     private func applyImage(image : UIImage?, rotation : Int) {
-        var transform = CGAffineTransformIdentity
+        imageSize = image!.size
+        imageTransform = CGAffineTransformIdentity
         if (rotation == 5 || rotation == 8){
             /* 90 degrees rotation */
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2 * 3));
+            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI_2 * 3));
+            imageSize = CGSizeMake(image!.size.height, image!.size.width)
         }else if (rotation == 3 || rotation == 4){
             /* 180 degrees rotation */
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI));
+            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI));
         }else if (rotation == 6 || rotation == 7){
             /* 270 degrees rotation */
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2));
+            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI_2));
+            imageSize = CGSizeMake(image!.size.height, image!.size.width)
         }
-        imageView!.transform = transform
-        self.imageView!.contentMode = .ScaleAspectFill
-        let time = dispatch_time(DISPATCH_TIME_NOW, 0)
         self.imageView!.image = image
-        dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
-            self.imageView!.contentMode = .ScaleAspectFit
-        })
+        applyTransform(imageView!.bounds.size)
+    }
+    
+    private func applyTransform(viewSize : CGSize) {
+        let hRatio = viewSize.width / imageSize.width
+        let vRatio = viewSize.height / imageSize.height
+        let ratio = min(hRatio, vRatio)
+        let transform = CGAffineTransformScale(imageTransform, ratio, ratio)
+        imageView!.transform = transform
+    }
+    //-----------------------------------------------------------------------------------------
+    // MARK: - デバイス回転
+    //-----------------------------------------------------------------------------------------
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        applyTransform(size)
     }
     
     //-----------------------------------------------------------------------------------------
@@ -96,6 +123,9 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             }
         }
         if (isSame){
+            LoadingLabel.layer.zPosition = -1;
+            indicatorView.stopAnimating()
+            indicatorView.layer.zPosition = -1;
             applyImage(image, rotation: rotation)
         }
     }

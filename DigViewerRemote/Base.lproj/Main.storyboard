@@ -146,11 +146,49 @@
         <scene sceneID="zs8-Re-b74">
             <objects>
                 <viewController id="45G-hC-5DD" customClass="FullImageViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <imageView key="view" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="J70-pN-P6r">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wPq-pm-zFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="whh-xB-yfv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xid-MV-8z6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Fx-Jr-Exf">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-7Q-c3l">
+                                <rect key="frame" x="282" y="282" width="37" height="37"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ngz-Xt-aDJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now Downloading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flg-IM-cxb">
+                                <rect key="frame" x="151" y="238" width="298" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="298" id="OM3-7f-wnB"/>
+                                    <constraint firstAttribute="height" constant="21" id="o4Q-RL-TXd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </imageView>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3Fx-Jr-Exf" secondAttribute="trailing" id="0RK-un-RgE"/>
+                            <constraint firstItem="flg-IM-cxb" firstAttribute="centerX" secondItem="Xid-MV-8z6" secondAttribute="centerX" id="68J-lj-PSS"/>
+                            <constraint firstItem="CFa-7Q-c3l" firstAttribute="top" secondItem="flg-IM-cxb" secondAttribute="bottom" constant="23" id="8GW-O3-BTJ"/>
+                            <constraint firstItem="3Fx-Jr-Exf" firstAttribute="top" secondItem="Xid-MV-8z6" secondAttribute="top" id="RDK-yx-cx0"/>
+                            <constraint firstItem="CFa-7Q-c3l" firstAttribute="centerX" secondItem="Xid-MV-8z6" secondAttribute="centerX" id="bjO-9j-h36"/>
+                            <constraint firstItem="CFa-7Q-c3l" firstAttribute="centerY" secondItem="Xid-MV-8z6" secondAttribute="centerY" id="dSW-hy-EDv"/>
+                            <constraint firstItem="3Fx-Jr-Exf" firstAttribute="leading" secondItem="Xid-MV-8z6" secondAttribute="leading" id="y08-Ak-hU1"/>
+                            <constraint firstItem="whh-xB-yfv" firstAttribute="top" secondItem="3Fx-Jr-Exf" secondAttribute="bottom" id="yJp-eR-bOV"/>
+                        </constraints>
+                    </view>
                     <navigationItem key="navigationItem" id="H78-Ux-RmO">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="yCZ-5v-RWL">
                             <connections>
@@ -159,7 +197,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageView" destination="J70-pN-P6r" id="von-0V-2bG"/>
+                        <outlet property="LoadingLabel" destination="flg-IM-cxb" id="KeI-YB-i02"/>
+                        <outlet property="imageView" destination="3Fx-Jr-Exf" id="v4E-n7-KKQ"/>
+                        <outlet property="indicatorView" destination="ngz-Xt-aDJ" id="lHV-kF-xon"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmp-g2-ZuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
