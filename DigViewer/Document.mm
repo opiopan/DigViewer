@@ -11,6 +11,7 @@
 #import "DocumentWindowController.h"
 #import "LoadingSheetController.h"
 #import "DVRemoteServer.h"
+#import "ImageRenderer.h"
 
 #include "CoreFoundationHelper.h"
 
@@ -183,6 +184,41 @@ static const CGFloat thumbnailSize = 256;
             });
         });
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリへフルイメージを送信
+//-----------------------------------------------------------------------------------------
+- (void)sendFullImage:(NSArray *)nodeId withSize:(CGFloat)maxSize
+{
+    NSString* documentName = self.fileURL.path;
+    PathNode* currentNode = [root nearestNodeAtPortablePath:nodeId];
+    NSString* imagePath = currentNode.imagePath;
+
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(que, ^(void){
+        ImageRenderer* renderer = [ImageRenderer imageRendererWithPath: imagePath];
+        NSInteger rotation = renderer.rotation;
+        NSImage* image;
+        id fullImage = renderer.image;
+        if ([fullImage isKindOfClass:[NSImage class]]){
+            image = fullImage;
+        }else{
+            ECGImageRef cgimage;
+            cgimage = (__bridge_retained CGImageRef)fullImage;
+            image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(maxSize, maxSize)];
+        }
+
+        NSData* data = [image TIFFRepresentation];
+        NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
+        NSDictionary* option = @{NSImageCompressionFactor: @0.7};
+        NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[DVRemoteServer sharedServer] sendFullimage:jpegData forNodeID:nodeId inDocument:documentName
+                                            withRotation:rotation];
+        });
+    });
 }
 
 @end

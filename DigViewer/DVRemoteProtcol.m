@@ -34,3 +34,6 @@ NSString* DVRCNMETA_TILT = @"tilt";
 NSString* DVRCNMETA_SUMMARY = @"summary";
 NSString* DVRCNMETA_GPS_SUMMARY = @"gpsSummary";
 NSString* DVRCNMETA_THUMBNAIL = @"thumbnail";
+NSString* DVRCNMETA_FULLIMAGE = @"fullimage";
+NSString* DVRCNMETA_IMAGESIZEMAX = @"imagesizemax";
+NSString* DVRCNMETA_IMAGEROTATION = @"imagerotation";

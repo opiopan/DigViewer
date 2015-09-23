@@ -25,6 +25,8 @@
 - (BOOL)establishServer;
 - (void)sendMeta:(NSDictionary*)meta;
 - (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName;
+- (void)sendFullimage:(NSData*)fullimage forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
+         withRotation:(NSInteger)rotation;
 
 @end
 
@@ -35,5 +37,8 @@
 - (void)dvrServer:(DVRemoteServer*)server needMoveToNeighborImageOfDocument:(NSString*)document
     withDirection:(DVRCommand)direction;
 - (void)dvrServer:(DVRemoteServer*)server needSendThumbnails:(NSArray*)ids forDocument:(NSString*)document;
+@optional
+- (void)dvrServer:(DVRemoteServer*)server needSendFullimage:(NSArray*)nodeId forDocument:(NSString*)document
+         withSize:(CGFloat)maxSize;
 @end
 

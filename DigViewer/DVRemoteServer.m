@@ -18,6 +18,8 @@
     
     NSData* _currentMeta;
     NSData* _templateMeta;
+    
+    NSMutableDictionary* _fullImageQue;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -49,6 +51,7 @@
         NSArray* gpsInfo = meta.gpsInfoStrings;
         NSDictionary* templateMeta = @{DVRCNMETA_SUMMARY:summary, DVRCNMETA_GPS_SUMMARY:gpsInfo};
         _templateMeta = [NSKeyedArchiver archivedDataWithRootObject:templateMeta];
+        _fullImageQue = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -110,6 +113,32 @@
             [_delegate dvrServer:self needSendThumbnails:[args valueForKey:DVRCNMETA_IDS]
                      forDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
         }
+    }else if (command == DVRC_REQUEST_FULLIMAGE){
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSString* idString = [self nodeIDStringForMeta:args];
+        
+        NSMutableArray* sessions = [_fullImageQue valueForKey:idString];
+        if (sessions){
+            BOOL found = NO;
+            for (DVRemoteSession* registeredSession in sessions){
+                if (session == registeredSession){
+                    found = YES;
+                    break;
+                }
+                if (!found){
+                    [sessions addObject:session];
+                }
+            }
+        }else{
+            NSMutableArray* sessions = [NSMutableArray array];
+            [sessions addObject:session];
+            [_fullImageQue setValue:sessions forKey:idString];
+            if (_delegate && [_delegate respondsToSelector:@selector(dvrServer:needSendFullimage:forDocument:withSize:)]){
+                [_delegate dvrServer:self needSendFullimage:[args valueForKey:DVRCNMETA_ID]
+                         forDocument:[args valueForKey:DVRCNMETA_DOCUMENT]
+                            withSize:[[args valueForKey:DVRCNMETA_IMAGESIZEMAX] doubleValue]];
+            }
+        }
     }
 }
 
@@ -117,6 +146,17 @@
 {
     [session close];
     [_authorizedSessions removeObject:session];
+    NSMutableArray* removingKeys = [NSMutableArray array];
+    for (NSString* key in _fullImageQue){
+        NSMutableArray* sessions = [_fullImageQue valueForKey:key];
+        [sessions removeObject:session];
+        if (sessions.count == 0){
+            [removingKeys addObject:key];
+        }
+    }
+    for (NSString* key in removingKeys){
+        [_fullImageQue removeObjectForKey:key];
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -142,7 +182,41 @@
     for (DVRemoteSession* session in _authorizedSessions){
         [session sendCommand:DVRC_NOTIFY_THUMBNAIL withData:data replacingQue:YES];
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// フル画像送信
+//-----------------------------------------------------------------------------------------
+- (void)sendFullimage:(NSData *)fullimage forNodeID:(NSArray *)nodeID inDocument:(NSString *)documentName
+         withRotation:(NSInteger)rotation
+{
+    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                           DVRCNMETA_ID: nodeID,
+                           DVRCNMETA_FULLIMAGE: fullimage,
+                           DVRCNMETA_IMAGEROTATION: @(rotation)};
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+    NSString* idString = [self nodeIDStringForMeta:args];
     
+    NSMutableArray* sessions = [_fullImageQue valueForKey:idString];
+    if (sessions){
+        for (DVRemoteSession* registeredSession in sessions){
+            [registeredSession sendCommand:DVRC_NOTIFY_FULLIMAGE withData:data replacingQue:NO];
+        }
+        [_fullImageQue removeObjectForKey:idString];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// ノードID文字列生成
+//-----------------------------------------------------------------------------------------
+- (NSString*)nodeIDStringForMeta:(NSDictionary*)meta
+{
+    NSString* rc = [meta valueForKey:DVRCNMETA_DOCUMENT];
+    NSArray* nodeId = [meta valueForKey:DVRCNMETA_ID];
+    for (NSString* element in nodeId){
+        rc = [rc stringByAppendingFormat:@"/%@", element];
+    }
+    return rc;
 }
 
 @end

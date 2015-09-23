@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) NSDictionary* meta;
 @property (readonly) NSDictionary* templateMeta;
 @property (readonly) UIImage* thumbnail;
+@property (readonly) NSInteger imageRotation;
 
 + (DVRemoteClient*)sharedClient;
 
@@ -45,14 +46,18 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)moveToNextImage;
 - (void)moveToPreviousImage;
 
+- (UIImage*)fullImageForID:(NSArray*)nodeID inDocument:(NSString*)document withMaxSize:(CGFloat)maxSize;
+
 @end
 
 //-----------------------------------------------------------------------------------------
 // デリゲートプロトコル
 //-----------------------------------------------------------------------------------------
 @protocol DVRemoteClientDelegate <NSObject>
+@optional
 - (void)dvrClient:(DVRemoteClient*)client changeState:(DVRClientState)state;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveMeta:(NSDictionary*)meta;
-@optional
 - (void)dvrClient:(DVRemoteClient*)client didRecieveCurrentThumbnail:(UIImage*)thumbnail;
+- (void)dvrClient:(DVRemoteClient*)client didRecieveFullImage:(UIImage*)image
+             ofId:(NSArray*)nodeId inDocument:(NSString*)documentName withRotation:(NSInteger)rotation;
 @end

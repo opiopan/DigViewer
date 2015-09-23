@@ -18,11 +18,13 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_MOVE_NEXT_IMAGE = 1,
     DVRC_MOVE_PREV_IMAGE,
     DVRC_REQUEST_THUMBNAIL,
+    DVRC_REQUEST_FULLIMAGE,
     
     // Server -> Client
     DVRC_NOTIFY_META = 1000,
     DVRC_NOTIFY_TEMPLATE_META,
-    DVRC_NOTIFY_THUMBNAIL
+    DVRC_NOTIFY_THUMBNAIL,
+    DVRC_NOTIFY_FULLIMAGE
 };
 
 //-----------------------------------------------------------------------------------------
@@ -48,3 +50,6 @@ extern NSString* DVRCNMETA_TILT;
 extern NSString* DVRCNMETA_SUMMARY;
 extern NSString* DVRCNMETA_GPS_SUMMARY;
 extern NSString* DVRCNMETA_THUMBNAIL;
+extern NSString* DVRCNMETA_FULLIMAGE;
+extern NSString* DVRCNMETA_IMAGESIZEMAX;
+extern NSString* DVRCNMETA_IMAGEROTATION;

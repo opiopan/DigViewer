@@ -135,7 +135,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="45G-hC-5DD" kind="presentation" identifier="FullImageView" id="bWQ-td-jEd"/>
+                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="ETZ-FC-MkB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTo-p1-J5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,40 +146,41 @@
         <scene sceneID="zs8-Re-b74">
             <objects>
                 <viewController id="45G-hC-5DD" customClass="FullImageViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Q5c-bi-oeR"/>
-                        <viewControllerLayoutGuide type="bottom" id="a7R-QA-FSh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2XO-UQ-n5M">
+                    <imageView key="view" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="J70-pN-P6r">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This page is to show full image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mG0-Fn-olb">
-                                <rect key="frame" x="183" y="289" width="235" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-6M-ftt">
-                                <rect key="frame" x="277" y="318" width="46" height="30"/>
-                                <state key="normal" title="Return"/>
-                                <connections>
-                                    <action selector="exitView:" destination="45G-hC-5DD" eventType="touchUpInside" id="J2s-vV-elr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="gm7-6M-ftt" firstAttribute="top" secondItem="mG0-Fn-olb" secondAttribute="bottom" constant="8" id="Bh4-ho-8Y4"/>
-                            <constraint firstItem="gm7-6M-ftt" firstAttribute="centerX" secondItem="2XO-UQ-n5M" secondAttribute="centerX" id="qRE-CW-iDf"/>
-                            <constraint firstItem="mG0-Fn-olb" firstAttribute="centerY" secondItem="2XO-UQ-n5M" secondAttribute="centerY" id="vV4-1A-5Da"/>
-                            <constraint firstItem="mG0-Fn-olb" firstAttribute="centerX" secondItem="2XO-UQ-n5M" secondAttribute="centerX" id="xge-3B-d43"/>
-                        </constraints>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <navigationItem key="navigationItem" id="H78-Ux-RmO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="yCZ-5v-RWL">
+                            <connections>
+                                <action selector="exitView:" destination="45G-hC-5DD" id="Dxk-Js-Fso"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="J70-pN-P6r" id="von-0V-2bG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmp-g2-ZuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1139" y="-1303"/>
+            <point key="canvasLocation" x="1793" y="-1296"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Jr-vq-hwB">
+            <objects>
+                <navigationController id="UWM-7A-nOd" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aba-Y2-I7a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="45G-hC-5DD" kind="relationship" relationship="rootViewController" id="e2S-Zx-sTh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qP5-yy-28D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1067" y="-1296"/>
         </scene>
         <!--Infomation View Controller-->
         <scene sceneID="xUU-DN-WVd">
@@ -396,7 +397,7 @@
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
-                        <segue destination="45G-hC-5DD" kind="presentation" identifier="FullImageView" id="wno-Tb-Ude"/>
+                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="XyN-pQ-fCP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ua2-Qv-qXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -567,7 +568,7 @@
         <image name="ServerButton" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bWQ-td-jEd"/>
+        <segue reference="ETZ-FC-MkB"/>
         <segue reference="1Vi-gm-zmd"/>
         <segue reference="83V-8J-7rY"/>
         <segue reference="iBt-Pp-e1a"/>

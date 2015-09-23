@@ -15,6 +15,8 @@
     DVRemoteSession* _session;
     
     NSDictionary* _meta;
+    
+    UIImage* _fullImage;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -94,7 +96,9 @@
 {
     if (_delegates.count){
         for (id <DVRemoteClientDelegate> delegate in _delegates){
-            [delegate dvrClient:self changeState:_state];
+            if ([delegate respondsToSelector:@selector(dvrClient:changeState:)]){
+                [delegate dvrClient:self changeState:_state];
+            }
         }
     }
 }
@@ -178,18 +182,44 @@
     }
 }
 
+- (UIImage *)fullImageForID:(NSArray *)nodeID inDocument:(NSString *)document withMaxSize:(CGFloat)maxSize
+{
+    UIImage* rc = nil;
+    
+    NSDictionary* commandArgs = @{DVRCNMETA_DOCUMENT: document,
+                                  DVRCNMETA_ID: nodeID,
+                                  DVRCNMETA_IMAGESIZEMAX: @(maxSize)};
+    if (_meta && [self compareWithMeta:commandArgs andMeta:_meta]){
+        rc = _fullImage;
+    }
+    
+    if (!rc){
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs];
+        [_session sendCommand:DVRC_REQUEST_FULLIMAGE withData:data replacingQue:YES];
+    }
+    
+    return rc;
+}
+
 //-----------------------------------------------------------------------------------------
 // セッションからのイベント処理
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
     if (command == DVRC_NOTIFY_TEMPLATE_META){
+        //-----------------------------------------------------------------------------------------
+        // テンプレートメタ受信
+        //-----------------------------------------------------------------------------------------
         _templateMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }else if (command == DVRC_NOTIFY_META){
+        //-----------------------------------------------------------------------------------------
+        // メタデータ受信
+        //-----------------------------------------------------------------------------------------
         NSDictionary* newMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (![self compareWithMeta:_meta andMeta:newMeta]){
             _meta = newMeta;
             _thumbnail = nil;
+            _fullImage = nil;
             NSDictionary* reqDict = @{DVRCNMETA_DOCUMENT: [_meta valueForKey:DVRCNMETA_DOCUMENT],
                                       DVRCNMETA_IDS: @[[_meta valueForKey:DVRCNMETA_ID]]};
             NSData* reqData = [NSKeyedArchiver archivedDataWithRootObject:reqDict];
@@ -199,10 +229,15 @@
         }
         if (_delegates.count){
             for (id <DVRemoteClientDelegate> delegate in _delegates){
-                [delegate dvrClient:self didRecieveMeta:_meta];
+                if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
+                    [delegate dvrClient:self didRecieveMeta:_meta];
+                }
             }
         }
     }else if (command == DVRC_NOTIFY_THUMBNAIL){
+        //-----------------------------------------------------------------------------------------
+        // サムネール受信
+        //-----------------------------------------------------------------------------------------
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if ([self compareWithMeta:_meta andMeta:args] && !_thumbnail){
             NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
@@ -211,6 +246,25 @@
                 if ([delegate respondsToSelector:@selector(dvrClient:didRecieveCurrentThumbnail:)]){
                     [delegate dvrClient:self didRecieveCurrentThumbnail:_thumbnail];
                 }
+            }
+        }
+    }else if (command == DVRC_NOTIFY_FULLIMAGE){
+        //-----------------------------------------------------------------------------------------
+        // フル画像受信
+        //-----------------------------------------------------------------------------------------
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSData* tiffData = [args valueForKey:DVRCNMETA_FULLIMAGE];
+        UIImage* image = [UIImage imageWithData:tiffData];
+        if ([self compareWithMeta:_meta andMeta:args] && !_fullImage){
+            _fullImage = image;
+            _imageRotation = [[args valueForKey:DVRCNMETA_IMAGEROTATION] intValue];
+        }
+        for (id <DVRemoteClientDelegate> delegate in _delegates){
+            if ([delegate respondsToSelector:@selector(dvrClient:didRecieveFullImage:ofId:inDocument:withRotation:)]){
+                [delegate dvrClient:self didRecieveFullImage:image
+                               ofId:[args valueForKey:DVRCNMETA_ID]
+                         inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]
+                       withRotation:[[args valueForKey:DVRCNMETA_IMAGEROTATION] intValue]];
             }
         }
     }

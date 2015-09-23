@@ -81,4 +81,14 @@
     }
 }
 
+- (void)dvrServer:(DVRemoteServer *)server needSendFullimage:(NSArray *)nodeId
+      forDocument:(NSString *)documentName withSize:(CGFloat)maxSize
+{
+    NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+    Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
+    if (document){
+        [document sendFullImage:nodeId withSize:maxSize];
+    }
+}
+
 @end
