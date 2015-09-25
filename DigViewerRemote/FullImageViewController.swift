@@ -25,6 +25,8 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
 
         navigationController?.hidesBarsOnTap = true
         
+        imageView!.alpha = 0
+        
         if let meta = DVRemoteClient.sharedClient().meta {
             targetDocument = meta[DVRCNMETA_DOCUMENT] as? String
             targetPath = meta[DVRCNMETA_ID]as? [String]
@@ -34,7 +36,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         if let image = DVRemoteClient.sharedClient().fullImageForID(targetPath, inDocument: targetDocument, withMaxSize: 2048) {
             indicatorView.layer.zPosition = -1;
             LoadingLabel.layer.zPosition = -1;
-            applyImage(image, rotation: DVRemoteClient.sharedClient().imageRotation)
+            applyImage(image, rotation: DVRemoteClient.sharedClient().imageRotation, animation: false)
             let time = dispatch_time(DISPATCH_TIME_NOW, 0)
             dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
                 self.applyTransform(self.imageView!.bounds.size)
@@ -75,7 +77,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     private var imageSize : CGSize = CGSizeMake(0, 0)
     private var imageTransform :  CGAffineTransform = CGAffineTransformIdentity
     
-    private func applyImage(image : UIImage?, rotation : Int) {
+    private func applyImage(image : UIImage?, rotation : Int, animation : Bool) {
         imageSize = image!.size
         imageTransform = CGAffineTransformIdentity
         if (rotation == 5 || rotation == 8){
@@ -90,8 +92,17 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI_2));
             imageSize = CGSizeMake(image!.size.height, image!.size.width)
         }
-        self.imageView!.image = image
         applyTransform(imageView!.bounds.size)
+        if (animation){
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.35)
+            imageView!.alpha = 1
+            imageView!.image = image
+            UIView.commitAnimations()
+        }else{
+            imageView!.alpha = 1
+            imageView!.image = image
+        }
     }
     
     private func applyTransform(viewSize : CGSize) {
@@ -106,7 +117,11 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.2)
         applyTransform(size)
+        UIView.commitAnimations()
     }
     
     //-----------------------------------------------------------------------------------------
@@ -123,10 +138,10 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             }
         }
         if (isSame){
-            LoadingLabel.layer.zPosition = -1;
+            LoadingLabel.alpha = 0;
             indicatorView.stopAnimating()
-            indicatorView.layer.zPosition = -1;
-            applyImage(image, rotation: rotation)
+            indicatorView.alpha = 0;
+            applyImage(image, rotation: rotation, animation: true)
         }
     }
     

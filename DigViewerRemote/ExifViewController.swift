@@ -81,7 +81,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.row == 0 ? CGFloat(160) : CGFloat(20)
+        return indexPath.row == 0 ? CGFloat(160) : CGFloat(16)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

@@ -15,7 +15,8 @@ class InfomationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedControll!.selectedSegmentIndex = 0;
+        
+        segmentedControll!.selectedSegmentIndex = 0
 
         let time = dispatch_time(DISPATCH_TIME_NOW, 0)
         dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in

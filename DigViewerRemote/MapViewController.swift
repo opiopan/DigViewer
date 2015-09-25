@@ -28,6 +28,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         splitViewController!.maximumPrimaryColumnWidth = 320
         
         navigationItem.hidesBackButton = true;
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         //navigationController?.hidesBarsOnTap = true
         
         configController.registerObserver(self)
@@ -86,11 +87,17 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 splitViewController!.preferredDisplayMode = .PrimaryHidden
             }
             if isEnableDoublePane {
-                splitViewController!.preferredDisplayMode = .AllVisible
+                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+                dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+                    self.splitViewController!.preferredDisplayMode = .AllVisible
+                })
             }
         }else if size.height > size.width && isReguler {
             if mode != .PrimaryHidden {
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.2)
                 splitViewController!.preferredDisplayMode = .PrimaryHidden
+                UIView.commitAnimations()
             }
         }
     }
@@ -107,7 +114,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             // 縦表示
             if isConnected {
                 if isReguler {
+                    UIView.beginAnimations(nil, context: nil)
+                    UIView.setAnimationDuration(0.2)
                     splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+                    UIView.commitAnimations()
                 }else{
                     performSegueWithIdentifier("ShowInformationView", sender: sender)
                 }
@@ -116,7 +126,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             // 横表示
             if isReguler {
                 isEnableDoublePane = !isEnableDoublePane
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.2)
                 splitViewController!.preferredDisplayMode = isEnableDoublePane ? .AllVisible : .PrimaryHidden
+                UIView.commitAnimations()
             }else{
                 if isConnected {
                     performSegueWithIdentifier("ShowInformationView", sender: sender)
