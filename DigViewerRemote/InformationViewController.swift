@@ -39,7 +39,7 @@ class InfomationViewController: UIViewController {
     // MARK: - コンテントビュー切り替え
     //-----------------------------------------------------------------------------------------
     func viewControllerForSegmentIndex(index:Int) -> UIViewController?{
-        let viewIdentifiers = ["ExifViewController", "ImageListViewController"]
+        let viewIdentifiers = ["ExifViewController", "ImageListNavigator"]
         if let storyboard = self.storyboard{
             return storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?
         }

@@ -45,8 +45,13 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 
 - (void)moveToNextImage;
 - (void)moveToPreviousImage;
+- (void)moveToNode:(NSArray*)nodeID inDocument:(NSString*)documentName;
+
+- (UIImage*)thumbnailForID:(NSArray*)nodeID inDocument:(NSString*)documen;
 
 - (UIImage*)fullImageForID:(NSArray*)nodeID inDocument:(NSString*)document withMaxSize:(CGFloat)maxSize;
+
+- (NSArray*)nodeListForID:(NSArray*)nodeID inDocument:(NSString*)document;
 
 @end
 
@@ -58,6 +63,10 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)dvrClient:(DVRemoteClient*)client changeState:(DVRClientState)state;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveMeta:(NSDictionary*)meta;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveCurrentThumbnail:(UIImage*)thumbnail;
+- (void)dvrClient:(DVRemoteClient*)client didRecieveThumbnail:(UIImage*)thumbnail
+             ofId:(NSArray*)nodeId inDocument:(NSString*)documentName withIndex:(NSInteger)index;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveFullImage:(UIImage*)image
              ofId:(NSArray*)nodeId inDocument:(NSString*)documentName withRotation:(NSInteger)rotation;
+- (void)dvrClient:(DVRemoteClient*)client didRecieveNodeList:(NSArray*)nodeList forNode:(NSArray*)nodeID
+       inDocument:(NSString*)documentName;
 @end

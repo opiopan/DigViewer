@@ -158,32 +158,31 @@ static NSString* PREFARENCES_FILE_NAME = @"/.DigViewer.preferences";
 // コンパニオンアプリへのサムネール送信
 //-----------------------------------------------------------------------------------------
 static const CGFloat thumbnailSize = 256;
-- (void)sendThumbnails:(NSArray *)ids
+- (void)sendThumbnail:(NSArray *)pathID
 {
     NSString* documentName = self.fileURL.path;
     dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    for (NSArray* pathID in ids){
-        PathNode* currentNode = [root nearestNodeAtPortablePath:pathID];
-        dispatch_async(que, ^(void){
-            NSImage* image;
-            id thumbnail = [currentNode thumbnailImage:thumbnailSize];
-            if ([thumbnail isKindOfClass:[NSImage class]]){
-                image = thumbnail;
-            }else{
-                ECGImageRef cgimage;
-                cgimage = (__bridge_retained CGImageRef)thumbnail;
-                image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(thumbnailSize, thumbnailSize)];
-            }
-            NSData* data = [image TIFFRepresentation];
-            NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
-            NSDictionary* option = @{NSImageCompressionFactor: @0.7};
-            NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
-
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [[DVRemoteServer sharedServer] sendThumbnail:jpegData forNodeID:pathID inDocument:documentName];
-            });
+    PathNode* currentNode = [root nearestNodeAtPortablePath:pathID];
+    dispatch_async(que, ^(void){
+        NSImage* image;
+        id thumbnail = [currentNode thumbnailImage:thumbnailSize];
+        if ([thumbnail isKindOfClass:[NSImage class]]){
+            image = thumbnail;
+        }else{
+            ECGImageRef cgimage;
+            cgimage = (__bridge_retained CGImageRef)thumbnail;
+            image = [[NSImage alloc] initWithCGImage:cgimage size:NSMakeSize(thumbnailSize, thumbnailSize)];
+        }
+        NSData* data = [image TIFFRepresentation];
+        NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
+        NSDictionary* option = @{NSImageCompressionFactor: @0.7};
+        NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[DVRemoteServer sharedServer] sendThumbnail:jpegData forNodeID:pathID
+                                              inDocument:documentName withIndex:currentNode.indexInParent];
         });
-    }
+    });
 }
 
 //-----------------------------------------------------------------------------------------
@@ -217,6 +216,37 @@ static const CGFloat thumbnailSize = 256;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[DVRemoteServer sharedServer] sendFullimage:jpegData forNodeID:nodeId inDocument:documentName
                                             withRotation:rotation];
+        });
+    });
+}
+
+//-----------------------------------------------------------------------------------------
+// コンパニオンアプリへディレクトリ内のノード一覧を送信
+//-----------------------------------------------------------------------------------------
+- (void)sendNodeListInFolder:(NSArray*)nodeId bySession:(DVRemoteSession *)session
+{
+    NSString* documentName = self.fileURL.path;
+    PathNode* currentNode = [root nearestNodeAtPortablePath:nodeId];
+    NSArray* path = [currentNode portablePath];
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(que, ^(void){
+        NSMutableArray* list = [NSMutableArray array];
+        for (PathNode* node in currentNode.images){
+            NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
+            NSString* type;
+            if (node.isImage){
+                NSError* error;
+                type = [workspace localizedDescriptionForType:[workspace typeOfFile:node.imagePath error:&error]];
+            }else{
+                type = [workspace localizedDescriptionForType:@"public.folder"];
+            }
+            NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: node.name,
+                                        DVRCNMETA_ITEM_TYPE: type,
+                                        DVRCNMETA_ITEM_IS_FOLDER: @(!node.isImage)};
+            [list addObject:nodeAttrs];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[DVRemoteServer sharedServer] sendFolderItems:list forNodeID:path inDocument:documentName bySession:session];
         });
     });
 }

@@ -16,6 +16,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     @IBOutlet weak var imageView : UIImageView? = nil
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var LoadingLabel: UILabel!
+    @IBOutlet weak var FailedLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             navigationItem.title = targetPath![targetPath!.count - 1]
         }
         
+        FailedLabel.alpha = 0;
         if let image = DVRemoteClient.sharedClient().fullImageForID(targetPath, inDocument: targetDocument, withMaxSize: 2048) {
             indicatorView.layer.zPosition = -1;
             LoadingLabel.layer.zPosition = -1;
@@ -138,10 +140,21 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             }
         }
         if (isSame){
-            LoadingLabel.alpha = 0;
+            LoadingLabel.alpha = 0
             indicatorView.stopAnimating()
-            indicatorView.alpha = 0;
+            indicatorView.alpha = 0
             applyImage(image, rotation: rotation, animation: true)
+        }
+    }
+    
+    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
+        if (state == DVRClientState.Disconnected){
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.35)
+            FailedLabel.alpha = 1
+            LoadingLabel.alpha = 0
+            indicatorView.stopAnimating()
+            indicatorView.alpha = 0
         }
     }
     

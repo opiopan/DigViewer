@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PathNode.h"
+#import "DVRemoteSession.h"
 
 @interface Document : NSDocument
 
@@ -17,7 +18,8 @@
 - (void)loadDocument:(id)sender;
 - (void)saveDocumentWindowPreferences:(NSDictionary*)preferences;
 
-- (void)sendThumbnails:(NSArray*)ids;
+- (void)sendThumbnail:(NSArray*)ids;
 - (void)sendFullImage:(NSArray *)nodeId withSize:(CGFloat)maxSize;
+- (void)sendNodeListInFolder:(NSArray*)nodeId bySession:(DVRemoteSession*)session;
 
 @end

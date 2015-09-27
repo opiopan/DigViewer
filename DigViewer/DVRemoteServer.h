@@ -24,9 +24,12 @@
 
 - (BOOL)establishServer;
 - (void)sendMeta:(NSDictionary*)meta;
-- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName;
+- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
+            withIndex:(NSInteger)index;
 - (void)sendFullimage:(NSData*)fullimage forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
          withRotation:(NSInteger)rotation;
+- (void)sendFolderItems:(NSArray*)items forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
+              bySession:(DVRemoteSession*)session;
 
 @end
 
@@ -36,9 +39,12 @@
 @protocol DVRemoteServerDelegate <NSObject>
 - (void)dvrServer:(DVRemoteServer*)server needMoveToNeighborImageOfDocument:(NSString*)document
     withDirection:(DVRCommand)direction;
-- (void)dvrServer:(DVRemoteServer*)server needSendThumbnails:(NSArray*)ids forDocument:(NSString*)document;
+- (void)dvrServer:(DVRemoteServer*)server needSendThumbnail:(NSArray*)id forDocument:(NSString*)document;
 @optional
+- (void)dvrServer:(DVRemoteServer*)server needMoveToNode:(NSArray*)nodeID inDocument:(NSString*)documentName;
 - (void)dvrServer:(DVRemoteServer*)server needSendFullimage:(NSArray*)nodeId forDocument:(NSString*)document
          withSize:(CGFloat)maxSize;
+- (void)dvrServer:(DVRemoteServer*)server needSendFolderItms:(NSArray*)nodeId forDocument:(NSString*)document
+        bySession:(DVRemoteSession*)session;
 @end
 

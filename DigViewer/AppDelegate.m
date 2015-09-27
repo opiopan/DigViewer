@@ -72,12 +72,26 @@
     }
 }
 
-- (void)dvrServer:(DVRemoteServer *)server needSendThumbnails:(NSArray *)ids forDocument:(NSString *)documentName
+- (void)dvrServer:(DVRemoteServer *)server needMoveToNode:(NSArray *)nodeID inDocument:(NSString *)documentName
 {
     NSDocumentController* controller = [NSDocumentController sharedDocumentController];
     Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
     if (document){
-        [document sendThumbnails:ids];
+        PathNode* node = [document.root nearestNodeAtPortablePath:nodeID];
+        for (NSWindowController* windowController in document.windowControllers){
+            if ([windowController.class isSubclassOfClass:[DocumentWindowController class]]){
+                [((DocumentWindowController*)windowController) moveToImageNode:node];
+            }
+        }
+    }
+}
+
+- (void)dvrServer:(DVRemoteServer *)server needSendThumbnail:(NSArray *)id forDocument:(NSString *)documentName
+{
+    NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+    Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
+    if (document){
+        [document sendThumbnail:id];
     }
 }
 
@@ -88,6 +102,16 @@
     Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
     if (document){
         [document sendFullImage:nodeId withSize:maxSize];
+    }
+}
+
+- (void)dvrServer:(DVRemoteServer *)server needSendFolderItms:(NSArray *)nodeId forDocument:(NSString *)documentName
+        bySession:(DVRemoteSession *)session
+{
+    NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+    Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
+    if (document){
+        [document sendNodeListInFolder:nodeId bySession:session];
     }
 }
 

@@ -657,6 +657,7 @@ static NSString* CategoryKML = @"KML";
     Document* document = controller.document;
     [data setValue:document.fileURL.path forKey:DVRCNMETA_DOCUMENT];
     [data setValue:node.portablePath forKey:DVRCNMETA_ID];
+    [data setValue:@(node.indexInParent) forKey:DVRCNMETA_INDEX_IN_PARENT];
     if (_metadata.gpsInfo){
         MapGeometry geometry = [self mapGeometory];
         

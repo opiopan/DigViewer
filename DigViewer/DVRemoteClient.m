@@ -8,15 +8,23 @@
 
 #import "DVRemoteClient.h"
 
+@interface DVRemoteClient ()
+@property NSInteger watchDogCount;
+@property BOOL runningWatchDog;
+@end
+
 @implementation DVRemoteClient{
     NSMutableArray* _delegates;
     
     NSNetService* _serviceForSession;
     DVRemoteSession* _session;
+    DVRemoteSession* _sidebandSession;
     
     NSDictionary* _meta;
     
     UIImage* _fullImage;
+    
+    NSDictionary* _nodeListWrap;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -44,6 +52,7 @@
         _state = DVRClientDisconnected;
         _reconectCount = 0;
         _runLoop = [NSRunLoop currentRunLoop];
+        _runningWatchDog = NO;
     }
     return self;
 }
@@ -136,8 +145,10 @@
     _session = [[DVRemoteSession alloc] initWithInputStream:inputStream outputStream:outputStream];
     _session.delegate = self;
     [_session scheduleInRunLoop:_runLoop];
-    _state = DVRClientConnected;
-    [self notifyStateChange];
+//    [sender getInputStream:&inputStream outputStream:&outputStream];
+//    _sidebandSession = [[DVRemoteSession alloc] initWithInputStream:inputStream outputStream:outputStream];
+//    _sidebandSession.delegate = self;
+//    [_sidebandSession scheduleInRunLoop:_runLoop];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
@@ -153,6 +164,10 @@
     if (_session){
         [_session close];
         _session = nil;
+    }
+    if (_sidebandSession){
+        [_sidebandSession close];
+        _sidebandSession = nil;
     }
     if (_state != DVRClientDisconnected){
         _state = DVRClientDisconnected;
@@ -179,7 +194,30 @@
         NSString* document = [_meta valueForKey:DVRCNMETA_DOCUMENT];
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:document];
         [_session sendCommand:command withData:data replacingQue:NO];
+        [self startWatchDog];
     }
+}
+
+
+- (void)moveToNode:(NSArray *)nodeID inDocument:(NSString *)documentName
+{
+    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                           DVRCNMETA_ID: nodeID};
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+    [_session sendCommand:DVRC_MOVE_NODE withData:data replacingQue:YES];
+}
+
+- (UIImage *)thumbnailForID:(NSArray *)nodeID inDocument:(NSString *)documentName
+{
+    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                           DVRCNMETA_ID : nodeID};
+    if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
+        return _thumbnail;
+    }
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+    [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
+    
+    return nil;
 }
 
 - (UIImage *)fullImageForID:(NSArray *)nodeID inDocument:(NSString *)document withMaxSize:(CGFloat)maxSize
@@ -196,9 +234,25 @@
     if (!rc){
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs];
         [_session sendCommand:DVRC_REQUEST_FULLIMAGE withData:data replacingQue:YES];
+        [self startWatchDog];
     }
     
     return rc;
+}
+
+- (NSArray *)nodeListForID:(NSArray *)nodeID inDocument:(NSString *)document
+{
+    if (nodeID != nil && document != nil){
+        NSDictionary* args = @{DVRCNMETA_DOCUMENT: document, DVRCNMETA_ID: nodeID};
+        if (_nodeListWrap && [self compareWithMeta:_nodeListWrap andMeta:args]){
+            return [_nodeListWrap valueForKey:DVRCNMETA_ITEM_LIST];
+        }
+        
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        [_session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:YES];
+    }
+    
+    return nil;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -206,7 +260,16 @@
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
-    if (command == DVRC_NOTIFY_TEMPLATE_META){
+    [self endWatchDog];
+    if (command == DVRC_NOTIFY_ACCEPTED){
+        if (session == _session){
+            [_session sendCommand:DVRC_MAIN_CONNECTION withData:nil replacingQue:YES];
+            _state = DVRClientConnected;
+            [self notifyStateChange];
+        }else{
+            [_session sendCommand:DVRC_SIDE_CONNECTION withData:nil replacingQue:YES];
+        }
+    }else if (command == DVRC_NOTIFY_TEMPLATE_META){
         //-----------------------------------------------------------------------------------------
         // テンプレートメタ受信
         //-----------------------------------------------------------------------------------------
@@ -220,8 +283,11 @@
             _meta = newMeta;
             _thumbnail = nil;
             _fullImage = nil;
+            if (![self compareWithMeta:_nodeListWrap andMetasParent:newMeta]){
+                _nodeListWrap = nil;
+            }
             NSDictionary* reqDict = @{DVRCNMETA_DOCUMENT: [_meta valueForKey:DVRCNMETA_DOCUMENT],
-                                      DVRCNMETA_IDS: @[[_meta valueForKey:DVRCNMETA_ID]]};
+                                      DVRCNMETA_ID:[_meta valueForKey:DVRCNMETA_ID]};
             NSData* reqData = [NSKeyedArchiver archivedDataWithRootObject:reqDict];
             [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:reqData replacingQue:NO];
         }else{
@@ -239,13 +305,22 @@
         // サムネール受信
         //-----------------------------------------------------------------------------------------
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
+        UIImage* image = [UIImage imageWithData:tiffData];
         if ([self compareWithMeta:_meta andMeta:args] && !_thumbnail){
-            NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
-            _thumbnail = [UIImage imageWithData:tiffData];
+            _thumbnail = image;
             for (id <DVRemoteClientDelegate> delegate in _delegates){
                 if ([delegate respondsToSelector:@selector(dvrClient:didRecieveCurrentThumbnail:)]){
-                    [delegate dvrClient:self didRecieveCurrentThumbnail:_thumbnail];
+                    [delegate dvrClient:self didRecieveCurrentThumbnail:image];
                 }
+            }
+        }
+        for (id <DVRemoteClientDelegate> delegate in _delegates){
+            if ([delegate respondsToSelector:@selector(dvrClient:didRecieveThumbnail:ofId:inDocument:withIndex:)]){
+                [delegate dvrClient:self didRecieveThumbnail:image
+                               ofId:[args valueForKey:DVRCNMETA_ID]
+                         inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]
+                          withIndex:[[args valueForKey:DVRCNMETA_INDEX_IN_PARENT] intValue]];
             }
         }
     }else if (command == DVRC_NOTIFY_FULLIMAGE){
@@ -265,6 +340,20 @@
                                ofId:[args valueForKey:DVRCNMETA_ID]
                          inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]
                        withRotation:[[args valueForKey:DVRCNMETA_IMAGEROTATION] intValue]];
+            }
+        }
+    }else if (command == DVRC_NOTIFY_FOLDER_ITEMS){
+        //-----------------------------------------------------------------------------------------
+        // フォルダ内要素一覧受信
+        //-----------------------------------------------------------------------------------------
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if ([self compareWithMeta:args andMetasParent:_meta]){
+            _nodeListWrap = args;
+        }
+        for (id <DVRemoteClientDelegate> delegate in _delegates){
+            if ([delegate respondsToSelector:@selector(dvrClient:didRecieveNodeList:forNode:inDocument:)]){
+                [delegate dvrClient:self didRecieveNodeList:[args valueForKey:DVRCNMETA_ITEM_LIST]
+                            forNode:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
             }
         }
     }
@@ -299,6 +388,52 @@
     }
     
     return rc;
+}
+- (BOOL) compareWithMeta:(NSDictionary*)meta1 andMetasParent:(NSDictionary*)meta2
+{
+    BOOL rc = YES;
+    
+    NSString* doc1 = [meta1 valueForKey:DVRCNMETA_DOCUMENT];
+    NSString* doc2 = [meta2 valueForKey:DVRCNMETA_DOCUMENT];
+    NSArray* path1 = [meta1 valueForKey:DVRCNMETA_ID];
+    NSArray* path2 = [meta2 valueForKey:DVRCNMETA_ID];
+    
+    if ([doc1 isEqualToString:doc2] && path1.count == path2.count - 1){
+        for (int i = 0; i < path1.count; i++){
+            if (![path1[i] isEqualToString:path2[i]]){
+                rc = NO;
+                break;
+            }
+        }
+    }else{
+        rc = NO;
+    }
+    
+    return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// Watch Dog
+//-----------------------------------------------------------------------------------------
+- (void)startWatchDog
+{
+    if (_state == DVRClientConnected && !_runningWatchDog){
+        _runningWatchDog = YES;
+        NSInteger count = _watchDogCount;
+        DVRemoteClient* __weak weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (count == weakSelf.watchDogCount){
+                weakSelf.runningWatchDog = NO;
+                [weakSelf disconnect];
+            }
+        });
+    }
+}
+
+- (void)endWatchDog
+{
+    _runningWatchDog = NO;
+    _watchDogCount++;
 }
 
 @end

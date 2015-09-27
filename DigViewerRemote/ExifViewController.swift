@@ -65,7 +65,9 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
     func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
         let index = NSIndexPath.init(forRow: 0, inSection: 0)
         if let cell = tableView!.cellForRowAtIndexPath(index) {
-            (cell as! InspectorImageCell).thumbnailView.image = thumbnail
+            if (cell as! InspectorImageCell).thumbnailView.image == nil {
+                (cell as! InspectorImageCell).thumbnailView.image = thumbnail
+            }
         }
     }
 

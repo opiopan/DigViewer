@@ -234,9 +234,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     }
     
     func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
-        thumbnailView!.image = thumbnail
-        if (annotation != nil){
-            mapView!.selectAnnotation(annotation!, animated:true)
+        if thumbnailView!.image == nil {
+            thumbnailView!.image = thumbnail
+            if annotation != nil {
+                mapView!.selectAnnotation(annotation!, animated:true)
+            }
         }
     }
     
@@ -311,7 +313,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if (isUpdatedLocation || !configController.map3DView){
             if photoCoordinate != nil && mapSpan != nil {
                 let region = MKCoordinateRegionMake(photoCoordinate!, mapSpan!)
-                mapView!.setRegion(region, animated: true)
+                mapView!.setRegion(region, animated: !configController.map3DView)
             }
         }else{
             if centerCoordinate != nil && cameraAltitude != nil {

@@ -14,7 +14,9 @@
     BOOL _publishingFailed;
     NSNetService* _service;
     
+    NSMutableArray* _reservedSessions;
     NSMutableArray* _authorizedSessions;
+    NSMutableArray* _sidebandSessions;
     
     NSData* _currentMeta;
     NSData* _templateMeta;
@@ -44,7 +46,9 @@
     self = [super init];
     if (self){
         _publishingFailed = NO;
+        _reservedSessions = [NSMutableArray array];
         _authorizedSessions = [NSMutableArray array];
+        _sidebandSessions = [NSMutableArray array];
         
         ImageMetadata* meta = [[ImageMetadata alloc] init];
         NSArray* summary = meta.summary;
@@ -90,10 +94,7 @@
     [_authorizedSessions addObject:session];
     session.delegate = self;
     [session scheduleInRunLoop:_runLoop];
-    [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
-    if (_currentMeta){
-        [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
-    }
+    [session sendCommand:DVRC_NOTIFY_ACCEPTED withData:nil replacingQue:NO];
 }
 
 
@@ -102,15 +103,31 @@
 //-----------------------------------------------------------------------------------------
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
-    if (command == DVRC_MOVE_PREV_IMAGE || command == DVRC_MOVE_NEXT_IMAGE){
+    if (command == DVRC_MAIN_CONNECTION){
+        [_reservedSessions removeObject:session];
+        [_authorizedSessions addObject:session];
+        [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
+        if (_currentMeta){
+            [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
+        }
+    }else if (command == DVRC_SIDE_CONNECTION){
+        [_reservedSessions removeObject:session];
+        [_sidebandSessions addObject:session];
+    }if (command == DVRC_MOVE_PREV_IMAGE || command == DVRC_MOVE_NEXT_IMAGE){
         NSString* document = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_delegate){
             [_delegate dvrServer:self needMoveToNeighborImageOfDocument:document withDirection:command];
         }
+    }else if (command == DVRC_MOVE_NODE){
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_delegate && [_delegate respondsToSelector:@selector(dvrServer:needMoveToNode:inDocument:)]){
+            [_delegate dvrServer:self needMoveToNode:[args valueForKey:DVRCNMETA_ID]
+                      inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
+        }
     }else if (command == DVRC_REQUEST_THUMBNAIL){
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_delegate){
-            [_delegate dvrServer:self needSendThumbnails:[args valueForKey:DVRCNMETA_IDS]
+            [_delegate dvrServer:self needSendThumbnail:[args valueForKey:DVRCNMETA_ID]
                      forDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
         }
     }else if (command == DVRC_REQUEST_FULLIMAGE){
@@ -139,13 +156,22 @@
                             withSize:[[args valueForKey:DVRCNMETA_IMAGESIZEMAX] doubleValue]];
             }
         }
+    }else if (command == DVRC_REQUEST_FOLDER_ITEMS){
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_delegate && [_delegate respondsToSelector:@selector(dvrServer:needSendFolderItms:forDocument:bySession:)]){
+            [_delegate dvrServer:self needSendFolderItms:[args valueForKey:DVRCNMETA_ID]
+                     forDocument:[args valueForKey:DVRCNMETA_DOCUMENT] bySession:session];
+        }
+        
     }
 }
 
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error
 {
     [session close];
+    [_reservedSessions removeObject:session];
     [_authorizedSessions removeObject:session];
+    [_sidebandSessions removeObject:session];
     NSMutableArray* removingKeys = [NSMutableArray array];
     for (NSString* key in _fullImageQue){
         NSMutableArray* sessions = [_fullImageQue valueForKey:key];
@@ -173,11 +199,12 @@
 //-----------------------------------------------------------------------------------------
 // サムネール送信
 //-----------------------------------------------------------------------------------------
-- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
+- (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName withIndex:(NSInteger)index
 {
     NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
                            DVRCNMETA_ID: nodeID,
-                           DVRCNMETA_THUMBNAIL: thumbnail};
+                           DVRCNMETA_THUMBNAIL: thumbnail,
+                           DVRCNMETA_INDEX_IN_PARENT: @(index)};
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
     for (DVRemoteSession* session in _authorizedSessions){
         [session sendCommand:DVRC_NOTIFY_THUMBNAIL withData:data replacingQue:YES];
@@ -203,6 +230,27 @@
             [registeredSession sendCommand:DVRC_NOTIFY_FULLIMAGE withData:data replacingQue:NO];
         }
         [_fullImageQue removeObjectForKey:idString];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// フォルダー内ノード情報一覧送信
+//-----------------------------------------------------------------------------------------
+- (void)sendFolderItems:(NSArray *)items forNodeID:(NSArray *)nodeID inDocument:(NSString *)documentName
+              bySession:(DVRemoteSession *)session
+{
+    DVRemoteSession* targetSession = nil;
+    for (targetSession in _authorizedSessions){
+        if (targetSession == session){
+            break;
+        }
+    }
+    if (targetSession){
+        NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                               DVRCNMETA_ID: nodeID,
+                               DVRCNMETA_ITEM_LIST: items};
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        [targetSession sendCommand:DVRC_NOTIFY_FOLDER_ITEMS withData:data replacingQue:YES];
     }
 }
 
