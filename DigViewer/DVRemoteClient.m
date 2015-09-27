@@ -249,7 +249,10 @@
         }
         
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
-        [_session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:YES];
+        DVRemoteSession* session = _session;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:NO];
+        });
     }
     
     return nil;

@@ -207,7 +207,7 @@
                            DVRCNMETA_INDEX_IN_PARENT: @(index)};
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
     for (DVRemoteSession* session in _authorizedSessions){
-        [session sendCommand:DVRC_NOTIFY_THUMBNAIL withData:data replacingQue:YES];
+        [session sendCommand:DVRC_NOTIFY_THUMBNAIL withData:data replacingQue:NO];
     }
 }
 

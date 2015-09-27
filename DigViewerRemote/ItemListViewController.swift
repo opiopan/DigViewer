@@ -183,7 +183,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
                 //NSLog("image exist:\(nodeId.last)")
             }
         }else{
-            NSLog("no cell:\(nodeId.last)")
+            //NSLog("no cell:\(nodeId.last)")
         }
     }
     
