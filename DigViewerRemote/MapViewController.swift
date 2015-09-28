@@ -214,22 +214,27 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         grandAltitude = nil
 
         // ポップアップウィンドウセットアップ
-        let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]
-        popupViewController!.dateLabel.text = popupSummary[0].value
-        popupViewController!.cameraLabel.text = popupSummary[2].value
-        popupViewController!.lensLabel.text = popupSummary[3].value
-        var condition : String = ""
-        for var i = 5; i < popupSummary.count; i++ {
-            if condition == "" {
-                condition = popupSummary[i].value
-            }else if let value = popupSummary[i].value {
-                condition = condition + " " + value
+        if let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]? {
+            popupViewController!.dateLabel.text = popupSummary[0].value
+            if popupSummary.count > 2 {
+                popupViewController!.cameraLabel.text = popupSummary[2].value
             }
+            if popupSummary.count > 3 {
+                popupViewController!.lensLabel.text = popupSummary[3].value
+            }
+            var condition : String = ""
+            for var i = 5; i < popupSummary.count; i++ {
+                if condition == "" {
+                    condition = popupSummary[i].value
+                }else if let value = popupSummary[i].value {
+                    condition = condition + " " + value
+                }
+            }
+            popupViewController!.conditionLabel.text = condition
+            popupViewController!.addressLabel.text = nil
+            popupViewController!.thumbnailView.image = client.thumbnail
+            thumbnailView!.image = client.thumbnail;
         }
-        popupViewController!.conditionLabel.text = condition
-        popupViewController!.addressLabel.text = nil
-        popupViewController!.thumbnailView.image = client.thumbnail
-        thumbnailView!.image = client.thumbnail;
 
         let latitude = meta[DVRCNMETA_LATITUDE] as! Double?
         let longitude = meta[DVRCNMETA_LONGITUDE] as! Double?
