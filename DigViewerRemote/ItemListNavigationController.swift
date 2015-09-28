@@ -106,6 +106,9 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
     }
     */
 
-    
-    
+    func backToMapView (){
+        if let controller = self.parentViewController {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
 }

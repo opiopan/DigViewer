@@ -685,6 +685,11 @@ static NSString* CategoryKML = @"KML";
     
     [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
     
+    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node];
+    NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
+    NSArray* summary = [meta summaryWithFilter:filter];
+    [data setValue:summary forKey:DVRCNMETA_POPUP_SUMMARY];
+    
     [[DVRemoteServer sharedServer] sendMeta:data];
 }
 

@@ -122,4 +122,6 @@ class ConfigurationController: NSObject {
             updateConfiguration()
         }
     }
+    
+    var informationViewType : Int = 0
 }

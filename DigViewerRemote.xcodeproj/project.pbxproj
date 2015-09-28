@@ -16,6 +16,9 @@
 		7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */; settings = {ASSET_TAGS = (); }; };
+		7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */; settings = {ASSET_TAGS = (); }; };
+		7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D31BB83C7700C1DB19 /* PopupView.swift */; settings = {ASSET_TAGS = (); }; };
 		7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -54,6 +57,9 @@
 		7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListNavigationController.swift; sourceTree = "<group>"; };
 		7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeItemCell.swift; sourceTree = "<group>"; };
+		7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
+		7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		7B7356D31BB83C7700C1DB19 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
@@ -109,6 +115,16 @@
 				7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		7B7356D01BB7E62C00C1DB19 /* Custom Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */,
+				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
+				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
+			);
+			name = "Custom Annotation";
 			sourceTree = "<group>";
 		};
 		7BBA59C01B9DA59C0025B902 = {
@@ -201,6 +217,7 @@
 			children = (
 				7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */,
 				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
+				7B7356D01BB7E62C00C1DB19 /* Custom Annotation */,
 				7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */,
 				7B9098361BA4634C00B03FD8 /* ExifViewController.swift */,
 				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
@@ -341,7 +358,10 @@
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */,
 				7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */,
+				7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */,
 				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,
+				7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */,
+				7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */,
 				7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,

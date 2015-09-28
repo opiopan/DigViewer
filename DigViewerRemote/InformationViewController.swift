@@ -16,7 +16,7 @@ class InfomationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        segmentedControll!.selectedSegmentIndex = 0
+        segmentedControll!.selectedSegmentIndex = ConfigurationController.sharedController.informationViewType
 
         let time = dispatch_time(DISPATCH_TIME_NOW, 0)
         dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
@@ -39,6 +39,7 @@ class InfomationViewController: UIViewController {
     // MARK: - コンテントビュー切り替え
     //-----------------------------------------------------------------------------------------
     func viewControllerForSegmentIndex(index:Int) -> UIViewController?{
+        ConfigurationController.sharedController.informationViewType = index
         let viewIdentifiers = ["ExifViewController", "ImageListNavigator"]
         if let storyboard = self.storyboard{
             return storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?

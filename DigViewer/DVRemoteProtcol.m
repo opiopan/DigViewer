@@ -42,3 +42,4 @@ NSString* DVRCNMETA_ITEM_NAME = @"itemname";
 NSString* DVRCNMETA_ITEM_IS_FOLDER = @"itemisfolder";
 NSString* DVRCNMETA_ITEM_TYPE = @"itemtype";
 NSString* DVRCNMETA_INDEX_IN_PARENT = @"indexinparent";
+NSString* DVRCNMETA_POPUP_SUMMARY = @"popupsummary";

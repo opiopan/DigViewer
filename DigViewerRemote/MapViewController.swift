@@ -22,6 +22,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     private var initialized = false
     
+    private var annotationView : AnnotationView?
+    private var popupViewController : SummaryPopupViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,8 +40,19 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         thumbnailView = UIImageView.init(frame: CGRectMake(0, 0, 64, 64));
         thumbnailView!.contentMode = UIViewContentMode.ScaleAspectFill
         
+        popupViewController = storyboard!.instantiateViewControllerWithIdentifier("ImageSummaryPopup") as? SummaryPopupViewController
+        if let popupView = popupViewController?.view{
+            var popupFrame = popupView.frame
+            popupFrame.size.width = 350
+            popupFrame.size.height = 150
+            //popupView.frame = popupFrame
+        }
+        
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
+        
+        geocoder = CLGeocoder()
+        
         reflectUserDefaults()
 
     }
@@ -109,18 +123,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     @IBAction func performInformationButton(sender : UIBarButtonItem) {
         let bounds = UIScreen.mainScreen().bounds
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
-        let isConnected = DVRemoteClient.sharedClient().state == .Connected
         if bounds.size.height > bounds.size.width {
             // 縦表示
-            if isConnected {
-                if isReguler {
-                    UIView.beginAnimations(nil, context: nil)
-                    UIView.setAnimationDuration(0.2)
-                    splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
-                    UIView.commitAnimations()
-                }else{
-                    performSegueWithIdentifier("ShowInformationView", sender: sender)
-                }
+            if isReguler {
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.2)
+                splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+                UIView.commitAnimations()
+            }else{
+                performSegueWithIdentifier("ShowInformationView", sender: sender)
             }
         }else{
             // 横表示
@@ -131,9 +142,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 splitViewController!.preferredDisplayMode = isEnableDoublePane ? .AllVisible : .PrimaryHidden
                 UIView.commitAnimations()
             }else{
-                if isConnected {
-                    performSegueWithIdentifier("ShowInformationView", sender: sender)
-                }
+                performSegueWithIdentifier("ShowInformationView", sender: sender)
             }
         }
     }
@@ -188,7 +197,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
     }
     
-    private var annotation : MKShape? = nil
+    private var annotation : MKPointAnnotation? = nil
+    private var geocoder : CLGeocoder? = nil
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         if (annotation != nil){
@@ -202,7 +212,25 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         cameraHeading = nil
         cameraTilt = 0
         grandAltitude = nil
-        
+
+        // ポップアップウィンドウセットアップ
+        let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]
+        popupViewController!.dateLabel.text = popupSummary[0].value
+        popupViewController!.cameraLabel.text = popupSummary[2].value
+        popupViewController!.lensLabel.text = popupSummary[3].value
+        var condition : String = ""
+        for var i = 5; i < popupSummary.count; i++ {
+            if condition == "" {
+                condition = popupSummary[i].value
+            }else if let value = popupSummary[i].value {
+                condition = condition + " " + value
+            }
+        }
+        popupViewController!.conditionLabel.text = condition
+        popupViewController!.addressLabel.text = nil
+        popupViewController!.thumbnailView.image = client.thumbnail
+        thumbnailView!.image = client.thumbnail;
+
         let latitude = meta[DVRCNMETA_LATITUDE] as! Double?
         let longitude = meta[DVRCNMETA_LONGITUDE] as! Double?
         if (latitude != nil && longitude != nil){
@@ -211,6 +239,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             let spanLatitude = meta[DVRCNMETA_SPAN_LATITUDE] as! Double?
             let spanLongitude = meta[DVRCNMETA_SPAN_LONGITUDE] as! Double?
 
+            // 視点セットアップ
             centerCoordinate = CLLocationCoordinate2DMake(viewLatitude!, viewLongitude!)
             photoCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
             mapSpan = MKCoordinateSpanMake(spanLatitude!, spanLongitude!)
@@ -219,23 +248,55 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             cameraHeading = meta[DVRCNMETA_HEADING] as! Double?
             cameraTilt = meta[DVRCNMETA_TILT] as! CGFloat
 
+            // アノテーションセットアップ
             var nodeId = meta[DVRCNMETA_ID] as! [String]?;
-            let theRoppongiAnnotation = MKPointAnnotation()
-            theRoppongiAnnotation.coordinate = photoCoordinate!
-            theRoppongiAnnotation.title = nodeId![nodeId!.count - 1]
-            annotation = theRoppongiAnnotation
-            thumbnailView!.image = client.thumbnail;
+            annotation = MKPointAnnotation()
+            annotation!.coordinate = photoCoordinate!
+            annotation!.title = nodeId![nodeId!.count - 1]
             mapView!.addAnnotation(annotation!)
 //            mapView!.selectAnnotation(annotation!, animated:true)
             
+            // 逆ジオコーディング(経緯度→住所に変換)
+            let location = CLLocation(latitude: latitude!, longitude: longitude!)
+            geocoder!.reverseGeocodeLocation(location, completionHandler: {
+                [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
+                if placemarks != nil && placemarks!.count > 0 {
+                    let placemark = placemarks![0]
+                    var name : String? = nil
+                    var address : String? = nil
+                    name = placemark.name
+                    
+                    if let city  = placemark.locality {
+                        address = city
+                    }else if let state = placemark.administrativeArea {
+                        address = state
+                    }
+                    if let country = placemark.country {
+                        if address == nil {
+                            address = country
+                        }else{
+                            address = address! + " " + country
+                        }
+                    }
+                    if name == nil {
+                        name = address
+                    }else if address != nil {
+                        name = "\(name!)\n\(address!)"
+                    }
+                    self.popupViewController!.addressLabel.text = name
+                }
+                
+            })
+
+            // 撮影地点に移動
             willStatToMove()
             moveToDefaultPosition(self)
         }
     }
     
     func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
-        if thumbnailView!.image == nil {
-            thumbnailView!.image = thumbnail
+        if popupViewController!.thumbnailView!.image == nil {
+            popupViewController!.thumbnailView!.image = thumbnail
             if annotation != nil {
                 mapView!.selectAnnotation(annotation!, animated:true)
             }
@@ -295,6 +356,21 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if (isUpdatedLocation){
             isUpdatedLocation = false
             moveToDefaultPosition(self)
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === mapView.userLocation { // 現在地を示すアノテーションの場合はデフォルトのまま
+            return nil
+        } else {
+            let identifier = "annotation"
+            if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("annotation") { // 再利用できる場合はそのまま返す
+                return annotationView
+            } else { // 再利用できるアノテーションが無い場合（初回など）は生成する
+                let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView.calloutViewController = popupViewController
+                return annotationView
+            }
         }
     }
     
@@ -385,14 +461,14 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - アノテーションカスタマイズ
     //-----------------------------------------------------------------------------------------
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]){
-        for view : MKAnnotationView in views {
-            view.leftCalloutAccessoryView = thumbnailView!
-            let button = UIButton.init(type:UIButtonType.DetailDisclosure)
-            button.addTarget(self, action: "viewFullImage:", forControlEvents: .TouchUpInside)
-            view.rightCalloutAccessoryView = button
-        }
-    }
+//    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]){
+//        for view : MKAnnotationView in views {
+//            view.leftCalloutAccessoryView = thumbnailView!
+//            let button = UIButton.init(type:UIButtonType.DetailDisclosure)
+//            button.addTarget(self, action: "viewFullImage:", forControlEvents: .TouchUpInside)
+//            view.rightCalloutAccessoryView = button
+//        }
+//    }
     
     func viewFullImage(sender: AnyObject) {
         performSegueWithIdentifier("FullImageView", sender: sender)
