@@ -214,8 +214,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         grandAltitude = nil
 
         // ポップアップウィンドウセットアップ
+        popupViewController!.dateLabel.text = nil
+        popupViewController!.cameraLabel.text = nil
+        popupViewController!.lensLabel.text = nil
+        popupViewController!.conditionLabel.text = nil
+        popupViewController!.addressLabel.text = nil
         if let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]? {
-            popupViewController!.dateLabel.text = popupSummary[0].value
+            if popupSummary.count > 0 {
+                popupViewController!.dateLabel.text = popupSummary[0].value
+            }
             if popupSummary.count > 2 {
                 popupViewController!.cameraLabel.text = popupSummary[2].value
             }
@@ -267,28 +274,49 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
                 if placemarks != nil && placemarks!.count > 0 {
                     let placemark = placemarks![0]
-                    var name : String? = nil
-                    var address : String? = nil
-                    name = placemark.name
                     
-                    if let city  = placemark.locality {
-                        address = city
-                    }else if let state = placemark.administrativeArea {
-                        address = state
+                    var address : String? = nil
+
+                    let interest = placemark.areasOfInterest
+                    if interest != nil && interest!.count > 0 {
+                        address = interest![0]
+                    }
+                    
+                    var units : [String] = []
+                    if let unit = placemark.administrativeArea {
+                        units.append(unit)
+                    }
+                    if let unit = placemark.locality {
+                        units.append(unit)
+                    }
+                    if let unit = placemark.subLocality {
+                        units.append(unit)
+                    }
+                    
+                    if units.count >= 2 {
+                        let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: ""),units[1], units[0]) as String
+                        if address == nil {
+                            address = str
+                        }else{
+                            address = "\(address!)\n\(str)"
+                        }
+                    }else if units.count == 1 {
+                        if address == nil {
+                            address = units[0]
+                        }else{
+                            address = "\(address!)\n\(units[0])"
+                        }
+                        
                     }
                     if let country = placemark.country {
                         if address == nil {
                             address = country
                         }else{
-                            address = address! + " " + country
+                            address = "\(address!) (\(country))"
                         }
                     }
-                    if name == nil {
-                        name = address
-                    }else if address != nil {
-                        name = "\(name!)\n\(address!)"
-                    }
-                    self.popupViewController!.addressLabel.text = name
+                    
+                    self.popupViewController!.addressLabel.text = address
                 }
                 
             })

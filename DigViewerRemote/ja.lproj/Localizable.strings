@@ -1,0 +1,9 @@
+/* 
+  Localized.strings
+  DigViewerRemote
+
+  Created by opiopan on 2015/09/28.
+  Copyright © 2015年 opiopan. All rights reserved.
+*/
+
+"ADDRESS_FORMAT" = "%2$@ %1$@";
