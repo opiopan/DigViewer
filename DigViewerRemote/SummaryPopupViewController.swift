@@ -10,11 +10,7 @@ import UIKit
 
 class SummaryPopupViewController: UIViewController {
     @IBOutlet weak var thumbnailView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel! {
-        didSet {
-            updateCount++
-        }
-    }
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var cameraLabel: UILabel!
     @IBOutlet weak var lensLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
@@ -24,11 +20,6 @@ class SummaryPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        var popupFrame = self.view.frame
-        popupFrame.size.width = 350
-        popupFrame.size.height = 150
-        self.view.frame = popupFrame
         
         let baseView = self.view as? PopupView
         baseView!.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
@@ -59,8 +50,5 @@ class SummaryPopupViewController: UIViewController {
     }
     */
     
-    func test(){
-        
-    }
 
 }

@@ -410,7 +410,7 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2Y-3f-c2p">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="134"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2I5-ir-tH5">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2I5-ir-tH5">
                                         <rect key="frame" x="12" y="12" width="110" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="2I5-ir-tH5" secondAttribute="height" multiplier="1:1" id="Nao-OQ-nNz"/>

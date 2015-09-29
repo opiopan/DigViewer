@@ -121,8 +121,8 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
     propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
-    propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSpecial, "Focal Length:", "%@ mm", 0, NULL, convertFocalLength,
-    propertyEXIF, kCGImagePropertyExifFocalLenIn35mmFilm, pvTypeSpecial, "Focal Length in 35mm:", "%@ mm", 0, NULL, convertFocalLength35,
+    propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSpecial, "Focal Length:", "%@mm", 0, NULL, convertFocalLength,
+    propertyEXIF, kCGImagePropertyExifFocalLenIn35mmFilm, pvTypeSpecial, "Focal Length in 35mm:", "%@mm", 0, NULL, convertFocalLength35,
     propertyEXIF, kCGImagePropertyExifExposureTime, pvTypeSpecial, "Exposure Time:", NULL, 0, NULL, convertExposureTime,
     propertyEXIF, kCGImagePropertyExifFNumber, pvTypeSimple, "Aperture:", "f/%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifISOSpeedRatings, pvTypeHeadOfArray, "ISO Speed:", "ISO%@", 0, NULL, NULL,
@@ -296,9 +296,9 @@ static id convertExposureTime(ImageMetadata* meta, TranslationRule* rule)
     NSString* valueString = nil;
     if (value){
         if (value.doubleValue < 0.5){
-            valueString = [NSString stringWithFormat:@"1/%.f sec", 1.0 / value.doubleValue];
+            valueString = [NSString stringWithFormat:@"1/%.fs", 1.0 / value.doubleValue];
         }else{
-            valueString = [NSString stringWithFormat:@"%@ sec", value];
+            valueString = [NSString stringWithFormat:@"%@s", value];
         }
     }
     return valueString;

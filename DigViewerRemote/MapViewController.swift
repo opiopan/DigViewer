@@ -18,8 +18,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var show3DView = true
     private var firstConnecting = true
     
-    private var thumbnailView : UIImageView? = nil
-    
     private var initialized = false
     
     private var annotationView : AnnotationView?
@@ -39,16 +37,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         configController.registerObserver(self)
         show3DView = configController.map3DView
         
-        thumbnailView = UIImageView.init(frame: CGRectMake(0, 0, 64, 64));
-        thumbnailView!.contentMode = UIViewContentMode.ScaleAspectFill
-        
         popupViewController = storyboard!.instantiateViewControllerWithIdentifier("ImageSummaryPopup") as? SummaryPopupViewController
-        if let popupView = popupViewController?.view{
-            var popupFrame = popupView.frame
-            popupFrame.size.width = 350
-            popupFrame.size.height = 150
-            //popupView.frame = popupFrame
-        }
+        arrangePopupInBlurCover()
+        let recognizer = UITapGestureRecognizer(target: self, action: "tapOnThumbnail:")
+        popupViewController!.thumbnailView!.addGestureRecognizer(recognizer)
         
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
@@ -105,7 +97,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         frame.size.height = max(size.width, size.height)
         coverView!.frame = frame
         arrangePopupInBlurCover()
-        
+
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         let mode = splitViewController!.displayMode
         if size.width > size.height && isReguler {
@@ -253,7 +245,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             popupViewController!.conditionLabel.text = condition
             popupViewController!.addressLabel.text = nil
             popupViewController!.thumbnailView.image = client.thumbnail
-            thumbnailView!.image = client.thumbnail;
         }
 
         let latitude = meta[DVRCNMETA_LATITUDE] as! Double?
@@ -284,11 +275,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             
             // 逆ジオコーディング(経緯度→住所に変換)
             let location = CLLocation(latitude: latitude!, longitude: longitude!)
+            geocoder!.cancelGeocode()
+            let updateCount = popupViewController!.updateCount
             geocoder!.reverseGeocodeLocation(location, completionHandler: {
                 [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
                 if placemarks != nil && placemarks!.count > 0 {
                     let placemark = placemarks![0]
-                    self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
+                    if self.popupViewController!.updateCount == updateCount {
+                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
+                    }
                 }
             })
 
@@ -529,6 +524,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     func viewFullImage(sender: AnyObject) {
         performSegueWithIdentifier("FullImageView", sender: sender)
     }
+
+    func tapOnThumbnail(recognizer: UIGestureRecognizer){
+        viewFullImage(self)
+    }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - ブラーカバーの制御
@@ -561,6 +560,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private func arrangePopupInBlurCover(){
         if popupViewController!.view.superview != nil && popupViewController!.view.superview == coverView {
             var frame = popupViewController!.view.frame
+            frame.size.width = 350
+            frame.size.height = 150
             frame.origin.x = (mapView!.bounds.width - frame.size.width) * 0.5
             frame.origin.y = (mapView!.bounds.height - frame.size.height) * 0.5
             popupViewController!.view.frame = frame
