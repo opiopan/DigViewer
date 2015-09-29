@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExifViewController: UITableViewController, DVRemoteClientDelegate {
+class ExifViewController: UITableViewController, DVRemoteClientDelegate, InformationViewChild {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,14 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate {
         super.didReceiveMemoryWarning()
     }
 
+    //-----------------------------------------------------------------------------------------
+    // MARK: - InformationViewChildプロトコル
+    //-----------------------------------------------------------------------------------------
+    private var informationViewController : InfomationViewController?
+    func setInformationViewController(controller: InfomationViewController) {
+        informationViewController = controller
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------

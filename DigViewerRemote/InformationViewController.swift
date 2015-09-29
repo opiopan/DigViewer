@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol InformationViewChild {
+    func setInformationViewController(controller : InfomationViewController)
+}
+
 class InfomationViewController: UIViewController {
     @IBOutlet var segmentedControll : UISegmentedControl?;
     @IBOutlet var placeholder : UIView?;
@@ -42,7 +46,9 @@ class InfomationViewController: UIViewController {
         ConfigurationController.sharedController.informationViewType = index
         let viewIdentifiers = ["ExifViewController", "ImageListNavigator"]
         if let storyboard = self.storyboard{
-            return storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?
+            let controller = storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?
+            (controller as! InformationViewChild).setInformationViewController(self)
+            return controller
         }
         return nil
     }

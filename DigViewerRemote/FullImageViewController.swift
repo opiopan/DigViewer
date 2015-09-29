@@ -155,6 +155,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             LoadingLabel.alpha = 0
             indicatorView.stopAnimating()
             indicatorView.alpha = 0
+            UIView.commitAnimations()
         }
     }
     

@@ -34,7 +34,9 @@ class AnnotationView: MKPinAnnotationView {
     var calloutViewController : SummaryPopupViewController? {
         didSet{
             if let controller = oldValue {
-                controller.view.removeFromSuperview()
+                if controller.view.superview != nil {
+                    controller.view.removeFromSuperview()
+                }
             }
         }
     }
@@ -53,14 +55,28 @@ class AnnotationView: MKPinAnnotationView {
         didSet{
             let calloutView = calloutViewController!.view
             if selected {
+                if calloutView.superview != nil {
+                    calloutView.removeFromSuperview()
+                }
                 let annotationViewBounds = self.bounds
                 var calloutViewFrame = calloutView.frame
-                calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5
+                calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5 - 8.0
                 calloutViewFrame.origin.y = -calloutViewFrame.size.height
                 calloutView.frame = calloutViewFrame;
+                calloutView.alpha = 0.0
                 addSubview(calloutView)
+                UIView.animateWithDuration(0.2, animations: {() -> Void in
+                    calloutView.alpha = 1.0
+                })
             }else{
-                calloutView.removeFromSuperview()
+                let updateCount = calloutViewController!.updateCount
+                UIView.animateWithDuration(0.2, animations: {() -> Void in
+                    calloutView.alpha = 0.0
+                }, completion: {[unowned self](flag : Bool) -> Void in
+                    if self.calloutViewController!.updateCount == updateCount {
+                        calloutView.removeFromSuperview()
+                    }
+                })
             }
         }
     }

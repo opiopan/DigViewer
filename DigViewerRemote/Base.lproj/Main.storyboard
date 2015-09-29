@@ -74,7 +74,7 @@
                                             <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mnG-pR-1te">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" id="mnG-pR-1te">
                                             <rect key="frame" x="112" y="3" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -232,7 +232,7 @@
             </objects>
             <point key="canvasLocation" x="287" y="-2338"/>
         </scene>
-        <!--Title-->
+        <!--Item List View Controller-->
         <scene sceneID="D12-Rh-tEE">
             <objects>
                 <tableViewController storyboardIdentifier="ImageListViewController" id="BYt-a7-zmq" customClass="ItemListViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
@@ -308,7 +308,7 @@
                             <outlet property="delegate" destination="BYt-a7-zmq" id="rFq-Wq-hEr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="YXZ-AX-phx"/>
+                    <navigationItem key="navigationItem" id="YXZ-AX-phx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llp-ge-mAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -362,7 +362,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="EXIF"/>
-                                <segment title="Image list"/>
+                                <segment title="Navigation"/>
                             </segments>
                             <connections>
                                 <action selector="segmentChange:" destination="wEo-tl-BVd" eventType="valueChanged" id="ue4-pI-TMU"/>
@@ -431,13 +431,13 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8m-Nd-HE0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="o8m-Nd-HE0">
                                                 <rect key="frame" x="0.0" y="22" width="208" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXj-Lj-w4a">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXj-Lj-w4a">
                                                 <rect key="frame" x="0.0" y="36.5" width="208" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -533,7 +533,7 @@
             </objects>
             <point key="canvasLocation" x="1203" y="-320"/>
         </scene>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="85S-k6-is8">
             <objects>
                 <viewController id="KXb-Jb-PaG" customClass="MapViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
@@ -595,7 +595,7 @@
                             <constraint firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="OlD-Vh-8Sc">
+                    <navigationItem key="navigationItem" id="OlD-Vh-8Sc">
                         <barButtonItem key="leftBarButtonItem" image="ServerButton" id="t8a-y4-8KS">
                             <connections>
                                 <action selector="performServersButton:" destination="KXb-Jb-PaG" id="pKl-6d-EXw"/>
@@ -633,7 +633,7 @@
                             <tableViewSection headerTitle="Map Behaviours" id="Aib-ta-5ZH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Qjr-z9-vX2">
-                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qjr-z9-vX2" id="u5c-TU-Uis">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -660,7 +660,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ShowLabels" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ShowLabels" textLabel="v3Q-LF-DfZ" style="IBUITableViewCellStyleDefault" id="gnn-BO-6KN">
-                                        <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gnn-BO-6KN" id="WEg-Gg-oVi">
                                             <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
@@ -677,7 +677,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="3DBirdsView" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="3DBirdsView" textLabel="y20-uk-v9p" style="IBUITableViewCellStyleDefault" id="W86-Wd-fbz">
-                                        <rect key="frame" x="0.0" y="201.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W86-Wd-fbz" id="eJD-5m-Qlu">
                                             <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
@@ -698,7 +698,7 @@
                             <tableViewSection headerTitle="Others" id="iGU-9o-DoF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MUZ-Fu-uR3">
-                                        <rect key="frame" x="0.0" y="295.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="231.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUZ-Fu-uR3" id="AqT-AM-DRz">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -786,8 +786,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iBt-Pp-e1a"/>
-        <segue reference="mAB-uM-i7s"/>
-        <segue reference="pCi-iM-HrQ"/>
+        <segue reference="1Vi-gm-zmd"/>
+        <segue reference="83V-8J-7rY"/>
         <segue reference="ETZ-FC-MkB"/>
     </inferredMetricsTieBreakers>
 </document>

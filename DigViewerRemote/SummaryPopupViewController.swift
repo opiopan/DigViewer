@@ -10,11 +10,17 @@ import UIKit
 
 class SummaryPopupViewController: UIViewController {
     @IBOutlet weak var thumbnailView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel! {
+        didSet {
+            updateCount++
+        }
+    }
     @IBOutlet weak var cameraLabel: UILabel!
     @IBOutlet weak var lensLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    
+    var updateCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

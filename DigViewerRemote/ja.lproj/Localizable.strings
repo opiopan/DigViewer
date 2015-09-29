@@ -6,4 +6,11 @@
   Copyright © 2015年 opiopan. All rights reserved.
 */
 
+"Disconnected" = "未接続";
+"Connecting..." = "接続中...";
+"Authenticating..." = "認証中...";
+"Connected" ="接続完了";
+
+
 "ADDRESS_FORMAT" = "%2$@ %1$@";
+"ADDRESS_NA" = "位置情報なし";

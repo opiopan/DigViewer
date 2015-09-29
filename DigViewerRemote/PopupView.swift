@@ -10,14 +10,20 @@ import UIKit
 
 class PopupView: UIView {
     var fillColor : UIColor?
-    var showAnchor = true
+    var showAnchor = true {
+        didSet {
+            if oldValue != showAnchor {
+                self.setNeedsDisplay()
+            }
+        }
+    }
 
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         let radius = CGFloat(16)
         let anchor = CGFloat(16)
         let anchorHalfWidth = CGFloat(anchor * 0.9)
-        let xOffset = -CGFloat(8)
+        let xOffset = -CGFloat(0)
         let width = self.bounds.size.width
         let height = self.bounds.size.height - anchor
 

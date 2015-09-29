@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemListNavigationController: UINavigationController, DVRemoteClientDelegate {
+class ItemListNavigationController: UINavigationController, DVRemoteClientDelegate, InformationViewChild {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,14 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - InformationViewChildプロトコル
+    //-----------------------------------------------------------------------------------------
+    private var informationViewController : InfomationViewController?
+    func setInformationViewController(controller: InfomationViewController) {
+        informationViewController = controller
     }
 
     //-----------------------------------------------------------------------------------------
@@ -107,8 +115,8 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
     */
 
     func backToMapView (){
-        if let controller = self.parentViewController {
-            controller.dismissViewControllerAnimated(true, completion: nil)
+        if let controller = self.informationViewController!.navigationController!.navigationController {
+            controller.popViewControllerAnimated(true)
         }
     }
 }

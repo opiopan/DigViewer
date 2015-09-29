@@ -1,84 +1,42 @@
 
 /* Class = "UINavigationItem"; title = "Servers"; ObjectID = "24t-cj-eN7"; */
-"24t-cj-eN7.title" = "Servers";
-
-/* Class = "UILabel"; text = "Address"; ObjectID = "8ax-V1-wec"; */
-"8ax-V1-wec.text" = "Address";
+"24t-cj-eN7.title" = "サーバー一覧";
 
 /* Class = "UITableViewSection"; headerTitle = "Map Behaviours"; ObjectID = "Aib-ta-5ZH"; */
-"Aib-ta-5ZH.headerTitle" = "Map Behaviours";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "DrN-b9-RvQ"; */
-"DrN-b9-RvQ.text" = "Title";
-
-/* Class = "UILabel"; text = " "; ObjectID = "FMl-OD-AYs"; */
-"FMl-OD-AYs.text" = " ";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "K4z-0K-CMb"; */
-"K4z-0K-CMb.text" = "Label";
+"Aib-ta-5ZH.headerTitle" = "地図の表示";
 
 /* Class = "UILabel"; text = "Failed to Download a Image"; ObjectID = "Knt-Bv-kuD"; */
-"Knt-Bv-kuD.text" = "Failed to Download a Image";
+"Knt-Bv-kuD.text" = "画像のダウンロードに失敗しました";
 
 /* Class = "UINavigationItem"; title = "Map"; ObjectID = "OlD-Vh-8Sc"; */
-"OlD-Vh-8Sc.title" = "Map";
-
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "YXZ-AX-phx"; */
-"YXZ-AX-phx.title" = "Title";
+"OlD-Vh-8Sc.title" = "地図";
 
 /* Class = "UILabel"; text = "Now Downloading..."; ObjectID = "flg-IM-cxb"; */
-"flg-IM-cxb.text" = "Now Downloading...";
+"flg-IM-cxb.text" = "ダウンロード中...";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "gIw-SX-kXA"; */
-"gIw-SX-kXA.title" = "Preferences";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "gP8-DJ-i9d"; */
-"gP8-DJ-i9d.text" = "Label";
+"gIw-SX-kXA.title" = "設定";
 
 /* Class = "UITableViewSection"; headerTitle = "Others"; ObjectID = "iGU-9o-DoF"; */
-"iGU-9o-DoF.headerTitle" = "Others";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "lZ9-Ad-NX7"; */
-"lZ9-Ad-NX7.text" = "Label";
-
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "mnG-pR-1te"; */
-"mnG-pR-1te.text" = "Subtitle";
+"iGU-9o-DoF.headerTitle" = "その他";
 
 /* Class = "UISegmentedControl"; naq-Lb-RYa.segmentTitles[0] = "EXIF"; ObjectID = "naq-Lb-RYa"; */
 "naq-Lb-RYa.segmentTitles[0]" = "EXIF";
 
 /* Class = "UISegmentedControl"; naq-Lb-RYa.segmentTitles[1] = "Image list"; ObjectID = "naq-Lb-RYa"; */
-"naq-Lb-RYa.segmentTitles[1]" = "Image list";
-
-/* Class = "UILabel"; text = "camera"; ObjectID = "o8m-Nd-HE0"; */
-"o8m-Nd-HE0.text" = "camera";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "sVo-7N-avT"; */
-"sVo-7N-avT.text" = "Label";
-
-/* Class = "UILabel"; text = " "; ObjectID = "tOF-SC-Fl9"; */
-"tOF-SC-Fl9.text" = " ";
+"naq-Lb-RYa.segmentTitles[1]" = "ナビゲーション";
 
 /* Class = "UILabel"; text = "Volume Buttons to Transit Images"; ObjectID = "tqq-7L-Ltf"; */
-"tqq-7L-Ltf.text" = "Volume Buttons to Transit Images";
-
-/* Class = "UILabel"; text = "Show Labels"; ObjectID = "v3Q-LF-DfZ"; */
-"v3Q-LF-DfZ.text" = "Show Labels";
-
-/* Class = "UILabel"; text = "Lens"; ObjectID = "vXj-Lj-w4a"; */
-"vXj-Lj-w4a.text" = "Lens";
+"tqq-7L-Ltf.text" = "ボリュームボタンで画像を遷移";
 
 /* Class = "UISegmentedControl"; wMC-Ob-BaY.segmentTitles[0] = "Map"; ObjectID = "wMC-Ob-BaY"; */
-"wMC-Ob-BaY.segmentTitles[0]" = "Map";
+"wMC-Ob-BaY.segmentTitles[0]" = "マップ";
+
+/* Class = "UILabel"; text = "Show Labels"; ObjectID = "v3Q-LF-DfZ"; */
+"v3Q-LF-DfZ.text" = "ラベルを表示";
 
 /* Class = "UISegmentedControl"; wMC-Ob-BaY.segmentTitles[1] = "Satellite"; ObjectID = "wMC-Ob-BaY"; */
-"wMC-Ob-BaY.segmentTitles[1]" = "Satellite";
-
-/* Class = "UILabel"; text = "Date"; ObjectID = "xhz-7F-MTv"; */
-"xhz-7F-MTv.text" = "Date";
+"wMC-Ob-BaY.segmentTitles[1]" = "衛星写真";
 
 /* Class = "UILabel"; text = "3D Bird's View"; ObjectID = "y20-uk-v9p"; */
-"y20-uk-v9p.text" = "3D Bird's View";
-
-/* Class = "UILabel"; text = "condition"; ObjectID = "yCi-AA-n5S"; */
-"yCi-AA-n5S.text" = "condition";
+"y20-uk-v9p.text" = "3Dマップ";

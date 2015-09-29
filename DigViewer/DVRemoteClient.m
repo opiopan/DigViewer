@@ -68,12 +68,26 @@
 //-----------------------------------------------------------------------------------------
 - (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate
 {
-    [_delegates addObject:delegate];
+    if ([NSThread isMainThread]){
+        [_delegates addObject:delegate];
+    }else{
+        DVRemoteClient* __weak weakSelf = self;
+        dispatch_sync(dispatch_get_main_queue(), ^(){
+            [weakSelf addClientDelegate:delegate];
+        });
+    }
 }
 
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate
 {
-    [_delegates removeObject:delegate];
+    if ([NSThread isMainThread]){
+        [_delegates removeObject:delegate];
+    }else{
+        DVRemoteClient* __weak weakSelf = self;
+        dispatch_sync(dispatch_get_main_queue(), ^(){
+            [weakSelf removeClientDelegate:delegate];
+        });
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -85,7 +99,7 @@
                               @"Connecting...",
                               @"Authenticating...",
                               @"Connected"];
-    return descriptions[_state];
+    return NSLocalizedString(descriptions[_state], "");
 }
 
 - (NSNetService *)service

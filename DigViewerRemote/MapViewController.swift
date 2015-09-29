@@ -25,6 +25,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var annotationView : AnnotationView?
     private var popupViewController : SummaryPopupViewController?
     
+    private var coverView : UIVisualEffectView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +54,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         mapView!.delegate = self
         
         geocoder = CLGeocoder()
+        
+        coverView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+        setBlurCover(true, isShowPopup: false)
         
         reflectUserDefaults()
 
@@ -94,6 +99,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        var frame = self.view.bounds
+        frame.size.width = max(size.width, size.height)
+        frame.size.height = max(size.width, size.height)
+        coverView!.frame = frame
+        arrangePopupInBlurCover()
+        
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         let mode = splitViewController!.displayMode
         if size.width > size.height && isReguler {
@@ -202,6 +214,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         if (annotation != nil){
+            popupViewController!.updateCount++
             mapView!.removeAnnotation(annotation!)
             annotation = nil
         }
@@ -261,6 +274,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             cameraTilt = meta[DVRCNMETA_TILT] as! CGFloat
 
             // アノテーションセットアップ
+            (popupViewController!.view as! PopupView).showAnchor = true
             var nodeId = meta[DVRCNMETA_ID] as! [String]?;
             annotation = MKPointAnnotation()
             annotation!.coordinate = photoCoordinate!
@@ -274,56 +288,20 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
                 if placemarks != nil && placemarks!.count > 0 {
                     let placemark = placemarks![0]
-                    
-                    var address : String? = nil
-
-                    let interest = placemark.areasOfInterest
-                    if interest != nil && interest!.count > 0 {
-                        address = interest![0]
-                    }
-                    
-                    var units : [String] = []
-                    if let unit = placemark.administrativeArea {
-                        units.append(unit)
-                    }
-                    if let unit = placemark.locality {
-                        units.append(unit)
-                    }
-                    if let unit = placemark.subLocality {
-                        units.append(unit)
-                    }
-                    
-                    if units.count >= 2 {
-                        let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: ""),units[1], units[0]) as String
-                        if address == nil {
-                            address = str
-                        }else{
-                            address = "\(address!)\n\(str)"
-                        }
-                    }else if units.count == 1 {
-                        if address == nil {
-                            address = units[0]
-                        }else{
-                            address = "\(address!)\n\(units[0])"
-                        }
-                        
-                    }
-                    if let country = placemark.country {
-                        if address == nil {
-                            address = country
-                        }else{
-                            address = "\(address!) (\(country))"
-                        }
-                    }
-                    
-                    self.popupViewController!.addressLabel.text = address
+                    self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
                 }
-                
             })
 
+            // ブラーカバーを外す
+            setBlurCover(false, isShowPopup: false)
+            
             // 撮影地点に移動
             willStatToMove()
             moveToDefaultPosition(self)
+        }else{
+            popupViewController!.addressLabel.text = NSLocalizedString("ADDRESS_NA", comment: "")
+            (popupViewController!.view as! PopupView).showAnchor = false
+            setBlurCover(true, isShowPopup: true)
         }
     }
     
@@ -334,6 +312,51 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 mapView!.selectAnnotation(annotation!, animated:true)
             }
         }
+    }
+    
+    private func recognizePlacemark(placemark : CLPlacemark) -> String? {
+        var address : String? = nil
+        
+        let interest = placemark.areasOfInterest
+        if interest != nil && interest!.count > 0 {
+            address = interest![interest!.count - 1]
+        }
+        
+        var units : [String] = []
+        if let unit = placemark.administrativeArea {
+            units.append(unit)
+        }
+        if let unit = placemark.locality {
+            units.append(unit)
+        }
+        if let unit = placemark.subLocality {
+            units.append(unit)
+        }
+        
+        if units.count >= 2 {
+            let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: ""),units[1], units[0]) as String
+            if address == nil {
+                address = str
+            }else{
+                address = "\(address!)\n\(str)"
+            }
+        }else if units.count == 1 {
+            if address == nil {
+                address = units[0]
+            }else{
+                address = "\(address!)\n\(units[0])"
+            }
+            
+        }
+        if let country = placemark.country {
+            if address == nil {
+                address = country
+            }else{
+                address = "\(address!) (\(country))"
+            }
+        }
+        
+        return address
     }
     
     //-----------------------------------------------------------------------------------------
@@ -505,5 +528,42 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func viewFullImage(sender: AnyObject) {
         performSegueWithIdentifier("FullImageView", sender: sender)
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - ブラーカバーの制御
+    //-----------------------------------------------------------------------------------------
+    private func setBlurCover(isShow : Bool, isShowPopup : Bool) {
+        if isShow && coverView!.superview == nil {
+            coverView!.frame = self.view.bounds
+            mapView!.addSubview(coverView!)
+            coverView!.layer.zPosition = 1
+        }else if !isShow && coverView!.superview != nil {
+            if popupViewController!.view.superview != nil && popupViewController!.view.superview == coverView {
+                popupViewController!.view.removeFromSuperview()
+            }
+            coverView!.removeFromSuperview()
+        }
+
+        if isShow && isShowPopup {
+            if popupViewController!.view.superview != nil && popupViewController!.view.superview != coverView {
+                popupViewController!.view.removeFromSuperview()
+            }
+            if popupViewController!.view.superview == nil {
+                coverView!.addSubview(popupViewController!.view)
+                popupViewController!.view.alpha = 1.0
+                popupViewController!.updateCount++
+                arrangePopupInBlurCover()
+            }
+        }
+    }
+    
+    private func arrangePopupInBlurCover(){
+        if popupViewController!.view.superview != nil && popupViewController!.view.superview == coverView {
+            var frame = popupViewController!.view.frame
+            frame.origin.x = (mapView!.bounds.width - frame.size.width) * 0.5
+            frame.origin.y = (mapView!.bounds.height - frame.size.height) * 0.5
+            popupViewController!.view.frame = frame
+        }
     }
 }
