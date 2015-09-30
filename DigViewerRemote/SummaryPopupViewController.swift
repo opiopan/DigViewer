@@ -51,20 +51,20 @@ class SummaryPopupViewController: UIViewController {
         let childView = self.view
         childView.translatesAutoresizingMaskIntoConstraints = false
         parentView.addSubview(childView)
-        let viewDictionary = ["childView": childView]
+        let viewDictionary = ["childView": childView, "parentView": parentView]
         let metricDictionary = ["viewWidth": Double(viewWidth), "viewHeight": Double(viewHeight)]
         let constraints = NSMutableArray()
         let constraintFormat1 =
         NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(>=0)-[childView(==viewWidth)]-(>=0)-|",
-            options : .AlignAllCenterX,
+            "H:[parentView]-(<=1)-[childView(==viewWidth)]",
+            options : .AlignAllCenterY,
             metrics: metricDictionary,
             views: viewDictionary)
         constraints.addObjectsFromArray(constraintFormat1)
         let constraintFormat2 =
         NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(>=0)-[childView(==viewHeight)]-(>=0)-|",
-            options : .AlignAllCenterY,
+            "V:[parentView]-(<=1)-[childView(==viewHeight)]",
+            options : .AlignAllCenterX,
             metrics: metricDictionary,
             views: viewDictionary)
         constraints.addObjectsFromArray(constraintFormat2)
