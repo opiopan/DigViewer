@@ -17,9 +17,17 @@ class SummaryPopupViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     
     var updateCount = 0
+    
+    var viewWidth:CGFloat = 350.0
+    var viewHeight:CGFloat = 150.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var popupFrame = self.view.frame
+        popupFrame.size.width = viewWidth
+        popupFrame.size.height = viewHeight
+        self.view.frame = popupFrame
         
         let baseView = self.view as? PopupView
         baseView!.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
@@ -39,7 +47,42 @@ class SummaryPopupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func addToSuperView(parentView : UIView) {
+        let childView = self.view
+        childView.translatesAutoresizingMaskIntoConstraints = false
+        parentView.addSubview(childView)
+        let viewDictionary = ["childView": childView]
+        let metricDictionary = ["viewWidth": Double(viewWidth), "viewHeight": Double(viewHeight)]
+        let constraints = NSMutableArray()
+        let constraintFormat1 =
+        NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|-(>=0)-[childView(==viewWidth)]-(>=0)-|",
+            options : .AlignAllCenterX,
+            metrics: metricDictionary,
+            views: viewDictionary)
+        constraints.addObjectsFromArray(constraintFormat1)
+        let constraintFormat2 =
+        NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-(>=0)-[childView(==viewHeight)]-(>=0)-|",
+            options : .AlignAllCenterY,
+            metrics: metricDictionary,
+            views: viewDictionary)
+        constraints.addObjectsFromArray(constraintFormat2)
 
+        parentView.addConstraints((constraints as NSArray as? [NSLayoutConstraint])!)
+    }
+    
+    func removeFromSuperView() {
+        if view.superview != nil {
+            view.removeFromSuperview()
+            view.translatesAutoresizingMaskIntoConstraints = true
+            var popupFrame = self.view.frame
+            popupFrame.size.width = viewWidth
+            popupFrame.size.height = viewHeight
+            self.view.frame = popupFrame
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

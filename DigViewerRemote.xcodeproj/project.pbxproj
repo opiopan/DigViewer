@@ -110,6 +110,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B06A2ED1BBABF25000DCE97 /* Information View */ = {
+			isa = PBXGroup;
+			children = (
+				7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */,
+				7B9098361BA4634C00B03FD8 /* ExifViewController.swift */,
+				7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */,
+				7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */,
+			);
+			name = "Information View";
+			sourceTree = "<group>";
+		};
 		7B52AA3B1BB0121E0068A842 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,14 +132,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		7B7356D01BB7E62C00C1DB19 /* Custom Annotation */ = {
+		7B7356D01BB7E62C00C1DB19 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
 				7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */,
 				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
 				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
 			);
-			name = "Custom Annotation";
+			name = "Map View";
 			sourceTree = "<group>";
 		};
 		7BBA59C01B9DA59C0025B902 = {
@@ -221,12 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */,
-				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
-				7B7356D01BB7E62C00C1DB19 /* Custom Annotation */,
-				7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */,
-				7B9098361BA4634C00B03FD8 /* ExifViewController.swift */,
-				7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */,
-				7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */,
+				7B7356D01BB7E62C00C1DB19 /* Map View */,
+				7B06A2ED1BBABF25000DCE97 /* Information View */,
 				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
 				7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */,
 				7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */,

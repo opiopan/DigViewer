@@ -38,7 +38,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         show3DView = configController.map3DView
         
         popupViewController = storyboard!.instantiateViewControllerWithIdentifier("ImageSummaryPopup") as? SummaryPopupViewController
-        arrangePopupInBlurCover()
+        if let view = popupViewController!.view {
+            var frame = view.frame
+            frame.size.width *= 2
+        }
         let recognizer = UITapGestureRecognizer(target: self, action: "tapOnThumbnail:")
         popupViewController!.thumbnailView!.addGestureRecognizer(recognizer)
         
@@ -91,12 +94,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        var frame = self.view.bounds
-        frame.size.width = max(size.width, size.height)
-        frame.size.height = max(size.width, size.height)
-        coverView!.frame = frame
-        arrangePopupInBlurCover()
 
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         let mode = splitViewController!.displayMode
@@ -534,37 +531,44 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     private func setBlurCover(isShow : Bool, isShowPopup : Bool) {
         if isShow && coverView!.superview == nil {
-            coverView!.frame = self.view.bounds
-            mapView!.addSubview(coverView!)
-            coverView!.layer.zPosition = 1
+            //coverView!.frame = self.view.bounds
+            let childView = coverView!
+            childView.translatesAutoresizingMaskIntoConstraints = false
+            mapView!.addSubview(childView)
+            childView.layer.zPosition = 1
+            let viewDictionary = ["childView": childView]
+            let constraints = NSMutableArray()
+            let constraintFormat1 =
+                NSLayoutConstraint.constraintsWithVisualFormat(
+                    "H:|-[childView]-|",
+                    options : NSLayoutFormatOptions(rawValue: 0),
+                    metrics: nil,
+                    views: viewDictionary)
+            constraints.addObjectsFromArray(constraintFormat1)
+            let constraintFormat2 =
+                NSLayoutConstraint.constraintsWithVisualFormat(
+                    "V:|-[childView]-|",
+                    options : NSLayoutFormatOptions(rawValue: 0),
+                    metrics: nil,
+                    views: viewDictionary)
+            constraints.addObjectsFromArray(constraintFormat2)
+            mapView!.addConstraints((constraints as NSArray as? [NSLayoutConstraint])!)
         }else if !isShow && coverView!.superview != nil {
             if popupViewController!.view.superview != nil && popupViewController!.view.superview == coverView {
-                popupViewController!.view.removeFromSuperview()
+                popupViewController!.removeFromSuperView()
             }
             coverView!.removeFromSuperview()
         }
 
         if isShow && isShowPopup {
             if popupViewController!.view.superview != nil && popupViewController!.view.superview != coverView {
-                popupViewController!.view.removeFromSuperview()
+                popupViewController!.removeFromSuperView()
             }
             if popupViewController!.view.superview == nil {
-                coverView!.addSubview(popupViewController!.view)
+                popupViewController!.addToSuperView(coverView!)
                 popupViewController!.view.alpha = 1.0
                 popupViewController!.updateCount++
-                arrangePopupInBlurCover()
             }
-        }
-    }
-    
-    private func arrangePopupInBlurCover(){
-        if popupViewController!.view.superview != nil && popupViewController!.view.superview == coverView {
-            var frame = popupViewController!.view.frame
-            frame.size.width = 350
-            frame.size.height = 150
-            frame.origin.x = (mapView!.bounds.width - frame.size.width) * 0.5
-            frame.origin.y = (mapView!.bounds.height - frame.size.height) * 0.5
-            popupViewController!.view.frame = frame
         }
     }
 }

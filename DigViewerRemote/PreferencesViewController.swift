@@ -46,12 +46,12 @@ class PreferencesViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     @IBAction func actionForMapType(sender : UISegmentedControl) {
         configController.mapType = MapType(rawValue: sender.selectedSegmentIndex)!
-        closeThisView(nil)
+        reflectToControl()
     }
     
     @IBAction func actionForEnableVolume(sender : UISwitch) {
         configController.enableVolumeButton = sender.on
-        closeThisView(nil)
+        reflectToControl()
     }
     
     //-----------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@ class PreferencesViewController: UITableViewController {
             if let identifier = targetCell.restorationIdentifier {
                 if identifier == "ShowLabels" {
                     configController.mapShowLabel = !configController.mapShowLabel
-                    closeThisView(nil)
+                    reflectToControl()
                 }else if identifier == "3DBirdsView" {
                     configController.map3DView = !configController.map3DView
-                    closeThisView(nil)
+                    reflectToControl()
                 }
             }
         }
