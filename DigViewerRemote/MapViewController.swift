@@ -200,6 +200,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     private var annotation : MKPointAnnotation? = nil
     private var geocoder : CLGeocoder? = nil
+    private var isGeocoding = false
+    private var pendingGeocodingRecquest : CLLocation? = nil
+    private var currentLocation : CLLocation? = nil
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         if (annotation != nil){
@@ -271,18 +274,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
 //            mapView!.selectAnnotation(annotation!, animated:true)
             
             // 逆ジオコーディング(経緯度→住所に変換)
-            let location = CLLocation(latitude: latitude!, longitude: longitude!)
-            geocoder!.cancelGeocode()
-            let updateCount = popupViewController!.updateCount
-            geocoder!.reverseGeocodeLocation(location, completionHandler: {
-                [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
-                if placemarks != nil && placemarks!.count > 0 {
-                    let placemark = placemarks![0]
-                    if self.popupViewController!.updateCount == updateCount {
-                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
-                    }
-                }
-            })
+            currentLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+            performGeocoding(currentLocation!)
 
             // ブラーカバーを外す
             setBlurCover(false, isShowPopup: false)
@@ -306,12 +299,34 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
     }
     
+    private func performGeocoding(location : CLLocation) {
+        if !isGeocoding {
+            isGeocoding = true
+            geocoder!.reverseGeocodeLocation(location, completionHandler: {
+                [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
+                if placemarks != nil && placemarks!.count > 0 && self.pendingGeocodingRecquest == nil{
+                    let placemark = placemarks![0]
+                    if self.currentLocation == location {
+                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
+                    }
+                }
+                self.isGeocoding = false
+                if let pending = self.pendingGeocodingRecquest {
+                    self.pendingGeocodingRecquest = nil
+                    self.performGeocoding(pending)
+                }
+            })
+        }else{
+            pendingGeocodingRecquest = location
+        }
+    }
+    
     private func recognizePlacemark(placemark : CLPlacemark) -> String? {
         var address : String? = nil
         
         let interest = placemark.areasOfInterest
         if interest != nil && interest!.count > 0 {
-            address = interest![interest!.count - 1]
+            address = interest![0]
         }
         
         var units : [String] = []

@@ -14,7 +14,6 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         super.viewDidLoad()
 
         let client = DVRemoteClient.sharedClient()
-        client.addClientDelegate(self)
         
         let meta = client.meta
         if meta != nil {
@@ -31,13 +30,20 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     }
     
     deinit{
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        DVRemoteClient.sharedClient().addClientDelegate(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        DVRemoteClient.sharedClient().removeClientDelegate(self)
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: - InformationViewChildプロトコル
     //-----------------------------------------------------------------------------------------

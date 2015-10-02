@@ -307,13 +307,11 @@
                                       DVRCNMETA_ID:[_meta valueForKey:DVRCNMETA_ID]};
             NSData* reqData = [NSKeyedArchiver archivedDataWithRootObject:reqDict];
             [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:reqData replacingQue:NO];
-        }else{
-            _meta = newMeta;
-        }
-        if (_delegates.count){
-            for (id <DVRemoteClientDelegate> delegate in _delegates){
-                if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
-                    [delegate dvrClient:self didRecieveMeta:_meta];
+            if (_delegates.count){
+                for (id <DVRemoteClientDelegate> delegate in _delegates){
+                    if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
+                        [delegate dvrClient:self didRecieveMeta:_meta];
+                    }
                 }
             }
         }

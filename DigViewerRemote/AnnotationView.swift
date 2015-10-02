@@ -51,32 +51,46 @@ class AnnotationView: MKPinAnnotationView {
         return hitView
     }
     
+    private var envelopeView : UIView? = nil
+    
     override var selected : Bool {
         didSet{
             let calloutView = calloutViewController!.view
             if selected {
+                var frame = calloutView.frame
+                frame.origin.x = 0
+                frame.origin.y = 0
+                calloutView.frame = frame
+                envelopeView = UIView(frame: frame)
                 if calloutView.superview != nil {
+                    calloutViewController!.updateCount++
                     calloutView.removeFromSuperview()
                 }
+                envelopeView!.addSubview(calloutView)
+                
                 let annotationViewBounds = self.bounds
                 var calloutViewFrame = calloutView.frame
                 calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5 - 8.0
                 calloutViewFrame.origin.y = -calloutViewFrame.size.height
-                calloutView.frame = calloutViewFrame;
-                calloutView.alpha = 0.0
-                addSubview(calloutView)
-                UIView.animateWithDuration(0.2, animations: {() -> Void in
-                    calloutView.alpha = 1.0
+                envelopeView!.frame = calloutViewFrame;
+                envelopeView!.alpha = 0.0
+                addSubview(envelopeView!)
+                UIView.animateWithDuration(0.2, animations: {[unowned self]() -> Void in
+                    self.envelopeView!.alpha = 1.0
                 })
             }else{
-                let updateCount = calloutViewController!.updateCount
-                UIView.animateWithDuration(0.2, animations: {() -> Void in
-                    calloutView.alpha = 0.0
-                }, completion: {[unowned self](flag : Bool) -> Void in
-                    if self.calloutViewController!.updateCount == updateCount {
-                        calloutView.removeFromSuperview()
-                    }
-                })
+                if let targetView = envelopeView {
+                    envelopeView = nil
+                    let updateCount = calloutViewController!.updateCount
+                    UIView.animateWithDuration(0.2, animations: {() -> Void in
+                        targetView.alpha = 0.0
+                    }, completion: {[unowned self](flag : Bool) -> Void in
+                        targetView.removeFromSuperview()
+                        if self.calloutViewController!.updateCount == updateCount {
+                            calloutView.removeFromSuperview()
+                        }
+                    })
+                }
             }
         }
     }

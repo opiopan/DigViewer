@@ -12,7 +12,6 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        DVRemoteClient.sharedClient().addClientDelegate(self)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -22,12 +21,19 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     }
     
     deinit {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        DVRemoteClient.sharedClient().addClientDelegate(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
 
     //-----------------------------------------------------------------------------------------

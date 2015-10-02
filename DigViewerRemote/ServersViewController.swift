@@ -14,19 +14,24 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DVRemoteClient.sharedClient().addClientDelegate(self)
-        
         browser.delegate = self
         browser.searchServers()
     }
     
     deinit{
         browser.stop()
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        DVRemoteClient.sharedClient().addClientDelegate(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
 
     @IBAction func closeServersView(sender : UIBarButtonItem?){
