@@ -44,9 +44,9 @@ class AnnotationView: MKPinAnnotationView {
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         var hitView = super.hitTest(point, withEvent: event)
         if hitView == nil && self.selected {
-            let pointInAnnotationView = superview!.convertPoint(point, toView: self)
             let calloutView = calloutViewController!.view
-            hitView = calloutView.hitTest(pointInAnnotationView, withEvent: event)
+            let pointInCalloutView = self.convertPoint(point, toView: calloutView)
+            hitView = calloutView.hitTest(pointInCalloutView, withEvent: event)
         }
         return hitView
     }
