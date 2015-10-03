@@ -666,10 +666,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wMC-Ob-BaY">
-                                                    <rect key="frame" x="209" y="8" width="183" height="29"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="183" id="G2F-Ig-hd2"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="456" y="7" width="127" height="29"/>
                                                     <segments>
                                                         <segment title="Map"/>
                                                         <segment title="Satellite"/>
@@ -678,10 +675,19 @@
                                                         <action selector="actionForMapType:" destination="rbR-PC-yPt" eventType="valueChanged" id="W1J-SB-rzF"/>
                                                     </connections>
                                                 </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKw-wn-rX4">
+                                                    <rect key="frame" x="16" y="0.0" width="71.5" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wMC-Ob-BaY" firstAttribute="centerX" secondItem="u5c-TU-Uis" secondAttribute="centerX" id="IuV-7U-bft"/>
+                                                <constraint firstAttribute="trailing" secondItem="wMC-Ob-BaY" secondAttribute="trailing" constant="17" id="0Ar-Iu-NlI"/>
+                                                <constraint firstAttribute="bottom" secondItem="YKw-wn-rX4" secondAttribute="bottom" id="RT5-Z3-2dL"/>
                                                 <constraint firstItem="wMC-Ob-BaY" firstAttribute="centerY" secondItem="u5c-TU-Uis" secondAttribute="centerY" id="uF6-ox-4vI"/>
+                                                <constraint firstItem="YKw-wn-rX4" firstAttribute="top" secondItem="u5c-TU-Uis" secondAttribute="top" id="waO-s6-a0m"/>
+                                                <constraint firstItem="YKw-wn-rX4" firstAttribute="leading" secondItem="u5c-TU-Uis" secondAttribute="leading" constant="16" id="xOK-gO-lLN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

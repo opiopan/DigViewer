@@ -40,3 +40,6 @@
 
 /* Class = "UILabel"; text = "3D Bird's View"; ObjectID = "y20-uk-v9p"; */
 "y20-uk-v9p.text" = "3Dマップ";
+
+/* Class = "UILabel"; text = "Map Type"; ObjectID = "YKw-wn-rX4"; */
+"YKw-wn-rX4.text" = "地図種別";

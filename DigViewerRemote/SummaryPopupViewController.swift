@@ -23,6 +23,10 @@ class SummaryPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenBounds = UIScreen.mainScreen().bounds
+        let widthLimit = min(screenBounds.height, screenBounds.width) - 10
+        viewWidth = min(viewWidth, widthLimit)
 
         var popupFrame = self.view.frame
         popupFrame.size.width = viewWidth
