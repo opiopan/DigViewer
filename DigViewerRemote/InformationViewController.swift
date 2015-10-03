@@ -34,6 +34,14 @@ class InfomationViewController: UIViewController {
             }
         })
     }
+
+    override func viewWillAppear(animated: Bool) {
+        navigationController!.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        navigationController!.setNavigationBarHidden(true, animated: true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

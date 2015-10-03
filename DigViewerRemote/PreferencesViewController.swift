@@ -8,11 +8,12 @@
 
 import UIKit
 
-class PreferencesViewController: UITableViewController {
+class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     @IBOutlet var mapTypeControl : UISegmentedControl?
     @IBOutlet var mapLabelControl : UITableViewCell?
     @IBOutlet var map3DControl : UITableViewCell?
     @IBOutlet var enableVolumeControl : UISwitch?
+    @IBOutlet weak var connectionCell: UITableViewCell!
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -25,6 +26,16 @@ class PreferencesViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        DVRemoteClient.sharedClient().addClientDelegate(self)
+        let client = DVRemoteClient.sharedClient()
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.service.name
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        DVRemoteClient.sharedClient().removeClientDelegate(self)
     }
 
     @IBAction func closeThisView(sender : UIBarButtonItem?){
@@ -71,5 +82,13 @@ class PreferencesViewController: UITableViewController {
             }
         }
         
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 接続状態を反映
+    //-----------------------------------------------------------------------------------------
+    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
+        let client = DVRemoteClient.sharedClient()
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.service.name
     }
 }

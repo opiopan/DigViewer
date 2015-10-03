@@ -404,23 +404,6 @@
             </objects>
             <point key="canvasLocation" x="-425" y="-1872"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="J1H-LX-kGx">
-            <objects>
-                <navigationController id="AZD-Kb-uLo" sceneMemberID="viewController">
-                    <value key="contentSizeForViewInPopover" type="size" width="360" height="400"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QmK-7q-FhO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="rj1-As-3ds" kind="relationship" relationship="rootViewController" id="JYu-wN-7ZP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1jb-cb-qQu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="407" y="-320"/>
-        </scene>
         <!--Summary Popup View Controller-->
         <scene sceneID="TrD-LE-5km">
             <objects>
@@ -522,12 +505,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BnN-mm-yJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407" y="284"/>
+            <point key="canvasLocation" x="-425" y="284"/>
         </scene>
         <!--Servers-->
         <scene sceneID="LKe-OG-B4F">
             <objects>
-                <tableViewController id="rj1-As-3ds" customClass="ServerViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ServerViewController" id="rj1-As-3ds" customClass="ServerViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uXn-Ev-egb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -557,7 +540,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfY-Wb-GRU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203" y="-320"/>
+            <point key="canvasLocation" x="1067" y="457"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="85S-k6-is8">
@@ -607,7 +590,7 @@
                                 </items>
                             </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OqM-XB-U5S">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -615,32 +598,22 @@
                             <constraint firstItem="l4r-4E-Kc7" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="2UI-a7-Z1D"/>
                             <constraint firstItem="l4r-4E-Kc7" firstAttribute="top" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="6LA-rJ-VJq"/>
                             <constraint firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="6u4-R6-MqF"/>
-                            <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="gRo-xe-Jor" secondAttribute="bottom" id="TIa-tA-fXl"/>
+                            <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="ywu-ch-6z2" secondAttribute="top" id="Y7Z-Da-jye"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="aPH-7K-tuh"/>
                             <constraint firstItem="dKE-35-FpS" firstAttribute="top" secondItem="l4r-4E-Kc7" secondAttribute="bottom" id="jRD-ez-v7I"/>
                             <constraint firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OlD-Vh-8Sc">
-                        <barButtonItem key="leftBarButtonItem" image="ServerButton" id="t8a-y4-8KS">
-                            <connections>
-                                <action selector="performServersButton:" destination="KXb-Jb-PaG" id="pKl-6d-EXw"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="OlD-Vh-8Sc"/>
                     <connections>
                         <outlet property="barTitle" destination="OlD-Vh-8Sc" id="vK5-kI-cns"/>
                         <outlet property="mapView" destination="OqM-XB-U5S" id="nbh-0q-7Gk"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
-                        <segue destination="AZD-Kb-uLo" kind="presentation" identifier="ModalServersView" id="iBt-Pp-e1a"/>
-                        <segue destination="AZD-Kb-uLo" kind="popoverPresentation" identifier="PopoverServersView" popoverAnchorBarButtonItem="t8a-y4-8KS" id="0Q2-Qu-8C5">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
-                        <segue destination="rbR-PC-yPt" kind="popoverPresentation" identifier="PopoverConfigurationView" popoverAnchorBarButtonItem="G61-6W-1Ki" id="83V-8J-7rY">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
                         <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="XyN-pQ-fCP"/>
+                        <segue destination="2Ld-xr-uD4" kind="popoverPresentation" identifier="PopoverConfigurationView" popoverAnchorBarButtonItem="G61-6W-1Ki" id="QjS-Zo-NfZ">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ua2-Qv-qXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -656,10 +629,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
+                            <tableViewSection headerTitle="Data Source" id="kGk-X2-jDl">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="OyK-ra-MRG" detailTextLabel="WWX-Ed-zo5" style="IBUITableViewCellStyleValue1" id="zaD-Hw-rzS">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zaD-Hw-rzS" id="9US-Ka-lfI">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OyK-ra-MRG">
+                                                    <rect key="frame" x="15" y="12" width="83.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WWX-Ed-zo5">
+                                                    <rect key="frame" x="523.5" y="12" width="41.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="rj1-As-3ds" kind="show" identifier="SelectServer" id="pYz-RB-d5B"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Map Behaviours" id="Aib-ta-5ZH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Qjr-z9-vX2">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qjr-z9-vX2" id="u5c-TU-Uis">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -692,7 +696,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ShowLabels" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ShowLabels" textLabel="v3Q-LF-DfZ" style="IBUITableViewCellStyleDefault" id="gnn-BO-6KN">
-                                        <rect key="frame" x="0.0" y="93.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="251.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gnn-BO-6KN" id="WEg-Gg-oVi">
                                             <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
@@ -709,7 +713,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="3DBirdsView" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="3DBirdsView" textLabel="y20-uk-v9p" style="IBUITableViewCellStyleDefault" id="W86-Wd-fbz">
-                                        <rect key="frame" x="0.0" y="137.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="295.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W86-Wd-fbz" id="eJD-5m-Qlu">
                                             <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
@@ -730,7 +734,7 @@
                             <tableViewSection headerTitle="Others" id="iGU-9o-DoF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MUZ-Fu-uR3">
-                                        <rect key="frame" x="0.0" y="231.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="389.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUZ-Fu-uR3" id="AqT-AM-DRz">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -779,8 +783,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="380" height="340"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="380" height="430"/>
                     <connections>
+                        <outlet property="connectionCell" destination="zaD-Hw-rzS" id="Lft-x7-pWN"/>
                         <outlet property="enableVolumeControl" destination="VRT-yh-YFL" id="V6j-ct-4xK"/>
                         <outlet property="map3DControl" destination="W86-Wd-fbz" id="wMZ-50-6f2"/>
                         <outlet property="mapLabelControl" destination="gnn-BO-6KN" id="nxm-ck-26e"/>
@@ -789,12 +794,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZD-2K-CtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-425" y="509"/>
+            <point key="canvasLocation" x="1067" y="-320"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Preferences Navigation Controller-->
         <scene sceneID="OTE-ao-aX9">
             <objects>
-                <navigationController id="2Ld-xr-uD4" sceneMemberID="viewController">
+                <navigationController id="2Ld-xr-uD4" customClass="PreferencesNavigationController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mgQ-WQ-KDS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -805,7 +810,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIa-Of-IDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1221" y="509"/>
+            <point key="canvasLocation" x="287" y="-320"/>
         </scene>
     </scenes>
     <resources>
@@ -814,12 +819,10 @@
         <image name="LeftButton" width="31" height="31"/>
         <image name="ListButton" width="31" height="31"/>
         <image name="RightButton" width="31" height="31"/>
-        <image name="ServerButton" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="83V-8J-7rY"/>
-        <segue reference="mAB-uM-i7s"/>
-        <segue reference="iBt-Pp-e1a"/>
-        <segue reference="ETZ-FC-MkB"/>
+        <segue reference="1Vi-gm-zmd"/>
+        <segue reference="XyN-pQ-fCP"/>
+        <segue reference="1lN-Fx-bf5"/>
     </inferredMetricsTieBreakers>
 </document>

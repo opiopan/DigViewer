@@ -43,3 +43,9 @@
 
 /* Class = "UILabel"; text = "Map Type"; ObjectID = "YKw-wn-rX4"; */
 "YKw-wn-rX4.text" = "地図種別";
+
+/* Class = "UITableViewSection"; headerTitle = "Data Source"; ObjectID = "kGk-X2-jDl"; */
+"kGk-X2-jDl.headerTitle" = "データソース";
+
+/* Class = "UILabel"; text = "Connection"; ObjectID = "OyK-ra-MRG"; */
+"OyK-ra-MRG.text" = "接続先";

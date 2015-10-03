@@ -32,7 +32,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         
         navigationItem.hidesBackButton = true;
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        //navigationController?.hidesBarsOnTap = true
+        navigationController!.setNavigationBarHidden(true, animated: false)
         
         configController.registerObserver(self)
         show3DView = configController.map3DView
@@ -147,19 +147,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             }
         }
     }
-    
-    //-----------------------------------------------------------------------------------------
-    // Servers ボタン
-    //-----------------------------------------------------------------------------------------
-    @IBAction func performServersButton(sender : AnyObject) {
-        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
-                        traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
-        if isReguler {
-            performSegueWithIdentifier("PopoverServersView", sender: sender)
-        }else{
-            performSegueWithIdentifier("ModalServersView", sender: sender)
-        }
-    }
 
     //-----------------------------------------------------------------------------------------
     // 次・前 ボタン
@@ -184,6 +171,20 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             performSegueWithIdentifier("ModalConfigurationView", sender: sender)
         }
     }
+    
+    //-----------------------------------------------------------------------------------------
+    // Serversリスト表示
+    //-----------------------------------------------------------------------------------------
+    private func showServersList() {
+        isOpenServerList = true
+        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
+            traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
+        if isReguler {
+            performSegueWithIdentifier("PopoverConfigurationView", sender: self)
+        }else{
+            performSegueWithIdentifier("ModalConfigurationView", sender: self)
+        }
+    }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコルの実装
@@ -191,10 +192,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
         if client.state == .Disconnected && firstConnecting {
-            performServersButton(self)
-            firstConnecting = false;
+            firstConnecting = false
+            showServersList()
         }else if client.state == .Connected {
-            firstConnecting = false;
+            firstConnecting = false
         }
     }
     
@@ -412,7 +413,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 })
             }else{
                 firstConnecting = false;
-                self.performServersButton(self)
+                showServersList()
             }
         }
 
@@ -586,4 +587,18 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             }
         }
     }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Segueコントロール
+    //-----------------------------------------------------------------------------------------
+    private var isOpenServerList : Bool = false
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == "PopoverConfigurationView" || segue.identifier == "ModalConfigurationView" {
+            let controller = segue.destinationViewController as! PreferencesNavigationController
+            controller.isOpenServerList = isOpenServerList
+            isOpenServerList = false
+        }
+    }
+
 }
