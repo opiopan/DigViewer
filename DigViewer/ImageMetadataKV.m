@@ -29,6 +29,7 @@
     if (self){
         _key = [aDecoder decodeObjectForKey:@"key"];
         _value = [aDecoder decodeObjectForKey:@"value"];
+        _remark = [aDecoder decodeObjectForKey:@"remark"];
     }
     return self;
 }
@@ -37,6 +38,7 @@
 {
     [aCoder encodeObject:_key forKey:@"key"];
     [aCoder encodeObject:_value forKey:@"value"];
+    [aCoder encodeObject:_remark forKey:@"remark"];
 }
 
 @end

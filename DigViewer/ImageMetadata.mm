@@ -113,14 +113,14 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifDateTimeOriginal, pvTypeSpecial, "Date Time:", NULL, 0, NULL, convertDate,
     propertyALL, kCGImagePropertyProfileName, pvTypeSimple, "Color Profile:", "%@", 0, NULL, NULL,
     propertyALL, kCGImagePropertyDepth, pvTypeSimple, "Bit Depth:", "%@ bit", 0, NULL, NULL,
-    propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
+    propertyALL, NULL, pvTypeSeparator, "EXIFSEP_EQUIPMENTS", NULL, 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFMake, pvTypeSimple, "Camera Maker:", "%@", 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFModel, pvTypeSimple, "Camera Model:", "%@", 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifSensingMethod, pvTypeSimple, "Sensing Method:", NULL, MAPDEF(sensingMethods), NULL,
     propertyEXIF, kCGImagePropertyExifLensMake, pvTypeSpecial, "Lens Maker:", NULL, 0, NULL, convertLensMaker,
     propertyEXIF, kCGImagePropertyExifLensModel, pvTypeSpecial, "Lens Model:", NULL, 0, NULL, convertLensModel,
     propertyEXIF, kCGImagePropertyExifLensSpecification, pvTypeSpecial, "Lens Spec:", NULL, 0, NULL, convertLensSpec,
-    propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
+    propertyALL, NULL, pvTypeSeparator, "EXIFSEP_CONDITIONS", NULL, 0, NULL, NULL,
     propertyEXIF, kCGImagePropertyExifFocalLength, pvTypeSpecial, "Focal Length:", "%@mm", 0, NULL, convertFocalLength,
     propertyEXIF, kCGImagePropertyExifFocalLenIn35mmFilm, pvTypeSpecial, "Focal Length in 35mm:", "%@mm", 0, NULL, convertFocalLength35,
     propertyEXIF, kCGImagePropertyExifExposureTime, pvTypeSpecial, "Exposure Time:", NULL, 0, NULL, convertExposureTime,
@@ -139,7 +139,7 @@ static struct TranslationRule{
     propertyEXIF, kCGImagePropertyExifSceneCaptureType, pvTypeSimple, "Scene Cpature Type:", NULL, MAPDEF(sceneCaptureTypes), NULL,
     propertyEXIF, kCGImagePropertyExifSubjectDistRange, pvTypeSimple, "Subject Distance Range:", NULL, MAPDEF(subjectDists), NULL,
     propertyEXIF, kCGImagePropertyExifCustomRendered, pvTypeSimple, "Special Effects:", NULL, MAPDEF(customRendereds), NULL,
-    propertyALL, NULL, pvTypeSeparator, NULL, NULL, 0, NULL, NULL,
+    propertyALL, NULL, pvTypeSeparator, "EXIFSEP_SOFTOWARE", NULL, 0, NULL, NULL,
     propertyTIFF, kCGImagePropertyTIFFSoftware, pvTypeSimple, "Processing Software:", "%@", 0, NULL, NULL,
 };
 
@@ -495,7 +495,9 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                     if (validRowCount > 0 || !_name){
                         [array addObjectsFromArray:section];
                     }
-                    section = [[NSMutableArray alloc] initWithObjects:[ImageMetadataKV kvWithKey:nil value:nil], nil];
+                    ImageMetadataKV* kv = [ImageMetadataKV kvWithKey:nil value:nil];
+                    kv.remark = NSLocalizedString(@(rule->keyName), nil);
+                    section = [[NSMutableArray alloc] initWithObjects:kv, nil];
                     validRowCount = 0;
                 }else{
                     keyString = NSLocalizedString(@(rule->keyName), nil);

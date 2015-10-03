@@ -11,6 +11,7 @@
 @interface ImageMetadataKV : NSObject <NSCoding>
 @property NSString* key;
 @property NSString* value;
+@property NSString* remark;
 
 + (id)kvWithKey:(NSString*)key value:(NSString*)value;
 

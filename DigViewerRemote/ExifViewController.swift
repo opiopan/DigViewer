@@ -60,8 +60,8 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     
     private var exifData : [ImageMetadataKV]! = nil
     private var gpsData : [ImageMetadataKV]! = nil
-    private var sectionCount = 0;
-    private var rowCount = 0;
+    private var sectionNames : [String] = [];
+    private var sectionData : [[ImageMetadataKV]] = [];
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         exifData = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
@@ -70,9 +70,28 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         }else{
             gpsData = nil
         }
-        sectionCount = 1
-        let gpsDataCount = gpsData == nil ? 0 : gpsData.count
-        rowCount = exifData.count - 1 + (gpsDataCount > 0 ? gpsDataCount + 1 : 0)
+        
+        sectionNames = [NSLocalizedString("EXIF-BASIC", comment:"")];
+        sectionData = [[]];
+        for entry in exifData {
+            if entry.key == nil {
+                sectionNames.append(entry.remark)
+                sectionData.append([])
+            }else{
+                var data = sectionData.last
+                data!.append(entry)
+                sectionData[sectionData.count - 1] = data!
+            }
+        }
+        if gpsData != nil{
+            sectionNames.append(NSLocalizedString("EXIF-LOCATION", comment:""))
+            sectionData.append([])
+            for entry in gpsData {
+                var data = sectionData.last
+                data!.append(entry)
+                sectionData[sectionData.count - 1] = data!
+            }
+        }
         tableView.reloadData()
     }
     
@@ -89,30 +108,79 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     // MARK: - テーブルビューのデータソース
     //-----------------------------------------------------------------------------------------
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sectionCount
+        return sectionNames.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowCount
+        let data = sectionData[section]
+        return section == 0 ? data.count - 1 : data.count
     }
 
+    private var cellForEstimate : LabelArrangableCell?
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.row == 0 ? CGFloat(160) : CGFloat(16)
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return  CGFloat(160)
+        }else{
+            if cellForEstimate == nil {
+                cellForEstimate = tableView.dequeueReusableCellWithIdentifier("ExifEntry") as? LabelArrangableCell
+            }
+            setupCell(cellForEstimate!, indexPath: indexPath)
+            cellForEstimate!.contentView.setNeedsLayout()
+            cellForEstimate!.contentView.layoutIfNeeded()
+
+            let font = cellForEstimate!.subTextLabel!.font
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            let attributes = [
+                NSFontAttributeName : font,
+                NSParagraphStyleAttributeName : paragraphStyle
+            ]
+            let text = cellForEstimate!.subTextLabel.text
+            let screenBounds = tableView.bounds
+            let labelFrame = cellForEstimate!.subTextLabel.frame
+            let labelSize = CGSize(width: screenBounds.size.width - labelFrame.origin.x, height: labelFrame.size.height)
+            var newLabelSize = labelSize
+            if text != nil {
+                newLabelSize.height = 1000
+                let rect = (text! as NSString).boundingRectWithSize(
+                    newLabelSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+                newLabelSize = rect.size
+            }
+            
+            var size = cellForEstimate!.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+            if size.height < newLabelSize.height {
+                size.height += (newLabelSize.height - labelSize.height)
+            }
+            
+            return size.height + 1
+        }
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionNames[section]
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = indexPath.row == 0 ?
+        let cell = indexPath.section == 0 && indexPath.row == 0 ?
                    tableView.dequeueReusableCellWithIdentifier("ImageCell", forIndexPath: indexPath) :
                    tableView.dequeueReusableCellWithIdentifier("ExifEntry", forIndexPath: indexPath)
+
+        setupCell(cell, indexPath: indexPath)
+    
+        return cell
+    }
+    
+    private func setupCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         var entry : ImageMetadataKV? = nil
-        if indexPath.row == 0 {
+        if indexPath.section == 0 && indexPath.row == 0 {
             entry = exifData[0]
-        }else if indexPath.row > 0 && indexPath.row < exifData.count - 1{
+        }else if indexPath.section == 0 {
             entry = exifData[indexPath.row + 1]
-        }else if indexPath.row >= exifData.count {
-            entry = gpsData[indexPath.row - exifData.count]
+        }else{
+            entry = (sectionData[indexPath.section])[indexPath.row]
         }
-        if indexPath.row == 0 {
+        if indexPath.section == 0 && indexPath.row == 0 {
             let imageCell = cell as! InspectorImageCell
             let entry2 = exifData[1]
             imageCell.mainLabel!.text = entry!.value
@@ -120,16 +188,15 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
             imageCell.thumbnailView!.image = DVRemoteClient.sharedClient().thumbnail
         }else{
             if entry != nil {
-                cell.textLabel!.text = entry!.key
-                cell.detailTextLabel!.text = entry!.value
-                (cell as! LabelArrangableCell).textLabelWidth = firstFieldWidth(cell)
+                let exifCell = cell as! LabelArrangableCell
+                exifCell.mainLabel!.text = entry!.key
+                exifCell.subTextLabel!.text = entry!.value
+                exifCell.textLabelWidth = CGFloat(firstFieldWidth(cell))
             }else{
-                cell.textLabel!.text = ""
-                cell.detailTextLabel!.text = ""
+                (cell as! LabelArrangableCell).mainLabel!.text = ""
+                (cell as! LabelArrangableCell).subTextLabel!.text = ""
             }
         }
-
-        return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -147,7 +214,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         if let width = calculatedFirstFieldWidth {
             return width
         }else{
-            let font = cell.textLabel!.font
+            let font = (cell as! LabelArrangableCell).mainLabel!.font
             let attributes = [NSFontAttributeName : font]
             let meta = DVRemoteClient.sharedClient().templateMeta
             let exif = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
@@ -165,7 +232,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
                     width = max(width, Double(size.width))
                 }
             }
-            calculatedFirstFieldWidth = width
+            calculatedFirstFieldWidth = width + 1
             return calculatedFirstFieldWidth!
         }
     }

@@ -8,3 +8,6 @@
 
 "ADDRESS_FORMAT" = "%1$@ %2$@";
 "ADDRESS_NA" = "No location information";
+
+"EXIF-BASIC" = "Basic";
+"EXIF-LOCATION" = "Location";

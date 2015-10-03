@@ -6,6 +6,11 @@
   Copyright (c) 2013年 opiopan. All rights reserved.
 */
 
+// EXIFセクションタイトル
+"EXIFSEP_EQUIPMENTS" = "撮影機材";
+"EXIFSEP_CONDITIONS" = "撮影条件";
+"EXIFSEP_SOFTOWARE" = "現像ソフトウェア";
+
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (デフォルト)";
 "MENU_RESET_ZOOM_RATIO" = "画像表示サイズを元に戻す";

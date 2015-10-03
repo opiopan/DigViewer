@@ -11,6 +11,8 @@
 "Authenticating..." = "認証中...";
 "Connected" ="接続完了";
 
-
 "ADDRESS_FORMAT" = "%2$@ %1$@";
 "ADDRESS_NA" = "位置情報なし";
+
+"EXIF-BASIC" = "基本情報";
+"EXIF-LOCATION" = "位置情報";

@@ -6,6 +6,11 @@
   Copyright (c) 2015年 opiopan. All rights reserved.
 */
 
+// EXIFセクションタイトル
+"EXIFSEP_EQUIPMENTS" = "Equipments";
+"EXIFSEP_CONDITIONS" = "Conditions";
+"EXIFSEP_SOFTOWARE" = "Developing Software";
+
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
 "MENU_RESET_ZOOM_RATIO" = "Reset Zoom Ratio";

@@ -21,4 +21,5 @@ class InspectorImageCell: UITableViewCell {
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
+    @IBOutlet weak var thumbnailHightConstraint: NSLayoutConstraint!
 }
