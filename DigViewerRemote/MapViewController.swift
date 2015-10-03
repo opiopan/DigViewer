@@ -28,6 +28,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        splitViewController!.presentsWithGesture = false
         splitViewController!.maximumPrimaryColumnWidth = 320
         
         navigationItem.hidesBackButton = true;
