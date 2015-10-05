@@ -49,7 +49,7 @@ function setKey(key){
         secondaryMsg.firstChild.nodeValue = msgInvalidKey;
         var script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "http://maps.googleapis.com/maps/api/js?";
+        script.src = "https://maps.googleapis.com/maps/api/js?";
         script.src += "libraries=geometry,drawing&sensor=false&callback=initialize";
         document.body.appendChild(script);
     }
