@@ -7,6 +7,7 @@
 //
 
 #import "DVRemoteClient.h"
+#import "LRUCache.h"
 
 //-----------------------------------------------------------------------------------------
 // ThumbnailCacheEntry: サムネールキャッシュの要素
@@ -42,10 +43,8 @@
     
     NSDictionary* _nodeListWrap;
     
-    NSMutableDictionary* _thumbnailCacheIndex;
-    ThumbnailCacheEntry* _thumbnailCacheHead;
-    ThumbnailCacheEntry* _thumbnailCacheTail;
-    int _thumbnailCacheCount;
+    LRUCache* _thumbnailCache;
+    LRUCache* _nodeListCache;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -74,10 +73,8 @@
         _reconectCount = 0;
         _runLoop = [NSRunLoop currentRunLoop];
         _runningWatchDog = NO;
-        _thumbnailCacheIndex = [NSMutableDictionary dictionary];
-        _thumbnailCacheHead = nil;
-        _thumbnailCacheTail = nil;
-        _thumbnailCacheCount = 0;
+        _thumbnailCache = [LRUCache cacheWithSize:500];
+        _nodeListCache = [LRUCache cacheWithSize:10];
     }
     return self;
 }
@@ -253,7 +250,8 @@
     if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
         return _thumbnail;
     }
-    UIImage* thumbnail = [self thumbnailInCacheForID:nodeID inDocument:documentName];
+    NSString* key = [self keyForID:nodeID inDocument:documentName];
+    UIImage* thumbnail = [_thumbnailCache valueForKey:key];
     if (!thumbnail && downloadIfNeed){
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
         [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
@@ -288,6 +286,12 @@
         NSDictionary* args = @{DVRCNMETA_DOCUMENT: document, DVRCNMETA_ID: nodeID};
         if (_nodeListWrap && [self compareWithMeta:_nodeListWrap andMeta:args]){
             return [_nodeListWrap valueForKey:DVRCNMETA_ITEM_LIST];
+        }
+        
+        NSString* key = [self keyForID:nodeID inDocument:document];
+        NSArray* nodeList = [_nodeListCache valueForKey:key];
+        if (nodeList){
+            return nodeList;
         }
         
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
@@ -350,7 +354,8 @@
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
         UIImage* image = [UIImage imageWithData:tiffData];
-        [self cacheThumbnail:image withID:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
+        NSString* key = [self keyForID:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
+        [_thumbnailCache setValue:image forKey:key];
         if ([self compareWithMeta:_meta andMeta:args] && !_thumbnail){
             _thumbnail = image;
             for (id <DVRemoteClientDelegate> delegate in _delegates){
@@ -394,10 +399,14 @@
         if ([self compareWithMeta:args andMetasParent:_meta]){
             _nodeListWrap = args;
         }
+        NSArray* nodeList = [args valueForKey:DVRCNMETA_ITEM_LIST];
+        NSArray* nodeID = [args valueForKey:DVRCNMETA_ID];
+        NSString* document = [args valueForKey:DVRCNMETA_DOCUMENT];
+        NSString* key = [self keyForID:nodeID inDocument:document];
+        [_nodeListCache setValue:nodeList forKey:key];
         for (id <DVRemoteClientDelegate> delegate in _delegates){
             if ([delegate respondsToSelector:@selector(dvrClient:didRecieveNodeList:forNode:inDocument:)]){
-                [delegate dvrClient:self didRecieveNodeList:[args valueForKey:DVRCNMETA_ITEM_LIST]
-                            forNode:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
+                [delegate dvrClient:self didRecieveNodeList:nodeList forNode:nodeID inDocument:document];
             }
         }
     }
@@ -454,72 +463,6 @@
     }
     
     return rc;
-}
-
-//-----------------------------------------------------------------------------------------
-// サムネールキャッシュ
-//-----------------------------------------------------------------------------------------
-static int THUMBNAIL_CHACHE_SIZE = 500;
-- (void)cacheThumbnail:(UIImage*)thumbnail withID:(NSArray*)nodeID inDocument:(NSString*)document
-{
-    NSString* key = [self keyForID:nodeID inDocument:document];
-    ThumbnailCacheEntry* entry = [_thumbnailCacheIndex valueForKey:key];
-    if (!entry){
-        entry = [ThumbnailCacheEntry new];
-        entry.key = key;
-        entry.image = thumbnail;
-        entry.next = nil;
-        entry.prev = nil;
-        [_thumbnailCacheIndex setValue:entry forKey:key];
-        [self addThumbnailCacheEntry:entry];
-        if (_thumbnailCacheCount > THUMBNAIL_CHACHE_SIZE){
-            [_thumbnailCacheIndex removeObjectForKey:_thumbnailCacheHead.key];
-            [self removeThumbnailCacheEntry:_thumbnailCacheHead];
-        }
-    }
-}
-
-- (UIImage*)thumbnailInCacheForID:(NSArray*)nodeID inDocument:(NSString*)document
-{
-    UIImage* image = nil;
-    NSString* key = [self keyForID:nodeID inDocument:document];
-    ThumbnailCacheEntry* entry = [_thumbnailCacheIndex valueForKey:key];
-    if (entry){
-        image = entry.image;
-        [self removeThumbnailCacheEntry:entry];
-        [self addThumbnailCacheEntry:entry];
-    }
-    return image;
-}
-
-- (void)addThumbnailCacheEntry:(ThumbnailCacheEntry*)entry
-{
-    if (_thumbnailCacheTail){
-        entry.prev = _thumbnailCacheTail;
-        _thumbnailCacheTail.next = entry;
-        _thumbnailCacheTail = entry;
-    }else{
-        _thumbnailCacheHead = entry;
-        _thumbnailCacheTail = entry;
-    }
-    _thumbnailCacheCount++;
-}
-
-- (void)removeThumbnailCacheEntry:(ThumbnailCacheEntry*)entry
-{
-    if (entry.prev){
-        entry.prev.next = entry.next;
-    }else{
-        _thumbnailCacheHead = entry.next;
-    }
-    if (entry.next){
-        entry.next.prev = entry.prev;
-    }else{
-        _thumbnailCacheTail = entry.prev;
-    }
-    entry.next = nil;
-    entry.prev = nil;
-    _thumbnailCacheCount--;
 }
 
 - (NSString*)keyForID:(NSArray*)nodeID inDocument:(NSString*)document

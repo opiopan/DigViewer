@@ -48,7 +48,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     private var checkedCell : Int? = nil
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return document != nil && path != nil ? 1 : 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,11 +63,15 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             })
             return nodeList!.count
         }else{
-            return 0
+            return 1
         }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if nodeList == nil{
+            return tableView.dequeueReusableCellWithIdentifier("LoadingCell", forIndexPath: indexPath)
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("NodeItemCell", forIndexPath: indexPath) as! NodeItemCell
 
         let node = nodeList![indexPath.row];

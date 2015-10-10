@@ -356,6 +356,35 @@
                                     <outlet property="thumbnailView" destination="NQG-dK-MjI" id="8Fc-qU-3BF"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="6nj-74-h3Y">
+                                <rect key="frame" x="0.0" y="171" width="600" height="79"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6nj-74-h3Y" id="a0b-dh-IS0">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="78.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-qv-HoW">
+                                            <rect key="frame" x="234.5" y="30" width="20" height="20"/>
+                                            <animations/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCB-Ot-OqI">
+                                            <rect key="frame" x="262.5" y="29" width="75" height="20.5"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="TsJ-qv-HoW" firstAttribute="centerY" secondItem="a0b-dh-IS0" secondAttribute="centerY" id="6mr-zS-DU5"/>
+                                        <constraint firstItem="cCB-Ot-OqI" firstAttribute="leading" secondItem="TsJ-qv-HoW" secondAttribute="trailing" constant="8" id="IzH-61-yYF"/>
+                                        <constraint firstItem="cCB-Ot-OqI" firstAttribute="centerX" secondItem="a0b-dh-IS0" secondAttribute="centerX" id="fIh-43-ngh"/>
+                                        <constraint firstItem="cCB-Ot-OqI" firstAttribute="centerY" secondItem="a0b-dh-IS0" secondAttribute="centerY" id="ydS-Vw-WG5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="BYt-a7-zmq" id="32Z-h2-Oog"/>
