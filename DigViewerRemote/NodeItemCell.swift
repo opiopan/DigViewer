@@ -12,6 +12,7 @@ class NodeItemCell: UITableViewCell {
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
+    var nodeID : [AnyObject]!
     
     override func awakeFromNib() {
         super.awakeFromNib()

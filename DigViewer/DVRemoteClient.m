@@ -221,15 +221,17 @@
     [_session sendCommand:DVRC_MOVE_NODE withData:data replacingQue:YES];
 }
 
-- (UIImage *)thumbnailForID:(NSArray *)nodeID inDocument:(NSString *)documentName
+- (UIImage *)thumbnailForID:(NSArray *)nodeID inDocument:(NSString *)documentName downloadIfNeed:(BOOL)downloadIfNeed
 {
     NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
                            DVRCNMETA_ID : nodeID};
     if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
         return _thumbnail;
     }
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
-    [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
+    if (downloadIfNeed){
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
+    }
     
     return nil;
 }

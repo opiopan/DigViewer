@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)moveToPreviousImage;
 - (void)moveToNode:(NSArray*)nodeID inDocument:(NSString*)documentName;
 
-- (UIImage*)thumbnailForID:(NSArray*)nodeID inDocument:(NSString*)documen;
+- (UIImage*)thumbnailForID:(NSArray*)nodeID inDocument:(NSString*)documen downloadIfNeed:(BOOL)downloadIfNeed;
 
 - (UIImage*)fullImageForID:(NSArray*)nodeID inDocument:(NSString*)document withMaxSize:(CGFloat)maxSize;
 

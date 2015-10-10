@@ -37,7 +37,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     }
 
     //-----------------------------------------------------------------------------------------
-    // MARK: - Table view data source
+    // MARK: - テーブルビューのデータソース
     //-----------------------------------------------------------------------------------------
     var document : String? = nil
     var path : [String]? = nil
@@ -72,24 +72,35 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
 
         let node = nodeList![indexPath.row];
         let name = node[DVRCNMETA_ITEM_NAME] as? String
-        cell.mainLabel.text = name
-        cell.subLabel.text = node[DVRCNMETA_ITEM_TYPE] as? String
-        if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
-            cell.accessoryType = .DisclosureIndicator
-        }else{
-            if indexPath.row == checkedCell {
-                cell.accessoryType = .Checkmark
-            }else{
-                cell.accessoryType = .None
-            }
-        }
         var nodeID = path
         nodeID!.append(name!)
-        cell.thumbnailView!.image = DVRemoteClient.sharedClient().thumbnailForID(nodeID, inDocument: document!)
+        if cell.nodeID == nil || cell.nodeID.last as? String != name {
+            cell.mainLabel.text = name
+            cell.subLabel.text = node[DVRCNMETA_ITEM_TYPE] as? String
+            if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
+                cell.accessoryType = .DisclosureIndicator
+            }else{
+                if indexPath.row == checkedCell {
+                    cell.accessoryType = .Checkmark
+                }else{
+                    cell.accessoryType = .None
+                }
+            }
+            cell.nodeID = nodeID
+            cell.thumbnailView!.image = nil
+        }
+        if cell.thumbnailView!.image == nil{
+            let download = !(tableView.dragging || tableView.decelerating)
+            cell.thumbnailView!.image =
+                DVRemoteClient.sharedClient().thumbnailForID(nodeID, inDocument: document!, downloadIfNeed: download)
+        }
         
         return cell
     }
 
+    //-----------------------------------------------------------------------------------------
+    // MARK: - セルタップ時の動作
+    //-----------------------------------------------------------------------------------------
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node = nodeList![indexPath.row];
         selectedNode = node[DVRCNMETA_ITEM_NAME] as? String
@@ -138,6 +149,31 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
                 checkedCell = index
                 if let cell = tableView!.cellForRowAtIndexPath(indexPath) {
                     cell.accessoryType = .Checkmark
+                }
+            }
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - スクロール停止の判定
+    //-----------------------------------------------------------------------------------------
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            loadImagesForOnscreenRows()
+        }
+    }
+    
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        loadImagesForOnscreenRows()
+    }
+    
+    private func loadImagesForOnscreenRows(){
+        if nodeList != nil && nodeList!.count > 0 {
+            for cell in tableView.visibleCells {
+                if (cell as! NodeItemCell).thumbnailView.image == nil {
+                    let nodeID = (cell as! NodeItemCell).nodeID
+                    (cell as! NodeItemCell).thumbnailView.image =
+                        DVRemoteClient.sharedClient().thumbnailForID(nodeID, inDocument: document!, downloadIfNeed: true)
                 }
             }
         }
