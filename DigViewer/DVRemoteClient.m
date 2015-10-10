@@ -8,6 +8,22 @@
 
 #import "DVRemoteClient.h"
 
+//-----------------------------------------------------------------------------------------
+// ThumbnailCacheEntry: サムネールキャッシュの要素
+//-----------------------------------------------------------------------------------------
+@interface ThumbnailCacheEntry : NSObject
+@property ThumbnailCacheEntry* next;
+@property ThumbnailCacheEntry* prev;
+@property NSString* key;
+@property UIImage* image;
+@end
+
+@implementation ThumbnailCacheEntry
+@end
+
+//-----------------------------------------------------------------------------------------
+// DVRemoteClientの実装
+//-----------------------------------------------------------------------------------------
 @interface DVRemoteClient ()
 @property NSInteger watchDogCount;
 @property BOOL runningWatchDog;
@@ -25,6 +41,11 @@
     UIImage* _fullImage;
     
     NSDictionary* _nodeListWrap;
+    
+    NSMutableDictionary* _thumbnailCacheIndex;
+    ThumbnailCacheEntry* _thumbnailCacheHead;
+    ThumbnailCacheEntry* _thumbnailCacheTail;
+    int _thumbnailCacheCount;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -53,6 +74,10 @@
         _reconectCount = 0;
         _runLoop = [NSRunLoop currentRunLoop];
         _runningWatchDog = NO;
+        _thumbnailCacheIndex = [NSMutableDictionary dictionary];
+        _thumbnailCacheHead = nil;
+        _thumbnailCacheTail = nil;
+        _thumbnailCacheCount = 0;
     }
     return self;
 }
@@ -228,12 +253,13 @@
     if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
         return _thumbnail;
     }
-    if (downloadIfNeed){
+    UIImage* thumbnail = [self thumbnailInCacheForID:nodeID inDocument:documentName];
+    if (!thumbnail && downloadIfNeed){
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
         [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
     }
     
-    return nil;
+    return thumbnail;
 }
 
 - (UIImage *)fullImageForID:(NSArray *)nodeID inDocument:(NSString *)document withMaxSize:(CGFloat)maxSize
@@ -324,6 +350,7 @@
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
         UIImage* image = [UIImage imageWithData:tiffData];
+        [self cacheThumbnail:image withID:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
         if ([self compareWithMeta:_meta andMeta:args] && !_thumbnail){
             _thumbnail = image;
             for (id <DVRemoteClientDelegate> delegate in _delegates){
@@ -427,6 +454,81 @@
     }
     
     return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// サムネールキャッシュ
+//-----------------------------------------------------------------------------------------
+static int THUMBNAIL_CHACHE_SIZE = 500;
+- (void)cacheThumbnail:(UIImage*)thumbnail withID:(NSArray*)nodeID inDocument:(NSString*)document
+{
+    NSString* key = [self keyForID:nodeID inDocument:document];
+    ThumbnailCacheEntry* entry = [_thumbnailCacheIndex valueForKey:key];
+    if (!entry){
+        entry = [ThumbnailCacheEntry new];
+        entry.key = key;
+        entry.image = thumbnail;
+        entry.next = nil;
+        entry.prev = nil;
+        [_thumbnailCacheIndex setValue:entry forKey:key];
+        [self addThumbnailCacheEntry:entry];
+        if (_thumbnailCacheCount > THUMBNAIL_CHACHE_SIZE){
+            [_thumbnailCacheIndex removeObjectForKey:_thumbnailCacheHead.key];
+            [self removeThumbnailCacheEntry:_thumbnailCacheHead];
+        }
+    }
+}
+
+- (UIImage*)thumbnailInCacheForID:(NSArray*)nodeID inDocument:(NSString*)document
+{
+    UIImage* image = nil;
+    NSString* key = [self keyForID:nodeID inDocument:document];
+    ThumbnailCacheEntry* entry = [_thumbnailCacheIndex valueForKey:key];
+    if (entry){
+        image = entry.image;
+        [self removeThumbnailCacheEntry:entry];
+        [self addThumbnailCacheEntry:entry];
+    }
+    return image;
+}
+
+- (void)addThumbnailCacheEntry:(ThumbnailCacheEntry*)entry
+{
+    if (_thumbnailCacheTail){
+        entry.prev = _thumbnailCacheTail;
+        _thumbnailCacheTail.next = entry;
+        _thumbnailCacheTail = entry;
+    }else{
+        _thumbnailCacheHead = entry;
+        _thumbnailCacheTail = entry;
+    }
+    _thumbnailCacheCount++;
+}
+
+- (void)removeThumbnailCacheEntry:(ThumbnailCacheEntry*)entry
+{
+    if (entry.prev){
+        entry.prev.next = entry.next;
+    }else{
+        _thumbnailCacheHead = entry.next;
+    }
+    if (entry.next){
+        entry.next.prev = entry.prev;
+    }else{
+        _thumbnailCacheTail = entry.prev;
+    }
+    entry.next = nil;
+    entry.prev = nil;
+    _thumbnailCacheCount--;
+}
+
+- (NSString*)keyForID:(NSArray*)nodeID inDocument:(NSString*)document
+{
+    NSString* key = document;
+    for (NSString* name in nodeID){
+        key = [key stringByAppendingFormat:@"/%@", name];
+    }
+    return key;
 }
 
 //-----------------------------------------------------------------------------------------
