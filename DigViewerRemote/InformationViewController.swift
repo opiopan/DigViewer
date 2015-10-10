@@ -34,13 +34,21 @@ class InfomationViewController: UIViewController {
             }
         })
     }
-
+    
+    deinit {
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
-        navigationController!.setNavigationBarHidden(false, animated: true)
+        if splitViewController!.displayMode == UISplitViewControllerDisplayMode.PrimaryHidden {
+            navigationController!.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        navigationController!.setNavigationBarHidden(true, animated: true)
+        if splitViewController!.displayMode == UISplitViewControllerDisplayMode.PrimaryHidden {
+            navigationController!.setNavigationBarHidden(true, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
