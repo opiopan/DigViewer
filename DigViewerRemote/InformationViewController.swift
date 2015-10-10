@@ -40,13 +40,13 @@ class InfomationViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        if splitViewController!.displayMode == UISplitViewControllerDisplayMode.PrimaryHidden {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             navigationController!.setNavigationBarHidden(false, animated: true)
         }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        if splitViewController!.displayMode == UISplitViewControllerDisplayMode.PrimaryHidden {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             navigationController!.setNavigationBarHidden(true, animated: true)
         }
     }
