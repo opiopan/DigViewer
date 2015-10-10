@@ -27,6 +27,7 @@
 		7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
 		7BA52EB91BC8CD9400D69AE9 /* LRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EB81BC8CD9400D69AE9 /* LRUCache.m */; settings = {ASSET_TAGS = (); }; };
+		7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */; settings = {ASSET_TAGS = (); }; };
 		7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */; };
 		7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59D01B9DA59C0025B902 /* MapViewController.swift */; };
@@ -77,6 +78,7 @@
 		7B9098361BA4634C00B03FD8 /* ExifViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifViewController.swift; sourceTree = "<group>"; };
 		7BA52EB71BC8CD9400D69AE9 /* LRUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRUCache.h; path = DigViewer/LRUCache.h; sourceTree = SOURCE_ROOT; };
 		7BA52EB81BC8CD9400D69AE9 /* LRUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRUCache.m; path = DigViewer/LRUCache.m; sourceTree = SOURCE_ROOT; };
+		7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigationController.swift; sourceTree = "<group>"; };
 		7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewerRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59CD1B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */,
 				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
 				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
+				7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */,
 				7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */,
 				7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */,
+				7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

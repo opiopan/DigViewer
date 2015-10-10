@@ -55,7 +55,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         setBlurCover(true, isShowPopup: false)
         
         reflectUserDefaults()
-
+        
+        initMessageView()
     }
     
     deinit{
@@ -191,7 +192,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     // MARK: - DVRemoteClientDelegateプロトコルの実装
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
+        updateMessageView()
         if client.state == .Disconnected && firstConnecting {
             firstConnecting = false
             showServersList()
@@ -586,6 +587,34 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 popupViewController!.view.alpha = 1.0
                 popupViewController!.updateCount++
             }
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: メッセージウィンドウ・コントロール
+    //-----------------------------------------------------------------------------------------
+    @IBOutlet weak var messageView: MessageView!
+    @IBOutlet weak var messageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var messageLabel: UILabel!
+    private var messageViewHeight : CGFloat = 0.0
+    
+    private func initMessageView() {
+        messageView.layer.zPosition = 10.0
+        messageViewHeight = messageViewHeightConstraint.constant
+        updateMessageView()
+    }
+    
+    private func updateMessageView() {
+        let client = DVRemoteClient.sharedClient()
+        messageLabel.text = client.state != .Connected ? client.stateString : client.service.name
+        let height = client.state == .Connected ? 0.0 : messageViewHeight
+        let delay = client.state == .Connected ? 1.0 : 0.0
+        if messageViewHeightConstraint.constant != height {
+            UIView.animateWithDuration(
+                0.5, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {[unowned self]() -> Void in
+                    self.messageViewHeightConstraint.constant = height
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
         }
     }
     

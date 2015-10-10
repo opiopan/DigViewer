@@ -577,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BnN-mm-yJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-425" y="284"/>
+            <point key="canvasLocation" x="-425" y="179"/>
         </scene>
         <!--Servers-->
         <scene sceneID="LKe-OG-B4F">
@@ -633,6 +633,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUM-ns-Duw" customClass="MessageView" customModule="DigViewerRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="16" width="600" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppl-CZ-4Vv">
+                                        <rect key="frame" x="0.0" y="54" width="600" height="18"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="0.96954255705544834" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55304418103448272" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ppl-CZ-4Vv" firstAttribute="leading" secondItem="KUM-ns-Duw" secondAttribute="leading" id="DIW-Lb-V1T"/>
+                                    <constraint firstAttribute="height" constant="80" id="MUl-qj-4bf"/>
+                                    <constraint firstAttribute="trailing" secondItem="ppl-CZ-4Vv" secondAttribute="trailing" id="eQd-Rg-9s6"/>
+                                    <constraint firstAttribute="bottom" secondItem="ppl-CZ-4Vv" secondAttribute="bottom" constant="8" id="kdM-3D-mzI"/>
+                                </constraints>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <animations/>
@@ -676,8 +696,11 @@
                             <constraint firstItem="l4r-4E-Kc7" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="2UI-a7-Z1D"/>
                             <constraint firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="6u4-R6-MqF"/>
                             <constraint firstAttribute="bottom" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="Ldf-MS-AVO"/>
+                            <constraint firstItem="KUM-ns-Duw" firstAttribute="top" secondItem="gRo-xe-Jor" secondAttribute="bottom" constant="-48" id="Oww-8I-BYG"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="ywu-ch-6z2" secondAttribute="top" id="Y7Z-Da-jye"/>
+                            <constraint firstItem="KUM-ns-Duw" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="ZSI-GL-Cr1"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="aPH-7K-tuh"/>
+                            <constraint firstAttribute="trailing" secondItem="KUM-ns-Duw" secondAttribute="trailing" id="hJV-n4-Vsf"/>
                             <constraint firstItem="dKE-35-FpS" firstAttribute="top" secondItem="l4r-4E-Kc7" secondAttribute="bottom" id="jRD-ez-v7I"/>
                             <constraint firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
                         </constraints>
@@ -686,6 +709,9 @@
                     <connections>
                         <outlet property="barTitle" destination="OlD-Vh-8Sc" id="vK5-kI-cns"/>
                         <outlet property="mapView" destination="OqM-XB-U5S" id="nbh-0q-7Gk"/>
+                        <outlet property="messageLabel" destination="ppl-CZ-4Vv" id="LsS-cw-rtM"/>
+                        <outlet property="messageView" destination="KUM-ns-Duw" id="N7z-wW-4SH"/>
+                        <outlet property="messageViewHeightConstraint" destination="MUl-qj-4bf" id="rui-be-DH9"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
                         <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="XyN-pQ-fCP"/>
