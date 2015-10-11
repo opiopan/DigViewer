@@ -945,8 +945,8 @@
         <image name="RightButton" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Vi-gm-zmd"/>
         <segue reference="XyN-pQ-fCP"/>
+        <segue reference="1Vi-gm-zmd"/>
         <segue reference="1lN-Fx-bf5"/>
     </inferredMetricsTieBreakers>
 </document>

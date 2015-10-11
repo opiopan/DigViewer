@@ -64,6 +64,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         configController.unregisterObserver(self)
     }
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -591,7 +595,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: メッセージウィンドウ・コントロール
+    // MARK: - メッセージウィンドウ・コントロール
     //-----------------------------------------------------------------------------------------
     @IBOutlet weak var messageView: MessageView!
     @IBOutlet weak var messageViewHeightConstraint: NSLayoutConstraint!
@@ -601,6 +605,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private func initMessageView() {
         messageView.layer.zPosition = 10.0
         messageViewHeight = messageViewHeightConstraint.constant
+
+        let recognizer = UITapGestureRecognizer(target: self, action: "tapOnMessageView:")
+        messageView.addGestureRecognizer(recognizer)
+
         updateMessageView()
     }
     
@@ -616,6 +624,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                     self.view.layoutIfNeeded()
                 }, completion: nil)
         }
+    }
+    
+    func tapOnMessageView(recognizer: UIGestureRecognizer){
+        showServersList()
     }
     
     //-----------------------------------------------------------------------------------------

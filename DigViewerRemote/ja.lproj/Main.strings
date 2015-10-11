@@ -11,6 +11,9 @@
 /* Class = "UINavigationItem"; title = "Map"; ObjectID = "OlD-Vh-8Sc"; */
 "OlD-Vh-8Sc.title" = "地図";
 
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCB-Ot-OqI"; */
+"cCB-Ot-OqI.text" = "ロード中...";
+
 /* Class = "UILabel"; text = "Now Downloading..."; ObjectID = "flg-IM-cxb"; */
 "flg-IM-cxb.text" = "ダウンロード中...";
 
