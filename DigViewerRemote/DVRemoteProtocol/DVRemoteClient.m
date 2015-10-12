@@ -396,21 +396,19 @@
         // メタデータ受信
         //-----------------------------------------------------------------------------------------
         NSDictionary* newMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (![self compareWithMeta:_meta andMeta:newMeta]){
-            _meta = newMeta;
-            _thumbnail = nil;
-            _fullImage = nil;
-            if (![self compareWithMeta:_nodeListWrap andMetasParent:newMeta]){
-                _nodeListWrap = nil;
-            }
-            _thumbnail = [self thumbnailForID:[_meta valueForKey:DVRCNMETA_ID]
-                                   inDocument:[_meta valueForKey:DVRCNMETA_DOCUMENT]
-                               downloadIfNeed:YES];
-            if (_delegates.count){
-                for (id <DVRemoteClientDelegate> delegate in _delegates){
-                    if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
-                        [delegate dvrClient:self didRecieveMeta:_meta];
-                    }
+        _meta = newMeta;
+        _thumbnail = nil;
+        _fullImage = nil;
+        if (![self compareWithMeta:_nodeListWrap andMetasParent:newMeta]){
+            _nodeListWrap = nil;
+        }
+        _thumbnail = [self thumbnailForID:[_meta valueForKey:DVRCNMETA_ID]
+                               inDocument:[_meta valueForKey:DVRCNMETA_DOCUMENT]
+                           downloadIfNeed:YES];
+        if (_delegates.count){
+            for (id <DVRemoteClientDelegate> delegate in _delegates){
+                if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
+                    [delegate dvrClient:self didRecieveMeta:_meta];
                 }
             }
         }

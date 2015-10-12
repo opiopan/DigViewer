@@ -33,8 +33,8 @@ class MapGeometry: NSObject {
         longitude = (meta[DVRCNMETA_LONGITUDE] as! Double?)!
         spanLatitude = (meta[DVRCNMETA_SPAN_LATITUDE] as! Double?)!
         spanLongitude = (meta[DVRCNMETA_SPAN_LONGITUDE] as! Double?)!
-        spanLatitudeMeter = spanLatitude * 111000;
-        spanLongitudeMeter = spanLongitude * fabs(cos(latitude)) * 111000;
+        spanLatitudeMeter = (meta[DVRCNMETA_SPAN_LATITUDE_METER] as! Double?)!
+        spanLongitudeMeter = (meta[DVRCNMETA_SPAN_LONGITUDE_METER] as! Double?)!
         let heading = meta[DVRCNMETA_HEADING] as! Double?
         
         let OFFSET_RATIO = 0.3
