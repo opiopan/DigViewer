@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) DVRClientState state;
 @property (readonly) NSString* stateString;
 @property (readonly) NSNetService* service;
+@property (readonly) NSString* serviceName;
 @property (readonly) NSInteger reconectCount;
 @property (readonly) NSDictionary* meta;
 @property (readonly) NSDictionary* templateMeta;
@@ -40,6 +41,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 
 - (void)connectToServer:(NSNetService*)service;
+- (void)connectToLocal;
 - (void)reconnect;
 - (void)disconnect;
 

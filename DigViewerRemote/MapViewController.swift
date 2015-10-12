@@ -254,22 +254,17 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             popupViewController!.thumbnailView.image = client.thumbnail
         }
 
-        let latitude = meta[DVRCNMETA_LATITUDE] as! Double?
-        let longitude = meta[DVRCNMETA_LONGITUDE] as! Double?
-        if (latitude != nil && longitude != nil){
-            let viewLatitude = meta[DVRCNMETA_VIEW_LATITUDE] as! Double?
-            let viewLongitude = meta[DVRCNMETA_VIEW_LONGITUDE] as! Double?
-            let spanLatitude = meta[DVRCNMETA_SPAN_LATITUDE] as! Double?
-            let spanLongitude = meta[DVRCNMETA_SPAN_LONGITUDE] as! Double?
+        if (meta[DVRCNMETA_LATITUDE] != nil){
+            let geometry = MapGeometry(meta: meta)
 
             // 視点セットアップ
-            centerCoordinate = CLLocationCoordinate2DMake(viewLatitude!, viewLongitude!)
-            photoCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-            mapSpan = MKCoordinateSpanMake(spanLatitude!, spanLongitude!)
+            centerCoordinate = geometry.centerCoordinate
+            photoCoordinate = geometry.photoCoordinate
+            mapSpan = geometry.mapSpan
 
-            cameraAltitude = meta[DVRCNMETA_STAND_ALTITUDE] as! Double?
-            cameraHeading = meta[DVRCNMETA_HEADING] as! Double?
-            cameraTilt = meta[DVRCNMETA_TILT] as! CGFloat
+            cameraAltitude = geometry.cameraAltitude
+            cameraHeading = geometry.cameraHeading
+            cameraTilt = CGFloat(geometry.cameraTilt)
 
             // アノテーションセットアップ
             (popupViewController!.view as! PopupView).showAnchor = true
@@ -278,10 +273,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             annotation!.coordinate = photoCoordinate!
             annotation!.title = nodeId![nodeId!.count - 1]
             mapView!.addAnnotation(annotation!)
-//            mapView!.selectAnnotation(annotation!, animated:true)
+            if popupViewController!.thumbnailView.image != nil {
+                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+                dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+                    self.mapView!.selectAnnotation(self.annotation!, animated:true)
+                })
+            }
             
             // 逆ジオコーディング(経緯度→住所に変換)
-            currentLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+            currentLocation = CLLocation(latitude: geometry.latitude, longitude: geometry.longitude)
             performGeocoding(currentLocation!)
 
             // ブラーカバーを外す
@@ -411,11 +411,15 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             initialized = true
             let client = DVRemoteClient.sharedClient()
             client.addClientDelegate(self)
-            barTitle!.title = client.state != .Connected ? client.stateString : client.service.name
+            barTitle!.title = client.state != .Connected ? client.stateString : client.serviceName
             if let name = ConfigurationController.sharedController.establishedConnection {
                 let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
                 dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
-                    client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+                    if name == "" {
+                        client.connectToLocal()
+                    }else{
+                        client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+                    }
                 })
             }else{
                 firstConnecting = false;
@@ -614,9 +618,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     private func updateMessageView() {
         let client = DVRemoteClient.sharedClient()
-        messageLabel.text = client.state != .Connected ? client.stateString : client.service.name
+        messageLabel.text = client.state != .Connected ? client.stateString : client.serviceName
         let height = client.state == .Connected ? 0.0 : messageViewHeight
-        let delay = client.state == .Connected ? 1.0 : 0.0
+        let delay = client.state == .Connected ? 2.0 : 0.0
         if messageViewHeightConstraint.constant != height {
             UIView.animateWithDuration(
                 0.5, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {[unowned self]() -> Void in

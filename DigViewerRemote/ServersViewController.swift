@@ -69,15 +69,21 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servers != nil ? servers!.count : 0
+        return servers != nil ? servers!.count + 1 : 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) 
-        let client = DVRemoteClient.sharedClient()
-        let name = servers[indexPath.row].name
+        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath)
+        
+        let serverCount = servers != nil ? servers!.count : 0;
+        let name = indexPath.row < serverCount ? servers[indexPath.row].name : NSLocalizedString("DSNAME_LOCAL", comment: "")
         cell.textLabel!.text = name
-        if client.state != .Disconnected && client.service!.name == name {
+        cell.accessoryType = .None
+        
+        let client = DVRemoteClient.sharedClient()
+        if client.state != .Disconnected && client.service == nil && indexPath.row == serverCount {
+            cell.accessoryType = .Checkmark
+        }else if client.state != .Disconnected && client.service != nil && client.service.name == name {
             cell.accessoryType = .Checkmark
         }
         return cell
@@ -88,13 +94,30 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let nextServer = servers[indexPath.row]
+        let serverCount = servers != nil ? servers!.count : 0;
         let client = DVRemoteClient.sharedClient()
-        if (client.service != nil && client.service!.name != nextServer.name){
-            client.disconnect()
-            client.connectToServer(nextServer)
-        }else if (client.state == .Disconnected){
-            client.connectToServer(nextServer)
+        if indexPath.row == serverCount {
+            var needConnect = false
+            if client.state != .Disconnected && client.service != nil {
+                client.disconnect()
+                needConnect = true
+            }else if client.state == .Disconnected {
+                needConnect = true
+            }
+            if needConnect {
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
+                    client.connectToLocal()
+                })
+            }
+        }else{
+            let nextServer = servers[indexPath.row]
+            if client.state != .Disconnected && (client.service == nil || client.service!.name != nextServer.name) {
+                client.disconnect()
+                client.connectToServer(nextServer)
+            }else if client.state == .Disconnected {
+                client.connectToServer(nextServer)
+            }
         }
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }

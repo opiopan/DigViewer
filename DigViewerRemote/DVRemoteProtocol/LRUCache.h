@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface LRUCache : NSObject
-+ (LRUCache*)cacheWithSize:(int) size;
++ (LRUCache*)cacheWithSize:(int)size;
 - (void)setValue:(id)value forKey:(NSString *)key;
 - (id)valueForKey:(NSString *)key;
 @end

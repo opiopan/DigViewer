@@ -645,7 +645,7 @@
                                     </label>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55304418103448272" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59803340517241377" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="ppl-CZ-4Vv" firstAttribute="leading" secondItem="KUM-ns-Duw" secondAttribute="leading" id="DIW-Lb-V1T"/>
                                     <constraint firstAttribute="height" constant="80" id="MUl-qj-4bf"/>

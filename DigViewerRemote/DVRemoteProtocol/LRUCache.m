@@ -21,7 +21,6 @@
 @implementation CacheEntry
 @end
 
-
 //-----------------------------------------------------------------------------------------
 // LRUCacheの実装
 //-----------------------------------------------------------------------------------------
@@ -42,6 +41,16 @@
     cache->_head = nil;
     cache->_tail = nil;
     return cache;
+}
+
+- (void)dealloc
+{
+    CacheEntry* next = nil;
+    for (CacheEntry* entry = _head; entry; entry = next){
+        next = entry.next;
+        entry.next = nil;
+        entry.prev = nil;
+    }
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key

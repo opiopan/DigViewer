@@ -7,7 +7,9 @@
 //
 
 #import "ImageMetadata.h"
+#if ! TARGET_OS_IPHONE
 #import "LensLibrary.h"
+#endif
 #import "CoreFoundationHelper.h"
 
 #include <math.h>
@@ -379,6 +381,7 @@ static id convertExposureBias(ImageMetadata* meta, TranslationRule* rule)
 //-----------------------------------------------------------------------------------------
 // 撮影日時抽出
 //-----------------------------------------------------------------------------------------
+#if ! TARGET_OS_IPHONE
 extern NSString* dateTimeOfImage(PathNode* pathNode)
 {
     if (pathNode.isImage){
@@ -392,6 +395,7 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
         return nil;
     }
 }
+#endif
 
 //-----------------------------------------------------------------------------------------
 // ImageMetadataクラス implementation
@@ -410,17 +414,36 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
 //-----------------------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------------------
+#if ! TARGET_OS_IPHONE
 - (id)initWithPathNode:(PathNode *)pathNode
+{
+    NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
+    if (pathNode.isImage){
+        NSError* error;
+        NSString* type = [workspace localizedDescriptionForType:[workspace typeOfFile:pathNode.imagePath error:&error]];
+        NSURL* url = [NSURL fileURLWithPath:pathNode.imagePath];
+        ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+        
+        self = [self initWithImage:imageSource name:pathNode.name typeName:type];
+        
+        // PathNodeオブジェクトの撮影日時を更新
+        NSString* dateTime = [_properties[propertyEXIF] valueForKey:(__bridge NSString*)kCGImagePropertyExifDateTimeOriginal];
+        pathNode.imageDateTime = dateTime ? dateTime : @"x";
+    }else{
+        self = [self initWithImage:nil name:pathNode.name typeName:[workspace localizedDescriptionForType:@"public.folder"]];
+    }
+
+    return self;
+}
+#endif
+
+- (id)initWithImage:(CGImageSourceRef)imageSource name:(NSString *)name typeName:(NSString*)typeName
 {
     self = [self init];
     if (self){
-        _name = pathNode.name;
-        NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
-        if (pathNode.isImage){
-            NSError* error;
-            _type = [workspace localizedDescriptionForType:[workspace typeOfFile:pathNode.imagePath error:&error]];
-            NSURL* url = [NSURL fileURLWithPath:pathNode.imagePath];
-            ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
+        _name = name;
+        _type = typeName;
+        if (imageSource){
             _properties[propertyALL] = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, 0, NULL);
             for (int i = 0; i < sizeof(propertyDictonaryKeys) / sizeof(propertyDictonaryKeys[0]); i++){
                 _properties[propertyDictonaryKeys[i].kind] =
@@ -432,11 +455,8 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                 _geometry = [NSString stringWithFormat:@"%@ x %@", x, y];
             }
             
-            // PathNodeオブジェクトの撮影日時を更新
-            NSString* dateTime = [_properties[propertyEXIF] valueForKey:(__bridge NSString*)kCGImagePropertyExifDateTimeOriginal];
-            pathNode.imageDateTime = dateTime ? dateTime : @"x";
-            
             // レンズライブラリから対応するレンズプロファイルを検索
+#if ! TARGET_OS_IPHONE
             LLMatchingProperties* properties = [LLMatchingProperties new];
             ImageMetadata* __weak weakSelf = self;
             id (^simpleValue)(int) = ^(int index){
@@ -458,8 +478,7 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                     break;
                 }
             }
-        }else{
-            _type = [workspace localizedDescriptionForType:@"public.folder"];
+#endif
         }
     }
     return self;

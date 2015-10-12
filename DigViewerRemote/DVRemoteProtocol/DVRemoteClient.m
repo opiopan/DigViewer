@@ -7,6 +7,7 @@
 //
 
 #import "DVRemoteClient.h"
+#import "LocalSession.h"
 #import "LRUCache.h"
 
 //-----------------------------------------------------------------------------------------
@@ -35,7 +36,8 @@
     
     NSNetService* _serviceForSession;
     DVRemoteSession* _session;
-    DVRemoteSession* _sidebandSession;
+    LocalSession* _localSession;
+    NSString* _lastSessionName;
     
     NSDictionary* _meta;
     
@@ -129,6 +131,15 @@
     return _serviceForSession;
 }
 
+- (NSString*) serviceName
+{
+    if (_state != DVRClientDisconnected){
+        return _serviceForSession ? _serviceForSession.name : NSLocalizedString(@"DSNAME_LOCAL", nil);
+    }else{
+        return nil;
+    }
+}
+
 - (NSDictionary *)meta
 {
     return _meta;
@@ -139,6 +150,18 @@
 //-----------------------------------------------------------------------------------------
 - (void)notifyStateChange
 {
+    if (_state == DVRClientConnected ){
+        NSString* serviceName = _serviceForSession ? _serviceForSession.name : @"";
+        if (![_lastSessionName isEqualToString:serviceName]){
+            _meta = nil;
+            _fullImage = nil;
+            _nodeListWrap = nil;
+            _thumbnailCache = [LRUCache cacheWithSize:500];
+            _nodeListCache = [LRUCache cacheWithSize:10];
+        }
+        _lastSessionName = serviceName;
+    }
+    
     if (_delegates.count){
         for (id <DVRemoteClientDelegate> delegate in _delegates){
             if ([delegate respondsToSelector:@selector(dvrClient:changeState:)]){
@@ -163,9 +186,22 @@
     }
 }
 
-- (void)reconnect
+- (void)connectToLocal
 {
     if (_state == DVRClientDisconnected){
+        _reconectCount = 0;
+        _serviceForSession = nil;
+        _state = DVRClientConnecting;
+        _localSession = [LocalSession new];
+        _localSession.delegate = self;
+        [self notifyStateChange];
+        [_localSession connect];
+    }
+}
+
+- (void)reconnect
+{
+    if (_state == DVRClientDisconnected && _serviceForSession){
         _reconectCount++;
         _state = DVRClientConnecting;
         [self notifyStateChange];
@@ -201,9 +237,8 @@
         [_session close];
         _session = nil;
     }
-    if (_sidebandSession){
-        [_sidebandSession close];
-        _sidebandSession = nil;
+    if (_localSession){
+        _localSession = nil;
     }
     if (_state != DVRClientDisconnected){
         _state = DVRClientDisconnected;
@@ -216,12 +251,20 @@
 //-----------------------------------------------------------------------------------------
 - (void)moveToNextImage
 {
-    [self sendMoveToCommand:DVRC_MOVE_NEXT_IMAGE];
+    if (_localSession){
+        [_localSession moveNextAsset];
+    }else{
+        [self sendMoveToCommand:DVRC_MOVE_NEXT_IMAGE];
+    }
 }
 
 - (void)moveToPreviousImage
 {
-    [self sendMoveToCommand:DVRC_MOVE_PREV_IMAGE];
+    if (_localSession){
+        [_localSession movePreviousAsset];
+    }else{
+        [self sendMoveToCommand:DVRC_MOVE_PREV_IMAGE];
+    }
 }
 
 - (void)sendMoveToCommand:(DVRCommand)command
@@ -237,68 +280,90 @@
 
 - (void)moveToNode:(NSArray *)nodeID inDocument:(NSString *)documentName
 {
-    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
-                           DVRCNMETA_ID: nodeID};
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
-    [_session sendCommand:DVRC_MOVE_NODE withData:data replacingQue:YES];
+    if (_localSession){
+        [_localSession moveToAssetWithID:nodeID];
+    }else{
+        NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                               DVRCNMETA_ID: nodeID};
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        [_session sendCommand:DVRC_MOVE_NODE withData:data replacingQue:YES];
+    }
 }
 
 - (UIImage *)thumbnailForID:(NSArray *)nodeID inDocument:(NSString *)documentName downloadIfNeed:(BOOL)downloadIfNeed
 {
-    NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
-                           DVRCNMETA_ID : nodeID};
-    if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
-        return _thumbnail;
+    if (_localSession){
+        return [_localSession thumbnailForID:nodeID];
+    }else{
+        NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
+                               DVRCNMETA_ID : nodeID};
+        if (_thumbnail && [self compareWithMeta:args andMeta:_meta]){
+            return _thumbnail;
+        }
+        NSString* key = [self keyForID:nodeID inDocument:documentName];
+        UIImage* thumbnail = [_thumbnailCache valueForKey:key];
+        if (!thumbnail && downloadIfNeed){
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+            [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
+        }
+        
+        return thumbnail;
     }
-    NSString* key = [self keyForID:nodeID inDocument:documentName];
-    UIImage* thumbnail = [_thumbnailCache valueForKey:key];
-    if (!thumbnail && downloadIfNeed){
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
-        [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
-    }
-    
-    return thumbnail;
 }
 
 - (UIImage *)fullImageForID:(NSArray *)nodeID inDocument:(NSString *)document withMaxSize:(CGFloat)maxSize
 {
-    UIImage* rc = nil;
-    
-    NSDictionary* commandArgs = @{DVRCNMETA_DOCUMENT: document,
-                                  DVRCNMETA_ID: nodeID,
-                                  DVRCNMETA_IMAGESIZEMAX: @(maxSize)};
-    if (_meta && [self compareWithMeta:commandArgs andMeta:_meta]){
-        rc = _fullImage;
+    if (_localSession){
+        return [_localSession fullImageForID:nodeID];
+    }else{
+        UIImage* rc = nil;
+        
+        NSDictionary* commandArgs = @{DVRCNMETA_DOCUMENT: document,
+                                      DVRCNMETA_ID: nodeID,
+                                      DVRCNMETA_IMAGESIZEMAX: @(maxSize)};
+        if (_meta && [self compareWithMeta:commandArgs andMeta:_meta]){
+            rc = _fullImage;
+        }
+        
+        if (!rc){
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs];
+            [_session sendCommand:DVRC_REQUEST_FULLIMAGE withData:data replacingQue:YES];
+            [self startWatchDog];
+        }
+        
+        return rc;
     }
-    
-    if (!rc){
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs];
-        [_session sendCommand:DVRC_REQUEST_FULLIMAGE withData:data replacingQue:YES];
-        [self startWatchDog];
-    }
-    
-    return rc;
 }
 
 - (NSArray *)nodeListForID:(NSArray *)nodeID inDocument:(NSString *)document
 {
     if (nodeID != nil && document != nil){
-        NSDictionary* args = @{DVRCNMETA_DOCUMENT: document, DVRCNMETA_ID: nodeID};
-        if (_nodeListWrap && [self compareWithMeta:_nodeListWrap andMeta:args]){
-            return [_nodeListWrap valueForKey:DVRCNMETA_ITEM_LIST];
-        }
-        
-        NSString* key = [self keyForID:nodeID inDocument:document];
-        NSArray* nodeList = [_nodeListCache valueForKey:key];
-        if (nodeList){
+        if (_localSession){
+            NSString* key = [self keyForID:nodeID inDocument:document];
+            NSArray* nodeList = [_nodeListCache valueForKey:key];
+            if (!nodeList){
+                nodeList = [_localSession nodeListForID:nodeID];
+                [_nodeListCache setValue:nodeList forKey:key];
+            }
             return nodeList;
+        }else{
+            NSDictionary* args = @{DVRCNMETA_DOCUMENT: document, DVRCNMETA_ID: nodeID};
+            if (_nodeListWrap && [self compareWithMeta:_nodeListWrap andMeta:args]){
+                return [_nodeListWrap valueForKey:DVRCNMETA_ITEM_LIST];
+            }
+            
+            NSString* key = [self keyForID:nodeID inDocument:document];
+            NSArray* nodeList = [_nodeListCache valueForKey:key];
+            if (nodeList){
+                return nodeList;
+            }
+            
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+            DVRemoteSession* session = _session;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:NO];
+            });
         }
-        
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
-        DVRemoteSession* session = _session;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:NO];
-        });
     }
     
     return nil;
@@ -311,7 +376,10 @@
 {
     [self endWatchDog];
     if (command == DVRC_NOTIFY_ACCEPTED){
-        if (session == _session){
+        if (_localSession){
+            _state = DVRClientConnected;
+            [self notifyStateChange];
+        }else if (session == _session){
             [_session sendCommand:DVRC_MAIN_CONNECTION withData:nil replacingQue:YES];
             _state = DVRClientConnected;
             [self notifyStateChange];
@@ -335,10 +403,9 @@
             if (![self compareWithMeta:_nodeListWrap andMetasParent:newMeta]){
                 _nodeListWrap = nil;
             }
-            NSDictionary* reqDict = @{DVRCNMETA_DOCUMENT: [_meta valueForKey:DVRCNMETA_DOCUMENT],
-                                      DVRCNMETA_ID:[_meta valueForKey:DVRCNMETA_ID]};
-            NSData* reqData = [NSKeyedArchiver archivedDataWithRootObject:reqDict];
-            [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:reqData replacingQue:NO];
+            _thumbnail = [self thumbnailForID:[_meta valueForKey:DVRCNMETA_ID]
+                                   inDocument:[_meta valueForKey:DVRCNMETA_DOCUMENT]
+                               downloadIfNeed:YES];
             if (_delegates.count){
                 for (id <DVRemoteClientDelegate> delegate in _delegates){
                     if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){

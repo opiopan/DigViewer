@@ -31,7 +31,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     override func viewWillAppear(animated: Bool) {
         DVRemoteClient.sharedClient().addClientDelegate(self)
         let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.service.name
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -89,6 +89,6 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.service.name
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
     }
 }

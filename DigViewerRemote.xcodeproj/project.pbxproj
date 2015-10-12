@@ -26,8 +26,15 @@
 		7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
 		7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
-		7BA52EB91BC8CD9400D69AE9 /* LRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EB81BC8CD9400D69AE9 /* LRUCache.m */; settings = {ASSET_TAGS = (); }; };
 		7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */; settings = {ASSET_TAGS = (); }; };
+		7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */; settings = {ASSET_TAGS = (); }; };
+		7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC11BCA285200D69AE9 /* LRUCache.m */; settings = {ASSET_TAGS = (); }; };
+		7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */; settings = {ASSET_TAGS = (); }; };
+		7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */; settings = {ASSET_TAGS = (); }; };
+		7BA52ECD1BCB445E00D69AE9 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */; };
+		7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */; };
+		7BA52ED01BCB447B00D69AE9 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECF1BCB447B00D69AE9 /* Photos.framework */; };
+		7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */; settings = {ASSET_TAGS = (); }; };
 		7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */; };
 		7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59D01B9DA59C0025B902 /* MapViewController.swift */; };
@@ -35,7 +42,6 @@
 		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
 		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
 		7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */; };
-		7BD72C3A1B9DB2D500DDBC1A /* DVRemoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */; };
 		7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 /* End PBXBuildFile section */
@@ -76,9 +82,20 @@
 		7B9098331BA448D800B03FD8 /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadataKV.h; path = DigViewer/ImageMetadataKV.h; sourceTree = SOURCE_ROOT; };
 		7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetadataKV.m; path = DigViewer/ImageMetadataKV.m; sourceTree = SOURCE_ROOT; };
 		7B9098361BA4634C00B03FD8 /* ExifViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifViewController.swift; sourceTree = "<group>"; };
-		7BA52EB71BC8CD9400D69AE9 /* LRUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRUCache.h; path = DigViewer/LRUCache.h; sourceTree = SOURCE_ROOT; };
-		7BA52EB81BC8CD9400D69AE9 /* LRUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRUCache.m; path = DigViewer/LRUCache.m; sourceTree = SOURCE_ROOT; };
 		7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		7BA52EBE1BCA285200D69AE9 /* DVRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteClient.h; path = DVRemoteProtocol/DVRemoteClient.h; sourceTree = "<group>"; };
+		7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteClient.m; path = DVRemoteProtocol/DVRemoteClient.m; sourceTree = "<group>"; };
+		7BA52EC01BCA285200D69AE9 /* LRUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRUCache.h; path = DVRemoteProtocol/LRUCache.h; sourceTree = "<group>"; };
+		7BA52EC11BCA285200D69AE9 /* LRUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRUCache.m; path = DVRemoteProtocol/LRUCache.m; sourceTree = "<group>"; };
+		7BA52EC41BCA558B00D69AE9 /* LocalSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalSession.h; path = DVRemoteProtocol/LocalSession.h; sourceTree = "<group>"; };
+		7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LocalSession.mm; path = DVRemoteProtocol/LocalSession.mm; sourceTree = "<group>"; };
+		7BA52EC71BCAB27800D69AE9 /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadata.h; path = DigViewer/ImageMetadata.h; sourceTree = SOURCE_ROOT; };
+		7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ImageMetadata.mm; path = DigViewer/ImageMetadata.mm; sourceTree = SOURCE_ROOT; };
+		7BA52ECA1BCAB52E00D69AE9 /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreFoundationHelper.h; path = DigViewer/CoreFoundationHelper.h; sourceTree = SOURCE_ROOT; };
+		7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		7BA52ECF1BCB447B00D69AE9 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
 		7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigationController.swift; sourceTree = "<group>"; };
 		7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewerRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59CD1B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,8 +107,6 @@
 		7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigViewerRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59E31B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigViewerRemoteTests.swift; sourceTree = "<group>"; };
-		7BD72C341B9DB2D500DDBC1A /* DVRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteClient.h; path = DigViewer/DVRemoteClient.h; sourceTree = SOURCE_ROOT; };
-		7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteClient.m; path = DigViewer/DVRemoteClient.m; sourceTree = SOURCE_ROOT; };
 		7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
 		7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
@@ -103,6 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA52ED01BCB447B00D69AE9 /* Photos.framework in Frameworks */,
+				7BA52ECD1BCB445E00D69AE9 /* CoreImage.framework in Frameworks */,
+				7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */,
 				7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
+				7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */,
 				7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */,
 				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
 				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
@@ -164,6 +183,9 @@
 		7BBA59C01B9DA59C0025B902 = {
 			isa = PBXGroup;
 			children = (
+				7BA52ECF1BCB447B00D69AE9 /* Photos.framework */,
+				7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */,
+				7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */,
 				7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */,
 				7B467F731B9F15A1005719E7 /* MapKit.framework */,
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
@@ -226,14 +248,19 @@
 				7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */,
 				7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */,
 				7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */,
-				7BD72C341B9DB2D500DDBC1A /* DVRemoteClient.h */,
-				7BD72C351B9DB2D500DDBC1A /* DVRemoteClient.m */,
+				7BA52EBE1BCA285200D69AE9 /* DVRemoteClient.h */,
+				7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */,
 				7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */,
 				7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */,
 				7B9098331BA448D800B03FD8 /* ImageMetadataKV.h */,
 				7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */,
-				7BA52EB71BC8CD9400D69AE9 /* LRUCache.h */,
-				7BA52EB81BC8CD9400D69AE9 /* LRUCache.m */,
+				7BA52EC71BCAB27800D69AE9 /* ImageMetadata.h */,
+				7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */,
+				7BA52EC01BCA285200D69AE9 /* LRUCache.h */,
+				7BA52EC11BCA285200D69AE9 /* LRUCache.m */,
+				7BA52EC41BCA558B00D69AE9 /* LocalSession.h */,
+				7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */,
+				7BA52ECA1BCAB52E00D69AE9 /* CoreFoundationHelper.h */,
 			);
 			name = "DV Remote Protocol";
 			sourceTree = "<group>";
@@ -384,11 +411,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,
+				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
+				7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */,
 				7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */,
-				7BD72C3A1B9DB2D500DDBC1A /* DVRemoteClient.m in Sources */,
-				7BA52EB91BC8CD9400D69AE9 /* LRUCache.m in Sources */,
 				7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */,
 				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
@@ -401,6 +429,8 @@
 				7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
+				7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */,
+				7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
 				7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */,

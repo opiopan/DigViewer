@@ -11,3 +11,18 @@
 
 "EXIF-BASIC" = "Basic";
 "EXIF-LOCATION" = "Location";
+
+"DSNAME_LOCAL" = "Local Photo Library";
+
+"LS_TOP_FOLDER_NAME" = "Album";
+"LS_IMAGE_TYPE_NAME" = "Image";
+"LS_TYPESTRING_ALBUM" = "Album";
+
+//-------------------------------------------------------------------------------------
+// 画像メタデータ用strings
+//-------------------------------------------------------------------------------------
+
+// EXIFセクションタイトル
+"EXIFSEP_EQUIPMENTS" = "Equipments";
+"EXIFSEP_CONDITIONS" = "Conditions";
+"EXIFSEP_SOFTOWARE" = "Developing Software";

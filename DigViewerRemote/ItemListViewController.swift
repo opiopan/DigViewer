@@ -76,9 +76,10 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
 
         let node = nodeList![indexPath.row];
         let name = node[DVRCNMETA_ITEM_NAME] as? String
+        let localID = node[DVRCNMETA_LOCAL_ID] == nil ? name : node[DVRCNMETA_LOCAL_ID] as? String
         var nodeID = path
-        nodeID!.append(name!)
-        if cell.nodeID == nil || cell.nodeID.last as? String != name {
+        nodeID!.append(localID!)
+        if cell.nodeID == nil || cell.nodeID.last as? String != localID {
             cell.mainLabel.text = name
             cell.subLabel.text = node[DVRCNMETA_ITEM_TYPE] as? String
             if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
@@ -107,7 +108,9 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node = nodeList![indexPath.row];
-        selectedNode = node[DVRCNMETA_ITEM_NAME] as? String
+        let isFolder = (node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber)!.boolValue
+        let imageID = node[DVRCNMETA_LOCAL_ID] == nil ?  node[DVRCNMETA_ITEM_NAME] as? String : node[DVRCNMETA_LOCAL_ID] as? String
+        selectedNode =  isFolder ?  node[DVRCNMETA_ITEM_NAME] as? String : imageID
         if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
             let newView = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController") as? ItemListViewController
             newView!.navigationItem.title = selectedNode
@@ -120,7 +123,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             navigationController!.setViewControllers(controllers, animated: true)
         }else{
             var nodeID = path
-            nodeID!.append(((nodeList![indexPath.row])[DVRCNMETA_ITEM_NAME] as? String)!)
+            nodeID!.append(selectedNode!)
             DVRemoteClient.sharedClient().moveToNode(nodeID, inDocument: document)
             if !traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) {
                 (navigationController! as? ItemListNavigationController)?.backToMapView()
@@ -134,7 +137,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     private func updateNodeList() {
         for var i = 0; i < nodeList!.count; i++ {
             let node = nodeList![i];
-            let name = node[DVRCNMETA_ITEM_NAME] as? String
+            let name = node[DVRCNMETA_LOCAL_ID] == nil ?  node[DVRCNMETA_ITEM_NAME] as? String : node[DVRCNMETA_LOCAL_ID] as? String
             if selectedNode != nil && name == selectedNode {
                 tableView!.selectRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0), animated: false, scrollPosition: .Middle)
             }
