@@ -19,6 +19,8 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         if meta != nil {
             dvrClient(client, didRecieveMeta: meta)
         }
+
+        DVRemoteClient.sharedClient().addClientDelegate(self)
         
         //tableView.tableFooterView = UIView();
 
@@ -125,6 +127,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
             if cellForEstimate == nil {
                 cellForEstimate = tableView.dequeueReusableCellWithIdentifier("ExifEntry") as? LabelArrangableCell
             }
+
             setupCell(cellForEstimate!, indexPath: indexPath)
             cellForEstimate!.contentView.setNeedsLayout()
             cellForEstimate!.contentView.layoutIfNeeded()

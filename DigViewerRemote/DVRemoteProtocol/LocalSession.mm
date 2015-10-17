@@ -47,7 +47,7 @@ static const int NAME_CLIP_LENGTH = 8;
         _documentName = @"document";
         _topName = NSLocalizedString(@"LS_TOP_FOLDER_NAME", nil);
         _assetsFetchOptions = [PHFetchOptions new];
-        _assetsFetchOptions.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:true]];
+        //_assetsFetchOptions.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:true]];
         _assetsFetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %@", @(PHAssetMediaTypeImage)];
         _imageManager = [PHImageManager defaultManager];
     }

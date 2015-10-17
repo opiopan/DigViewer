@@ -72,6 +72,11 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
                 view!.document = newDocument
                 view!.path = currentPath
                 view!.selectedNode = path[i + 1]
+                if i == path.count - 1 {
+                    view!.selectedNodeIndex = meta[DVRCNMETA_INDEX_IN_PARENT] as? Int
+                }else{
+                    view!.selectedNodeIndex = nil
+                }
                 views.append(view!)
             }
             //(views.last! as! ItemListViewController).tableView!.reloadData()

@@ -42,7 +42,8 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     var document : String? = nil
     var path : [String]? = nil
     var selectedNode : String? = nil
-    var nodeList : [[String : AnyObject]]? = nil
+    var selectedNodeIndex : Int? = nil
+    var nodeList : NSArray? = nil
     var thumbnailList : [UIImage] = []
     private var listRequireing = false
     private var checkedCell : Int? = nil
@@ -54,13 +55,15 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if nodeList == nil && document != nil && path != nil && !listRequireing {
             listRequireing = true
-            nodeList = DVRemoteClient.sharedClient().nodeListForID(path, inDocument: document) as! [[String: AnyObject]]?
+            nodeList = DVRemoteClient.sharedClient().nodeListForID(path, inDocument: document)
+            if nodeList != nil {
+                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+                dispatch_after(time, dispatch_get_main_queue() ,{[unowned self]()->Void in
+                    self.updateNodeList()
+                })
+            }
         }
         if nodeList != nil {
-            let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-            dispatch_after(time, dispatch_get_main_queue() ,{[unowned self]()->Void in
-                self.updateNodeList()
-            })
             return nodeList!.count
         }else{
             return 1
@@ -76,7 +79,10 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
 
         let node = nodeList![indexPath.row];
         let name = node[DVRCNMETA_ITEM_NAME] as? String
-        let localID = node[DVRCNMETA_LOCAL_ID] == nil ? name : node[DVRCNMETA_LOCAL_ID] as? String
+        var localID = node[DVRCNMETA_LOCAL_ID] as? String
+        if localID == nil {
+             localID = name
+        }
         var nodeID = path
         nodeID!.append(localID!)
         if cell.nodeID == nil || cell.nodeID.last as? String != localID {
@@ -109,7 +115,10 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node = nodeList![indexPath.row];
         let isFolder = (node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber)!.boolValue
-        let imageID = node[DVRCNMETA_LOCAL_ID] == nil ?  node[DVRCNMETA_ITEM_NAME] as? String : node[DVRCNMETA_LOCAL_ID] as? String
+        var imageID = node[DVRCNMETA_LOCAL_ID] as? String
+        if imageID == nil {
+            imageID = node[DVRCNMETA_ITEM_NAME] as? String
+        }
         selectedNode =  isFolder ?  node[DVRCNMETA_ITEM_NAME] as? String : imageID
         if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
             let newView = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController") as? ItemListViewController
@@ -135,27 +144,36 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     // MARK: - ノードリストの更新
     //-----------------------------------------------------------------------------------------
     private func updateNodeList() {
-        for var i = 0; i < nodeList!.count; i++ {
-            let node = nodeList![i];
-            let name = node[DVRCNMETA_LOCAL_ID] == nil ?  node[DVRCNMETA_ITEM_NAME] as? String : node[DVRCNMETA_LOCAL_ID] as? String
-            if selectedNode != nil && name == selectedNode {
-                tableView!.selectRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0), animated: false, scrollPosition: .Middle)
-            }
-        }
         if let meta = DVRemoteClient.sharedClient().meta {
             let newDocument = meta[DVRCNMETA_DOCUMENT] as? String
             let newPath = meta[DVRCNMETA_ID] as? [String]
+            var isCurrentFolder = false
             if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
+                isCurrentFolder = true
                 for var i = 0; i < path!.count; i++ {
                     if path![i] != newPath![i] {
-                        return
+                        isCurrentFolder = false
+                        break
                     }
                 }
+            }
+            if isCurrentFolder {
                 let index = (meta[DVRCNMETA_INDEX_IN_PARENT] as? NSNumber)! as Int
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 checkedCell = index
+                tableView!.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .Middle)
                 if let cell = tableView!.cellForRowAtIndexPath(indexPath) {
                     cell.accessoryType = .Checkmark
+                }
+            }else if selectedNode != nil {
+                for var i = 0; i < nodeList!.count; i++ {
+                    let node = nodeList![i];
+                    let name = node[DVRCNMETA_ITEM_NAME] as? String
+                    if name == selectedNode {
+                        tableView!.selectRowAtIndexPath(
+                            NSIndexPath(forRow: i, inSection: 0), animated: false, scrollPosition: .Middle)
+                        break
+                    }
                 }
             }
         }
@@ -198,6 +216,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             }
             nodeList = newNodeList as! [[String : AnyObject]]?
             tableView.reloadData()
+            updateNodeList()
         }
     }
     

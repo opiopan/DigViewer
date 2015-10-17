@@ -276,7 +276,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             if popupViewController!.thumbnailView.image != nil {
                 let time = dispatch_time(DISPATCH_TIME_NOW, 0)
                 dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
-                    self.mapView!.selectAnnotation(self.annotation!, animated:true)
+                    if let annotation = self.annotation {
+                        self.mapView!.selectAnnotation(annotation, animated:true)
+                    }
                 })
             }
             

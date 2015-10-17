@@ -271,9 +271,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="BYt-a7-zmq" kind="relationship" relationship="rootViewController" id="MpL-EL-UzH"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sz3-f2-6Gm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -290,7 +287,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NodeItemCell" id="BOM-3T-RXY" customClass="NodeItemCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="79"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BOM-3T-RXY" id="88d-ew-K9R">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="78.5"/>
@@ -357,7 +354,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="6nj-74-h3Y">
-                                <rect key="frame" x="0.0" y="171" width="600" height="79"/>
+                                <rect key="frame" x="0.0" y="107" width="600" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6nj-74-h3Y" id="a0b-dh-IS0">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="78.5"/>
@@ -945,7 +942,7 @@
         <image name="RightButton" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XyN-pQ-fCP"/>
+        <segue reference="ETZ-FC-MkB"/>
         <segue reference="1Vi-gm-zmd"/>
         <segue reference="1lN-Fx-bf5"/>
     </inferredMetricsTieBreakers>
