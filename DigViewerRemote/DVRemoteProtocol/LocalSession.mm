@@ -23,13 +23,32 @@ static struct {
     (PHAssetCollectionType)0, (PHAssetCollectionSubtype)0
 };
 
+@interface LSNode : NSObject
+@property NSString* name;
+@property NSArray* nodeID;
+@property NSMutableArray* children;
+@property PHAssetCollection* collection;
+@end
+
+@implementation LSNode
+- (instancetype)init
+{
+    self = [super init];
+    if (self){
+        _children = [NSMutableArray array];
+    }
+    return self;
+}
+@end
+
 @implementation LocalSession {
     PHFetchOptions* _assetsFetchOptions;
     PHImageManager* _imageManager;
     
     NSString* _documentName;
     NSString* _topName;
-    NSMutableArray* _collections;
+    LSNode* _root;
+    LSNode* _currentNode;
     NSArray* _currentCollectionPath;
     PHFetchResult* _currentAssets;
     NSUInteger _currentIndexInAssets;
@@ -81,20 +100,49 @@ static const int NAME_CLIP_LENGTH = 13;
 
 - (void)completeConnect
 {
-    _collections = [NSMutableArray array];
+    _root = [LSNode new];
+    _root.name = _topName;
+    _root.nodeID = @[_topName];
+    
+    // 固定アルバムを設定
     for (int i = 0; AssetTypes[i].type != 0; i++){
         PHFetchResult* result = [PHAssetCollection fetchAssetCollectionsWithType:AssetTypes[i].type
                                                                          subtype:AssetTypes[i].subType
                                                                          options:nil];
         for (NSUInteger j = 0; j < result.count; j++){
             PHAssetCollection* collection = [result objectAtIndex:j];
-            [_collections addObject:collection];
+            LSNode* node = [LSNode new];
+            node.name = collection.localizedTitle;
+            node.nodeID = [_root.nodeID arrayByAddingObject:node.name];
+            node.collection = collection;
+            [_root.children addObject:node];
         }
     }
-    _currentCollectionPath = @[_topName, ((PHAssetCollection*)_collections[0]).localizedTitle];
-    _currentAssets = [PHAsset fetchAssetsInAssetCollection:_collections[0] options:_assetsFetchOptions];
+    _currentNode = _root.children[0];
+    _currentCollectionPath = @[_topName, _currentNode.name];
+    _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
     _currentIndexInAssets = _currentAssets.count > 0 ? _currentAssets.count - 1 : 0;
     
+    // スマートコレクションリストに含まれるアルバムをツリーに追加
+    PHFetchResult* smartFolderList = [PHCollectionList fetchCollectionListsWithType:PHCollectionListTypeSmartFolder
+                                                                            subtype:PHCollectionListSubtypeAny options:nil];
+    for (PHCollectionList* list in smartFolderList){
+        LSNode* node = [LSNode new];
+        node.name = list.localizedTitle;
+        node.nodeID = [_root.nodeID arrayByAddingObject:node.name];
+        [_root.children addObject:node];
+
+        PHFetchResult* collections = [PHAssetCollection fetchCollectionsInCollectionList:list options:nil];
+        for (PHAssetCollection* collection in collections){
+            LSNode* child = [LSNode new];
+            child.name = collection.localizedTitle;
+            child.nodeID = [node.nodeID arrayByAddingObject:child.name];
+            child.collection = collection;
+            [node.children addObject:child];
+        }
+    }
+    
+    // 接続完了を返却
     if (_delegate){
         [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_ACCEPTED withData:nil];
         ImageMetadata* meta = [ImageMetadata new];
@@ -242,9 +290,9 @@ static const CGFloat THUMBNAIL_SIZE = 100;
         PHAsset* asset = assets[0];
         image = [self thumbnailForAsset:asset withSize:imageSize];
     }else{
-        PHFetchResult* collections = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[identifier] options:nil];
-        if (collections.count > 0){
-            PHAssetCollection* collection = collections[0];
+        LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
+        if (target.collection){
+            PHAssetCollection* collection = target.collection;
             PHFetchOptions* options = [PHFetchOptions new];
             options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
             options.fetchLimit = 1;
@@ -252,6 +300,9 @@ static const CGFloat THUMBNAIL_SIZE = 100;
             if (repAssets.count > 0){
                 image = [self thumbnailForAsset:repAssets[0] withSize:imageSize];
             }
+        }else{
+            LSNode* child = target.children[0];
+            image = [self thumbnailForID:child.nodeID withSize:imageSize];
         }
     }
     
@@ -307,33 +358,21 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 
 - (void)moveToAssetWithID: (NSArray*)nodeID
 {
-    if (nodeID.count == 3){
-        NSString* collectionName = nodeID[1];
-        NSString* assetID = nodeID[2];
-        
-        if (![collectionName isEqualToString:_currentCollectionPath.lastObject]){
-            PHAssetCollection* target = nil;
-            for (PHAssetCollection* collection in _collections){
-                if ([collection.localizedTitle isEqualToString:collectionName]){
-                    target = collection;
-                    _currentAssets = [PHAsset fetchAssetsInAssetCollection:target options:_assetsFetchOptions];
-                    _currentCollectionPath = @[_documentName, target.localizedTitle];
-                    _currentIndexInAssets = 0;
-                    break;
-                }
-            }
-            if (!target){
-                return;
-            }
-        }
-        
-        for (int i = 0; i < _currentAssets.count; i++){
-            PHAsset* asset = _currentAssets[i];
-            if ([assetID isEqualToString:asset.localIdentifier]){
-                _currentIndexInAssets = i;
-                [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
-                break;
-            }
+    NSString* assetID = nodeID.lastObject;
+    
+    if (![self nodeID:_currentCollectionPath isEqualToParentOfNodeID:nodeID]){
+        _currentNode = [self findNodeWithNodeID:nodeID forParent:YES];
+        _currentCollectionPath = _currentNode.nodeID;
+        _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
+        _currentIndexInAssets = 0;
+    }
+    
+    for (int i = 0; i < _currentAssets.count; i++){
+        PHAsset* asset = _currentAssets[i];
+        if ([assetID isEqualToString:asset.localIdentifier]){
+            _currentIndexInAssets = i;
+            [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
+            break;
         }
     }
 }
@@ -343,48 +382,72 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 //-----------------------------------------------------------------------------------------
 - (NSArray *)nodeListForID:(NSArray *)nodeID
 {
+    LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
+    
     NSMutableArray* rc = nil;
-    if (nodeID.count == 1){
+    if (!target.collection){
         rc = [NSMutableArray array];
-        for (PHAssetCollection* collection in _collections){
-            NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: collection.localizedTitle,
+        for (LSNode* child in target.children){
+            NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: child.name,
                                         DVRCNMETA_ITEM_TYPE: NSLocalizedString(@"LS_TYPESTRING_ALBUM", nil),
                                         DVRCNMETA_ITEM_IS_FOLDER: @(YES),
-                                        DVRCNMETA_LOCAL_ID: collection.localIdentifier};
+                                        /*DVRCNMETA_LOCAL_ID: collection.localIdentifier*/};
             [rc addObject:nodeAttrs];
         }
-        
-    }else if (nodeID.count == 2){
-        PHAssetCollection* target = nil;
-        NSString* targetName = nodeID.lastObject;
-        for (PHAssetCollection* collection in _collections){
-            if ([targetName isEqualToString:collection.localizedTitle]){
-                target = collection;
-                break;
-            }
-        }
-        if (target){
-            rc = [NSMutableArray array];
-            PHFetchResult* assets = [PHAsset fetchAssetsInAssetCollection:target options:_assetsFetchOptions];
-            for (PHAsset* asset in assets){
-                NSDate* date = asset.creationDate;
-                NSDateFormatter *dateFormatter = [NSDateFormatter new];
-                dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-                dateFormatter.timeStyle = NSDateFormatterMediumStyle;
-                NSString *formattedDateString = [dateFormatter stringFromDate:date];
-                
-                NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: formattedDateString,
-                                            DVRCNMETA_ITEM_TYPE: [self typeNameOfAsset:asset],
-                                            DVRCNMETA_ITEM_IS_FOLDER: @(NO),
-                                            DVRCNMETA_LOCAL_ID: asset.localIdentifier};
-                [rc addObject:nodeAttrs];
-            }
+    }else{
+        rc = [NSMutableArray array];
+        PHFetchResult* assets = [PHAsset fetchAssetsInAssetCollection:target.collection options:_assetsFetchOptions];
+        for (PHAsset* asset in assets){
+            NSDate* date = asset.creationDate;
+            NSDateFormatter *dateFormatter = [NSDateFormatter new];
+            dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+            dateFormatter.timeStyle = NSDateFormatterMediumStyle;
+            NSString *formattedDateString = [dateFormatter stringFromDate:date];
+            
+            NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: formattedDateString,
+                                        DVRCNMETA_ITEM_TYPE: [self typeNameOfAsset:asset],
+                                        DVRCNMETA_ITEM_IS_FOLDER: @(NO),
+                                        DVRCNMETA_LOCAL_ID: asset.localIdentifier};
+            [rc addObject:nodeAttrs];
         }
     }
     
     return rc;
 }
 
+//-----------------------------------------------------------------------------------------
+// パス操作
+//-----------------------------------------------------------------------------------------
+- (BOOL)nodeID:(NSArray*)src isEqualToParentOfNodeID:(NSArray*)dest
+{
+    BOOL rc = NO;
+    if (src.count == dest.count - 1){
+        rc = YES;
+        for (int i = 0; i < src.count; i++){
+            if (![src[i] isEqualToString:dest[i]]){
+                rc = NO;
+                break;
+            }
+        }
+    }
+    return rc;
+}
+
+- (LSNode*)findNodeWithNodeID:(NSArray*)nodeID forParent:(BOOL)forParent
+{
+    NSUInteger limit = forParent ? nodeID.count - 1 : nodeID.count;
+    LSNode* current = _root;
+    for (int i = 1; i < limit; i++){
+        NSString* name = nodeID[i];
+        for (LSNode* target in current.children){
+            if ([target.name isEqualToString:name]){
+                current = target;
+                break;
+            }
+        }
+    }
+    return current;
+}
 
 //-----------------------------------------------------------------------------------------
 // 画像タイプ文字列生成
