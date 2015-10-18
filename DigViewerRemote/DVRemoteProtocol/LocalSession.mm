@@ -35,7 +35,7 @@ static struct {
     NSUInteger _currentIndexInAssets;
 }
 
-static const int NAME_CLIP_LENGTH = 8;
+static const int NAME_CLIP_LENGTH = 13;
 
 //-----------------------------------------------------------------------------------------
 // 初期化
@@ -184,7 +184,7 @@ static const CGFloat SPAN_IN_METER = 450.0;
 - (void)notifyMetaForAsset:(PHAsset*)asset indexInParent:(NSUInteger)indexInParent imageData:(NSData*)imageData
 {
     NSString* name = [asset.localIdentifier substringToIndex:NAME_CLIP_LENGTH];
-    NSString* type = NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil);
+    NSString* type = [self typeNameOfAsset:asset];
     ECGImageSourceRef imageSource(CGImageSourceCreateWithData((__bridge CFDataRef)(imageData), NULL));
     ImageMetadata* meta = [[ImageMetadata alloc] initWithImage:imageSource name:name typeName:type];
     
@@ -367,8 +367,14 @@ static const CGFloat THUMBNAIL_SIZE = 100;
             rc = [NSMutableArray array];
             PHFetchResult* assets = [PHAsset fetchAssetsInAssetCollection:target options:_assetsFetchOptions];
             for (PHAsset* asset in assets){
-                NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: [asset.localIdentifier substringToIndex:NAME_CLIP_LENGTH],
-                                            DVRCNMETA_ITEM_TYPE: NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil),
+                NSDate* date = asset.creationDate;
+                NSDateFormatter *dateFormatter = [NSDateFormatter new];
+                dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+                dateFormatter.timeStyle = NSDateFormatterMediumStyle;
+                NSString *formattedDateString = [dateFormatter stringFromDate:date];
+                
+                NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: formattedDateString,
+                                            DVRCNMETA_ITEM_TYPE: [self typeNameOfAsset:asset],
                                             DVRCNMETA_ITEM_IS_FOLDER: @(NO),
                                             DVRCNMETA_LOCAL_ID: asset.localIdentifier};
                 [rc addObject:nodeAttrs];
@@ -377,6 +383,25 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     }
     
     return rc;
+}
+
+
+//-----------------------------------------------------------------------------------------
+// 画像タイプ文字列生成
+//-----------------------------------------------------------------------------------------
+- (NSString*)typeNameOfAsset:(PHAsset*)asset
+{
+    if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoScreenshot){
+        return NSLocalizedString(@"LS_SCREENSHOTIMAGE_TYPE_NAME", nil);
+    }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoPanorama){
+        return NSLocalizedString(@"LS_PANORAMAIMAGE_TYPE_NAME", nil);
+    }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoHDR){
+        return NSLocalizedString(@"LS_HDRIMAGE_TYPE_NAME", nil);
+//    }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoLive){
+//        return NSLocalizedString(@"LS_LIVEIMAGE_TYPE_NAME", nil);
+    }else{
+        return NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil);
+    }
 }
 
 @end

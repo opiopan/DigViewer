@@ -16,6 +16,10 @@
 
 "LS_TOP_FOLDER_NAME" = "Album";
 "LS_IMAGE_TYPE_NAME" = "Image";
+"LS_SCREENSHOTIMAGE_TYPE_NAME" = "Screenshot image";
+"LS_PANORAMAIMAGE_TYPE_NAME" = "Panorama image";
+"LS_HDRIMAGE_TYPE_NAME" = "HDR image";
+"LS_LIVEIMAGE_TYPE_NAME" = "Live Photo";
 "LS_TYPESTRING_ALBUM" = "Album";
 
 //-------------------------------------------------------------------------------------

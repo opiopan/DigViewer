@@ -21,6 +21,10 @@
 
 "LS_TOP_FOLDER_NAME" = "アルバム";
 "LS_IMAGE_TYPE_NAME" = "イメージ";
+"LS_SCREENSHOTIMAGE_TYPE_NAME" = "スクリーンショット";
+"LS_PANORAMAIMAGE_TYPE_NAME" = "パノラマ";
+"LS_HDRIMAGE_TYPE_NAME" = "HDR画像";
+"LS_LIVEIMAGE_TYPE_NAME" = "ライブフォト";
 "LS_TYPESTRING_ALBUM" = "アルバム";
 
 //-------------------------------------------------------------------------------------

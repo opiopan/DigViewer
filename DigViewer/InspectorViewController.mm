@@ -478,10 +478,10 @@ typedef struct _MapGeometry MapGeometry;
         rc.spanLatitudeMeter = spanLatitude.doubleValue * 111000;
         rc.spanLongitudeMeter = spanLongitude.doubleValue * fabs(cos(rc.latitude) / 180.0 * M_PI) * 111000;
     }else{
-        rc.spanLatitude = 600.0 / 111000.0;
-        rc.spanLongitude = 600.0 / 111000.0 / fabs(cos(rc.latitude) / 180.0 * M_PI);
-        rc.spanLatitudeMeter = 600.0;
-        rc.spanLongitudeMeter = 600.0;
+        rc.spanLatitude = 450.0 / 111000.0;
+        rc.spanLongitude = 450.0 / 111000.0 / fabs(cos(rc.latitude) / 180.0 * M_PI);
+        rc.spanLatitudeMeter = 450.0;
+        rc.spanLongitudeMeter = 450.0;
     }
     static const double OFFSET_RATIO = 0.4;
     double deltaLat = rc.spanLatitude * OFFSET_RATIO;
