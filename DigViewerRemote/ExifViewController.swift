@@ -118,40 +118,48 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         return section == 0 ? data.count - 1 : data.count
     }
 
-    private var cellForEstimate : LabelArrangableCell?
+    private static var cellForEstimate : LabelArrangableCell?
+    private static var cellForEstimateSize : CGSize!
+    private static var valueTextAttributes : [String : AnyObject]!
+    private static var valueTextHeight = CGFloat(0)
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
             return  CGFloat(160)
         }else{
-            if cellForEstimate == nil {
-                cellForEstimate = tableView.dequeueReusableCellWithIdentifier("ExifEntry") as? LabelArrangableCell
+            if ExifViewController.cellForEstimate == nil {
+                ExifViewController.cellForEstimate =
+                    tableView.dequeueReusableCellWithIdentifier("ExifEntry") as? LabelArrangableCell
+                setupCell(ExifViewController.cellForEstimate!, indexPath: indexPath)
+                ExifViewController.cellForEstimate!.contentView.setNeedsLayout()
+                ExifViewController.cellForEstimate!.contentView.layoutIfNeeded()
+                let font = ExifViewController.cellForEstimate!.subTextLabel!.font
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
+                ExifViewController.valueTextAttributes = [
+                    NSFontAttributeName : font,
+                    NSParagraphStyleAttributeName : paragraphStyle
+                ]
+                ExifViewController.valueTextHeight = ExifViewController.cellForEstimate!.subTextLabel.bounds.size.height
+                ExifViewController.cellForEstimateSize =
+                    ExifViewController.cellForEstimate!.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
             }
-
-            setupCell(cellForEstimate!, indexPath: indexPath)
-            cellForEstimate!.contentView.setNeedsLayout()
-            cellForEstimate!.contentView.layoutIfNeeded()
-
-            let font = cellForEstimate!.subTextLabel!.font
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            let attributes = [
-                NSFontAttributeName : font,
-                NSParagraphStyleAttributeName : paragraphStyle
-            ]
-            let text = cellForEstimate!.subTextLabel.text
+            
+            setupCell(ExifViewController.cellForEstimate!, indexPath: indexPath)
+            let text = ExifViewController.cellForEstimate!.subTextLabel.text
             let screenBounds = tableView.bounds
-            let labelFrame = cellForEstimate!.subTextLabel.frame
+            let labelFrame = ExifViewController.cellForEstimate!.subTextLabel.frame
             let labelSize = CGSize(width: screenBounds.size.width - labelFrame.origin.x, height: labelFrame.size.height)
             var newLabelSize = labelSize
             if text != nil {
                 newLabelSize.height = 1000
                 let rect = (text! as NSString).boundingRectWithSize(
-                    newLabelSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+                    newLabelSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                    attributes: ExifViewController.valueTextAttributes, context: nil)
                 newLabelSize = rect.size
             }
             
-            var size = cellForEstimate!.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+            var size = ExifViewController.cellForEstimateSize
             if size.height < newLabelSize.height {
                 size.height += (newLabelSize.height - labelSize.height)
             }

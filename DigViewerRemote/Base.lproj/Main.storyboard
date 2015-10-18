@@ -650,11 +650,11 @@
                                     <constraint firstAttribute="bottom" secondItem="ppl-CZ-4Vv" secondAttribute="bottom" constant="8" id="kdM-3D-mzI"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
+                                <rect key="frame" x="0.0" y="560" width="600" height="40"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="0jD-qi-Aq3"/>
+                                    <constraint firstAttribute="height" constant="40" id="0jD-qi-Aq3"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem image="ConfigureButton" id="G61-6W-1Ki">
@@ -685,6 +685,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="tintColor" red="0.34711077809333801" green="0.95829755067825317" blue="0.99910140037536621" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
                         <animations/>
@@ -942,8 +943,8 @@
         <image name="RightButton" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ETZ-FC-MkB"/>
-        <segue reference="1Vi-gm-zmd"/>
         <segue reference="1lN-Fx-bf5"/>
+        <segue reference="1Vi-gm-zmd"/>
+        <segue reference="XyN-pQ-fCP"/>
     </inferredMetricsTieBreakers>
 </document>

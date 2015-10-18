@@ -342,8 +342,17 @@
             NSString* key = [self keyForID:nodeID inDocument:document];
             NSArray* nodeList = [_nodeListCache valueForKey:key];
             if (!nodeList){
-                nodeList = [_localSession nodeListForID:nodeID];
-                [_nodeListCache setValue:nodeList forKey:key];
+                DVRemoteClient* __weak weakSelf = self;
+                LocalSession* localSession = _localSession;
+                LRUCache* nodeListCache = _nodeListCache;
+                dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(que, ^(void){
+                    NSArray* nodeList = [localSession nodeListForID:nodeID];
+                    [nodeListCache setValue:nodeList forKey:key];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [weakSelf notifyNodeList:nodeList forID:nodeID inDocument:document withKey:key];
+                    });
+                });
             }
             return nodeList;
         }else{
@@ -367,6 +376,15 @@
     }
     
     return nil;
+}
+
+- (void)notifyNodeList:(NSArray*)nodeList forID:(NSArray*)nodeID inDocument:(NSString*)document withKey:(NSString*)key
+{
+    for (id <DVRemoteClientDelegate> delegate in _delegates){
+        if ([delegate respondsToSelector:@selector(dvrClient:didRecieveNodeList:forNode:inDocument:)]){
+            [delegate dvrClient:self didRecieveNodeList:nodeList forNode:nodeID inDocument:document];
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------
