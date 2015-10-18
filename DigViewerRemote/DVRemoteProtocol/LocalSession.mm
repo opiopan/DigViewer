@@ -162,7 +162,7 @@ static const CGFloat SPAN_IN_METER = 450.0;
     }
    
     rc.spanLatitude = SPAN_IN_METER / 111000.0;
-    rc.spanLongitude = SPAN_IN_METER / 111000.0 / fabs(cos(gpsInfo.latitude.doubleValue));
+    rc.spanLongitude = SPAN_IN_METER / 111000.0 / fabs(cos(rc.latitude / 180.0 * M_PI));
     rc.spanLatitudeMeter = SPAN_IN_METER;
     rc.spanLongitudeMeter = SPAN_IN_METER;
     

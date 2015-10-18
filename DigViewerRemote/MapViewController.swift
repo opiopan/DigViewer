@@ -217,13 +217,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             mapView!.removeAnnotation(annotation!)
             annotation = nil
         }
-        centerCoordinate = nil
-        photoCoordinate = nil
-        mapSpan = nil
-        cameraAltitude = nil
-        cameraHeading = nil
-        cameraTilt = 0
-        grandAltitude = nil
+        geometry = nil
 
         // ポップアップウィンドウセットアップ
         popupViewController!.dateLabel.text = nil
@@ -254,23 +248,14 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             popupViewController!.thumbnailView.image = client.thumbnail
         }
 
-        if (meta[DVRCNMETA_LATITUDE] != nil){
-            let geometry = MapGeometry(meta: meta)
-
-            // 視点セットアップ
-            centerCoordinate = geometry.centerCoordinate
-            photoCoordinate = geometry.photoCoordinate
-            mapSpan = geometry.mapSpan
-
-            cameraAltitude = geometry.cameraAltitude
-            cameraHeading = geometry.cameraHeading
-            cameraTilt = CGFloat(geometry.cameraTilt)
+        if meta[DVRCNMETA_LATITUDE] != nil {
+            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size)
 
             // アノテーションセットアップ
             (popupViewController!.view as! PopupView).showAnchor = true
             var nodeId = meta[DVRCNMETA_ID] as! [String]?;
             annotation = MKPointAnnotation()
-            annotation!.coordinate = photoCoordinate!
+            annotation!.coordinate = geometry!.photoCoordinate
             annotation!.title = nodeId![nodeId!.count - 1]
             mapView!.addAnnotation(annotation!)
             if popupViewController!.thumbnailView.image != nil {
@@ -283,7 +268,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             }
             
             // 逆ジオコーディング(経緯度→住所に変換)
-            currentLocation = CLLocation(latitude: geometry.latitude, longitude: geometry.longitude)
+            currentLocation = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
             performGeocoding(currentLocation!)
 
             // ブラーカバーを外す
@@ -383,10 +368,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func willStatToMove() {
         let region = mapView!.region
-        if (photoCoordinate!.latitude >= region.center.latitude - region.span.latitudeDelta &&
-            photoCoordinate!.latitude <= region.center.latitude + region.span.latitudeDelta &&
-            photoCoordinate!.longitude >= region.center.longitude - region.span.longitudeDelta &&
-            photoCoordinate!.longitude <= region.center.longitude + region.span.longitudeDelta){
+        if (geometry!.photoCoordinate.latitude >= region.center.latitude - region.span.latitudeDelta &&
+            geometry!.photoCoordinate.latitude <= region.center.latitude + region.span.latitudeDelta &&
+            geometry!.photoCoordinate.longitude >= region.center.longitude - region.span.longitudeDelta &&
+            geometry!.photoCoordinate.longitude <= region.center.longitude + region.span.longitudeDelta){
             isUpdatedLocation = false;
             isLoadingData = false;
         }else{
@@ -453,27 +438,25 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - 地図視点移動
     //-----------------------------------------------------------------------------------------
-    private var centerCoordinate : CLLocationCoordinate2D? = nil
-    private var photoCoordinate : CLLocationCoordinate2D? = nil
-    private var mapSpan : MKCoordinateSpan? = nil
-    private var cameraAltitude : Double? = nil
-    private var cameraHeading : Double? = nil
-    private var cameraTilt : CGFloat = 0
-    private var grandAltitude : Double? = nil
+    private var geometry : MapGeometry? = nil
     
     @IBAction func moveToDefaultPosition(sender : AnyObject?) {
+        let meta = DVRemoteClient.sharedClient().meta
+        if meta[DVRCNMETA_LATITUDE] != nil {
+            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size)
+        }
         if (isUpdatedLocation || !configController.map3DView){
-            if photoCoordinate != nil && mapSpan != nil {
-                let region = MKCoordinateRegionMake(photoCoordinate!, mapSpan!)
+            if geometry != nil {
+                let region = MKCoordinateRegionMake(geometry!.photoCoordinate, geometry!.mapSpan)
                 mapView!.setRegion(region, animated: !configController.map3DView)
             }
         }else{
-            if centerCoordinate != nil && cameraAltitude != nil {
+            if geometry != nil {
                 let camera = MKMapCamera();
-                camera.centerCoordinate = centerCoordinate!
-                camera.heading = cameraHeading == nil ? 0 : cameraHeading!
-                camera.altitude = cameraAltitude!
-                camera.pitch = cameraTilt
+                camera.centerCoordinate = geometry!.centerCoordinate
+                camera.heading = geometry!.cameraHeading
+                camera.altitude = geometry!.cameraAltitude
+                camera.pitch = CGFloat(geometry!.cameraTilt)
                 
                 mapView!.setCamera(camera, animated: true)
             }
@@ -483,56 +466,56 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - Google Maps Elevation APIを利用した標高取得
     //-----------------------------------------------------------------------------------------
-    private var isRunningAltitudeTranslation : Bool = false
-    private var translatingAltitude : Double? = nil
-    private var translatingCoordinate : CLLocationCoordinate2D? = nil
-    
-    func scheduleAltitudeTranslation() {
-        if (isRunningAltitudeTranslation ||
-            (translatingCoordinate != nil && translatingCoordinate!.latitude == photoCoordinate!.latitude &&
-             translatingCoordinate!.longitude == photoCoordinate!.longitude)){
-            return
-        }
-        isRunningAltitudeTranslation = true;
-        translatingAltitude = nil;
-        translatingCoordinate = CLLocationCoordinate2DMake(photoCoordinate!.latitude, photoCoordinate!.longitude);
-        let url = NSURL(string: "https://maps.googleapis.com/maps/api/elevation/json?" +
-                                "locations=\(translatingCoordinate!.latitude),\(translatingCoordinate!.longitude)")
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: nil)
-        let task = session.dataTaskWithURL(url!, completionHandler:{[unowned self](data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-            var errorOccured = true
-            if (data != nil){
-                do{
-                    let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
-                    if let results = jsonData["results"] as? NSArray {
-                        if let resultSet = results[0] as? NSDictionary {
-                            if let elevation = resultSet["elevation"] as? Double {
-                                errorOccured = false
-                                self.translatingAltitude = elevation
-                            }
-                        }
-                    }
-                }catch let error as NSError {
-                    NSLog("%@", error)
-                }
-            }
-            let mainQue = dispatch_get_main_queue()
-            dispatch_async(mainQue, {[unowned self]() ->Void in
-                self.isRunningAltitudeTranslation = false;
-                if (!errorOccured &&
-                    self.translatingCoordinate!.latitude == self.photoCoordinate!.latitude &&
-                    self.translatingCoordinate!.longitude == self.photoCoordinate!.longitude){
-                        self.translatingCoordinate = nil
-                        self.grandAltitude = self.translatingAltitude
-                        self.moveToDefaultPosition(self)
-                }else{
-                    self.scheduleAltitudeTranslation()
-                }
-            })
-        })
-        task.resume()
-    }
+//    private var isRunningAltitudeTranslation : Bool = false
+//    private var translatingAltitude : Double? = nil
+//    private var translatingCoordinate : CLLocationCoordinate2D? = nil
+//    
+//    func scheduleAltitudeTranslation() {
+//        if (isRunningAltitudeTranslation ||
+//            (translatingCoordinate != nil && translatingCoordinate!.latitude == photoCoordinate!.latitude &&
+//             translatingCoordinate!.longitude == photoCoordinate!.longitude)){
+//            return
+//        }
+//        isRunningAltitudeTranslation = true;
+//        translatingAltitude = nil;
+//        translatingCoordinate = CLLocationCoordinate2DMake(photoCoordinate!.latitude, photoCoordinate!.longitude);
+//        let url = NSURL(string: "https://maps.googleapis.com/maps/api/elevation/json?" +
+//                                "locations=\(translatingCoordinate!.latitude),\(translatingCoordinate!.longitude)")
+//        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+//        let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: nil)
+//        let task = session.dataTaskWithURL(url!, completionHandler:{[unowned self](data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+//            var errorOccured = true
+//            if (data != nil){
+//                do{
+//                    let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
+//                    if let results = jsonData["results"] as? NSArray {
+//                        if let resultSet = results[0] as? NSDictionary {
+//                            if let elevation = resultSet["elevation"] as? Double {
+//                                errorOccured = false
+//                                self.translatingAltitude = elevation
+//                            }
+//                        }
+//                    }
+//                }catch let error as NSError {
+//                    NSLog("%@", error)
+//                }
+//            }
+//            let mainQue = dispatch_get_main_queue()
+//            dispatch_async(mainQue, {[unowned self]() ->Void in
+//                self.isRunningAltitudeTranslation = false;
+//                if (!errorOccured &&
+//                    self.translatingCoordinate!.latitude == self.photoCoordinate!.latitude &&
+//                    self.translatingCoordinate!.longitude == self.photoCoordinate!.longitude){
+//                        self.translatingCoordinate = nil
+//                        self.grandAltitude = self.translatingAltitude
+//                        self.moveToDefaultPosition(self)
+//                }else{
+//                    self.scheduleAltitudeTranslation()
+//                }
+//            })
+//        })
+//        task.resume()
+//    }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - アノテーションカスタマイズ

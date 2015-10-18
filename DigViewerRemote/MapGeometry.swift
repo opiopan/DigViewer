@@ -28,7 +28,7 @@ class MapGeometry: NSObject {
     let cameraHeading : Double
     let cameraTilt : Double
     
-    init(meta: [NSObject : AnyObject]!){
+    init(meta: [NSObject : AnyObject]!, viewSize : CGSize){
         latitude = (meta[DVRCNMETA_LATITUDE] as! Double?)!
         longitude = (meta[DVRCNMETA_LONGITUDE] as! Double?)!
         spanLatitude = (meta[DVRCNMETA_SPAN_LATITUDE] as! Double?)!
@@ -53,11 +53,19 @@ class MapGeometry: NSObject {
             cameraHeading = 0
             cameraTilt = 50
         }
-
+//        viewLatitude = latitude
+//        viewLongitude = longitude
+//        cameraHeading = 0
+//        cameraTilt = 0
+        
         photoCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
         centerCoordinate = CLLocationCoordinate2DMake(viewLatitude, viewLongitude)
         mapSpan = MKCoordinateSpanMake(spanLatitude, spanLongitude)
 
-        cameraAltitude = max(spanLatitudeMeter, spanLongitudeMeter) * 1.87 * cos(cameraTilt / 180 * M_PI)
+        let vRatio = spanLatitudeMeter / Double(viewSize.height)
+        let hRatio = spanLongitudeMeter / Double(viewSize.width)
+        let vSpan = Double(viewSize.height) * max(vRatio, hRatio)
+        
+        cameraAltitude = vSpan * 1.875 * cos(cameraTilt / 180 * M_PI)
     }
 }

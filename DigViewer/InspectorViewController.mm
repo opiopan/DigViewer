@@ -476,10 +476,10 @@ typedef struct _MapGeometry MapGeometry;
         rc.spanLatitude = spanLatitude.doubleValue;
         rc.spanLongitude = spanLongitude.doubleValue;
         rc.spanLatitudeMeter = spanLatitude.doubleValue * 111000;
-        rc.spanLongitudeMeter = spanLongitude.doubleValue * fabs(cos(rc.latitude)) * 111000;
+        rc.spanLongitudeMeter = spanLongitude.doubleValue * fabs(cos(rc.latitude) / 180.0 * M_PI) * 111000;
     }else{
         rc.spanLatitude = 600.0 / 111000.0;
-        rc.spanLongitude = 600.0 / 111000.0 / fabs(cos(gpsInfo.latitude.doubleValue));
+        rc.spanLongitude = 600.0 / 111000.0 / fabs(cos(rc.latitude) / 180.0 * M_PI);
         rc.spanLatitudeMeter = 600.0;
         rc.spanLongitudeMeter = 600.0;
     }
