@@ -301,8 +301,10 @@ static const CGFloat THUMBNAIL_SIZE = 100;
                 image = [self thumbnailForAsset:repAssets[0] withSize:imageSize];
             }
         }else{
-            LSNode* child = target.children[0];
-            image = [self thumbnailForID:child.nodeID withSize:imageSize];
+            if (target.children.count > 0){
+                LSNode* child = target.children[0];
+                image = [self thumbnailForID:child.nodeID withSize:imageSize];
+            }
         }
     }
     

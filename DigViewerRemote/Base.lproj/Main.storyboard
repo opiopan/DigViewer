@@ -388,7 +388,15 @@
                             <outlet property="delegate" destination="BYt-a7-zmq" id="rFq-Wq-hEr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="YXZ-AX-phx"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="YXZ-AX-phx">
+                        <barButtonItem key="rightBarButtonItem" image="BottomButton" id="jzb-Dv-ZbB">
+                            <connections>
+                                <action selector="moveToBottom:" destination="BYt-a7-zmq" id="Klt-fZ-1b0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llp-ge-mAi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -650,9 +658,18 @@
                                     <constraint firstAttribute="bottom" secondItem="ppl-CZ-4Vv" secondAttribute="bottom" constant="8" id="kdM-3D-mzI"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJa-dP-S1q">
+                                <rect key="frame" x="0.0" y="560" width="600" height="300"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="agm-aQ-2o5"/>
+                                </constraints>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
                                 <rect key="frame" x="0.0" y="560" width="600" height="40"/>
                                 <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0jD-qi-Aq3"/>
                                 </constraints>
@@ -691,10 +708,13 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fJa-dP-S1q" secondAttribute="trailing" id="0g1-aA-hSv"/>
                             <constraint firstItem="l4r-4E-Kc7" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="2UI-a7-Z1D"/>
                             <constraint firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="6u4-R6-MqF"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="fJa-dP-S1q" secondAttribute="bottom" constant="-260" id="KOR-ZJ-TNj"/>
                             <constraint firstAttribute="bottom" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="Ldf-MS-AVO"/>
                             <constraint firstItem="KUM-ns-Duw" firstAttribute="top" secondItem="gRo-xe-Jor" secondAttribute="bottom" constant="-48" id="Oww-8I-BYG"/>
+                            <constraint firstItem="fJa-dP-S1q" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="Tbe-bd-MFl"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="ywu-ch-6z2" secondAttribute="top" id="Y7Z-Da-jye"/>
                             <constraint firstItem="KUM-ns-Duw" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="ZSI-GL-Cr1"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="aPH-7K-tuh"/>
@@ -710,6 +730,7 @@
                         <outlet property="messageLabel" destination="ppl-CZ-4Vv" id="LsS-cw-rtM"/>
                         <outlet property="messageView" destination="KUM-ns-Duw" id="N7z-wW-4SH"/>
                         <outlet property="messageViewHeightConstraint" destination="MUl-qj-4bf" id="rui-be-DH9"/>
+                        <outlet property="toolbar" destination="l4r-4E-Kc7" id="HaF-II-2Q4"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
                         <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="XyN-pQ-fCP"/>
@@ -936,6 +957,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BottomButton" width="31" height="31"/>
         <image name="CenteringButton" width="31" height="31"/>
         <image name="ConfigureButton" width="31" height="31"/>
         <image name="LeftButton" width="31" height="31"/>

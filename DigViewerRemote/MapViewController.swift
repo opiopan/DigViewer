@@ -13,6 +13,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     @IBOutlet var barTitle : UINavigationItem? = nil
     @IBOutlet var mapView : MKMapView? = nil
+    @IBOutlet weak var toolbar: UIToolbar!
 
     private let configController = ConfigurationController.sharedController
     private var show3DView = true
@@ -34,6 +35,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         navigationItem.hidesBackButton = true;
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationController!.setNavigationBarHidden(true, animated: false)
+        
+        toolbar.layer.zPosition = 10
         
         configController.registerObserver(self)
         show3DView = configController.map3DView

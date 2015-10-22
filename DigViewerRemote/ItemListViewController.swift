@@ -259,6 +259,15 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     }
     
     //-----------------------------------------------------------------------------------------
+    // MARK: - ユーザアクション
+    //-----------------------------------------------------------------------------------------
+    @IBAction func moveToBottom(sender: AnyObject) {
+        let row = nodeList == nil || nodeList!.count == 0 ? 0 : nodeList!.count - 1
+        let path = NSIndexPath(forRow: row, inSection: 0)
+        tableView!.scrollToRowAtIndexPath(path, atScrollPosition: .Middle, animated: true)
+    }
+    
+    //-----------------------------------------------------------------------------------------
     // MARK: - Navigation
     //-----------------------------------------------------------------------------------------
     /*
