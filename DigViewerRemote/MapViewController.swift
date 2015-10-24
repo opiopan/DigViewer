@@ -9,7 +9,8 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate, ConfigurationControllerDelegate {
+class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate,
+                         ConfigurationControllerDelegate, SummaryPopupViewControllerDelegate {
     
     @IBOutlet var barTitle : UINavigationItem? = nil
     @IBOutlet var mapView : MKMapView? = nil
@@ -48,6 +49,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
         let recognizer = UITapGestureRecognizer(target: self, action: "tapOnThumbnail:")
         popupViewController!.thumbnailView!.addGestureRecognizer(recognizer)
+        popupViewController?.delegate = self
         
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
@@ -60,6 +62,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         reflectUserDefaults()
         
         initMessageView()
+        
+        initSummaryBar()
     }
     
     deinit{
@@ -208,18 +212,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
     }
     
-    private var annotation : MKPointAnnotation? = nil
     private var geocoder : CLGeocoder? = nil
     private var isGeocoding = false
     private var pendingGeocodingRecquest : CLLocation? = nil
     private var currentLocation : CLLocation? = nil
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
-        if (annotation != nil){
-            popupViewController!.updateCount++
-            mapView!.removeAnnotation(annotation!)
-            annotation = nil
-        }
+        removeAnnotation()
         geometry = nil
 
         // ポップアップウィンドウセットアップ
@@ -255,20 +254,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size)
 
             // アノテーションセットアップ
-            (popupViewController!.view as! PopupView).showAnchor = true
-            var nodeId = meta[DVRCNMETA_ID] as! [String]?;
-            annotation = MKPointAnnotation()
-            annotation!.coordinate = geometry!.photoCoordinate
-            annotation!.title = nodeId![nodeId!.count - 1]
-            mapView!.addAnnotation(annotation!)
-            if popupViewController!.thumbnailView.image != nil {
-                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-                dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
-                    if let annotation = self.annotation {
-                        self.mapView!.selectAnnotation(annotation, animated:true)
-                    }
-                })
-            }
+            addAnnotation()
             
             // 逆ジオコーディング(経緯度→住所に変換)
             currentLocation = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
@@ -423,21 +409,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation === mapView.userLocation { // 現在地を示すアノテーションの場合はデフォルトのまま
-            return nil
-        } else {
-            let identifier = "annotation"
-            if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("annotation") { // 再利用できる場合はそのまま返す
-                return annotationView
-            } else { // 再利用できるアノテーションが無い場合（初回など）は生成する
-                let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                annotationView.calloutViewController = popupViewController
-                return annotationView
-            }
-        }
-    }
-    
     //-----------------------------------------------------------------------------------------
     // MARK: - 地図視点移動
     //-----------------------------------------------------------------------------------------
@@ -521,16 +492,49 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
 //    }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: - アノテーションカスタマイズ
+    // MARK: - アノテーション制御
     //-----------------------------------------------------------------------------------------
-//    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]){
-//        for view : MKAnnotationView in views {
-//            view.leftCalloutAccessoryView = thumbnailView!
-//            let button = UIButton.init(type:UIButtonType.DetailDisclosure)
-//            button.addTarget(self, action: "viewFullImage:", forControlEvents: .TouchUpInside)
-//            view.rightCalloutAccessoryView = button
-//        }
-//    }
+    private var annotation : MKPointAnnotation? = nil
+
+    func addAnnotation() {
+        (popupViewController!.view as! PopupView).showAnchor = true
+        annotation = MKPointAnnotation()
+        annotation!.coordinate = geometry!.photoCoordinate
+        mapView!.addAnnotation(annotation!)
+        if popupViewController!.thumbnailView.image != nil {
+            let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+            dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+                if let annotation = self.annotation {
+                    self.mapView!.selectAnnotation(annotation, animated:true)
+                }
+            })
+        }
+    }
+    
+    func removeAnnotation() {
+        if (annotation != nil){
+            popupViewController!.updateCount++
+            mapView!.removeAnnotation(annotation!)
+            annotation = nil
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === mapView.userLocation { // 現在地を示すアノテーションの場合はデフォルトのまま
+            return nil
+        } else {
+            let identifier = "annotation"
+            if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? AnnotationView{
+                // 再利用できる場合はそのまま返す
+                annotationView.calloutViewController = summaryBarEnable ? nil : popupViewController
+                return annotationView
+            } else { // 再利用できるアノテーションが無い場合（初回など）は生成する
+                let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView.calloutViewController = summaryBarEnable ? nil : popupViewController
+                return annotationView
+            }
+        }
+    }
     
     func viewFullImage(sender: AnyObject) {
         performSegueWithIdentifier("FullImageView", sender: sender)
@@ -574,12 +578,12 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             coverView!.removeFromSuperview()
         }
 
-        if isShow && isShowPopup {
+        if isShow && isShowPopup && !summaryBarEnable {
             if popupViewController!.view.superview != nil && popupViewController!.view.superview != coverView {
                 popupViewController!.removeFromSuperView()
             }
             if popupViewController!.view.superview == nil {
-                popupViewController!.addToSuperView(coverView!)
+                popupViewController!.addToSuperView(coverView!, parentType: .NoLocationCover)
                 popupViewController!.view.alpha = 1.0
                 popupViewController!.updateCount++
             }
@@ -620,6 +624,47 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func tapOnMessageView(recognizer: UIGestureRecognizer){
         showServersList()
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - サマリバーコントロール
+    //-----------------------------------------------------------------------------------------
+    @IBOutlet weak var summaryBarPlaceholderHeight: NSLayoutConstraint!
+    @IBOutlet weak var summaryBarPlaceholder: UIView!
+    @IBOutlet weak var summaryBar: UIView!
+    @IBOutlet weak var summaryBarPosition: NSLayoutConstraint!
+    private var summaryBarPositionDefault: CGFloat = 0
+    private var summaryBarEnable: Bool = false
+    
+    func initSummaryBar() {
+        summaryBarPositionDefault = summaryBarPosition.constant
+    }
+    
+    func summaryPopupViewControllerPushedPinButton(controller: SummaryPopupViewController) {
+        summaryBarEnable = !summaryBarEnable
+        if !summaryBarEnable {
+            popupViewController?.removeFromSuperView()
+            popupViewController?.pinMode = false
+            summaryBarPosition.constant = summaryBarPositionDefault
+            if coverView?.superview != nil {
+                popupViewController?.addToSuperView(coverView!, parentType: .NoLocationCover)
+            }else{
+                removeAnnotation()
+                addAnnotation()
+            }
+            
+        }else{
+            if coverView?.superview != nil {
+                popupViewController?.removeFromSuperView()
+            }else{
+                removeAnnotation()
+                addAnnotation()
+            }
+            summaryBarPlaceholderHeight.constant = popupViewController!.viewHeight
+            summaryBarPosition.constant = summaryBarPositionDefault + popupViewController!.viewBaseHeight
+            popupViewController?.pinMode = true
+            popupViewController?.addToSuperView(summaryBarPlaceholder, parentType: .NoLocationCover)
+        }
     }
     
     //-----------------------------------------------------------------------------------------

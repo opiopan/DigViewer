@@ -17,8 +17,13 @@ class PopupView: UIView {
             }
         }
     }
+    var noBackground : Bool = false
 
     override func drawRect(rect: CGRect) {
+        if noBackground {
+            return
+        }
+        
         let context = UIGraphicsGetCurrentContext()
         let radius = CGFloat(16)
         let anchor = CGFloat(16)

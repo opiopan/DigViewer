@@ -33,20 +33,21 @@ class AnnotationView: MKPinAnnotationView {
     
     var calloutViewController : SummaryPopupViewController? {
         didSet{
-            if let controller = oldValue {
-                if controller.view.superview != nil {
-                    controller.view.removeFromSuperview()
-                }
-            }
+//            if let controller = oldValue {
+//                if oldValue != calloutViewController && controller.view.superview != nil {
+//                    controller.view.removeFromSuperview()
+//                }
+//            }
         }
     }
     
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         var hitView = super.hitTest(point, withEvent: event)
         if hitView == nil && self.selected {
-            let calloutView = calloutViewController!.view
-            let pointInCalloutView = self.convertPoint(point, toView: calloutView)
-            hitView = calloutView.hitTest(pointInCalloutView, withEvent: event)
+            if let calloutView = calloutViewController?.view {
+                let pointInCalloutView = self.convertPoint(point, toView: calloutView)
+                hitView = calloutView.hitTest(pointInCalloutView, withEvent: event)
+            }
         }
         return hitView
     }
@@ -55,41 +56,43 @@ class AnnotationView: MKPinAnnotationView {
     
     override var selected : Bool {
         didSet{
-            let calloutView = calloutViewController!.view
-            if selected {
-                var frame = calloutView.frame
-                frame.origin.x = 0
-                frame.origin.y = 0
-                calloutView.frame = frame
-                envelopeView = UIView(frame: frame)
-                if calloutView.superview != nil {
-                    calloutViewController!.updateCount++
-                    calloutView.removeFromSuperview()
-                }
-                envelopeView!.addSubview(calloutView)
-                
-                let annotationViewBounds = self.bounds
-                var calloutViewFrame = calloutView.frame
-                calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5 - 8.0
-                calloutViewFrame.origin.y = -calloutViewFrame.size.height
-                envelopeView!.frame = calloutViewFrame;
-                envelopeView!.alpha = 0.0
-                addSubview(envelopeView!)
-                UIView.animateWithDuration(0.2, animations: {[unowned self]() -> Void in
-                    self.envelopeView!.alpha = 1.0
-                })
-            }else{
-                if let targetView = envelopeView {
-                    envelopeView = nil
-                    let updateCount = calloutViewController!.updateCount
-                    UIView.animateWithDuration(0.2, animations: {() -> Void in
-                        targetView.alpha = 0.0
-                    }, completion: {[unowned self](flag : Bool) -> Void in
-                        targetView.removeFromSuperview()
-                        if self.calloutViewController!.updateCount == updateCount {
-                            calloutView.removeFromSuperview()
-                        }
-                    })
+            if calloutViewController != nil {
+                let calloutView = calloutViewController!.view
+                if selected {
+                    var frame = calloutView.frame
+                    frame.origin.x = 0
+                    frame.origin.y = 0
+                    calloutView.frame = frame
+                    envelopeView = UIView(frame: frame)
+                    if calloutView.superview != nil {
+                        calloutViewController!.updateCount++
+                        calloutView.removeFromSuperview()
+                    }
+                    envelopeView!.addSubview(calloutView)
+                    
+                    let annotationViewBounds = self.bounds
+                    var calloutViewFrame = calloutView.frame
+                    calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5 - 8.0
+                    calloutViewFrame.origin.y = -calloutViewFrame.size.height
+                    envelopeView!.frame = calloutViewFrame;
+                    envelopeView!.alpha = 0.0
+                    addSubview(envelopeView!)
+                    UIView.animateWithDuration(0.2, animations: {[unowned self]() -> Void in
+                        self.envelopeView!.alpha = 1.0
+                        })
+                }else{
+                    if let targetView = envelopeView {
+                        envelopeView = nil
+                        let updateCount = calloutViewController!.updateCount
+                        UIView.animateWithDuration(0.2, animations: {() -> Void in
+                            targetView.alpha = 0.0
+                        }, completion: {[unowned self](flag : Bool) -> Void in
+                            targetView.removeFromSuperview()
+                            if self.calloutViewController != nil && self.calloutViewController!.updateCount == updateCount {
+                                calloutView.removeFromSuperview()
+                            }
+                        })
+                    }
                 }
             }
         }

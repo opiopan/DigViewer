@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum SupparyPopupViewParentType : Int {
+    case NoLocationCover
+    case PinnedBar
+}
+
+@objc protocol SummaryPopupViewControllerDelegate {
+    optional func summaryPopupViewControllerPushedPinButton(controller : SummaryPopupViewController) -> Void
+}
+
 class SummaryPopupViewController: UIViewController {
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -15,11 +24,17 @@ class SummaryPopupViewController: UIViewController {
     @IBOutlet weak var lensLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet var popupView: PopupView!
     
     var updateCount = 0
     
     var viewWidth:CGFloat = 350.0
     var viewHeight:CGFloat = 150.0
+    var viewBaseHeight:CGFloat {
+        get{
+            return viewHeight - 16
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,28 +66,38 @@ class SummaryPopupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addToSuperView(parentView : UIView) {
+    func addToSuperView(parentView : UIView, parentType : SupparyPopupViewParentType) {
         let childView = self.view
         childView.translatesAutoresizingMaskIntoConstraints = false
         parentView.addSubview(childView)
+        
         let viewDictionary = ["childView": childView, "parentView": parentView]
         let metricDictionary = ["viewWidth": Double(viewWidth), "viewHeight": Double(viewHeight)]
         let constraints = NSMutableArray()
-        let constraintFormat1 =
-        NSLayoutConstraint.constraintsWithVisualFormat(
+
+        let constraintFormat1 = NSLayoutConstraint.constraintsWithVisualFormat(
             "H:[parentView]-(<=1)-[childView(==viewWidth)]",
             options : .AlignAllCenterY,
             metrics: metricDictionary,
             views: viewDictionary)
         constraints.addObjectsFromArray(constraintFormat1)
-        let constraintFormat2 =
-        NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[parentView]-(<=1)-[childView(==viewHeight)]",
-            options : .AlignAllCenterX,
+        
+        var option : NSLayoutFormatOptions
+        var constraintString : String
+        if parentType == .NoLocationCover {
+            option = .AlignAllCenterX
+            constraintString = "V:[parentView]-(<=1)-[childView(==viewHeight)]"
+        }else{
+            option = NSLayoutFormatOptions(rawValue: 0)
+            constraintString = "V:[parentView]-100-[childView(==viewHeight)]"
+        }
+        let constraintFormat2 = NSLayoutConstraint.constraintsWithVisualFormat(
+            constraintString,
+            options : option,
             metrics: metricDictionary,
             views: viewDictionary)
         constraints.addObjectsFromArray(constraintFormat2)
-
+        
         parentView.addConstraints((constraints as NSArray as? [NSLayoutConstraint])!)
     }
     
@@ -84,6 +109,30 @@ class SummaryPopupViewController: UIViewController {
             popupFrame.size.width = viewWidth
             popupFrame.size.height = viewHeight
             self.view.frame = popupFrame
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - ピン操作
+    //-----------------------------------------------------------------------------------------
+    var delegate : SummaryPopupViewControllerDelegate? = nil
+    
+    @IBOutlet weak var pinButton: UIButton!
+    
+    @IBAction func onPinButton(sender: AnyObject) {
+        delegate?.summaryPopupViewControllerPushedPinButton!(self)
+    }
+    
+    var pinMode : Bool = false {
+        didSet{
+            if pinMode {
+                pinButton.setImage(UIImage(named: "pin_on"), forState: UIControlState.Normal)
+                popupView.noBackground = true
+            }else{
+                pinButton.setImage(UIImage(named: "pin_off"), forState: UIControlState.Normal)
+                popupView.noBackground = false
+            }
+            popupView.setNeedsDisplay()
         }
     }
     

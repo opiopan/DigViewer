@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bqX-2x-2CQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bqX-2x-2CQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -493,7 +493,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QXw-bD-AXM">
-                                        <rect key="frame" x="130" y="24.5" width="208" height="85"/>
+                                        <rect key="frame" x="130" y="25" width="208" height="85"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhz-7F-MTv">
                                                 <rect key="frame" x="0.0" y="0.0" width="208" height="17"/>
@@ -547,6 +547,19 @@
                                         </subviews>
                                         <animations/>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRh-GK-4iT" userLabel="Pin Button">
+                                        <rect key="frame" x="324" y="4" width="22" height="22"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="TrO-5h-JZ7"/>
+                                            <constraint firstAttribute="width" constant="22" id="UOr-25-InY"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.34711077810000002" green="0.9582975507" blue="0.99910140039999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="pin_off"/>
+                                        <connections>
+                                            <action selector="onPinButton:" destination="s2g-z2-2O6" eventType="touchUpInside" id="9X8-ud-MIi"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -554,8 +567,10 @@
                                     <constraint firstItem="QXw-bD-AXM" firstAttribute="leading" secondItem="2I5-ir-tH5" secondAttribute="trailing" constant="8" id="7EV-es-Cpc"/>
                                     <constraint firstItem="2I5-ir-tH5" firstAttribute="leading" secondItem="d2Y-3f-c2p" secondAttribute="leading" constant="12" id="HwI-nd-Y18"/>
                                     <constraint firstItem="QXw-bD-AXM" firstAttribute="centerY" secondItem="d2Y-3f-c2p" secondAttribute="centerY" id="JFy-vp-beB"/>
+                                    <constraint firstAttribute="trailing" secondItem="MRh-GK-4iT" secondAttribute="trailing" constant="4" id="Ny8-gt-3Qn"/>
                                     <constraint firstAttribute="bottom" secondItem="2I5-ir-tH5" secondAttribute="bottom" constant="12" id="Ssq-3m-3xD"/>
                                     <constraint firstItem="2I5-ir-tH5" firstAttribute="top" secondItem="d2Y-3f-c2p" secondAttribute="top" constant="12" id="UBe-aK-ffI"/>
+                                    <constraint firstItem="MRh-GK-4iT" firstAttribute="top" secondItem="d2Y-3f-c2p" secondAttribute="top" constant="4" id="inx-1r-M8K"/>
                                     <constraint firstAttribute="trailing" secondItem="QXw-bD-AXM" secondAttribute="trailing" constant="12" id="q39-1S-ePM"/>
                                 </constraints>
                             </view>
@@ -577,6 +592,8 @@
                         <outlet property="conditionLabel" destination="yCi-AA-n5S" id="Ahv-72-cq7"/>
                         <outlet property="dateLabel" destination="xhz-7F-MTv" id="dvB-Dd-ZSU"/>
                         <outlet property="lensLabel" destination="vXj-Lj-w4a" id="rk2-Ks-Xx7"/>
+                        <outlet property="pinButton" destination="MRh-GK-4iT" id="z8F-H7-ZCs"/>
+                        <outlet property="popupView" destination="amB-Gt-ezJ" id="pG5-Hp-ld6"/>
                         <outlet property="thumbnailView" destination="2I5-ir-tH5" id="P2e-YI-oZi"/>
                     </connections>
                 </viewController>
@@ -658,11 +675,24 @@
                                     <constraint firstAttribute="bottom" secondItem="ppl-CZ-4Vv" secondAttribute="bottom" constant="8" id="kdM-3D-mzI"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJa-dP-S1q">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJa-dP-S1q" userLabel="Summary View">
                                 <rect key="frame" x="0.0" y="560" width="600" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbd-0c-jFJ" userLabel="Summary View Placeholder">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="YTB-fM-wnQ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Kbd-0c-jFJ" secondAttribute="trailing" id="0b9-E7-cVS"/>
+                                    <constraint firstItem="Kbd-0c-jFJ" firstAttribute="top" secondItem="fJa-dP-S1q" secondAttribute="top" id="Edf-ip-Wt5"/>
+                                    <constraint firstItem="Kbd-0c-jFJ" firstAttribute="leading" secondItem="fJa-dP-S1q" secondAttribute="leading" id="KZI-jf-WTc"/>
                                     <constraint firstAttribute="height" constant="300" id="agm-aQ-2o5"/>
                                 </constraints>
                             </view>
@@ -730,6 +760,10 @@
                         <outlet property="messageLabel" destination="ppl-CZ-4Vv" id="LsS-cw-rtM"/>
                         <outlet property="messageView" destination="KUM-ns-Duw" id="N7z-wW-4SH"/>
                         <outlet property="messageViewHeightConstraint" destination="MUl-qj-4bf" id="rui-be-DH9"/>
+                        <outlet property="summaryBar" destination="fJa-dP-S1q" id="WBI-4T-SAA"/>
+                        <outlet property="summaryBarPlaceholder" destination="Kbd-0c-jFJ" id="AJo-PE-VPp"/>
+                        <outlet property="summaryBarPlaceholderHeight" destination="YTB-fM-wnQ" id="83R-nh-Pfs"/>
+                        <outlet property="summaryBarPosition" destination="KOR-ZJ-TNj" id="0md-YL-12h"/>
                         <outlet property="toolbar" destination="l4r-4E-Kc7" id="HaF-II-2Q4"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
@@ -963,10 +997,11 @@
         <image name="LeftButton" width="31" height="31"/>
         <image name="ListButton" width="31" height="31"/>
         <image name="RightButton" width="31" height="31"/>
+        <image name="pin_off" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1lN-Fx-bf5"/>
-        <segue reference="1Vi-gm-zmd"/>
         <segue reference="XyN-pQ-fCP"/>
+        <segue reference="1Vi-gm-zmd"/>
     </inferredMetricsTieBreakers>
 </document>

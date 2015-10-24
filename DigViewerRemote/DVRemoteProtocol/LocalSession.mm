@@ -462,8 +462,8 @@ static const CGFloat THUMBNAIL_SIZE = 100;
         return NSLocalizedString(@"LS_PANORAMAIMAGE_TYPE_NAME", nil);
     }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoHDR){
         return NSLocalizedString(@"LS_HDRIMAGE_TYPE_NAME", nil);
-//    }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoLive){
-//        return NSLocalizedString(@"LS_LIVEIMAGE_TYPE_NAME", nil);
+    }else if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoLive){
+        return NSLocalizedString(@"LS_LIVEIMAGE_TYPE_NAME", nil);
     }else{
         return NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil);
     }
