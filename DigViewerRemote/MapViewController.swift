@@ -261,6 +261,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             addAnnotation()
             
             // 逆ジオコーディング(経緯度→住所に変換)
+            let GPSSummary = meta[DVRCNMETA_GPS_SUMMARY] as! NSArray?
+            let latKV = GPSSummary![0] as! ImageMetadataKV
+            let longKV = GPSSummary![1] as! ImageMetadataKV
+            popupViewController!.addressLabel.text = NSString(format: "%@\n%@", latKV.value, longKV.value) as String
             currentLocation = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
             performGeocoding(currentLocation!)
 
