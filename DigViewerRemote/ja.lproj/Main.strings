@@ -36,13 +36,13 @@
 "wMC-Ob-BaY.segmentTitles[0]" = "マップ";
 
 /* Class = "UILabel"; text = "Show Labels"; ObjectID = "v3Q-LF-DfZ"; */
-"v3Q-LF-DfZ.text" = "ラベルを表示";
+"d4K-R7-nkW.text" = "ラベルを表示";
 
 /* Class = "UISegmentedControl"; wMC-Ob-BaY.segmentTitles[1] = "Satellite"; ObjectID = "wMC-Ob-BaY"; */
 "wMC-Ob-BaY.segmentTitles[1]" = "衛星写真";
 
 /* Class = "UILabel"; text = "3D Bird's View"; ObjectID = "y20-uk-v9p"; */
-"y20-uk-v9p.text" = "3Dマップ";
+"8AE-Yq-jQK.text" = "3Dマップ";
 
 /* Class = "UILabel"; text = "Map Type"; ObjectID = "YKw-wn-rX4"; */
 "YKw-wn-rX4.text" = "地図種別";
@@ -52,3 +52,42 @@
 
 /* Class = "UILabel"; text = "Connection"; ObjectID = "OyK-ra-MRG"; */
 "OyK-ra-MRG.text" = "接続先";
+
+/* Class = "UILabel"; text = "Details"; ObjectID = "EyY-zP-fTb"; */
+"EyY-zP-fTb.text" = "詳細設定";
+
+/* Class = "UILabel"; text = "Method"; ObjectID = "1NB-1w-scI"; */
+"1NB-1w-scI.text" = "連携方式";
+
+/* Class = "UILabel"; text = "Restore Default Settings"; ObjectID = "1X8-SL-acr"; */
+"1X8-SL-acr.text" = "デフォルト設定に戻す";
+
+/* Class = "UILabel"; text = "Display Span"; ObjectID = "5gZ-Mz-LgB"; */
+"5gZ-Mz-LgB.text" = "表示範囲";
+
+/* Class = "UINavigationItem"; title = "Map Deails"; ObjectID = "93d-xV-eMw"; */
+"93d-xV-eMw.title" = "地図 詳細設定";
+
+/* Class = "UITableViewSection"; headerTitle = "3D View For Image Having Heading Information"; ObjectID = "MAj-uu-C9F"; */
+"MAj-uu-C9F.headerTitle" = "撮影方向付き画像の3D表示";
+
+/* Class = "UILabel"; text = "Look At Heading Direction"; ObjectID = "UQc-rt-zqc"; */
+"UQc-rt-zqc.text" = "撮影方向を向く";
+
+/* Class = "UILabel"; text = "Shift To Heading Direction"; ObjectID = "WH8-Zp-YZg"; */
+"WH8-Zp-YZg.text" = "撮影方向へのシフト量";
+
+/* Class = "UITableViewSection"; headerTitle = "Span & Tilt"; ObjectID = "WXG-jW-FTH"; */
+"WXG-jW-FTH.headerTitle" = "表示範囲と傾き";
+
+/* Class = "UILabel"; text = "Tilt in 3D View"; ObjectID = "bPR-Ch-qjV"; */
+"bPR-Ch-qjV.text" = "3D表示時の傾き";
+
+/* Class = "UITableViewSection"; headerTitle = "Relationship with remote DigViewer"; ObjectID = "brx-En-bDT"; */
+"brx-En-bDT.headerTitle" = "リモートのDigViewerとの連携";
+
+/* Class = "UILabel"; text = "Show Same Map Span With Remote"; ObjectID = "ga0-l0-Dxf"; */
+"ga0-l0-Dxf.text" = "地図の表示範囲をリモートと同期する";
+
+/* Class = "UILabel"; text = "Apply Current Map Display"; ObjectID = "reA-1b-F5I"; */
+"reA-1b-F5I.text" = "現在の地図表示状態を設定に反映する";

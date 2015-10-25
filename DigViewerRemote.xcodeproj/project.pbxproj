@@ -12,6 +12,8 @@
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
 		7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */; };
 		7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA431BB0DE700068A842 /* InspectorTableView.swift */; };
+		7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */; };
+		7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */; };
 		7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6753941BA3BFEA005CC069 /* ServersViewController.swift */; };
 		7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */; };
 		7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */; };
@@ -63,6 +65,8 @@
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
 		7B52AA431BB0DE700068A842 /* InspectorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorTableView.swift; sourceTree = "<group>"; };
+		7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailPreferencesViewController.swift; sourceTree = "<group>"; };
+		7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectorViewController.swift; sourceTree = "<group>"; };
 		7B6753941BA3BFEA005CC069 /* ServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersViewController.swift; sourceTree = "<group>"; };
 		7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListNavigationController.swift; sourceTree = "<group>"; };
 		7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */,
 				7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */,
 				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
+				7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */,
+				7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */,
 			);
 			name = "Preferences View";
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 			files = (
 				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,
+				7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */,
 				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
 				7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */,
@@ -438,6 +445,7 @@
 				7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */,
 				7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
+				7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
 				7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */,
 				7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */,

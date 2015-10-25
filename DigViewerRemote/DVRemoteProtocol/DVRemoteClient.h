@@ -34,6 +34,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) NSDictionary* templateMeta;
 @property (readonly) UIImage* thumbnail;
 @property (readonly) NSInteger imageRotation;
+@property (readonly) BOOL isConnectedToLocal;
 
 + (DVRemoteClient*)sharedClient;
 

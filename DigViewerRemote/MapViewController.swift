@@ -100,6 +100,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         reflectUserDefaults()
     }
     
+    func notifyUpdateMapDetailConfiguration(configuration: ConfigurationController) {
+        moveToDefaultPosition(self)
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: - 回転時対応
     //-----------------------------------------------------------------------------------------
@@ -676,6 +680,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if segue.identifier! == "PopoverConfigurationView" || segue.identifier == "ModalConfigurationView" {
             let controller = segue.destinationViewController as! PreferencesNavigationController
             controller.isOpenServerList = isOpenServerList
+            controller.mapView = self.mapView
             isOpenServerList = false
         }
     }

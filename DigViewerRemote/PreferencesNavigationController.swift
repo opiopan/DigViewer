@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class PreferencesNavigationController: UINavigationController {
     var isOpenServerList : Bool = false
@@ -29,4 +30,6 @@ class PreferencesNavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
 
+    var mapView : MKMapView!
+    
 }

@@ -10,8 +10,8 @@ import UIKit
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     @IBOutlet var mapTypeControl : UISegmentedControl?
-    @IBOutlet var mapLabelControl : UITableViewCell?
-    @IBOutlet var map3DControl : UITableViewCell?
+    @IBOutlet weak var mapLabelSwitch: UISwitch!
+    @IBOutlet weak var map3DSwitch: UISwitch!
     @IBOutlet var enableVolumeControl : UISwitch?
     @IBOutlet weak var connectionCell: UITableViewCell!
     
@@ -47,8 +47,8 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     func reflectToControl() {
         mapTypeControl!.selectedSegmentIndex = configController.mapType.rawValue
-        mapLabelControl!.accessoryType = configController.mapShowLabel ? .Checkmark : .None
-        map3DControl!.accessoryType = configController.map3DView ? .Checkmark : .None
+        mapLabelSwitch.on = configController.mapShowLabel
+        map3DSwitch.on = configController.map3DView
         enableVolumeControl!.on = configController.enableVolumeButton
     }
 
@@ -60,28 +60,17 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         reflectToControl()
     }
     
+    @IBAction func actionForMapLabelSwitch(sender: UISwitch) {
+        configController.mapShowLabel = sender.on
+    }
+    
+    @IBAction func actionForMap3DSwitch(sender: UISwitch) {
+        configController.map3DView = sender.on
+    }
+    
     @IBAction func actionForEnableVolume(sender : UISwitch) {
         configController.enableVolumeButton = sender.on
         reflectToControl()
-    }
-    
-    //-----------------------------------------------------------------------------------------
-    // MARK: - 選択状態の変更
-    //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        if let targetCell = cell{
-            if let identifier = targetCell.restorationIdentifier {
-                if identifier == "ShowLabels" {
-                    configController.mapShowLabel = !configController.mapShowLabel
-                    reflectToControl()
-                }else if identifier == "3DBirdsView" {
-                    configController.map3DView = !configController.map3DView
-                    reflectToControl()
-                }
-            }
-        }
-        
     }
     
     //-----------------------------------------------------------------------------------------
@@ -91,4 +80,15 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         let client = DVRemoteClient.sharedClient()
         connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
     }
+    
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Navigation
+    //-----------------------------------------------------------------------------------------
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let index = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(index, animated: true)
+        }
+    }
+
 }

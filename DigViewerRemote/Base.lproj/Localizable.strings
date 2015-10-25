@@ -22,6 +22,10 @@
 "LS_LIVEIMAGE_TYPE_NAME" = "Live Photo";
 "LS_TYPESTRING_ALBUM" = "Album";
 
+"SPAN_RELATION_METHOD" = "Relation Method";
+"SPAN_RELATION_METHOD_LONG_SIDE" = "Aligne to Long Side";
+"SPAN_RELATION_METHOD_SHORT_SIDE" = "Aligne to Short Side";
+
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings
 //-------------------------------------------------------------------------------------
