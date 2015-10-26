@@ -65,14 +65,29 @@ class MapDetailPreferencesViewController: UITableViewController {
     }
     
     //-----------------------------------------------------------------------------------------
+    // MARK: - 非表示セルの制御
+    //-----------------------------------------------------------------------------------------
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 && !configController.mapRelationSpan {
+            return 1
+        }else if section == 1 && !configController.mapTurnToHeading {
+            return 1
+        }else{
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
     // MARK: - UI要素のactionハンドラ
     //-----------------------------------------------------------------------------------------
     @IBAction func actionForSpanRelationSwitch(sender: UISwitch) {
         configController.mapRelationSpan = sender.on
+        self.tableView.reloadData()
     }
     
     @IBAction func actionForTurnToHeadingSwitch(sender: UISwitch) {
         configController.mapTurnToHeading = sender.on
+        tableView.reloadData()
     }
 
     @IBAction func actionForHeadingShiftSlider(sender: UISlider) {
