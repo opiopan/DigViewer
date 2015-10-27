@@ -30,6 +30,7 @@ class MapDetailPreferencesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectCellCount()
         reflectToControl()
     }
 
@@ -77,17 +78,59 @@ class MapDetailPreferencesViewController: UITableViewController {
         }
     }
     
+    private var relationSectionCellCount = 0
+    private var relationSectionCellIndexes : [NSIndexPath] = []
+    private var savedRelationState = false
+    private var headingSectionCellCount = 0
+    private var headingSectionCellIndexes : [NSIndexPath] = []
+    private var savedHeadingState = false
+    
+    private func collectCellCount() {
+        relationSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 0)
+        for var i = 1; i < relationSectionCellCount; i++ {
+            relationSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 0))
+        }
+        headingSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 1)
+        for var i = 1; i < headingSectionCellCount; i++ {
+            headingSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 1))
+        }
+    }
+    
+    private func beginUpdateCellCount() {
+        tableView.beginUpdates()
+        configController.beginMapDetailConfigurationTransaction()
+        savedRelationState = configController.mapRelationSpan
+        savedHeadingState = configController.mapTurnToHeading
+    }
+    
+    private func endUpdateCellCount() {
+        if savedRelationState && !configController.mapRelationSpan {
+            tableView.deleteRowsAtIndexPaths(relationSectionCellIndexes, withRowAnimation: .Automatic)
+        }else if !savedRelationState && configController.mapRelationSpan {
+            tableView.insertRowsAtIndexPaths(relationSectionCellIndexes, withRowAnimation: .Automatic)
+        }
+        if savedHeadingState && !configController.mapTurnToHeading {
+            tableView.deleteRowsAtIndexPaths(headingSectionCellIndexes, withRowAnimation: .Automatic)
+        }else if !savedHeadingState && configController.mapTurnToHeading {
+            tableView.insertRowsAtIndexPaths(headingSectionCellIndexes, withRowAnimation: .Automatic)
+        }
+        configController.commitMapDetailConfigurationTransaction()
+        tableView.endUpdates()
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: - UI要素のactionハンドラ
     //-----------------------------------------------------------------------------------------
     @IBAction func actionForSpanRelationSwitch(sender: UISwitch) {
+        beginUpdateCellCount()
         configController.mapRelationSpan = sender.on
-        self.tableView.reloadData()
+        endUpdateCellCount()
     }
     
     @IBAction func actionForTurnToHeadingSwitch(sender: UISwitch) {
+        beginUpdateCellCount()
         configController.mapTurnToHeading = sender.on
-        tableView.reloadData()
+        endUpdateCellCount()
     }
 
     @IBAction func actionForHeadingShiftSlider(sender: UISlider) {
@@ -121,7 +164,7 @@ class MapDetailPreferencesViewController: UITableViewController {
     }
     
     private func applyCurrentMap() {
-        configController.beginMapDetailConfigurationTransaction()
+        beginUpdateCellCount()
         let controller = self.navigationController as! PreferencesNavigationController
         configController.mapSpan = CGFloat(mapToSpan(controller.mapView))
         let camera = controller.mapView.camera
@@ -129,12 +172,12 @@ class MapDetailPreferencesViewController: UITableViewController {
             configController.mapTilt = camera.pitch
         }
         configController.mapRelationSpan = false
-        configController.commitMapDetailConfigurationTransaction()
+        endUpdateCellCount()
         reflectToControl()
     }
     
     private func restoreDefaultSettings() {
-        configController.beginMapDetailConfigurationTransaction()
+        beginUpdateCellCount()
         configController.mapRelationSpan = configController.defaultValue(UserDefaults.MapRelationSpan)! as! Bool
         configController.mapRelationSpanMethod =
             MapRelationSpanMethod(rawValue: configController.defaultValue(UserDefaults.MapRelationSpanMethod)! as! Int)!
@@ -142,7 +185,7 @@ class MapDetailPreferencesViewController: UITableViewController {
         configController.mapHeadingShift = CGFloat(configController.defaultValue(UserDefaults.MapHeadingShift)! as! Double)
         configController.mapSpan = CGFloat(configController.defaultValue(UserDefaults.MapSpan)! as! Double)
         configController.mapTilt = CGFloat(configController.defaultValue(UserDefaults.MapTilt)! as! Double)
-        configController.commitMapDetailConfigurationTransaction()
+        endUpdateCellCount()
         reflectToControl()
     }
     
