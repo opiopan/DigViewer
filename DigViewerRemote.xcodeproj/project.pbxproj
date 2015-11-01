@@ -44,6 +44,8 @@
 		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
 		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
 		7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */; };
+		7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */; };
+		7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */; };
 		7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,8 @@
 		7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigViewerRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59E31B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigViewerRemoteTests.swift; sourceTree = "<group>"; };
+		7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlay.swift; sourceTree = "<group>"; };
+		7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
 		7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
 		7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
@@ -183,6 +187,8 @@
 				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
 				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
 				7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */,
+				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
+				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -427,8 +433,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */,
 				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,
+				7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */,
 				7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */,
 				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,

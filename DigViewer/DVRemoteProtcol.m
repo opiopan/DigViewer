@@ -44,3 +44,4 @@ NSString* DVRCNMETA_ITEM_TYPE = @"itemtype";
 NSString* DVRCNMETA_INDEX_IN_PARENT = @"indexinparent";
 NSString* DVRCNMETA_POPUP_SUMMARY = @"popupsummary";
 NSString* DVRCNMETA_LOCAL_ID = @"localid";
+NSString* DVRCNMETA_FOV_ANGLE = @"fovangle";

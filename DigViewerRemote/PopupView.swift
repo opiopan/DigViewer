@@ -58,4 +58,23 @@ class PopupView: UIView {
         CGContextClosePath(context)
         CGContextFillPath(context)
     }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - タッチイベント処理
+    //-----------------------------------------------------------------------------------------
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        NSLog("touchBegan")
+//    }
+//    
+//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        NSLog("touchMoved")
+//    }
+//    
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        NSLog("touchEnded")
+//    }
+//    
+//    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+//        NSLog("touchCanceld")
+//    }
 }

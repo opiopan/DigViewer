@@ -23,6 +23,8 @@ class MapGeometry: NSObject {
     let spanLatitudeMeter : Double
     let spanLongitudeMeter : Double
     
+    let heading : Double?
+    
     let centerCoordinate : CLLocationCoordinate2D
     let photoCoordinate : CLLocationCoordinate2D
     
@@ -30,6 +32,8 @@ class MapGeometry: NSObject {
     let cameraAltitude : Double
     let cameraHeading : Double
     let cameraTilt : Double
+    
+    let fovAngle : Double
     
     init(meta: [NSObject : AnyObject]!, viewSize : CGSize){
         let controller = ConfigurationController.sharedController
@@ -49,7 +53,7 @@ class MapGeometry: NSObject {
             spanLongitude = spanLongitudeMeter / DEGREE_TO_METER_RATIO / fabs(cos(latitude / 180.0 * M_PI))
         }
         
-        let heading = meta[DVRCNMETA_HEADING] as! Double?
+        heading = meta[DVRCNMETA_HEADING] as! Double?
         
         let OFFSET_RATIO = Double(controller.mapHeadingShift)
         let deltaLat = spanLatitude * OFFSET_RATIO
@@ -81,13 +85,39 @@ class MapGeometry: NSObject {
         let vSpan = Double(viewSize.height) * max(vRatio, hRatio)
         
         cameraAltitude = vSpan * SPAN_TO_ALTITUDE_RATIO * cos(cameraTilt / 180 * M_PI)
-    }
-}
 
-func mapToSpan(mapView : MKMapView) -> Double {
-    let altitude = mapView.camera.altitude / cos(Double(mapView.camera.pitch) / 180 * M_PI)
-    let vSpan = altitude / SPAN_TO_ALTITUDE_RATIO
-    let hSpan = vSpan * Double(mapView.bounds.size.width / mapView.bounds.size.height)
+        let angle = meta[DVRCNMETA_FOV_ANGLE] as? Double
+        if angle != nil {
+            fovAngle = angle!
+        }else{
+            fovAngle = 0
+        }
+    }
     
-    return min(vSpan, hSpan)
+    class func mapToSpan(mapView : MKMapView) -> Double {
+        let altitude = mapView.camera.altitude / cos(Double(mapView.camera.pitch) / 180 * M_PI)
+        let vSpan = altitude / SPAN_TO_ALTITUDE_RATIO
+        let hSpan = vSpan * Double(mapView.bounds.size.width / mapView.bounds.size.height)
+        
+        return min(vSpan, hSpan)
+    }
+    
+    class func mapToSize(mapView : MKMapView) -> CGSize {
+        let altitude = mapView.camera.altitude / cos(Double(mapView.camera.pitch) / 180 * M_PI)
+        let vSpan = altitude / SPAN_TO_ALTITUDE_RATIO
+        let hSpan = vSpan * Double(mapView.bounds.size.width / mapView.bounds.size.height)
+        
+        return CGSize(width: hSpan, height: vSpan)
+    }
+    
+    class func translateCoordinateToMapPoint(point : CLLocationCoordinate2D, offset : CGPoint, rotation : CGFloat) -> MKMapPoint {
+        let cosTheta = cos(rotation)
+        let sinTheta = sin(rotation)
+        let deltaX = offset.x * cosTheta - offset.y * sinTheta
+        let deltaY = offset.x * sinTheta + offset.y * cosTheta
+        let deltaLat = Double(deltaY) / DEGREE_TO_METER_RATIO
+        let deltaLong = Double(deltaX) / DEGREE_TO_METER_RATIO / fabs(cos(point.latitude / 180.0 * M_PI))
+        return MKMapPointForCoordinate(
+            CLLocationCoordinate2D(latitude:point.latitude + deltaLat, longitude: point.longitude + deltaLong))
+    }
 }

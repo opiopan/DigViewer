@@ -272,7 +272,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             setBlurCover(false, isShowPopup: false)
             
             // 撮影地点に移動
-            willStatToMove()
+            willStartToMove()
             moveToDefaultPosition(self)
         }else{
             popupViewController!.addressLabel.text = NSLocalizedString("ADDRESS_NA", comment: "")
@@ -358,17 +358,23 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: - MKMapViewDelegateプロトコルの実装
+    // MARK: - 地図データロード状況ごとの処理 (MKMapViewDelegateプロトコル)
     //-----------------------------------------------------------------------------------------
     private var isUpdatedLocation = false
     private var isLoadingData = false
     
-    func willStatToMove() {
+    func willStartToMove() {
         let region = mapView!.region
+        let camera = mapView!.camera
+        var altitude = camera.altitude
+        if !configController.map3DView {
+            altitude *= Double(cos(configController.mapTilt))
+        }
         if (geometry!.photoCoordinate.latitude >= region.center.latitude - region.span.latitudeDelta &&
             geometry!.photoCoordinate.latitude <= region.center.latitude + region.span.latitudeDelta &&
             geometry!.photoCoordinate.longitude >= region.center.longitude - region.span.longitudeDelta &&
-            geometry!.photoCoordinate.longitude <= region.center.longitude + region.span.longitudeDelta){
+            geometry!.photoCoordinate.longitude <= region.center.longitude + region.span.longitudeDelta &&
+            geometry!.cameraAltitude > altitude * 0.5 && geometry!.cameraAltitude < altitude * 2){
             isUpdatedLocation = false;
             isLoadingData = false;
         }else{
@@ -430,7 +436,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if (isUpdatedLocation || !configController.map3DView){
             if geometry != nil {
                 let region = MKCoordinateRegionMake(geometry!.photoCoordinate, geometry!.mapSpan)
-                mapView!.setRegion(region, animated: !configController.map3DView)
+                mapView!.setRegion(region, animated: !isUpdatedLocation)
+                if !isUpdatedLocation {
+                    addOverlay()
+                }
             }
         }else{
             if geometry != nil {
@@ -441,70 +450,17 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 camera.pitch = CGFloat(geometry!.cameraTilt)
                 
                 mapView!.setCamera(camera, animated: true)
+                addOverlay()
             }
         }
     }
-    
-    //-----------------------------------------------------------------------------------------
-    // MARK: - Google Maps Elevation APIを利用した標高取得
-    //-----------------------------------------------------------------------------------------
-//    private var isRunningAltitudeTranslation : Bool = false
-//    private var translatingAltitude : Double? = nil
-//    private var translatingCoordinate : CLLocationCoordinate2D? = nil
-//    
-//    func scheduleAltitudeTranslation() {
-//        if (isRunningAltitudeTranslation ||
-//            (translatingCoordinate != nil && translatingCoordinate!.latitude == photoCoordinate!.latitude &&
-//             translatingCoordinate!.longitude == photoCoordinate!.longitude)){
-//            return
-//        }
-//        isRunningAltitudeTranslation = true;
-//        translatingAltitude = nil;
-//        translatingCoordinate = CLLocationCoordinate2DMake(photoCoordinate!.latitude, photoCoordinate!.longitude);
-//        let url = NSURL(string: "https://maps.googleapis.com/maps/api/elevation/json?" +
-//                                "locations=\(translatingCoordinate!.latitude),\(translatingCoordinate!.longitude)")
-//        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-//        let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: nil)
-//        let task = session.dataTaskWithURL(url!, completionHandler:{[unowned self](data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-//            var errorOccured = true
-//            if (data != nil){
-//                do{
-//                    let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
-//                    if let results = jsonData["results"] as? NSArray {
-//                        if let resultSet = results[0] as? NSDictionary {
-//                            if let elevation = resultSet["elevation"] as? Double {
-//                                errorOccured = false
-//                                self.translatingAltitude = elevation
-//                            }
-//                        }
-//                    }
-//                }catch let error as NSError {
-//                    NSLog("%@", error)
-//                }
-//            }
-//            let mainQue = dispatch_get_main_queue()
-//            dispatch_async(mainQue, {[unowned self]() ->Void in
-//                self.isRunningAltitudeTranslation = false;
-//                if (!errorOccured &&
-//                    self.translatingCoordinate!.latitude == self.photoCoordinate!.latitude &&
-//                    self.translatingCoordinate!.longitude == self.photoCoordinate!.longitude){
-//                        self.translatingCoordinate = nil
-//                        self.grandAltitude = self.translatingAltitude
-//                        self.moveToDefaultPosition(self)
-//                }else{
-//                    self.scheduleAltitudeTranslation()
-//                }
-//            })
-//        })
-//        task.resume()
-//    }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - アノテーション制御
     //-----------------------------------------------------------------------------------------
     private var annotation : MKPointAnnotation? = nil
 
-    func addAnnotation() {
+    private func addAnnotation() {
         (popupViewController!.view as! PopupView).showAnchor = true
         annotation = MKPointAnnotation()
         annotation!.coordinate = geometry!.photoCoordinate
@@ -519,7 +475,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
     }
     
-    func removeAnnotation() {
+    private func removeAnnotation() {
         if (annotation != nil){
             popupViewController!.updateCount++
             mapView!.removeAnnotation(annotation!)
@@ -550,6 +506,42 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
 
     func tapOnThumbnail(recognizer: UIGestureRecognizer){
         viewFullImage(self)
+    }
+    
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 撮影方向オーバーレイ制御
+    //-----------------------------------------------------------------------------------------
+    private func addOverlay() {
+        removeOverlay()
+        if geometry != nil && geometry!.heading != nil {
+            let size = MapGeometry.mapToSize(mapView!)
+            let overlay = HeadingOverlay(
+                center: geometry!.photoCoordinate, heading: geometry!.heading!, fov: geometry!.fovAngle,
+                length: Double(min(size.width, size.height)) / 2)
+            overlay.altitude = mapView!.camera.altitude
+            mapView!.addOverlay(overlay)
+        }
+    }
+    
+    private func removeOverlay() {
+        for overlay in mapView!.overlays {
+            mapView!.removeOverlay(overlay)
+        }
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        var altitude : Double = 0
+        if mapView.overlays.count > 0 {
+            altitude = (mapView.overlays[0] as? HeadingOverlay)!.altitude
+        }
+        if altitude < mapView.camera.altitude * 0.9 || altitude > mapView.camera.altitude * 1.1 {
+            addOverlay()
+        }
+    }
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        return HeadingOverlayRenderer(overlay: overlay)
     }
     
     //-----------------------------------------------------------------------------------------

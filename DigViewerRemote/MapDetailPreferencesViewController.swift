@@ -166,7 +166,7 @@ class MapDetailPreferencesViewController: UITableViewController {
     private func applyCurrentMap() {
         beginUpdateCellCount()
         let controller = self.navigationController as! PreferencesNavigationController
-        configController.mapSpan = CGFloat(mapToSpan(controller.mapView))
+        configController.mapSpan = CGFloat(MapGeometry.mapToSpan(controller.mapView))
         let camera = controller.mapView.camera
         if configController.map3DView || camera.pitch > 2 {
             configController.mapTilt = camera.pitch

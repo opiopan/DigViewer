@@ -681,6 +681,12 @@ static NSString* CategoryKML = @"KML";
         [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
 
         [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
+        
+        if (_metadata.gpsInfo.fovLong){
+            NSNumber* fovAngle = _metadata.gpsInfo.imageDirection.intValue < 5 ?
+                                 _metadata.gpsInfo.fovLong : _metadata.gpsInfo.fovShort;
+            [data setValue:fovAngle forKey:DVRCNMETA_FOV_ANGLE];
+        }
     }
     
     [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
