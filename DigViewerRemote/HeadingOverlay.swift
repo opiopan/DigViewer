@@ -39,16 +39,16 @@ class HeadingOverlay: NSObject, MKOverlay {
     
     var altitude: Double = 0
     
-    init(center : CLLocationCoordinate2D, heading : Double, fov : Double, length : Double) {
+    init(center : CLLocationCoordinate2D, heading : Double, fov : Double, vScale : Double, hScale : Double) {
         self.center = center
         self.heading = heading
         self.fov = fov
-        self.length = length
+        self.length = vScale
         
         let rotation = -self.heading * M_PI / 180.0
         
         for point in ArrowTemplate {
-            let offset = CGPoint(x: point.x * CGFloat(length), y: point.y * CGFloat(length))
+            let offset = CGPoint(x: point.x * CGFloat(hScale), y: point.y * CGFloat(vScale))
             arrowGeometry.append(MapGeometry.translateCoordinateToMapPoint(center, offset: offset, rotation: CGFloat(rotation)))
         }
         
@@ -57,7 +57,7 @@ class HeadingOverlay: NSObject, MKOverlay {
         var yMax : Double
         var yMin : Double
         if fov > 0 {
-            let fovArcRadius = length * 2
+            let fovArcRadius = length * 2.5
             fovArcAngle = fov * M_PI / 180.0
             fovArcCenter = MKMapPointForCoordinate(center)
             fovArcStart = MapGeometry.translateCoordinateToMapPoint(

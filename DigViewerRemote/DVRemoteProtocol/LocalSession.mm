@@ -260,7 +260,7 @@ static const CGFloat SPAN_IN_METER = 450.0;
         [data setValue:meta.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
         
         if (meta.gpsInfo.fovLong){
-            NSNumber* fovAngle = meta.gpsInfo.imageDirection.intValue < 5 ? meta.gpsInfo.fovLong : meta.gpsInfo.fovShort;
+            NSNumber* fovAngle = meta.gpsInfo.rotation.intValue < 5 ? meta.gpsInfo.fovLong : meta.gpsInfo.fovShort;
             [data setValue:fovAngle forKey:DVRCNMETA_FOV_ANGLE];
         }
 

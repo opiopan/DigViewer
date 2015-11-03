@@ -223,6 +223,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         removeAnnotation()
+        removeOverlay()
         geometry = nil
 
         // ポップアップウィンドウセットアップ
@@ -516,11 +517,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         removeOverlay()
         if geometry != nil && geometry!.heading != nil {
             let size = MapGeometry.mapToSize(mapView!)
+            let hScale = Double(min(size.width, size.height)) / 2
+            let vScale =  hScale / cos(Double(mapView!.camera.pitch) / 180 * M_PI)
             let overlay = HeadingOverlay(
                 center: geometry!.photoCoordinate, heading: geometry!.heading!, fov: geometry!.fovAngle,
-                length: Double(min(size.width, size.height)) / 2)
+                vScale: vScale, hScale: hScale)
             overlay.altitude = mapView!.camera.altitude
-            mapView!.addOverlay(overlay)
+            mapView!.addOverlay(overlay, level: .AboveLabels)
         }
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-private let startColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1.0)
+private let startColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.4)
 private let startColorComponent = CGColorGetComponents(startColor.CGColor)
 private let endColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0)
 private let endColorComponent = CGColorGetComponents(endColor.CGColor)
@@ -51,11 +51,11 @@ class HeadingOverlayRenderer: MKOverlayRenderer {
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, locations.count)
-        CGContextDrawRadialGradient(context, gradient, center, radius, center, radius, .DrawsAfterEndLocation)
+        CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, .DrawsAfterEndLocation)
         
-        CGContextSetFillColorWithColor(context, UIColor(red: 1, green: 0, blue: 0, alpha: 0.2).CGColor)
-        let rect = rectForMapRect(mapRect)
-        CGContextFillRect(context, rect)
+//        CGContextSetFillColorWithColor(context, UIColor(red: 1, green: 0, blue: 0, alpha: 0.2).CGColor)
+//        let rect = rectForMapRect(mapRect)
+//        CGContextFillRect(context, rect)
 
         CGContextRestoreGState(context)
         
