@@ -18,6 +18,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
 
     private let configController = ConfigurationController.sharedController
     private var show3DView = true
+    private var headingDisplayMode = ConfigurationController.sharedController.mapHeadingDisplay
     private var firstConnecting = true
     
     private var initialized = false
@@ -93,6 +94,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if configController.map3DView != show3DView {
             show3DView = configController.map3DView
             moveToDefaultPosition(self)
+        }
+        
+        if configController.mapHeadingDisplay != headingDisplayMode {
+            headingDisplayMode = configController.mapHeadingDisplay
+            addOverlay()
         }
     }
     

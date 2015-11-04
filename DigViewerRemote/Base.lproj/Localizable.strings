@@ -26,6 +26,12 @@
 "SPAN_RELATION_METHOD_LONG_SIDE" = "Aligne to Long Side";
 "SPAN_RELATION_METHOD_SHORT_SIDE" = "Aligne to Short Side";
 
+"HEADING_DISPLAY" = "Heading Display";
+"HEADING_DISPLAY_NONE" = "None";
+"HEADING_DISPLAY_ARROW" = "Arrow";
+"HEADING_DISPLAY_FOV" = "FOV";
+"HEADING_DISPLAY_ARROW_AND_FOV" = "Arrow and FOV";
+
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings
 //-------------------------------------------------------------------------------------

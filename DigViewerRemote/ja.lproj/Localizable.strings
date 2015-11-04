@@ -31,6 +31,12 @@
 "SPAN_RELATION_METHOD_LONG_SIDE" = "長辺に合わせる";
 "SPAN_RELATION_METHOD_SHORT_SIDE" = "短辺に合わせる";
 
+"HEADING_DISPLAY" = "撮影方向";
+"HEADING_DISPLAY_NONE" = "表示しない";
+"HEADING_DISPLAY_ARROW" = "矢印";
+"HEADING_DISPLAY_FOV" = "視野角";
+"HEADING_DISPLAY_ARROW_AND_FOV" = "矢印と視野角";
+
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings
 //-------------------------------------------------------------------------------------

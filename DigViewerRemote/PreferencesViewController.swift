@@ -9,11 +9,19 @@
 import UIKit
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
+    static var headingDisplays = [
+        NSLocalizedString("HEADING_DISPLAY_NONE", comment: ""),
+        NSLocalizedString("HEADING_DISPLAY_ARROW", comment: ""),
+        NSLocalizedString("HEADING_DISPLAY_FOV", comment: ""),
+        NSLocalizedString("HEADING_DISPLAY_ARROW_AND_FOV", comment: ""),
+    ]
+    
     @IBOutlet var mapTypeControl : UISegmentedControl?
     @IBOutlet weak var mapLabelSwitch: UISwitch!
     @IBOutlet weak var map3DSwitch: UISwitch!
     @IBOutlet var enableVolumeControl : UISwitch?
     @IBOutlet weak var connectionCell: UITableViewCell!
+    @IBOutlet weak var headingDisplayCell: UITableViewCell!
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -32,6 +40,8 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         DVRemoteClient.sharedClient().addClientDelegate(self)
         let client = DVRemoteClient.sharedClient()
         connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
+        headingDisplayCell.detailTextLabel!.text =
+            PreferencesViewController.headingDisplays[configController.mapHeadingDisplay.rawValue]
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -125,6 +135,22 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     // MARK: - Navigation
     //-----------------------------------------------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let targetCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!) {
+            if let identifier = targetCell.reuseIdentifier {
+                if identifier == "selectHeadingCell" {
+                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let identity = ItemSelectorIdentity()
+                    identity.title = NSLocalizedString("HEADING_DISPLAY", comment: "")
+                    identity.selectionIndex = configController.mapHeadingDisplay.rawValue
+                    identity.description = nil
+                    identity.items = PreferencesViewController.headingDisplays
+                    identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
+                        self.configController.mapHeadingDisplay = MapHeadingDisplay(rawValue: index)!
+                    }
+                    target.identity = identity
+                }
+            }
+        }
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(index, animated: true)
         }

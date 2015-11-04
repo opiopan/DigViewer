@@ -91,3 +91,7 @@
 
 /* Class = "UILabel"; text = "Apply Current Map Display"; ObjectID = "reA-1b-F5I"; */
 "reA-1b-F5I.text" = "現在の地図表示状態を設定に反映する";
+
+/* Class = "UILabel"; text = "Heading"; ObjectID = "di8-nT-hRY"; */
+"di8-nT-hRY.text" = "撮影方向";
+

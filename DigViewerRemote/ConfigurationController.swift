@@ -17,6 +17,7 @@ struct UserDefaults {
     static let MapType = "MapType";
     static let MapShowLabel = "MapShowLabel";
     static let Map3DView = "Map3DView"
+    static let MapHeadingDisplay = "MapHeadingDisplay"
     static let EnableVolumeButton = "EnableVolumeButton"
     
     static let MapRelationSpan = "MapRelationSpan";
@@ -30,6 +31,13 @@ struct UserDefaults {
 enum MapType : Int {
     case Map = 0
     case Satellite
+}
+
+enum MapHeadingDisplay : Int {
+    case None = 0
+    case Arrow
+    case FOV
+    case ArrowAndFOV
 }
 
 enum MapRelationSpanMethod : Int {
@@ -63,6 +71,7 @@ class ConfigurationController: NSObject {
             UserDefaults.MapType                : MapType.Map.rawValue,
             UserDefaults.MapShowLabel           : true,
             UserDefaults.Map3DView              : false,
+            UserDefaults.MapHeadingDisplay      : MapHeadingDisplay.ArrowAndFOV.rawValue,
             UserDefaults.EnableVolumeButton     : false,
             UserDefaults.MapRelationSpan        : true,
             UserDefaults.MapRelationSpanMethod  : MapRelationSpanMethod.LongSide.rawValue,
@@ -76,6 +85,7 @@ class ConfigurationController: NSObject {
         mapType = MapType(rawValue : controller.valueForKey(UserDefaults.MapType) as! Int)!
         mapShowLabel = controller.valueForKey(UserDefaults.MapShowLabel) as! Bool
         map3DView = controller.valueForKey(UserDefaults.Map3DView) as! Bool
+        mapHeadingDisplay = MapHeadingDisplay(rawValue: controller.valueForKey(UserDefaults.MapHeadingDisplay) as! Int)!
         enableVolumeButton = controller.valueForKey(UserDefaults.EnableVolumeButton) as! Bool
         mapRelationSpan = controller.valueForKey(UserDefaults.MapRelationSpan) as! Bool
         mapRelationSpanMethod = MapRelationSpanMethod(rawValue: controller.valueForKey(UserDefaults.MapRelationSpanMethod) as! Int)!
@@ -166,6 +176,13 @@ class ConfigurationController: NSObject {
             updateConfiguration()
         }
     }
+    var mapHeadingDisplay : MapHeadingDisplay {
+        didSet {
+            controller.setValue(mapHeadingDisplay.rawValue, forKey: UserDefaults.MapHeadingDisplay)
+            updateConfiguration()
+        }
+    }
+    
     var enableVolumeButton : Bool {
         didSet {
             controller.setValue(enableVolumeButton, forKey: UserDefaults.EnableVolumeButton)
