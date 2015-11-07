@@ -99,7 +99,7 @@ class ColorPickerViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("NamedColorCell", forIndexPath: indexPath) as! NamedColorCell
 
         cell.colorNameLabel.text = colorList[indexPath.row].name
-        cell.colorView.backgroundColor = colorList[indexPath.row].color
+        cell.color = colorList[indexPath.row].color
         if indexPath.row == selectedIndex {
             cell.accessoryType = .Checkmark
         }else{

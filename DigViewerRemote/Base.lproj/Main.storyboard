@@ -945,21 +945,13 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Color Settings" id="wtG-p1-PH3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PinColorCell" id="Ael-aW-UQW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PinColorCell" id="Ael-aW-UQW" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="571.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ael-aW-UQW" id="TJh-o2-qGg">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf8-yA-lmc">
-                                                    <rect key="frame" x="521" y="1" width="41.5" height="41.5"/>
-                                                    <animations/>
-                                                    <color key="backgroundColor" red="1" green="0.96954255710000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="uf8-yA-lmc" secondAttribute="height" multiplier="1:1" id="Bda-V2-HAE"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pin at Photo Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpM-1i-Lom">
                                                     <rect key="frame" x="15" y="11.5" width="154" height="19.5"/>
                                                     <animations/>
@@ -967,6 +959,14 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf8-yA-lmc">
+                                                    <rect key="frame" x="521" y="1" width="41.5" height="41.5"/>
+                                                    <animations/>
+                                                    <color key="backgroundColor" red="1" green="0.96954255710000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="uf8-yA-lmc" secondAttribute="height" multiplier="1:1" id="Bda-V2-HAE"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <animations/>
                                             <constraints>
@@ -982,7 +982,7 @@
                                             <segue destination="JxC-9E-gH5" kind="show" id="Kvd-N2-puw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArrowColorCell" id="aQj-0Z-qVA">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArrowColorCell" id="aQj-0Z-qVA" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="615.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQj-0Z-qVA" id="wfI-CS-eS5">
@@ -996,7 +996,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-OK-A6U">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-OK-A6U">
                                                     <rect key="frame" x="521.5" y="1" width="41.5" height="41.5"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.99068140979999997" green="0.5329657793" blue="0.5460992455" alpha="1" colorSpace="calibratedRGB"/>
@@ -1019,7 +1019,7 @@
                                             <segue destination="JxC-9E-gH5" kind="show" id="Ob7-tc-DRy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CircleColorCell" id="eqW-wh-zvq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CircleColorCell" id="eqW-wh-zvq" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="659.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eqW-wh-zvq" id="hnC-Oj-UzC">
@@ -1033,7 +1033,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FC-cW-L4J">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FC-cW-L4J">
                                                     <rect key="frame" x="521.5" y="1" width="41.5" height="41.5"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -39,6 +39,7 @@
 		7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */; };
 		7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */; };
 		7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */; };
+		7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */; };
 		7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */; };
 		7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */; };
 		7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59D01B9DA59C0025B902 /* MapViewController.swift */; };
@@ -106,6 +107,7 @@
 		7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
 		7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedColorCell.swift; sourceTree = "<group>"; };
+		7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectingCell.swift; sourceTree = "<group>"; };
 		7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigationController.swift; sourceTree = "<group>"; };
 		7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewerRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59CD1B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */,
 				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
 				7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */,
+				7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */,
 				7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */,
 				7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */,
 				7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */,
@@ -464,6 +467,7 @@
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
 				7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */,
 				7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */,
+				7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
 				7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */,
