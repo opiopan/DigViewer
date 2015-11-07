@@ -485,17 +485,19 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var annotation : MKPointAnnotation? = nil
 
     private func addAnnotation() {
-        (popupViewController!.view as! PopupView).showAnchor = true
-        annotation = MKPointAnnotation()
-        annotation!.coordinate = geometry!.photoCoordinate
-        mapView!.addAnnotation(annotation!)
-        if popupViewController!.thumbnailView.image != nil {
-            let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-            dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
-                if let annotation = self.annotation {
-                    self.mapView!.selectAnnotation(annotation, animated:true)
-                }
-            })
+        if geometry != nil {
+            (popupViewController!.view as! PopupView).showAnchor = true
+            annotation = MKPointAnnotation()
+            annotation!.coordinate = geometry!.photoCoordinate
+            mapView!.addAnnotation(annotation!)
+            if popupViewController!.thumbnailView.image != nil {
+                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+                dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+                    if let annotation = self.annotation {
+                        self.mapView!.selectAnnotation(annotation, animated:true)
+                    }
+                })
+            }
         }
     }
     
