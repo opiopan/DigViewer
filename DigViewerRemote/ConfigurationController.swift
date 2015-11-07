@@ -26,6 +26,9 @@ struct UserDefaults {
     static let MapHeadingShift = "MapHeadingShift"
     static let MapSpan = "MapSpan"
     static let MapTilt = "MapTilt"
+    static let MapPinColor = "MapPinColor"
+    static let MapArrowColor = "MapArrowColor"
+    static let MapFOVColor = "MapFOVColor"
 }
 
 enum MapType : Int {
@@ -67,6 +70,7 @@ class ConfigurationController: NSObject {
     private let controller = NSUserDefaults.standardUserDefaults()
 
     override init(){
+        let redColor = NSKeyedArchiver.archivedDataWithRootObject(UIColor.redColor())
         defaults = [
             UserDefaults.MapType                : MapType.Map.rawValue,
             UserDefaults.MapShowLabel           : true,
@@ -79,6 +83,9 @@ class ConfigurationController: NSObject {
             UserDefaults.MapHeadingShift        : 0.3,
             UserDefaults.MapSpan                : 450.0,
             UserDefaults.MapTilt                : 50.0,
+            UserDefaults.MapPinColor            : redColor,
+            UserDefaults.MapArrowColor          : redColor,
+            UserDefaults.MapFOVColor            : redColor,
         ]
         controller.registerDefaults(defaults)
         establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
@@ -93,6 +100,12 @@ class ConfigurationController: NSObject {
         mapHeadingShift = controller.valueForKey(UserDefaults.MapHeadingShift) as! CGFloat
         mapSpan = controller.valueForKey(UserDefaults.MapSpan) as! CGFloat
         mapTilt = controller.valueForKey(UserDefaults.MapTilt) as! CGFloat
+        mapPinColor =
+            NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapPinColor) as! NSData) as! UIColor
+        mapArrowColor =
+            NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapArrowColor) as! NSData) as! UIColor
+        mapFovColor =
+            NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapFOVColor) as! NSData) as! UIColor
     }
     
     //-----------------------------------------------------------------------------------------
@@ -255,6 +268,30 @@ class ConfigurationController: NSObject {
     var mapTiltString : String {
         get {
             return NSString(format: "%.0f°", mapTilt) as String
+        }
+    }
+    
+    var mapPinColor : UIColor {
+        didSet {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(mapPinColor)
+            controller.setValue(data, forKey: UserDefaults.MapPinColor)
+            updateConfiguration()
+        }
+    }
+    
+    var mapArrowColor : UIColor {
+        didSet {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(mapArrowColor)
+            controller.setValue(data, forKey: UserDefaults.MapArrowColor)
+            updateConfiguration()
+        }
+    }
+    
+    var mapFovColor : UIColor {
+        didSet {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(mapFovColor)
+            controller.setValue(data, forKey: UserDefaults.MapFOVColor)
+            updateConfiguration()
         }
     }
     

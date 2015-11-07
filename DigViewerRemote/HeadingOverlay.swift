@@ -36,6 +36,9 @@ class HeadingOverlay: NSObject, MKOverlay {
     var fovArcAngle : Double = 0
     var fovArcCenter : MKMapPoint = MKMapPoint()
     var fovArcStart : MKMapPoint = MKMapPoint()
+
+    var arrowColor = ConfigurationController.sharedController.mapArrowColor
+    var fovColor = ConfigurationController.sharedController.mapFovColor
     
     var altitude: Double = 0
     

@@ -11,14 +11,6 @@ import MapKit
 
 class AnnotationView: MKPinAnnotationView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

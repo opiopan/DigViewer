@@ -60,7 +60,7 @@
 "1NB-1w-scI.text" = "連携方式";
 
 /* Class = "UILabel"; text = "Restore Default Settings"; ObjectID = "1X8-SL-acr"; */
-"1X8-SL-acr.text" = "デフォルト設定に戻す";
+"LBO-l7-dxk.text" = "デフォルト設定に戻す";
 
 /* Class = "UILabel"; text = "Display Span"; ObjectID = "5gZ-Mz-LgB"; */
 "5gZ-Mz-LgB.text" = "表示範囲";
@@ -95,3 +95,14 @@
 /* Class = "UILabel"; text = "Heading"; ObjectID = "di8-nT-hRY"; */
 "di8-nT-hRY.text" = "撮影方向";
 
+/* Class = "UITableViewSection"; headerTitle = "Color Sttings"; ObjectID = "wtG-p1-PH3"; */
+"wtG-p1-PH3.headerTitle" = "色の設定";
+
+/* Class = "UILabel"; text = "Pin at Photo Location"; ObjectID = "UpM-1i-Lom"; */
+"UpM-1i-Lom.text" = "撮影位置のピン";
+
+/* Class = "UILabel"; text = "Heading Arrow"; ObjectID = "vzv-Qg-qPA"; */
+"vzv-Qg-qPA.text" = "撮影方向の矢印";
+
+/* Class = "UILabel"; text = "Circle Sector for FOV"; ObjectID = "D5a-8e-Hg6"; */
+"D5a-8e-Hg6.text" = "視野を表す扇形";

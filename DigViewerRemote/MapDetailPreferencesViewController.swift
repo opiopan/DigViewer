@@ -22,7 +22,13 @@ class MapDetailPreferencesViewController: UITableViewController {
     @IBOutlet weak var spanLabel: UILabel!
     @IBOutlet weak var tiltSlider: UISlider!
     @IBOutlet weak var tiltLabel: UILabel!
-    
+    @IBOutlet weak var pinColorView: UIView!
+    @IBOutlet weak var pinColorLabel: UILabel!
+    @IBOutlet weak var arrowColorView: UIView!
+    @IBOutlet weak var arrowColorLabel: UILabel!
+    @IBOutlet weak var fovColorView: UIView!
+    @IBOutlet weak var fovColorLabel: UILabel!
+
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
     //-----------------------------------------------------------------------------------------
@@ -63,6 +69,9 @@ class MapDetailPreferencesViewController: UITableViewController {
         spanSlider.value = Float(log10(configController.mapSpan))
         tiltLabel.text = configController.mapTiltString
         tiltSlider.value = Float(configController.mapTilt)
+        pinColorView.backgroundColor = configController.mapPinColor
+        arrowColorView.backgroundColor = configController.mapArrowColor
+        fovColorView.backgroundColor = configController.mapFovColor
     }
     
     //-----------------------------------------------------------------------------------------
@@ -185,6 +194,12 @@ class MapDetailPreferencesViewController: UITableViewController {
         configController.mapHeadingShift = CGFloat(configController.defaultValue(UserDefaults.MapHeadingShift)! as! Double)
         configController.mapSpan = CGFloat(configController.defaultValue(UserDefaults.MapSpan)! as! Double)
         configController.mapTilt = CGFloat(configController.defaultValue(UserDefaults.MapTilt)! as! Double)
+        configController.mapPinColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+                configController.defaultValue(UserDefaults.MapPinColor)! as! NSData) as! UIColor
+        configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+            configController.defaultValue(UserDefaults.MapArrowColor)! as! NSData) as! UIColor
+        configController.mapFovColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+            configController.defaultValue(UserDefaults.MapFOVColor)! as! NSData) as! UIColor
         endUpdateCellCount()
         reflectToControl()
     }
@@ -204,6 +219,33 @@ class MapDetailPreferencesViewController: UITableViewController {
                     identity.items = MapDetailPreferencesViewController.spanRelationMethods
                     identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
                         self.configController.mapRelationSpanMethod = MapRelationSpanMethod(rawValue: index)!
+                    }
+                    target.identity = identity
+                }else if identifier == "PinColorCell" {
+                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let identity = ColorPickerIdentity()
+                    identity.title = pinColorLabel.text
+                    identity.color = configController.mapPinColor
+                    identity.changeNotifier = {[unowned self](color:UIColor) in
+                        self.configController.mapPinColor = color
+                    }
+                    target.identity = identity
+                }else if identifier == "ArrowColorCell" {
+                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let identity = ColorPickerIdentity()
+                    identity.title = arrowColorLabel.text
+                    identity.color = configController.mapArrowColor
+                    identity.changeNotifier = {[unowned self](color:UIColor) in
+                        self.configController.mapArrowColor = color
+                    }
+                    target.identity = identity
+                }else if identifier == "CircleColorCell" {
+                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let identity = ColorPickerIdentity()
+                    identity.title = fovColorLabel.text
+                    identity.color = configController.mapFovColor
+                    identity.changeNotifier = {[unowned self](color:UIColor) in
+                        self.configController.mapFovColor = color
                     }
                     target.identity = identity
                 }

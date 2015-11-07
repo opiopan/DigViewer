@@ -32,6 +32,18 @@
 "HEADING_DISPLAY_FOV" = "FOV";
 "HEADING_DISPLAY_ARROW_AND_FOV" = "Arrow and FOV";
 
+"COLOR_BLACK" = "Black";
+"COLOR_WHITE" = "White";
+"COLOR_RED" = "Red";
+"COLOR_GREEN" = "Green";
+"COLOR_BLUE" = "Blue";
+"COLOR_CYAN" = "Cyan";
+"COLOR_YELLOW" = "Yellow";
+"COLOR_MAGENTA" = "Magenta";
+"COLOR_ORANGE" = "Orange";
+"COLOR_PURPLE" = "Purple";
+"COLOR_BROWN" = "Brown";
+
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings
 //-------------------------------------------------------------------------------------

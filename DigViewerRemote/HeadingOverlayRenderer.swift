@@ -9,22 +9,29 @@
 import UIKit
 import MapKit
 
-private let startColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.4)
-private let startColorComponent = CGColorGetComponents(startColor.CGColor)
-private let endColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0)
-private let endColorComponent = CGColorGetComponents(endColor.CGColor)
-private var components : [CGFloat] = [
-    startColorComponent[0], startColorComponent[1], startColorComponent[2], startColorComponent[3],
-    endColorComponent[0], endColorComponent[1], endColorComponent[2], endColorComponent[3],
-];
-
-private var locations : [CGFloat] = [0.0, 1.0]
-
 class HeadingOverlayRenderer: MKOverlayRenderer {
     private var displayMode : MapHeadingDisplay
 
+    private var components : [CGFloat]
+    private var locations : [CGFloat] = [0.0, 1.0]
+    
     override init(overlay : MKOverlay) {
         displayMode = ConfigurationController.sharedController.mapHeadingDisplay
+
+        var red : CGFloat = 0
+        var green : CGFloat = 0
+        var blue : CGFloat = 0
+        var alpha : CGFloat = 0
+        (overlay as! HeadingOverlay).fovColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let startColor = UIColor(red: red, green: green, blue: blue, alpha: 0.4)
+        let startColorComponent = CGColorGetComponents(startColor.CGColor)
+        let endColor = UIColor(red: red, green: green, blue: blue, alpha: 0)
+        let endColorComponent = CGColorGetComponents(endColor.CGColor)
+        components = [
+            startColorComponent[0], startColorComponent[1], startColorComponent[2], startColorComponent[3],
+            endColorComponent[0], endColorComponent[1], endColorComponent[2], endColorComponent[3],
+        ];
+
         super.init(overlay: overlay)
     }
     
@@ -69,7 +76,7 @@ class HeadingOverlayRenderer: MKOverlayRenderer {
                 CGContextAddLineToPoint(context, point.x, point.y)
             }
             CGContextClosePath(context)
-            CGContextSetFillColorWithColor(context, UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0).CGColor)
+            CGContextSetFillColorWithColor(context, headingOverlay!.arrowColor.CGColor)
             CGContextFillPath(context)
         }
     }

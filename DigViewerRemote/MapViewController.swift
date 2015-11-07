@@ -84,6 +84,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - User Defaultsの反映
     //-----------------------------------------------------------------------------------------
+    var pinColor = ConfigurationController.sharedController.mapPinColor
+    var arrowColor = ConfigurationController.sharedController.mapArrowColor
+    var fovColor = ConfigurationController.sharedController.mapFovColor
+    
     func reflectUserDefaults() {
         if configController.mapType == .Map {
             mapView!.mapType = .Standard
@@ -98,6 +102,19 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         
         if configController.mapHeadingDisplay != headingDisplayMode {
             headingDisplayMode = configController.mapHeadingDisplay
+            addOverlay()
+        }
+        
+        if configController.mapPinColor != pinColor {
+            pinColor = configController.mapPinColor
+            removeAnnotation()
+            addAnnotation()
+        }
+        
+        if configController.mapArrowColor != arrowColor || configController.mapFovColor != fovColor {
+            arrowColor = configController.mapArrowColor
+            fovColor = configController.mapFovColor
+            removeOverlay()
             addOverlay()
         }
     }
@@ -498,10 +515,12 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? AnnotationView{
                 // 再利用できる場合はそのまま返す
                 annotationView.calloutViewController = summaryBarEnable ? nil : popupViewController
+                annotationView.pinTintColor = configController.mapPinColor
                 return annotationView
             } else { // 再利用できるアノテーションが無い場合（初回など）は生成する
                 let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView.calloutViewController = summaryBarEnable ? nil : popupViewController
+                annotationView.pinTintColor = configController.mapPinColor
                 return annotationView
             }
         }
