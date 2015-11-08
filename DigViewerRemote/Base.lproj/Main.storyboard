@@ -644,7 +644,7 @@
             <objects>
                 <tableViewController id="XQR-n8-rav" customClass="MapDetailPreferencesViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gb7-xT-K4o">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="950"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -943,10 +943,45 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Color Settings" id="wtG-p1-PH3">
+                            <tableViewSection headerTitle="Summary View" id="wtG-p1-PH3">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SelectPinningStyleCell" textLabel="LwQ-fD-Cxi" detailTextLabel="eEy-fA-gos" style="IBUITableViewCellStyleValue1" id="3pV-5I-PYn">
+                                        <rect key="frame" x="0.0" y="571.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3pV-5I-PYn" id="SBh-WU-Lau">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Pinning Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LwQ-fD-Cxi">
+                                                    <rect key="frame" x="15" y="12" width="94.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eEy-fA-gos">
+                                                    <rect key="frame" x="523.5" y="12" width="41.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <segue destination="5OP-6g-Oaq" kind="show" id="Ham-AD-Jvw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Color Settings" id="m77-uF-oeh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PinColorCell" id="Ael-aW-UQW" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="571.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="665.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ael-aW-UQW" id="TJh-o2-qGg">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -983,7 +1018,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArrowColorCell" id="aQj-0Z-qVA" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="615.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="709.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQj-0Z-qVA" id="wfI-CS-eS5">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -1020,7 +1055,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CircleColorCell" id="eqW-wh-zvq" customClass="ColorSelectingCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="659.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="753.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eqW-wh-zvq" id="hnC-Oj-UzC">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -1058,10 +1093,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="m77-uF-oeh">
+                            <tableViewSection id="A8l-Iw-0sD">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RestoreDefaultSettingsCell" textLabel="LBO-l7-dxk" style="IBUITableViewCellStyleDefault" id="Frf-6Z-TWk">
-                                        <rect key="frame" x="0.0" y="739.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="833.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Frf-6Z-TWk" id="Ay0-bv-JWc">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1096,7 +1131,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="800"/>
+                    <size key="freeformSize" width="600" height="950"/>
                     <connections>
                         <outlet property="arrowColorLabel" destination="vzv-Qg-qPA" id="tAc-zD-7mU"/>
                         <outlet property="arrowColorView" destination="Yeg-OK-A6U" id="u0C-Me-YUM"/>
@@ -1109,6 +1144,7 @@
                         <outlet property="relateSpanSwitch" destination="TJa-2q-Yin" id="lKv-4q-c3x"/>
                         <outlet property="spanLabel" destination="uwR-LQ-DFo" id="9pE-do-xNy"/>
                         <outlet property="spanSlider" destination="a5f-wi-Fh1" id="OKE-ep-L4J"/>
+                        <outlet property="summaryPinningStyleCell" destination="3pV-5I-PYn" id="WFC-eQ-0Pt"/>
                         <outlet property="tiltLabel" destination="a9f-VC-BWc" id="DD0-EJ-4h9"/>
                         <outlet property="tiltSlider" destination="O0m-uO-jkg" id="E1K-fP-FS1"/>
                         <outlet property="turnToHeadingSwitch" destination="Kgh-WX-ucO" id="6t5-EJ-4gs"/>
@@ -1116,7 +1152,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHM-IJ-OwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1067" y="554"/>
+            <point key="canvasLocation" x="1067" y="629"/>
         </scene>
         <!--Color Picker-->
         <scene sceneID="KtD-Nr-Zg0">
@@ -1305,6 +1341,38 @@
                                     <constraint firstAttribute="height" constant="300" id="agm-aQ-2o5"/>
                                 </constraints>
                             </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XN-Gy-7L5" userLabel="2nd Summary View">
+                                <rect key="frame" x="0.0" y="560" width="600" height="300"/>
+                                <subviews>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wS5-MQ-bsT" userLabel="Left Placeholder">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Ycx-um-Y4u"/>
+                                            <constraint firstAttribute="height" constant="50" id="n12-Cq-BuO"/>
+                                        </constraints>
+                                    </view>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzJ-Vs-aaE" userLabel="Right Placeholder">
+                                        <rect key="frame" x="550" y="0.0" width="50" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="CEv-b7-ZtA"/>
+                                            <constraint firstAttribute="height" constant="50" id="S15-57-GST"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="wS5-MQ-bsT" firstAttribute="leading" secondItem="0XN-Gy-7L5" secondAttribute="leading" id="Eqq-wh-hX9"/>
+                                    <constraint firstAttribute="trailing" secondItem="NzJ-Vs-aaE" secondAttribute="trailing" id="LMJ-TO-XIn"/>
+                                    <constraint firstAttribute="height" constant="300" id="Vjy-JQ-z9l"/>
+                                    <constraint firstItem="NzJ-Vs-aaE" firstAttribute="top" secondItem="0XN-Gy-7L5" secondAttribute="top" id="hxs-sg-1WW"/>
+                                    <constraint firstItem="wS5-MQ-bsT" firstAttribute="top" secondItem="0XN-Gy-7L5" secondAttribute="top" id="psd-NC-uTX"/>
+                                </constraints>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
                                 <rect key="frame" x="0.0" y="560" width="600" height="40"/>
                                 <animations/>
@@ -1354,12 +1422,15 @@
                             <constraint firstAttribute="bottom" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="Ldf-MS-AVO"/>
                             <constraint firstItem="KUM-ns-Duw" firstAttribute="top" secondItem="gRo-xe-Jor" secondAttribute="bottom" constant="-48" id="Oww-8I-BYG"/>
                             <constraint firstItem="fJa-dP-S1q" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="Tbe-bd-MFl"/>
+                            <constraint firstAttribute="trailing" secondItem="0XN-Gy-7L5" secondAttribute="trailing" id="UlK-e9-NUq"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="ywu-ch-6z2" secondAttribute="top" id="Y7Z-Da-jye"/>
                             <constraint firstItem="KUM-ns-Duw" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="ZSI-GL-Cr1"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="aPH-7K-tuh"/>
+                            <constraint firstItem="0XN-Gy-7L5" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="aPw-mV-zQm"/>
                             <constraint firstAttribute="trailing" secondItem="KUM-ns-Duw" secondAttribute="trailing" id="hJV-n4-Vsf"/>
                             <constraint firstItem="dKE-35-FpS" firstAttribute="top" secondItem="l4r-4E-Kc7" secondAttribute="bottom" id="jRD-ez-v7I"/>
                             <constraint firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
+                            <constraint firstAttribute="bottom" secondItem="0XN-Gy-7L5" secondAttribute="bottom" constant="-260" id="zZf-D9-e5Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OlD-Vh-8Sc"/>
@@ -1370,9 +1441,17 @@
                         <outlet property="messageView" destination="KUM-ns-Duw" id="N7z-wW-4SH"/>
                         <outlet property="messageViewHeightConstraint" destination="MUl-qj-4bf" id="rui-be-DH9"/>
                         <outlet property="summaryBar" destination="fJa-dP-S1q" id="WBI-4T-SAA"/>
+                        <outlet property="summaryBar2nd" destination="0XN-Gy-7L5" id="Cat-tr-MYL"/>
+                        <outlet property="summaryBar2ndPosition" destination="zZf-D9-e5Q" id="VKl-RZ-kUq"/>
+                        <outlet property="summaryBarLeftPlaceholder" destination="wS5-MQ-bsT" id="J23-ex-Jf9"/>
+                        <outlet property="summaryBarLeftPlaceholderHeight" destination="n12-Cq-BuO" id="skq-jt-cdd"/>
+                        <outlet property="summaryBarLeftPlaceholderWidth" destination="Ycx-um-Y4u" id="tZw-zB-Z7i"/>
                         <outlet property="summaryBarPlaceholder" destination="Kbd-0c-jFJ" id="AJo-PE-VPp"/>
                         <outlet property="summaryBarPlaceholderHeight" destination="YTB-fM-wnQ" id="83R-nh-Pfs"/>
-                        <outlet property="summaryBarPosition" destination="KOR-ZJ-TNj" id="0md-YL-12h"/>
+                        <outlet property="summaryBarPosition" destination="KOR-ZJ-TNj" id="uCN-jJ-kJZ"/>
+                        <outlet property="summaryBarRightPlaceholder" destination="NzJ-Vs-aaE" id="eiw-Dd-rBk"/>
+                        <outlet property="summaryBarRightPlaceholderHeight" destination="S15-57-GST" id="Ng0-VY-O8F"/>
+                        <outlet property="summaryBarRightPlaceholderWidth" destination="CEv-b7-ZtA" id="rxA-9L-grf"/>
                         <outlet property="toolbar" destination="l4r-4E-Kc7" id="HaF-II-2Q4"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
@@ -1677,7 +1756,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="380" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="380" height="600"/>
                     <connections>
                         <outlet property="connectionCell" destination="zaD-Hw-rzS" id="Lft-x7-pWN"/>
                         <outlet property="enableVolumeControl" destination="VRT-yh-YFL" id="V6j-ct-4xK"/>
@@ -1720,10 +1799,10 @@
         <image name="pin_off" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1lN-Fx-bf5"/>
+        <segue reference="XyN-pQ-fCP"/>
         <segue reference="1Vi-gm-zmd"/>
-        <segue reference="JNz-7y-A5o"/>
+        <segue reference="QjS-Zo-NfZ"/>
         <segue reference="iva-b8-mdh"/>
-        <segue reference="ETZ-FC-MkB"/>
+        <segue reference="Ham-AD-Jvw"/>
     </inferredMetricsTieBreakers>
 </document>

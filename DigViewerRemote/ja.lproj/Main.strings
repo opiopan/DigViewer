@@ -95,9 +95,6 @@
 /* Class = "UILabel"; text = "Heading"; ObjectID = "di8-nT-hRY"; */
 "di8-nT-hRY.text" = "撮影方向";
 
-/* Class = "UITableViewSection"; headerTitle = "Color Sttings"; ObjectID = "wtG-p1-PH3"; */
-"wtG-p1-PH3.headerTitle" = "色の設定";
-
 /* Class = "UILabel"; text = "Pin at Photo Location"; ObjectID = "UpM-1i-Lom"; */
 "UpM-1i-Lom.text" = "撮影位置のピン";
 
@@ -110,3 +107,12 @@
 /* Class = "UILabel"; text = "Show Summary"; ObjectID = "FzK-eG-Dce"; */
 "FzK-eG-Dce.text" = "サマリー表示";
 
+/* Class = "UITableViewSection"; headerTitle = "Color Sttings"; ObjectID = "wtG-p1-PH3"; */
+"wtG-p1-PH3.headerTitle" = "サマリー表示";
+
+/* Class = "UITableViewSection"; headerTitle = "Summary View"; ObjectID = "m77-\
+ uF-oeh"; */
+"m77-uF-oeh.headerTitle" = "色の設定";
+
+/* Class = "UILabel"; text = "Pinning Style"; ObjectID = "LwQ-fD-Cxi"; */
+"LwQ-fD-Cxi.text" = "ピン留め状態の表示方法";

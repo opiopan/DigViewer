@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum PopupViewBackgroundMode {
+    case None
+    case Balloon
+    case Rectangle
+}
+
 class PopupView: UIView {
     var fillColor : UIColor?
     var showAnchor = true {
@@ -17,10 +23,10 @@ class PopupView: UIView {
             }
         }
     }
-    var noBackground : Bool = false
+    var backgroundMode = PopupViewBackgroundMode.Balloon
 
     override func drawRect(rect: CGRect) {
-        if noBackground {
+        if backgroundMode == .None {
             return
         }
         
@@ -37,26 +43,32 @@ class PopupView: UIView {
         }
         
         let rect = CGRectMake(0, 0, width, height)
-        let minX = CGRectGetMinX(rect)
-        let maxX = CGRectGetMaxX(rect)
-        let midX = CGRectGetMidX(rect) + xOffset
-        let minY = CGRectGetMinY(rect)
-        let maxY = CGRectGetMaxY(rect)
-        let midY = CGRectGetMidY(rect)
-        CGContextMoveToPoint(context, midX + anchorHalfWidth, maxY)
-        CGContextAddArcToPoint(context, minX, maxY, minX, midY, radius)
-        CGContextAddArcToPoint(context, minX, minY, midX, minY, radius)
-        CGContextAddArcToPoint(context, maxX, minY, maxX, midY, radius)
-        CGContextAddArcToPoint(context, maxX, maxY, midX, maxY, radius)
         
-        if showAnchor {
-            CGContextAddLineToPoint(context, midX + anchorHalfWidth, maxY)
-            CGContextAddLineToPoint(context, midX, maxY + anchor)
-            CGContextAddLineToPoint(context, midX - anchorHalfWidth, maxY)
+        if backgroundMode == .Balloon {
+            let minX = CGRectGetMinX(rect)
+            let maxX = CGRectGetMaxX(rect)
+            let midX = CGRectGetMidX(rect) + xOffset
+            let minY = CGRectGetMinY(rect)
+            let maxY = CGRectGetMaxY(rect)
+            let midY = CGRectGetMidY(rect)
+            
+            CGContextMoveToPoint(context, midX + anchorHalfWidth, maxY)
+            CGContextAddArcToPoint(context, minX, maxY, minX, midY, radius)
+            CGContextAddArcToPoint(context, minX, minY, midX, minY, radius)
+            CGContextAddArcToPoint(context, maxX, minY, maxX, midY, radius)
+            CGContextAddArcToPoint(context, maxX, maxY, midX, maxY, radius)
+            
+            if showAnchor {
+                CGContextAddLineToPoint(context, midX + anchorHalfWidth, maxY)
+                CGContextAddLineToPoint(context, midX, maxY + anchor)
+                CGContextAddLineToPoint(context, midX - anchorHalfWidth, maxY)
+            }
+            
+            CGContextClosePath(context)
+            CGContextFillPath(context)
+        }else{
+            CGContextFillRect(context, rect)
         }
-        
-        CGContextClosePath(context)
-        CGContextFillPath(context)
     }
     
     //-----------------------------------------------------------------------------------------

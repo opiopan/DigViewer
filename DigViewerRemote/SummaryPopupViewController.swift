@@ -8,9 +8,16 @@
 
 import UIKit
 
-enum SupparyPopupViewParentType : Int {
+enum SummaryPopupViewParentType : Int {
     case NoLocationCover
     case PinnedBar
+}
+
+enum SummaryPopupPinMode : Int {
+    case Off
+    case Toolbar
+    case Left
+    case Right
 }
 
 @objc protocol SummaryPopupViewControllerDelegate {
@@ -66,7 +73,7 @@ class SummaryPopupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addToSuperView(parentView : UIView, parentType : SupparyPopupViewParentType) {
+    func addToSuperView(parentView : UIView, parentType : SummaryPopupViewParentType) {
         let childView = self.view
         childView.translatesAutoresizingMaskIntoConstraints = false
         parentView.addSubview(childView)
@@ -123,14 +130,17 @@ class SummaryPopupViewController: UIViewController {
         delegate?.summaryPopupViewControllerPushedPinButton!(self)
     }
     
-    var pinMode : Bool = false {
+    var pinMode : SummaryPopupPinMode = .Off {
         didSet{
-            if pinMode {
+            if pinMode == .Toolbar{
                 pinButton.setImage(UIImage(named: "pin_on"), forState: UIControlState.Normal)
-                popupView.noBackground = true
+                popupView.backgroundMode = .None
+            }else if pinMode == .Left || pinMode == .Right {
+                pinButton.setImage(UIImage(named: "pin_on"), forState: UIControlState.Normal)
+                popupView.backgroundMode = .Rectangle
             }else{
                 pinButton.setImage(UIImage(named: "pin_off"), forState: UIControlState.Normal)
-                popupView.noBackground = false
+                popupView.backgroundMode = .Balloon
             }
             popupView.setNeedsDisplay()
         }

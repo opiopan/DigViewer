@@ -38,7 +38,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationController!.setNavigationBarHidden(true, animated: false)
         
-        toolbar.layer.zPosition = 10
+        toolbar.layer.zPosition = 100
+        summaryBar2nd.layer.zPosition = 1
         
         configController.registerObserver(self)
         show3DView = configController.map3DView
@@ -88,6 +89,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     var arrowColor = ConfigurationController.sharedController.mapArrowColor
     var fovColor = ConfigurationController.sharedController.mapFovColor
     var summaryMode = ConfigurationController.sharedController.mapSummaryDisplay
+    var summaryPinningStyle = ConfigurationController.sharedController.mapSummaryPinningStyle
     
     func reflectUserDefaults() {
         if configController.mapType == .Map {
@@ -121,6 +123,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         
         if configController.mapSummaryDisplay != summaryMode {
             summaryMode = configController.mapSummaryDisplay
+            arrangeSummaryBar()
+        }
+        
+        if configController.mapSummaryPinningStyle != summaryPinningStyle {
+            summaryPinningStyle = configController.mapSummaryPinningStyle
             arrangeSummaryBar()
         }
     }
@@ -674,21 +681,37 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - サマリバーコントロール
     //-----------------------------------------------------------------------------------------
-    @IBOutlet weak var summaryBarPlaceholderHeight: NSLayoutConstraint!
-    @IBOutlet weak var summaryBarPlaceholder: UIView!
     @IBOutlet weak var summaryBar: UIView!
     @IBOutlet weak var summaryBarPosition: NSLayoutConstraint!
+
+    @IBOutlet weak var summaryBarPlaceholder: UIView!
+    @IBOutlet weak var summaryBarPlaceholderHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var summaryBar2nd: UIView!
+    @IBOutlet weak var summaryBar2ndPosition: NSLayoutConstraint!
+    
+    @IBOutlet weak var summaryBarLeftPlaceholder: UIView!
+    @IBOutlet weak var summaryBarLeftPlaceholderHeight: NSLayoutConstraint!
+    @IBOutlet weak var summaryBarLeftPlaceholderWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var summaryBarRightPlaceholder: UIView!
+    @IBOutlet weak var summaryBarRightPlaceholderHeight: NSLayoutConstraint!
+    @IBOutlet weak var summaryBarRightPlaceholderWidth: NSLayoutConstraint!
+    
     private var summaryBarPositionDefault: CGFloat = 0
+    private var summaryBar2ndPositionDefault: CGFloat = 0
     
     func initSummaryBar() {
         summaryBarPositionDefault = summaryBarPosition.constant
+        summaryBar2ndPositionDefault = summaryBar2ndPosition.constant
     }
     
     func arrangeSummaryBar() {
         if configController.mapSummaryDisplay != .Pinning {
             popupViewController?.removeFromSuperView()
-            popupViewController?.pinMode = false
+            popupViewController?.pinMode = .Off
             summaryBarPosition.constant = summaryBarPositionDefault
+            summaryBar2ndPosition.constant = summaryBar2ndPositionDefault
             if coverView?.superview != nil {
                 popupViewController?.addToSuperView(coverView!, parentType: .NoLocationCover)
             }else{
@@ -703,10 +726,27 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 removeAnnotation()
                 addAnnotation()
             }
-            summaryBarPlaceholderHeight.constant = popupViewController!.viewHeight
-            summaryBarPosition.constant = summaryBarPositionDefault + popupViewController!.viewBaseHeight
-            popupViewController?.pinMode = true
-            popupViewController?.addToSuperView(summaryBarPlaceholder, parentType: .NoLocationCover)
+            if configController.mapSummaryPinningStyle == .InToolBar {
+                summaryBarPlaceholderHeight.constant = popupViewController!.viewHeight
+                summaryBarPosition.constant = summaryBarPositionDefault + popupViewController!.viewBaseHeight
+                summaryBar2ndPosition.constant = summaryBar2ndPositionDefault
+                popupViewController?.pinMode = .Toolbar
+                popupViewController?.addToSuperView(summaryBarPlaceholder, parentType: .NoLocationCover)
+            }else if configController.mapSummaryPinningStyle == .LowerLeft {
+                summaryBarLeftPlaceholderHeight.constant = popupViewController!.viewHeight
+                summaryBarLeftPlaceholderWidth.constant = popupViewController!.viewWidth
+                summaryBarPosition.constant = summaryBarPositionDefault
+                summaryBar2ndPosition.constant = summaryBar2ndPositionDefault + popupViewController!.viewBaseHeight
+                popupViewController?.pinMode = .Left
+                popupViewController?.addToSuperView(summaryBarLeftPlaceholder, parentType: .NoLocationCover)
+            }else{
+                summaryBarRightPlaceholderHeight.constant = popupViewController!.viewHeight
+                summaryBarRightPlaceholderWidth.constant = popupViewController!.viewWidth
+                summaryBarPosition.constant = summaryBarPositionDefault
+                summaryBar2ndPosition.constant = summaryBar2ndPositionDefault + popupViewController!.viewBaseHeight
+                popupViewController?.pinMode = .Right
+                popupViewController?.addToSuperView(summaryBarRightPlaceholder, parentType: .NoLocationCover)
+            }
         }
     }
     

@@ -14,6 +14,12 @@ class MapDetailPreferencesViewController: UITableViewController {
         NSLocalizedString("SPAN_RELATION_METHOD_SHORT_SIDE", comment: ""),
     ]
     
+    static var summaryPinningStyles = [
+        NSLocalizedString("SUMMARY_PINNING_STYLE_TOOLBAR", comment: ""),
+        NSLocalizedString("SUMMARY_PINNING_STYLE_LOWER_LEFT", comment: ""),
+        NSLocalizedString("SUMMARY_PINNING_STYLE_LOWER_RIGHT", comment: ""),
+    ]
+    
     @IBOutlet weak var relateSpanSwitch: UISwitch!
     @IBOutlet weak var relateSpanMethodCell: UITableViewCell!
     @IBOutlet weak var turnToHeadingSwitch: UISwitch!
@@ -28,6 +34,7 @@ class MapDetailPreferencesViewController: UITableViewController {
     @IBOutlet weak var arrowColorLabel: UILabel!
     @IBOutlet weak var fovColorView: UIView!
     @IBOutlet weak var fovColorLabel: UILabel!
+    @IBOutlet weak var summaryPinningStyleCell: UITableViewCell!
 
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -72,6 +79,9 @@ class MapDetailPreferencesViewController: UITableViewController {
         pinColorView.backgroundColor = configController.mapPinColor
         arrowColorView.backgroundColor = configController.mapArrowColor
         fovColorView.backgroundColor = configController.mapFovColor
+        summaryPinningStyleCell.detailTextLabel!.text = MapDetailPreferencesViewController.summaryPinningStyles[
+            configController.mapSummaryPinningStyle.rawValue
+        ]
     }
     
     //-----------------------------------------------------------------------------------------
@@ -219,6 +229,17 @@ class MapDetailPreferencesViewController: UITableViewController {
                     identity.items = MapDetailPreferencesViewController.spanRelationMethods
                     identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
                         self.configController.mapRelationSpanMethod = MapRelationSpanMethod(rawValue: index)!
+                    }
+                    target.identity = identity
+                }else if identifier == "SelectPinningStyleCell" {
+                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let identity = ItemSelectorIdentity()
+                    identity.title = targetCell.textLabel!.text
+                    identity.selectionIndex = configController.mapSummaryPinningStyle.rawValue
+                    identity.description = nil
+                    identity.items = MapDetailPreferencesViewController.summaryPinningStyles
+                    identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
+                        self.configController.mapSummaryPinningStyle = MapSummaryPinningStyle(rawValue: index)!
                     }
                     target.identity = identity
                 }else if identifier == "PinColorCell" {

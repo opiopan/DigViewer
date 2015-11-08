@@ -30,6 +30,7 @@ struct UserDefaults {
     static let MapPinColor = "MapPinColor"
     static let MapArrowColor = "MapArrowColor"
     static let MapFOVColor = "MapFOVColor"
+    static let MapSummaryPinningStyle = "MapSummaryPinningStyle"
 }
 
 enum MapType : Int {
@@ -53,6 +54,12 @@ enum MapSummaryDisplay : Int {
 enum MapRelationSpanMethod : Int {
     case LongSide = 0
     case ShortSide
+}
+
+enum MapSummaryPinningStyle : Int {
+    case InToolBar = 0
+    case LowerLeft
+    case LowerRight
 }
 
 //-----------------------------------------------------------------------------------------
@@ -94,6 +101,7 @@ class ConfigurationController: NSObject {
             UserDefaults.MapPinColor            : redColor,
             UserDefaults.MapArrowColor          : redColor,
             UserDefaults.MapFOVColor            : redColor,
+            UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.InToolBar.rawValue,
         ]
         controller.registerDefaults(defaults)
         establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
@@ -115,6 +123,8 @@ class ConfigurationController: NSObject {
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapArrowColor) as! NSData) as! UIColor
         mapFovColor =
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapFOVColor) as! NSData) as! UIColor
+        mapSummaryPinningStyle =
+            MapSummaryPinningStyle(rawValue: controller.valueForKey(UserDefaults.MapSummaryPinningStyle) as! Int)!
     }
     
     //-----------------------------------------------------------------------------------------
@@ -307,6 +317,13 @@ class ConfigurationController: NSObject {
         didSet {
             let data = NSKeyedArchiver.archivedDataWithRootObject(mapFovColor)
             controller.setValue(data, forKey: UserDefaults.MapFOVColor)
+            updateConfiguration()
+        }
+    }
+    
+    var mapSummaryPinningStyle : MapSummaryPinningStyle {
+        didSet {
+            controller.setValue(mapSummaryPinningStyle.rawValue, forKey: UserDefaults.MapSummaryPinningStyle)
             updateConfiguration()
         }
     }

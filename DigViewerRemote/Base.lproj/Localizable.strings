@@ -49,6 +49,10 @@
 "COLOR_PURPLE" = "Purple";
 "COLOR_BROWN" = "Brown";
 
+"SUMMARY_PINNING_STYLE_TOOLBAR" = "in Toolbar";
+"SUMMARY_PINNING_STYLE_LOWER_LEFT" = "at the Lower Left";
+"SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "at the Lower Right";
+
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings
 //-------------------------------------------------------------------------------------
