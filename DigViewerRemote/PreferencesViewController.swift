@@ -16,12 +16,19 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         NSLocalizedString("HEADING_DISPLAY_ARROW_AND_FOV", comment: ""),
     ]
     
+    static var summaryDisplays = [
+        NSLocalizedString("SUMMARY_DISPLAY_NONE", comment: ""),
+        NSLocalizedString("SUMMARY_DISPLAY_BALLOON", comment: ""),
+        NSLocalizedString("SUMMARY_DISPLAY_PINNING", comment: ""),
+    ]
+    
     @IBOutlet var mapTypeControl : UISegmentedControl?
     @IBOutlet weak var mapLabelSwitch: UISwitch!
     @IBOutlet weak var map3DSwitch: UISwitch!
     @IBOutlet var enableVolumeControl : UISwitch?
     @IBOutlet weak var connectionCell: UITableViewCell!
     @IBOutlet weak var headingDisplayCell: UITableViewCell!
+    @IBOutlet weak var summaryDisplayCell: UITableViewCell!
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -42,6 +49,8 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
         headingDisplayCell.detailTextLabel!.text =
             PreferencesViewController.headingDisplays[configController.mapHeadingDisplay.rawValue]
+        summaryDisplayCell.detailTextLabel!.text =
+            PreferencesViewController.summaryDisplays[configController.mapSummaryDisplay.rawValue]
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -146,6 +155,17 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
                     identity.items = PreferencesViewController.headingDisplays
                     identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
                         self.configController.mapHeadingDisplay = MapHeadingDisplay(rawValue: index)!
+                    }
+                    target.identity = identity
+                }else if identifier == "selectSummaryCell" {
+                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let identity = ItemSelectorIdentity()
+                    identity.title = NSLocalizedString("SUMMARY_DISPLAY", comment: "")
+                    identity.selectionIndex = configController.mapSummaryDisplay.rawValue
+                    identity.description = nil
+                    identity.items = PreferencesViewController.summaryDisplays
+                    identity.changeNotifier = {[unowned self](identity : ItemSelectorIdentity, index : Int) in
+                        self.configController.mapSummaryDisplay = MapSummaryDisplay(rawValue: index)!
                     }
                     target.identity = identity
                 }

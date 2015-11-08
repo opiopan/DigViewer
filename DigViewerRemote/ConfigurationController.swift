@@ -18,6 +18,7 @@ struct UserDefaults {
     static let MapShowLabel = "MapShowLabel";
     static let Map3DView = "Map3DView"
     static let MapHeadingDisplay = "MapHeadingDisplay"
+    static let MapSummaryDisplay = "MapSummaryDisplay"
     static let EnableVolumeButton = "EnableVolumeButton"
     
     static let MapRelationSpan = "MapRelationSpan";
@@ -41,6 +42,12 @@ enum MapHeadingDisplay : Int {
     case Arrow
     case FOV
     case ArrowAndFOV
+}
+
+enum MapSummaryDisplay : Int {
+    case None = 0
+    case Balloon
+    case Pinning
 }
 
 enum MapRelationSpanMethod : Int {
@@ -76,6 +83,7 @@ class ConfigurationController: NSObject {
             UserDefaults.MapShowLabel           : true,
             UserDefaults.Map3DView              : false,
             UserDefaults.MapHeadingDisplay      : MapHeadingDisplay.ArrowAndFOV.rawValue,
+            UserDefaults.MapSummaryDisplay      : MapSummaryDisplay.Balloon.rawValue,
             UserDefaults.EnableVolumeButton     : false,
             UserDefaults.MapRelationSpan        : true,
             UserDefaults.MapRelationSpanMethod  : MapRelationSpanMethod.LongSide.rawValue,
@@ -93,6 +101,7 @@ class ConfigurationController: NSObject {
         mapShowLabel = controller.valueForKey(UserDefaults.MapShowLabel) as! Bool
         map3DView = controller.valueForKey(UserDefaults.Map3DView) as! Bool
         mapHeadingDisplay = MapHeadingDisplay(rawValue: controller.valueForKey(UserDefaults.MapHeadingDisplay) as! Int)!
+        mapSummaryDisplay = MapSummaryDisplay(rawValue: controller.valueForKey(UserDefaults.MapSummaryDisplay) as! Int)!
         enableVolumeButton = controller.valueForKey(UserDefaults.EnableVolumeButton) as! Bool
         mapRelationSpan = controller.valueForKey(UserDefaults.MapRelationSpan) as! Bool
         mapRelationSpanMethod = MapRelationSpanMethod(rawValue: controller.valueForKey(UserDefaults.MapRelationSpanMethod) as! Int)!
@@ -192,6 +201,13 @@ class ConfigurationController: NSObject {
     var mapHeadingDisplay : MapHeadingDisplay {
         didSet {
             controller.setValue(mapHeadingDisplay.rawValue, forKey: UserDefaults.MapHeadingDisplay)
+            updateConfiguration()
+        }
+    }
+    
+    var mapSummaryDisplay : MapSummaryDisplay {
+        didSet {
+            controller.setValue(mapSummaryDisplay.rawValue, forKey: UserDefaults.MapSummaryDisplay)
             updateConfiguration()
         }
     }

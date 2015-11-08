@@ -26,11 +26,16 @@
 "SPAN_RELATION_METHOD_LONG_SIDE" = "Aligne to Long Side";
 "SPAN_RELATION_METHOD_SHORT_SIDE" = "Aligne to Short Side";
 
-"HEADING_DISPLAY" = "Heading Display";
+"HEADING_DISPLAY" = "Show Heading";
 "HEADING_DISPLAY_NONE" = "None";
 "HEADING_DISPLAY_ARROW" = "Arrow";
 "HEADING_DISPLAY_FOV" = "FOV";
 "HEADING_DISPLAY_ARROW_AND_FOV" = "Arrow and FOV";
+
+"SUMMARY_DISPLAY" = "Show Summary";
+"SUMMARY_DISPLAY_NONE" = "None";
+"SUMMARY_DISPLAY_BALLOON" = "as Balloon";
+"SUMMARY_DISPLAY_PINNING" = "Pin to the Bottom";
 
 "COLOR_BLACK" = "Black";
 "COLOR_WHITE" = "White";

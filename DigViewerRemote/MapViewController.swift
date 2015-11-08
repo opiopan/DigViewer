@@ -87,6 +87,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     var pinColor = ConfigurationController.sharedController.mapPinColor
     var arrowColor = ConfigurationController.sharedController.mapArrowColor
     var fovColor = ConfigurationController.sharedController.mapFovColor
+    var summaryMode = ConfigurationController.sharedController.mapSummaryDisplay
     
     func reflectUserDefaults() {
         if configController.mapType == .Map {
@@ -116,6 +117,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             fovColor = configController.mapFovColor
             removeOverlay()
             addOverlay()
+        }
+        
+        if configController.mapSummaryDisplay != summaryMode {
+            summaryMode = configController.mapSummaryDisplay
+            arrangeSummaryBar()
         }
     }
     
@@ -243,11 +249,17 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var isGeocoding = false
     private var pendingGeocodingRecquest : CLLocation? = nil
     private var currentLocation : CLLocation? = nil
+    private var isFirst = true
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         removeAnnotation()
         removeOverlay()
         geometry = nil
+        
+        if isFirst {
+            isFirst = false
+            arrangeSummaryBar()
+        }
 
         // ポップアップウィンドウセットアップ
         popupViewController!.dateLabel.text = nil
@@ -308,7 +320,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
         if popupViewController!.thumbnailView!.image == nil {
             popupViewController!.thumbnailView!.image = thumbnail
-            if annotation != nil {
+            if annotation != nil  && configController.mapSummaryDisplay == .Balloon {
                 mapView!.selectAnnotation(annotation!, animated:true)
             }
         }
@@ -494,7 +506,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                 let time = dispatch_time(DISPATCH_TIME_NOW, 0)
                 dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
                     if let annotation = self.annotation {
-                        self.mapView!.selectAnnotation(annotation, animated:true)
+                        if self.configController.mapSummaryDisplay == .Balloon {
+                            self.mapView!.selectAnnotation(annotation, animated:true)
+                        }
                     }
                 })
             }
@@ -514,6 +528,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             return nil
         } else {
             let identifier = "annotation"
+            let summaryBarEnable = configController.mapSummaryDisplay == .Pinning
             if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? AnnotationView{
                 // 再利用できる場合はそのまま返す
                 annotationView.calloutViewController = summaryBarEnable ? nil : popupViewController
@@ -608,7 +623,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             coverView!.removeFromSuperview()
         }
 
-        if isShow && isShowPopup && !summaryBarEnable {
+        if isShow && isShowPopup && configController.mapSummaryDisplay == .Balloon {
             if popupViewController!.view.superview != nil && popupViewController!.view.superview != coverView {
                 popupViewController!.removeFromSuperView()
             }
@@ -664,15 +679,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     @IBOutlet weak var summaryBar: UIView!
     @IBOutlet weak var summaryBarPosition: NSLayoutConstraint!
     private var summaryBarPositionDefault: CGFloat = 0
-    private var summaryBarEnable: Bool = false
     
     func initSummaryBar() {
         summaryBarPositionDefault = summaryBarPosition.constant
     }
     
-    func summaryPopupViewControllerPushedPinButton(controller: SummaryPopupViewController) {
-        summaryBarEnable = !summaryBarEnable
-        if !summaryBarEnable {
+    func arrangeSummaryBar() {
+        if configController.mapSummaryDisplay != .Pinning {
             popupViewController?.removeFromSuperView()
             popupViewController?.pinMode = false
             summaryBarPosition.constant = summaryBarPositionDefault
@@ -694,6 +707,14 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             summaryBarPosition.constant = summaryBarPositionDefault + popupViewController!.viewBaseHeight
             popupViewController?.pinMode = true
             popupViewController?.addToSuperView(summaryBarPlaceholder, parentType: .NoLocationCover)
+        }
+    }
+    
+    func summaryPopupViewControllerPushedPinButton(controller: SummaryPopupViewController) {
+        if configController.mapSummaryDisplay == .Pinning {
+            configController.mapSummaryDisplay = .Balloon
+        }else{
+            configController.mapSummaryDisplay = .Pinning
         }
     }
     

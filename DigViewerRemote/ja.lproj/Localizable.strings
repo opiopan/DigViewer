@@ -37,6 +37,11 @@
 "HEADING_DISPLAY_FOV" = "視野";
 "HEADING_DISPLAY_ARROW_AND_FOV" = "矢印と視野";
 
+"SUMMARY_DISPLAY" = "サマリー表示";
+"SUMMARY_DISPLAY_NONE" = "表示しない";
+"SUMMARY_DISPLAY_BALLOON" = "バルーン表示";
+"SUMMARY_DISPLAY_PINNING" = "下部にピン留め";
+
 "COLOR_BLACK" = "ブラック";
 "COLOR_WHITE" = "ホワイト";
 "COLOR_RED" = "レッド";

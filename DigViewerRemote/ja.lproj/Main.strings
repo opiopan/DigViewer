@@ -106,3 +106,7 @@
 
 /* Class = "UILabel"; text = "Circle Sector for FOV"; ObjectID = "D5a-8e-Hg6"; */
 "D5a-8e-Hg6.text" = "視野を表す扇形";
+
+/* Class = "UILabel"; text = "Show Summary"; ObjectID = "FzK-eG-Dce"; */
+"FzK-eG-Dce.text" = "サマリー表示";
+
