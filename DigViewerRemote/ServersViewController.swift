@@ -76,7 +76,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath)
         
         let serverCount = servers != nil ? servers!.count : 0;
-        let name = indexPath.row < serverCount ? servers[indexPath.row].name : NSLocalizedString("DSNAME_LOCAL", comment: "")
+        let name = indexPath.row < serverCount ? servers[indexPath.row].name : AppDelegate.deviceName()
         cell.textLabel!.text = name
         cell.accessoryType = .None
         

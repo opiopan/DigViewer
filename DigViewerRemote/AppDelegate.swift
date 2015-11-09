@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: - ロック禁止期間の制御
+    // MARK: - 画面ロック禁止期間の制御
     //-----------------------------------------------------------------------------------------
     private var timeToStartLock : dispatch_time_t = 0
     private var isInvokedLockTimer = false
@@ -88,6 +88,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
                 self.waitForTimeToStartLock()
             }
         })
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 端末種別文字列
+    //-----------------------------------------------------------------------------------------
+    static func deviceName() -> String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        if identifier.hasPrefix("iPhone") {
+            return NSLocalizedString("DSNAME_LOCAL_IPHONE", comment:"")
+        }else if identifier.hasPrefix("iPad") {
+            return NSLocalizedString("DSNAME_LOCAL_IPAD", comment:"")
+        }else if identifier.hasPrefix("iPod") {
+            return NSLocalizedString("DSNAME_LOCAL_IPOD_TOUCH", comment:"")
+        }else{
+            return NSLocalizedString("DSNAME_LOCAL_SIMULATOR", comment:"")
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - コネクション名
+    //-----------------------------------------------------------------------------------------
+    static func connectionName() -> String? {
+        let name = DVRemoteClient.sharedClient().serviceName
+        if name != nil && DVRemoteClient.sharedClient().isConnectedToLocal {
+            return deviceName()
+        }else{
+            return name
+        }
     }
 }
 

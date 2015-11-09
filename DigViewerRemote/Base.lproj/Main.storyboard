@@ -601,7 +601,7 @@
             </objects>
             <point key="canvasLocation" x="-425" y="179"/>
         </scene>
-        <!--Servers-->
+        <!--Data Source-->
         <scene sceneID="LKe-OG-B4F">
             <objects>
                 <tableViewController storyboardIdentifier="ServerViewController" id="rj1-As-3ds" customClass="ServerViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
@@ -627,7 +627,7 @@
                             <outlet property="delegate" destination="rj1-As-3ds" id="LZ6-PN-pcl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Servers" id="24t-cj-eN7">
+                    <navigationItem key="navigationItem" title="Data Source" id="24t-cj-eN7">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="dll-gM-Ux4">
                             <connections>
                                 <action selector="closeServersView:" destination="rj1-As-3ds" id="oD2-hR-s6t"/>
@@ -1802,7 +1802,7 @@
         <segue reference="XyN-pQ-fCP"/>
         <segue reference="1Vi-gm-zmd"/>
         <segue reference="QjS-Zo-NfZ"/>
+        <segue reference="JNz-7y-A5o"/>
         <segue reference="iva-b8-mdh"/>
-        <segue reference="Ham-AD-Jvw"/>
     </inferredMetricsTieBreakers>
 </document>

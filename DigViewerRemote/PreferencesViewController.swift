@@ -46,7 +46,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     override func viewWillAppear(animated: Bool) {
         DVRemoteClient.sharedClient().addClientDelegate(self)
         let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
         headingDisplayCell.detailTextLabel!.text =
             PreferencesViewController.headingDisplays[configController.mapHeadingDisplay.rawValue]
         summaryDisplayCell.detailTextLabel!.text =

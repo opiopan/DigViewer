@@ -6,6 +6,7 @@
   Copyright © 2015年 opiopan. All rights reserved.
 */
 
+"MSGVIEW_INITIALIIZING_MAP" = "地図初期化中";
 "Disconnected" = "未接続";
 "Connecting..." = "接続中...";
 "Authenticating..." = "認証中...";
@@ -18,6 +19,10 @@
 "EXIF-LOCATION" = "位置情報";
 
 "DSNAME_LOCAL" = "ローカル フォトライブラリー";
+"DSNAME_LOCAL_IPHONE" = "この iPhone";
+"DSNAME_LOCAL_IPAD" = "この iPad";
+"DSNAME_LOCAL_IPODTOUCH" = "この iPod touch";
+"DSNAME_LOCAL_SIMULATOR" = "このシミュレーター";
 
 "LS_TOP_FOLDER_NAME" = "アルバム";
 "LS_IMAGE_TYPE_NAME" = "イメージ";

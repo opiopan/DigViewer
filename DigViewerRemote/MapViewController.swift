@@ -662,7 +662,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     private func updateMessageView() {
         let client = DVRemoteClient.sharedClient()
-        messageLabel.text = client.state != .Connected ? client.stateString : client.serviceName
+        if initialized {
+            messageLabel.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
+        }else{
+            messageLabel.text = NSLocalizedString("MSGVIEW_INITIALIIZING_MAP", comment: "")
+        }
         let height = client.state == .Connected ? 0.0 : messageViewHeight
         let delay = client.state == .Connected ? 2.0 : 0.0
         if messageViewHeightConstraint.constant != height {

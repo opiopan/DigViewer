@@ -6,6 +6,8 @@
   Copyright © 2015年 opiopan. All rights reserved.
 */
 
+"MSGVIEW_INITIALIIZING_MAP" = "Initializing Map";
+
 "ADDRESS_FORMAT" = "%1$@ %2$@";
 "ADDRESS_NA" = "No location information";
 
@@ -13,6 +15,10 @@
 "EXIF-LOCATION" = "Location";
 
 "DSNAME_LOCAL" = "Local Photo Library";
+"DSNAME_LOCAL_IPHONE" = "This iPhone";
+"DSNAME_LOCAL_IPAD" = "This iPad";
+"DSNAME_LOCAL_IPODTOUCH" = "This iPod touch";
+"DSNAME_LOCAL_SIMULATOR" = "This simulator";
 
 "LS_TOP_FOLDER_NAME" = "Album";
 "LS_IMAGE_TYPE_NAME" = "Image";

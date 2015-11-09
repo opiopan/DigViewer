@@ -1,6 +1,6 @@
 
 /* Class = "UINavigationItem"; title = "Servers"; ObjectID = "24t-cj-eN7"; */
-"24t-cj-eN7.title" = "サーバー一覧";
+"24t-cj-eN7.title" = "接続先";
 
 /* Class = "UITableViewSection"; headerTitle = "Map Behaviours"; ObjectID = "Aib-ta-5ZH"; */
 "Aib-ta-5ZH.headerTitle" = "地図の表示";
