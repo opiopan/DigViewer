@@ -639,6 +639,45 @@
             </objects>
             <point key="canvasLocation" x="1793" y="-320"/>
         </scene>
+        <!--Simple Footer View Controller-->
+        <scene sceneID="5RY-OU-gjS">
+            <objects>
+                <viewController storyboardIdentifier="SimpleFooter" id="zvy-xB-2KM" customClass="SimpleFooterViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Osv-ck-NKM"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Bs-pM-hmu"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Uie-m8-K1L">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv6-gc-SUK">
+                                <rect key="frame" x="25" y="15" width="150" height="17"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wv6-gc-SUK" firstAttribute="leading" secondItem="Uie-m8-K1L" secondAttribute="leading" constant="25" id="29n-fM-3XD"/>
+                            <constraint firstAttribute="trailing" secondItem="wv6-gc-SUK" secondAttribute="trailing" constant="25" id="WHX-mw-6iP"/>
+                            <constraint firstItem="wv6-gc-SUK" firstAttribute="top" secondItem="Osv-ck-NKM" secondAttribute="bottom" constant="15" id="hFT-yz-k95"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="100"/>
+                    <connections>
+                        <outlet property="textLabel" destination="wv6-gc-SUK" id="xip-if-1J0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yUM-KV-yS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2263" y="-570"/>
+        </scene>
         <!--Map Deails-->
         <scene sceneID="OV1-fG-ZPL">
             <objects>
@@ -1802,7 +1841,7 @@
         <segue reference="XyN-pQ-fCP"/>
         <segue reference="1Vi-gm-zmd"/>
         <segue reference="QjS-Zo-NfZ"/>
-        <segue reference="JNz-7y-A5o"/>
+        <segue reference="ha4-5m-vCT"/>
         <segue reference="iva-b8-mdh"/>
     </inferredMetricsTieBreakers>
 </document>

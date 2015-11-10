@@ -6,7 +6,9 @@
   Copyright © 2015年 opiopan. All rights reserved.
 */
 
-"MSGVIEW_INITIALIIZING_MAP" = "地図初期化中";
+"MSGVIEW_INITIALIIZING_MAP" = "マップ初期化中";
+"MSGVIEW_ESTABLISHED" = "データソース: %@";
+
 "Disconnected" = "未接続";
 "Connecting..." = "接続中...";
 "Authenticating..." = "認証中...";
@@ -62,6 +64,8 @@
 "SUMMARY_PINNING_STYLE_TOOLBAR" = "ツールバー内";
 "SUMMARY_PINNING_STYLE_LOWER_LEFT" = "左下";
 "SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "右下";
+
+"MSG_DATASOURCE_DESCTIPTION" = "表示するデータソースを選択してください。\nDigViewerを実行しているMacがこのリストにない場合は、MacとこのiOSデバイスが同じネットワークに接続されていることを確認してください。";
 
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings

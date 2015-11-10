@@ -663,7 +663,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private func updateMessageView() {
         let client = DVRemoteClient.sharedClient()
         if initialized {
-            messageLabel.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
+            messageLabel.text = client.state != .Connected ? client.stateString :
+                AppDelegate.connectionName()
+                //NSString(format: NSLocalizedString("MSGVIEW_ESTABLISHED", comment: ""), AppDelegate.connectionName()!) as String
         }else{
             messageLabel.text = NSLocalizedString("MSGVIEW_INITIALIIZING_MAP", comment: "")
         }

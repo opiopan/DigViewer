@@ -89,10 +89,6 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let serverCount = servers != nil ? servers!.count : 0;
         let client = DVRemoteClient.sharedClient()
@@ -122,4 +118,19 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    private var footerController : SimpleFooterViewController!
+
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let storyboard = self.storyboard{
+            footerController =
+                storyboard.instantiateViewControllerWithIdentifier("SimpleFooter") as! SimpleFooterViewController
+            if footerController.view.subviews.count > 0 {
+                footerController.textLabel.text = NSLocalizedString("MSG_DATASOURCE_DESCTIPTION", comment: "")
+            }
+            return footerController.view
+        }else{
+            return nil
+        }
+    }
+
 }

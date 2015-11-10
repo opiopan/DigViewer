@@ -136,7 +136,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : client.serviceName
+        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
     }
     
     
