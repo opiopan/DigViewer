@@ -63,6 +63,15 @@
     return sharedClient;
 }
 
+
+//-----------------------------------------------------------------------------------------
+// 一時的な接続
+//-----------------------------------------------------------------------------------------
++ (DVRemoteClient *)temporaryClient
+{
+    return [DVRemoteClient new];
+}
+
 //-----------------------------------------------------------------------------------------
 // 初期化・回収
 //-----------------------------------------------------------------------------------------
@@ -392,6 +401,11 @@
     }
 }
 
+- (void)requestServerInfo
+{
+    [_session sendCommand:DVRC_REQUEST_SEVER_INFO withData:nil replacingQue:NO];
+}
+
 //-----------------------------------------------------------------------------------------
 // セッションからのイベント処理
 //-----------------------------------------------------------------------------------------
@@ -495,6 +509,16 @@
         for (id <DVRemoteClientDelegate> delegate in _delegates){
             if ([delegate respondsToSelector:@selector(dvrClient:didRecieveNodeList:forNode:inDocument:)]){
                 [delegate dvrClient:self didRecieveNodeList:nodeList forNode:nodeID inDocument:document];
+            }
+        }
+    }else if (command == DVRC_NOTIFY_SERVER_INFO){
+        //-----------------------------------------------------------------------------------------
+        // サーバー情報受信
+        //-----------------------------------------------------------------------------------------
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        for (id <DVRemoteClientDelegate> delegate in _delegates){
+            if ([delegate respondsToSelector:@selector(dvrClient:didRecieveServerInfo:)]){
+                [delegate dvrClient:self didRecieveServerInfo:args];
             }
         }
     }

@@ -12,7 +12,7 @@ NSString* DVR_SERVICE_TYPE = @"_dv-remote._tcp";
 NSString* DVR_SERVICE_NAME = @"DigViewer Remote";
 
 //-----------------------------------------------------------------------------------------
-// DVRC_NOTIFY_META用 Dictionary Key文字列
+// Dictionary Key文字列
 //-----------------------------------------------------------------------------------------
 NSString* DVRCNMETA_DOCUMENT = @"document";
 NSString* DVRCNMETA_ID = @"id";
@@ -45,3 +45,11 @@ NSString* DVRCNMETA_INDEX_IN_PARENT = @"indexinparent";
 NSString* DVRCNMETA_POPUP_SUMMARY = @"popupsummary";
 NSString* DVRCNMETA_LOCAL_ID = @"localid";
 NSString* DVRCNMETA_FOV_ANGLE = @"fovangle";
+NSString* DVRCNMETA_SERVER_ICON = @"servericon";
+NSString* DVRCNMETA_SERVER_IMAGE = @"serverimage";
+NSString* DVRCNMETA_SERVER_INFO = @"serverinfo";
+NSString* DVRCNMETA_MACHINE_NAME = @"machinename";
+NSString* DVRCNMETA_CPU = @"cpu";
+NSString* DVRCNMETA_MEMORY_SIZE = @"memorysize";
+NSString* DVRCNMETA_DESCRIPTION = @"description";
+NSString* DVRCNMETA_DV_VERSION = @"dvverstion";

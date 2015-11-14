@@ -584,6 +584,7 @@
                             <constraint firstAttribute="trailing" secondItem="d2Y-3f-c2p" secondAttribute="trailing" id="xAH-tb-Qcu"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="350" height="150"/>
                     <connections>
@@ -652,19 +653,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv6-gc-SUK">
-                                <rect key="frame" x="25" y="15" width="150" height="17"/>
+                                <rect key="frame" x="15" y="8" width="170" height="14.5"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wv6-gc-SUK" firstAttribute="leading" secondItem="Uie-m8-K1L" secondAttribute="leading" constant="25" id="29n-fM-3XD"/>
-                            <constraint firstAttribute="trailing" secondItem="wv6-gc-SUK" secondAttribute="trailing" constant="25" id="WHX-mw-6iP"/>
-                            <constraint firstItem="wv6-gc-SUK" firstAttribute="top" secondItem="Osv-ck-NKM" secondAttribute="bottom" constant="15" id="hFT-yz-k95"/>
+                            <constraint firstItem="wv6-gc-SUK" firstAttribute="leading" secondItem="Uie-m8-K1L" secondAttribute="leading" constant="15" id="29n-fM-3XD"/>
+                            <constraint firstAttribute="trailing" secondItem="wv6-gc-SUK" secondAttribute="trailing" constant="15" id="WHX-mw-6iP"/>
+                            <constraint firstItem="wv6-gc-SUK" firstAttribute="top" secondItem="Osv-ck-NKM" secondAttribute="bottom" constant="8" id="hFT-yz-k95"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -677,6 +678,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUM-KV-yS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2263" y="-570"/>
+        </scene>
+        <!--Data Source Header Controller-->
+        <scene sceneID="O8s-dr-es4">
+            <objects>
+                <viewController storyboardIdentifier="dataSourceHeader" id="Fhx-v5-ZST" customClass="DataSourceHeaderController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="djm-Nj-Rto"/>
+                        <viewControllerLayoutGuide type="bottom" id="PXJ-GD-3eh"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="wXV-WT-qZd">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvx-6a-9mG">
+                                <rect key="frame" x="15" y="72" width="120.5" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DATA SOURCE..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2Z-aD-sSR">
+                                        <rect key="frame" x="0.0" y="0.0" width="100.5" height="20"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eBM-iU-Khg">
+                                        <rect key="frame" x="100.5" y="0.0" width="20" height="20"/>
+                                        <animations/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <animations/>
+                            </stackView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vvx-6a-9mG" firstAttribute="leading" secondItem="wXV-WT-qZd" secondAttribute="leading" constant="15" id="Rwy-c6-loV"/>
+                            <constraint firstItem="PXJ-GD-3eh" firstAttribute="top" secondItem="vvx-6a-9mG" secondAttribute="bottom" constant="8" id="xbR-c7-cpX"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="100"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="eBM-iU-Khg" id="jLd-oM-kxD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="94o-VV-4Jy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2263" y="-381"/>
         </scene>
         <!--Map Deails-->
         <scene sceneID="OV1-fG-ZPL">

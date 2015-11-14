@@ -113,6 +113,10 @@
     }else if (command == DVRC_SIDE_CONNECTION){
         [_reservedSessions removeObject:session];
         [_sidebandSessions addObject:session];
+    }else if (command == DVRC_REQUEST_SEVER_INFO){
+        if(_delegate){
+            [_delegate dvrServer:self needSendServerInfoToClient:session];
+        }
     }if (command == DVRC_MOVE_PREV_IMAGE || command == DVRC_MOVE_NEXT_IMAGE){
         NSString* document = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_delegate){
@@ -251,6 +255,23 @@
                                DVRCNMETA_ITEM_LIST: items};
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
         [targetSession sendCommand:DVRC_NOTIFY_FOLDER_ITEMS withData:data replacingQue:YES];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// サーバー情報送信
+//-----------------------------------------------------------------------------------------
+- (void)sendServerInfo:(NSDictionary *)serverInfo bySession:(DVRemoteSession *)session
+{
+    DVRemoteSession* targetSession = nil;
+    for (targetSession in _authorizedSessions){
+        if (targetSession == session){
+            break;
+        }
+    }
+    if (targetSession){
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:serverInfo];
+        [targetSession sendCommand:DVRC_NOTIFY_SERVER_INFO withData:data replacingQue:NO];
     }
 }
 

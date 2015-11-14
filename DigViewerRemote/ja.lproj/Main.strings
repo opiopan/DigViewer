@@ -50,6 +50,9 @@
 /* Class = "UITableViewSection"; headerTitle = "Data Source"; ObjectID = "kGk-X2-jDl"; */
 "kGk-X2-jDl.headerTitle" = "データソース";
 
+/* Class = "UILabel"; text = "DATA SOURCE..."; ObjectID = "V2Z-aD-sSR"; */
+"V2Z-aD-sSR.text" = "データーソース...";
+
 /* Class = "UILabel"; text = "Connection"; ObjectID = "OyK-ra-MRG"; */
 "OyK-ra-MRG.text" = "接続先";
 
@@ -116,3 +119,4 @@
 
 /* Class = "UILabel"; text = "Pinning Style"; ObjectID = "LwQ-fD-Cxi"; */
 "LwQ-fD-Cxi.text" = "ピン留め状態の表示方法";
+

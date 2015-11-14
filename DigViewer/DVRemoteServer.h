@@ -30,6 +30,7 @@
          withRotation:(NSInteger)rotation;
 - (void)sendFolderItems:(NSArray*)items forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
               bySession:(DVRemoteSession*)session;
+- (void)sendServerInfo:(NSDictionary*)serverInfo bySession:(DVRemoteSession*)session;
 
 @end
 
@@ -46,5 +47,6 @@
          withSize:(CGFloat)maxSize;
 - (void)dvrServer:(DVRemoteServer*)server needSendFolderItms:(NSArray*)nodeId forDocument:(NSString*)document
         bySession:(DVRemoteSession*)session;
+- (void)dvrServer:(DVRemoteServer*)server needSendServerInfoToClient:(DVRemoteSession*)session;
 @end
 

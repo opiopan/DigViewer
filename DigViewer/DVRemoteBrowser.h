@@ -28,6 +28,7 @@
 // デリゲートプロトコル
 //-----------------------------------------------------------------------------------------
 @protocol DVRemoteBrowserDelegate <NSObject>
-- (void)dvrBrowserDetectChangeServers:(DVRemoteBrowser*)browser;
+- (void)dvrBrowserDetectAddServer:(DVRemoteBrowser*)browser service:(NSNetService *)service;
+- (void)dvrBrowserDetectRemoveServer:(DVRemoteBrowser*)browser service:(NSNetService *)service;
 - (void)dvrBrowser:(DVRemoteBrowser*)browser didNotSearch:(NSDictionary*)errorDict;
 @end

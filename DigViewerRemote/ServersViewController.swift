@@ -8,9 +8,16 @@
 
 import UIKit
 
+private class ServerInfo {
+    var service: NSNetService!
+    var icon: UIImage!
+    var image: UIImage!
+    var attributes: [String : String]!
+}
+
 class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate {
 
-    let browser : DVRemoteBrowser = DVRemoteBrowser()
+    private let browser : DVRemoteBrowser = DVRemoteBrowser()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +34,11 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
 
     override func viewWillAppear(animated: Bool) {
-        DVRemoteClient.sharedClient().addClientDelegate(self)
+        tmpClient.addClientDelegate(self)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+        tmpClient.removeClientDelegate(self)
     }
 
     @IBAction func closeServersView(sender : UIBarButtonItem?){
@@ -41,24 +48,73 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     //-----------------------------------------------------------------------------------------
     // MARK: - サーバー探索
     //-----------------------------------------------------------------------------------------
-    private var servers : [NSNetService]! = nil
+    private var servers : [ServerInfo] = []
     
-    func dvrBrowserDetectChangeServers(browser: DVRemoteBrowser!) {
-        servers = browser.servers as! [NSNetService]!
-        tableView.reloadData()
+    func dvrBrowserDetectAddServer(browser: DVRemoteBrowser!, service: NSNetService!) {
+        let serverInfo = ServerInfo()
+        serverInfo.service = service
+        addServerInfo(serverInfo)
+    }
+    
+    func dvrBrowserDetectRemoveServer(browser: DVRemoteBrowser!, service: NSNetService!) {
+        let indexes = servers.enumerate().filter{$0.element.service.name == service.name}.map{$0.index}
+        if let index = indexes.first {
+            servers.removeAtIndex(index)
+            tableView.beginUpdates()
+            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
     }
     
     func dvrBrowser(browser: DVRemoteBrowser!, didNotSearch errorDict: [NSObject : AnyObject]!) {
     }
     
+    
     //-----------------------------------------------------------------------------------------
-    // MARK: - DVRemote クライアント
+    // MARK: - サーバー情報収集
     //-----------------------------------------------------------------------------------------
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        
+    private var queryingServers : [ServerInfo] = []
+    private let tmpClient = DVRemoteClient.temporaryClient()
+    
+    private func addServerInfo(serverInfo: ServerInfo){
+        queryingServers.append(serverInfo)
+        if queryingServers.count == 1 {
+            queryServerInfo()
+        }
     }
     
-    func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
+    private func queryServerInfo(){
+        headerController.activityIndicator.startAnimating()
+        tmpClient.connectToServer(queryingServers[0].service)
+    }
+    
+    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
+        NSLog("\(state)")
+        if state == .Connected {
+            client.requestServerInfo()
+        }else if state == .Disconnected {
+            headerController.activityIndicator.stopAnimating()
+            queryingServers.removeAtIndex(0)
+            if queryingServers.count > 0 {
+                queryServerInfo()
+            }
+        }
+    }
+    
+    func dvrClient(client: DVRemoteClient!, didRecieveServerInfo info: [NSObject : AnyObject]!) {
+        let serverInfo = queryingServers[0];
+        serverInfo.attributes = info[DVRCNMETA_SERVER_INFO] as! [String : String]
+        serverInfo.icon = UIImage(data: info[DVRCNMETA_SERVER_ICON] as! NSData)
+        serverInfo.image = UIImage(data: info[DVRCNMETA_SERVER_IMAGE] as! NSData)
+        servers.append(serverInfo)
+        servers = servers.sort{$0.service.name < $1.service.name}
+        let indexes = servers.enumerate().filter{$0.element.service.name == serverInfo.service.name}.map{$0.index}
+        if let index = indexes.first {
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
+        client.disconnect()
     }
  
     //-----------------------------------------------------------------------------------------
@@ -69,16 +125,19 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servers != nil ? servers!.count + 1 : 1
+        return servers.count + 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath)
         
-        let serverCount = servers != nil ? servers!.count : 0;
-        let name = indexPath.row < serverCount ? servers[indexPath.row].name : AppDelegate.deviceName()
+        let serverCount = servers.count;
+        let name = indexPath.row < serverCount ? servers[indexPath.row].service.name : AppDelegate.deviceName()
+        let icon = indexPath.row < serverCount ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
         cell.textLabel!.text = name
-        cell.accessoryType = .None
+        cell.accessoryType = indexPath.row < serverCount ? .DetailButton : .None
+        cell.imageView!.image = icon
+        cell.imageView!.contentMode = .ScaleAspectFit
         
         let client = DVRemoteClient.sharedClient()
         if client.state != .Disconnected && client.service == nil && indexPath.row == serverCount {
@@ -90,7 +149,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let serverCount = servers != nil ? servers!.count : 0;
+        let serverCount = servers.count;
         let client = DVRemoteClient.sharedClient()
         if indexPath.row == serverCount {
             var needConnect = false
@@ -107,7 +166,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 })
             }
         }else{
-            let nextServer = servers[indexPath.row]
+            let nextServer = servers[indexPath.row].service
             if client.state != .Disconnected && (client.service == nil || client.service!.name != nextServer.name) {
                 client.disconnect()
                 client.connectToServer(nextServer)
@@ -116,6 +175,21 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             }
         }
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private var headerController : DataSourceHeaderController!
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        return 54
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let storyboard = self.storyboard {
+            headerController = storyboard.instantiateViewControllerWithIdentifier("dataSourceHeader") as! DataSourceHeaderController
+            return headerController.view
+        }else{
+            return nil
+        }
     }
     
     private var footerController : SimpleFooterViewController!

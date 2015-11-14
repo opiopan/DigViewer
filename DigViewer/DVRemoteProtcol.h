@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_SIDE_CONNECTION,
     DVRC_REQUEST_FOLDER_ITEMS,
     DVRC_MOVE_NODE,
+    DVRC_REQUEST_SEVER_INFO,
     
     // Server -> Client
     DVRC_NOTIFY_META = 1000,
@@ -31,10 +32,11 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NOTIFY_FULLIMAGE,
     DVRC_NOTIFY_ACCEPTED,
     DVRC_NOTIFY_FOLDER_ITEMS,
+    DVRC_NOTIFY_SERVER_INFO,
 };
 
 //-----------------------------------------------------------------------------------------
-// DVRC_NOTIFY_META用 Dictionary Key文字列
+// Dictionary Key文字列
 //-----------------------------------------------------------------------------------------
 extern NSString* DVRCNMETA_DOCUMENT;
 extern NSString* DVRCNMETA_ID;
@@ -67,3 +69,11 @@ extern NSString* DVRCNMETA_ITEM_TYPE;
 extern NSString* DVRCNMETA_INDEX_IN_PARENT;
 extern NSString* DVRCNMETA_LOCAL_ID;
 extern NSString* DVRCNMETA_FOV_ANGLE;
+extern NSString* DVRCNMETA_SERVER_ICON;
+extern NSString* DVRCNMETA_SERVER_IMAGE;
+extern NSString* DVRCNMETA_SERVER_INFO;
+extern NSString* DVRCNMETA_MACHINE_NAME;
+extern NSString* DVRCNMETA_CPU;
+extern NSString* DVRCNMETA_MEMORY_SIZE;
+extern NSString* DVRCNMETA_DESCRIPTION;
+extern NSString* DVRCNMETA_DV_VERSION;

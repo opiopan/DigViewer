@@ -91,9 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: - 端末種別文字列
+    // MARK: - 端末情報
     //-----------------------------------------------------------------------------------------
-    static func deviceName() -> String {
+    static func deviceID() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -104,6 +104,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
             }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
+        return identifier
+    }
+    
+    static func deviceName() -> String {
+        let identifier = AppDelegate.deviceID()
         if identifier.hasPrefix("iPhone") {
             return NSLocalizedString("DSNAME_LOCAL_IPHONE", comment:"")
         }else if identifier.hasPrefix("iPad") {
@@ -112,6 +117,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
             return NSLocalizedString("DSNAME_LOCAL_IPOD_TOUCH", comment:"")
         }else{
             return NSLocalizedString("DSNAME_LOCAL_SIMULATOR", comment:"")
+        }
+    }
+    
+    static func deviceIcon() -> UIImage? {
+        let identifier = AppDelegate.deviceID()
+        if identifier.hasPrefix("iPhone") {
+            return UIImage(named: "icon_iPhone")
+        }else if identifier.hasPrefix("iPad") {
+            return UIImage(named: "icon_iPad")
+        }else if identifier.hasPrefix("iPod") {
+            return UIImage(named: "icon_iPod")
+        }else{
+            return UIImage(named: "icon_iPhone")
         }
     }
     

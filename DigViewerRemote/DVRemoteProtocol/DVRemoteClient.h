@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) BOOL isConnectedToLocal;
 
 + (DVRemoteClient*)sharedClient;
++ (DVRemoteClient*)temporaryClient;
 
 - (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
@@ -56,6 +57,8 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 
 - (NSArray*)nodeListForID:(NSArray*)nodeID inDocument:(NSString*)document;
 
+- (void)requestServerInfo;
+
 @end
 
 //-----------------------------------------------------------------------------------------
@@ -72,4 +75,5 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
              ofId:(NSArray*)nodeId inDocument:(NSString*)documentName withRotation:(NSInteger)rotation;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveNodeList:(NSArray*)nodeList forNode:(NSArray*)nodeID
        inDocument:(NSString*)documentName;
+- (void)dvrClient:(DVRemoteClient*)client didRecieveServerInfo:(NSDictionary*)info;
 @end

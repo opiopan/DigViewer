@@ -60,7 +60,7 @@
 "SUMMARY_PINNING_STYLE_LOWER_LEFT" = "at the Lower Left";
 "SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "at the Lower Right";
 
-"MSG_DATASOURCE_DESCTIPTION" = "Select a data source to display.\nIf no Mac running DigViewer is shown in this list, please make sure the Mac and this iOS device are connected to same network.";
+"MSG_DATASOURCE_DESCTIPTION" = "Select a data source to connect.\nIf no Mac running DigViewer is shown in this list, please make sure the Mac and this iOS device are connected to same network.";
 
 //-------------------------------------------------------------------------------------
 // 画像メタデータ用strings

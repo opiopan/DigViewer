@@ -61,10 +61,8 @@
            didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
 {
     [_servers addObject:aNetService];
-    if (!moreComing){
-        if (_delegate){
-            [_delegate dvrBrowserDetectChangeServers:self];
-        }
+    if (_delegate){
+        [_delegate dvrBrowserDetectAddServer:self service:aNetService];
     }
 }
 
@@ -72,10 +70,8 @@
          didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
 {
     [_servers removeObject:aNetService];
-    if (!moreComing){
-        if (_delegate){
-            [_delegate dvrBrowserDetectChangeServers:self];
-        }
+    if (_delegate){
+        [_delegate dvrBrowserDetectRemoveServer:self service:aNetService];
     }
 }
 
