@@ -652,6 +652,7 @@
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="5hs-kC-At6"/>
+                                                <constraint firstAttribute="width" constant="22" id="BJY-Um-UsZ"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="onDetailButton:" destination="rPc-FI-jde" eventType="touchUpInside" id="HmC-at-XOt"/>
@@ -660,7 +661,7 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="kzr-hl-Rbo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gaz-mJ-mXc" secondAttribute="trailing" priority="750" constant="8" id="5De-J8-ETL"/>
+                                        <constraint firstItem="kzr-hl-Rbo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gaz-mJ-mXc" secondAttribute="trailing" constant="8" id="5De-J8-ETL"/>
                                         <constraint firstItem="4us-M7-aLR" firstAttribute="leading" secondItem="nQK-tA-bsZ" secondAttribute="leading" constant="15" id="DKM-Xz-bPE"/>
                                         <constraint firstItem="kzr-hl-Rbo" firstAttribute="centerY" secondItem="nQK-tA-bsZ" secondAttribute="centerY" id="Fsd-R3-pzT"/>
                                         <constraint firstItem="4us-M7-aLR" firstAttribute="centerY" secondItem="nQK-tA-bsZ" secondAttribute="centerY" id="WI5-F3-Y38"/>
