@@ -26,6 +26,8 @@
 "DSNAME_LOCAL_IPODTOUCH" = "この iPod touch";
 "DSNAME_LOCAL_SIMULATOR" = "このシミュレーター";
 
+"DSD_SERVER" = "ホスト名: ";
+"DSD_USER" = "ユーザー: ";
 "DSD_PROCESSOR" = "プロセッサ: ";
 "DSD_MEMORY" = "メモリ: ";
 "DSD_DIGVIEWER" = "DigViewer ";

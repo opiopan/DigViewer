@@ -183,6 +183,9 @@
             }
         }
     }
+    if (_tmpDelegate && [_tmpDelegate respondsToSelector:@selector(dvrClient:changeState:)]){
+        [_tmpDelegate dvrClient:self changeState:_state];
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -516,10 +519,8 @@
         // サーバー情報受信
         //-----------------------------------------------------------------------------------------
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        for (id <DVRemoteClientDelegate> delegate in _delegates){
-            if ([delegate respondsToSelector:@selector(dvrClient:didRecieveServerInfo:)]){
-                [delegate dvrClient:self didRecieveServerInfo:args];
-            }
+        if (_tmpDelegate && [_tmpDelegate respondsToSelector:@selector(dvrClient:didRecieveServerInfo:)]){
+            [_tmpDelegate dvrClient:self didRecieveServerInfo:args];
         }
     }
 }

@@ -23,10 +23,25 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         super.viewDidLoad()
         browser.delegate = self
         browser.searchServers()
+
+        headerController =
+            storyboard!.instantiateViewControllerWithIdentifier("dataSourceHeader") as! DataSourceHeaderController
+        footerController =
+            storyboard!.instantiateViewControllerWithIdentifier("SimpleFooter") as! SimpleFooterViewController
+        let localBrowser = browser
+        let localHeader = headerController
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(10 * NSEC_PER_SEC)), dispatch_get_main_queue()){
+            if localBrowser.servers.count == 0 {
+                localHeader.activityIndicator.stopAnimating()
+            }
+        }
     }
     
     deinit{
         browser.stop()
+        tmpClient.tmpDelegate = nil
+        tmpClient.disconnect()
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,11 +49,9 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
 
     override func viewWillAppear(animated: Bool) {
-        tmpClient.addClientDelegate(self)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        tmpClient.removeClientDelegate(self)
     }
 
     @IBAction func closeServersView(sender : UIBarButtonItem?){
@@ -85,6 +98,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     
     private func queryServerInfo(){
         headerController.activityIndicator.startAnimating()
+        tmpClient.tmpDelegate = self
         tmpClient.connectToServer(queryingServers[0].service)
     }
     
@@ -142,8 +156,9 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         cell.iconImageVIew.contentMode = .ScaleAspectFit
         
         if isRemote {
+            let targetName = servers[indexPath.row].service.name
             cell.detailTransitor = {[unowned self](cell : DataSourceCell) in
-                self.detailTargetRow = indexPath.row
+                self.detailTargetName = targetName
                 self.performSegueWithIdentifier("DataSourceDetail", sender: self)
             }
         }else{
@@ -196,38 +211,36 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let storyboard = self.storyboard {
-            headerController = storyboard.instantiateViewControllerWithIdentifier("dataSourceHeader") as! DataSourceHeaderController
+        if section == 0 {
             return headerController.view
         }else{
-            return nil
+            return super.tableView(tableView, viewForHeaderInSection: section)
         }
     }
     
     private var footerController : SimpleFooterViewController!
 
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let storyboard = self.storyboard{
-            footerController =
-                storyboard.instantiateViewControllerWithIdentifier("SimpleFooter") as! SimpleFooterViewController
+        if section == 0 {
             if footerController.view.subviews.count > 0 {
                 footerController.textLabel.text = NSLocalizedString("MSG_DATASOURCE_DESCTIPTION", comment: "")
             }
             return footerController.view
         }else{
-            return nil
+            return super.tableView(tableView, viewForFooterInSection: section)
         }
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - Navigation
     //-----------------------------------------------------------------------------------------
-    private var detailTargetRow = -1
+    private var detailTargetName = ""
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "DataSourceDetail" {
             let target = segue.destinationViewController as! DataSourceDetailViewController
-            target.serverInfo = servers[detailTargetRow]
+            let indexes = servers.enumerate().filter{$0.element.service.name == detailTargetName}.map{$0.index}
+            target.serverInfo = servers[indexes[0]]
         }
     }
 
