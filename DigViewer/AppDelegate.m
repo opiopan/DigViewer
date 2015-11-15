@@ -263,7 +263,11 @@ static NSData* pngFromNSImage(NSImage* image);
 //-----------------------------------------------------------------------------------------
 static NSData* pngFromNSImage(NSImage* image)
 {
-    NSData* data = [image TIFFRepresentation];
+    CGFloat scale = [NSScreen mainScreen].backingScaleFactor;
+    NSImageRep* rep = [image bestRepresentationForRect:NSMakeRect(0, 0, 512.0 / scale, 512.0 / scale) context:nil hints:nil];
+    NSImage* repImage = [NSImage new];
+    [repImage addRepresentation:rep];
+    NSData* data = [repImage TIFFRepresentation];
     NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
     NSData* pngData = [tiffRep representationUsingType:NSPNGFileType properties:@{}];
     return pngData;

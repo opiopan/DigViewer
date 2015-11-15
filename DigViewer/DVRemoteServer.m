@@ -22,6 +22,8 @@
     NSData* _templateMeta;
     
     NSMutableDictionary* _fullImageQue;
+    
+    NSDictionary* _serverInfo;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -114,7 +116,9 @@
         [_reservedSessions removeObject:session];
         [_sidebandSessions addObject:session];
     }else if (command == DVRC_REQUEST_SEVER_INFO){
-        if(_delegate){
+        if (_serverInfo){
+            [self sendServerInfo:_serverInfo bySession:session];
+        }else if(_delegate){
             [_delegate dvrServer:self needSendServerInfoToClient:session];
         }
     }if (command == DVRC_MOVE_PREV_IMAGE || command == DVRC_MOVE_NEXT_IMAGE){
@@ -263,6 +267,9 @@
 //-----------------------------------------------------------------------------------------
 - (void)sendServerInfo:(NSDictionary *)serverInfo bySession:(DVRemoteSession *)session
 {
+    if (!_serverInfo){
+        _serverInfo = serverInfo;
+    }
     DVRemoteSession* targetSession = nil;
     for (targetSession in _authorizedSessions){
         if (targetSession == session){
