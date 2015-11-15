@@ -10,6 +10,8 @@
 		7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */; };
 		7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */; };
 		7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */; };
+		7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */; };
+		7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */; };
 		7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B467F731B9F15A1005719E7 /* MapKit.framework */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
 		7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */; };
@@ -70,6 +72,8 @@
 		7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFooterViewController.swift; sourceTree = "<group>"; };
 		7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderController.swift; sourceTree = "<group>"; };
+		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
+		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
 		7B467F731B9F15A1005719E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
@@ -209,8 +213,10 @@
 				7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */,
 				7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */,
 				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
+				7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */,
 				7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */,
 				7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */,
+				7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */,
 				7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */,
 				7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */,
 				7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */,
@@ -452,6 +458,7 @@
 				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,
 				7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */,
+				7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */,
 				7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */,
 				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
@@ -477,6 +484,7 @@
 				7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
+				7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */,
 				7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */,
 				7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */,
 				7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private class ServerInfo {
+class ServerInfo {
     var service: NSNetService!
     var icon: UIImage!
     var image: UIImage!
@@ -89,7 +89,6 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        NSLog("\(state)")
         if state == .Connected {
             client.requestServerInfo()
         }else if state == .Disconnected {
@@ -129,15 +128,28 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! DataSourceCell
         
         let serverCount = servers.count;
-        let name = indexPath.row < serverCount ? servers[indexPath.row].service.name : AppDelegate.deviceName()
-        let icon = indexPath.row < serverCount ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
-        cell.textLabel!.text = name
-        cell.accessoryType = indexPath.row < serverCount ? .DetailButton : .None
-        cell.imageView!.image = icon
-        cell.imageView!.contentMode = .ScaleAspectFit
+        let isRemote = indexPath.row < serverCount
+        let name = isRemote ? servers[indexPath.row].service.name : AppDelegate.deviceName()
+        let icon = isRemote ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
+        let description = isRemote ? servers[indexPath.row].attributes[DVRCNMETA_MACHINE_NAME] : nil
+        cell.dataSourceLabel.text = name
+        cell.descriptionLabel.text = description
+        cell.accessoryType = .None
+        cell.iconImageVIew.image = icon
+        cell.iconImageVIew.contentMode = .ScaleAspectFit
+        
+        if isRemote {
+            cell.detailTransitor = {[unowned self](cell : DataSourceCell) in
+                self.detailTargetRow = indexPath.row
+                self.performSegueWithIdentifier("DataSourceDetail", sender: self)
+            }
+        }else{
+            cell.detailButton.enabled = false
+            cell.detailButton.hidden = true
+        }
         
         let client = DVRemoteClient.sharedClient()
         if client.state != .Disconnected && client.service == nil && indexPath.row == serverCount {
@@ -204,6 +216,18 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             return footerController.view
         }else{
             return nil
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Navigation
+    //-----------------------------------------------------------------------------------------
+    private var detailTargetRow = -1
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DataSourceDetail" {
+            let target = segue.destinationViewController as! DataSourceDetailViewController
+            target.serverInfo = servers[detailTargetRow]
         }
     }
 

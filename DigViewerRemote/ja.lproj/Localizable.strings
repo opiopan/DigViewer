@@ -26,6 +26,10 @@
 "DSNAME_LOCAL_IPODTOUCH" = "この iPod touch";
 "DSNAME_LOCAL_SIMULATOR" = "このシミュレーター";
 
+"DSD_PROCESSOR" = "プロセッサ: ";
+"DSD_MEMORY" = "メモリ: ";
+"DSD_DIGVIEWER" = "DigViewer ";
+
 "LS_TOP_FOLDER_NAME" = "アルバム";
 "LS_IMAGE_TYPE_NAME" = "イメージ";
 "LS_SCREENSHOTIMAGE_TYPE_NAME" = "スクリーンショット";

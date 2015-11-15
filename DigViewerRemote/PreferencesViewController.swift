@@ -139,7 +139,6 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
     }
     
-    
     //-----------------------------------------------------------------------------------------
     // MARK: - Navigation
     //-----------------------------------------------------------------------------------------
