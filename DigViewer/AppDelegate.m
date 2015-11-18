@@ -192,6 +192,10 @@ static NSData* pngFromNSImage(NSImage* image);
     NSString* memory = [NSString stringWithFormat:@"%@ %@ %@", memorySize,
                         [memDict valueForKey:@"dimm_type"], [memDict valueForKey:@"dimm_speed"]];
     NSDictionary* gpuDict = systemProperties(@"SPDisplaysDataType");
+    NSString* vramSize = [gpuDict valueForKey:@"spdisplays_vram"];
+    if (!vramSize){
+        vramSize = [gpuDict valueForKey:@"spdisplays_vram_shared"];
+    }
     NSString* gpu = [NSString stringWithFormat:@"%@ (%@)",
                      [gpuDict valueForKey:@"sppci_model"], [gpuDict valueForKey:@"_spdisplays_vram"]];
     
