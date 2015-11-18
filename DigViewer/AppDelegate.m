@@ -70,7 +70,10 @@
 {
     DVRemoteServer* server = [DVRemoteServer sharedServer];
     server.delegate = self;
-    [server establishServer];
+    [self dvrServer:server needSendServerInfoToClient:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [server establishServer];
+    });
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -170,25 +173,27 @@
 //-----------------------------------------------------------------------------------------
 // DVremoveへサーバー情報を返却
 //-----------------------------------------------------------------------------------------
+static NSDictionary* systemProperties(NSString* key);
 static NSData* pngFromNSImage(NSImage* image);
 - (void)dvrServer:(DVRemoteServer *)server needSendServerInfoToClient:(DVRemoteSession *)session
 {
-    TemporaryFileController* tmpFileController = [TemporaryFileController sharedController];
-    NSString* infoFile = [tmpFileController allocatePathWithSuffix:@".plist" forCategory:@"serverInfo"];
-
-    // system_profilerで動作環境の情報を取得
-    NSString* cmd = [NSString stringWithFormat:@"system_profiler -xml SPHardwareDataType > %@", infoFile];
-    system(cmd.UTF8String);
-    NSArray* info = [NSArray arrayWithContentsOfFile:infoFile];
-    
     // キー情報抽出
-    NSDictionary* mainDict = [info[0] valueForKey:@"_items"][0];
+    NSDictionary* mainDict = systemProperties(@"SPHardwareDataType");
     NSString* machineID = [mainDict valueForKey:@"machine_model"];
     NSString* serialNumber = [mainDict valueForKey:@"serial_number"];
     NSString* cpu = [NSString stringWithFormat:@"%@ %@",
                      [mainDict valueForKey:@"current_processor_speed"],
                      [mainDict valueForKey:@"cpu_type"]];
+    int coreNum = [[mainDict valueForKey:@"number_processors"] intValue] * [[mainDict valueForKey:@"packages"] intValue];
     NSString* memorySize = [mainDict valueForKey:@"physical_memory"];
+    NSDictionary* osDict = systemProperties(@"SPSoftwareDataType");
+    NSString* osVersion = [osDict valueForKey:@"os_version"];
+    NSDictionary* memDict = [[systemProperties(@"SPMemoryDataType") valueForKey:@"_items"] objectAtIndex:0];
+    NSString* memory = [NSString stringWithFormat:@"%@ %@ %@", memorySize,
+                        [memDict valueForKey:@"dimm_type"], [memDict valueForKey:@"dimm_speed"]];
+    NSDictionary* gpuDict = systemProperties(@"SPDisplaysDataType");
+    NSString* gpu = [NSString stringWithFormat:@"%@ (%@)",
+                     [gpuDict valueForKey:@"sppci_model"], [gpuDict valueForKey:@"_spdisplays_vram"]];
     
     // ServerInformation.framework バンドルから詳細情報を抽出
     NSBundle* bundle = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/ServerInformation.framework"];
@@ -231,10 +236,13 @@ static NSData* pngFromNSImage(NSImage* image);
             NSMutableDictionary* serverInfo = [NSMutableDictionary dictionary];
             [serverInfo setValue:extractor.modelName forKey:DVRCNMETA_MACHINE_NAME];
             [serverInfo setValue:cpu forKey:DVRCNMETA_CPU];
-            [serverInfo setValue:memorySize forKey:DVRCNMETA_MEMORY_SIZE];
+            [serverInfo setValue:@(coreNum).stringValue forKey:DVRCNMETA_CPU_CORE_NUM];
+            [serverInfo setValue:memory forKey:DVRCNMETA_MEMORY_SIZE];
+            [serverInfo setValue:gpu forKey:DVRCNMETA_GPU];
+            [serverInfo setValue:osVersion forKey:DVRCNMETA_OS_VERSION];
             [serverInfo setValue:description forKey:DVRCNMETA_DESCRIPTION];
             InfoPlistController* infoPlist = [InfoPlistController new];
-            [serverInfo setValue:infoPlist.version forKey:DVRCNMETA_DV_VERSION];
+            [serverInfo setValue:[infoPlist.version substringFromIndex:8] forKey:DVRCNMETA_DV_VERSION];
             
             NSMutableDictionary* rd = [NSMutableDictionary dictionary];
             [rd setValue:serverInfo forKey:DVRCNMETA_SERVER_INFO];
@@ -251,12 +259,25 @@ static NSData* pngFromNSImage(NSImage* image);
         }
     }];
     [task resume];
-    
-    // クリーンナップ
-    [tmpFileController cleanUpForCategory:@"serverInfo"];
 }
 
 @end
+
+
+//-----------------------------------------------------------------------------------------
+// PNGデータ変換
+//-----------------------------------------------------------------------------------------
+static NSDictionary* systemProperties(NSString* key)
+{
+    TemporaryFileController* tmpFileController = [TemporaryFileController sharedController];
+    NSString* infoFile = [tmpFileController allocatePathWithSuffix:@".plist" forCategory:@"serverInfo"];
+    NSString* cmd = [NSString stringWithFormat:@"system_profiler -xml %@ > %@", key, infoFile];
+    system(cmd.UTF8String);
+    NSArray* info = [NSArray arrayWithContentsOfFile:infoFile];
+    [tmpFileController cleanUpForCategory:@"serverInfo"];
+
+    return [info[0] valueForKey:@"_items"][0];
+}
 
 //-----------------------------------------------------------------------------------------
 // PNGデータ変換

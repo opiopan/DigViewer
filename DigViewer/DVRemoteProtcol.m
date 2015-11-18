@@ -53,3 +53,6 @@ NSString* DVRCNMETA_CPU = @"cpu";
 NSString* DVRCNMETA_MEMORY_SIZE = @"memorysize";
 NSString* DVRCNMETA_DESCRIPTION = @"description";
 NSString* DVRCNMETA_DV_VERSION = @"dvverstion";
+NSString* DVRCNMETA_OS_VERSION = @"osversion";
+NSString* DVRCNMETA_GPU = @"gpu";
+NSString* DVRCNMETA_CPU_CORE_NUM = @"cpucorenum";

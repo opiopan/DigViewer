@@ -820,7 +820,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PM6-xO-hPp">
-                                <rect key="frame" x="249" y="359.5" width="103" height="72.5"/>
+                                <rect key="frame" x="249" y="359" width="103" height="113.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZq-Rd-QzF">
                                         <rect key="frame" x="0.0" y="0.0" width="103" height="14.5"/>
@@ -850,8 +850,30 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DigViewer Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7S-Gf-AJS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GPU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGu-bx-7ch">
                                         <rect key="frame" x="0.0" y="58" width="103" height="14.5"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGB-y8-rtt">
+                                        <rect key="frame" x="0.0" y="72.5" width="103" height="12"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="rRf-VD-twd"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OS Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn2-tY-3oJ">
+                                        <rect key="frame" x="0.0" y="84.5" width="103" height="14.5"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DigViewer Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7S-Gf-AJS">
+                                        <rect key="frame" x="0.0" y="99" width="103" height="14.5"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -859,14 +881,9 @@
                                     </label>
                                 </subviews>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstItem="XM6-Ke-sIh" firstAttribute="width" secondItem="PM6-xO-hPp" secondAttribute="width" id="Mzq-y9-5Td"/>
-                                    <constraint firstItem="d7S-Gf-AJS" firstAttribute="width" secondItem="PM6-xO-hPp" secondAttribute="width" id="frM-ln-tMf"/>
-                                    <constraint firstItem="any-UI-QKo" firstAttribute="width" secondItem="PM6-xO-hPp" secondAttribute="width" id="lOw-RP-6oA"/>
-                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah5-u3-AA1">
-                                <rect key="frame" x="32" y="448" width="536" height="14.5"/>
+                                <rect key="frame" x="32" y="488.5" width="536" height="14.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -909,11 +926,13 @@
                         <outlet property="cpuLabel" destination="any-UI-QKo" id="OKx-g0-aZV"/>
                         <outlet property="descriptionLabel" destination="ah5-u3-AA1" id="D5Q-UD-w1K"/>
                         <outlet property="dvVersionLabel" destination="d7S-Gf-AJS" id="gcS-OV-P1B"/>
+                        <outlet property="gpuLabel" destination="TGu-bx-7ch" id="2uW-8Y-9f4"/>
                         <outlet property="imageHeightConstraint" destination="6cW-3Z-EFU" id="G6T-IA-Xhb"/>
                         <outlet property="imageView" destination="94R-Gy-8WW" id="2Hh-bD-xot"/>
                         <outlet property="imageWidthConstraint" destination="kxc-aF-Xep" id="0eD-Pn-B4N"/>
                         <outlet property="memoryLabel" destination="XM6-Ke-sIh" id="t5o-DX-9O3"/>
                         <outlet property="modelNameLabel" destination="ycz-DE-QO1" id="xs7-Bo-bx3"/>
+                        <outlet property="osVersionLabel" destination="kn2-tY-3oJ" id="HMm-dX-zRL"/>
                         <outlet property="serverLabel" destination="vZq-Rd-QzF" id="lgM-vu-Ekk"/>
                         <outlet property="userLabel" destination="Zwe-Dv-EQh" id="nGP-sK-PkS"/>
                     </connections>

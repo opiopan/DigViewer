@@ -21,10 +21,12 @@
 "DSNAME_LOCAL_IPODTOUCH" = "This iPod touch";
 "DSNAME_LOCAL_SIMULATOR" = "This simulator";
 
-"DSD_SERVER" = "HOST NAME: ";
-"DSD_USER" = "USER: ";
-"DSD_PROCESSOR" = "PROCESSOR: ";
-"DSD_MEMORY" = "MEMORY: ";
+"DSD_SERVER" = "HOST NAME:  ";
+"DSD_USER" = "USER:  ";
+"DSD_PROCESSOR" = "PROCESSOR:  ";
+"DSD_CORE" = " core";
+"DSD_MEMORY" = "MEMORY:  ";
+"DSD_GPU" = "GRAPHICS:  ";
 "DSD_DIGVIEWER" = "DigViewer ";
 
 "LS_TOP_FOLDER_NAME" = "Album";

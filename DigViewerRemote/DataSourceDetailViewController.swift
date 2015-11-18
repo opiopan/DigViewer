@@ -16,6 +16,8 @@ class DataSourceDetailViewController: UIViewController {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var cpuLabel: UILabel!
     @IBOutlet weak var memoryLabel: UILabel!
+    @IBOutlet weak var gpuLabel: UILabel!
+    @IBOutlet weak var osVersionLabel: UILabel!
     @IBOutlet weak var dvVersionLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
@@ -47,6 +49,9 @@ class DataSourceDetailViewController: UIViewController {
                 userLabel.text = nil
                 cpuLabel.text = nil
                 memoryLabel.text = nil
+                gpuLabel.text = nil
+                osVersionLabel.text = nil
+                dvVersionLabel.text = nil
                 
                 let components = info.service.name.componentsSeparatedByString("@")
                 if components.count > 0 {
@@ -56,15 +61,20 @@ class DataSourceDetailViewController: UIViewController {
                     serverLabel.text = NSLocalizedString("DSD_SERVER", comment: "") + components[1]
                 }
                 if let cpu = info.attributes[DVRCNMETA_CPU] {
-                    cpuLabel.text = NSLocalizedString("DSD_PROCESSOR", comment: "") + cpu
+                    let coreNum = info.attributes[DVRCNMETA_CPU_CORE_NUM];
+                    let core = " (\(coreNum!)\(NSLocalizedString("DSD_CORE", comment: "")))"
+                    cpuLabel.text = NSLocalizedString("DSD_PROCESSOR", comment: "") + cpu + core
                 }
                 if let memory = info.attributes[DVRCNMETA_MEMORY_SIZE] {
                     memoryLabel.text = NSLocalizedString("DSD_MEMORY", comment: "") + memory
                 }
+                if let gpu = info.attributes[DVRCNMETA_GPU] {
+                    gpuLabel.text = NSLocalizedString("DSD_GPU", comment: "") + gpu
+                }
+                osVersionLabel.text = info.attributes[DVRCNMETA_OS_VERSION]
                 if let version = info.attributes[DVRCNMETA_DV_VERSION] {
                     dvVersionLabel.text = NSLocalizedString("DSD_DIGVIEWER", comment: "") + version
                 }
-                
                 descriptionLabel.text = info.attributes[DVRCNMETA_DESCRIPTION]
             }
         }
