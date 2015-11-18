@@ -196,8 +196,7 @@ static NSData* pngFromNSImage(NSImage* image);
     if (!vramSize){
         vramSize = [gpuDict valueForKey:@"spdisplays_vram_shared"];
     }
-    NSString* gpu = [NSString stringWithFormat:@"%@ (%@)",
-                     [gpuDict valueForKey:@"sppci_model"], [gpuDict valueForKey:@"_spdisplays_vram"]];
+    NSString* gpu = [NSString stringWithFormat:@"%@ (%@)", [gpuDict valueForKey:@"sppci_model"], vramSize];
     
     // ServerInformation.framework バンドルから詳細情報を抽出
     NSBundle* bundle = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/ServerInformation.framework"];
