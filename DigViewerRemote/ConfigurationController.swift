@@ -31,6 +31,8 @@ struct UserDefaults {
     static let MapArrowColor = "MapArrowColor"
     static let MapFOVColor = "MapFOVColor"
     static let MapSummaryPinningStyle = "MapSummaryPinningStyle"
+    
+    static let DataSourcePinnedList = "DataSourcePinnedList"
 }
 
 enum MapType : Int {
@@ -66,8 +68,9 @@ enum MapSummaryPinningStyle : Int {
 // MARK: - Observer用プロトコル定義
 //-----------------------------------------------------------------------------------------
 @objc protocol ConfigurationControllerDelegate {
-    func notifyUpdateConfiguration(configuration : ConfigurationController);
+    optional func notifyUpdateConfiguration(configuration : ConfigurationController);
     optional func notifyUpdateMapDetailConfiguration(configuration : ConfigurationController)
+    optional func notifyUpdateDataSourceConfiguration(configuration : ConfigurationController)
 }
 
 
@@ -102,6 +105,7 @@ class ConfigurationController: NSObject {
             UserDefaults.MapArrowColor          : redColor,
             UserDefaults.MapFOVColor            : redColor,
             UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.InToolBar.rawValue,
+            UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedDataWithRootObject([] as [ServerInfo])
         ]
         controller.registerDefaults(defaults)
         establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
@@ -125,6 +129,9 @@ class ConfigurationController: NSObject {
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapFOVColor) as! NSData) as! UIColor
         mapSummaryPinningStyle =
             MapSummaryPinningStyle(rawValue: controller.valueForKey(UserDefaults.MapSummaryPinningStyle) as! Int)!
+        dataSourcePinnedList =
+            NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
+            as! [ServerInfo]
     }
     
     //-----------------------------------------------------------------------------------------
@@ -148,7 +155,7 @@ class ConfigurationController: NSObject {
     private func updateConfiguration(){
         updateCount++
         for observer in observers {
-            observer.notifyUpdateConfiguration(self)
+            observer.notifyUpdateConfiguration?(self)
         }
     }
     
@@ -158,6 +165,13 @@ class ConfigurationController: NSObject {
             for observer in observers {
                 observer.notifyUpdateMapDetailConfiguration?(self)
             }
+        }
+    }
+    
+    private func updateDataSourceConfiguration() {
+        updateCount++
+        for observer in observers {
+            observer.notifyUpdateDataSourceConfiguration?(self)
         }
     }
     
@@ -325,6 +339,14 @@ class ConfigurationController: NSObject {
         didSet {
             controller.setValue(mapSummaryPinningStyle.rawValue, forKey: UserDefaults.MapSummaryPinningStyle)
             updateConfiguration()
+        }
+    }
+    
+    var dataSourcePinnedList : [ServerInfo] {
+        didSet {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(dataSourcePinnedList)
+            controller.setValue(data, forKey: UserDefaults.DataSourcePinnedList)
+            updateDataSourceConfiguration()
         }
     }
     

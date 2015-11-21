@@ -8,14 +8,41 @@
 
 import UIKit
 
-class ServerInfo {
+class ServerInfo : NSObject, NSCoding {
     var service: NSNetService!
     var icon: UIImage!
     var image: UIImage!
     var attributes: [String : String]!
+    var isPinned: Bool = false
+    var isActive: Bool = false
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init()
+        let domain = aDecoder.decodeObjectForKey("domain") as! String
+        let type = aDecoder.decodeObjectForKey("type") as! String
+        let name = aDecoder.decodeObjectForKey("name") as! String
+        service = NSNetService(domain: domain, type: type, name: name)
+        icon = aDecoder.decodeObjectForKey("icon") as! UIImage
+        image = aDecoder.decodeObjectForKey("image") as! UIImage
+        attributes = NSDictionary(coder: aDecoder) as! [String:String]
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(service.domain as NSString, forKey: "domain")
+        aCoder.encodeObject(service.type as NSString, forKey: "type")
+        aCoder.encodeObject(service.name as NSString, forKey: "name")
+        aCoder.encodeObject(icon, forKey: "icon")
+        aCoder.encodeObject(image, forKey: "image")
+        (attributes as NSDictionary).encodeWithCoder(aCoder)
+    }
 }
 
-class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate {
+class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate,
+                            ConfigurationControllerDelegate {
 
     private let browser : DVRemoteBrowser = DVRemoteBrowser()
 
@@ -36,6 +63,9 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 localHeader.activityIndicator.stopAnimating()
             }
         }
+        
+//        syncPinnedList()
+        ConfigurationController.sharedController.registerObserver(self)
     }
     
     deinit{
@@ -49,6 +79,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
 
     override func viewWillAppear(animated: Bool) {
+        syncPinnedList()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -57,12 +88,93 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     @IBAction func closeServersView(sender : UIBarButtonItem?){
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - サーバーリスト操作
+    //-----------------------------------------------------------------------------------------
+    private var pinnedServers : [ServerInfo] = []
+    private var servers : [ServerInfo] = []
+
+    private func syncPinnedList() {
+        self.pinnedServers = ConfigurationController.sharedController.dataSourcePinnedList
+
+        // 削除
+        let deletee = servers.enumerate().filter{
+            [unowned self] in
+            let name = $0.element.service.name
+            return !$0.element.isActive && self.pinnedServers.filter{$0.service.name == name}.count == 0
+        }.reverse().map{NSIndexPath(forRow:$0.index, inSection:0)}
+        for index in deletee.reverse() {
+            servers.removeAtIndex(index.row)
+        }
+        tableView.beginUpdates()
+        tableView.deleteRowsAtIndexPaths(deletee, withRowAnimation: .Automatic)
+        tableView.endUpdates()
+        
+        // 追加
+        let addee = pinnedServers.filter{
+            [unowned self] in
+            let name = $0.service.name
+            return self.servers.filter{$0.service.name == name}.count == 0
+        }
+        servers.appendContentsOf(addee)
+        servers = servers.sort{$0.service.name < $1.service.name}
+        let addeeIndexes = pinnedServers.enumerate().filter{
+            let name = $0.element.service.name
+            return addee.filter{$0.service.name == name}.count > 0
+        }.map{NSIndexPath(forRow: $0.index, inSection: 0)}
+        tableView.beginUpdates()
+        tableView.deleteRowsAtIndexPaths(addeeIndexes, withRowAnimation: .Automatic)
+        tableView.endUpdates()
+    }
+    
+    private func registerServer(serverInfo : ServerInfo) {
+        let pinnedIndexes = servers.enumerate().filter{$0.element.service.name == serverInfo.service.name}.map{$0.index}
+        if let pinnedIndex = pinnedIndexes.first {
+            servers[pinnedIndex].isActive = true
+            let indexPath = NSIndexPath(forRow: pinnedIndex, inSection: 0)
+            if let cell = tableView.cellForRowAtIndexPath(indexPath){
+                setupCell(cell as! DataSourceCell, indexPath: indexPath)
+            }
+        }else{
+            serverInfo.isActive = true
+            servers.append(serverInfo)
+            servers = servers.sort{$0.service.name < $1.service.name}
+            let indexes = servers.enumerate().filter{$0.element.service.name == serverInfo.service.name}.map{$0.index}
+            if let index = indexes.first {
+                tableView.beginUpdates()
+                tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+                tableView.endUpdates()
+            }
+        }
+    }
+    
+    private func unregisterServer(name : String) {
+        let indexes = servers.enumerate().filter{$0.element.service.name == name}.map{$0.index}
+        if let index = indexes.first {
+            let isPinned = servers.filter{$0.service.name == name}.count > 0
+            if  isPinned {
+                servers[index].isActive = false;
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                    setupCell(cell as! DataSourceCell, indexPath: indexPath)
+                }
+            }else{
+                servers.removeAtIndex(index)
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+                tableView.endUpdates()
+            }
+        }
+    }
+    
+//    func notifyUpdateDataSourceConfiguration(configuration: ConfigurationController) {
+//        syncPinnedList()
+//    }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - サーバー探索
     //-----------------------------------------------------------------------------------------
-    private var servers : [ServerInfo] = []
-    
     func dvrBrowserDetectAddServer(browser: DVRemoteBrowser!, service: NSNetService!) {
         let serverInfo = ServerInfo()
         serverInfo.service = service
@@ -70,18 +182,11 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     }
     
     func dvrBrowserDetectRemoveServer(browser: DVRemoteBrowser!, service: NSNetService!) {
-        let indexes = servers.enumerate().filter{$0.element.service.name == service.name}.map{$0.index}
-        if let index = indexes.first {
-            servers.removeAtIndex(index)
-            tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
-            tableView.endUpdates()
-        }
+        unregisterServer(service.name)
     }
     
     func dvrBrowser(browser: DVRemoteBrowser!, didNotSearch errorDict: [NSObject : AnyObject]!) {
     }
-    
     
     //-----------------------------------------------------------------------------------------
     // MARK: - サーバー情報収集
@@ -119,43 +224,36 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         serverInfo.attributes = info[DVRCNMETA_SERVER_INFO] as! [String : String]
         serverInfo.icon = UIImage(data: info[DVRCNMETA_SERVER_ICON] as! NSData)
         serverInfo.image = UIImage(data: info[DVRCNMETA_SERVER_IMAGE] as! NSData)
-        servers.append(serverInfo)
-        servers = servers.sort{$0.service.name < $1.service.name}
-        let indexes = servers.enumerate().filter{$0.element.service.name == serverInfo.service.name}.map{$0.index}
-        if let index = indexes.first {
-            tableView.beginUpdates()
-            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
-            tableView.endUpdates()
-        }
+        registerServer(serverInfo)
         client.disconnect()
     }
- 
-    //-----------------------------------------------------------------------------------------
-    // MARK: - テーブルビュー用データソース
-    //-----------------------------------------------------------------------------------------
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servers.count + 1
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! DataSourceCell
-        
+    //-----------------------------------------------------------------------------------------
+    // MARK: - セル状態設定
+    //-----------------------------------------------------------------------------------------
+    private func setupCell(cell : DataSourceCell, indexPath : NSIndexPath) {
         let serverCount = servers.count;
         let isRemote = indexPath.row < serverCount
         let name = isRemote ? servers[indexPath.row].service.name : AppDelegate.deviceName()
         let icon = isRemote ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
         let description = isRemote ? servers[indexPath.row].attributes[DVRCNMETA_MACHINE_NAME] : nil
+        cell.selectionStyle = .Default
         cell.dataSourceLabel.text = name
+        cell.dataSourceLabel.textColor = UIColor.blackColor()
         cell.descriptionLabel.text = description
+        cell.descriptionLabel.textColor = UIColor(red: 111/256, green: 113/256, blue: 121/256, alpha: 1)
         cell.accessoryType = .None
         cell.iconImageVIew.image = icon
+        cell.iconImageVIew.alpha = 1.0
         cell.iconImageVIew.contentMode = .ScaleAspectFit
         
         if isRemote {
+            if !servers[indexPath.row].isActive {
+                cell.selectionStyle = .None
+                cell.dataSourceLabel.textColor = UIColor.lightGrayColor()
+                cell.descriptionLabel.textColor = UIColor.lightGrayColor()
+                cell.iconImageVIew.alpha = 0.3
+            }
             let targetName = servers[indexPath.row].service.name
             cell.detailTransitor = {[unowned self](cell : DataSourceCell) in
                 self.detailTargetName = targetName
@@ -172,6 +270,22 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         }else if client.state != .Disconnected && client.service != nil && client.service.name == name {
             cell.accessoryType = .Checkmark
         }
+    }
+
+    //-----------------------------------------------------------------------------------------
+    // MARK: - テーブルビュー用データソース
+    //-----------------------------------------------------------------------------------------
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return servers.count + 1
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! DataSourceCell
+        setupCell(cell, indexPath: indexPath)
         return cell
     }
     
@@ -193,6 +307,9 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 })
             }
         }else{
+            if !servers[indexPath.row].isActive {
+                return
+            }
             let nextServer = servers[indexPath.row].service
             if client.state != .Disconnected && (client.service == nil || client.service!.name != nextServer.name) {
                 client.disconnect()
@@ -239,8 +356,12 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "DataSourceDetail" {
             let target = segue.destinationViewController as! DataSourceDetailViewController
+            let isPinned = pinnedServers.filter{$0.service.name == detailTargetName}.count > 0
             let indexes = servers.enumerate().filter{$0.element.service.name == detailTargetName}.map{$0.index}
-            target.serverInfo = servers[indexes[0]]
+            if let index = indexes.first {
+                servers[index].isPinned = isPinned
+                target.serverInfo = servers[index]
+            }
         }
     }
 

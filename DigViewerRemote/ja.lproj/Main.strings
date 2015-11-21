@@ -120,3 +120,6 @@
 /* Class = "UILabel"; text = "Pinning Style"; ObjectID = "LwQ-fD-Cxi"; */
 "LwQ-fD-Cxi.text" = "ピン留め状態の表示方法";
 
+/* Class = "UILabel"; text = "Show even if this Mac is off line"; ObjectID = "4 RU-bF-Kiu"; */
+"4RU-bF-Kiu.text" = "オフラインの場合でも表示する";
+

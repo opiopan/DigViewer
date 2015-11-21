@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */; };
+		7B1F9AAE1BFF7155003E08F3 /* DataSourceDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F9AAD1BFF7155003E08F3 /* DataSourceDetailContentView.swift */; };
 		7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */; };
 		7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */; };
 		7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
 		7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7B1F9AAD1BFF7155003E08F3 /* DataSourceDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailContentView.swift; sourceTree = "<group>"; };
 		7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFooterViewController.swift; sourceTree = "<group>"; };
 		7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderController.swift; sourceTree = "<group>"; };
 		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
@@ -168,6 +170,19 @@
 			name = "Information View";
 			sourceTree = "<group>";
 		};
+		7B1F9AAF1BFFECF0003E08F3 /* Data Source Selector */ = {
+			isa = PBXGroup;
+			children = (
+				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
+				7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */,
+				7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */,
+				7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */,
+				7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */,
+				7B1F9AAD1BFF7155003E08F3 /* DataSourceDetailContentView.swift */,
+			);
+			name = "Data Source Selector";
+			sourceTree = "<group>";
+		};
 		7B434DB71BD927FC00F6B6E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,11 +227,7 @@
 			children = (
 				7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */,
 				7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */,
-				7B6753941BA3BFEA005CC069 /* ServersViewController.swift */,
-				7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */,
-				7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */,
-				7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */,
-				7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */,
+				7B1F9AAF1BFFECF0003E08F3 /* Data Source Selector */,
 				7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */,
 				7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */,
 				7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */,
@@ -454,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B1F9AAE1BFF7155003E08F3 /* DataSourceDetailContentView.swift in Sources */,
 				7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */,
 				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,

@@ -22,6 +22,7 @@ class DataSourceDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pinnedSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +77,23 @@ class DataSourceDetailViewController: UIViewController {
                     dvVersionLabel.text = NSLocalizedString("DSD_DIGVIEWER", comment: "") + version
                 }
                 descriptionLabel.text = info.attributes[DVRCNMETA_DESCRIPTION]
+                
+                pinnedSwitch.on = info.isPinned
             }
         }
     }
+    
+    @IBAction func changePinnedSwitch(sender: UISwitch) {
+        if let info = serverInfo {
+            info.isPinned = sender.on
+            var pinnedList = ConfigurationController.sharedController.dataSourcePinnedList
+            if info.isPinned {
+                pinnedList.append(serverInfo!)
+            }else{
+                pinnedList = pinnedList.filter{$0.service.name != info.service.name}
+            }
+            ConfigurationController.sharedController.dataSourcePinnedList = pinnedList
+        }
+    }
+    
 }
