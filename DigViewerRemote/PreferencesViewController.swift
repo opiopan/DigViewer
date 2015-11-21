@@ -68,7 +68,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         mapTypeControl!.selectedSegmentIndex = configController.mapType.rawValue
         mapLabelSwitch.on = configController.mapShowLabel
         map3DSwitch.on = configController.map3DView
-        enableVolumeControl!.on = configController.enableVolumeButton
+//        enableVolumeControl!.on = configController.enableVolumeButton
     }
     
     //-----------------------------------------------------------------------------------------

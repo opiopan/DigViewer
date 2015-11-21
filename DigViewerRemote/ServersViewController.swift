@@ -232,33 +232,18 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     // MARK: - セル状態設定
     //-----------------------------------------------------------------------------------------
     private func setupCell(cell : DataSourceCell, indexPath : NSIndexPath, animated : Bool) {
-        if animated {
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.35)
-        }
-
         let serverCount = servers.count;
         let isRemote = indexPath.row < serverCount
         let name = isRemote ? servers[indexPath.row].service.name : AppDelegate.deviceName()
         let icon = isRemote ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
         let description = isRemote ? servers[indexPath.row].attributes[DVRCNMETA_MACHINE_NAME] : nil
-        cell.selectionStyle = .Default
         cell.dataSourceLabel.text = name
-        cell.dataSourceLabel.textColor = UIColor.blackColor()
         cell.descriptionLabel.text = description
-        cell.descriptionLabel.textColor = UIColor(red: 111/256, green: 113/256, blue: 121/256, alpha: 1)
         cell.accessoryType = .None
         cell.iconImageVIew.image = icon
-        cell.iconImageVIew.alpha = 1.0
         cell.iconImageVIew.contentMode = .ScaleAspectFit
         
         if isRemote {
-            if !servers[indexPath.row].isActive {
-                cell.selectionStyle = .None
-                cell.dataSourceLabel.textColor = UIColor.lightGrayColor()
-                cell.descriptionLabel.textColor = UIColor.lightGrayColor()
-                cell.iconImageVIew.alpha = 0.3
-            }
             let targetName = servers[indexPath.row].service.name
             cell.detailTransitor = {[unowned self](cell : DataSourceCell) in
                 self.detailTargetName = targetName
@@ -276,6 +261,25 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             cell.accessoryType = .Checkmark
         }
 
+        if animated {
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.35)
+        }
+        if isRemote && !servers[indexPath.row].isActive {
+            cell.selectionStyle = .None
+            cell.iconImageVIew.alpha = 0.27
+            cell.dataSourceLabel.alpha = 0.27
+            cell.descriptionLabel.alpha = 0.45
+//            cell.dataSourceLabel.textColor = UIColor.lightGrayColor()
+//            cell.descriptionLabel.textColor = UIColor.lightGrayColor()
+        }else{
+            cell.selectionStyle = .Default
+            cell.iconImageVIew.alpha = 1.0
+            cell.dataSourceLabel.alpha = 1.0
+            cell.descriptionLabel.alpha = 1.0
+//            cell.dataSourceLabel.textColor = UIColor.blackColor()
+//            cell.descriptionLabel.textColor = UIColor(red: 111/256, green: 113/256, blue: 121/256, alpha: 1)
+        }
         if animated {
             UIView.commitAnimations()
         }

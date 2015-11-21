@@ -30,6 +30,7 @@
 		7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */; };
 		7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */; };
 		7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */; };
+		7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */; };
 		7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
 		7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
@@ -95,6 +96,7 @@
 		7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
+		7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteBrowser.h; path = DigViewer/DVRemoteBrowser.h; sourceTree = SOURCE_ROOT; };
 		7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteBrowser.m; path = DigViewer/DVRemoteBrowser.m; sourceTree = SOURCE_ROOT; };
 		7B90982F1BA40AEF00B03FD8 /* DigViewerRemote-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DigViewerRemote-Header.h"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */,
 				7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */,
 				7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */,
+				7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */,
 			);
 			name = "Preferences View";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */,
 				7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */,
 				7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */,
+				7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */,
 				7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */,
 				7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */,
 				7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */,

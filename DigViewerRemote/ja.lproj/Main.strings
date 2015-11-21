@@ -90,7 +90,7 @@
 "brx-En-bDT.headerTitle" = "リモートのDigViewerとの連携";
 
 /* Class = "UILabel"; text = "Show Same Map Span With Remote"; ObjectID = "ga0-l0-Dxf"; */
-"ga0-l0-Dxf.text" = "地図の表示範囲をリモートと同期する";
+"ga0-l0-Dxf.text" = "地図の表示範囲をリモートと同期";
 
 /* Class = "UILabel"; text = "Apply Current Map Display"; ObjectID = "reA-1b-F5I"; */
 "reA-1b-F5I.text" = "現在の地図表示状態を設定に反映する";
@@ -123,3 +123,5 @@
 /* Class = "UILabel"; text = "Show even if this Mac is off line"; ObjectID = "4 RU-bF-Kiu"; */
 "4RU-bF-Kiu.text" = "オフラインの場合でも表示する";
 
+/* Class = "UILabel"; text = "About DigViewer remote"; ObjectID = "2Ma-gd-ySz"; */
+"2Ma-gd-ySz.text" = "DigViewer remote について";
