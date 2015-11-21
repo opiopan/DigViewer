@@ -20,6 +20,16 @@ class ServerInfo : NSObject, NSCoding {
         super.init()
     }
     
+    init(src : ServerInfo) {
+        super.init()
+        service = NSNetService(domain: src.service.domain, type: src.service.type, name: src.service.name)
+        icon = src.icon
+        image = src.image
+        attributes = src.attributes
+        isPinned = src.isPinned
+        isActive = src.isActive
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init()
         let domain = aDecoder.decodeObjectForKey("domain") as! String
@@ -134,7 +144,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             servers[pinnedIndex].isActive = true
             let indexPath = NSIndexPath(forRow: pinnedIndex, inSection: 0)
             if let cell = tableView.cellForRowAtIndexPath(indexPath){
-                setupCell(cell as! DataSourceCell, indexPath: indexPath)
+                setupCell(cell as! DataSourceCell, indexPath: indexPath, animated: true)
             }
         }else{
             serverInfo.isActive = true
@@ -157,7 +167,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 servers[index].isActive = false;
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                    setupCell(cell as! DataSourceCell, indexPath: indexPath)
+                    setupCell(cell as! DataSourceCell, indexPath: indexPath, animated: true)
                 }
             }else{
                 servers.removeAtIndex(index)
@@ -231,7 +241,12 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     //-----------------------------------------------------------------------------------------
     // MARK: - セル状態設定
     //-----------------------------------------------------------------------------------------
-    private func setupCell(cell : DataSourceCell, indexPath : NSIndexPath) {
+    private func setupCell(cell : DataSourceCell, indexPath : NSIndexPath, animated : Bool) {
+        if animated {
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.35)
+        }
+
         let serverCount = servers.count;
         let isRemote = indexPath.row < serverCount
         let name = isRemote ? servers[indexPath.row].service.name : AppDelegate.deviceName()
@@ -270,6 +285,10 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         }else if client.state != .Disconnected && client.service != nil && client.service.name == name {
             cell.accessoryType = .Checkmark
         }
+
+        if animated {
+            UIView.commitAnimations()
+        }
     }
 
     //-----------------------------------------------------------------------------------------
@@ -285,7 +304,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! DataSourceCell
-        setupCell(cell, indexPath: indexPath)
+        setupCell(cell, indexPath: indexPath, animated: false)
         return cell
     }
     

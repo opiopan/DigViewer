@@ -88,7 +88,9 @@ class DataSourceDetailViewController: UIViewController {
             info.isPinned = sender.on
             var pinnedList = ConfigurationController.sharedController.dataSourcePinnedList
             if info.isPinned {
-                pinnedList.append(serverInfo!)
+                let newInfo = ServerInfo(src: info)
+                newInfo.isActive = false
+                pinnedList.append(newInfo)
             }else{
                 pinnedList = pinnedList.filter{$0.service.name != info.service.name}
             }
