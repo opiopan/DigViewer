@@ -26,8 +26,6 @@ class ServerInfo : NSObject, NSCoding {
         icon = src.icon
         image = src.image
         attributes = src.attributes
-        isPinned = src.isPinned
-        isActive = src.isActive
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,8 +49,7 @@ class ServerInfo : NSObject, NSCoding {
     }
 }
 
-class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate,
-                            ConfigurationControllerDelegate {
+class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate {
 
     private let browser : DVRemoteBrowser = DVRemoteBrowser()
 
@@ -73,9 +70,6 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 localHeader.activityIndicator.stopAnimating()
             }
         }
-        
-//        syncPinnedList()
-        ConfigurationController.sharedController.registerObserver(self)
     }
     
     deinit{
@@ -126,7 +120,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             [unowned self] in
             let name = $0.service.name
             return self.servers.filter{$0.service.name == name}.count == 0
-        }
+        }.map{ServerInfo(src: $0)}
         servers.appendContentsOf(addee)
         servers = servers.sort{$0.service.name < $1.service.name}
         let addeeIndexes = pinnedServers.enumerate().filter{
@@ -177,10 +171,6 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             }
         }
     }
-    
-//    func notifyUpdateDataSourceConfiguration(configuration: ConfigurationController) {
-//        syncPinnedList()
-//    }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - サーバー探索
