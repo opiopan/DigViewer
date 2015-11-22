@@ -1,5 +1,5 @@
 //
-//  DataSourceDetailContentView.swift
+//  ScrollableContentView.swift
 //  DigViewerRemote
 //
 //  Created by opiopan on 2015/11/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataSourceDetailContentView: UIView {
+class ScrollableContentView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()

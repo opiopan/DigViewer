@@ -9,17 +9,40 @@
 import UIKit
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
-    static var headingDisplays = [
+    static private var headingDisplays = [
         NSLocalizedString("HEADING_DISPLAY_NONE", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_ARROW", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_FOV", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_ARROW_AND_FOV", comment: ""),
     ]
     
-    static var summaryDisplays = [
+    static private var summaryDisplays = [
         NSLocalizedString("SUMMARY_DISPLAY_NONE", comment: ""),
         NSLocalizedString("SUMMARY_DISPLAY_BALLOON", comment: ""),
         NSLocalizedString("SUMMARY_DISPLAY_PINNING", comment: ""),
+    ]
+    
+    static private var dataSourceSeciotnIcons = [
+        "icon_datasource",
+    ]
+    
+    static private var mapSectionIcons = [
+        "icon_maptype",
+        "icon_maplabel",
+        "icon_3dview",
+        "icon_heading",
+        "icon_summary",
+        "icon_detailconfig",
+    ]
+    
+    static private var otherSectionIcons = [
+        "icon_about"
+    ]
+    
+    static private var icons : [[String]] = [
+        PreferencesViewController.dataSourceSeciotnIcons,
+        PreferencesViewController.mapSectionIcons,
+        PreferencesViewController.otherSectionIcons,
     ]
     
     @IBOutlet var mapTypeControl : UISegmentedControl?
@@ -83,12 +106,17 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell : UITableViewCell! = nil
+        var row = indexPath.row
         if indexPath.section == 1 && configController.mapType == .Map && indexPath.row > 0 {
             let newIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-            return super.tableView(tableView, cellForRowAtIndexPath: newIndexPath)
+            cell = super.tableView(tableView, cellForRowAtIndexPath: newIndexPath)
+            row++
         }else{
-            return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+            cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }
+        cell.imageView!.image = UIImage(named: PreferencesViewController.icons[indexPath.section][row])
+        return cell
     }
     
     private var savedMapType : MapType = .Map
