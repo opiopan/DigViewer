@@ -156,7 +156,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     private func unregisterServer(name : String) {
         let indexes = servers.enumerate().filter{$0.element.service.name == name}.map{$0.index}
         if let index = indexes.first {
-            let isPinned = servers.filter{$0.service.name == name}.count > 0
+            let isPinned = pinnedServers.filter{$0.service.name == name}.count > 0
             if  isPinned {
                 servers[index].isActive = false;
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)

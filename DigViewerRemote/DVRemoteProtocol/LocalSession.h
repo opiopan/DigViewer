@@ -25,3 +25,7 @@
 - (NSArray *)nodeListForID:(NSArray *)nodeID;
 
 @end
+
+@protocol LocalSessionDelegate
+@optional
+@end

@@ -12,6 +12,7 @@ class AboutViewController: UIViewController {
 
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var cautionLabel: UILabel!
+    @IBOutlet weak var copyrightLabel: UILabel!
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -28,18 +29,15 @@ class AboutViewController: UIViewController {
         let cautions = infoPlist!["OPCaution"] as! [String]
         if cautions.count > 0 {
             let cautionString = cautions.enumerate().reduce(""){
-                var separator = ", "
-                if $1.index == 0 {
-                    separator = ""
-                }else if $1.index == cautions.count - 1 {
-                    separator = ", and "
-                }
+                let separator = $1.index == 0 ? "" : $1.index == cautions.count - 1 ? ", and " : ", "
                 return $0 + separator + $1.element
             }
             cautionLabel.text = "Caution:\nThis is NOT OFFICIAL BUILD which is \(cautionString)."
         }else{
             cautionLabel.text = nil
         }
+        
+        copyrightLabel.text = infoPlist!["NSHumanReadableCopyright"] as? String
     }
     
     override func didReceiveMemoryWarning() {

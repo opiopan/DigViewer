@@ -102,6 +102,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         if let cell = tableView!.cellForRowAtIndexPath(index) {
             if (cell as! InspectorImageCell).thumbnailView.image == nil {
                 (cell as! InspectorImageCell).thumbnailView.image = thumbnail
+                tableView.reloadData()
             }
         }
     }
@@ -125,7 +126,14 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
-            return  CGFloat(160)
+            var rc = CGFloat(152)
+            if let image = DVRemoteClient.sharedClient().thumbnail {
+                var ratio = image.size.height / image.size.width
+                ratio = min(1.0, ratio)
+                ratio = max(0.3, ratio)
+                rc *= ratio
+            }
+            return  rc + 8
         }else{
             if ExifViewController.cellForEstimate == nil {
                 ExifViewController.cellForEstimate =
@@ -214,6 +222,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
         if (indexPath.row == 0){
             performSegueWithIdentifier("FullImageView", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     //-----------------------------------------------------------------------------------------
