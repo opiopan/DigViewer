@@ -11,13 +11,6 @@ import UIKit
 class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     deinit {
@@ -25,7 +18,6 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -119,16 +111,53 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
         if imageID == nil {
             imageID = node[DVRCNMETA_ITEM_NAME] as? String
         }
+
         selectedNode =  isFolder ?  node[DVRCNMETA_ITEM_NAME] as? String : imageID
         if node[DVRCNMETA_ITEM_IS_FOLDER] as? NSNumber != 0 {
-            let newView = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController") as? ItemListViewController
-            newView!.navigationItem.title = selectedNode
-            newView!.document = document
-            newView!.path = path
-            newView!.path!.append(selectedNode!)
-            newView!.selectedNode = nil
+            var newPath = path!
+            newPath.append(selectedNode!)
+            
+            var isCurrentFolder = false
+            if let meta = DVRemoteClient.sharedClient().meta {
+                let currentDocument = meta[DVRCNMETA_DOCUMENT] as? String
+                let currentPath = meta[DVRCNMETA_ID] as? [String]
+                if document != nil && document == currentDocument && newPath.count == currentPath!.count - 1 {
+                    isCurrentFolder = true
+                    for var i = 0; i < newPath.count; i++ {
+                        if newPath[i] != currentPath![i] {
+                            isCurrentFolder = false
+                            break
+                        }
+                    }
+                }
+            }
+
+            var additionalView : UIViewController? = nil
+            let client = DVRemoteClient.sharedClient()
+            if client.isConnectedToLocal && client.isAssetCollection(newPath, inDocument: document){
+                let meta = DVRemoteClient.sharedClient().meta!
+                let newView = self.storyboard!.instantiateViewControllerWithIdentifier("AssetListViewController") as? AssetListViewController
+                newView!.navigationItem.title = selectedNode
+                newView!.document = document
+                newView!.path = newPath
+                newView!.selectedNode = nil
+                if isCurrentFolder {
+                    newView!.selectedNodeIndex = (meta[DVRCNMETA_INDEX_IN_PARENT] as? NSNumber)! as Int
+                }else{
+                    newView!.selectedNodeIndex = nil
+                }
+                newView!.assets = client.assetsForID(newPath, inDocument: document)
+                additionalView = newView
+            }else{
+                let newView = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController") as? ItemListViewController
+                newView!.navigationItem.title = selectedNode
+                newView!.document = document
+                newView!.path = newPath
+                newView!.selectedNode = nil
+                additionalView = newView
+            }
             var controllers = navigationController!.viewControllers
-            controllers.append(newView!)
+            controllers.append(additionalView!)
             navigationController!.setViewControllers(controllers, animated: true)
         }else{
             var nodeID = path

@@ -31,6 +31,8 @@
 		7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */; };
 		7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */; };
 		7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */; };
+		7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */; };
+		7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB211C02D58500783E17 /* AssetCell.swift */; };
 		7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
 		7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
@@ -97,6 +99,8 @@
 		7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
+		7B88FB211C02D58500783E17 /* AssetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteBrowser.h; path = DigViewer/DVRemoteBrowser.h; sourceTree = SOURCE_ROOT; };
 		7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteBrowser.m; path = DigViewer/DVRemoteBrowser.m; sourceTree = SOURCE_ROOT; };
 		7B90982F1BA40AEF00B03FD8 /* DigViewerRemote-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DigViewerRemote-Header.h"; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				7B9098361BA4634C00B03FD8 /* ExifViewController.swift */,
 				7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */,
 				7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */,
+				7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */,
+				7B88FB211C02D58500783E17 /* AssetCell.swift */,
 			);
 			name = "Information View";
 			sourceTree = "<group>";
@@ -481,10 +487,12 @@
 				7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */,
 				7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */,
 				7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */,
+				7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */,
 				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */,
 				7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */,
+				7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */,
 				7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */,
 				7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */,
 				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 #import "DVRemoteSession.h"
 
 @protocol DVRemoteClientDelegate;
@@ -60,6 +61,9 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (NSArray*)nodeListForID:(NSArray*)nodeID inDocument:(NSString*)document;
 
 - (void)requestServerInfo;
+
+- (PHFetchResult*)assetsForID:(NSArray*)nodeID inDocument:(NSString*)document;
+- (BOOL)isAssetCollection:(NSArray*)nodeID inDocument:(NSString*)document;
 
 @end
 

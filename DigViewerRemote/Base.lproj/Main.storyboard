@@ -402,6 +402,76 @@
             </objects>
             <point key="canvasLocation" x="1025" y="-2341"/>
         </scene>
+        <!--Asset List View Controller-->
+        <scene sceneID="gE5-l0-sRX">
+            <objects>
+                <collectionViewController storyboardIdentifier="AssetListViewController" id="yI9-ln-fMe" customClass="AssetListViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="d0d-FK-iKh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="0GG-1q-J2I">
+                            <size key="itemSize" width="80" height="80"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetCell" id="7Fx-0E-0Ca" customClass="AssetCell" customModule="DigViewerRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jZP-XO-Kwy" userLabel="base">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <animations/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-co-fnn" userLabel="checkMark">
+                                            <rect key="frame" x="51" y="51" width="25" height="25"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="3p2-5P-Lio"/>
+                                                <constraint firstAttribute="width" constant="25" id="vQP-3k-LaE"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstItem="jZP-XO-Kwy" firstAttribute="top" secondItem="7Fx-0E-0Ca" secondAttribute="top" id="9ML-cB-WQh"/>
+                                    <constraint firstItem="jZP-XO-Kwy" firstAttribute="leading" secondItem="7Fx-0E-0Ca" secondAttribute="leading" id="OUI-JW-uge"/>
+                                    <constraint firstAttribute="bottom" secondItem="jZP-XO-Kwy" secondAttribute="bottom" id="Tf9-ge-LtW"/>
+                                    <constraint firstAttribute="trailing" secondItem="m7k-co-fnn" secondAttribute="trailing" constant="4" id="hlP-qp-nqf"/>
+                                    <constraint firstAttribute="bottom" secondItem="m7k-co-fnn" secondAttribute="bottom" constant="4" id="hxl-eL-Wkc"/>
+                                    <constraint firstAttribute="trailing" secondItem="jZP-XO-Kwy" secondAttribute="trailing" id="omW-7i-cSD"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="checkMarkView" destination="m7k-co-fnn" id="1pD-VT-1s7"/>
+                                    <outlet property="imageView" destination="jZP-XO-Kwy" id="AgA-lY-afk"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="yI9-ln-fMe" id="rzh-lc-XW9"/>
+                            <outlet property="delegate" destination="yI9-ln-fMe" id="lNW-fC-5Qf"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="cSO-c5-Cjy">
+                        <barButtonItem key="rightBarButtonItem" image="BottomButton" id="5TB-mW-DSu">
+                            <connections>
+                                <action selector="moveToBottom:" destination="yI9-ln-fMe" id="Sep-1G-x7Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YqN-yp-9eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="-2338"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Jr-vq-hwB">
             <objects>

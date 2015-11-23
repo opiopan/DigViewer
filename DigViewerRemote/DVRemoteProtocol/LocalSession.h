@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Photos/Photos.h>
 #import "DVRemoteSession.h"
 
 @interface LocalSession : NSObject
@@ -23,6 +24,10 @@
 - (void)moveToAssetWithID: (NSArray*)nodeID;
 
 - (NSArray *)nodeListForID:(NSArray *)nodeID;
+- (PHFetchResult*)assetsForID:(NSArray*)nodeID;
+- (BOOL)isAssetCollection:(NSArray*)nodeID;
+
++ (UIImage*)thumbnailForAsset:(PHAsset*)asset withSize:(CGFloat)imageSize;
 
 @end
 

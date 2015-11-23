@@ -283,7 +283,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 
 - (UIImage *)thumbnailForID:(NSArray *)nodeID
 {
-    return [self thumbnailForID:nodeID withSize:THUMBNAIL_SIZE];
+    return [self thumbnailForID:nodeID withSize:THUMBNAIL_SIZE * [UIScreen mainScreen].scale];
 }
 
 - (UIImage *)thumbnailForID:(NSArray *)nodeID withSize:(CGFloat)imageSize
@@ -294,7 +294,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     PHFetchResult* assets = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
     if (assets.count > 0){
         PHAsset* asset = assets[0];
-        image = [self thumbnailForAsset:asset withSize:imageSize];
+        image = [self.class thumbnailForAsset:asset withSize:imageSize];
     }else{
         LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
         if (target.collection){
@@ -304,7 +304,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
             options.fetchLimit = 1;
             PHFetchResult* repAssets = [PHAsset fetchAssetsInAssetCollection:collection options:options];
             if (repAssets.count > 0){
-                image = [self thumbnailForAsset:repAssets[0] withSize:imageSize];
+                image = [self.class thumbnailForAsset:repAssets[0] withSize:imageSize];
             }
         }else{
             if (target.children.count > 0){
@@ -317,7 +317,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     return image;
 }
 
-- (UIImage*)thumbnailForAsset:(PHAsset*)asset withSize:(CGFloat)imageSize
++ (UIImage*)thumbnailForAsset:(PHAsset*)asset withSize:(CGFloat)imageSize
 {
     __block UIImage *image = nil;
 
@@ -421,6 +421,22 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     }
     
     return rc;
+}
+
+- (PHFetchResult*)assetsForID:(NSArray*)nodeID
+{
+    PHFetchResult* assets = nil;
+    LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
+    if (target.collection){
+        assets = [PHAsset fetchAssetsInAssetCollection:target.collection options:_assetsFetchOptions];
+    }
+    return assets;
+}
+
+- (BOOL)isAssetCollection:(NSArray*)nodeID
+{
+    LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
+    return target.collection;
 }
 
 //-----------------------------------------------------------------------------------------

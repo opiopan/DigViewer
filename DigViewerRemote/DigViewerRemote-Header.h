@@ -8,3 +8,4 @@
 #import "DVRemoteBrowser.h"
 #import "DVRemoteClient.h"
 #import "ImageMetadataKV.h"
+#import "LocalSession.h"

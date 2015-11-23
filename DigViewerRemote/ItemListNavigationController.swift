@@ -51,6 +51,8 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             let path = meta[DVRCNMETA_ID] as! [String]
             var views: [UIViewController] = []
             var currentPath: [String] = []
+            let isLocal = DVRemoteClient.sharedClient().isConnectedToLocal
+            
             if document != nil && document == newDocument {
                 for var i = 0; i < path.count - 1; i++ {
                     if i < viewControllers.count && viewControllers[i].navigationItem.title == path[i] {
@@ -67,19 +69,34 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             
             for var i = views.count; i < path.count - 1; i++ {
                 currentPath.append(path[i])
-                let view = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController") as? ItemListViewController
-                view!.navigationItem.title = path[i]
-                view!.document = newDocument
-                view!.path = currentPath
-                view!.selectedNode = path[i + 1]
-                if i == path.count - 1 {
+                if isLocal && DVRemoteClient.sharedClient().isAssetCollection(currentPath, inDocument: newDocument) {
+                    let view = self.storyboard!.instantiateViewControllerWithIdentifier("AssetListViewController")
+                               as? AssetListViewController
+                    view!.navigationItem.title = path[i]
+                    view!.document = newDocument
+                    view!.path = currentPath
+                    view!.selectedNode = path[i + 1]
                     view!.selectedNodeIndex = meta[DVRCNMETA_INDEX_IN_PARENT] as? Int
+                    view!.assets = DVRemoteClient.sharedClient().assetsForID(currentPath, inDocument: newDocument)
+                    views.append(view!)
                 }else{
-                    view!.selectedNodeIndex = nil
+                    let view = self.storyboard!.instantiateViewControllerWithIdentifier("ImageListViewController")
+                               as? ItemListViewController
+                    view!.navigationItem.title = path[i]
+                    view!.document = newDocument
+                    view!.path = currentPath
+                    view!.selectedNode = path[i + 1]
+                    if i == path.count - 1 {
+                        view!.selectedNodeIndex = meta[DVRCNMETA_INDEX_IN_PARENT] as? Int
+                    }else{
+                        view!.selectedNodeIndex = nil
+                    }
+                    views.append(view!)
                 }
-                views.append(view!)
             }
-            //(views.last! as! ItemListViewController).tableView!.reloadData()
+            
+            
+            
             document = newDocument
             setViewControllers(views, animated: animated)
         }else{
@@ -95,8 +112,13 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
         var needRearrange = false
         let newDocument = meta![DVRCNMETA_DOCUMENT] as? String
         let newPath = meta![DVRCNMETA_ID] as? [String]
-        let lastController = viewControllers.last as! ItemListViewController?
-        let path = lastController != nil ? lastController!.path : nil
+        let lastController = viewControllers.last
+        var path : [String]? = nil
+        if lastController != nil && lastController!.dynamicType == ItemListViewController.self {
+            path = (lastController as! ItemListViewController).path
+        }else if lastController != nil && lastController!.dynamicType == AssetListViewController.self {
+            path = (lastController as! AssetListViewController).path
+        }
         if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
             for var i = 0; i < path!.count; i++ {
                 if path![i] != newPath![i] {

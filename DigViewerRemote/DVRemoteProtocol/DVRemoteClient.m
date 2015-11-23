@@ -409,6 +409,24 @@
     [_session sendCommand:DVRC_REQUEST_SEVER_INFO withData:nil replacingQue:NO];
 }
 
+- (PHFetchResult*)assetsForID:(NSArray*)nodeID inDocument:(NSString*)document
+{
+    if (_localSession){
+        return [_localSession assetsForID:nodeID];
+    }else{
+        return nil;
+    }
+}
+
+- (BOOL)isAssetCollection:(NSArray*)nodeID inDocument:(NSString*)document
+{
+    if (_localSession){
+        return [_localSession isAssetCollection:nodeID];
+    }else{
+        return false;
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // セッションからのイベント処理
 //-----------------------------------------------------------------------------------------
