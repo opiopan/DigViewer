@@ -436,7 +436,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 - (BOOL)isAssetCollection:(NSArray*)nodeID
 {
     LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
-    return target.collection;
+    return target.collection != nil;
 }
 
 //-----------------------------------------------------------------------------------------
