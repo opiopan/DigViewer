@@ -2275,7 +2275,7 @@
     </scenes>
     <resources>
         <image name="BottomButton" width="31" height="31"/>
-        <image name="CenteringButton" width="31" height="31"/>
+        <image name="CenteringButton" width="30" height="30"/>
         <image name="ConfigureButton" width="31" height="31"/>
         <image name="DVremote" width="512" height="512"/>
         <image name="LeftButton" width="31" height="31"/>
