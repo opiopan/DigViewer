@@ -148,6 +148,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
+        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         let mode = splitViewController!.displayMode
         if size.width > size.height && isReguler {
@@ -176,6 +177,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     @IBAction func performInformationButton(sender : UIBarButtonItem) {
         let bounds = UIScreen.mainScreen().bounds
+        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
         if bounds.size.height > bounds.size.width {
             // 縦表示
@@ -216,6 +218,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     // 設定ボタン
     //-----------------------------------------------------------------------------------------
     @IBAction func configureApp(sender : AnyObject) {
+        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
             traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
         if isReguler {
@@ -230,6 +233,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     private func showServersList() {
         isOpenServerList = true
+        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
             traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
         if isReguler {

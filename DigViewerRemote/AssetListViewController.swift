@@ -97,27 +97,117 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     //-----------------------------------------------------------------------------------------
-    // MARK: UICollectionViewDelegate
+    // MARK: ハイライト＆選択制御
     //-----------------------------------------------------------------------------------------
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        changeSelecting(indexPath, job: .Highlight)
         return true
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        changeSelecting(indexPath, job: .Unhighlight)
     }
 
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        var nodeID = path
-        let asset = assets!.objectAtIndex(indexPath.row) as! PHAsset
-        nodeID!.append(asset.localIdentifier)
-        DVRemoteClient.sharedClient().moveToNode(nodeID, inDocument: document)
-        if !traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) {
-            (navigationController! as? ItemListNavigationController)?.backToMapView()
-        }
-        
+        changeSelecting(indexPath, job: .Select)
         return true
     }
     
-    private let approximatelySize = 78.0
-    private let separatorSize = 2.0
+    private enum SelectingPhase {
+        case None
+        case Highlighting
+        case Highlight
+        case Unhighlighting
+        case Unhighlight
+    }
     
+    private enum SelectingJob {
+        case None
+        case Highlight
+        case Unhighlight
+        case Select
+    }
+    
+    private var selectingPhase : SelectingPhase = .None
+    private var selectingIndexPath : NSIndexPath?
+    private var deferringJob : SelectingJob = .None
+    private let highlightPeriod = 0.2
+    
+    private func changeSelecting(indexPath : NSIndexPath,  job : SelectingJob) {
+        if selectingIndexPath != nil && selectingIndexPath! != indexPath {
+            if let cell = collectionView!.cellForItemAtIndexPath(selectingIndexPath!) as! AssetCell? {
+                cell.imageView.alpha = 1.0
+            }
+            selectingIndexPath = nil
+            selectingPhase = .None
+            deferringJob = .None
+        }
+      
+        selectingIndexPath = indexPath
+        
+        if job == .Highlight {
+            selectingPhase = .Highlighting
+            deferringJob = .None
+            if let cell = collectionView!.cellForItemAtIndexPath(indexPath) as! AssetCell? {
+                UIView.animateWithDuration(highlightPeriod, animations: {
+                    cell.imageView.alpha = 0.5
+                }){
+                    [unowned self] (Bool) in
+                    if self.selectingIndexPath != nil && self.selectingIndexPath! == indexPath {
+                        self.selectingPhase = .Highlight
+                        if self.deferringJob != .None {
+                            self.changeSelecting(self.selectingIndexPath!, job: self.deferringJob)
+                        }
+                    }
+                }
+            }
+        }else if job == .Unhighlight {
+            if selectingPhase == .Highlight {
+                selectingPhase = .Unhighlighting
+                if let cell = collectionView!.cellForItemAtIndexPath(indexPath) as! AssetCell? {
+                    UIView.animateWithDuration(highlightPeriod, animations: {
+                        cell.imageView.alpha = 1.0
+                    }){
+                        [unowned self] (Bool) in
+                        if self.selectingIndexPath != nil && self.selectingIndexPath! == indexPath {
+                            self.selectingPhase = .Unhighlight
+                            if self.deferringJob != .None {
+                                self.changeSelecting(self.selectingIndexPath!, job: self.deferringJob)
+                            }
+                        }
+                    }
+                }
+                
+            }else if selectingPhase == .Highlighting {
+                deferringJob = job
+            }
+        }else if job == .Select {
+            var nodeID = path
+            let asset = assets!.objectAtIndex(indexPath.row) as! PHAsset
+            nodeID!.append(asset.localIdentifier)
+            DVRemoteClient.sharedClient().moveToNode(nodeID, inDocument: document)
+            if selectingPhase == .Highlighting || selectingPhase == .Unhighlighting {
+                deferringJob = job
+            }else{
+                let condition = UITraitCollection(horizontalSizeClass: .Regular)
+                let isiPad = UIApplication.sharedApplication().keyWindow!.traitCollection.containsTraitsInCollection(condition)
+                if !isiPad {
+                    (navigationController! as? ItemListNavigationController)?.backToMapView()
+                }else if selectingPhase == .Highlight {
+                    changeSelecting(indexPath, job: .Unhighlight)
+                }
+            }
+            
+        }
+    }
+    
+    private let approximatelySize = 78.0
+    private let separatorSize = 1.0
+    
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: レイアウト
+    //-----------------------------------------------------------------------------------------
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let viewWidth = Double(collectionView.frame.size.width)
         let rowNum = Double(Int(viewWidth / approximatelySize))

@@ -163,7 +163,8 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             var nodeID = path
             nodeID!.append(selectedNode!)
             DVRemoteClient.sharedClient().moveToNode(nodeID, inDocument: document)
-            if !traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) {
+            let collection = UIApplication.sharedApplication().keyWindow!.traitCollection
+            if !collection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) {
                 (navigationController! as? ItemListNavigationController)?.backToMapView()
             }
         }
