@@ -411,6 +411,14 @@
                                                 <constraint firstAttribute="width" constant="25" id="vQP-3k-LaE"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2eZ-Ks-5u9">
+                                            <rect key="frame" x="4" y="51" width="25" height="25"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="OaB-V3-BVp"/>
+                                                <constraint firstAttribute="height" constant="25" id="VFA-bD-lOY"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -418,13 +426,16 @@
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="jZP-XO-Kwy" firstAttribute="top" secondItem="7Fx-0E-0Ca" secondAttribute="top" id="9ML-cB-WQh"/>
+                                    <constraint firstItem="2eZ-Ks-5u9" firstAttribute="leading" secondItem="7Fx-0E-0Ca" secondAttribute="leading" constant="4" id="Jhb-ob-Jgz"/>
                                     <constraint firstItem="jZP-XO-Kwy" firstAttribute="leading" secondItem="7Fx-0E-0Ca" secondAttribute="leading" id="OUI-JW-uge"/>
                                     <constraint firstAttribute="bottom" secondItem="jZP-XO-Kwy" secondAttribute="bottom" id="Tf9-ge-LtW"/>
                                     <constraint firstAttribute="trailing" secondItem="m7k-co-fnn" secondAttribute="trailing" constant="4" id="hlP-qp-nqf"/>
                                     <constraint firstAttribute="bottom" secondItem="m7k-co-fnn" secondAttribute="bottom" constant="4" id="hxl-eL-Wkc"/>
                                     <constraint firstAttribute="trailing" secondItem="jZP-XO-Kwy" secondAttribute="trailing" id="omW-7i-cSD"/>
+                                    <constraint firstAttribute="bottom" secondItem="2eZ-Ks-5u9" secondAttribute="bottom" constant="4" id="sU7-ba-ssP"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="badgeCell" destination="2eZ-Ks-5u9" id="3mb-hE-sUE"/>
                                     <outlet property="checkMarkView" destination="m7k-co-fnn" id="1pD-VT-1s7"/>
                                     <outlet property="imageView" destination="jZP-XO-Kwy" id="AgA-lY-afk"/>
                                 </connections>

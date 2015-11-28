@@ -76,13 +76,26 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         let asset = assets!.objectAtIndex(indexPath.row) as! PHAsset
         let size = approximatelySize * Double(UIScreen.mainScreen().scale)
         let thumbnailSize = CGSize(width: size, height: size)
-        //cell.imageView.image = LocalSession.thumbnailForAsset(asset, withSize: CGFloat(size))
         imageManager.requestImageForAsset(asset, targetSize: thumbnailSize, contentMode: .AspectFill, options: nil){
             if let image = $0.0 {
                 cell.imageView.image = image
             }
         }
-        
+        if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoPanorama.rawValue) != 0 {
+            cell.badgeCell.image = UIImage(named: "badge_panorama")
+        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoHDR.rawValue) != 0 {
+            cell.badgeCell.image = UIImage(named: "badge_hdr")
+        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoScreenshot.rawValue) != 0 {
+            cell.badgeCell.image = UIImage(named: "badge_screenshot")
+        }else{
+            cell.badgeCell.image = nil
+        }
+        if #available(iOS 9.1, *) {
+            if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoLive.rawValue) != 0 {
+                cell.badgeCell.image = UIImage(named: "badge_live")
+            }
+        }
+    
         return cell
     }
 

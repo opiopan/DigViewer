@@ -11,4 +11,5 @@ import UIKit
 class AssetCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var checkMarkView: UIImageView!
+    @IBOutlet weak var badgeCell: UIImageView!
 }
