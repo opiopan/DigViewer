@@ -41,6 +41,7 @@
 "LS_HDRIMAGE_TYPE_NAME" = "HDR画像";
 "LS_LIVEIMAGE_TYPE_NAME" = "ライブフォト";
 "LS_TYPESTRING_ALBUM" = "アルバム";
+"LS_SYNCED_ALBUM" = "Macと同期したアルバム";
 
 "SPAN_RELATION_METHOD" = "連携方式";
 "SPAN_RELATION_METHOD_LONG_SIDE" = "長辺に合わせる";

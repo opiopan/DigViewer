@@ -115,8 +115,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let data = sectionData[section]
-        return section == 0 ? data.count - 1 : data.count
+        return sectionData[section].count
     }
 
     private static var cellForEstimate : LabelArrangableCell?
@@ -126,12 +125,13 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
-            var rc = CGFloat(152)
+            var rc = CGFloat(152 * 0.75)
             if let image = DVRemoteClient.sharedClient().thumbnail {
-                var ratio = image.size.height / image.size.width
-                ratio = min(1.0, ratio)
-                ratio = max(0.3, ratio)
-                rc *= ratio
+                let ratio = image.size.height / image.size.width
+                rc *= max(1.0, ratio)
+                if rc / ratio > view.bounds.width {
+                    rc = view.bounds.width * ratio
+                }
             }
             return  rc + 8
         }else{
@@ -191,19 +191,9 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     }
     
     private func setupCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        var entry : ImageMetadataKV? = nil
-        if indexPath.section == 0 && indexPath.row == 0 {
-            entry = exifData[0]
-        }else if indexPath.section == 0 {
-            entry = exifData[indexPath.row + 1]
-        }else{
-            entry = (sectionData[indexPath.section])[indexPath.row]
-        }
+        let entry : ImageMetadataKV? = (sectionData[indexPath.section])[indexPath.row]
         if indexPath.section == 0 && indexPath.row == 0 {
             let imageCell = cell as! InspectorImageCell
-            let entry2 = exifData[1]
-            imageCell.mainLabel!.text = entry!.value
-            imageCell.subLabel!.text = entry2.value
             imageCell.thumbnailView!.image = DVRemoteClient.sharedClient().thumbnail
         }else{
             if entry != nil {

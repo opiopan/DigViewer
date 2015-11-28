@@ -15,12 +15,15 @@
 static struct {
     PHAssetCollectionType type;
     PHAssetCollectionSubtype subType;
+    NSString* folderName;
+    BOOL needSort;
+    BOOL prevailBottom;
 }AssetTypes[] = {
-    PHAssetCollectionTypeSmartAlbum, PHAssetCollectionSubtypeSmartAlbumUserLibrary,
-    PHAssetCollectionTypeSmartAlbum, PHAssetCollectionSubtypeSmartAlbumFavorites,
-    PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumRegular,
-    PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumSyncedAlbum,
-    (PHAssetCollectionType)0, (PHAssetCollectionSubtype)0
+    PHAssetCollectionTypeSmartAlbum, PHAssetCollectionSubtypeSmartAlbumUserLibrary, nil, NO, YES,
+    PHAssetCollectionTypeSmartAlbum, PHAssetCollectionSubtypeSmartAlbumFavorites, nil, NO, NO,
+    PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumRegular, nil, NO, NO,
+    PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumSyncedAlbum, @"LS_SYNCED_ALBUM", YES, NO,
+    (PHAssetCollectionType)0, (PHAssetCollectionSubtype)0, nil, NO, NO,
 };
 
 @interface LSNode : NSObject
@@ -28,6 +31,7 @@ static struct {
 @property NSArray* nodeID;
 @property NSMutableArray* children;
 @property PHAssetCollection* collection;
+@property BOOL prevailBottom;
 @end
 
 @implementation LSNode
@@ -109,13 +113,31 @@ static const int NAME_CLIP_LENGTH = 13;
         PHFetchResult* result = [PHAssetCollection fetchAssetCollectionsWithType:AssetTypes[i].type
                                                                          subtype:AssetTypes[i].subType
                                                                          options:nil];
+        LSNode* parent = _root;
+        if (AssetTypes[i].folderName){
+            parent = [LSNode new];
+            parent.name = NSLocalizedString(AssetTypes[i].folderName, nil);
+            parent.nodeID = [_root.nodeID arrayByAddingObject:parent.name];
+            parent.prevailBottom = NO;
+            [_root.children addObject:parent];
+        }
+        NSMutableArray* currentNodes = [NSMutableArray new];
         for (NSUInteger j = 0; j < result.count; j++){
             PHAssetCollection* collection = [result objectAtIndex:j];
             LSNode* node = [LSNode new];
             node.name = collection.localizedTitle;
-            node.nodeID = [_root.nodeID arrayByAddingObject:node.name];
+            node.nodeID = [parent.nodeID arrayByAddingObject:node.name];
             node.collection = collection;
-            [_root.children addObject:node];
+            node.prevailBottom = AssetTypes[i].prevailBottom;
+            [currentNodes addObject:node];
+        }
+        if (AssetTypes[i].needSort) {
+            [parent.children addObjectsFromArray:[currentNodes sortedArrayUsingComparator:^(LSNode* obj1, LSNode* obj2){
+                return [obj1.name compare:obj2.name options:NSCaseInsensitiveSearch | NSNumericSearch];
+            }]];
+             
+        }else{
+            [parent.children addObjectsFromArray:currentNodes];
         }
     }
     _currentNode = _root.children[0];
@@ -124,21 +146,26 @@ static const int NAME_CLIP_LENGTH = 13;
     _currentIndexInAssets = _currentAssets.count > 0 ? _currentAssets.count - 1 : 0;
     
     // スマートコレクションリストに含まれるアルバムをツリーに追加
-    PHFetchResult* smartFolderList = [PHCollectionList fetchCollectionListsWithType:PHCollectionListTypeSmartFolder
-                                                                            subtype:PHCollectionListSubtypeAny options:nil];
-    for (PHCollectionList* list in smartFolderList){
-        LSNode* node = [LSNode new];
-        node.name = list.localizedTitle;
-        node.nodeID = [_root.nodeID arrayByAddingObject:node.name];
-        [_root.children addObject:node];
-
-        PHFetchResult* collections = [PHAssetCollection fetchCollectionsInCollectionList:list options:nil];
-        for (PHAssetCollection* collection in collections){
-            LSNode* child = [LSNode new];
-            child.name = collection.localizedTitle;
-            child.nodeID = [node.nodeID arrayByAddingObject:child.name];
-            child.collection = collection;
-            [node.children addObject:child];
+    PHFetchResult* collectionLists[2];
+    collectionLists[0] = [PHCollectionList fetchCollectionListsWithType:PHCollectionListTypeFolder
+                                                                subtype:PHCollectionListSubtypeAny options:nil];
+    collectionLists[1] = [PHCollectionList fetchCollectionListsWithType:PHCollectionListTypeSmartFolder
+                                                                subtype:PHCollectionListSubtypeAny options:nil];
+    for (int i = 0; i < 2; i++){
+        for (PHCollectionList* list in collectionLists[i]){
+            LSNode* node = [LSNode new];
+            node.name = list.localizedTitle;
+            node.nodeID = [_root.nodeID arrayByAddingObject:node.name];
+            [_root.children addObject:node];
+            
+            PHFetchResult* collections = [PHAssetCollection fetchCollectionsInCollectionList:list options:nil];
+            for (PHAssetCollection* collection in collections){
+                LSNode* child = [LSNode new];
+                child.name = collection.localizedTitle;
+                child.nodeID = [node.nodeID arrayByAddingObject:child.name];
+                child.collection = collection;
+                [node.children addObject:child];
+            }
         }
     }
     
@@ -299,12 +326,15 @@ static const CGFloat THUMBNAIL_SIZE = 100;
         LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
         if (target.collection){
             PHAssetCollection* collection = target.collection;
-            PHFetchOptions* options = [PHFetchOptions new];
-            options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
-            options.fetchLimit = 1;
+            PHFetchOptions* options = nil;
+            if (target.prevailBottom){
+                options = [PHFetchOptions new];
+                options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
+                options.fetchLimit = 1;
+            }
             PHFetchResult* repAssets = [PHAsset fetchAssetsInAssetCollection:collection options:options];
             if (repAssets.count > 0){
-                image = [self.class thumbnailForAsset:repAssets[0] withSize:imageSize];
+                image = [self.class thumbnailForAsset:repAssets[repAssets.count / 2] withSize:imageSize];
             }
         }else{
             if (target.children.count > 0){

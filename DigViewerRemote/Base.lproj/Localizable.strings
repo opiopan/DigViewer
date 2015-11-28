@@ -36,6 +36,7 @@
 "LS_HDRIMAGE_TYPE_NAME" = "HDR image";
 "LS_LIVEIMAGE_TYPE_NAME" = "Live Photo";
 "LS_TYPESTRING_ALBUM" = "Album";
+"LS_SYNCED_ALBUM" = "Album synched with Mac";
 
 "SPAN_RELATION_METHOD" = "Relation Method";
 "SPAN_RELATION_METHOD_LONG_SIDE" = "Aligne to Long Side";
