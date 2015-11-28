@@ -125,7 +125,7 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
-            var rc = CGFloat(152 * 0.75)
+            var rc = CGFloat(150)
             if let image = DVRemoteClient.sharedClient().thumbnail {
                 let ratio = image.size.height / image.size.width
                 rc *= max(1.0, ratio)
