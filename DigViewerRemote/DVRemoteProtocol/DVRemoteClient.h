@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 
-- (void)connectToServer:(NSNetService*)service;
+- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key;
 - (void)connectToLocal;
 - (void)reconnect;
 - (void)disconnect;
@@ -82,4 +82,6 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)dvrClient:(DVRemoteClient*)client didRecieveNodeList:(NSArray*)nodeList forNode:(NSArray*)nodeID
        inDocument:(NSString*)documentName;
 - (void)dvrClient:(DVRemoteClient*)client didRecieveServerInfo:(NSDictionary*)info;
+
+- (void)dvrClient:(DVRemoteClient*)client didRecievePairingKey:(NSString*)key forServer:(NSNetService*)service;
 @end

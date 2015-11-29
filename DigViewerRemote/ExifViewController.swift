@@ -39,7 +39,11 @@ class ExifViewController: UITableViewController, DVRemoteClientDelegate, Informa
     }
 
     override func viewWillAppear(animated: Bool) {
-        DVRemoteClient.sharedClient().addClientDelegate(self)
+        let client = DVRemoteClient.sharedClient()
+        client.addClientDelegate(self)
+        if client.meta != nil {
+            dvrClient(client, didRecieveMeta: client.meta)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

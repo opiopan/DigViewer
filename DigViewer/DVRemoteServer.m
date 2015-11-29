@@ -106,11 +106,15 @@
 - (void)dvrSession:(DVRemoteSession*)session recieveCommand:(DVRCommand)command withData:(NSData*)data
 {
     if (command == DVRC_MAIN_CONNECTION){
-        [_reservedSessions removeObject:session];
-        [_authorizedSessions addObject:session];
-        [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
-        if (_currentMeta){
-            [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
+    }else if (command == DVRC_REQUEST_PAIRING){
+        if (_delegate){
+            NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [_delegate dvrServer:self needPairingForClient:session withAttributes:args];
+        }
+    }else if (command == DVRC_CHARENGE_AUTH){
+        if (_delegate){
+            NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [_delegate dvrServer:self needAuthenticateClient:session withAttributes:args];
         }
     }else if (command == DVRC_SIDE_CONNECTION){
         [_reservedSessions removeObject:session];
@@ -190,6 +194,52 @@
     }
     for (NSString* key in removingKeys){
         [_fullImageQue removeObjectForKey:key];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// セション切断
+//-----------------------------------------------------------------------------------------
+- (void)discardSession:(DVRemoteSession *)session
+{
+    [session close];
+    [_reservedSessions removeObject:session];
+    [_authorizedSessions removeObject:session];
+    [_sidebandSessions removeObject:session];
+    NSMutableArray* removingKeys = [NSMutableArray array];
+    for (NSString* key in _fullImageQue){
+        NSMutableArray* sessions = [_fullImageQue valueForKey:key];
+        [sessions removeObject:session];
+        if (sessions.count == 0){
+            [removingKeys addObject:key];
+        }
+    }
+    for (NSString* key in removingKeys){
+        [_fullImageQue removeObjectForKey:key];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// クライアント認証
+//-----------------------------------------------------------------------------------------
+- (void)sendPairingKey:(NSDictionary*)args bySession:(DVRemoteSession*)session
+{
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+    [session sendCommand:DVRC_NOTIFY_PAIRCODE withData:data replacingQue:YES];
+}
+
+- (void)completeAuthenticationAsResult:(BOOL)succeeded ofSession:(DVRemoteSession*)session
+{
+    int cmd = succeeded ? DVRC_NOTIFY_AUTHENTICATED : DVRC_NOTIFY_FAIL_AUTH;
+    [session sendCommand:cmd withData:nil replacingQue:YES];
+    
+    if (succeeded){
+        [_reservedSessions removeObject:session];
+        [_authorizedSessions addObject:session];
+        [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
+        if (_currentMeta){
+            [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
+        }
     }
 }
 

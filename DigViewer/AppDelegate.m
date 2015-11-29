@@ -12,6 +12,7 @@
 #import "Document.h"
 #import "DocumentWindowController.h"
 #import "InfoPlistController.h"
+#import "PairingWindowController.h"
 #include <stdlib.h>
 
 //-----------------------------------------------------------------------------------------
@@ -64,7 +65,9 @@
 //-----------------------------------------------------------------------------------------
 // AppDelegateの実装
 //-----------------------------------------------------------------------------------------
-@implementation AppDelegate
+@implementation AppDelegate {
+    PairingWindowController* _pairingWindowController;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
@@ -167,6 +170,56 @@
     Document* document = [controller documentForURL:[NSURL fileURLWithPath:documentName]];
     if (document){
         [document sendNodeListInFolder:nodeId bySession:session];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// DVremoteの認証
+//-----------------------------------------------------------------------------------------
+static NSString* pairingKeysName = @"dvremotePairingKeys";
+
+- (void)dvrServer:(DVRemoteServer *)server needPairingForClient:(DVRemoteSession *)session withAttributes:(NSDictionary *)attrs
+{
+    UInt32 key = arc4random();
+    NSString* keyString = @(key).stringValue;
+    NSMutableDictionary* args = [NSMutableDictionary dictionaryWithDictionary:attrs];
+    [args setValue:keyString forKey:DVRCNMETA_PAIRCODE];
+    [server sendPairingKey:args bySession:session];
+    
+    int hash = key % 10000;
+    NSString* deviceName = [attrs valueForKey:DVRCNMETA_DEVICE_NAME];
+    NSString* deviceType = [attrs valueForKey:DVRCNMETA_DEVICE_TYPE];
+    NSString* deviceID = [attrs valueForKey:DVRCNMETA_DEVICE_ID];
+    _pairingWindowController = [PairingWindowController new];
+    _pairingWindowController.modelName = deviceName;
+    _pairingWindowController.modelType = deviceType;
+    _pairingWindowController.keyHash = hash;
+    [_pairingWindowController startPairingWithCompletionHandler:^(BOOL isOK){
+        if (isOK){
+            NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+            NSMutableDictionary* keyes =
+                [NSMutableDictionary dictionaryWithDictionary:[controller.values valueForKey:pairingKeysName]];
+            [keyes setValue:args forKey:deviceID];
+            [controller.values setValue:keyes forKey:pairingKeysName];
+            [server completeAuthenticationAsResult:YES ofSession:session];
+        }else{
+            [server discardSession:session];
+        }
+    }];
+}
+
+- (void)dvrServer:(DVRemoteServer *)server needAuthenticateClient:(DVRemoteSession *)session withAttributes:(NSDictionary *)attrs
+{
+    NSString* deviceID = [attrs valueForKey:DVRCNMETA_DEVICE_ID];
+    NSString* charengedKey = [attrs valueForKey:DVRCNMETA_PAIRCODE];
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    NSDictionary* keys = [controller.values valueForKey:pairingKeysName];
+    NSDictionary* values = [keys valueForKey:deviceID];
+    NSString* key = [values valueForKey:DVRCNMETA_PAIRCODE];
+    if ([key isEqualToString:charengedKey]){
+        [server completeAuthenticationAsResult:YES ofSession:session];
+    }else{
+        [server completeAuthenticationAsResult:NO ofSession:session];
     }
 }
 

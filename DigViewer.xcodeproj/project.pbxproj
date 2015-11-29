@@ -69,7 +69,7 @@
 		7B4E8E0F16BDD4C5001C5D09 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E0E16BDD4C5001C5D09 /* FrameView.m */; };
 		7B4E8E1216BEAAC3001C5D09 /* BasicBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E8E1116BEAAC3001C5D09 /* BasicBackgroundView.m */; };
 		7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4E8E2416C827D3001C5D09 /* Localizable.strings */; };
-		7B52AA461BB120330068A842 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B52AA451BB120330068A842 /* DigViewer.icns */; settings = {ASSET_TAGS = (); }; };
+		7B52AA461BB120330068A842 /* DigViewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B52AA451BB120330068A842 /* DigViewer.icns */; };
 		7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BBE1AE1ED0A00618590 /* LensLibrary.xcdatamodeld */; };
 		7B553BF81AE211DF00618590 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B553BF71AE211DF00618590 /* LensLibrary.m */; };
 		7B5C09F81B64DBD4004FE1A0 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C09F71B64DBD4004FE1A0 /* Condition.m */; };
@@ -181,6 +181,9 @@
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */; };
+		7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */; };
+		7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */; };
+		7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */; };
 		7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */; };
@@ -498,6 +501,10 @@
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD4BB3D1B78E116006C75BB /* EnhancedImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnhancedImageBrowserView.h; sourceTree = "<group>"; };
 		7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnhancedImageBrowserView.m; sourceTree = "<group>"; };
+		7BD6CF2A1C0ACDA90063C2ED /* PairingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairingWindowController.h; sourceTree = "<group>"; };
+		7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingWindowController.m; sourceTree = "<group>"; };
+		7BD6CF331C0B202F0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PairingWindow.xib; sourceTree = "<group>"; };
+		7BD6CF361C0B20B50063C2ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PairingWindow.strings; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
 		7BD9DEBB1B49307C005FBC5B /* EffectByQCComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByQCComposition.h; sourceTree = "<group>"; };
@@ -632,6 +639,8 @@
 				7B39204B1696CA1900E139D0 /* MainMenu.xib */,
 				7B4E8E2716C82A02001C5D09 /* MainMenu.strings */,
 				7BB3327B1AEBB50700C74944 /* unavailable.png */,
+				7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */,
+				7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */,
 				7BBEE9F31AE070D30047DF50 /* Preferences Window */,
 				7BBEE9F41AE070F30047DF50 /* Document Window and Relatives */,
 				7B4E8E2416C827D3001C5D09 /* Localizable.strings */,
@@ -946,6 +955,8 @@
 			children = (
 				7BB4E60F1AD979C00076630A /* AppDelegate.h */,
 				7B9B24631AD101D1008F6E64 /* AppDelegate.m */,
+				7BD6CF2A1C0ACDA90063C2ED /* PairingWindowController.h */,
+				7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */,
 				7B6D83631B32F1D6004A2426 /* Preferences Window */,
 				7B6D83641B32F235004A2426 /* Slideshow */,
 				7B6AE0171B99DA6700FA0335 /* DV Remote Protocol */,
@@ -1231,11 +1242,13 @@
 				7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
+				7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */,
 				7BCA29A81B4E70B500FCFD7A /* BurnOut.qtz in Resources */,
 				7BCF7F051B527FE5001B0A7A /* Afterimage.cikernel in Resources */,
 				7BB4E6061AD96D610076630A /* MapPreferences.xib in Resources */,
 				7B5C0A131B652BCD004FE1A0 /* EditCameraSheet.xib in Resources */,
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
+				7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
 				7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
@@ -1300,6 +1313,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/SelectNewConditionSheet.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/InspectorView.strings",
 				"$(SRCROOT)/DigViewer/en.lproj/InspectorView.xib",
+				"$(SRCROOT)/DigViewer/en.lproj/PairingWindow.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/PairingWindow.strings",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -1325,10 +1340,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectDeletingConditionSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectNewConditionSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InspectorView.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/PairingWindow.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1442,6 +1458,7 @@
 				7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B5C0A211B65E04E004FE1A0 /* InputCameraNameController.m in Sources */,
+				7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */,
 				7B71F0981B7E3D41002F83D3 /* TemporaryFileController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
@@ -1820,6 +1837,22 @@
 				7BC667A418B05213000CB995 /* en */,
 			);
 			name = InspectorView.xib;
+			sourceTree = "<group>";
+		};
+		7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD6CF331C0B202F0063C2ED /* en */,
+			);
+			name = PairingWindow.xib;
+			sourceTree = "<group>";
+		};
+		7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD6CF361C0B20B50063C2ED /* ja */,
+			);
+			name = PairingWindow.strings;
 			sourceTree = "<group>";
 		};
 		7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */ = {

@@ -61,7 +61,9 @@
                      @"pathNodeSortType":             @0,
                      @"pathNodeSortCaseInsensitive":  @YES,
                      @"pathNodeSortAsNumeric":        @YES,
-                     @"pathNodeSortByDateTime":       @NO};
+                     @"pathNodeSortByDateTime":       @NO,
+                     @"dvremotePairingKeys":          @{},
+                     };
     }
     return defaults;
 }

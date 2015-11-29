@@ -246,14 +246,36 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコルの実装
     //-----------------------------------------------------------------------------------------
+    private var pendingPairingKey : String? = nil
+    
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
         updateMessageView()
+        if client.state == .Disconnected {
+            pendingPairingKey = nil
+        }
         if client.state == .Disconnected && firstConnecting {
             firstConnecting = false
             showServersList()
         }else if client.state == .Connected {
             firstConnecting = false
+            if pendingPairingKey != nil {
+                let controller = ConfigurationController.sharedController
+                var keys = controller.authenticationgKeys
+                keys[client.service.name] = pendingPairingKey
+                controller.authenticationgKeys = keys
+                pendingPairingKey = nil
+            }
         }
+    }
+    
+    func dvrClient(client: DVRemoteClient!, didRecievePairingKey key: String!, forServer service: NSNetService!) {
+        pendingPairingKey = key
+        let controller = ConfigurationController.sharedController
+        var keys = controller.authenticationgKeys
+        keys[service.name] = nil
+        controller.authenticationgKeys = keys
+     
+        performSegueWithIdentifier("ParingNotice", sender: self)
     }
     
     private var geocoder : CLGeocoder? = nil
@@ -455,7 +477,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                     if name == "" {
                         client.connectToLocal()
                     }else{
-                        client.connectToServer(NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name))
+                        let service = NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
+                        let key = ConfigurationController.sharedController.authenticationgKeys[name];
+                        client.connectToServer(service, withKey: key)
                     }
                 })
             }else{
@@ -779,6 +803,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             controller.isOpenServerList = isOpenServerList
             controller.mapView = self.mapView
             isOpenServerList = false
+        }else if segue.identifier! == "ParingNotice" {
+            let controller = segue.destinationViewController as! PairingViewController
+            var bounds = controller.view.bounds
+            bounds.size.width *= 2
+            controller.hashLabel.text = NSString(format: "%04d", Int(pendingPairingKey!)! % 10000) as String
         }
     }
 

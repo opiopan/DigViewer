@@ -33,6 +33,8 @@ struct UserDefaults {
     static let MapSummaryPinningStyle = "MapSummaryPinningStyle"
     
     static let DataSourcePinnedList = "DataSourcePinnedList"
+    
+    static let AuthenticationgKeys = "AuthenticatingKeys"
 }
 
 enum MapType : Int {
@@ -105,7 +107,8 @@ class ConfigurationController: NSObject {
             UserDefaults.MapArrowColor          : redColor,
             UserDefaults.MapFOVColor            : redColor,
             UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.InToolBar.rawValue,
-            UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedDataWithRootObject([] as [ServerInfo])
+            UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedDataWithRootObject([] as [ServerInfo]),
+            UserDefaults.AuthenticationgKeys    : NSDictionary(),
         ]
         controller.registerDefaults(defaults)
         establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
@@ -132,6 +135,7 @@ class ConfigurationController: NSObject {
         dataSourcePinnedList =
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
             as! [ServerInfo]
+        authenticationgKeys = controller.valueForKey(UserDefaults.AuthenticationgKeys) as! [String:String]
     }
     
     //-----------------------------------------------------------------------------------------
@@ -347,6 +351,12 @@ class ConfigurationController: NSObject {
             let data = NSKeyedArchiver.archivedDataWithRootObject(dataSourcePinnedList)
             controller.setValue(data, forKey: UserDefaults.DataSourcePinnedList)
             updateDataSourceConfiguration()
+        }
+    }
+    
+    var authenticationgKeys : [String:String] {
+        didSet {
+            controller.setValue(authenticationgKeys, forKey: UserDefaults.AuthenticationgKeys)
         }
     }
     

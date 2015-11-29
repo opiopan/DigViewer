@@ -1,0 +1,21 @@
+
+/* Class = "NSTextFieldCell"; title = "Recieve a pairing request from a following device running Digviewer remote."; ObjectID = "27i-Sq-YvD"; */
+"27i-Sq-YvD.title" = "DigViewer remoteを実行している下記のデバイスからペアリング要求を受け付けました。";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "7wm-MW-ly9"; */
+"7wm-MW-ly9.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "MVy-Pv-xfq"; */
+"MVy-Pv-xfq.title" = "キャンセル";
+
+/* Class = "NSWindow"; title = "Pairing with remote device"; ObjectID = "QvC-M9-y7g"; */
+"QvC-M9-y7g.title" = "リモートデバイスとのペアリング";
+
+/* Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "cIn-QT-ie1"; */
+"cIn-QT-ie1.title" = "名前:";
+
+/* Class = "NSTextFieldCell"; title = "Type:"; ObjectID = "np2-md-Qew"; */
+"np2-md-Qew.title" = "種別:";
+
+/* Class = "NSTextFieldCell"; title = "To allow paring with this device, Please enter the number displaing on a iOS device then push  OK button."; ObjectID = "rVm-IO-v47"; */
+"rVm-IO-v47.title" = "上記デバイスとのペアリングを許可するには、この iOS デバイス上に表示されている数値を入力した後、OK ボタンを押してください。";

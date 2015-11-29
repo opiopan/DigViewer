@@ -125,3 +125,9 @@
 
 /* Class = "UILabel"; text = "About DigViewer remote"; ObjectID = "2Ma-gd-ySz"; */
 "2Ma-gd-ySz.text" = "DigViewer remote について";
+
+/* Class = "UILabel"; text = "Please input following numbers on a Mac to pair with this iOS device."; ObjectID = "vEf-27-9Ie"; */
+"vEf-27-9Ie.text" = "以下の数値をこの iOS デバイスとペアリングする Mac に入力してください。";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xsY-Ry-Pgo"; */
+"xsY-Ry-Pgo.normalTitle" = "キャンセル";

@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_REQUEST_FOLDER_ITEMS,
     DVRC_MOVE_NODE,
     DVRC_REQUEST_SEVER_INFO,
+    DVRC_REQUEST_PAIRING,
+    DVRC_CHARENGE_AUTH,
     
     // Server -> Client
     DVRC_NOTIFY_META = 1000,
@@ -33,6 +35,9 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NOTIFY_ACCEPTED,
     DVRC_NOTIFY_FOLDER_ITEMS,
     DVRC_NOTIFY_SERVER_INFO,
+    DVRC_NOTIFY_PAIRCODE,
+    DVRC_NOTIFY_AUTHENTICATED,
+    DVRC_NOTIFY_FAIL_AUTH,
 };
 
 //-----------------------------------------------------------------------------------------
@@ -80,3 +85,7 @@ extern NSString* DVRCNMETA_DV_VERSION;
 extern NSString* DVRCNMETA_OS_VERSION;
 extern NSString* DVRCNMETA_GPU;
 extern NSString* DVRCNMETA_CPU_CORE_NUM;
+extern NSString* DVRCNMETA_PAIRCODE;
+extern NSString* DVRCNMETA_DEVICE_ID;
+extern NSString* DVRCNMETA_DEVICE_NAME;
+extern NSString* DVRCNMETA_DEVICE_TYPE;

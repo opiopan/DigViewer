@@ -38,6 +38,7 @@
     DVRemoteSession* _session;
     LocalSession* _localSession;
     NSString* _lastSessionName;
+    NSString* _pairingKey;
     
     NSDictionary* _meta;
     
@@ -47,6 +48,8 @@
     
     LRUCache* _thumbnailCache;
     LRUCache* _nodeListCache;
+    
+    BOOL _isTemporary;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -69,7 +72,9 @@
 //-----------------------------------------------------------------------------------------
 + (DVRemoteClient *)temporaryClient
 {
-    return [DVRemoteClient new];
+    DVRemoteClient* client =  [DVRemoteClient new];
+    client->_isTemporary = YES;
+    return client;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -191,12 +196,13 @@
 //-----------------------------------------------------------------------------------------
 // セッション開設・回収
 //-----------------------------------------------------------------------------------------
-- (void)connectToServer:(NSNetService *)service
+- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key
 {
     if (_state == DVRClientDisconnected){
         _reconectCount = 0;
         _serviceForSession = [[NSNetService alloc] initWithDomain:service.domain type:service.type name:service.name];
         _serviceForSession.delegate = self;
+        _pairingKey = key;
         _state = DVRClientConnecting;
         [self notifyStateChange];
         [_serviceForSession resolveWithTimeout:5.0];
@@ -208,6 +214,7 @@
     if (_state == DVRClientDisconnected){
         _reconectCount = 0;
         _serviceForSession = nil;
+        _pairingKey = nil;
         _state = DVRClientConnecting;
         _localSession = [LocalSession new];
         _localSession.delegate = self;
@@ -439,16 +446,46 @@
             [self notifyStateChange];
         }else if (session == _session){
             [_session sendCommand:DVRC_MAIN_CONNECTION withData:nil replacingQue:YES];
-            _state = DVRClientConnected;
+            [self requestAuthentication];
+            _state = DVRClientAuthenticating;
             [self notifyStateChange];
         }else{
             [_session sendCommand:DVRC_SIDE_CONNECTION withData:nil replacingQue:YES];
         }
+    }else if (command == DVRC_NOTIFY_PAIRCODE){
+        //-----------------------------------------------------------------------------------------
+        // ペアリングキー受信
+        //-----------------------------------------------------------------------------------------
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        _pairingKey = [args valueForKey:DVRCNMETA_PAIRCODE];
+        if (_delegates.count){
+            for (id <DVRemoteClientDelegate> delegate in _delegates){
+                if ([delegate respondsToSelector:@selector(dvrClient:didRecievePairingKey:forServer:)]){
+                    [delegate dvrClient:self didRecievePairingKey:_pairingKey forServer:_serviceForSession];
+                }
+            }
+        }
+    }else if (command == DVRC_NOTIFY_AUTHENTICATED){
+        //-----------------------------------------------------------------------------------------
+        // 認証完了
+        //-----------------------------------------------------------------------------------------
+        _state = DVRClientConnected;
+        [self notifyStateChange];
+    }else if (command == DVRC_NOTIFY_FAIL_AUTH){
+        //-----------------------------------------------------------------------------------------
+        // 認証失敗
+        //-----------------------------------------------------------------------------------------
+        _pairingKey = nil;
+        [self requestAuthentication];
     }else if (command == DVRC_NOTIFY_TEMPLATE_META){
         //-----------------------------------------------------------------------------------------
         // テンプレートメタ受信
         //-----------------------------------------------------------------------------------------
         _templateMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (_state != DVRClientConnected){
+            _state = DVRClientConnected;
+            [self notifyStateChange];
+        }
     }else if (command == DVRC_NOTIFY_META){
         //-----------------------------------------------------------------------------------------
         // メタデータ受信
@@ -546,6 +583,28 @@
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error
 {
     [self disconnect];
+}
+
+//-----------------------------------------------------------------------------------------
+// 認証
+//-----------------------------------------------------------------------------------------
+- (void)requestAuthentication
+{
+    if (_isTemporary) return;
+    
+    UIDevice* device = [UIDevice currentDevice];
+    NSDictionary* argBase =@{DVRCNMETA_DEVICE_ID: device.identifierForVendor.UUIDString,
+                             DVRCNMETA_DEVICE_NAME: device.name,
+                             DVRCNMETA_DEVICE_TYPE: device.localizedModel};
+    NSMutableDictionary* args = [NSMutableDictionary dictionaryWithDictionary: argBase];
+    int cmd;
+    if (_pairingKey){
+        cmd = DVRC_CHARENGE_AUTH;
+        [args setValue:_pairingKey forKey:DVRCNMETA_PAIRCODE];
+    }else{
+        cmd = DVRC_REQUEST_PAIRING;
+    }
+    [_session sendCommand:cmd withData:[NSKeyedArchiver archivedDataWithRootObject:args] replacingQue:YES];
 }
 
 //-----------------------------------------------------------------------------------------

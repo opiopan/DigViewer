@@ -23,6 +23,8 @@
 + (DVRemoteServer*)sharedServer;
 
 - (BOOL)establishServer;
+- (void)discardSession:(DVRemoteSession*)session;
+
 - (void)sendMeta:(NSDictionary*)meta;
 - (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
             withIndex:(NSInteger)index;
@@ -31,6 +33,8 @@
 - (void)sendFolderItems:(NSArray*)items forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
               bySession:(DVRemoteSession*)session;
 - (void)sendServerInfo:(NSDictionary*)serverInfo bySession:(DVRemoteSession*)session;
+- (void)sendPairingKey:(NSDictionary*)args bySession:(DVRemoteSession*)session;
+- (void)completeAuthenticationAsResult:(BOOL)succeeded ofSession:(DVRemoteSession*)session;
 
 @end
 
@@ -48,5 +52,7 @@
 - (void)dvrServer:(DVRemoteServer*)server needSendFolderItms:(NSArray*)nodeId forDocument:(NSString*)document
         bySession:(DVRemoteSession*)session;
 - (void)dvrServer:(DVRemoteServer*)server needSendServerInfoToClient:(DVRemoteSession*)session;
+- (void)dvrServer:(DVRemoteServer*)server needPairingForClient:(DVRemoteSession*)session withAttributes:(NSDictionary*)attrs;
+- (void)dvrServer:(DVRemoteServer*)server needAuthenticateClient:(DVRemoteSession*)session withAttributes:(NSDictionary*)attrs;
 @end
 

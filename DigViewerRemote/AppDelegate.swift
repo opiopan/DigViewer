@@ -50,9 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        if state == .Disconnected && client.reconectCount < 10 {
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-            dispatch_after(time, dispatch_get_main_queue(), {() -> Void in client.reconnect()})
+        if state == .Disconnected && client.reconectCount < 10 && client.service != nil {
+            let key = ConfigurationController.sharedController.authenticationgKeys[client.service.name]
+            if key != nil {
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue(), {() -> Void in client.reconnect()})
+            }
         }else if state == .Connected {
             let connectionName = client.service == nil ? "" : client.serviceName
             ConfigurationController.sharedController.establishedConnection = connectionName

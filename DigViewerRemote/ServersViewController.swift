@@ -204,11 +204,11 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     private func queryServerInfo(){
         headerController.activityIndicator.startAnimating()
         tmpClient.tmpDelegate = self
-        tmpClient.connectToServer(queryingServers[0].service)
+        tmpClient.connectToServer(queryingServers[0].service, withKey: nil)
     }
     
     func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        if state == .Connected {
+        if state == .Authenticating {
             client.requestServerInfo()
         }else if state == .Disconnected {
             headerController.activityIndicator.stopAnimating()
@@ -324,11 +324,12 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
                 return
             }
             let nextServer = servers[indexPath.row].service
+            let nextKey = ConfigurationController.sharedController.authenticationgKeys[nextServer.name]
             if client.state != .Disconnected && (client.service == nil || client.service!.name != nextServer.name) {
                 client.disconnect()
-                client.connectToServer(nextServer)
+                client.connectToServer(nextServer, withKey: nextKey)
             }else if client.state == .Disconnected {
-                client.connectToServer(nextServer)
+                client.connectToServer(nextServer, withKey:  nextKey)
             }
         }
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
