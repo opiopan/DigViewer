@@ -23,6 +23,7 @@
 + (DVRemoteServer*)sharedServer;
 
 - (BOOL)establishServer;
+- (void)shutdownServer;
 - (void)discardSession:(DVRemoteSession*)session;
 
 - (void)sendMeta:(NSDictionary*)meta;

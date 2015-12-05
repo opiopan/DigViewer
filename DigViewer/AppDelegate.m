@@ -65,22 +65,30 @@
 //-----------------------------------------------------------------------------------------
 // AppDelegateの実装
 //-----------------------------------------------------------------------------------------
+static NSString* serverEnableKey = @"dvremoteEnable";
+
 @implementation AppDelegate {
     PairingWindowController* _pairingWindowController;
+    NSUserDefaultsController* _controller;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    _controller = [NSUserDefaultsController sharedUserDefaultsController];
+    [_controller addObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey] options:nil context:nil];
+    
     DVRemoteServer* server = [DVRemoteServer sharedServer];
     server.delegate = self;
     [self dvrServer:server needSendServerInfoToClient:nil];
+    AppDelegate* __weak weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [server establishServer];
+        [weakSelf setupDVRemoteServer];
     });
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
+    [_controller removeObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey]];
     [[TemporaryFileController sharedController] cleanUpAllCategories];
     return NSTerminateNow;
 }
@@ -106,6 +114,28 @@
         NSDocumentController* controller = [NSDocumentController sharedDocumentController];
         [controller openDocumentWithContentsOfURL:openPanel.URL display:YES
                                 completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){}];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// キー値監視
+//-----------------------------------------------------------------------------------------
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:[@"values." stringByAppendingString:serverEnableKey]]){
+        [self setupDVRemoteServer];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// DVRemoteServer起動・停止
+//-----------------------------------------------------------------------------------------
+- (void)setupDVRemoteServer
+{
+    if ([[_controller.values valueForKey:serverEnableKey] boolValue]){
+        [[DVRemoteServer sharedServer] establishServer];
+    }else{
+        [[DVRemoteServer sharedServer] shutdownServer];
     }
 }
 

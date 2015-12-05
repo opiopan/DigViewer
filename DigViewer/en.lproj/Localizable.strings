@@ -23,6 +23,7 @@
 "PREF_TITLE_SLIDESHOW" = "Slideshow";
 "PREF_TITLE_MAP" = "Map";
 "PREF_TITLE_LENS" = "Lens";
+"PREF_TITLE_DEVICE" = "Device";
 "PREF_TITLE_ADVANCED" = "Advanced";
 
 // スライドショー遷移エフェクト(ビルトイン)の名前

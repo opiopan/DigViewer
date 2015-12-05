@@ -63,6 +63,7 @@
                      @"pathNodeSortAsNumeric":        @YES,
                      @"pathNodeSortByDateTime":       @NO,
                      @"dvremotePairingKeys":          @{},
+                     @"dvremoteEnable":               @YES,
                      };
     }
     return defaults;

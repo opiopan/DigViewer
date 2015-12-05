@@ -13,6 +13,7 @@
 #import "SlideshowPreferences.h"
 #import "MapPreferences.h"
 #import "LensPreferences.h"
+#import "DevicePreferences.h"
 #import "AdvancedPreferences.h"
 
 @implementation AppPreferences
@@ -28,6 +29,7 @@
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_SLIDESHOW", nil) owner: [SlideshowPreferences sharedInstance]];
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_MAP", nil) owner: [MapPreferences sharedInstance]];
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_LENS", nil) owner: [LensPreferences sharedInstance]];
+        [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_DEVICE", nil) owner: [DevicePreferences sharedInstance]];
         [self addPreferenceNamed: NSLocalizedString(@"PREF_TITLE_ADVANCED", nil) owner: [AdvancedPreferences sharedInstance]];
     }
     return self;

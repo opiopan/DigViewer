@@ -60,3 +60,4 @@ NSString* DVRCNMETA_PAIRCODE = @"paircode";
 NSString* DVRCNMETA_DEVICE_ID = @"deviceid";
 NSString* DVRCNMETA_DEVICE_NAME = @"devicename";
 NSString* DVRCNMETA_DEVICE_TYPE = @"devicetype";
+NSString* DVRCNMETA_DEVICE_CODE = @"devicecode";

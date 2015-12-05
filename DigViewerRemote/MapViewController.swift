@@ -479,7 +479,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
                     }else{
                         let service = NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
                         let key = ConfigurationController.sharedController.authenticationgKeys[name];
-                        client.connectToServer(service, withKey: key)
+                        client.connectToServer(service, withKey: key, fromDevice: AppDelegate.deviceID())
                     }
                 })
             }else{

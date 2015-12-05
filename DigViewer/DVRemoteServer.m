@@ -63,10 +63,12 @@
 }
 
 //-----------------------------------------------------------------------------------------
-// サーバ起動
+// サーバ起動・停止
 //-----------------------------------------------------------------------------------------
 - (BOOL)establishServer
 {
+    if (_service) return NO;
+    
     NSString* name = [NSString stringWithFormat:@"%@@%@",  NSUserName(), [NSHost currentHost].localizedName];
     _service = [[NSNetService alloc] initWithDomain:@"" type:DVR_SERVICE_TYPE name:name port:0];
     if (_service){
@@ -84,6 +86,26 @@
 - (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict
 {
     _publishingFailed = YES;
+}
+
+- (void)shutdownServer
+{
+    if (_service){
+        [_service stop];
+        _service = nil;
+        NSArray* array = [NSArray arrayWithArray:_reservedSessions];
+        for (DVRemoteSession* session in array){
+            [self discardSession:session];
+        }
+        array = [NSArray arrayWithArray:_authorizedSessions];
+        for (DVRemoteSession* session in array){
+            [self discardSession:session];
+        }
+        array = [NSArray arrayWithArray:_sidebandSessions];
+        for (DVRemoteSession* session in array){
+            [self discardSession:session];
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------

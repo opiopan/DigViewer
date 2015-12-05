@@ -94,6 +94,7 @@
 		7B5C0A421B67A424004FE1A0 /* SelectDeletingConditionSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C0A401B67A424004FE1A0 /* SelectDeletingConditionSheet.strings */; };
 		7B5C0A451B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
 		7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B613F1D1C1076D6001B7E23 /* DevicePreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B613F1B1C1076D6001B7E23 /* DevicePreferences.strings */; };
 		7B61484B1B7B97AE00A03C45 /* InspectorArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */; };
 		7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B61484C1B7BA1D200A03C45 /* InspectorView.strings */; };
 		7B6148501B7C78AD00A03C45 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B61484F1B7C78AD00A03C45 /* MapKit.framework */; };
@@ -184,6 +185,9 @@
 		7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */; };
 		7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */; };
 		7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */; };
+		7BD6CF3A1C0DBA250063C2ED /* DevicePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF391C0DBA250063C2ED /* DevicePreferences.m */; };
+		7BD6CF3F1C0DBC690063C2ED /* DevicePreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF3E1C0DBC690063C2ED /* DevicePreferences.png */; };
+		7BD6CF421C106CDE0063C2ED /* DevicePreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF401C106CDE0063C2ED /* DevicePreferences.xib */; };
 		7BD874931AD13A3C009C43BF /* NSString+escaping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD874921AD13A3C009C43BF /* NSString+escaping.m */; };
 		7BD9DEBD1B49307C005FBC5B /* EffectByQCComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD9DEBC1B49307C005FBC5B /* EffectByQCComposition.m */; };
 		7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */; };
@@ -376,6 +380,7 @@
 		7B5C0A441B6A11CE004FE1A0 /* LensLibraryMapping2.1-2.2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "LensLibraryMapping2.1-2.2.xcmappingmodel"; sourceTree = "<group>"; };
 		7B5C0A461B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConditionMigrationPolicy2.1-2.2.h"; sourceTree = "<group>"; };
 		7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConditionMigrationPolicy2.1-2.2.m"; sourceTree = "<group>"; };
+		7B613F1C1C1076D6001B7E23 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DevicePreferences.strings; sourceTree = "<group>"; };
 		7B6148491B7B97AE00A03C45 /* InspectorArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorArrayController.h; sourceTree = "<group>"; };
 		7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorArrayController.m; sourceTree = "<group>"; };
 		7B61484D1B7BA1D200A03C45 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InspectorView.strings; sourceTree = "<group>"; };
@@ -505,6 +510,10 @@
 		7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingWindowController.m; sourceTree = "<group>"; };
 		7BD6CF331C0B202F0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PairingWindow.xib; sourceTree = "<group>"; };
 		7BD6CF361C0B20B50063C2ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PairingWindow.strings; sourceTree = "<group>"; };
+		7BD6CF381C0DBA240063C2ED /* DevicePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePreferences.h; sourceTree = "<group>"; };
+		7BD6CF391C0DBA250063C2ED /* DevicePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePreferences.m; sourceTree = "<group>"; };
+		7BD6CF3E1C0DBC690063C2ED /* DevicePreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DevicePreferences.png; path = resources/DevicePreferences.png; sourceTree = "<group>"; };
+		7BD6CF411C106CDE0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DevicePreferences.xib; sourceTree = "<group>"; };
 		7BD874911AD13A3C009C43BF /* NSString+escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+escaping.h"; sourceTree = "<group>"; };
 		7BD874921AD13A3C009C43BF /* NSString+escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+escaping.m"; sourceTree = "<group>"; };
 		7BD9DEBB1B49307C005FBC5B /* EffectByQCComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectByQCComposition.h; sourceTree = "<group>"; };
@@ -906,6 +915,8 @@
 				7BB4E5F71AD945460076630A /* MapPreferences.h */,
 				7BB4E5F81AD945460076630A /* MapPreferences.m */,
 				7B5C0A061B65021B004FE1A0 /* LensPreferences */,
+				7BD6CF381C0DBA240063C2ED /* DevicePreferences.h */,
+				7BD6CF391C0DBA250063C2ED /* DevicePreferences.m */,
 				7BB4E6131ADA09B80076630A /* AdvancedPreferences.h */,
 				7BB4E6141ADA09B80076630A /* AdvancedPreferences.m */,
 			);
@@ -1023,6 +1034,7 @@
 		7BBEE9F31AE070D30047DF50 /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
+				7BD6CF3E1C0DBC690063C2ED /* DevicePreferences.png */,
 				7B5C09F01B64D342004FE1A0 /* GeneralPreferences */,
 				7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */,
 				7BE7B6261B1F3C64009619E2 /* RenderingPreferences.strings */,
@@ -1032,6 +1044,8 @@
 				7BB4E6081AD96D610076630A /* MapPreferences.xib */,
 				7BB4E60B1AD96EB30076630A /* MapPreferences.strings */,
 				7B5C09F21B64D3F3004FE1A0 /* LensPreferences */,
+				7BD6CF401C106CDE0063C2ED /* DevicePreferences.xib */,
+				7B613F1B1C1076D6001B7E23 /* DevicePreferences.strings */,
 				7BB4E6211ADA0C3F0076630A /* AdvancedPreferences.xib */,
 				7BB4E6221ADA30F70076630A /* AdvancedPreferences.strings */,
 				7BB4E6011AD95A1C0076630A /* MapPreferences.png */,
@@ -1185,6 +1199,7 @@
 				7BB4E61F1ADA0C3F0076630A /* AdvancedPreferences.xib in Resources */,
 				7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */,
 				7BCF7F081B52802C001B0A7A /* ColorDivider.qtz in Resources */,
+				7BD6CF421C106CDE0063C2ED /* DevicePreferences.xib in Resources */,
 				7B39204A1696CA1800E139D0 /* Document.xib in Resources */,
 				7BB4E60E1AD96EB30076630A /* MapPreferences.strings in Resources */,
 				7B066F361B57D9C400288D57 /* Twister.qtz in Resources */,
@@ -1220,6 +1235,7 @@
 				7B0DBED416A0F89C000365F4 /* ImageView.xib in Resources */,
 				7B5C0A1E1B65DFA3004FE1A0 /* InputCameraName.xib in Resources */,
 				7B40A41D1AFD08FD006ED497 /* pause.png in Resources */,
+				7B613F1D1C1076D6001B7E23 /* DevicePreferences.strings in Resources */,
 				7BB4E60D1AD96EB30076630A /* GeneralPreferences.strings in Resources */,
 				7B0DBEE016A297E2000365F4 /* ThumbnailView.xib in Resources */,
 				7B74FB9D1B3EC8DD005BC748 /* EditCustomEffect.strings in Resources */,
@@ -1239,6 +1255,7 @@
 				7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */,
 				7B4E8E2216C827D3001C5D09 /* Localizable.strings in Resources */,
 				7BB4E61C1ADA0C350076630A /* LensPreferences.xib in Resources */,
+				7BD6CF3F1C0DBC690063C2ED /* DevicePreferences.png in Resources */,
 				7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */,
 				7BB4E6271ADA30F70076630A /* LensPreferences.strings in Resources */,
 				7BE7B6161B1F26E7009619E2 /* RenderingPreferences.xib in Resources */,
@@ -1315,6 +1332,8 @@
 				"$(SRCROOT)/DigViewer/en.lproj/InspectorView.xib",
 				"$(SRCROOT)/DigViewer/en.lproj/PairingWindow.xib",
 				"$(SRCROOT)/DigViewer/ja.lproj/PairingWindow.strings",
+				"$(SRCROOT)/DigViewer/en.lproj/DevicePreferences.xib",
+				"$(SRCROOT)/DigViewer/ja.lproj/DevicePreferences.strings",
 			);
 			name = "Run Script For Creating Localized NIB";
 			outputPaths = (
@@ -1341,10 +1360,11 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/SelectNewConditionSheet.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InspectorView.nib",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/PairingWindow.nib",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/DevicePreferences.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1462,6 +1482,7 @@
 				7B71F0981B7E3D41002F83D3 /* TemporaryFileController.m in Sources */,
 				7B0DBF0416A84335000365F4 /* ClickableImageView.mm in Sources */,
 				7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */,
+				7BD6CF3A1C0DBA250063C2ED /* DevicePreferences.m in Sources */,
 				7B467D6A1B12083000969442 /* TwoFingerGestureRecognizer.m in Sources */,
 				7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */,
 				7BB4E5F91AD945460076630A /* MapPreferences.m in Sources */,
@@ -1695,6 +1716,14 @@
 			name = SelectDeletingConditionSheet.strings;
 			sourceTree = "<group>";
 		};
+		7B613F1B1C1076D6001B7E23 /* DevicePreferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B613F1C1C1076D6001B7E23 /* ja */,
+			);
+			name = DevicePreferences.strings;
+			sourceTree = "<group>";
+		};
 		7B61484C1B7BA1D200A03C45 /* InspectorView.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1853,6 +1882,14 @@
 				7BD6CF361C0B20B50063C2ED /* ja */,
 			);
 			name = PairingWindow.strings;
+			sourceTree = "<group>";
+		};
+		7BD6CF401C106CDE0063C2ED /* DevicePreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD6CF411C106CDE0063C2ED /* en */,
+			);
+			name = DevicePreferences.xib;
 			sourceTree = "<group>";
 		};
 		7BE7B6181B1F26E7009619E2 /* RenderingPreferences.xib */ = {

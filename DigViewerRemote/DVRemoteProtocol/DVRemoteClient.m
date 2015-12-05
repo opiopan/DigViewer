@@ -39,6 +39,7 @@
     LocalSession* _localSession;
     NSString* _lastSessionName;
     NSString* _pairingKey;
+    NSString* _deviceCode;
     
     NSDictionary* _meta;
     
@@ -196,13 +197,14 @@
 //-----------------------------------------------------------------------------------------
 // セッション開設・回収
 //-----------------------------------------------------------------------------------------
-- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key
+- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key fromDevice:(NSString *)deviceCode
 {
     if (_state == DVRClientDisconnected){
         _reconectCount = 0;
         _serviceForSession = [[NSNetService alloc] initWithDomain:service.domain type:service.type name:service.name];
         _serviceForSession.delegate = self;
         _pairingKey = key;
+        _deviceCode = deviceCode;
         _state = DVRClientConnecting;
         [self notifyStateChange];
         [_serviceForSession resolveWithTimeout:5.0];
@@ -595,7 +597,8 @@
     UIDevice* device = [UIDevice currentDevice];
     NSDictionary* argBase =@{DVRCNMETA_DEVICE_ID: device.identifierForVendor.UUIDString,
                              DVRCNMETA_DEVICE_NAME: device.name,
-                             DVRCNMETA_DEVICE_TYPE: device.localizedModel};
+                             DVRCNMETA_DEVICE_TYPE: device.localizedModel,
+                             DVRCNMETA_DEVICE_CODE: _deviceCode};
     NSMutableDictionary* args = [NSMutableDictionary dictionaryWithDictionary: argBase];
     int cmd;
     if (_pairingKey){

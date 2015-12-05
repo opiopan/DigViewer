@@ -1,0 +1,18 @@
+
+/* Class = "NSTextFieldCell"; title = "Paired Devices:"; ObjectID = "aSs-lS-NFC"; */
+"aSs-lS-NFC.title" = "ペアリング済デバイス:";
+
+/* Class = "NSTextFieldCell"; title = "iOS device can be used as a companion of DigViewer, such as a sub-display to show meta data of images. Especially, showing location information on map is very efficient.\nPlease try DigViewer remote on your iPhone or iPad."; ObjectID = "btu-gX-rs6"; */
+"btu-gX-rs6.title" = "iOS デバイスを DigViewer の画像のメタデータを表示するサブディスプレイとして利用できます。特に撮影位置を iOS デバイスの地図上に表示すると効果的です。\nDigViewer remote をあなたの iPhone または iPad でお試しください。";
+
+/* Class = "NSButtonCell"; title = "Cancel Pairing"; ObjectID = "dga-pK-rYI"; */
+"dga-pK-rYI.title" = "ペアリングを解除";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "i3p-ym-QGB"; */
+"i3p-ym-QGB.headerCell.title" = "名前";
+
+/* Class = "NSTableColumn"; headerCell.title = "Device Type"; ObjectID = "pdN-iR-h9U"; */
+"pdN-iR-h9U.headerCell.title" = "デバイス種別";
+
+/* Class = "NSButtonCell"; title = "Enable relationship with remote iOS device"; ObjectID = "sHb-5u-j6s"; */
+"sHb-5u-j6s.title" = "iOS デバイスとの連携機能を有効にする";

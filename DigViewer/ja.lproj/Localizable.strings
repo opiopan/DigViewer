@@ -26,6 +26,7 @@
 "PREF_TITLE_SLIDESHOW" = "スライドショー";
 "PREF_TITLE_MAP" = "地図";
 "PREF_TITLE_LENS" = "レンズ";
+"PREF_TITLE_DEVICE" = "デバイス";
 "PREF_TITLE_ADVANCED" = "詳細";
 
 // スライドショー遷移エフェクト(ビルトイン)の名前

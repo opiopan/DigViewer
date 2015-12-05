@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 
-- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key;
+- (void)connectToServer:(NSNetService *)service withKey:(NSString*)key fromDevice:(NSString*)deviceCode;
 - (void)connectToLocal;
 - (void)reconnect;
 - (void)disconnect;
