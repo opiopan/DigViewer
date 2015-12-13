@@ -149,6 +149,11 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        if isPresentingSharingMenu {
+            documentInteractionController.dismissMenuAnimated(false)
+            isPresentingSharingMenu = false
+        }
 
         let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
@@ -801,13 +806,14 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var isPresentingSharingMenu = false;
     
     func onLongPress(recognizer: UIGestureRecognizer){
-        if !isPresentingSharingMenu && DVRemoteClient.sharedClient().meta != nil{
+        if !isPresentingSharingMenu && geometry != nil{
             let date = self.popupViewController!.dateLabel.text
             let kml = KMLFile(name: date!, geometry: self.geometry!)
             documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: kml.path))
             documentInteractionController.delegate = self
             isPresentingSharingMenu = true;
-            documentInteractionController.presentOpenInMenuFromRect(mapView!.frame, inView: self.view, animated: true)
+            let rect = CGRect(origin: recognizer.locationInView(self.view), size: CGSizeZero)
+            documentInteractionController.presentOpenInMenuFromRect(rect, inView: self.view, animated: true)
         }
     }
     
