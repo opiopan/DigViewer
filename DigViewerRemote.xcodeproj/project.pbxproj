@@ -49,6 +49,7 @@
 		7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */; };
 		7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */; };
 		7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */; };
+		7BB683C21C1C7E8C00A6DFAF /* KMLFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */; };
 		7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */; };
 		7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59D01B9DA59C0025B902 /* MapViewController.swift */; };
 		7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D21B9DA59C0025B902 /* Main.storyboard */; };
@@ -126,6 +127,7 @@
 		7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedColorCell.swift; sourceTree = "<group>"; };
 		7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectingCell.swift; sourceTree = "<group>"; };
 		7BAFF9DA1BBFF66100B33E0D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigationController.swift; sourceTree = "<group>"; };
+		7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMLFile.swift; sourceTree = "<group>"; };
 		7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigViewerRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBA59CD1B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BBA59CE1B9DA59C0025B902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */,
 				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
 				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
+				7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */,
 				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
 				7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */,
+				7BB683C21C1C7E8C00A6DFAF /* KMLFile.swift in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */,
 				7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */,

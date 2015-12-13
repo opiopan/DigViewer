@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate,
-                         ConfigurationControllerDelegate, SummaryPopupViewControllerDelegate {
+                         ConfigurationControllerDelegate, SummaryPopupViewControllerDelegate,
+                         UIDocumentInteractionControllerDelegate {
     
     @IBOutlet var barTitle : UINavigationItem? = nil
     @IBOutlet var mapView : MKMapView? = nil
@@ -55,6 +56,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
+        mapView!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "onLongPress:"))
         
         geocoder = CLGeocoder()
         
@@ -790,6 +792,27 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }else{
             configController.mapSummaryDisplay = .Pinning
         }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 位置情報の共有
+    //-----------------------------------------------------------------------------------------
+    private var documentInteractionController : UIDocumentInteractionController!
+    private var isPresentingSharingMenu = false;
+    
+    func onLongPress(recognizer: UIGestureRecognizer){
+        if !isPresentingSharingMenu && DVRemoteClient.sharedClient().meta != nil{
+            let date = self.popupViewController!.dateLabel.text
+            let kml = KMLFile(name: date!, geometry: self.geometry!)
+            documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: kml.path))
+            documentInteractionController.delegate = self
+            isPresentingSharingMenu = true;
+            documentInteractionController.presentOpenInMenuFromRect(mapView!.frame, inView: self.view, animated: true)
+        }
+    }
+    
+    func documentInteractionControllerDidDismissOpenInMenu(controller: UIDocumentInteractionController) {
+        isPresentingSharingMenu = false;
     }
     
     //-----------------------------------------------------------------------------------------
