@@ -476,6 +476,7 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         if (!initialized){
             initialized = true
             let client = DVRemoteClient.sharedClient()
+            client.isInitialized = true
             client.addClientDelegate(self)
             barTitle!.title = client.state != .Connected ? client.stateString : client.serviceName
             if let name = ConfigurationController.sharedController.establishedConnection {

@@ -45,6 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - アプリ間連携
+    //-----------------------------------------------------------------------------------------
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        DVRemoteClient.sharedClient().regeisterSharedImage(url)
+        return true
+    }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル

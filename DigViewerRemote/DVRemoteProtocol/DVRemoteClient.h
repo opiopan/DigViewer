@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 //-----------------------------------------------------------------------------------------
 @interface DVRemoteClient : NSObject <NSNetServiceDelegate, DVRemoteSessionDelegate>
 
+@property (nonatomic) BOOL isInitialized;
 @property (weak) NSRunLoop* runLoop;
 @property (readonly) DVRClientState state;
 @property (readonly) NSString* stateString;
@@ -44,6 +45,8 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 
 - (void)addClientDelegate:(id <DVRemoteClientDelegate>)delegate;
 - (void)removeClientDelegate:(id <DVRemoteClientDelegate>)delegate;
+
+- (void)regeisterSharedImage:(NSURL*)url;
 
 - (void)connectToServer:(NSNetService *)service withKey:(NSString*)key fromDevice:(NSString*)deviceCode;
 - (void)connectToLocal;

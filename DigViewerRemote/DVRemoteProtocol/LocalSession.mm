@@ -31,6 +31,7 @@ static struct {
 @property NSArray* nodeID;
 @property NSMutableArray* children;
 @property PHAssetCollection* collection;
+@property BOOL enableSharedImage;
 @property BOOL prevailBottom;
 @end
 
@@ -46,6 +47,9 @@ static struct {
 @end
 
 @implementation LocalSession {
+    NSURL* _sharedImage;
+    BOOL _isConnected;
+    
     PHFetchOptions* _assetsFetchOptions;
     PHImageManager* _imageManager;
     
@@ -67,6 +71,7 @@ static const int NAME_CLIP_LENGTH = 13;
 {
     self = [super init];
     if (self){
+        _isConnected = NO;
         _documentName = @"document";
         _topName = NSLocalizedString(@"LS_TOP_FOLDER_NAME", nil);
         _assetsFetchOptions = [PHFetchOptions new];
@@ -75,6 +80,36 @@ static const int NAME_CLIP_LENGTH = 13;
         _imageManager = [PHImageManager defaultManager];
     }
     return self;
+}
+
+//-----------------------------------------------------------------------------------------
+// アプリ間共有イメージの登録
+//-----------------------------------------------------------------------------------------
+- (void)registerSharedImage:(NSURL *)url
+{
+    _sharedImage = url;
+    if (_isConnected){
+        [self createSharedImageNode];
+        LSNode* node = _root.children.lastObject;
+        NSArray* nodeID = [node.nodeID arrayByAddingObject:NSLocalizedString(@"LS_APP_SHARED_IMAGE", nil)];
+        LocalSession* __weak weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf moveToAssetWithID:nodeID];
+        });
+    }
+}
+
+- (void) createSharedImageNode
+{
+    LSNode* target = _root.children.lastObject;
+    if (!target.enableSharedImage){
+        LSNode* sharedNode = [LSNode new];
+        sharedNode.name = NSLocalizedString(@"LS_APP_SHARED_FOLDER_NAME", nil);
+        sharedNode.nodeID = [_root.nodeID arrayByAddingObject:sharedNode.name];
+        sharedNode.enableSharedImage = YES;
+        sharedNode.prevailBottom = NO;
+        [_root.children addObject:sharedNode];
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -100,6 +135,7 @@ static const int NAME_CLIP_LENGTH = 13;
             [weakSelf notifyClosed];
         });
     }
+    _isConnected = YES;
 }
 
 - (void)completeConnect
@@ -140,10 +176,6 @@ static const int NAME_CLIP_LENGTH = 13;
             [parent.children addObjectsFromArray:currentNodes];
         }
     }
-    _currentNode = _root.children[0];
-    _currentCollectionPath = @[_topName, _currentNode.name];
-    _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
-    _currentIndexInAssets = _currentAssets.count > 0 ? _currentAssets.count - 1 : 0;
     
     // スマートコレクションリストに含まれるアルバムをツリーに追加
     PHFetchResult* collectionLists[2];
@@ -168,6 +200,19 @@ static const int NAME_CLIP_LENGTH = 13;
             }
         }
     }
+
+    // カレントノードを設定
+    if (_sharedImage){
+        [self createSharedImageNode];
+        _currentNode = _root.children.lastObject;
+        _currentAssets = nil;
+        _currentIndexInAssets = 0;
+    }else{
+        _currentNode = _root.children[0];
+        _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
+        _currentIndexInAssets = _currentAssets.count > 0 ? _currentAssets.count - 1 : 0;
+    }
+    _currentCollectionPath = _currentNode.nodeID;
     
     // 接続完了を返却
     if (_delegate){
@@ -180,8 +225,8 @@ static const int NAME_CLIP_LENGTH = 13;
         [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_TEMPLATE_META withData:data];
     }
     
-    if (_currentAssets.count > 0){
-        PHAsset* asset = _currentAssets[_currentIndexInAssets];
+    if (_sharedImage || _currentAssets.count > 0){
+        PHAsset* asset = _sharedImage ? nil : _currentAssets[_currentIndexInAssets];
         LocalSession* __weak weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
@@ -250,22 +295,39 @@ static const CGFloat SPAN_IN_METER = 450.0;
 - (void)notifyMetaForAsset:(PHAsset*)asset indexInParent:(NSUInteger)indexInParent
 {
     LocalSession* __weak weakSelf = self;
-    [_imageManager requestImageDataForAsset:asset options:nil resultHandler:
-     ^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-         [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData];
-     }];
+    if (asset){
+        [_imageManager requestImageDataForAsset:asset options:nil resultHandler:
+         ^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+             [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData];
+         }];
+    }else{
+        NSData* imageData = [NSData dataWithContentsOfURL:_sharedImage];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData];
+        });
+    }
 }
 
 - (void)notifyMetaForAsset:(PHAsset*)asset indexInParent:(NSUInteger)indexInParent imageData:(NSData*)imageData
 {
-    NSString* name = [asset.localIdentifier substringToIndex:NAME_CLIP_LENGTH];
-    NSString* type = [self typeNameOfAsset:asset];
+    NSString* name;
+    NSString* type;
+    NSArray* path;
+    if (asset){
+        name = [asset.localIdentifier substringToIndex:NAME_CLIP_LENGTH];
+        type = [self typeNameOfAsset:asset];
+        path = [_currentCollectionPath arrayByAddingObject:asset.localIdentifier];
+    }else{
+        name = NSLocalizedString(@"LS_APP_SHARED_IMAGE", nil);
+        type = NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil);
+        path = [_currentCollectionPath arrayByAddingObject:name];
+    }
+
     ECGImageSourceRef imageSource(CGImageSourceCreateWithData((__bridge CFDataRef)(imageData), NULL));
     ImageMetadata* meta = [[ImageMetadata alloc] initWithImage:imageSource name:name typeName:type];
     
     NSMutableDictionary* data = [NSMutableDictionary dictionary];
     [data setValue:_documentName forKey:DVRCNMETA_DOCUMENT];
-    NSArray* path = [_currentCollectionPath arrayByAddingObject:asset.localIdentifier];
     [data setValue:path forKey:DVRCNMETA_ID];
     [data setValue:@(indexInParent) forKey:DVRCNMETA_INDEX_IN_PARENT];
     if (meta.gpsInfo){
@@ -324,7 +386,9 @@ static const CGFloat THUMBNAIL_SIZE = 100;
         image = [self.class thumbnailForAsset:asset withSize:imageSize];
     }else{
         LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
-        if (target.collection){
+        if (target.enableSharedImage){
+            image = [UIImage imageWithContentsOfFile:_sharedImage.path];
+        }else if (target.collection){
             PHAssetCollection* collection = target.collection;
             PHFetchOptions* options = nil;
             if (target.prevailBottom){
@@ -378,7 +442,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 //-----------------------------------------------------------------------------------------
 - (void)moveNextAsset
 {
-    if (_currentIndexInAssets + 1 < _currentAssets.count){
+    if (_currentAssets && _currentIndexInAssets + 1 < _currentAssets.count){
         _currentIndexInAssets++;
         PHAsset* asset = _currentAssets[_currentIndexInAssets];
         [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
@@ -387,7 +451,7 @@ static const CGFloat THUMBNAIL_SIZE = 100;
 
 - (void)movePreviousAsset
 {
-    if (_currentIndexInAssets > 0){
+    if (_currentAssets && _currentIndexInAssets > 0){
         _currentIndexInAssets--;
         PHAsset* asset = _currentAssets[_currentIndexInAssets];
         [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
@@ -401,16 +465,24 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     if (![self nodeID:_currentCollectionPath isEqualToParentOfNodeID:nodeID]){
         _currentNode = [self findNodeWithNodeID:nodeID forParent:YES];
         _currentCollectionPath = _currentNode.nodeID;
-        _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
+        if (_currentNode.enableSharedImage){
+            _currentAssets = nil;
+        }else{
+            _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
+        }
         _currentIndexInAssets = 0;
     }
-    
-    for (int i = 0; i < _currentAssets.count; i++){
-        PHAsset* asset = _currentAssets[i];
-        if ([assetID isEqualToString:asset.localIdentifier]){
-            _currentIndexInAssets = i;
-            [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
-            break;
+
+    if (_currentNode.enableSharedImage){
+        [self notifyMetaForAsset:nil indexInParent:_currentIndexInAssets];
+    }else{
+        for (int i = 0; i < _currentAssets.count; i++){
+            PHAsset* asset = _currentAssets[i];
+            if ([assetID isEqualToString:asset.localIdentifier]){
+                _currentIndexInAssets = i;
+                [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
+                break;
+            }
         }
     }
 }
@@ -423,7 +495,14 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     LSNode* target = [self findNodeWithNodeID:nodeID forParent:NO];
     
     NSMutableArray* rc = nil;
-    if (!target.collection){
+    if (target.enableSharedImage){
+        rc = [NSMutableArray array];
+        NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: NSLocalizedString(@"LS_APP_SHARED_IMAGE", nil),
+                                    DVRCNMETA_ITEM_TYPE: NSLocalizedString(@"LS_IMAGE_TYPE_NAME", nil),
+                                    DVRCNMETA_ITEM_IS_FOLDER: @(NO),
+                                    DVRCNMETA_LOCAL_ID: NSLocalizedString(@"LS_APP_SHARED_IMAGE", nil)};
+        [rc addObject:nodeAttrs];
+    }else if (!target.collection){
         rc = [NSMutableArray array];
         for (LSNode* child in target.children){
             NSDictionary* nodeAttrs = @{DVRCNMETA_ITEM_NAME: child.name,

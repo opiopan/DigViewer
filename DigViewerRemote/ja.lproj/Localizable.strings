@@ -35,6 +35,8 @@
 "DSD_DIGVIEWER" = "DigViewer ";
 
 "LS_TOP_FOLDER_NAME" = "アルバム";
+"LS_APP_SHARED_FOLDER_NAME" = "他アプリからのコピー";
+"LS_APP_SHARED_IMAGE" = "他アプリからコピーされた画像";
 "LS_IMAGE_TYPE_NAME" = "イメージ";
 "LS_SCREENSHOTIMAGE_TYPE_NAME" = "スクリーンショット";
 "LS_PANORAMAIMAGE_TYPE_NAME" = "パノラマ";

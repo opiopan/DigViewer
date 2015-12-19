@@ -34,6 +34,8 @@
 @implementation DVRemoteClient{
     NSMutableArray* _delegates;
     
+    NSURL* _sharedImage;
+    
     NSNetService* _serviceForSession;
     DVRemoteSession* _session;
     LocalSession* _localSession;
@@ -85,6 +87,7 @@
 {
     self = [super init];
     if (self){
+        _isInitialized = NO;
         _delegates = [NSMutableArray array];
         _state = DVRClientDisconnected;
         _reconectCount = 0;
@@ -195,6 +198,21 @@
 }
 
 //-----------------------------------------------------------------------------------------
+// アプリ間共有イメージの登録
+//-----------------------------------------------------------------------------------------
+- (void)regeisterSharedImage:(NSURL *)url
+{
+    _sharedImage = url;
+    if (_localSession){
+        [_localSession registerSharedImage:url];
+        _sharedImage = nil;
+    }else if (_isInitialized){
+        [self disconnect];
+        [self connectToLocal];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // セッション開設・回収
 //-----------------------------------------------------------------------------------------
 - (void)connectToServer:(NSNetService *)service withKey:(NSString*)key fromDevice:(NSString *)deviceCode
@@ -221,6 +239,9 @@
         _localSession = [LocalSession new];
         _localSession.delegate = self;
         [self notifyStateChange];
+        if (_sharedImage){
+            [_localSession registerSharedImage:_sharedImage];
+        }
         [_localSession connect];
     }
 }

@@ -14,6 +14,8 @@
 
 @property (weak) id <DVRemoteSessionDelegate> delegate;
 
+- (void)registerSharedImage: (NSURL*)url;
+
 - (void)connect;
 
 - (UIImage*)thumbnailForID: (NSArray*)nodeID;
