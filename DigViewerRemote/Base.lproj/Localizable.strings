@@ -71,6 +71,13 @@
 "SUMMARY_PINNING_STYLE_LOWER_LEFT" = "at the Lower Left";
 "SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "at the Lower Right";
 
+"SA_SHARE_LOCATION" = "Share Location";
+"SA_SHARE_KML" = "Share for Google Earth";
+"SA_SHARE_CANCEL" = "Cancel";
+
+"CA_OPEN_MAP" = "Open by Map";
+"CA_OPEN_GOOGLEMAPS" = "Open by Google Maps";
+
 "MSG_DATASOURCE_DESCTIPTION" = "Select a data source to connect.\nPhoto library in this iOS device and DigViewer running on Mac can be used as data source of DigViewer remote\nIf no Mac running DigViewer is shown in this list, please make sure the Mac and this iOS device are connected to same network.";
 
 //-------------------------------------------------------------------------------------

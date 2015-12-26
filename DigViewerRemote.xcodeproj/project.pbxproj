@@ -61,6 +61,7 @@
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
 		7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
+		7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,19 @@
 			remoteInfo = DigViewerRemote;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7BF05B1D1C257CC100A4A766 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
@@ -145,6 +159,8 @@
 		7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
+		7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DigViewerRemote.entitlements; sourceTree = "<group>"; };
+		7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +247,7 @@
 				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
 				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
 				7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */,
+				7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -272,6 +289,7 @@
 		7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */ = {
 			isa = PBXGroup;
 			children = (
+				7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */,
 				7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */,
 				7BD72C3E1B9DB3FC00DDBC1A /* Controllers */,
 				7B52AA3B1BB0121E0068A842 /* Views */,
@@ -368,6 +386,7 @@
 				7BBA59C61B9DA59C0025B902 /* Frameworks */,
 				7BBA59C71B9DA59C0025B902 /* Resources */,
 				7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */,
+				7BF05B1D1C257CC100A4A766 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -403,13 +422,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = opiopan;
 				TargetAttributes = {
 					7BBA59C81B9DA59C0025B902 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G3Y32477L5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					7BBA59DD1B9DA59C0025B902 = {
 						CreatedOnToolsVersion = 6.4;
@@ -499,6 +523,7 @@
 				7BB683C21C1C7E8C00A6DFAF /* KMLFile.swift in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */,
+				7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */,
 				7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */,
 				7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */,
 				7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */,
@@ -664,8 +689,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/DigViewerRemote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DigViewerRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.$(PRODUCT_NAME:rfc1034identifier)";
@@ -679,8 +706,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/DigViewerRemote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DigViewerRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.$(PRODUCT_NAME:rfc1034identifier)";

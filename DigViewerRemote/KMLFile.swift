@@ -8,14 +8,18 @@
 
 import UIKit
 
-class KMLFile: NSObject {
+class KMLFile: NSObject, UIActivityItemSource {
     
-    let path : String
+    private let titleName : String
+    private let pathString : String
+    private let contents : String
     
     init(name : String, geometry : MapGeometry) {
+        titleName = name
+        
         let fileName = name.stringByReplacingOccurrencesOfString("/", withString: "-")
         let dirPath = "\(NSHomeDirectory())/tmp/KML"
-        self.path = "\(dirPath)/\(fileName).kml"
+        self.pathString = "\(dirPath)/\(fileName).kml"
         
         let range = max(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter) / cos(geometry.cameraTilt / 180 * M_PI)
 
@@ -23,7 +27,7 @@ class KMLFile: NSObject {
         _ = try? manager.removeItemAtPath(dirPath)
         _ = try? manager.createDirectoryAtPath(dirPath, withIntermediateDirectories: true, attributes: nil)
         
-        let contents =
+        contents =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
             "    <Placemark>\n" +
@@ -41,7 +45,32 @@ class KMLFile: NSObject {
             "        </LookAt>\n" +
             "    </Placemark>\n" +
             "</kml>\n"
-        _ = try? contents.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
     }
 
+    
+    var path : String {
+        get{
+            _ = try? contents.writeToFile(pathString, atomically: false, encoding: NSUTF8StringEncoding)
+            return pathString
+        }
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - UIActivityItemSourceプロトコル
+    //-----------------------------------------------------------------------------------------
+    func activityViewControllerPlaceholderItem(controller: UIActivityViewController) -> AnyObject {
+        return NSData()
+    }
+    
+    func activityViewController(controller: UIActivityViewController, itemForActivityType type: String) -> AnyObject? {
+        return contents.dataUsingEncoding(NSUTF8StringEncoding)
+    }
+    
+    func activityViewController(controller: UIActivityViewController, dataTypeIdentifierForActivityType type: String?) -> String {
+        return "com.google.earth.kml"
+    }
+    
+    func activityViewController(controller: UIActivityViewController, subjectForActivityType type: String?) -> String {
+        return titleName
+    }
 }

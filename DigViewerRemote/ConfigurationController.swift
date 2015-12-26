@@ -13,6 +13,8 @@ import UIKit
 // MARK: ユーザデフォルトキー名 / 列挙型定義
 //-----------------------------------------------------------------------------------------
 struct UserDefaults {
+    static let GroupsMigration = "GroupsMigration";
+    
     static let EstablishedConnection = "EstablishedConnection";
     static let MapType = "MapType";
     static let MapShowLabel = "MapShowLabel";
@@ -86,7 +88,7 @@ class ConfigurationController: NSObject {
     // MARK: - 初期化
     //-----------------------------------------------------------------------------------------
     private var defaults : [String:AnyObject]
-    private let controller = NSUserDefaults.standardUserDefaults()
+    private let controller = NSUserDefaults(suiteName: "group.com.opiopan.DVremote")!
 
     override init(){
         let redColor = NSKeyedArchiver.archivedDataWithRootObject(UIColor.redColor())
@@ -136,6 +138,47 @@ class ConfigurationController: NSObject {
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
             as! [ServerInfo]
         authenticationgKeys = controller.valueForKey(UserDefaults.AuthenticationgKeys) as! [String:String]
+        
+        super.init()
+        
+        self.migrateToAppGroups()
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - App Groupsへのマイグレーション
+    //-----------------------------------------------------------------------------------------
+    private func migrateToAppGroups() {
+        if controller.valueForKey(UserDefaults.GroupsMigration) == nil {
+            let src = NSUserDefaults.standardUserDefaults()
+            
+            establishedConnection = src.valueForKey(UserDefaults.EstablishedConnection) as! String?
+            mapType = MapType(rawValue : src.valueForKey(UserDefaults.MapType) as! Int)!
+            mapShowLabel = src.valueForKey(UserDefaults.MapShowLabel) as! Bool
+            map3DView = src.valueForKey(UserDefaults.Map3DView) as! Bool
+            mapHeadingDisplay = MapHeadingDisplay(rawValue: src.valueForKey(UserDefaults.MapHeadingDisplay) as! Int)!
+            mapSummaryDisplay = MapSummaryDisplay(rawValue: src.valueForKey(UserDefaults.MapSummaryDisplay) as! Int)!
+            enableVolumeButton = src.valueForKey(UserDefaults.EnableVolumeButton) as! Bool
+            mapRelationSpan = src.valueForKey(UserDefaults.MapRelationSpan) as! Bool
+            mapRelationSpanMethod = MapRelationSpanMethod(rawValue: src.valueForKey(UserDefaults.MapRelationSpanMethod) as! Int)!
+            mapTurnToHeading = src.valueForKey(UserDefaults.MapTurnToHeading) as! Bool
+            mapHeadingShift = src.valueForKey(UserDefaults.MapHeadingShift) as! CGFloat
+            mapSpan = src.valueForKey(UserDefaults.MapSpan) as! CGFloat
+            mapTilt = src.valueForKey(UserDefaults.MapTilt) as! CGFloat
+            mapPinColor =
+                NSKeyedUnarchiver.unarchiveObjectWithData(src.valueForKey(UserDefaults.MapPinColor) as! NSData) as! UIColor
+            mapArrowColor =
+                NSKeyedUnarchiver.unarchiveObjectWithData(src.valueForKey(UserDefaults.MapArrowColor) as! NSData) as! UIColor
+            mapFovColor =
+                NSKeyedUnarchiver.unarchiveObjectWithData(src.valueForKey(UserDefaults.MapFOVColor) as! NSData) as! UIColor
+            mapSummaryPinningStyle =
+                MapSummaryPinningStyle(rawValue: src.valueForKey(UserDefaults.MapSummaryPinningStyle) as! Int)!
+            dataSourcePinnedList =
+                NSKeyedUnarchiver.unarchiveObjectWithData(src.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
+                as! [ServerInfo]
+            authenticationgKeys = src.valueForKey(UserDefaults.AuthenticationgKeys) as! [String:String]
+            
+            controller.setValue(true, forKey: UserDefaults.GroupsMigration)
+        }
     }
     
     //-----------------------------------------------------------------------------------------

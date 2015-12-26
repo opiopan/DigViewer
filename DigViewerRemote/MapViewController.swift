@@ -149,11 +149,6 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        if isPresentingSharingMenu {
-            documentInteractionController.dismissMenuAnimated(false)
-            isPresentingSharingMenu = false
-        }
 
         let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
         let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
@@ -804,22 +799,125 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     // MARK: - 位置情報の共有
     //-----------------------------------------------------------------------------------------
     private var documentInteractionController : UIDocumentInteractionController!
-    private var isPresentingSharingMenu = false;
     
     func onLongPress(recognizer: UIGestureRecognizer){
-        if !isPresentingSharingMenu && geometry != nil{
+        let rect = CGRect(origin: recognizer.locationInView(self.view), size: CGSizeZero)
+        
+        if self.presentedViewController == nil {
+            let controller = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            if geometry != nil {
+                controller.addAction(UIAlertAction(
+                    title: NSLocalizedString("SA_SHARE_LOCATION", comment: ""), style: .Default){
+                        [unowned self](action: UIAlertAction) in
+                        self.showLocationSharingSheet(rect)
+                    }
+                )
+                controller.addAction(UIAlertAction(
+                    title: NSLocalizedString("SA_SHARE_KML", comment: ""), style: .Default){
+                        [unowned self](action: UIAlertAction) in
+                        self.showKMLSharingSheet(rect)
+                    }
+                )
+            }
+            controller.addAction(UIAlertAction(
+                title: NSLocalizedString("SA_SHARE_CANCEL", comment: ""), style: .Cancel){(action: UIAlertAction) in}
+            )
+            if let popoverPresentationController = controller.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = rect
+            }
+            if controller.actions.count > 1 {
+                self.presentViewController(controller, animated: true){}
+            }
+        }
+    }
+
+    private func showLocationSharingSheet(rect : CGRect) {
+        if let geometry = self.geometry {
+            let lat = geometry.latitude
+            let lng = geometry.longitude
+            let title = popupViewController!.dateLabel.text
+
+            // 共有データ構築
+            var text = "\(title!)\n"
+            if let camera = popupViewController!.cameraLabel.text {
+                text += "\(camera)\n"
+            }
+            if let lens = popupViewController!.lensLabel.text {
+                text += "\(lens)\n"
+            }
+            if let condition = popupViewController!.conditionLabel.text {
+                text += "\(condition)\n"
+            }
+            if let address = popupViewController!.addressLabel.text {
+                text += "\(address)\n"
+            }
+//            let vcfString = "BEGIN:VCARD\nVERSION:3.0\n   N:;\(title);;;\n   FN:Shared Location\n" +
+//                            "item1.URL;type=pref:http://maps.apple.com/?ll=\(lat),\(lng)\n" +
+//                            "item1.X-ABLabel:map url\nEND:VCARD"
+//            let vcfPath = "\(NSHomeDirectory())/tmp/tmp.vcf"
+//            _ = try? vcfString.writeToFile(vcfPath, atomically: false, encoding: NSUTF8StringEncoding)
+            let mapUrl = "http://maps.apple.com/maps?address=&ll=\(lat),\(lng)&q=\(lat),\(lng)&t=m"
+            var items : [AnyObject] = [
+                text,
+//                NSURL(fileURLWithPath: vcfPath),
+                NSURL(string: mapUrl)!,
+            ]
+            if let thumbnail = popupViewController!.thumbnailView.image {
+                items.append(thumbnail)
+            }
+            
+            // カスタムアクティビティの設定
+            let mapType = mapView!.mapType
+            let mapActivity = CustomActivity(key: "CA_OPEN_MAP", icon: UIImage(named: "action_open_map")!){
+                let placeMark = MKPlacemark(
+                    coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lng), addressDictionary: nil)
+                let mapItem = MKMapItem(placemark: placeMark)
+                mapItem.name = title
+                let span = MKCoordinateSpan(latitudeDelta: geometry.spanLatitude, longitudeDelta: geometry.spanLongitude)
+                let camera = MKMapCamera();
+                camera.centerCoordinate = geometry.centerCoordinate
+                camera.heading = geometry.cameraHeading
+                camera.altitude = geometry.cameraAltitude
+                camera.pitch = CGFloat(geometry.cameraTilt)
+                let options = [
+                    MKLaunchOptionsMapTypeKey: mapType.rawValue,
+                    MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: span),
+                    MKLaunchOptionsCameraKey: camera,
+                ]
+                mapItem.openInMapsWithLaunchOptions(options)
+            }
+            let mapScale = geometry.spanLongitudeMeter / Double(mapView!.frame.size.width)
+            let gmapActivity = CustomActivity(key: "CA_OPEN_GOOGLEMAPS", icon: UIImage(named: "action_open_googlemaps")!){
+                let zoom = Int(max(0, min(19, round(log2(156543.033928 / mapScale)))))
+                var url : NSURL
+                if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemapsurl://")!){
+                    url = NSURL(string: "comgooglemapsurl://?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
+                }else{
+                    url = NSURL(string: "https://www.google.com/maps?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
+                }
+                UIApplication.sharedApplication().openURL(url)
+            }
+            let activities = [mapActivity, gmapActivity]
+            
+            // アクティビティビューの表示
+            let controller = UIActivityViewController(activityItems: items, applicationActivities: activities)
+            if let popoverPresentationController = controller.popoverPresentationController {
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.sourceRect = rect
+            }
+            self.presentViewController(controller, animated: true){}
+        }
+    }
+    
+    private func showKMLSharingSheet(rect : CGRect) {
+        if self.presentedViewController == nil && geometry != nil{
             let date = self.popupViewController!.dateLabel.text
             let kml = KMLFile(name: date!, geometry: self.geometry!)
             documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: kml.path))
             documentInteractionController.delegate = self
-            isPresentingSharingMenu = true;
-            let rect = CGRect(origin: recognizer.locationInView(self.view), size: CGSizeZero)
             documentInteractionController.presentOpenInMenuFromRect(rect, inView: self.view, animated: true)
         }
-    }
-    
-    func documentInteractionControllerDidDismissOpenInMenu(controller: UIDocumentInteractionController) {
-        isPresentingSharingMenu = false;
     }
     
     //-----------------------------------------------------------------------------------------
