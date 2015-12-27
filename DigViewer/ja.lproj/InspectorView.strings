@@ -7,3 +7,6 @@
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "v8D-wx-LlG"; */
 "v8D-wx-LlG.title" = "すべて選択";
+
+/* Class = "NSMenuItem"; title = "Copy Summary"; ObjectID = "tsR-Sh-zcz"; */
+"tsR-Sh-zcz.title" = "サマリーをコピー";

@@ -23,6 +23,7 @@
 		7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */; };
 		7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */; };
 		7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */; };
+		7B6D69A81C2ECD520060212A /* MapURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D69A71C2ECD520060212A /* MapURL.swift */; };
 		7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */; };
 		7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */; };
 		7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D31BB83C7700C1DB19 /* PopupView.swift */; };
@@ -105,6 +106,7 @@
 		7B6C069D1BB67266004902D3 /* ItemListNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListNavigationController.swift; sourceTree = "<group>"; };
 		7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeItemCell.swift; sourceTree = "<group>"; };
+		7B6D69A71C2ECD520060212A /* MapURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapURL.swift; sourceTree = "<group>"; };
 		7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
 		7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7B7356D31BB83C7700C1DB19 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
 				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
 				7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */,
+				7B6D69A71C2ECD520060212A /* MapURL.swift */,
 				7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */,
 			);
 			name = "Map View";
@@ -544,6 +547,7 @@
 				7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */,
 				7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */,
 				7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */,
+				7B6D69A81C2ECD520060212A /* MapURL.swift in Sources */,
 				7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */,
 				7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */,
 				7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */,

@@ -284,12 +284,14 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     private var isGeocoding = false
     private var pendingGeocodingRecquest : CLLocation? = nil
     private var currentLocation : CLLocation? = nil
+    private var placemark : CLPlacemark? = nil
     private var isFirst = true
     
     func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
         removeAnnotation()
         removeOverlay()
         geometry = nil
+        placemark = nil
         
         if isFirst {
             isFirst = false
@@ -367,9 +369,9 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             geocoder!.reverseGeocodeLocation(location, completionHandler: {
                 [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
                 if placemarks != nil && placemarks!.count > 0 && self.pendingGeocodingRecquest == nil{
-                    let placemark = placemarks![0]
+                    self.placemark = placemarks![0]
                     if self.currentLocation == location {
-                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(placemark)
+                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(self.placemark!)
                     }
                 }
                 self.isGeocoding = false
@@ -852,16 +854,10 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
             if let address = popupViewController!.addressLabel.text {
                 text += "\(address)\n"
             }
-//            let vcfString = "BEGIN:VCARD\nVERSION:3.0\n   N:;\(title);;;\n   FN:Shared Location\n" +
-//                            "item1.URL;type=pref:http://maps.apple.com/?ll=\(lat),\(lng)\n" +
-//                            "item1.X-ABLabel:map url\nEND:VCARD"
-//            let vcfPath = "\(NSHomeDirectory())/tmp/tmp.vcf"
-//            _ = try? vcfString.writeToFile(vcfPath, atomically: false, encoding: NSUTF8StringEncoding)
-            let mapUrl = "http://maps.apple.com/maps?address=&ll=\(lat),\(lng)&q=\(lat),\(lng)&t=m"
+            let mapUrl = MapURL(geometry: geometry, title: popupViewController!.addressLabel.text!)
             var items : [AnyObject] = [
                 text,
-//                NSURL(fileURLWithPath: vcfPath),
-                NSURL(string: mapUrl)!,
+                mapUrl,
             ]
             if let thumbnail = popupViewController!.thumbnailView.image {
                 items.append(thumbnail)

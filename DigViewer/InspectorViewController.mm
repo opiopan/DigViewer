@@ -377,6 +377,63 @@ static NSString* kViewSelector = @"viewSelector";
     return targetView.clickedRow >= 0 || targetView.selectedRowIndexes.count > 0;
 }
 
+- (IBAction)copySummary:(id)sender
+{
+    PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
+    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:current];
+    NSArray* filter = @[@0, @4, @5, @7, @8, @11, @13, @14, @15];
+    NSArray* summary = [meta summaryWithFilter:filter];
+    
+    NSString* date = ((ImageMetadataKV*)summary[0]).value;
+    NSString* cameraMake =
+        [((ImageMetadataKV*)summary[2]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* cameraModel =
+        [((ImageMetadataKV*)summary[3]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* lensMake =
+        [((ImageMetadataKV*)summary[4]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* lensModel = ((ImageMetadataKV*)summary[5]).value;
+    NSString* focalLength = ((ImageMetadataKV*)summary[7]).value;
+    NSString* exposureTime = ((ImageMetadataKV*)summary[8]).value;
+    NSString* aperture = ((ImageMetadataKV*)summary[9]).value;
+    NSString* isoSpeed = ((ImageMetadataKV*)summary[10]).value;
+    
+    if (lensMake && lensModel &&
+        [lensModel rangeOfString:lensMake options:NSCaseInsensitiveSearch].location == NSNotFound &&
+        (!cameraModel || [lensModel rangeOfString:cameraModel options:NSCaseInsensitiveSearch].location == NSNotFound)){
+        lensModel = [NSString stringWithFormat:@"%@ %@", lensMake, lensModel];
+    }
+    if (cameraMake && cameraModel &&
+        [cameraModel rangeOfString:cameraMake options:NSCaseInsensitiveSearch].location == NSNotFound){
+        cameraModel = [NSString stringWithFormat:@"%@ %@", cameraMake, cameraModel];
+    }
+    
+    NSString* condition = nil;
+    for (NSString* element in @[focalLength, exposureTime, aperture, isoSpeed]) {
+        if (element){
+            if (condition){
+                condition = [NSString stringWithFormat:@"%@ %@", condition, element];
+            }else{
+                condition = element;
+            }
+        }
+    }
+    
+    NSString* summaryString = nil;
+    for (NSString* element in @[date, cameraModel, lensModel, condition]) {
+        if (element){
+            if (summaryString){
+                summaryString = [NSString stringWithFormat:@"%@%@\n", summaryString, element];
+            }else{
+                summaryString = [element stringByAppendingString:@"\n"];
+            }
+        }
+    }
+    
+    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
+    [pboard declareTypes:@[NSPasteboardTypeString] owner:self];
+    [pboard setString:summaryString forType:NSPasteboardTypeString];
+}
+
 //-----------------------------------------------------------------------------------------
 // デフォルトのコピーアクション
 //-----------------------------------------------------------------------------------------

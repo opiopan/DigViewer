@@ -7,9 +7,9 @@
 */
 
 // EXIFセクションタイトル
-"EXIFSEP_EQUIPMENTS" = "撮影機材";
+"EXIFSEP_EQUIPMENTS" = "機材";
 "EXIFSEP_CONDITIONS" = "撮影条件";
-"EXIFSEP_SOFTOWARE" = "現像ソフトウェア";
+"EXIFSEP_SOFTOWARE" = "現像";
 
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (デフォルト)";

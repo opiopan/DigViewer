@@ -9,7 +9,7 @@
 // EXIFセクションタイトル
 "EXIFSEP_EQUIPMENTS" = "Equipments";
 "EXIFSEP_CONDITIONS" = "Conditions";
-"EXIFSEP_SOFTOWARE" = "Developing Software";
+"EXIFSEP_SOFTOWARE" = "Developing";
 
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
