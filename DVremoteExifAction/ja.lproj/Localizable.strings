@@ -1,0 +1,153 @@
+/* 
+  Localized.strings
+  DigViewerRemote
+
+  Created by opiopan on 2015/09/28.
+  Copyright © 2015年 opiopan. All rights reserved.
+*/
+
+"EXIF-BASIC" = "基本情報";
+"EXIF-LOCATION" = "位置情報";
+
+"LS_IMAGE_TYPE_NAME" = "イメージ";
+
+//-------------------------------------------------------------------------------------
+// 画像メタデータ用strings
+//-------------------------------------------------------------------------------------
+
+// EXIFセクションタイトル
+"EXIFSEP_EQUIPMENTS" = "機材";
+"EXIFSEP_CONDITIONS" = "撮影条件";
+"EXIFSEP_SOFTOWARE" = "現像";
+
+// インスペクタービュー: 属性名
+"File Name:" = "ファイル名:";
+"Type:" = "種別:";
+"Image size:" = "画像サイズ:";
+"Date Time:" = "撮影日時:";
+"Color Profile:" = "カラープロファイル:";
+"Bit Depth:" = "ビット深度:";
+"Camera Maker:" = "カメラメーカー:";
+"Camera Model:" = "カメラモデル:";
+"Lens Maker:" = "レンズメーカー:";
+"Lens Model:" = "レンズモデル:";
+"Lens Spec:" = "レンズ仕様:";
+"Sensing Method:" = "センサー方式:";
+"Focal Length:" = "焦点距離:";
+"Focal Length in 35mm:" = "35mm換算 焦点距離:";
+"Exposure Time:" = "露出時間:";
+"Aperture:" = "絞り:";
+"ISO Speed:" = "ISO感度:";
+"Exposure Bias:" = "露出補正:";
+"Exposure Program:" = "露出プログラム:";
+"Exposure Mode:" = "露出モード:";
+"Metering Mode:" = "測光モード:";
+"Flash:" = "フラッシュ:";
+"Flash Energy:" = "フラッシュ強度:";
+"White Balance:" = "ホワイトバランス:";
+"Contrast:" = "コントラスト:";
+"Saturation:" = "彩度:";
+"Sharpness:" = "シャープネス:";
+"Scene Cpature Type:" = "撮影シーンタイプ:";
+"Subject Distance Range:" = "被写体距離レンジ:";
+"Special Effects:" = "エフェクト:";
+"Processing Software:" = "処理ソフトウェア:";
+
+// インスペクタービュー: センサー方式
+"Unknown" = "不明";
+"Monochrome Area Sensor" = "単色平面センサー";
+"1 Chip Color Sensor" = "単板カラーセンサー";
+"2 Chip Color Sensor" = "2板カラーセンサー";
+"3 Chip Color Sensor" = "3板カラーセンサー";
+"Color Sequential Area" = "順次カラー方式平面センサー";
+"Monochrome Linear" = "単色リニアセンサー";
+"Trilinear" = "3色リニアセンサー";
+"Color Sequential Linear" = "順次カラー方式リニアセンサー";
+
+// インスペクタービュー: 露出プログラム
+"Manual" = "マニュアル";
+"Program AE" = "プログラムAE";
+"Aperture Priority AE" = "絞り優先";
+"Shutter Speed Priority AE" = "シャッタースピード優先";
+"Creative (Depth of field priority)" = "クリエイティブモード (被写界深度優先)";
+"Action (High speed priority)" = "アクションモード (高速シャッター優先)";
+"Portrait" = "ポートレートモード (人物撮影)";
+"Landscape" = "風景モード";
+
+// インスペクタービュー: 露出モード
+"Auto" = "自動";
+"Manual" = "マニュアル";
+"Auto Bracket" = "自動ブラケット";
+
+// インスペクタービュー: 測光モード
+"Average" = "平均";
+"Center Weighted Average" = "中央重点";
+"Spot" = "スポット";
+"Multi Spot" = "マルチスポット";
+"Multi Segment" = "分割測光";
+"Partial" = "部分測光";
+"Other" = "その他";
+
+// インスペクタービュー: ホワイトバランス
+
+// インスペクタービュー: コントラスト
+"Normal" = "標準";
+"Soft" = "弱い";
+"Hard" = "強い";
+
+// インスペクタービュー: 彩度
+"Low" = "低い";
+"High" = "高い";
+
+// インスペクタービュー: シャープネス
+
+// インスペクタービュー: 撮影シーンタイプ
+"Starndard" = "標準";
+"Landscape" = "風景";
+"Portrait" = "人物";
+"Night" = "夜景";
+
+// インスペクタービュー: 被写体距離レンジ
+"Macro" = "マクロ";
+"Close" = "近距離";
+"Distant" = "遠景";
+
+// インスペクタービュー: スペシャルエフェクト
+"None" = "なし";
+"Custom Processing" = "カスタムエフェクト";
+
+// インスペクタービュー: レンズ仕様
+"Fixed Focal Length" = "単焦点";
+"Zoom" = "ズーム";
+
+// インスペクタービュー: フラッシュ
+", " = "、";
+"Fired" = "発光";
+"Did not fire" = "発光せず";
+"On" = "オン";
+"Off" = "オフ";
+"Auto" = "自動";
+"Return not detected" = "リターン検出せず";
+"Return detected" = "リターン検出";
+"No flash function" = "フラッシュ機能なし";
+"Red-eye reduction" = "赤目防止";
+
+// インスペクタービュー: GPS
+"True Direction" = "真方位";
+"Magnetic Direction" = "磁方位";
+"knot" = "ノット";
+"2D" = "2次元";
+"3D" = "3次元";
+"%@ N" = "北緯 %@";
+"%@ S" = "南緯 %@";
+"Latitude:" = "緯度:";
+"%@ E" = "東経 %@";
+"%@ W" = "西経 %@";
+"Longitude:" = "経度:";
+"Altitude:" = "高度:";
+"Image Direction:" = "撮影方向:";
+"Track Direction:" = "移動方向:";
+"Track Speed:" = "移動速度:";
+"GPS Date Time:" = "GPS日時:";
+"Measure Mode:" = "測位方式:";
+"Geodetic Reference System:" = "測地系:";

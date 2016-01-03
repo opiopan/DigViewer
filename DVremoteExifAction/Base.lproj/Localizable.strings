@@ -1,0 +1,21 @@
+/* 
+  Localized.strings
+  DigViewerRemote
+
+  Created by opiopan on 2015/09/28.
+  Copyright © 2015年 opiopan. All rights reserved.
+*/
+
+"EXIF-BASIC" = "Basic";
+"EXIF-LOCATION" = "Location";
+
+"LS_IMAGE_TYPE_NAME" = "Image";
+
+//-------------------------------------------------------------------------------------
+// 画像メタデータ用strings
+//-------------------------------------------------------------------------------------
+
+// EXIFセクションタイトル
+"EXIFSEP_EQUIPMENTS" = "Equipments";
+"EXIFSEP_CONDITIONS" = "Conditions";
+"EXIFSEP_SOFTOWARE" = "Developing";

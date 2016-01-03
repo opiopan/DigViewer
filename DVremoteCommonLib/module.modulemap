@@ -1,0 +1,11 @@
+framework module DVremoteCommonLib {
+    umbrella header "DVremoteCommonLib.h"
+    
+    header "DVRemoteProtcol.h"
+    header "ImageMetadata.h"
+    header "ImageMetadataKV.h"
+    header "PortableImageMetadata.h"
+    
+    export *
+    module * { export * }
+}

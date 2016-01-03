@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */; };
 		7B1F9AAE1BFF7155003E08F3 /* ScrollableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F9AAD1BFF7155003E08F3 /* ScrollableContentView.swift */; };
 		7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */; };
 		7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */; };
@@ -15,7 +14,6 @@
 		7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */; };
 		7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B467F731B9F15A1005719E7 /* MapKit.framework */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
-		7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */; };
 		7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA431BB0DE700068A842 /* InspectorTableView.swift */; };
 		7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */; };
 		7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */; };
@@ -24,6 +22,33 @@
 		7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */; };
 		7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */; };
 		7B6D69A81C2ECD520060212A /* MapURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D69A71C2ECD520060212A /* MapURL.swift */; };
+		7B6D6A0E1C3653C10060212A /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
+		7B6D6A0F1C3653C10060212A /* DVremoteCommonUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B6D6A171C3654440060212A /* ExifViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */; };
+		7B6D6A181C3654440060212A /* InspectorImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A151C3654440060212A /* InspectorImageCell.swift */; };
+		7B6D6A191C3654440060212A /* LabelArrangableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A161C3654440060212A /* LabelArrangableCell.swift */; };
+		7B6D6A261C369B150060212A /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7B6D6A271C369B150060212A /* DVremoteCommonLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B6D6A2B1C369B290060212A /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7B6D6A341C369BA90060212A /* CoreFoundationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */; };
+		7B6D6A351C369BA90060212A /* DVRemoteProtcol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6D6A361C369BA90060212A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A2F1C369BA90060212A /* DVRemoteProtcol.m */; };
+		7B6D6A371C369BA90060212A /* ImageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A301C369BA90060212A /* ImageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6D6A381C369BA90060212A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A311C369BA90060212A /* ImageMetadata.mm */; };
+		7B6D6A391C369BA90060212A /* ImageMetadataKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A321C369BA90060212A /* ImageMetadataKV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6D6A3A1C369BA90060212A /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A331C369BA90060212A /* ImageMetadataKV.m */; };
+		7B6D6A3D1C369BE20060212A /* PortableImageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6D6A3E1C369BE20060212A /* PortableImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */; };
+		7B6D6A3F1C369C560060212A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */; };
+		7B6D6A451C36A66B0060212A /* DVremoteCommonLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B716B3F1C375F64002046B9 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B716B3E1C375F64002046B9 /* ActionViewController.swift */; };
+		7B716B421C375F64002046B9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B401C375F64002046B9 /* MainInterface.storyboard */; };
+		7B716B461C375F64002046B9 /* DVremoteExifAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7B716B4A1C375F78002046B9 /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7B716B4B1C375F78002046B9 /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
+		7B716B4D1C376036002046B9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B4C1C376036002046B9 /* Images.xcassets */; };
+		7B716B501C37791C002046B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B521C37791C002046B9 /* InfoPlist.strings */; };
+		7B716B571C39089D002046B9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B551C39089D002046B9 /* Localizable.strings */; };
 		7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */; };
 		7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */; };
 		7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D31BB83C7700C1DB19 /* PopupView.swift */; };
@@ -35,13 +60,11 @@
 		7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */; };
 		7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB211C02D58500783E17 /* AssetCell.swift */; };
 		7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
-		7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
 		7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */; };
 		7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */; };
 		7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC11BCA285200D69AE9 /* LRUCache.m */; };
 		7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */; };
-		7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */; };
 		7BA52ECD1BCB445E00D69AE9 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */; };
 		7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */; };
 		7BA52ED01BCB447B00D69AE9 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECF1BCB447B00D69AE9 /* Photos.framework */; };
@@ -56,32 +79,57 @@
 		7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D21B9DA59C0025B902 /* Main.storyboard */; };
 		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
 		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
-		7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */; };
 		7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */; };
 		7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */; };
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
-		7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 		7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7BBA59DF1B9DA59C0025B902 /* PBXContainerItemProxy */ = {
+		7B6D6A0C1C3653C10060212A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7BBA59C81B9DA59C0025B902;
-			remoteInfo = DigViewerRemote;
+			remoteGlobalIDString = 7B6D6A061C3653C10060212A;
+			remoteInfo = DVremoteCommonUI;
+		};
+		7B6D6A241C369B150060212A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B6D6A1E1C369B150060212A;
+			remoteInfo = DVremoteCommonLib;
+		};
+		7B716B441C375F64002046B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B716B3B1C375F64002046B9;
+			remoteInfo = DVremoteExifAction;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7B6D69D51C356E1D0060212A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7B6D6A0F1C3653C10060212A /* DVremoteCommonUI.framework in Embed Frameworks */,
+				7B6D6A271C369B150060212A /* DVremoteCommonLib.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BF05B1D1C257CC100A4A766 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				7B716B461C375F64002046B9 /* DVremoteExifAction.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,7 +137,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
 		7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7B1F9AAD1BFF7155003E08F3 /* ScrollableContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableContentView.swift; sourceTree = "<group>"; };
 		7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFooterViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +145,6 @@
 		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
 		7B467F731B9F15A1005719E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
-		7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
 		7B52AA431BB0DE700068A842 /* InspectorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorTableView.swift; sourceTree = "<group>"; };
 		7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailPreferencesViewController.swift; sourceTree = "<group>"; };
 		7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectorViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +153,33 @@
 		7B6C069F1BB67AAC004902D3 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeItemCell.swift; sourceTree = "<group>"; };
 		7B6D69A71C2ECD520060212A /* MapURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapURL.swift; sourceTree = "<group>"; };
+		7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DVremoteCommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVremoteCommonUI.h; sourceTree = "<group>"; };
+		7B6D6A0B1C3653C10060212A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifViewControllerBase.swift; sourceTree = "<group>"; };
+		7B6D6A151C3654440060212A /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
+		7B6D6A161C3654440060212A /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
+		7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DVremoteCommonLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreFoundationHelper.h; path = DigViewer/CoreFoundationHelper.h; sourceTree = SOURCE_ROOT; };
+		7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
+		7B6D6A2F1C369BA90060212A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
+		7B6D6A301C369BA90060212A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadata.h; path = DigViewer/ImageMetadata.h; sourceTree = SOURCE_ROOT; };
+		7B6D6A311C369BA90060212A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ImageMetadata.mm; path = DigViewer/ImageMetadata.mm; sourceTree = SOURCE_ROOT; };
+		7B6D6A321C369BA90060212A /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadataKV.h; path = DigViewer/ImageMetadataKV.h; sourceTree = SOURCE_ROOT; };
+		7B6D6A331C369BA90060212A /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetadataKV.m; path = DigViewer/ImageMetadataKV.m; sourceTree = SOURCE_ROOT; };
+		7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortableImageMetadata.h; sourceTree = "<group>"; };
+		7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PortableImageMetadata.mm; sourceTree = "<group>"; };
+		7B6D6A401C369E480060212A /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVremoteCommonLib.h; sourceTree = "<group>"; };
+		7B6D6A441C36A66B0060212A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteExifAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B716B3E1C375F64002046B9 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		7B716B411C375F64002046B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		7B716B431C375F64002046B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B716B4C1C376036002046B9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7B716B511C37791C002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B716B561C39089D002046B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B716B581C3908B6002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
 		7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7B7356D31BB83C7700C1DB19 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -122,8 +195,6 @@
 		7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteBrowser.h; path = DigViewer/DVRemoteBrowser.h; sourceTree = SOURCE_ROOT; };
 		7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteBrowser.m; path = DigViewer/DVRemoteBrowser.m; sourceTree = SOURCE_ROOT; };
 		7B90982F1BA40AEF00B03FD8 /* DigViewerRemote-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DigViewerRemote-Header.h"; sourceTree = "<group>"; };
-		7B9098331BA448D800B03FD8 /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadataKV.h; path = DigViewer/ImageMetadataKV.h; sourceTree = SOURCE_ROOT; };
-		7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetadataKV.m; path = DigViewer/ImageMetadataKV.m; sourceTree = SOURCE_ROOT; };
 		7B9098361BA4634C00B03FD8 /* ExifViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifViewController.swift; sourceTree = "<group>"; };
 		7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		7BA52EBE1BCA285200D69AE9 /* DVRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteClient.h; path = DVRemoteProtocol/DVRemoteClient.h; sourceTree = "<group>"; };
@@ -132,9 +203,6 @@
 		7BA52EC11BCA285200D69AE9 /* LRUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRUCache.m; path = DVRemoteProtocol/LRUCache.m; sourceTree = "<group>"; };
 		7BA52EC41BCA558B00D69AE9 /* LocalSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalSession.h; path = DVRemoteProtocol/LocalSession.h; sourceTree = "<group>"; };
 		7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LocalSession.mm; path = DVRemoteProtocol/LocalSession.mm; sourceTree = "<group>"; };
-		7BA52EC71BCAB27800D69AE9 /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadata.h; path = DigViewer/ImageMetadata.h; sourceTree = SOURCE_ROOT; };
-		7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ImageMetadata.mm; path = DigViewer/ImageMetadata.mm; sourceTree = SOURCE_ROOT; };
-		7BA52ECA1BCAB52E00D69AE9 /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreFoundationHelper.h; path = DigViewer/CoreFoundationHelper.h; sourceTree = SOURCE_ROOT; };
 		7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		7BA52ECF1BCB447B00D69AE9 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -151,14 +219,9 @@
 		7BBA59D31B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BBA59D51B9DA59C0025B902 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7BBA59D81B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigViewerRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BBA59E31B9DA59C0025B902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigViewerRemoteTests.swift; sourceTree = "<group>"; };
 		7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlay.swift; sourceTree = "<group>"; };
 		7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
 		7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
-		7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
-		7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteProtcol.m; path = DigViewer/DVRemoteProtcol.m; sourceTree = SOURCE_ROOT; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
 		7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DigViewerRemote.entitlements; sourceTree = "<group>"; };
@@ -166,6 +229,31 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7B6D6A031C3653C10060212A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6D6A2B1C369B290060212A /* DVremoteCommonLib.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6D6A1B1C369B150060212A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6D6A3F1C369C560060212A /* ImageIO.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B716B391C375F64002046B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B716B4A1C375F78002046B9 /* DVremoteCommonLib.framework in Frameworks */,
+				7B716B4B1C375F78002046B9 /* DVremoteCommonUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BBA59C61B9DA59C0025B902 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,14 +261,9 @@
 				7BA52ED01BCB447B00D69AE9 /* Photos.framework in Frameworks */,
 				7BA52ECD1BCB445E00D69AE9 /* CoreImage.framework in Frameworks */,
 				7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */,
+				7B6D6A261C369B150060212A /* DVremoteCommonLib.framework in Frameworks */,
+				7B6D6A0E1C3653C10060212A /* DVremoteCommonUI.framework in Frameworks */,
 				7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BBA59DB1B9DA59C0025B902 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,12 +312,62 @@
 			isa = PBXGroup;
 			children = (
 				7B52AA431BB0DE700068A842 /* InspectorTableView.swift */,
-				7B52AA3E1BB055CF0068A842 /* LabelArrangableCell.swift */,
-				7B14FCA71BB16F2C00374E79 /* InspectorImageCell.swift */,
 				7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */,
 				7B1F9AAD1BFF7155003E08F3 /* ScrollableContentView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		7B6D6A081C3653C10060212A /* DVremoteCommonUI */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */,
+				7B6D6A0B1C3653C10060212A /* Info.plist */,
+				7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */,
+				7B6D6A151C3654440060212A /* InspectorImageCell.swift */,
+				7B6D6A161C3654440060212A /* LabelArrangableCell.swift */,
+			);
+			path = DVremoteCommonUI;
+			sourceTree = "<group>";
+		};
+		7B6D6A201C369B150060212A /* DVremoteCommonLib */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */,
+				7B6D6A441C36A66B0060212A /* Info.plist */,
+				7B6D6A401C369E480060212A /* module.modulemap */,
+				7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */,
+				7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */,
+				7B6D6A2C1C369B650060212A /* Shared with DigViewer */,
+			);
+			path = DVremoteCommonLib;
+			sourceTree = "<group>";
+		};
+		7B6D6A2C1C369B650060212A /* Shared with DigViewer */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */,
+				7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */,
+				7B6D6A2F1C369BA90060212A /* DVRemoteProtcol.m */,
+				7B6D6A301C369BA90060212A /* ImageMetadata.h */,
+				7B6D6A311C369BA90060212A /* ImageMetadata.mm */,
+				7B6D6A321C369BA90060212A /* ImageMetadataKV.h */,
+				7B6D6A331C369BA90060212A /* ImageMetadataKV.m */,
+			);
+			name = "Shared with DigViewer";
+			sourceTree = "<group>";
+		};
+		7B716B3D1C375F64002046B9 /* DVremoteExifAction */ = {
+			isa = PBXGroup;
+			children = (
+				7B716B431C375F64002046B9 /* Info.plist */,
+				7B716B3E1C375F64002046B9 /* ActionViewController.swift */,
+				7B716B401C375F64002046B9 /* MainInterface.storyboard */,
+				7B716B551C39089D002046B9 /* Localizable.strings */,
+				7B716B521C37791C002046B9 /* InfoPlist.strings */,
+				7B716B4C1C376036002046B9 /* Images.xcassets */,
+			);
+			path = DVremoteExifAction;
 			sourceTree = "<group>";
 		};
 		7B7356D01BB7E62C00C1DB19 /* Map View */ = {
@@ -275,7 +408,9 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
-				7BBA59E11B9DA59C0025B902 /* DigViewerRemoteTests */,
+				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
+				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
+				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
 				7BBA59CA1B9DA59C0025B902 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -284,7 +419,9 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */,
-				7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */,
+				7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */,
+				7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */,
+				7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,43 +449,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7BBA59E11B9DA59C0025B902 /* DigViewerRemoteTests */ = {
-			isa = PBXGroup;
-			children = (
-				7BBA59E41B9DA59C0025B902 /* DigViewerRemoteTests.swift */,
-				7BBA59E21B9DA59C0025B902 /* Supporting Files */,
-			);
-			path = DigViewerRemoteTests;
-			sourceTree = "<group>";
-		};
-		7BBA59E21B9DA59C0025B902 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7BBA59E31B9DA59C0025B902 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				7BD72C361B9DB2D500DDBC1A /* DVRemoteProtcol.h */,
-				7BD72C371B9DB2D500DDBC1A /* DVRemoteProtcol.m */,
 				7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */,
 				7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */,
 				7BA52EBE1BCA285200D69AE9 /* DVRemoteClient.h */,
 				7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */,
 				7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */,
 				7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */,
-				7B9098331BA448D800B03FD8 /* ImageMetadataKV.h */,
-				7B9098341BA448D800B03FD8 /* ImageMetadataKV.m */,
-				7BA52EC71BCAB27800D69AE9 /* ImageMetadata.h */,
-				7BA52EC81BCAB27800D69AE9 /* ImageMetadata.mm */,
 				7BA52EC01BCA285200D69AE9 /* LRUCache.h */,
 				7BA52EC11BCA285200D69AE9 /* LRUCache.m */,
 				7BA52EC41BCA558B00D69AE9 /* LocalSession.h */,
 				7BA52EC51BCA558B00D69AE9 /* LocalSession.mm */,
-				7BA52ECA1BCAB52E00D69AE9 /* CoreFoundationHelper.h */,
 			);
 			name = "DV Remote Protocol";
 			sourceTree = "<group>";
@@ -380,7 +493,83 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		7B6D6A041C3653C10060212A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6D6A1C1C369B150060212A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6D6A451C36A66B0060212A /* DVremoteCommonLib.h in Headers */,
+				7B6D6A391C369BA90060212A /* ImageMetadataKV.h in Headers */,
+				7B6D6A371C369BA90060212A /* ImageMetadata.h in Headers */,
+				7B6D6A351C369BA90060212A /* DVRemoteProtcol.h in Headers */,
+				7B6D6A3D1C369BE20060212A /* PortableImageMetadata.h in Headers */,
+				7B6D6A341C369BA90060212A /* CoreFoundationHelper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		7B6D6A061C3653C10060212A /* DVremoteCommonUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6D6A101C3653C10060212A /* Build configuration list for PBXNativeTarget "DVremoteCommonUI" */;
+			buildPhases = (
+				7B6D6A021C3653C10060212A /* Sources */,
+				7B6D6A031C3653C10060212A /* Frameworks */,
+				7B6D6A041C3653C10060212A /* Headers */,
+				7B6D6A051C3653C10060212A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteCommonUI;
+			productName = DVremoteCommonUI;
+			productReference = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7B6D6A1E1C369B150060212A /* DVremoteCommonLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6D6A281C369B150060212A /* Build configuration list for PBXNativeTarget "DVremoteCommonLib" */;
+			buildPhases = (
+				7B6D6A1A1C369B150060212A /* Sources */,
+				7B6D6A1B1C369B150060212A /* Frameworks */,
+				7B6D6A1C1C369B150060212A /* Headers */,
+				7B6D6A1D1C369B150060212A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteCommonLib;
+			productName = DVremoteCommonLib;
+			productReference = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7B716B3B1C375F64002046B9 /* DVremoteExifAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B716B471C375F64002046B9 /* Build configuration list for PBXNativeTarget "DVremoteExifAction" */;
+			buildPhases = (
+				7B716B381C375F64002046B9 /* Sources */,
+				7B716B391C375F64002046B9 /* Frameworks */,
+				7B716B3A1C375F64002046B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteExifAction;
+			productName = DVremoteExifAction;
+			productReference = 7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		7BBA59C81B9DA59C0025B902 /* DigViewerRemote */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BBA59E81B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemote" */;
@@ -390,33 +579,19 @@
 				7BBA59C71B9DA59C0025B902 /* Resources */,
 				7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */,
 				7BF05B1D1C257CC100A4A766 /* Embed App Extensions */,
+				7B6D69D51C356E1D0060212A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7B6D6A0D1C3653C10060212A /* PBXTargetDependency */,
+				7B6D6A251C369B150060212A /* PBXTargetDependency */,
+				7B716B451C375F64002046B9 /* PBXTargetDependency */,
 			);
 			name = DigViewerRemote;
 			productName = DigViewerRemote;
 			productReference = 7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7BBA59DD1B9DA59C0025B902 /* DigViewerRemoteTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7BBA59EB1B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemoteTests" */;
-			buildPhases = (
-				7BBA59DA1B9DA59C0025B902 /* Sources */,
-				7BBA59DB1B9DA59C0025B902 /* Frameworks */,
-				7BBA59DC1B9DA59C0025B902 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7BBA59E01B9DA59C0025B902 /* PBXTargetDependency */,
-			);
-			name = DigViewerRemoteTests;
-			productName = DigViewerRemoteTests;
-			productReference = 7BBA59DE1B9DA59C0025B902 /* DigViewerRemoteTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -429,6 +604,18 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = opiopan;
 				TargetAttributes = {
+					7B6D6A061C3653C10060212A = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+					};
+					7B6D6A1E1C369B150060212A = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+					};
+					7B716B3B1C375F64002046B9 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+					};
 					7BBA59C81B9DA59C0025B902 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G3Y32477L5;
@@ -437,10 +624,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					7BBA59DD1B9DA59C0025B902 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 7BBA59C81B9DA59C0025B902;
 					};
 				};
 			};
@@ -459,12 +642,39 @@
 			projectRoot = "";
 			targets = (
 				7BBA59C81B9DA59C0025B902 /* DigViewerRemote */,
-				7BBA59DD1B9DA59C0025B902 /* DigViewerRemoteTests */,
+				7B6D6A1E1C369B150060212A /* DVremoteCommonLib */,
+				7B6D6A061C3653C10060212A /* DVremoteCommonUI */,
+				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7B6D6A051C3653C10060212A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6D6A1D1C369B150060212A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B716B3A1C375F64002046B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B716B421C375F64002046B9 /* MainInterface.storyboard in Resources */,
+				7B716B571C39089D002046B9 /* Localizable.strings in Resources */,
+				7B716B501C37791C002046B9 /* InfoPlist.strings in Resources */,
+				7B716B4D1C376036002046B9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BBA59C71B9DA59C0025B902 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -473,13 +683,6 @@
 				7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */,
 				7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */,
 				7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BBA59DC1B9DA59C0025B902 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +706,35 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7B6D6A021C3653C10060212A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6D6A171C3654440060212A /* ExifViewControllerBase.swift in Sources */,
+				7B6D6A191C3654440060212A /* LabelArrangableCell.swift in Sources */,
+				7B6D6A181C3654440060212A /* InspectorImageCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6D6A1A1C369B150060212A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6D6A3A1C369BA90060212A /* ImageMetadataKV.m in Sources */,
+				7B6D6A3E1C369BE20060212A /* PortableImageMetadata.mm in Sources */,
+				7B6D6A381C369BA90060212A /* ImageMetadata.mm in Sources */,
+				7B6D6A361C369BA90060212A /* DVRemoteProtcol.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B716B381C375F64002046B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B716B3F1C375F64002046B9 /* ActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BBA59C51B9DA59C0025B902 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,10 +750,7 @@
 				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
 				7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */,
 				7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */,
-				7B9098351BA448D800B03FD8 /* ImageMetadataKV.m in Sources */,
-				7B52AA3F1BB055CF0068A842 /* LabelArrangableCell.swift in Sources */,
 				7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */,
-				7BD72C3B1B9DB2D500DDBC1A /* DVRemoteProtcol.m in Sources */,
 				7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */,
 				7BB683C21C1C7E8C00A6DFAF /* KMLFile.swift in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
@@ -534,12 +763,10 @@
 				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,
 				7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */,
 				7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */,
-				7B14FCA81BB16F2C00374E79 /* InspectorImageCell.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
 				7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
 				7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */,
-				7BA52EC91BCAB27800D69AE9 /* ImageMetadata.mm in Sources */,
 				7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
@@ -557,25 +784,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BBA59DA1B9DA59C0025B902 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BBA59E51B9DA59C0025B902 /* DigViewerRemoteTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7BBA59E01B9DA59C0025B902 /* PBXTargetDependency */ = {
+		7B6D6A0D1C3653C10060212A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7BBA59C81B9DA59C0025B902 /* DigViewerRemote */;
-			targetProxy = 7BBA59DF1B9DA59C0025B902 /* PBXContainerItemProxy */;
+			target = 7B6D6A061C3653C10060212A /* DVremoteCommonUI */;
+			targetProxy = 7B6D6A0C1C3653C10060212A /* PBXContainerItemProxy */;
+		};
+		7B6D6A251C369B150060212A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B6D6A1E1C369B150060212A /* DVremoteCommonLib */;
+			targetProxy = 7B6D6A241C369B150060212A /* PBXContainerItemProxy */;
+		};
+		7B716B451C375F64002046B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B716B3B1C375F64002046B9 /* DVremoteExifAction */;
+			targetProxy = 7B716B441C375F64002046B9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7B716B401C375F64002046B9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B716B411C375F64002046B9 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		7B716B521C37791C002046B9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B716B511C37791C002046B9 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7B716B551C39089D002046B9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B716B561C39089D002046B9 /* Base */,
+				7B716B581C3908B6002046B9 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7B7356D91BB971C500C1DB19 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -605,6 +859,132 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7B6D6A111C3653C10060212A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DVremoteCommonUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7B6D6A121C3653C10060212A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DVremoteCommonUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7B6D6A291C369B150060212A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DVremoteCommonLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7B6D6A2A1C369B150060212A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DVremoteCommonLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7B716B481C375F64002046B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = DVremoteExifAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7B716B491C375F64002046B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DVremoteExifAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		7BBA59E61B9DA59C0025B902 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -723,45 +1103,35 @@
 			};
 			name = Release;
 		};
-		7BBA59EC1B9DA59C0025B902 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/System/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DigViewerRemoteTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigViewerRemote.app/DigViewerRemote";
-			};
-			name = Debug;
-		};
-		7BBA59ED1B9DA59C0025B902 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/System/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DigViewerRemoteTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigViewerRemote.app/DigViewerRemote";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7B6D6A101C3653C10060212A /* Build configuration list for PBXNativeTarget "DVremoteCommonUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B6D6A111C3653C10060212A /* Debug */,
+				7B6D6A121C3653C10060212A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B6D6A281C369B150060212A /* Build configuration list for PBXNativeTarget "DVremoteCommonLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B6D6A291C369B150060212A /* Debug */,
+				7B6D6A2A1C369B150060212A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B716B471C375F64002046B9 /* Build configuration list for PBXNativeTarget "DVremoteExifAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B716B481C375F64002046B9 /* Debug */,
+				7B716B491C375F64002046B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7BBA59C41B9DA59C0025B902 /* Build configuration list for PBXProject "DigViewerRemote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -776,15 +1146,6 @@
 			buildConfigurations = (
 				7BBA59E91B9DA59C0025B902 /* Debug */,
 				7BBA59EA1B9DA59C0025B902 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7BBA59EB1B9DA59C0025B902 /* Build configuration list for PBXNativeTarget "DigViewerRemoteTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7BBA59EC1B9DA59C0025B902 /* Debug */,
-				7BBA59ED1B9DA59C0025B902 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

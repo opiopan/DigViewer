@@ -9,6 +9,7 @@
 #import <Photos/Photos.h>
 #import "LocalSession.h"
 #import "ImageMetadata.h"
+#import "PortableImageMetadata.h"
 
 #include "CorefoundationHelper.h"
 
@@ -323,45 +324,12 @@ static const CGFloat SPAN_IN_METER = 450.0;
         path = [_currentCollectionPath arrayByAddingObject:name];
     }
 
-    ECGImageSourceRef imageSource(CGImageSourceCreateWithData((__bridge CFDataRef)(imageData), NULL));
-    ImageMetadata* meta = [[ImageMetadata alloc] initWithImage:imageSource name:name typeName:type];
+    PortableImageMetadata* meta = [[PortableImageMetadata alloc] initWithImage:imageData name:name type:type];
+    meta.documentName = _documentName;
+    meta.path = path;
+    meta.indexInParent = indexInParent;
     
-    NSMutableDictionary* data = [NSMutableDictionary dictionary];
-    [data setValue:_documentName forKey:DVRCNMETA_DOCUMENT];
-    [data setValue:path forKey:DVRCNMETA_ID];
-    [data setValue:@(indexInParent) forKey:DVRCNMETA_INDEX_IN_PARENT];
-    if (meta.gpsInfo){
-        MapGeometry geometry = [self mapGeometory:meta.gpsInfo];
-
-        [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
-        [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
-        if (geometry.isEnableAltitude){
-            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
-        }
-        if (geometry.isEnableHeading){
-            [data setValue:@(geometry.heading) forKey:DVRCNMETA_HEADING];
-        }
-        [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
-        [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
-        [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
-        [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
-
-        [data setValue:meta.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
-        
-        if (meta.gpsInfo.fovLong){
-            NSNumber* fovAngle = meta.gpsInfo.rotation.intValue < 5 ? meta.gpsInfo.fovLong : meta.gpsInfo.fovShort;
-            [data setValue:fovAngle forKey:DVRCNMETA_FOV_ANGLE];
-        }
-
-    }
-    [data setValue:meta.summary forKey:DVRCNMETA_SUMMARY];
-    
-    ImageMetadata* smeta = [[ImageMetadata alloc] initWithImage:imageSource name:name typeName:type];
-    NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
-    NSArray* summary = [smeta summaryWithFilter:filter];
-    [data setValue:summary forKey:DVRCNMETA_POPUP_SUMMARY];
-    
-    NSData* sdata = [NSKeyedArchiver archivedDataWithRootObject:data];
+    NSData* sdata = [NSKeyedArchiver archivedDataWithRootObject:meta.portableData];
     [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_META withData:sdata];
 }
 

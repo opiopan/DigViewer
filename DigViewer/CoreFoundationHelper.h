@@ -5,6 +5,8 @@
 #ifndef CoreFoundationHelper_h
 #define CoreFoundationHelper_h
 
+#import <ImageIO/ImageIO.h>
+
 template <class T,class RT, RT (*RETAIN)(RT), void (*RELEASE)(RT)> class ECFObjectRef{
 protected:
     T ref;
