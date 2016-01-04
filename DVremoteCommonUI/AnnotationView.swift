@@ -9,21 +9,21 @@
 import UIKit
 import MapKit
 
-class AnnotationView: MKPinAnnotationView {
+public class AnnotationView: MKPinAnnotationView {
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+    public override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var calloutViewController : SummaryPopupViewController? {
+    public var calloutViewController : SummaryPopupViewController? {
         didSet{
 //            if let controller = oldValue {
 //                if oldValue != calloutViewController && controller.view.superview != nil {
@@ -33,7 +33,7 @@ class AnnotationView: MKPinAnnotationView {
         }
     }
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         var hitView = super.hitTest(point, withEvent: event)
         if hitView == nil && self.selected {
             if let calloutView = calloutViewController?.view {
@@ -46,7 +46,7 @@ class AnnotationView: MKPinAnnotationView {
     
     private var envelopeView : UIView? = nil
     
-    override var selected : Bool {
+    public override var selected : Bool {
         didSet{
             if calloutViewController != nil {
                 let calloutView = calloutViewController!.view
@@ -90,18 +90,4 @@ class AnnotationView: MKPinAnnotationView {
         }
     }
 
-//    override func setSelected(selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        let calloutView = calloutViewController!.view
-//        if selected {
-//            let annotationViewBounds = self.bounds
-//            var calloutViewFrame = calloutView.frame
-//            calloutViewFrame.origin.x = -(calloutViewFrame.size.width - annotationViewBounds.size.width) * 0.5
-//            calloutViewFrame.origin.y = -calloutViewFrame.size.height + 15.0
-//            calloutView.frame = calloutViewFrame;
-//            addSubview(calloutView)
-//        }else{
-//            calloutView.removeFromSuperview()
-//        }
-//    }
 }

@@ -8,40 +8,40 @@
 
 import UIKit
 import MapKit
+import DVremoteCommonLib
 
 private let SPAN_TO_ALTITUDE_RATIO = 1.875
 private let DEGREE_TO_METER_RATIO = 111000.0
 
-class MapGeometry: NSObject {
-    let latitude : Double
-    let longitude : Double
-    let viewLatitude : Double
-    let viewLongitude : Double
+public class MapGeometry: NSObject {
+    public let latitude : Double
+    public let longitude : Double
+    public let viewLatitude : Double
+    public let viewLongitude : Double
     
-    let spanLatitude : Double
-    let spanLongitude : Double
-    let spanLatitudeMeter : Double
-    let spanLongitudeMeter : Double
+    public let spanLatitude : Double
+    public let spanLongitude : Double
+    public let spanLatitudeMeter : Double
+    public let spanLongitudeMeter : Double
     
-    let heading : Double?
+    public let heading : Double?
     
-    let centerCoordinate : CLLocationCoordinate2D
-    let photoCoordinate : CLLocationCoordinate2D
+    public let centerCoordinate : CLLocationCoordinate2D
+    public let photoCoordinate : CLLocationCoordinate2D
     
-    let mapSpan : MKCoordinateSpan
-    let cameraAltitude : Double
-    let cameraHeading : Double
-    let cameraTilt : Double
+    public let mapSpan : MKCoordinateSpan
+    public let cameraAltitude : Double
+    public let cameraHeading : Double
+    public let cameraTilt : Double
     
-    let fovAngle : Double
+    public let fovAngle : Double
     
-    init(meta: [NSObject : AnyObject]!, viewSize : CGSize){
+    public init(meta: [NSObject : AnyObject]!, viewSize : CGSize, isLocalSession : Bool){
         let controller = ConfigurationController.sharedController
-        let localSession = DVRemoteClient.sharedClient().isConnectedToLocal
         
         latitude = (meta[DVRCNMETA_LATITUDE] as! Double?)!
         longitude = (meta[DVRCNMETA_LONGITUDE] as! Double?)!
-        if controller.mapRelationSpan && !localSession {
+        if controller.mapRelationSpan && !isLocalSession {
             spanLatitude = (meta[DVRCNMETA_SPAN_LATITUDE] as! Double?)!
             spanLongitude = (meta[DVRCNMETA_SPAN_LONGITUDE] as! Double?)!
             spanLatitudeMeter = (meta[DVRCNMETA_SPAN_LATITUDE_METER] as! Double?)!
@@ -71,11 +71,6 @@ class MapGeometry: NSObject {
         }
         cameraTilt = Double(controller.mapTilt)
         
-//        viewLatitude = latitude
-//        viewLongitude = longitude
-//        cameraHeading = 0
-//        cameraTilt = 0
-        
         photoCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
         centerCoordinate = CLLocationCoordinate2DMake(viewLatitude, viewLongitude)
         mapSpan = MKCoordinateSpanMake(spanLatitude, spanLongitude)
@@ -94,7 +89,7 @@ class MapGeometry: NSObject {
         }
     }
     
-    class func mapToSpan(mapView : MKMapView) -> Double {
+    public class func mapToSpan(mapView : MKMapView) -> Double {
         let altitude = mapView.camera.altitude / cos(Double(mapView.camera.pitch) / 180 * M_PI)
         let vSpan = altitude / SPAN_TO_ALTITUDE_RATIO
         let hSpan = vSpan * Double(mapView.bounds.size.width / mapView.bounds.size.height)
@@ -102,7 +97,7 @@ class MapGeometry: NSObject {
         return min(vSpan, hSpan)
     }
     
-    class func mapToSize(mapView : MKMapView) -> CGSize {
+    public class func mapToSize(mapView : MKMapView) -> CGSize {
         let altitude = mapView.camera.altitude / cos(Double(mapView.camera.pitch) / 180 * M_PI)
         let vSpan = altitude / SPAN_TO_ALTITUDE_RATIO
         let hSpan = vSpan * Double(mapView.bounds.size.width / mapView.bounds.size.height)
@@ -110,7 +105,7 @@ class MapGeometry: NSObject {
         return CGSize(width: hSpan, height: vSpan)
     }
     
-    class func translateCoordinateToMapPoint(point : CLLocationCoordinate2D, offset : CGPoint, rotation : CGFloat) -> MKMapPoint {
+    public class func translateCoordinateToMapPoint(point : CLLocationCoordinate2D, offset : CGPoint, rotation : CGFloat) -> MKMapPoint {
         let cosTheta = cos(rotation)
         let sinTheta = sin(rotation)
         let deltaX = offset.x * cosTheta - offset.y * sinTheta

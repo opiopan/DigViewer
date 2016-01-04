@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import DVremoteCommonUI
 
 class HeadingOverlayRenderer: MKOverlayRenderer {
     private var displayMode : MapHeadingDisplay

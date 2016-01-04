@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import DVremoteCommonLib
+import DVremoteCommonUI
 
 class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDelegate,
                          ConfigurationControllerDelegate, SummaryPopupViewControllerDelegate,
@@ -328,7 +330,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         }
 
         if meta[DVRCNMETA_LATITUDE] != nil {
-            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size)
+            let isLocalSession = DVRemoteClient.sharedClient()!.isConnectedToLocal
+            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size, isLocalSession: isLocalSession)
 
             // アノテーションセットアップ
             addAnnotation()
@@ -507,7 +510,8 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
     @IBAction func moveToDefaultPosition(sender : AnyObject?) {
         let meta = DVRemoteClient.sharedClient().meta
         if meta[DVRCNMETA_LATITUDE] != nil {
-            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size)
+            let isLocalSession = DVRemoteClient.sharedClient()!.isConnectedToLocal
+            geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size, isLocalSession: isLocalSession)
         }
         if (isUpdatedLocation || !configController.map3DView){
             if geometry != nil {
@@ -706,9 +710,13 @@ class MapViewController: UIViewController, DVRemoteClientDelegate, MKMapViewDele
         let delay = client.state == .Connected ? 2.0 : 0.0
         if messageViewHeightConstraint.constant != height {
             UIView.animateWithDuration(
-                0.5, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {[unowned self]() -> Void in
-                    self.messageViewHeightConstraint.constant = height
-                    self.view.layoutIfNeeded()
+                0.5, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {
+                    [unowned self]() -> Void in
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        [unowned self]() in
+                        self.messageViewHeightConstraint.constant = height
+                        self.view.layoutIfNeeded()
+                    }
                 }, completion: nil)
         }
     }

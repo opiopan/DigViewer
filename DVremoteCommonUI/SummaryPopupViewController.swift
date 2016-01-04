@@ -8,42 +8,42 @@
 
 import UIKit
 
-enum SummaryPopupViewParentType : Int {
+public enum SummaryPopupViewParentType : Int {
     case NoLocationCover
     case PinnedBar
 }
 
-enum SummaryPopupPinMode : Int {
+public enum SummaryPopupPinMode : Int {
     case Off
     case Toolbar
     case Left
     case Right
 }
 
-@objc protocol SummaryPopupViewControllerDelegate {
+@objc public protocol SummaryPopupViewControllerDelegate {
     optional func summaryPopupViewControllerPushedPinButton(controller : SummaryPopupViewController) -> Void
 }
 
-class SummaryPopupViewController: UIViewController {
-    @IBOutlet weak var thumbnailView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var cameraLabel: UILabel!
-    @IBOutlet weak var lensLabel: UILabel!
-    @IBOutlet weak var conditionLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet var popupView: PopupView!
+public class SummaryPopupViewController: UIViewController {
+    @IBOutlet public weak var thumbnailView: UIImageView!
+    @IBOutlet public weak var dateLabel: UILabel!
+    @IBOutlet public weak var cameraLabel: UILabel!
+    @IBOutlet public weak var lensLabel: UILabel!
+    @IBOutlet public weak var conditionLabel: UILabel!
+    @IBOutlet public weak var addressLabel: UILabel!
+    @IBOutlet public var popupView: PopupView!
     
-    var updateCount = 0
+    public var updateCount = 0
     
-    var viewWidth:CGFloat = 350.0
-    var viewHeight:CGFloat = 150.0
-    var viewBaseHeight:CGFloat {
+    public var viewWidth:CGFloat = 350.0
+    public var viewHeight:CGFloat = 150.0
+    public var viewBaseHeight:CGFloat {
         get{
             return viewHeight - 16
         }
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         let screenBounds = UIScreen.mainScreen().bounds
@@ -68,12 +68,12 @@ class SummaryPopupViewController: UIViewController {
         addressLabel!.textColor = textColor
     }
 
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func addToSuperView(parentView : UIView, parentType : SummaryPopupViewParentType) {
+    public func addToSuperView(parentView : UIView, parentType : SummaryPopupViewParentType) {
         let childView = self.view
         childView.translatesAutoresizingMaskIntoConstraints = false
         parentView.addSubview(childView)
@@ -108,7 +108,7 @@ class SummaryPopupViewController: UIViewController {
         parentView.addConstraints((constraints as NSArray as? [NSLayoutConstraint])!)
     }
     
-    func removeFromSuperView() {
+    public func removeFromSuperView() {
         if view.superview != nil {
             view.removeFromSuperview()
             view.translatesAutoresizingMaskIntoConstraints = true
@@ -122,15 +122,15 @@ class SummaryPopupViewController: UIViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - ピン操作
     //-----------------------------------------------------------------------------------------
-    var delegate : SummaryPopupViewControllerDelegate? = nil
+    public var delegate : SummaryPopupViewControllerDelegate? = nil
     
-    @IBOutlet weak var pinButton: UIButton!
+    @IBOutlet public weak var pinButton: UIButton!
     
-    @IBAction func onPinButton(sender: AnyObject) {
+    @IBAction public func onPinButton(sender: AnyObject) {
         delegate?.summaryPopupViewControllerPushedPinButton!(self)
     }
     
-    var pinMode : SummaryPopupPinMode = .Off {
+    public var pinMode : SummaryPopupPinMode = .Off {
         didSet{
             if pinMode == .Toolbar{
                 pinButton.setImage(UIImage(named: "pin_on"), forState: UIControlState.Normal)
@@ -145,16 +145,5 @@ class SummaryPopupViewController: UIViewController {
             popupView.setNeedsDisplay()
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 
 }

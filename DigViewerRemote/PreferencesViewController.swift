@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DVremoteCommonUI
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     static private var headingDisplays = [

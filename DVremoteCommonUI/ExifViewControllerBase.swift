@@ -182,10 +182,14 @@ public class ExifViewControllerBase: UITableViewController {
             }
         }
     }
+    
+    public var imageSelector : ((UIImageView) -> Void)? = nil
 
     override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == 0){
-            performSegueWithIdentifier("FullImageView", sender: tableView)
+        if indexPath.row == 0 && imageSelector != nil{
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                imageSelector!((cell as! InspectorImageCell).thumbnailView!)
+            }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

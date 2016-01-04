@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DVremoteCommonUI
 
 protocol InformationViewChild {
     func setInformationViewController(controller : InfomationViewController)

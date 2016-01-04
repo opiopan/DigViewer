@@ -2,7 +2,7 @@
 //  ActionViewController.swift
 //  DVremoteExifAction
 //
-//  Created by Hiroshi Murayama on 2016/01/02.
+//  Created by opiopan on 2016/01/02.
 //  Copyright © 2016年 opiopan. All rights reserved.
 //
 
@@ -15,26 +15,27 @@ class ActionViewController: ExifViewControllerBase {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        // Get the item[s] we're handling from the extension context.
-        
-        // For example, look for an image and place it into an image view.
-        // Replace this with something appropriate for the type[s] your extension supports.
         var imageFound = false
         for item: AnyObject in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
             for provider: AnyObject in inputItem.attachments! {
                 let itemProvider = provider as! NSItemProvider
                 if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-                    // This is an image. We'll load it, then place it in our image view.
-//                    weak var weakImageView = self.imageView
                     itemProvider.loadItemForTypeIdentifier(kUTTypeImage as String, options: nil, completionHandler: {
                         [unowned self] (data, error) in
+                        var imageData : NSData? = nil
+                        var image : UIImage? = nil
                         if let url = data as? NSURL {
-                            let imageData = NSData(contentsOfFile: url.path!)
-                            let name = ""
-                            let type = NSLocalizedString("LS_IMAGE_TYPE_NAME", comment:"")
+                            imageData = NSData(contentsOfFile: url.path!)
+                            image = UIImage(contentsOfFile: url.path!)
+                        }else if let imageObject = data as? UIImage {
+                            image = imageObject
+                            imageData = UIImagePNGRepresentation(imageObject)
+                        }
+                        let name = ""
+                        let type = NSLocalizedString("LS_IMAGE_TYPE_NAME", comment:"")
+                        if imageData != nil && image != nil {
                             let meta = PortableImageMetadata(image: imageData, name: name, type: type)
-                            let image = UIImage(contentsOfFile: url.path!)
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                 [unowned self] () in
                                 self.meta = meta!.portableData()
@@ -49,7 +50,6 @@ class ActionViewController: ExifViewControllerBase {
             }
             
             if (imageFound) {
-                // We only handle one image, so stop looking for more.
                 break
             }
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DVremoteCommonUI
 
 class MapURL: NSObject, UIActivityItemSource {
     private let url : NSURL

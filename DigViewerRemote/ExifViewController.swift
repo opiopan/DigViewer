@@ -14,6 +14,11 @@ class ExifViewController: ExifViewControllerBase, DVRemoteClientDelegate, Inform
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        super.imageSelector = {
+            [unowned self] (imageView) in
+            self.performSegueWithIdentifier("FullImageView", sender: self)
+        }
+        
         let client = DVRemoteClient.sharedClient()
         
         let meta = client.meta

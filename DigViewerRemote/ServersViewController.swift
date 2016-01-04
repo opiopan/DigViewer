@@ -7,47 +7,7 @@
 //
 
 import UIKit
-
-class ServerInfo : NSObject, NSCoding {
-    var service: NSNetService!
-    var icon: UIImage!
-    var image: UIImage!
-    var attributes: [String : String]!
-    var isPinned: Bool = false
-    var isActive: Bool = false
-    
-    override init() {
-        super.init()
-    }
-    
-    init(src : ServerInfo) {
-        super.init()
-        service = NSNetService(domain: src.service.domain, type: src.service.type, name: src.service.name)
-        icon = src.icon
-        image = src.image
-        attributes = src.attributes
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init()
-        let domain = aDecoder.decodeObjectForKey("domain") as! String
-        let type = aDecoder.decodeObjectForKey("type") as! String
-        let name = aDecoder.decodeObjectForKey("name") as! String
-        service = NSNetService(domain: domain, type: type, name: name)
-        icon = aDecoder.decodeObjectForKey("icon") as! UIImage
-        image = aDecoder.decodeObjectForKey("image") as! UIImage
-        attributes = NSDictionary(coder: aDecoder) as! [String:String]
-    }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(service.domain as NSString, forKey: "domain")
-        aCoder.encodeObject(service.type as NSString, forKey: "type")
-        aCoder.encodeObject(service.name as NSString, forKey: "name")
-        aCoder.encodeObject(icon, forKey: "icon")
-        aCoder.encodeObject(image, forKey: "image")
-        (attributes as NSDictionary).encodeWithCoder(aCoder)
-    }
-}
+import DVremoteCommonUI
 
 class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate {
 

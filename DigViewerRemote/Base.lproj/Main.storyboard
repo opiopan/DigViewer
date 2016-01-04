@@ -490,12 +490,12 @@
         <!--Summary Popup View Controller-->
         <scene sceneID="TrD-LE-5km">
             <objects>
-                <viewController storyboardIdentifier="ImageSummaryPopup" id="s2g-z2-2O6" customClass="SummaryPopupViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageSummaryPopup" id="s2g-z2-2O6" customClass="SummaryPopupViewController" customModule="DVremoteCommonUI" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MZ9-Eb-xQe"/>
                         <viewControllerLayoutGuide type="bottom" id="gMZ-pP-RRA"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="amB-Gt-ezJ" customClass="PopupView" customModule="DigViewerRemote" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="amB-Gt-ezJ" customClass="PopupView" customModule="DVremoteCommonUI">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -2132,10 +2132,10 @@
         <image name="pin_off" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Ob7-tc-DRy"/>
         <segue reference="QjS-Zo-NfZ"/>
         <segue reference="1Vi-gm-zmd"/>
+        <segue reference="XyN-pQ-fCP"/>
         <segue reference="JNz-7y-A5o"/>
-        <segue reference="Ob7-tc-DRy"/>
-        <segue reference="ETZ-FC-MkB"/>
     </inferredMetricsTieBreakers>
 </document>

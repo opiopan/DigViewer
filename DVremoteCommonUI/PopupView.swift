@@ -8,24 +8,24 @@
 
 import UIKit
 
-enum PopupViewBackgroundMode {
+public enum PopupViewBackgroundMode {
     case None
     case Balloon
     case Rectangle
 }
 
-class PopupView: UIView {
-    var fillColor : UIColor?
-    var showAnchor = true {
+public class PopupView: UIView {
+    public var fillColor : UIColor?
+    public var showAnchor = true {
         didSet {
             if oldValue != showAnchor {
                 self.setNeedsDisplay()
             }
         }
     }
-    var backgroundMode = PopupViewBackgroundMode.Balloon
+    public var backgroundMode = PopupViewBackgroundMode.Balloon
 
-    override func drawRect(rect: CGRect) {
+    public override func drawRect(rect: CGRect) {
         if backgroundMode == .None {
             return
         }
@@ -71,22 +71,4 @@ class PopupView: UIView {
         }
     }
     
-    //-----------------------------------------------------------------------------------------
-    // MARK: - タッチイベント処理
-    //-----------------------------------------------------------------------------------------
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        NSLog("touchBegan")
-//    }
-//    
-//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        NSLog("touchMoved")
-//    }
-//    
-//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        NSLog("touchEnded")
-//    }
-//    
-//    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-//        NSLog("touchCanceld")
-//    }
 }

@@ -49,13 +49,9 @@
 		7B716B4D1C376036002046B9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B4C1C376036002046B9 /* Images.xcassets */; };
 		7B716B501C37791C002046B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B521C37791C002046B9 /* InfoPlist.strings */; };
 		7B716B571C39089D002046B9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B551C39089D002046B9 /* Localizable.strings */; };
-		7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */; };
-		7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */; };
-		7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7356D31BB83C7700C1DB19 /* PopupView.swift */; };
 		7B7356D71BB971C500C1DB19 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B7356D91BB971C500C1DB19 /* Localizable.strings */; };
 		7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */; };
 		7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */; };
-		7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */; };
 		7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */; };
 		7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */; };
 		7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB211C02D58500783E17 /* AssetCell.swift */; };
@@ -68,7 +64,6 @@
 		7BA52ECD1BCB445E00D69AE9 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */; };
 		7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */; };
 		7BA52ED01BCB447B00D69AE9 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECF1BCB447B00D69AE9 /* Photos.framework */; };
-		7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */; };
 		7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */; };
 		7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */; };
 		7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */; };
@@ -83,6 +78,11 @@
 		7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */; };
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
+		7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */; };
+		7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */; };
+		7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */; };
+		7BEDC6251C3A65F300B47C31 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */; };
+		7BEDC6271C3A665F00B47C31 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6261C3A665F00B47C31 /* PopupView.swift */; };
 		7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */; };
 /* End PBXBuildFile section */
 
@@ -180,15 +180,11 @@
 		7B716B511C37791C002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B716B561C39089D002046B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B716B581C3908B6002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
-		7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
-		7B7356D31BB83C7700C1DB19 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7B7356D81BB971C500C1DB19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B7356DB1BB9728F00C1DB19 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		7B7356DD1BB9728F00C1DB19 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		7B7DDD081BAF9DD000C7A488 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		7B88FB211C02D58500783E17 /* AssetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
@@ -206,7 +202,6 @@
 		7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		7BA52ECF1BCB447B00D69AE9 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
 		7BA92C7D1BEDCC1700CE0C56 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		7BA92C7F1BEDCC6300CE0C56 /* NamedColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedColorCell.swift; sourceTree = "<group>"; };
 		7BA92C831BEE238100CE0C56 /* ColorSelectingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectingCell.swift; sourceTree = "<group>"; };
@@ -224,6 +219,11 @@
 		7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
+		7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
+		7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
+		7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
+		7BEDC6261C3A665F00B47C31 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DigViewerRemote.entitlements; sourceTree = "<group>"; };
 		7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,9 +323,9 @@
 			children = (
 				7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */,
 				7B6D6A0B1C3653C10060212A /* Info.plist */,
-				7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */,
-				7B6D6A151C3654440060212A /* InspectorImageCell.swift */,
-				7B6D6A161C3654440060212A /* LabelArrangableCell.swift */,
+				7BEDC61E1C3A312300B47C31 /* Configuration */,
+				7BEDC61F1C3A523E00B47C31 /* Map View */,
+				7BEDC61A1C3A085300B47C31 /* Exif View */,
 			);
 			path = DVremoteCommonUI;
 			sourceTree = "<group>";
@@ -374,10 +374,6 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
-				7BA52ED11BCB4FF400D69AE9 /* MapGeometry.swift */,
-				7B7356D11BB7E67100C1DB19 /* AnnotationView.swift */,
-				7B7356CE1BB7D88100C1DB19 /* SummaryPopupViewController.swift */,
-				7B7356D31BB83C7700C1DB19 /* PopupView.swift */,
 				7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */,
 				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
 				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
@@ -408,9 +404,9 @@
 			isa = PBXGroup;
 			children = (
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
+				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
 				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
-				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
 				7BBA59CA1B9DA59C0025B902 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -486,9 +482,37 @@
 				7BAFF9D91BBFF60000B33E0D /* Preferences View */,
 				7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */,
 				7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */,
-				7B7DDD0A1BAFA95F00C7A488 /* ConfigurationController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7BEDC61A1C3A085300B47C31 /* Exif View */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */,
+				7B6D6A151C3654440060212A /* InspectorImageCell.swift */,
+				7B6D6A161C3654440060212A /* LabelArrangableCell.swift */,
+			);
+			name = "Exif View";
+			sourceTree = "<group>";
+		};
+		7BEDC61E1C3A312300B47C31 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		7BEDC61F1C3A523E00B47C31 /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */,
+				7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */,
+				7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */,
+				7BEDC6261C3A665F00B47C31 /* PopupView.swift */,
+			);
+			name = "Map View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,6 +584,7 @@
 				7B716B381C375F64002046B9 /* Sources */,
 				7B716B391C375F64002046B9 /* Frameworks */,
 				7B716B3A1C375F64002046B9 /* Resources */,
+				7BEDC61B1C3A1CC400B47C31 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -577,7 +602,7 @@
 				7BBA59C51B9DA59C0025B902 /* Sources */,
 				7BBA59C61B9DA59C0025B902 /* Frameworks */,
 				7BBA59C71B9DA59C0025B902 /* Resources */,
-				7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */,
+				7BBA59EE1B9DAD710025B902 /* Run Script For Embedding Version */,
 				7BF05B1D1C257CC100A4A766 /* Embed App Extensions */,
 				7B6D69D51C356E1D0060212A /* Embed Frameworks */,
 			);
@@ -642,9 +667,9 @@
 			projectRoot = "";
 			targets = (
 				7BBA59C81B9DA59C0025B902 /* DigViewerRemote */,
+				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
 				7B6D6A1E1C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A061C3653C10060212A /* DVremoteCommonUI */,
-				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
 			);
 		};
 /* End PBXProject section */
@@ -689,14 +714,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7BBA59EE1B9DAD710025B902 /* Run Script For Deciding Version */ = {
+		7BBA59EE1B9DAD710025B902 /* Run Script For Embedding Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script For Deciding Version";
+			name = "Run Script For Embedding Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+		};
+		7BEDC61B1C3A1CC400B47C31 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,7 +748,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */,
+				7BEDC6271C3A665F00B47C31 /* PopupView.swift in Sources */,
+				7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */,
+				7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */,
 				7B6D6A171C3654440060212A /* ExifViewControllerBase.swift in Sources */,
+				7BEDC6251C3A65F300B47C31 /* SummaryPopupViewController.swift in Sources */,
 				7B6D6A191C3654440060212A /* LabelArrangableCell.swift in Sources */,
 				7B6D6A181C3654440060212A /* InspectorImageCell.swift in Sources */,
 			);
@@ -747,7 +790,6 @@
 				7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */,
 				7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */,
 				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
-				7B7DDD0B1BAFA95F00C7A488 /* ConfigurationController.swift in Sources */,
 				7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */,
 				7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */,
 				7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */,
@@ -759,14 +801,10 @@
 				7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */,
 				7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */,
 				7B6753951BA3BFEA005CC069 /* ServersViewController.swift in Sources */,
-				7B7356CF1BB7D88100C1DB19 /* SummaryPopupViewController.swift in Sources */,
 				7BBA59CF1B9DA59C0025B902 /* AppDelegate.swift in Sources */,
-				7B7356D21BB7E67100C1DB19 /* AnnotationView.swift in Sources */,
-				7B7356D41BB83C7700C1DB19 /* PopupView.swift in Sources */,
 				7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */,
 				7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
-				7BA52ED21BCB4FF400D69AE9 /* MapGeometry.swift in Sources */,
 				7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
 				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
@@ -862,6 +900,7 @@
 		7B6D6A111C3653C10060212A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -887,6 +926,7 @@
 		7B6D6A121C3653C10060212A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -910,6 +950,7 @@
 		7B6D6A291C369B150060212A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -934,6 +975,7 @@
 		7B6D6A2A1C369B150060212A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1131,6 +1173,7 @@
 				7B716B491C375F64002046B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BBA59C41B9DA59C0025B902 /* Build configuration list for PBXProject "DigViewerRemote" */ = {
 			isa = XCConfigurationList;

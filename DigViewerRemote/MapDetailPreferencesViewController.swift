@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DVremoteCommonUI
 
 class MapDetailPreferencesViewController: UITableViewController {
     static var spanRelationMethods = [

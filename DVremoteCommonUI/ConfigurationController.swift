@@ -12,57 +12,57 @@ import UIKit
 //-----------------------------------------------------------------------------------------
 // MARK: ユーザデフォルトキー名 / 列挙型定義
 //-----------------------------------------------------------------------------------------
-struct UserDefaults {
-    static let GroupsMigration = "GroupsMigration";
+public struct UserDefaults {
+    static public let GroupsMigration = "GroupsMigration";
     
-    static let EstablishedConnection = "EstablishedConnection";
-    static let MapType = "MapType";
-    static let MapShowLabel = "MapShowLabel";
-    static let Map3DView = "Map3DView"
-    static let MapHeadingDisplay = "MapHeadingDisplay"
-    static let MapSummaryDisplay = "MapSummaryDisplay"
-    static let EnableVolumeButton = "EnableVolumeButton"
+    static public let EstablishedConnection = "EstablishedConnection";
+    static public let MapType = "MapType";
+    static public let MapShowLabel = "MapShowLabel";
+    static public let Map3DView = "Map3DView"
+    static public let MapHeadingDisplay = "MapHeadingDisplay"
+    static public let MapSummaryDisplay = "MapSummaryDisplay"
+    static public let EnableVolumeButton = "EnableVolumeButton"
     
-    static let MapRelationSpan = "MapRelationSpan";
-    static let MapRelationSpanMethod = "MapRelationSpanMethod"
-    static let MapTurnToHeading = "MapTurnToHeading"
-    static let MapHeadingShift = "MapHeadingShift"
-    static let MapSpan = "MapSpan"
-    static let MapTilt = "MapTilt"
-    static let MapPinColor = "MapPinColor"
-    static let MapArrowColor = "MapArrowColor"
-    static let MapFOVColor = "MapFOVColor"
-    static let MapSummaryPinningStyle = "MapSummaryPinningStyle"
+    static public let MapRelationSpan = "MapRelationSpan";
+    static public let MapRelationSpanMethod = "MapRelationSpanMethod"
+    static public let MapTurnToHeading = "MapTurnToHeading"
+    static public let MapHeadingShift = "MapHeadingShift"
+    static public let MapSpan = "MapSpan"
+    static public let MapTilt = "MapTilt"
+    static public let MapPinColor = "MapPinColor"
+    static public let MapArrowColor = "MapArrowColor"
+    static public let MapFOVColor = "MapFOVColor"
+    static public let MapSummaryPinningStyle = "MapSummaryPinningStyle"
     
-    static let DataSourcePinnedList = "DataSourcePinnedList"
+    static public let DataSourcePinnedList = "DataSourcePinnedList2"
     
-    static let AuthenticationgKeys = "AuthenticatingKeys"
+    static public let AuthenticationgKeys = "AuthenticatingKeys"
 }
 
-enum MapType : Int {
+public enum MapType : Int {
     case Map = 0
     case Satellite
 }
 
-enum MapHeadingDisplay : Int {
+public enum MapHeadingDisplay : Int {
     case None = 0
     case Arrow
     case FOV
     case ArrowAndFOV
 }
 
-enum MapSummaryDisplay : Int {
+public enum MapSummaryDisplay : Int {
     case None = 0
     case Balloon
     case Pinning
 }
 
-enum MapRelationSpanMethod : Int {
+public enum MapRelationSpanMethod : Int {
     case LongSide = 0
     case ShortSide
 }
 
-enum MapSummaryPinningStyle : Int {
+public enum MapSummaryPinningStyle : Int {
     case InToolBar = 0
     case LowerLeft
     case LowerRight
@@ -71,7 +71,7 @@ enum MapSummaryPinningStyle : Int {
 //-----------------------------------------------------------------------------------------
 // MARK: - Observer用プロトコル定義
 //-----------------------------------------------------------------------------------------
-@objc protocol ConfigurationControllerDelegate {
+@objc public protocol ConfigurationControllerDelegate {
     optional func notifyUpdateConfiguration(configuration : ConfigurationController);
     optional func notifyUpdateMapDetailConfiguration(configuration : ConfigurationController)
     optional func notifyUpdateDataSourceConfiguration(configuration : ConfigurationController)
@@ -79,10 +79,54 @@ enum MapSummaryPinningStyle : Int {
 
 
 //-----------------------------------------------------------------------------------------
+// MARK: - Server情報
+//-----------------------------------------------------------------------------------------
+public class ServerInfo : NSObject, NSCoding {
+    public var service: NSNetService!
+    public var icon: UIImage!
+    public var image: UIImage!
+    public var attributes: [String : String]!
+    public var isPinned: Bool = false
+    public var isActive: Bool = false
+    
+    public override init() {
+        super.init()
+    }
+    
+    public init(src : ServerInfo) {
+        super.init()
+        service = NSNetService(domain: src.service.domain, type: src.service.type, name: src.service.name)
+        icon = src.icon
+        image = src.image
+        attributes = src.attributes
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init()
+        let domain = aDecoder.decodeObjectForKey("domain") as! String
+        let type = aDecoder.decodeObjectForKey("type") as! String
+        let name = aDecoder.decodeObjectForKey("name") as! String
+        service = NSNetService(domain: domain, type: type, name: name)
+        icon = aDecoder.decodeObjectForKey("icon") as! UIImage
+        image = aDecoder.decodeObjectForKey("image") as! UIImage
+        attributes = NSDictionary(coder: aDecoder) as! [String:String]
+    }
+    
+    public func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(service.domain as NSString, forKey: "domain")
+        aCoder.encodeObject(service.type as NSString, forKey: "type")
+        aCoder.encodeObject(service.name as NSString, forKey: "name")
+        aCoder.encodeObject(icon, forKey: "icon")
+        aCoder.encodeObject(image, forKey: "image")
+        (attributes as NSDictionary).encodeWithCoder(aCoder)
+    }
+}
+
+//-----------------------------------------------------------------------------------------
 // MARK: - ConfigurationController クラス定義
 //-----------------------------------------------------------------------------------------
-class ConfigurationController: NSObject {
-    static let sharedController = ConfigurationController()
+public class ConfigurationController: NSObject {
+    static public let sharedController = ConfigurationController()
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 初期化
@@ -185,11 +229,11 @@ class ConfigurationController: NSObject {
     // MARK: - Observer管理
     //-----------------------------------------------------------------------------------------
     private var observers : [ConfigurationControllerDelegate] = []
-    func registerObserver(observer : ConfigurationControllerDelegate){
+    public func registerObserver(observer : ConfigurationControllerDelegate){
         observers.append(observer)
     }
     
-    func unregisterObserver(observer : ConfigurationControllerDelegate){
+    public func unregisterObserver(observer : ConfigurationControllerDelegate){
         for var i = 0; i < observers.count; i++ {
             if observers[i] as AnyObject === observer as AnyObject {
                 observers.removeAtIndex(i)
@@ -198,7 +242,7 @@ class ConfigurationController: NSObject {
         }
     }
 
-    var updateCount = 0
+    private var updateCount = 0
     private func updateConfiguration(){
         updateCount++
         for observer in observers {
@@ -225,7 +269,7 @@ class ConfigurationController: NSObject {
     //-----------------------------------------------------------------------------------------
     // MARK: - デフォルト設定
     //-----------------------------------------------------------------------------------------
-    func defaultValue(name : String) -> AnyObject? {
+    public func defaultValue(name : String) -> AnyObject? {
         return defaults[name]
     }
 
@@ -233,11 +277,11 @@ class ConfigurationController: NSObject {
     // MARK: - トランザクション
     //-----------------------------------------------------------------------------------------
     private var inMapDetailConfigurationTransaction = 0;
-    func beginMapDetailConfigurationTransaction() {
+    public func beginMapDetailConfigurationTransaction() {
         inMapDetailConfigurationTransaction++
     }
     
-    func commitMapDetailConfigurationTransaction() {
+    public func commitMapDetailConfigurationTransaction() {
         inMapDetailConfigurationTransaction--
         updateMapDetailConfiguration()
     }
@@ -245,87 +289,87 @@ class ConfigurationController: NSObject {
     //-----------------------------------------------------------------------------------------
     // MARK: - プロパティの実装
     //-----------------------------------------------------------------------------------------
-    var establishedConnection : String? {
+    public var establishedConnection : String? {
         didSet{
             controller.setValue(establishedConnection, forKey: UserDefaults.EstablishedConnection)
             updateConfiguration()
         }
     }
-    var mapType : MapType {
+    public var mapType : MapType {
         didSet{
             controller.setValue(mapType.rawValue, forKey: UserDefaults.MapType)
             updateConfiguration()
         }
     }
-    var mapShowLabel : Bool {
+    public var mapShowLabel : Bool {
         didSet{
             controller.setValue(mapShowLabel, forKey: UserDefaults.MapShowLabel)
             updateConfiguration()
         }
     }
-    var map3DView : Bool {
+    public var map3DView : Bool {
         didSet {
             controller.setValue(map3DView, forKey: UserDefaults.Map3DView)
             updateConfiguration()
         }
     }
-    var mapHeadingDisplay : MapHeadingDisplay {
+    public var mapHeadingDisplay : MapHeadingDisplay {
         didSet {
             controller.setValue(mapHeadingDisplay.rawValue, forKey: UserDefaults.MapHeadingDisplay)
             updateConfiguration()
         }
     }
     
-    var mapSummaryDisplay : MapSummaryDisplay {
+    public var mapSummaryDisplay : MapSummaryDisplay {
         didSet {
             controller.setValue(mapSummaryDisplay.rawValue, forKey: UserDefaults.MapSummaryDisplay)
             updateConfiguration()
         }
     }
     
-    var enableVolumeButton : Bool {
+    public var enableVolumeButton : Bool {
         didSet {
             controller.setValue(enableVolumeButton, forKey: UserDefaults.EnableVolumeButton)
             updateConfiguration()
         }
     }
     
-    var mapRelationSpan : Bool {
+    public var mapRelationSpan : Bool {
         didSet {
             controller.setValue(mapRelationSpan, forKey: UserDefaults.MapRelationSpan)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapRelationSpanMethod : MapRelationSpanMethod {
+    public var mapRelationSpanMethod : MapRelationSpanMethod {
         didSet {
             controller.setValue(mapRelationSpanMethod.rawValue, forKey: UserDefaults.MapRelationSpanMethod)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapTurnToHeading : Bool {
+    public var mapTurnToHeading : Bool {
         didSet {
             controller.setValue(mapTurnToHeading, forKey: UserDefaults.MapTurnToHeading)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapHeadingShift : CGFloat {
+    public var mapHeadingShift : CGFloat {
         didSet {
             controller.setValue(mapHeadingShift, forKey: UserDefaults.MapHeadingShift)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapSpan : CGFloat {
+    public var mapSpan : CGFloat {
         didSet {
             controller.setValue(mapSpan, forKey: UserDefaults.MapSpan)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapSpanString : String {
+    public var mapSpanString : String {
         get {
             var rc = ""
             
@@ -345,20 +389,20 @@ class ConfigurationController: NSObject {
         }
     }
     
-    var mapTilt : CGFloat {
+    public var mapTilt : CGFloat {
         didSet {
             controller.setValue(mapTilt, forKey: UserDefaults.MapTilt)
             updateMapDetailConfiguration()
         }
     }
     
-    var mapTiltString : String {
+    public var mapTiltString : String {
         get {
             return NSString(format: "%.0f°", mapTilt) as String
         }
     }
     
-    var mapPinColor : UIColor {
+    public var mapPinColor : UIColor {
         didSet {
             let data = NSKeyedArchiver.archivedDataWithRootObject(mapPinColor)
             controller.setValue(data, forKey: UserDefaults.MapPinColor)
@@ -366,7 +410,7 @@ class ConfigurationController: NSObject {
         }
     }
     
-    var mapArrowColor : UIColor {
+    public var mapArrowColor : UIColor {
         didSet {
             let data = NSKeyedArchiver.archivedDataWithRootObject(mapArrowColor)
             controller.setValue(data, forKey: UserDefaults.MapArrowColor)
@@ -374,7 +418,7 @@ class ConfigurationController: NSObject {
         }
     }
     
-    var mapFovColor : UIColor {
+    public var mapFovColor : UIColor {
         didSet {
             let data = NSKeyedArchiver.archivedDataWithRootObject(mapFovColor)
             controller.setValue(data, forKey: UserDefaults.MapFOVColor)
@@ -382,14 +426,14 @@ class ConfigurationController: NSObject {
         }
     }
     
-    var mapSummaryPinningStyle : MapSummaryPinningStyle {
+    public var mapSummaryPinningStyle : MapSummaryPinningStyle {
         didSet {
             controller.setValue(mapSummaryPinningStyle.rawValue, forKey: UserDefaults.MapSummaryPinningStyle)
             updateConfiguration()
         }
     }
     
-    var dataSourcePinnedList : [ServerInfo] {
+    public var dataSourcePinnedList : [ServerInfo] {
         didSet {
             let data = NSKeyedArchiver.archivedDataWithRootObject(dataSourcePinnedList)
             controller.setValue(data, forKey: UserDefaults.DataSourcePinnedList)
@@ -397,11 +441,11 @@ class ConfigurationController: NSObject {
         }
     }
     
-    var authenticationgKeys : [String:String] {
+    public var authenticationgKeys : [String:String] {
         didSet {
             controller.setValue(authenticationgKeys, forKey: UserDefaults.AuthenticationgKeys)
         }
     }
     
-    var informationViewType : Int = 0
+    public var informationViewType : Int = 0
 }
