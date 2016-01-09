@@ -12,7 +12,6 @@
 		7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */; };
 		7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */; };
 		7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */; };
-		7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B467F731B9F15A1005719E7 /* MapKit.framework */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
 		7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA431BB0DE700068A842 /* InspectorTableView.swift */; };
 		7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */; };
@@ -74,15 +73,26 @@
 		7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D21B9DA59C0025B902 /* Main.storyboard */; };
 		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
 		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
-		7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */; };
-		7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */; };
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
+		7BE36A8B1C40A13200501159 /* DVremoteLocationAction.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */; };
 		7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */; };
 		7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */; };
 		7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */; };
 		7BEDC6251C3A65F300B47C31 /* SummaryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */; };
 		7BEDC6271C3A665F00B47C31 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6261C3A665F00B47C31 /* PopupView.swift */; };
+		7BEDC62A1C3BEB9900B47C31 /* HeadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6281C3BEB9900B47C31 /* HeadingOverlay.swift */; };
+		7BEDC62B1C3BEB9900B47C31 /* HeadingOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6291C3BEB9900B47C31 /* HeadingOverlayRenderer.swift */; };
+		7BEDC62D1C3BF62200B47C31 /* MapViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC62C1C3BF62200B47C31 /* MapViewControllerBase.swift */; };
+		7BEDC6471C3D5D7D00B47C31 /* LocationActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6461C3D5D7D00B47C31 /* LocationActionViewController.swift */; };
+		7BEDC64A1C3D5D7D00B47C31 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC6481C3D5D7D00B47C31 /* MainInterface.storyboard */; };
+		7BEDC64E1C3D5D7D00B47C31 /* DVremoteLocationAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7BEDC6531C3D5DB600B47C31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC6521C3D5DB600B47C31 /* Images.xcassets */; };
+		7BEDC6571C3D60DD00B47C31 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEDC6561C3D60DD00B47C31 /* MapKit.framework */; };
+		7BEDC6581C3D60F000B47C31 /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7BEDC6591C3D60F000B47C31 /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
+		7BEDC65C1C3D617C00B47C31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC65E1C3D617C00B47C31 /* InfoPlist.strings */; };
+		7BEDC6631C40A0C300B47C31 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC6611C40A0C300B47C31 /* Localizable.strings */; };
 		7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +118,13 @@
 			remoteGlobalIDString = 7B716B3B1C375F64002046B9;
 			remoteInfo = DVremoteExifAction;
 		};
+		7BEDC64C1C3D5D7D00B47C31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BEDC6431C3D5D7C00B47C31;
+			remoteInfo = DVremoteLocationAction;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +147,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				7B716B461C375F64002046B9 /* DVremoteExifAction.appex in Embed App Extensions */,
+				7BEDC64E1C3D5D7D00B47C31 /* DVremoteLocationAction.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +161,6 @@
 		7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderController.swift; sourceTree = "<group>"; };
 		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
 		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
-		7B467F731B9F15A1005719E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B52AA431BB0DE700068A842 /* InspectorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorTableView.swift; sourceTree = "<group>"; };
 		7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -214,16 +231,29 @@
 		7BBA59D31B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BBA59D51B9DA59C0025B902 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7BBA59D81B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlay.swift; sourceTree = "<group>"; };
-		7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
 		7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
+		7BE36A8A1C40A13200501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7BE36A8D1C40B31300501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
 		7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
 		7BEDC6261C3A665F00B47C31 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		7BEDC6281C3BEB9900B47C31 /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlay.swift; sourceTree = "<group>"; };
+		7BEDC6291C3BEB9900B47C31 /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
+		7BEDC62C1C3BF62200B47C31 /* MapViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerBase.swift; sourceTree = "<group>"; };
+		7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteLocationAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BEDC6461C3D5D7D00B47C31 /* LocationActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationActionViewController.swift; sourceTree = "<group>"; };
+		7BEDC6491C3D5D7D00B47C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		7BEDC64B1C3D5D7D00B47C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BEDC6521C3D5DB600B47C31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BEDC6561C3D60DD00B47C31 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7BEDC65D1C3D617C00B47C31 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DVremoteLocationAction.entitlements; sourceTree = "<group>"; };
+		7BEDC6601C3D61E600B47C31 /* DVremoteExifAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DVremoteExifAction.entitlements; sourceTree = "<group>"; };
+		7BEDC6621C40A0C300B47C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DigViewerRemote.entitlements; sourceTree = "<group>"; };
 		7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -263,7 +293,16 @@
 				7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */,
 				7B6D6A261C369B150060212A /* DVremoteCommonLib.framework in Frameworks */,
 				7B6D6A0E1C3653C10060212A /* DVremoteCommonUI.framework in Frameworks */,
-				7B467F741B9F15A1005719E7 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BEDC6411C3D5D7C00B47C31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BEDC6581C3D60F000B47C31 /* DVremoteCommonLib.framework in Frameworks */,
+				7BEDC6591C3D60F000B47C31 /* DVremoteCommonUI.framework in Frameworks */,
+				7BEDC6571C3D60DD00B47C31 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +341,6 @@
 				7BA52ECB1BCB445E00D69AE9 /* CoreImage.framework */,
 				7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */,
 				7B15CD0D1BAD731D00479CFF /* CoreLocation.framework */,
-				7B467F731B9F15A1005719E7 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			path = ..;
@@ -360,11 +398,12 @@
 		7B716B3D1C375F64002046B9 /* DVremoteExifAction */ = {
 			isa = PBXGroup;
 			children = (
-				7B716B431C375F64002046B9 /* Info.plist */,
+				7BEDC6601C3D61E600B47C31 /* DVremoteExifAction.entitlements */,
 				7B716B3E1C375F64002046B9 /* ActionViewController.swift */,
 				7B716B401C375F64002046B9 /* MainInterface.storyboard */,
-				7B716B551C39089D002046B9 /* Localizable.strings */,
+				7B716B431C375F64002046B9 /* Info.plist */,
 				7B716B521C37791C002046B9 /* InfoPlist.strings */,
+				7B716B551C39089D002046B9 /* Localizable.strings */,
 				7B716B4C1C376036002046B9 /* Images.xcassets */,
 			);
 			path = DVremoteExifAction;
@@ -375,8 +414,6 @@
 			children = (
 				7BBA59D01B9DA59C0025B902 /* MapViewController.swift */,
 				7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */,
-				7BC20CCC1BE49CC1003B1EAF /* HeadingOverlay.swift */,
-				7BC20CCE1BE50E5F003B1EAF /* HeadingOverlayRenderer.swift */,
 				7BB683C11C1C7E8C00A6DFAF /* KMLFile.swift */,
 				7B6D69A71C2ECD520060212A /* MapURL.swift */,
 				7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */,
@@ -403,8 +440,10 @@
 		7BBA59C01B9DA59C0025B902 = {
 			isa = PBXGroup;
 			children = (
+				7BEDC6561C3D60DD00B47C31 /* MapKit.framework */,
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
 				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
+				7BEDC6451C3D5D7D00B47C31 /* DVremoteLocationAction */,
 				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
 				7BBA59CA1B9DA59C0025B902 /* Products */,
@@ -418,6 +457,7 @@
 				7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */,
 				7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */,
 				7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */,
+				7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -507,12 +547,29 @@
 		7BEDC61F1C3A523E00B47C31 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				7BEDC62C1C3BF62200B47C31 /* MapViewControllerBase.swift */,
 				7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */,
 				7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */,
 				7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */,
 				7BEDC6261C3A665F00B47C31 /* PopupView.swift */,
+				7BEDC6281C3BEB9900B47C31 /* HeadingOverlay.swift */,
+				7BEDC6291C3BEB9900B47C31 /* HeadingOverlayRenderer.swift */,
 			);
 			name = "Map View";
+			sourceTree = "<group>";
+		};
+		7BEDC6451C3D5D7D00B47C31 /* DVremoteLocationAction */ = {
+			isa = PBXGroup;
+			children = (
+				7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */,
+				7BEDC6461C3D5D7D00B47C31 /* LocationActionViewController.swift */,
+				7BEDC6481C3D5D7D00B47C31 /* MainInterface.storyboard */,
+				7BEDC64B1C3D5D7D00B47C31 /* Info.plist */,
+				7BEDC65E1C3D617C00B47C31 /* InfoPlist.strings */,
+				7BEDC6611C40A0C300B47C31 /* Localizable.strings */,
+				7BEDC6521C3D5DB600B47C31 /* Images.xcassets */,
+			);
+			path = DVremoteLocationAction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,7 +641,7 @@
 				7B716B381C375F64002046B9 /* Sources */,
 				7B716B391C375F64002046B9 /* Frameworks */,
 				7B716B3A1C375F64002046B9 /* Resources */,
-				7BEDC61B1C3A1CC400B47C31 /* ShellScript */,
+				7BEDC61B1C3A1CC400B47C31 /* Run Script For Embedding Version */,
 			);
 			buildRules = (
 			);
@@ -612,11 +669,30 @@
 				7B6D6A0D1C3653C10060212A /* PBXTargetDependency */,
 				7B6D6A251C369B150060212A /* PBXTargetDependency */,
 				7B716B451C375F64002046B9 /* PBXTargetDependency */,
+				7BEDC64D1C3D5D7D00B47C31 /* PBXTargetDependency */,
 			);
 			name = DigViewerRemote;
 			productName = DigViewerRemote;
 			productReference = 7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BEDC64F1C3D5D7D00B47C31 /* Build configuration list for PBXNativeTarget "DVremoteLocationAction" */;
+			buildPhases = (
+				7BEDC6401C3D5D7C00B47C31 /* Sources */,
+				7BEDC6411C3D5D7C00B47C31 /* Frameworks */,
+				7BEDC6421C3D5D7C00B47C31 /* Resources */,
+				7BEDC6541C3D600600B47C31 /* Run Script For Embedding Version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteLocationAction;
+			productName = DVremoteLocationAction;
+			productReference = 7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -640,12 +716,32 @@
 					7B716B3B1C375F64002046B9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					7BBA59C81B9DA59C0025B902 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G3Y32477L5;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					7BEDC6431C3D5D7C00B47C31 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};
@@ -668,6 +764,7 @@
 			targets = (
 				7BBA59C81B9DA59C0025B902 /* DigViewerRemote */,
 				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
+				7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */,
 				7B6D6A1E1C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A061C3653C10060212A /* DVremoteCommonUI */,
 			);
@@ -711,6 +808,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BEDC6421C3D5D7C00B47C31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BEDC64A1C3D5D7D00B47C31 /* MainInterface.storyboard in Resources */,
+				7BEDC6631C40A0C300B47C31 /* Localizable.strings in Resources */,
+				7BEDC65C1C3D617C00B47C31 /* InfoPlist.strings in Resources */,
+				7BE36A8B1C40A13200501159 /* DVremoteLocationAction.entitlements in Resources */,
+				7BEDC6531C3D5DB600B47C31 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -728,13 +837,28 @@
 			shellPath = /bin/sh;
 			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
 		};
-		7BEDC61B1C3A1CC400B47C31 /* ShellScript */ = {
+		7BEDC61B1C3A1CC400B47C31 /* Run Script For Embedding Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script For Embedding Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+		};
+		7BEDC6541C3D600600B47C31 /* Run Script For Embedding Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script For Embedding Version";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -748,14 +872,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEDC62D1C3BF62200B47C31 /* MapViewControllerBase.swift in Sources */,
 				7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */,
 				7BEDC6271C3A665F00B47C31 /* PopupView.swift in Sources */,
+				7BEDC62B1C3BEB9900B47C31 /* HeadingOverlayRenderer.swift in Sources */,
 				7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */,
 				7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */,
 				7B6D6A171C3654440060212A /* ExifViewControllerBase.swift in Sources */,
 				7BEDC6251C3A65F300B47C31 /* SummaryPopupViewController.swift in Sources */,
 				7B6D6A191C3654440060212A /* LabelArrangableCell.swift in Sources */,
 				7B6D6A181C3654440060212A /* InspectorImageCell.swift in Sources */,
+				7BEDC62A1C3BEB9900B47C31 /* HeadingOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,10 +910,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B1F9AAE1BFF7155003E08F3 /* ScrollableContentView.swift in Sources */,
-				7BC20CCF1BE50E60003B1EAF /* HeadingOverlayRenderer.swift in Sources */,
 				7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */,
 				7BAFF9DB1BBFF66100B33E0D /* PreferencesNavigationController.swift in Sources */,
-				7BC20CCD1BE49CC1003B1EAF /* HeadingOverlay.swift in Sources */,
 				7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */,
 				7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */,
 				7BA52EC31BCA285200D69AE9 /* LRUCache.m in Sources */,
@@ -822,6 +947,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BEDC6401C3D5D7C00B47C31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BEDC6471C3D5D7D00B47C31 /* LocationActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -839,6 +972,11 @@
 			isa = PBXTargetDependency;
 			target = 7B716B3B1C375F64002046B9 /* DVremoteExifAction */;
 			targetProxy = 7B716B441C375F64002046B9 /* PBXContainerItemProxy */;
+		};
+		7BEDC64D1C3D5D7D00B47C31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */;
+			targetProxy = 7BEDC64C1C3D5D7D00B47C31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -892,6 +1030,32 @@
 				7BBA59D81B9DA59C0025B902 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		7BEDC6481C3D5D7D00B47C31 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BEDC6491C3D5D7D00B47C31 /* Base */,
+				7BE36A8D1C40B31300501159 /* ja */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		7BEDC65E1C3D617C00B47C31 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BEDC65D1C3D617C00B47C31 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7BEDC6611C40A0C300B47C31 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BEDC6621C40A0C300B47C31 /* Base */,
+				7BE36A8A1C40A13200501159 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1000,6 +1164,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteExifAction/DVremoteExifAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1008,6 +1173,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1016,6 +1182,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteExifAction/DVremoteExifAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DVremoteExifAction/Info.plist;
@@ -1023,6 +1190,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1145,6 +1313,41 @@
 			};
 			name = Release;
 		};
+		7BEDC6501C3D5D7D00B47C31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteLocationAction/DVremoteLocationAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = DVremoteLocationAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteLocationAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7BEDC6511C3D5D7D00B47C31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteLocationAction/DVremoteLocationAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DVremoteLocationAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteLocationAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1189,6 +1392,15 @@
 			buildConfigurations = (
 				7BBA59E91B9DA59C0025B902 /* Debug */,
 				7BBA59EA1B9DA59C0025B902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BEDC64F1C3D5D7D00B47C31 /* Build configuration list for PBXNativeTarget "DVremoteLocationAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BEDC6501C3D5D7D00B47C31 /* Debug */,
+				7BEDC6511C3D5D7D00B47C31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

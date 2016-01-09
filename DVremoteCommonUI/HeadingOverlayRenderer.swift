@@ -8,15 +8,14 @@
 
 import UIKit
 import MapKit
-import DVremoteCommonUI
 
-class HeadingOverlayRenderer: MKOverlayRenderer {
+public class HeadingOverlayRenderer: MKOverlayRenderer {
     private var displayMode : MapHeadingDisplay
 
     private var components : [CGFloat]
     private var locations : [CGFloat] = [0.0, 1.0]
     
-    override init(overlay : MKOverlay) {
+    override public init(overlay : MKOverlay) {
         displayMode = ConfigurationController.sharedController.mapHeadingDisplay
 
         var red : CGFloat = 0
@@ -36,7 +35,7 @@ class HeadingOverlayRenderer: MKOverlayRenderer {
         super.init(overlay: overlay)
     }
     
-    override func drawMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale, inContext context: CGContext) {
+    override public func drawMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale, inContext context: CGContext) {
         let headingOverlay = overlay as? HeadingOverlay
 
         // FOVを表す扇形の描画

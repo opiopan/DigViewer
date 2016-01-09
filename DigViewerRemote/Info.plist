@@ -10,10 +10,10 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>JPEG</string>
+			<string>Image</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.jpeg</string>
+				<string>public.image</string>
 			</array>
 		</dict>
 	</array>

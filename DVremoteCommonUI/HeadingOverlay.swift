@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import DVremoteCommonUI
 
 private let LineWidth = 0.008
 private let HeadRootV = 0.05
@@ -25,7 +24,7 @@ private let ArrowTemplate : [CGPoint] = [
     CGPoint(x: -HeadH, y: 1.0 - HeadV),
 ]
 
-class HeadingOverlay: NSObject, MKOverlay {
+public class HeadingOverlay: NSObject, MKOverlay {
     private let center : CLLocationCoordinate2D
     private let heading : Double
     private let fov : Double
@@ -34,16 +33,16 @@ class HeadingOverlay: NSObject, MKOverlay {
     private var arrowGeometry : [MKMapPoint] = []
     private let bound : MKMapRect
     
-    var fovArcAngle : Double = 0
-    var fovArcCenter : MKMapPoint = MKMapPoint()
-    var fovArcStart : MKMapPoint = MKMapPoint()
+    public var fovArcAngle : Double = 0
+    public var fovArcCenter : MKMapPoint = MKMapPoint()
+    public var fovArcStart : MKMapPoint = MKMapPoint()
 
-    var arrowColor = ConfigurationController.sharedController.mapArrowColor
-    var fovColor = ConfigurationController.sharedController.mapFovColor
+    public var arrowColor = ConfigurationController.sharedController.mapArrowColor
+    public var fovColor = ConfigurationController.sharedController.mapFovColor
     
-    var altitude: Double = 0
+    public var altitude: Double = 0
     
-    init(center : CLLocationCoordinate2D, heading : Double, fov : Double, vScale : Double, hScale : Double) {
+    public init(center : CLLocationCoordinate2D, heading : Double, fov : Double, vScale : Double, hScale : Double) {
         self.center = center
         self.heading = heading
         self.fov = fov
@@ -102,19 +101,19 @@ class HeadingOverlay: NSObject, MKOverlay {
         bound = MKMapRect(origin: MKMapPoint(x: xMin, y: yMin), size: MKMapSize(width: xMax - xMin, height: yMax - yMin))
     }
 
-    var coordinate: CLLocationCoordinate2D {
+    public var coordinate: CLLocationCoordinate2D {
         get {
             return center
         }
     }
     
-    var boundingMapRect: MKMapRect {
+    public var boundingMapRect: MKMapRect {
         get {
             return bound
         }
     }
     
-    var arrowPointList: [MKMapPoint] {
+    public var arrowPointList: [MKMapPoint] {
         get {
             return arrowGeometry
         }

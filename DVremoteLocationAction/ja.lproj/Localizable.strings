@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  DigViewerRemote
+
+  Created by opiopan on 2016/01/09.
+  Copyright © 2016年 opiopan. All rights reserved.
+*/
+
+"ADDRESS_FORMAT" = "%2$@ %1$@";
+"ADDRESS_NA" = "位置情報なし";
