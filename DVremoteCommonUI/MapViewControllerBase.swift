@@ -45,8 +45,6 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
         mapView!.layer.zPosition = -1;
         mapView!.delegate = self
         
-        geocoder = CLGeocoder()
-        
         coverView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
         setBlurCover(true, isShowPopup: false)
         
@@ -129,11 +127,6 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
     //-----------------------------------------------------------------------------------------
     // MARK: - メタデータ＆サムネール設定
     //-----------------------------------------------------------------------------------------
-    private var geocoder : CLGeocoder? = nil
-    private var isGeocoding = false
-    private var pendingGeocodingRecquest : CLLocation? = nil
-    private var currentLocation : CLLocation? = nil
-    private var placemark : CLPlacemark? = nil
     private var isFirst = true
     
     public var isLocalSession : Bool = false
@@ -146,7 +139,6 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             removeAnnotation()
             removeOverlay()
             geometry = nil
-            placemark = nil
             
             if isFirst {
                 isFirst = false
@@ -154,34 +146,14 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             }
             
             // ポップアップウィンドウセットアップ
-            popupViewController!.dateLabel.text = nil
-            popupViewController!.cameraLabel.text = nil
-            popupViewController!.lensLabel.text = nil
-            popupViewController!.conditionLabel.text = nil
-            popupViewController!.addressLabel.text = nil
-            if let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]? {
-                if popupSummary.count > 0 {
-                    popupViewController!.dateLabel.text = popupSummary[0].value
-                }
-                if popupSummary.count > 2 {
-                    popupViewController!.cameraLabel.text = popupSummary[2].value
-                }
-                if popupSummary.count > 3 {
-                    popupViewController!.lensLabel.text = popupSummary[3].value
-                }
-                var condition : String = ""
-                for var i = 5; i < popupSummary.count; i++ {
-                    if condition == "" {
-                        condition = popupSummary[i].value
-                    }else if let value = popupSummary[i].value {
-                        condition = condition + " " + value
-                    }
-                }
-                popupViewController!.conditionLabel.text = condition
-                popupViewController!.addressLabel.text = nil
-                popupViewController!.thumbnailView.image = self.thumbnail
-            }
+            let popupSummary = SummarizedMeta(meta: meta)
+            popupViewController!.dateLabel.text = popupSummary.date
+            popupViewController!.cameraLabel.text = popupSummary.camera
+            popupViewController!.lensLabel.text = popupSummary.lens
+            popupViewController!.conditionLabel.text = popupSummary.condition
+            popupViewController!.thumbnailView.image = self.thumbnail
             
+            // 位置情報付の反映
             if meta[DVRCNMETA_LATITUDE] != nil {
                 geometry = MapGeometry(meta: meta, viewSize: mapView!.bounds.size, isLocalSession: isLocalSession)
                 
@@ -193,8 +165,11 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 let latKV = GPSSummary![0] as! ImageMetadataKV
                 let longKV = GPSSummary![1] as! ImageMetadataKV
                 popupViewController!.addressLabel.text = NSString(format: "%@\n%@", latKV.value, longKV.value) as String
-                currentLocation = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
-                performGeocoding(currentLocation!)
+                let location = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
+                ReverseGeocoder.sharedCoder.performCoding(location){
+                    [unowned self](coder : ReverseGeocoder) in
+                    self.popupViewController!.addressLabel.text = coder.address
+                }
                 
                 // ブラーカバーを外す
                 setBlurCover(false, isShowPopup: false)
@@ -219,77 +194,6 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 }
             }
         }
-    }
-    
-    
-    //-----------------------------------------------------------------------------------------
-    // MARK: - 住所取得 (逆ジオコーディング)
-    //-----------------------------------------------------------------------------------------
-    private func performGeocoding(location : CLLocation) {
-        if !isGeocoding {
-            isGeocoding = true
-            geocoder!.reverseGeocodeLocation(location, completionHandler: {
-                [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
-                if placemarks != nil && placemarks!.count > 0 && self.pendingGeocodingRecquest == nil{
-                    self.placemark = placemarks![0]
-                    if self.currentLocation == location {
-                        self.popupViewController!.addressLabel.text = self.recognizePlacemark(self.placemark!)
-                    }
-                }
-                self.isGeocoding = false
-                if let pending = self.pendingGeocodingRecquest {
-                    self.pendingGeocodingRecquest = nil
-                    self.performGeocoding(pending)
-                }
-            })
-        }else{
-            pendingGeocodingRecquest = location
-        }
-    }
-    
-    private func recognizePlacemark(placemark : CLPlacemark) -> String? {
-        var address : String? = nil
-        
-        let interest = placemark.areasOfInterest
-        if interest != nil && interest!.count > 0 {
-            address = interest![0]
-        }
-        
-        var units : [String] = []
-        if let unit = placemark.administrativeArea {
-            units.append(unit)
-        }
-        if let unit = placemark.locality {
-            units.append(unit)
-        }
-        if let unit = placemark.subLocality {
-            units.append(unit)
-        }
-        
-        if units.count >= 2 {
-            let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: ""),units[1], units[0]) as String
-            if address == nil {
-                address = str
-            }else{
-                address = "\(address!)\n\(str)"
-            }
-        }else if units.count == 1 {
-            if address == nil {
-                address = units[0]
-            }else{
-                address = "\(address!)\n\(units[0])"
-            }
-            
-        }
-        if let country = placemark.country {
-            if address == nil {
-                address = country
-            }else{
-                address = "\(address!) (\(country))"
-            }
-        }
-        
-        return address
     }
     
     //-----------------------------------------------------------------------------------------

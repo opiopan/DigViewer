@@ -78,6 +78,7 @@
 
 "SA_SHARE_LOCATION" = "位置情報を共有";
 "SA_SHARE_KML" = "Google Earth向けに共有";
+"SA_COPY_SUMMARY" = "サマリーをコピー";
 "SA_SHARE_CANCEL" = "キャンセル";
 
 "CA_OPEN_MAP" = "マップで開く";

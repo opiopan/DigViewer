@@ -76,6 +76,14 @@
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
 		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 		7BE36A8B1C40A13200501159 /* DVremoteLocationAction.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */; };
+		7BE36A901C40FDC100501159 /* ReverseGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */; };
+		7BE36A921C41EDAE00501159 /* SummarizedMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */; };
+		7BE36A9A1C4201DA00501159 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */; };
+		7BE36AA01C4201DA00501159 /* DVremoteCopySummaryAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7BE36AA51C42025B00501159 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE36AA41C42025B00501159 /* Images.xcassets */; };
+		7BE36AA91C4203D200501159 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BE36AAB1C4203D200501159 /* InfoPlist.strings */; };
+		7BE36AAC1C42067400501159 /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7BE36AAD1C42067400501159 /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
 		7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */; };
 		7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */; };
 		7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */; };
@@ -118,6 +126,13 @@
 			remoteGlobalIDString = 7B716B3B1C375F64002046B9;
 			remoteInfo = DVremoteExifAction;
 		};
+		7BE36A9E1C4201DA00501159 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BE36A961C4201DA00501159;
+			remoteInfo = DVremoteCopySummaryAction;
+		};
 		7BEDC64C1C3D5D7D00B47C31 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7BBA59C11B9DA59C0025B902 /* Project object */;
@@ -148,6 +163,7 @@
 			files = (
 				7B716B461C375F64002046B9 /* DVremoteExifAction.appex in Embed App Extensions */,
 				7BEDC64E1C3D5D7D00B47C31 /* DVremoteLocationAction.appex in Embed App Extensions */,
+				7BE36AA01C4201DA00501159 /* DVremoteCopySummaryAction.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +252,13 @@
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
 		7BE36A8A1C40A13200501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BE36A8D1C40B31300501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReverseGeocoder.swift; sourceTree = "<group>"; };
+		7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummarizedMeta.swift; sourceTree = "<group>"; };
+		7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteCopySummaryAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		7BE36A9D1C4201DA00501159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BE36AA41C42025B00501159 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BE36AAA1C4203D200501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
 		7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
@@ -293,6 +316,15 @@
 				7BA52ECE1BCB445E00D69AE9 /* ImageIO.framework in Frameworks */,
 				7B6D6A261C369B150060212A /* DVremoteCommonLib.framework in Frameworks */,
 				7B6D6A0E1C3653C10060212A /* DVremoteCommonUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BE36A941C4201DA00501159 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36AAC1C42067400501159 /* DVremoteCommonLib.framework in Frameworks */,
+				7BE36AAD1C42067400501159 /* DVremoteCommonUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +394,7 @@
 				7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */,
 				7B6D6A0B1C3653C10060212A /* Info.plist */,
 				7BEDC61E1C3A312300B47C31 /* Configuration */,
+				7BE36A8E1C40FD6400501159 /* Utilities */,
 				7BEDC61F1C3A523E00B47C31 /* Map View */,
 				7BEDC61A1C3A085300B47C31 /* Exif View */,
 			);
@@ -444,6 +477,7 @@
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
 				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
 				7BEDC6451C3D5D7D00B47C31 /* DVremoteLocationAction */,
+				7BE36A981C4201DA00501159 /* DVremoteCopySummaryAction */,
 				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
 				7BBA59CA1B9DA59C0025B902 /* Products */,
@@ -458,6 +492,7 @@
 				7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */,
 				7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */,
 				7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */,
+				7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,6 +559,26 @@
 				7B772C311BB1B31F00FA27E8 /* FullImageViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7BE36A8E1C40FD6400501159 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */,
+				7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		7BE36A981C4201DA00501159 /* DVremoteCopySummaryAction */ = {
+			isa = PBXGroup;
+			children = (
+				7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */,
+				7BE36A9D1C4201DA00501159 /* Info.plist */,
+				7BE36AAB1C4203D200501159 /* InfoPlist.strings */,
+				7BE36AA41C42025B00501159 /* Images.xcassets */,
+			);
+			path = DVremoteCopySummaryAction;
 			sourceTree = "<group>";
 		};
 		7BEDC61A1C3A085300B47C31 /* Exif View */ = {
@@ -670,11 +725,30 @@
 				7B6D6A251C369B150060212A /* PBXTargetDependency */,
 				7B716B451C375F64002046B9 /* PBXTargetDependency */,
 				7BEDC64D1C3D5D7D00B47C31 /* PBXTargetDependency */,
+				7BE36A9F1C4201DA00501159 /* PBXTargetDependency */,
 			);
 			name = DigViewerRemote;
 			productName = DigViewerRemote;
 			productReference = 7BBA59C91B9DA59C0025B902 /* DigViewerRemote.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7BE36A961C4201DA00501159 /* DVremoteCopySummaryAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BE36AA11C4201DA00501159 /* Build configuration list for PBXNativeTarget "DVremoteCopySummaryAction" */;
+			buildPhases = (
+				7BE36A931C4201DA00501159 /* Sources */,
+				7BE36A941C4201DA00501159 /* Frameworks */,
+				7BE36A951C4201DA00501159 /* Resources */,
+				7BE36AA61C42035A00501159 /* Run Script For Embedding Version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteCopySummaryAction;
+			productName = DVremoteCopySummaryAction;
+			productReference = 7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */ = {
 			isa = PBXNativeTarget;
@@ -734,6 +808,10 @@
 							};
 						};
 					};
+					7BE36A961C4201DA00501159 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+					};
 					7BEDC6431C3D5D7C00B47C31 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
@@ -765,6 +843,7 @@
 				7BBA59C81B9DA59C0025B902 /* DigViewerRemote */,
 				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
 				7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */,
+				7BE36A961C4201DA00501159 /* DVremoteCopySummaryAction */,
 				7B6D6A1E1C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A061C3653C10060212A /* DVremoteCommonUI */,
 			);
@@ -808,6 +887,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BE36A951C4201DA00501159 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36AA51C42025B00501159 /* Images.xcassets in Resources */,
+				7BE36AA91C4203D200501159 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BEDC6421C3D5D7C00B47C31 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -824,6 +912,20 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		7BBA59EE1B9DAD710025B902 /* Run Script For Embedding Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script For Embedding Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+		};
+		7BE36AA61C42035A00501159 /* Run Script For Embedding Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -872,7 +974,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BE36A901C40FDC100501159 /* ReverseGeocoder.swift in Sources */,
 				7BEDC62D1C3BF62200B47C31 /* MapViewControllerBase.swift in Sources */,
+				7BE36A921C41EDAE00501159 /* SummarizedMeta.swift in Sources */,
 				7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */,
 				7BEDC6271C3A665F00B47C31 /* PopupView.swift in Sources */,
 				7BEDC62B1C3BEB9900B47C31 /* HeadingOverlayRenderer.swift in Sources */,
@@ -947,6 +1051,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BE36A931C4201DA00501159 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36A9A1C4201DA00501159 /* ActionRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BEDC6401C3D5D7C00B47C31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -972,6 +1084,11 @@
 			isa = PBXTargetDependency;
 			target = 7B716B3B1C375F64002046B9 /* DVremoteExifAction */;
 			targetProxy = 7B716B441C375F64002046B9 /* PBXContainerItemProxy */;
+		};
+		7BE36A9F1C4201DA00501159 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BE36A961C4201DA00501159 /* DVremoteCopySummaryAction */;
+			targetProxy = 7BE36A9E1C4201DA00501159 /* PBXContainerItemProxy */;
 		};
 		7BEDC64D1C3D5D7D00B47C31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1030,6 +1147,14 @@
 				7BBA59D81B9DA59C0025B902 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		7BE36AAB1C4203D200501159 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE36AAA1C4203D200501159 /* ja */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		7BEDC6481C3D5D7D00B47C31 /* MainInterface.storyboard */ = {
@@ -1313,6 +1438,37 @@
 			};
 			name = Release;
 		};
+		7BE36AA21C4201DA00501159 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = DVremoteCopySummaryAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7BE36AA31C4201DA00501159 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DVremoteCopySummaryAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		7BEDC6501C3D5D7D00B47C31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1395,6 +1551,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7BE36AA11C4201DA00501159 /* Build configuration list for PBXNativeTarget "DVremoteCopySummaryAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BE36AA21C4201DA00501159 /* Debug */,
+				7BE36AA31C4201DA00501159 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		7BEDC64F1C3D5D7D00B47C31 /* Build configuration list for PBXNativeTarget "DVremoteLocationAction" */ = {
 			isa = XCConfigurationList;

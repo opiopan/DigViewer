@@ -32,6 +32,11 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         toolbar.layer.zPosition = 100
         summaryBar2nd.layer.zPosition = 1
         
+        super.imageSelector = {
+            [unowned self] (imageView) in
+            self.performSegueWithIdentifier("FullImageView", sender: self)
+        }
+
         mapView!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "onLongPress:"))
         
         initMessageView()
@@ -303,6 +308,15 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                     title: NSLocalizedString("SA_SHARE_KML", comment: ""), style: .Default){
                         [unowned self](action: UIAlertAction) in
                         self.showKMLSharingSheet(rect)
+                    }
+                )
+                controller.addAction(UIAlertAction(
+                    title: NSLocalizedString("SA_COPY_SUMMARY", comment: ""), style: .Default){
+                        [unowned self](action: UIAlertAction) in
+                        if self.meta != nil {
+                            let summary = SummarizedMeta(meta: self.meta)
+                            summary.copySummaryToPasteboard()
+                        }
                     }
                 )
             }

@@ -73,6 +73,7 @@
 
 "SA_SHARE_LOCATION" = "Share Location";
 "SA_SHARE_KML" = "Share for Google Earth";
+"SA_COPY_SUMMARY" = "Copy Summary";
 "SA_SHARE_CANCEL" = "Cancel";
 
 "CA_OPEN_MAP" = "Open by Map";
