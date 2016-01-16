@@ -408,7 +408,9 @@ static NSString* kViewSelector = @"viewSelector";
     }
     
     NSString* condition = nil;
-    for (NSString* element in @[focalLength, exposureTime, aperture, isoSpeed]) {
+    NSString* elements[] = {focalLength, exposureTime, aperture, isoSpeed};
+    for (int i = 0; i < sizeof(elements) / sizeof(NSString*); i++){
+        NSString* element = elements[i];
         if (element){
             if (condition){
                 condition = [NSString stringWithFormat:@"%@ %@", condition, element];
