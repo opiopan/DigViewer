@@ -10,7 +10,7 @@ import UIKit
 import DVremoteCommonUI
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, NSURLSessionDelegate{
 
     var window: UIWindow?
 
@@ -52,6 +52,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate{
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         DVRemoteClient.sharedClient().regeisterSharedImage(url)
         return true
+    }
+    
+    private var completionHandler: (() -> Void)? = nil
+    
+    func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
+        NSLog("event for shared session")
+        self.completionHandler = completionHandler
+    }
+    
+    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        self.completionHandler!()
     }
 
     //-----------------------------------------------------------------------------------------

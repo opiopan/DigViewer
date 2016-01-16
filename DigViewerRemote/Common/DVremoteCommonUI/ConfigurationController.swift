@@ -10,6 +10,12 @@ import UIKit
 
 
 //-----------------------------------------------------------------------------------------
+// MARK: App Groups 識別子
+//-----------------------------------------------------------------------------------------
+public let DVremoteAppGroupID = "group.com.opiopan.DVremote"
+public let DVremoteSharedSessionID = "sharedSession.com.opiopan.DVremote"
+
+//-----------------------------------------------------------------------------------------
 // MARK: ユーザデフォルトキー名 / 列挙型定義
 //-----------------------------------------------------------------------------------------
 public struct UserDefaults {
@@ -132,7 +138,7 @@ public class ConfigurationController: NSObject {
     // MARK: - 初期化
     //-----------------------------------------------------------------------------------------
     private var defaults : [String:AnyObject]
-    private let controller = NSUserDefaults(suiteName: "group.com.opiopan.DVremote")!
+    private let controller = NSUserDefaults(suiteName: DVremoteAppGroupID)!
 
     override init(){
         let redColor = NSKeyedArchiver.archivedDataWithRootObject(UIColor.redColor())

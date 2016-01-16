@@ -2,7 +2,7 @@
 //  ActionRequestHandler.swift
 //  DVremoteCopySummaryAction
 //
-//  Created by Hiroshi Murayama on 2016/01/10.
+//  Created by opiopan on 2016/01/10.
 //  Copyright © 2016年 opiopan. All rights reserved.
 //
 

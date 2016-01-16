@@ -36,10 +36,10 @@
 		7B6D6A381C369BA90060212A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A311C369BA90060212A /* ImageMetadata.mm */; };
 		7B6D6A391C369BA90060212A /* ImageMetadataKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A321C369BA90060212A /* ImageMetadataKV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B6D6A3A1C369BA90060212A /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A331C369BA90060212A /* ImageMetadataKV.m */; };
-		7B6D6A3D1C369BE20060212A /* PortableImageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B6D6A3E1C369BE20060212A /* PortableImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */; };
 		7B6D6A3F1C369C560060212A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA52ECC1BCB445E00D69AE9 /* ImageIO.framework */; };
-		7B6D6A451C36A66B0060212A /* DVremoteCommonLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6F23581C52564F00E7B0A8 /* PortableImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F23561C52564400E7B0A8 /* PortableImageMetadata.mm */; };
+		7B6F235A1C5256E700E7B0A8 /* DVremoteCommonLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6F235C1C52570400E7B0A8 /* PortableImageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6F235B1C5256FB00E7B0A8 /* PortableImageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B716B3F1C375F64002046B9 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B716B3E1C375F64002046B9 /* ActionViewController.swift */; };
 		7B716B421C375F64002046B9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B716B401C375F64002046B9 /* MainInterface.storyboard */; };
 		7B716B461C375F64002046B9 /* DVremoteExifAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -84,6 +84,11 @@
 		7BE36AA91C4203D200501159 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BE36AAB1C4203D200501159 /* InfoPlist.strings */; };
 		7BE36AAC1C42067400501159 /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
 		7BE36AAD1C42067400501159 /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
+		7BE36AB51C42979D00501159 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36AB41C42979D00501159 /* ActionRequestHandler.swift */; };
+		7BE36AC01C4298BE00501159 /* DVremoteCommonLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */; };
+		7BE36AC11C4298BE00501159 /* DVremoteCommonUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */; };
+		7BE36AC31C4298D200501159 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE36AC21C4298D200501159 /* Images.xcassets */; };
+		7BE36AC61C429A1F00501159 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BE36AC81C429A1F00501159 /* InfoPlist.strings */; };
 		7BEDC61D1C3A30D000B47C31 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */; };
 		7BEDC6211C3A527B00B47C31 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */; };
 		7BEDC6231C3A65AE00B47C31 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */; };
@@ -187,11 +192,11 @@
 		7B6C06A11BB68D30004902D3 /* NodeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeItemCell.swift; sourceTree = "<group>"; };
 		7B6D69A71C2ECD520060212A /* MapURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapURL.swift; sourceTree = "<group>"; };
 		7B6D6A071C3653C10060212A /* DVremoteCommonUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DVremoteCommonUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVremoteCommonUI.h; sourceTree = "<group>"; };
-		7B6D6A0B1C3653C10060212A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifViewControllerBase.swift; sourceTree = "<group>"; };
-		7B6D6A151C3654440060212A /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorImageCell.swift; sourceTree = "<group>"; };
-		7B6D6A161C3654440060212A /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelArrangableCell.swift; sourceTree = "<group>"; };
+		7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DVremoteCommonUI.h; path = ../DigViewerRemote/Common/DVremoteCommonUI/DVremoteCommonUI.h; sourceTree = "<group>"; };
+		7B6D6A0B1C3653C10060212A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../DigViewerRemote/Common/DVremoteCommonUI/Info.plist; sourceTree = "<group>"; };
+		7B6D6A141C3654440060212A /* ExifViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExifViewControllerBase.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/ExifViewControllerBase.swift; sourceTree = "<group>"; };
+		7B6D6A151C3654440060212A /* InspectorImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InspectorImageCell.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/InspectorImageCell.swift; sourceTree = "<group>"; };
+		7B6D6A161C3654440060212A /* LabelArrangableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabelArrangableCell.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/LabelArrangableCell.swift; sourceTree = "<group>"; };
 		7B6D6A1F1C369B150060212A /* DVremoteCommonLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DVremoteCommonLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreFoundationHelper.h; path = DigViewer/CoreFoundationHelper.h; sourceTree = SOURCE_ROOT; };
 		7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteProtcol.h; path = DigViewer/DVRemoteProtcol.h; sourceTree = SOURCE_ROOT; };
@@ -200,16 +205,16 @@
 		7B6D6A311C369BA90060212A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ImageMetadata.mm; path = DigViewer/ImageMetadata.mm; sourceTree = SOURCE_ROOT; };
 		7B6D6A321C369BA90060212A /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadataKV.h; path = DigViewer/ImageMetadataKV.h; sourceTree = SOURCE_ROOT; };
 		7B6D6A331C369BA90060212A /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetadataKV.m; path = DigViewer/ImageMetadataKV.m; sourceTree = SOURCE_ROOT; };
-		7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortableImageMetadata.h; sourceTree = "<group>"; };
-		7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PortableImageMetadata.mm; sourceTree = "<group>"; };
-		7B6D6A401C369E480060212A /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVremoteCommonLib.h; sourceTree = "<group>"; };
-		7B6D6A441C36A66B0060212A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B6D6A401C369E480060212A /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = DigViewerRemote/Common/DVremoteCommonLib/module.modulemap; sourceTree = "<group>"; };
+		7B6D6A441C36A66B0060212A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Info.plist; path = DigViewerRemote/Common/DVremoteCommonLib/Info.plist; sourceTree = "<group>"; };
+		7B6F23561C52564400E7B0A8 /* PortableImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PortableImageMetadata.mm; path = DigViewerRemote/Common/DVremoteCommonLib/PortableImageMetadata.mm; sourceTree = SOURCE_ROOT; };
+		7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVremoteCommonLib.h; path = DigViewerRemote/Common/DVremoteCommonLib/DVremoteCommonLib.h; sourceTree = SOURCE_ROOT; };
+		7B6F235B1C5256FB00E7B0A8 /* PortableImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortableImageMetadata.h; path = DigViewerRemote/Common/DVremoteCommonLib/PortableImageMetadata.h; sourceTree = SOURCE_ROOT; };
 		7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteExifAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B716B3E1C375F64002046B9 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		7B716B3E1C375F64002046B9 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionViewController.swift; path = ../DigViewerRemote/Extensions/DVremoteExifAction/ActionViewController.swift; sourceTree = "<group>"; };
 		7B716B411C375F64002046B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		7B716B431C375F64002046B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B716B4C1C376036002046B9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7B716B431C375F64002046B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../DigViewerRemote/Extensions/DVremoteExifAction/Info.plist; sourceTree = "<group>"; };
+		7B716B4C1C376036002046B9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../DigViewerRemote/Extensions/DVremoteExifAction/Images.xcassets; sourceTree = "<group>"; };
 		7B716B511C37791C002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B716B561C39089D002046B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B716B581C3908B6002046B9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -252,30 +257,36 @@
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
 		7BE36A8A1C40A13200501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BE36A8D1C40B31300501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReverseGeocoder.swift; sourceTree = "<group>"; };
-		7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummarizedMeta.swift; sourceTree = "<group>"; };
+		7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReverseGeocoder.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/ReverseGeocoder.swift; sourceTree = "<group>"; };
+		7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummarizedMeta.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/SummarizedMeta.swift; sourceTree = "<group>"; };
 		7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteCopySummaryAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
-		7BE36A9D1C4201DA00501159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BE36AA41C42025B00501159 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionRequestHandler.swift; path = ../DigViewerRemote/Extensions/DVremoteCopySummaryAction/ActionRequestHandler.swift; sourceTree = "<group>"; };
+		7BE36A9D1C4201DA00501159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../DigViewerRemote/Extensions/DVremoteCopySummaryAction/Info.plist; sourceTree = "<group>"; };
+		7BE36AA41C42025B00501159 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../DigViewerRemote/Extensions/DVremoteCopySummaryAction/Images.xcassets; sourceTree = "<group>"; };
 		7BE36AAA1C4203D200501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
-		7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
-		7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
-		7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPopupViewController.swift; sourceTree = "<group>"; };
-		7BEDC6261C3A665F00B47C31 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
-		7BEDC6281C3BEB9900B47C31 /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlay.swift; sourceTree = "<group>"; };
-		7BEDC6291C3BEB9900B47C31 /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
-		7BEDC62C1C3BF62200B47C31 /* MapViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerBase.swift; sourceTree = "<group>"; };
+		7BE36AB21C42979D00501159 /* DVremoteOpenAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteOpenAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BE36AB41C42979D00501159 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionRequestHandler.swift; path = ../DigViewerRemote/Extensions/DVremoteOpenAction/ActionRequestHandler.swift; sourceTree = "<group>"; };
+		7BE36AB81C42979D00501159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../DigViewerRemote/Extensions/DVremoteOpenAction/Info.plist; sourceTree = "<group>"; };
+		7BE36AC21C4298D200501159 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../DigViewerRemote/Extensions/DVremoteOpenAction/Images.xcassets; sourceTree = "<group>"; };
+		7BE36AC71C429A1F00501159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BE36AC91C429BB700501159 /* DVremoteOpenAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = DVremoteOpenAction.entitlements; path = ../DigViewerRemote/Extensions/DVremoteOpenAction/DVremoteOpenAction.entitlements; sourceTree = "<group>"; };
+		7BEDC61C1C3A30D000B47C31 /* ConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigurationController.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/ConfigurationController.swift; sourceTree = "<group>"; };
+		7BEDC6201C3A527B00B47C31 /* MapGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapGeometry.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/MapGeometry.swift; sourceTree = "<group>"; };
+		7BEDC6221C3A65AE00B47C31 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/AnnotationView.swift; sourceTree = "<group>"; };
+		7BEDC6241C3A65F300B47C31 /* SummaryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryPopupViewController.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/SummaryPopupViewController.swift; sourceTree = "<group>"; };
+		7BEDC6261C3A665F00B47C31 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/PopupView.swift; sourceTree = "<group>"; };
+		7BEDC6281C3BEB9900B47C31 /* HeadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadingOverlay.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/HeadingOverlay.swift; sourceTree = "<group>"; };
+		7BEDC6291C3BEB9900B47C31 /* HeadingOverlayRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadingOverlayRenderer.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/HeadingOverlayRenderer.swift; sourceTree = "<group>"; };
+		7BEDC62C1C3BF62200B47C31 /* MapViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewControllerBase.swift; path = ../DigViewerRemote/Common/DVremoteCommonUI/MapViewControllerBase.swift; sourceTree = "<group>"; };
 		7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DVremoteLocationAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BEDC6461C3D5D7D00B47C31 /* LocationActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationActionViewController.swift; sourceTree = "<group>"; };
+		7BEDC6461C3D5D7D00B47C31 /* LocationActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationActionViewController.swift; path = ../DigViewerRemote/Extensions/DVremoteLocationAction/LocationActionViewController.swift; sourceTree = "<group>"; };
 		7BEDC6491C3D5D7D00B47C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		7BEDC64B1C3D5D7D00B47C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BEDC6521C3D5DB600B47C31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BEDC64B1C3D5D7D00B47C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../DigViewerRemote/Extensions/DVremoteLocationAction/Info.plist; sourceTree = "<group>"; };
+		7BEDC6521C3D5DB600B47C31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../DigViewerRemote/Extensions/DVremoteLocationAction/Images.xcassets; sourceTree = "<group>"; };
 		7BEDC6561C3D60DD00B47C31 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7BEDC65D1C3D617C00B47C31 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DVremoteLocationAction.entitlements; sourceTree = "<group>"; };
-		7BEDC6601C3D61E600B47C31 /* DVremoteExifAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DVremoteExifAction.entitlements; sourceTree = "<group>"; };
+		7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DVremoteLocationAction.entitlements; path = ../DigViewerRemote/Extensions/DVremoteLocationAction/DVremoteLocationAction.entitlements; sourceTree = "<group>"; };
+		7BEDC6601C3D61E600B47C31 /* DVremoteExifAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = DVremoteExifAction.entitlements; path = ../DigViewerRemote/Extensions/DVremoteExifAction/DVremoteExifAction.entitlements; sourceTree = "<group>"; };
 		7BEDC6621C40A0C300B47C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DigViewerRemote.entitlements; sourceTree = "<group>"; };
 		7BF05B6B1C2E3A4300A4A766 /* CustomActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
@@ -325,6 +336,15 @@
 			files = (
 				7BE36AAC1C42067400501159 /* DVremoteCommonLib.framework in Frameworks */,
 				7BE36AAD1C42067400501159 /* DVremoteCommonUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BE36AAF1C42979D00501159 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36AC01C4298BE00501159 /* DVremoteCommonLib.framework in Frameworks */,
+				7BE36AC11C4298BE00501159 /* DVremoteCommonUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,11 +424,11 @@
 		7B6D6A201C369B150060212A /* DVremoteCommonLib */ = {
 			isa = PBXGroup;
 			children = (
-				7B6D6A431C36A66B0060212A /* DVremoteCommonLib.h */,
+				7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */,
 				7B6D6A441C36A66B0060212A /* Info.plist */,
 				7B6D6A401C369E480060212A /* module.modulemap */,
-				7B6D6A3B1C369BE20060212A /* PortableImageMetadata.h */,
-				7B6D6A3C1C369BE20060212A /* PortableImageMetadata.mm */,
+				7B6F235B1C5256FB00E7B0A8 /* PortableImageMetadata.h */,
+				7B6F23561C52564400E7B0A8 /* PortableImageMetadata.mm */,
 				7B6D6A2C1C369B650060212A /* Shared with DigViewer */,
 			);
 			path = DVremoteCommonLib;
@@ -426,6 +446,26 @@
 				7B6D6A331C369BA90060212A /* ImageMetadataKV.m */,
 			);
 			name = "Shared with DigViewer";
+			sourceTree = "<group>";
+		};
+		7B6F23521C524AAA00E7B0A8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
+				7BEDC6451C3D5D7D00B47C31 /* DVremoteLocationAction */,
+				7BE36A981C4201DA00501159 /* DVremoteCopySummaryAction */,
+				7BE36AB31C42979D00501159 /* DVremoteOpenAction */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		7B6F23531C524AD200E7B0A8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
+				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		7B716B3D1C375F64002046B9 /* DVremoteExifAction */ = {
@@ -475,11 +515,8 @@
 			children = (
 				7BEDC6561C3D60DD00B47C31 /* MapKit.framework */,
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
-				7B716B3D1C375F64002046B9 /* DVremoteExifAction */,
-				7BEDC6451C3D5D7D00B47C31 /* DVremoteLocationAction */,
-				7BE36A981C4201DA00501159 /* DVremoteCopySummaryAction */,
-				7B6D6A201C369B150060212A /* DVremoteCommonLib */,
-				7B6D6A081C3653C10060212A /* DVremoteCommonUI */,
+				7B6F23521C524AAA00E7B0A8 /* Extensions */,
+				7B6F23531C524AD200E7B0A8 /* Common */,
 				7BBA59CA1B9DA59C0025B902 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -493,6 +530,7 @@
 				7B716B3C1C375F64002046B9 /* DVremoteExifAction.appex */,
 				7BEDC6441C3D5D7C00B47C31 /* DVremoteLocationAction.appex */,
 				7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */,
+				7BE36AB21C42979D00501159 /* DVremoteOpenAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,6 +619,18 @@
 			path = DVremoteCopySummaryAction;
 			sourceTree = "<group>";
 		};
+		7BE36AB31C42979D00501159 /* DVremoteOpenAction */ = {
+			isa = PBXGroup;
+			children = (
+				7BE36AC91C429BB700501159 /* DVremoteOpenAction.entitlements */,
+				7BE36AB41C42979D00501159 /* ActionRequestHandler.swift */,
+				7BE36AB81C42979D00501159 /* Info.plist */,
+				7BE36AC81C429A1F00501159 /* InfoPlist.strings */,
+				7BE36AC21C4298D200501159 /* Images.xcassets */,
+			);
+			path = DVremoteOpenAction;
+			sourceTree = "<group>";
+		};
 		7BEDC61A1C3A085300B47C31 /* Exif View */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,11 +691,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B6D6A451C36A66B0060212A /* DVremoteCommonLib.h in Headers */,
 				7B6D6A391C369BA90060212A /* ImageMetadataKV.h in Headers */,
+				7B6F235C1C52570400E7B0A8 /* PortableImageMetadata.h in Headers */,
+				7B6F235A1C5256E700E7B0A8 /* DVremoteCommonLib.h in Headers */,
 				7B6D6A371C369BA90060212A /* ImageMetadata.h in Headers */,
 				7B6D6A351C369BA90060212A /* DVRemoteProtcol.h in Headers */,
-				7B6D6A3D1C369BE20060212A /* PortableImageMetadata.h in Headers */,
 				7B6D6A341C369BA90060212A /* CoreFoundationHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +800,24 @@
 			productReference = 7BE36A971C4201DA00501159 /* DVremoteCopySummaryAction.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		7BE36AB11C42979D00501159 /* DVremoteOpenAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BE36ABC1C42979D00501159 /* Build configuration list for PBXNativeTarget "DVremoteOpenAction" */;
+			buildPhases = (
+				7BE36AAE1C42979D00501159 /* Sources */,
+				7BE36AAF1C42979D00501159 /* Frameworks */,
+				7BE36AB01C42979D00501159 /* Resources */,
+				7BE36ABF1C4297C100501159 /* Run Script For Embedding Version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DVremoteOpenAction;
+			productName = DVremoteOpenAction;
+			productReference = 7BE36AB21C42979D00501159 /* DVremoteOpenAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BEDC64F1C3D5D7D00B47C31 /* Build configuration list for PBXNativeTarget "DVremoteLocationAction" */;
@@ -812,6 +880,15 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
 					};
+					7BE36AB11C42979D00501159 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = G3Y32477L5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					7BEDC6431C3D5D7C00B47C31 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
@@ -844,6 +921,7 @@
 				7B716B3B1C375F64002046B9 /* DVremoteExifAction */,
 				7BEDC6431C3D5D7C00B47C31 /* DVremoteLocationAction */,
 				7BE36A961C4201DA00501159 /* DVremoteCopySummaryAction */,
+				7BE36AB11C42979D00501159 /* DVremoteOpenAction */,
 				7B6D6A1E1C369B150060212A /* DVremoteCommonLib */,
 				7B6D6A061C3653C10060212A /* DVremoteCommonUI */,
 			);
@@ -896,6 +974,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BE36AB01C42979D00501159 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36AC61C429A1F00501159 /* InfoPlist.strings in Resources */,
+				7BE36AC31C4298D200501159 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BEDC6421C3D5D7C00B47C31 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -926,6 +1013,20 @@
 			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
 		};
 		7BE36AA61C42035A00501159 /* Run Script For Embedding Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script For Embedding Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\nsed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\negrep '^RV[0-9\\]' | head -1 | sed 's/^RV//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\nawk -v tag=RV\"$RAWVERSION\" \\\n'BEGIN{subv=0}\n{for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=2015\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\nBUILD=\"$BUILD+\"\nBUNDLEVERSION=\"0.0\"\nSUBVERSION=`expr $SUBVERSION + 1`\nSUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\nBUNDLEVERSION=\"0.0\"\nSUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\nSUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\nSUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\nPERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\nPERIOD=\"$BEGIN, $END\"\nelse\nPERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :NSHumanReadableCopyright string '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+		};
+		7BE36ABF1C4297C100501159 /* Run Script For Embedding Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -995,7 +1096,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B6D6A3A1C369BA90060212A /* ImageMetadataKV.m in Sources */,
-				7B6D6A3E1C369BE20060212A /* PortableImageMetadata.mm in Sources */,
+				7B6F23581C52564F00E7B0A8 /* PortableImageMetadata.mm in Sources */,
 				7B6D6A381C369BA90060212A /* ImageMetadata.mm in Sources */,
 				7B6D6A361C369BA90060212A /* DVRemoteProtcol.m in Sources */,
 			);
@@ -1059,6 +1160,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BE36AAE1C42979D00501159 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE36AB51C42979D00501159 /* ActionRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BEDC6401C3D5D7C00B47C31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1104,6 +1213,7 @@
 				7B716B411C375F64002046B9 /* Base */,
 			);
 			name = MainInterface.storyboard;
+			path = ../DigViewerRemote/Extensions/DVremoteExifAction;
 			sourceTree = "<group>";
 		};
 		7B716B521C37791C002046B9 /* InfoPlist.strings */ = {
@@ -1112,6 +1222,7 @@
 				7B716B511C37791C002046B9 /* ja */,
 			);
 			name = InfoPlist.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteExifAction;
 			sourceTree = "<group>";
 		};
 		7B716B551C39089D002046B9 /* Localizable.strings */ = {
@@ -1121,6 +1232,7 @@
 				7B716B581C3908B6002046B9 /* ja */,
 			);
 			name = Localizable.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteExifAction;
 			sourceTree = "<group>";
 		};
 		7B7356D91BB971C500C1DB19 /* Localizable.strings */ = {
@@ -1155,6 +1267,16 @@
 				7BE36AAA1C4203D200501159 /* ja */,
 			);
 			name = InfoPlist.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteCopySummaryAction;
+			sourceTree = "<group>";
+		};
+		7BE36AC81C429A1F00501159 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE36AC71C429A1F00501159 /* ja */,
+			);
+			name = InfoPlist.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteOpenAction;
 			sourceTree = "<group>";
 		};
 		7BEDC6481C3D5D7D00B47C31 /* MainInterface.storyboard */ = {
@@ -1164,6 +1286,7 @@
 				7BE36A8D1C40B31300501159 /* ja */,
 			);
 			name = MainInterface.storyboard;
+			path = ../DigViewerRemote/Extensions/DVremoteLocationAction;
 			sourceTree = "<group>";
 		};
 		7BEDC65E1C3D617C00B47C31 /* InfoPlist.strings */ = {
@@ -1172,6 +1295,7 @@
 				7BEDC65D1C3D617C00B47C31 /* ja */,
 			);
 			name = InfoPlist.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteLocationAction;
 			sourceTree = "<group>";
 		};
 		7BEDC6611C40A0C300B47C31 /* Localizable.strings */ = {
@@ -1181,6 +1305,7 @@
 				7BE36A8A1C40A13200501159 /* ja */,
 			);
 			name = Localizable.strings;
+			path = ../DigViewerRemote/Extensions/DVremoteLocationAction;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1199,7 +1324,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DVremoteCommonUI/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Common/DVremoteCommonUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1224,7 +1349,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DVremoteCommonUI/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Common/DVremoteCommonUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1248,11 +1373,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DVremoteCommonLib/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Common/DVremoteCommonLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				MODULEMAP_FILE = DigViewerRemote/Common/DVremoteCommonLib/module.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1272,11 +1397,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DVremoteCommonLib/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Common/DVremoteCommonLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				MODULEMAP_FILE = DigViewerRemote/Common/DVremoteCommonLib/module.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1289,11 +1414,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DVremoteExifAction/DVremoteExifAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/Extensions/DVremoteExifAction/DVremoteExifAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = DVremoteExifAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteExifAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
@@ -1307,10 +1432,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DVremoteExifAction/DVremoteExifAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/Extensions/DVremoteExifAction/DVremoteExifAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = DVremoteExifAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteExifAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteExifAction;
@@ -1445,7 +1570,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = DVremoteCopySummaryAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteCopySummaryAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
@@ -1460,10 +1585,43 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = DVremoteCopySummaryAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteCopySummaryAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7BE36ABD1C42979D00501159 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteOpenAction/DVremoteOpenAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteOpenAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteOpenAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7BE36ABE1C42979D00501159 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteOpenAction/DVremoteOpenAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteOpenAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteOpenAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1473,11 +1631,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DVremoteLocationAction/DVremoteLocationAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/Extensions/DVremoteLocationAction/DVremoteLocationAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = DVremoteLocationAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteLocationAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteLocationAction;
@@ -1491,10 +1649,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DVremoteLocationAction/DVremoteLocationAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DigViewerRemote/Extensions/DVremoteLocationAction/DVremoteLocationAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = DVremoteLocationAction/Info.plist;
+				INFOPLIST_FILE = DigViewerRemote/Extensions/DVremoteLocationAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteLocationAction;
@@ -1559,6 +1717,16 @@
 				7BE36AA31C4201DA00501159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BE36ABC1C42979D00501159 /* Build configuration list for PBXNativeTarget "DVremoteOpenAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BE36ABD1C42979D00501159 /* Debug */,
+				7BE36ABE1C42979D00501159 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BEDC64F1C3D5D7D00B47C31 /* Build configuration list for PBXNativeTarget "DVremoteLocationAction" */ = {
 			isa = XCConfigurationList;
