@@ -26,6 +26,9 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
     
     override func viewWillAppear(animated: Bool) {
         DVRemoteClient.sharedClient().addClientDelegate(self)
+        if DVRemoteClient.sharedClient().namespaceCounter != namespaceCounter {
+            self.dvrClientChangeNamespace(DVRemoteClient.sharedClient())
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -44,6 +47,7 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
     // MARK: - カレントノードに合わせたビュー階層構築
     //-----------------------------------------------------------------------------------------
     private var document : String? = nil;
+    private var namespaceCounter = -1;
     
     private func arrangeSubviewsInAccordanceWithCurrentNode(animated : Bool){
         if let meta = DVRemoteClient.sharedClient().meta {
@@ -52,8 +56,9 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             var views: [UIViewController] = []
             var currentPath: [String] = []
             let isLocal = DVRemoteClient.sharedClient().isConnectedToLocal
+            let newNamespaceCounter = DVRemoteClient.sharedClient().namespaceCounter
             
-            if document != nil && document == newDocument {
+            if document != nil && document == newDocument && newNamespaceCounter == namespaceCounter {
                 for var i = 0; i < path.count - 1; i++ {
                     if i < viewControllers.count && viewControllers[i].navigationItem.title == path[i] {
                         currentPath.append(path[i])
@@ -66,6 +71,8 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             if (views.count > 0){
                 (views.last as? ItemListViewController)?.selectedNode = path[views.count]
             }
+            
+            namespaceCounter = newNamespaceCounter
             
             for var i = views.count; i < path.count - 1; i++ {
                 currentPath.append(path[i])
@@ -101,7 +108,7 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             setViewControllers(views, animated: animated)
         }else{
             document = nil
-            viewControllers = []
+            arrangeSubviewsInAccordanceWithCurrentNode(false)
         }
     }
     
@@ -134,6 +141,10 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
         if needRearrange{
             arrangeSubviewsInAccordanceWithCurrentNode(true)
         }
+    }
+    
+    func dvrClientChangeNamespace(client: DVRemoteClient!) {
+        arrangeSubviewsInAccordanceWithCurrentNode(false)
     }
 
     //-----------------------------------------------------------------------------------------

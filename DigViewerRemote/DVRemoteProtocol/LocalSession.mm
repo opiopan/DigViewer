@@ -141,6 +141,38 @@ static const int NAME_CLIP_LENGTH = 13;
 
 - (void)completeConnect
 {
+    // 名前空間読み込み
+    [self loadNamespace];
+    
+    // カレントノードを設定
+    [self resetCurrentNode];
+    
+    // 画像ライブラリの変更を監視
+    [PHPhotoLibrary.sharedPhotoLibrary registerChangeObserver:self];
+    
+    // 接続完了を返却
+    if (_delegate){
+        [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_ACCEPTED withData:nil];
+        ImageMetadata* meta = [ImageMetadata new];
+        NSArray* summary = meta.summary;
+        NSArray* gpsInfo = meta.gpsInfoStrings;
+        NSDictionary* templateMeta = @{DVRCNMETA_SUMMARY:summary, DVRCNMETA_GPS_SUMMARY:gpsInfo};
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:templateMeta];
+        [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_TEMPLATE_META withData:data];
+    }
+    
+    if (_sharedImage || _currentAssets.count > 0){
+        PHAsset* asset = _sharedImage ? nil : _currentAssets[_currentIndexInAssets];
+        LocalSession* __weak weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+                        namespaceChanged:NO entityChanged:YES];
+        });
+    }
+}
+
+- (void)loadNamespace
+{
     _root = [LSNode new];
     _root.name = _topName;
     _root.nodeID = @[_topName];
@@ -172,7 +204,7 @@ static const int NAME_CLIP_LENGTH = 13;
             [parent.children addObjectsFromArray:[currentNodes sortedArrayUsingComparator:^(LSNode* obj1, LSNode* obj2){
                 return [obj1.name compare:obj2.name options:NSCaseInsensitiveSearch | NSNumericSearch];
             }]];
-             
+            
         }else{
             [parent.children addObjectsFromArray:currentNodes];
         }
@@ -199,10 +231,16 @@ static const int NAME_CLIP_LENGTH = 13;
                 child.collection = collection;
                 [node.children addObject:child];
             }
+            NSArray* sortedChildren = [node.children sortedArrayUsingComparator:^(LSNode* obj1, LSNode* obj2){
+                return [obj1.name compare:obj2.name];
+            }];
+            node.children = [NSMutableArray arrayWithArray:sortedChildren];
         }
     }
+}
 
-    // カレントノードを設定
+- (void)resetCurrentNode
+{
     if (_sharedImage){
         [self createSharedImageNode];
         _currentNode = _root.children.lastObject;
@@ -214,25 +252,6 @@ static const int NAME_CLIP_LENGTH = 13;
         _currentIndexInAssets = _currentAssets.count > 0 ? _currentAssets.count - 1 : 0;
     }
     _currentCollectionPath = _currentNode.nodeID;
-    
-    // 接続完了を返却
-    if (_delegate){
-        [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_ACCEPTED withData:nil];
-        ImageMetadata* meta = [ImageMetadata new];
-        NSArray* summary = meta.summary;
-        NSArray* gpsInfo = meta.gpsInfoStrings;
-        NSDictionary* templateMeta = @{DVRCNMETA_SUMMARY:summary, DVRCNMETA_GPS_SUMMARY:gpsInfo};
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:templateMeta];
-        [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_TEMPLATE_META withData:data];
-    }
-    
-    if (_sharedImage || _currentAssets.count > 0){
-        PHAsset* asset = _sharedImage ? nil : _currentAssets[_currentIndexInAssets];
-        LocalSession* __weak weakSelf = self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
-        });
-    }
 }
 
 - (void)notifyClosed
@@ -240,8 +259,77 @@ static const int NAME_CLIP_LENGTH = 13;
     if (_delegate){
         [_delegate drvSession:nil shouldBeClosedByCause:nil];
     }
+    [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
 }
 
+//-----------------------------------------------------------------------------------------
+// 画像ライブラリの変更通知
+//-----------------------------------------------------------------------------------------
+- (void)photoLibraryDidChange:(PHChange *)changeInstance
+{
+    LSNode* currentNode = _currentNode;
+    PHFetchResult* currentAssets = _currentAssets;
+    NSUInteger currentIndexInAssets = _currentIndexInAssets;
+    
+    BOOL shouldBeReset = NO;
+    if (_currentAssets){
+        long offset = 0;
+        PHFetchResultChangeDetails* detail = [changeInstance changeDetailsForFetchResult:currentAssets];
+        if (detail && detail.removedIndexes){
+            for (NSUInteger index = detail.removedIndexes.firstIndex;
+                 index != NSNotFound;
+                 index = [detail.removedIndexes indexGreaterThanIndex:index]){
+                if (index < currentIndexInAssets){
+                    offset--;
+                }else if (index == currentIndexInAssets){
+                    shouldBeReset = YES;
+                    break;
+                }else{
+                    break;
+                }
+            }
+        }
+        if (detail && detail.insertedIndexes && !shouldBeReset){
+            for (NSUInteger index = detail.insertedIndexes.firstIndex;
+                 index != NSNotFound;
+                 index = [detail.insertedIndexes indexGreaterThanIndex:index]){
+                if (index < currentIndexInAssets){
+                    offset++;
+                }else{
+                    break;
+                }
+            }
+        }
+        currentIndexInAssets += offset;
+    }
+    
+    [self loadNamespace];
+
+    if (!shouldBeReset){
+        _currentNode = [self findNodeWithNodeID:currentNode.nodeID forParent:NO];
+        if (_currentNode){
+            _currentAssets = [PHAsset fetchAssetsInAssetCollection:_currentNode.collection options:_assetsFetchOptions];
+            _currentIndexInAssets = currentIndexInAssets;
+        }else{
+            shouldBeReset = YES;
+        }
+    }
+    
+    if (shouldBeReset){
+        [self resetCurrentNode];
+    }
+    
+    if (_delegate){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (_sharedImage || _currentAssets.count > 0){
+                PHAsset* asset = _currentAssets ? _currentAssets[_currentIndexInAssets] : nil;
+                LocalSession* __weak weakSelf = self;
+                [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+                            namespaceChanged:YES entityChanged:shouldBeReset];
+            }
+        });
+    }
+}
 
 //-----------------------------------------------------------------------------------------
 // 地図表示用ジオメトリ情報算出
@@ -294,22 +382,26 @@ static const CGFloat SPAN_IN_METER = 450.0;
 // メタ送信
 //-----------------------------------------------------------------------------------------
 - (void)notifyMetaForAsset:(PHAsset*)asset indexInParent:(NSUInteger)indexInParent
+          namespaceChanged:(BOOL)namespaceChanged entityChanged:(BOOL)entityChanged
 {
     LocalSession* __weak weakSelf = self;
     if (asset){
         [_imageManager requestImageDataForAsset:asset options:nil resultHandler:
          ^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-             [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData];
+             [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData
+                         namespaceChanged:namespaceChanged entityChanged:entityChanged];
          }];
     }else{
         NSData* imageData = [NSData dataWithContentsOfURL:_sharedImage];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData];
+            [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData
+                        namespaceChanged:namespaceChanged entityChanged:entityChanged];
         });
     }
 }
 
 - (void)notifyMetaForAsset:(PHAsset*)asset indexInParent:(NSUInteger)indexInParent imageData:(NSData*)imageData
+          namespaceChanged:(BOOL)namespaceChanged entityChanged:(BOOL)entityChanged
 {
     NSString* name;
     NSString* type;
@@ -328,6 +420,8 @@ static const CGFloat SPAN_IN_METER = 450.0;
     meta.documentName = _documentName;
     meta.path = path;
     meta.indexInParent = indexInParent;
+    meta.namespaceChanged = namespaceChanged;
+    meta.entityChanged = entityChanged;
     
     NSData* sdata = [NSKeyedArchiver archivedDataWithRootObject:meta.portableData];
     [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_META withData:sdata];
@@ -358,15 +452,10 @@ static const CGFloat THUMBNAIL_SIZE = 100;
             image = [UIImage imageWithContentsOfFile:_sharedImage.path];
         }else if (target.collection){
             PHAssetCollection* collection = target.collection;
-            PHFetchOptions* options = nil;
-            if (target.prevailBottom){
-                options = [PHFetchOptions new];
-                options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
-                options.fetchLimit = 1;
-            }
-            PHFetchResult* repAssets = [PHAsset fetchAssetsInAssetCollection:collection options:options];
+            PHFetchResult* repAssets = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
             if (repAssets.count > 0){
-                image = [self.class thumbnailForAsset:repAssets[repAssets.count / 2] withSize:imageSize];
+                unsigned long index = target.prevailBottom ? repAssets.count - 1 : repAssets.count / 2;
+                image = [self.class thumbnailForAsset:repAssets[index] withSize:imageSize];
             }
         }else{
             if (target.children.count > 0){
@@ -413,7 +502,8 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     if (_currentAssets && _currentIndexInAssets + 1 < _currentAssets.count){
         _currentIndexInAssets++;
         PHAsset* asset = _currentAssets[_currentIndexInAssets];
-        [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
+        [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+                namespaceChanged:NO entityChanged:YES];
     }
 }
 
@@ -422,7 +512,8 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     if (_currentAssets && _currentIndexInAssets > 0){
         _currentIndexInAssets--;
         PHAsset* asset = _currentAssets[_currentIndexInAssets];
-        [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
+        [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+                namespaceChanged:NO entityChanged:YES];
     }
 }
 
@@ -442,13 +533,15 @@ static const CGFloat THUMBNAIL_SIZE = 100;
     }
 
     if (_currentNode.enableSharedImage){
-        [self notifyMetaForAsset:nil indexInParent:_currentIndexInAssets];
+        [self notifyMetaForAsset:nil indexInParent:_currentIndexInAssets
+                namespaceChanged:NO entityChanged:YES];
     }else{
         for (int i = 0; i < _currentAssets.count; i++){
             PHAsset* asset = _currentAssets[i];
             if ([assetID isEqualToString:asset.localIdentifier]){
                 _currentIndexInAssets = i;
-                [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets];
+                [self notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+                        namespaceChanged:NO entityChanged:YES];
                 break;
             }
         }

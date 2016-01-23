@@ -61,3 +61,5 @@ NSString* DVRCNMETA_DEVICE_ID = @"deviceid";
 NSString* DVRCNMETA_DEVICE_NAME = @"devicename";
 NSString* DVRCNMETA_DEVICE_TYPE = @"devicetype";
 NSString* DVRCNMETA_DEVICE_CODE = @"devicecode";
+NSString* DVRCNMETA_NAMESPACE_CHANGED = @"namespacechanged";
+NSString* DVRCNMETA_ENTITY_CHANGED= @"entitychanged";

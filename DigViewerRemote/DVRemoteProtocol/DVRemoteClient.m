@@ -93,8 +93,7 @@
         _reconectCount = 0;
         _runLoop = [NSRunLoop currentRunLoop];
         _runningWatchDog = NO;
-        _thumbnailCache = [LRUCache cacheWithSize:500];
-        _nodeListCache = [LRUCache cacheWithSize:10];
+        [self initCache];
     }
     return self;
 }
@@ -103,6 +102,12 @@
 {
     [_delegates removeAllObjects];
     [self disconnect];
+}
+
+- (void)initCache
+{
+    _thumbnailCache = [LRUCache cacheWithSize:500];
+    _nodeListCache = [LRUCache cacheWithSize:10];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -179,8 +184,7 @@
             _meta = nil;
             _fullImage = nil;
             _nodeListWrap = nil;
-            _thumbnailCache = [LRUCache cacheWithSize:500];
-            _nodeListCache = [LRUCache cacheWithSize:10];
+            [self initCache];
         }
         _lastSessionName = serviceName;
     }
@@ -277,6 +281,8 @@
 
 - (void)disconnect
 {
+    _namespaceCounter++;
+    
     if (_serviceForSession){
         [_serviceForSession stop];
     }
@@ -523,10 +529,24 @@
         _thumbnail = [self thumbnailForID:[_meta valueForKey:DVRCNMETA_ID]
                                inDocument:[_meta valueForKey:DVRCNMETA_DOCUMENT]
                            downloadIfNeed:YES];
-        if (_delegates.count){
+        NSNumber* namespaceChanged = [_meta valueForKey:DVRCNMETA_NAMESPACE_CHANGED];
+        NSNumber* entityChanged = [_meta valueForKey:DVRCNMETA_ENTITY_CHANGED];
+        
+        if (namespaceChanged && namespaceChanged.boolValue){
+            [self initCache];
+            _namespaceCounter++;
             for (id <DVRemoteClientDelegate> delegate in _delegates){
-                if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
-                    [delegate dvrClient:self didRecieveMeta:_meta];
+                if ([delegate respondsToSelector:@selector(dvrClientChangeNamespace:)]){
+                    [delegate dvrClientChangeNamespace:self];
+                }
+            }
+        }
+        if (_delegates.count){
+            if (!entityChanged || entityChanged.boolValue){
+                for (id <DVRemoteClientDelegate> delegate in _delegates){
+                    if ([delegate respondsToSelector:@selector(dvrClient:didRecieveMeta:)]){
+                        [delegate dvrClient:self didRecieveMeta:_meta];
+                    }
                 }
             }
         }

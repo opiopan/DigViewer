@@ -24,6 +24,8 @@
         _imageData = imageData;
         _name = name;
         _type = type;
+        _namespaceChanged = NO;
+        _entityChanged = YES;
     }
     return self;
 }
@@ -113,6 +115,8 @@ static const CGFloat SPAN_IN_METER = 450.0;
         
     }
     [data setValue:meta.summary forKey:DVRCNMETA_SUMMARY];
+    [data setValue:@(_namespaceChanged) forKey:DVRCNMETA_NAMESPACE_CHANGED];
+    [data setValue:@(_entityChanged) forKey:DVRCNMETA_ENTITY_CHANGED];
     
     ImageMetadata* smeta = [[ImageMetadata alloc] initWithImage:imageSource name:_name typeName:_type];
     NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];

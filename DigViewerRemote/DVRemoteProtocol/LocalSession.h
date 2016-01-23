@@ -10,7 +10,7 @@
 #import <Photos/Photos.h>
 #import "DVRemoteSession.h"
 
-@interface LocalSession : NSObject
+@interface LocalSession : NSObject <PHPhotoLibraryChangeObserver>
 
 @property (weak) id <DVRemoteSessionDelegate> delegate;
 

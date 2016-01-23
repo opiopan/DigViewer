@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 @property (readonly) UIImage* thumbnail;
 @property (readonly) NSInteger imageRotation;
 @property (readonly) BOOL isConnectedToLocal;
+@property (readonly) NSInteger namespaceCounter;
 
 @property (weak, nonatomic) id<DVRemoteClientDelegate> tmpDelegate;
 
@@ -87,4 +88,6 @@ typedef NS_ENUM(NSUInteger, DVRClientState){
 - (void)dvrClient:(DVRemoteClient*)client didRecieveServerInfo:(NSDictionary*)info;
 
 - (void)dvrClient:(DVRemoteClient*)client didRecievePairingKey:(NSString*)key forServer:(NSNetService*)service;
+
+- (void)dvrClientChangeNamespace:(DVRemoteClient*)client;
 @end

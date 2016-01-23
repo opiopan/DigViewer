@@ -16,6 +16,8 @@
 @property NSString* documentName;
 @property NSArray* path;
 @property NSInteger indexInParent;
+@property BOOL namespaceChanged;
+@property BOOL entityChanged;
 
 - (id) initWithImage:(NSData*)imageData name:(NSString*)name type:(NSString*)type;
 - (NSDictionary*) portableData;
