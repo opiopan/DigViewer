@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DigViewer.xcodeproj">
+      location = "group:OSX/DigViewer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:DigViewerRemote.xcodeproj">
+      location = "group:iOS/DigViewerRemote.xcodeproj">
    </FileRef>
 </Workspace>
