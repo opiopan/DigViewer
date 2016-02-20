@@ -7,14 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B0197B41C688D2400DF1CF1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0197B21C688D2400DF1CF1 /* MainInterface.storyboard */; };
-		7B0197B71C688DF300DF1CF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B0197B51C688DF300DF1CF1 /* InfoPlist.strings */; };
 		7B1F9AAE1BFF7155003E08F3 /* ScrollableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F9AAD1BFF7155003E08F3 /* ScrollableContentView.swift */; };
 		7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E861BF22581001EB2B5 /* SimpleFooterViewController.swift */; };
 		7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */; };
 		7B243E8B1BF8100E001EB2B5 /* DataSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */; };
 		7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */; };
 		7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */; };
+		7B4AF4491C7032A90051FCE2 /* Lens.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA19C1C6A0CEA009E0B1F /* Lens.m */; };
+		7B4AF44A1C7032B70051FCE2 /* Lens.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCAA19B1C6A0CEA009E0B1F /* Lens.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF44B1C7032CB0051FCE2 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCAA1971C6A0CEA009E0B1F /* Camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF44C1C7032D10051FCE2 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1981C6A0CEA009E0B1F /* Camera.m */; };
+		7B4AF44D1C7032DD0051FCE2 /* Condition.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCAA1991C6A0CEA009E0B1F /* Condition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF44E1C7032E70051FCE2 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA19A1C6A0CEA009E0B1F /* Condition.m */; };
+		7B4AF44F1C7032EA0051FCE2 /* LensLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCAA19D1C6A0CEA009E0B1F /* LensLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF4501C7032F30051FCE2 /* LensLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA19E1C6A0CEA009E0B1F /* LensLibrary.m */; };
+		7B4AF4521C70383E0051FCE2 /* DVremoteConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */; };
+		7B4AF4541C7039FF0051FCE2 /* DVremoteConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4AF4531C7039940051FCE2 /* DVremoteConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF4551C7044D00051FCE2 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */; };
+		7B4AF4561C7044D70051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */; };
+		7B4AF4571C7044DA0051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */; };
+		7B4AF4581C7044E20051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
+		7B4AF4591C7044EA0051FCE2 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */; };
+		7B4AF45A1C7044EF0051FCE2 /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */; };
+		7B4AF45B1C7044F20051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */; };
+		7B4AF45C1C7044F30051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */; };
+		7B4AF45D1C7044F70051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */; };
+		7B4AF45F1C7044F90051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */; };
+		7B4AF4601C7044FD0051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
+		7B4AF4611C7044FE0051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
+		7B4AF4621C7045060051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B4AF4631C7045070051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B4AF4641C7045080051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B4AF4651C7045090051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7B4AF4661C780E280051FCE2 /* DVremoteCommonUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6D6A091C3653C10060212A /* DVremoteCommonUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF4671C7861CC0051FCE2 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0197B21C688D2400DF1CF1 /* MainInterface.storyboard */; };
+		7B4AF4681C7861DE0051FCE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B0197B51C688DF300DF1CF1 /* InfoPlist.strings */; };
+		7B4AF4691C7862190051FCE2 /* DVremoteExifAction.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC6601C3D61E600B47C31 /* DVremoteExifAction.entitlements */; };
+		7B4AF46A1C78651B0051FCE2 /* DVRemoteBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF46B1C7865210051FCE2 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
+		7B4AF46C1C78652A0051FCE2 /* DVRemoteSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4AF46D1C78652D0051FCE2 /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 		7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52AA431BB0DE700068A842 /* InspectorTableView.swift */; };
 		7B63A8B91BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */; };
 		7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */; };
@@ -54,7 +86,6 @@
 		7B88FB1E1C00CE9600783E17 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1D1C00CE9600783E17 /* AboutViewController.swift */; };
 		7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB1F1C02D55200783E17 /* AssetListViewController.swift */; };
 		7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B88FB211C02D58500783E17 /* AssetCell.swift */; };
-		7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */; };
 		7B9098371BA4634C00B03FD8 /* ExifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098361BA4634C00B03FD8 /* ExifViewController.swift */; };
 		7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBC1BC92A7100D69AE9 /* MessageView.swift */; };
 		7BA52EC21BCA285200D69AE9 /* DVRemoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */; };
@@ -73,8 +104,12 @@
 		7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D21B9DA59C0025B902 /* Main.storyboard */; };
 		7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D51B9DA59C0025B902 /* Images.xcassets */; };
 		7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA59D71B9DA59C0025B902 /* LaunchScreen.xib */; };
+		7BCAA18C1C6A0C13009E0B1F /* LensLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */; };
+		7BCAA1931C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */; };
+		7BCAA1941C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */; };
+		7BCAA1951C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */; };
+		7BCAA1961C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */; };
 		7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */; };
-		7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */; };
 		7BE36A8B1C40A13200501159 /* DVremoteLocationAction.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 7BEDC65F1C3D61A800B47C31 /* DVremoteLocationAction.entitlements */; };
 		7BE36A901C40FDC100501159 /* ReverseGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36A8F1C40FDC100501159 /* ReverseGeocoder.swift */; };
 		7BE36A921C41EDAE00501159 /* SummarizedMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE36A911C41EDAE00501159 /* SummarizedMeta.swift */; };
@@ -185,6 +220,8 @@
 		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
 		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVremoteConstants.m; sourceTree = "<group>"; };
+		7B4AF4531C7039940051FCE2 /* DVremoteConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVremoteConstants.h; sourceTree = "<group>"; };
 		7B52AA431BB0DE700068A842 /* InspectorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorTableView.swift; sourceTree = "<group>"; };
 		7B63A8B81BDBBE01004D95E3 /* MapDetailPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailPreferencesViewController.swift; sourceTree = "<group>"; };
 		7B63A8BA1BDBD8E0004D95E3 /* ItemSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectorViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +289,23 @@
 		7BBA59D31B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BBA59D51B9DA59C0025B902 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7BBA59D81B9DA59C0025B902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7BCAA1881C6A0C13009E0B1F /* LensLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary.xcdatamodel; sourceTree = "<group>"; };
+		7BCAA1891C6A0C13009E0B1F /* LensLibrary2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.1.xcdatamodel; sourceTree = "<group>"; };
+		7BCAA18A1C6A0C13009E0B1F /* LensLibrary2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.2.xcdatamodel; sourceTree = "<group>"; };
+		7BCAA18B1C6A0C13009E0B1F /* LensLibrary2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensLibrary2.xcdatamodel; sourceTree = "<group>"; };
+		7BCAA18E1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ConditionMigrationPolicy2.1-2.2.h"; path = "../../OSX/DigViewer/ConditionMigrationPolicy2.1-2.2.h"; sourceTree = "<group>"; };
+		7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ConditionMigrationPolicy2.1-2.2.m"; path = "../../OSX/DigViewer/ConditionMigrationPolicy2.1-2.2.m"; sourceTree = "<group>"; };
+		7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = "LensLibraryMapping1-2.xcmappingmodel"; path = "../../OSX/DigViewer/LensLibraryMapping1-2.xcmappingmodel"; sourceTree = "<group>"; };
+		7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = "LensLibraryMapping2-2.1.xcmappingmodel"; path = "../../OSX/DigViewer/LensLibraryMapping2-2.1.xcmappingmodel"; sourceTree = "<group>"; };
+		7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = "LensLibraryMapping2.1-2.2.xcmappingmodel"; path = "../../OSX/DigViewer/LensLibraryMapping2.1-2.2.xcmappingmodel"; sourceTree = "<group>"; };
+		7BCAA1971C6A0CEA009E0B1F /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../../OSX/DigViewer/Camera.h; sourceTree = "<group>"; };
+		7BCAA1981C6A0CEA009E0B1F /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Camera.m; path = ../../OSX/DigViewer/Camera.m; sourceTree = "<group>"; };
+		7BCAA1991C6A0CEA009E0B1F /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Condition.h; path = ../../OSX/DigViewer/Condition.h; sourceTree = "<group>"; };
+		7BCAA19A1C6A0CEA009E0B1F /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Condition.m; path = ../../OSX/DigViewer/Condition.m; sourceTree = "<group>"; };
+		7BCAA19B1C6A0CEA009E0B1F /* Lens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lens.h; path = ../../OSX/DigViewer/Lens.h; sourceTree = "<group>"; };
+		7BCAA19C1C6A0CEA009E0B1F /* Lens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lens.m; path = ../../OSX/DigViewer/Lens.m; sourceTree = "<group>"; };
+		7BCAA19D1C6A0CEA009E0B1F /* LensLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LensLibrary.h; path = ../../OSX/DigViewer/LensLibrary.h; sourceTree = "<group>"; };
+		7BCAA19E1C6A0CEA009E0B1F /* LensLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LensLibrary.m; path = ../../OSX/DigViewer/LensLibrary.m; sourceTree = "<group>"; };
 		7BD6CF301C0AF1080063C2ED /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
 		7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVRemoteSession.h; path = ../OSX/DigViewer/DVRemoteSession.h; sourceTree = SOURCE_ROOT; };
 		7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVRemoteSession.m; path = ../OSX/DigViewer/DVRemoteSession.m; sourceTree = SOURCE_ROOT; };
@@ -398,6 +452,39 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		7B4AF4471C7032520051FCE2 /* DVremote Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */,
+				7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */,
+				7B6D6A2F1C369BA90060212A /* DVRemoteProtcol.m */,
+				7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */,
+				7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */,
+				7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */,
+				7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */,
+				7B6D6A301C369BA90060212A /* ImageMetadata.h */,
+				7B6D6A311C369BA90060212A /* ImageMetadata.mm */,
+				7B6D6A321C369BA90060212A /* ImageMetadataKV.h */,
+				7B6D6A331C369BA90060212A /* ImageMetadataKV.m */,
+			);
+			name = "DVremote Protocol";
+			sourceTree = "<group>";
+		};
+		7B4AF4481C7032810051FCE2 /* Lens Library */ = {
+			isa = PBXGroup;
+			children = (
+				7BCAA19B1C6A0CEA009E0B1F /* Lens.h */,
+				7BCAA19C1C6A0CEA009E0B1F /* Lens.m */,
+				7BCAA1971C6A0CEA009E0B1F /* Camera.h */,
+				7BCAA1981C6A0CEA009E0B1F /* Camera.m */,
+				7BCAA1991C6A0CEA009E0B1F /* Condition.h */,
+				7BCAA19A1C6A0CEA009E0B1F /* Condition.m */,
+				7BCAA19D1C6A0CEA009E0B1F /* LensLibrary.h */,
+				7BCAA19E1C6A0CEA009E0B1F /* LensLibrary.m */,
+			);
+			name = "Lens Library";
+			sourceTree = "<group>";
+		};
 		7B52AA3B1BB0121E0068A842 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +514,8 @@
 				7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */,
 				7B6D6A441C36A66B0060212A /* Info.plist */,
 				7B6D6A401C369E480060212A /* module.modulemap */,
+				7B4AF4531C7039940051FCE2 /* DVremoteConstants.h */,
+				7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */,
 				7B6F235B1C5256FB00E7B0A8 /* PortableImageMetadata.h */,
 				7B6F23561C52564400E7B0A8 /* PortableImageMetadata.mm */,
 				7B6D6A2C1C369B650060212A /* Shared with DigViewer */,
@@ -437,13 +526,8 @@
 		7B6D6A2C1C369B650060212A /* Shared with DigViewer */ = {
 			isa = PBXGroup;
 			children = (
-				7B6D6A2D1C369BA90060212A /* CoreFoundationHelper.h */,
-				7B6D6A2E1C369BA90060212A /* DVRemoteProtcol.h */,
-				7B6D6A2F1C369BA90060212A /* DVRemoteProtcol.m */,
-				7B6D6A301C369BA90060212A /* ImageMetadata.h */,
-				7B6D6A311C369BA90060212A /* ImageMetadata.mm */,
-				7B6D6A321C369BA90060212A /* ImageMetadataKV.h */,
-				7B6D6A331C369BA90060212A /* ImageMetadataKV.m */,
+				7B4AF4481C7032810051FCE2 /* Lens Library */,
+				7B4AF4471C7032520051FCE2 /* DVremote Protocol */,
 			);
 			name = "Shared with DigViewer";
 			sourceTree = "<group>";
@@ -540,6 +624,7 @@
 			children = (
 				7BF05B271C259B4700A4A766 /* DigViewerRemote.entitlements */,
 				7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */,
+				7BCAA1861C6A0BDA009E0B1F /* Lens Library */,
 				7BD72C3E1B9DB3FC00DDBC1A /* Controllers */,
 				7B52AA3B1BB0121E0068A842 /* Views */,
 				7BD72C3D1B9DB3CC00DDBC1A /* Resources */,
@@ -558,15 +643,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7BCAA1861C6A0BDA009E0B1F /* Lens Library */ = {
+			isa = PBXGroup;
+			children = (
+				7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */,
+				7BCAA18D1C6A0C48009E0B1F /* Mapping Models */,
+			);
+			name = "Lens Library";
+			sourceTree = "<group>";
+		};
+		7BCAA18D1C6A0C48009E0B1F /* Mapping Models */ = {
+			isa = PBXGroup;
+			children = (
+				7BCAA1901C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel */,
+				7BCAA1911C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel */,
+				7BCAA1921C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel */,
+				7BCAA18E1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.h */,
+				7BCAA18F1C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m */,
+			);
+			name = "Mapping Models";
+			sourceTree = "<group>";
+		};
 		7BD72C331B9DB2B300DDBC1A /* DV Remote Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				7B9098261BA3DE2E00B03FD8 /* DVRemoteBrowser.h */,
-				7B9098271BA3DE2E00B03FD8 /* DVRemoteBrowser.m */,
 				7BA52EBE1BCA285200D69AE9 /* DVRemoteClient.h */,
 				7BA52EBF1BCA285200D69AE9 /* DVRemoteClient.m */,
-				7BD72C381B9DB2D500DDBC1A /* DVRemoteSession.h */,
-				7BD72C391B9DB2D500DDBC1A /* DVRemoteSession.m */,
 				7BA52EC01BCA285200D69AE9 /* LRUCache.h */,
 				7BA52EC11BCA285200D69AE9 /* LRUCache.m */,
 				7BA52EC41BCA558B00D69AE9 /* LocalSession.h */,
@@ -684,6 +786,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AF4661C780E280051FCE2 /* DVremoteCommonUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,10 +796,17 @@
 			files = (
 				7B6D6A391C369BA90060212A /* ImageMetadataKV.h in Headers */,
 				7B6F235C1C52570400E7B0A8 /* PortableImageMetadata.h in Headers */,
+				7B4AF44F1C7032EA0051FCE2 /* LensLibrary.h in Headers */,
 				7B6F235A1C5256E700E7B0A8 /* DVremoteCommonLib.h in Headers */,
 				7B6D6A371C369BA90060212A /* ImageMetadata.h in Headers */,
+				7B4AF44A1C7032B70051FCE2 /* Lens.h in Headers */,
+				7B4AF46C1C78652A0051FCE2 /* DVRemoteSession.h in Headers */,
+				7B4AF44D1C7032DD0051FCE2 /* Condition.h in Headers */,
 				7B6D6A351C369BA90060212A /* DVRemoteProtcol.h in Headers */,
+				7B4AF4541C7039FF0051FCE2 /* DVremoteConstants.h in Headers */,
+				7B4AF46A1C78651B0051FCE2 /* DVRemoteBrowser.h in Headers */,
 				7B6D6A341C369BA90060212A /* CoreFoundationHelper.h in Headers */,
+				7B4AF44B1C7032CB0051FCE2 /* Camera.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +1058,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B716B571C39089D002046B9 /* Localizable.strings in Resources */,
+				7B4AF4681C7861DE0051FCE2 /* InfoPlist.strings in Resources */,
+				7B4AF4691C7862190051FCE2 /* DVremoteExifAction.entitlements in Resources */,
+				7B4AF4671C7861CC0051FCE2 /* MainInterface.storyboard in Resources */,
 				7B716B4D1C376036002046B9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -957,8 +1070,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B7356D71BB971C500C1DB19 /* Localizable.strings in Resources */,
-				7B0197B71C688DF300DF1CF1 /* InfoPlist.strings in Resources */,
-				7B0197B41C688D2400DF1CF1 /* MainInterface.storyboard in Resources */,
 				7BBA59D41B9DA59C0025B902 /* Main.storyboard in Resources */,
 				7BBA59D91B9DA59C0025B902 /* LaunchScreen.xib in Resources */,
 				7BBA59D61B9DA59C0025B902 /* Images.xcassets in Resources */,
@@ -1095,10 +1206,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AF4521C70383E0051FCE2 /* DVremoteConstants.m in Sources */,
+				7B4AF4491C7032A90051FCE2 /* Lens.m in Sources */,
+				7B4AF44E1C7032E70051FCE2 /* Condition.m in Sources */,
 				7B6D6A3A1C369BA90060212A /* ImageMetadataKV.m in Sources */,
+				7B4AF46D1C78652D0051FCE2 /* DVRemoteSession.m in Sources */,
 				7B6F23581C52564F00E7B0A8 /* PortableImageMetadata.mm in Sources */,
 				7B6D6A381C369BA90060212A /* ImageMetadata.mm in Sources */,
+				7B4AF44C1C7032D10051FCE2 /* Camera.m in Sources */,
 				7B6D6A361C369BA90060212A /* DVRemoteProtcol.m in Sources */,
+				7B4AF46B1C7865210051FCE2 /* DVRemoteBrowser.m in Sources */,
+				7B4AF4501C7032F30051FCE2 /* LensLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,7 +1224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AF4581C7044E20051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
+				7B4AF4621C7045060051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7B716B3F1C375F64002046B9 /* ActionViewController.swift in Sources */,
+				7B4AF4551C7044D00051FCE2 /* LensLibrary.xcdatamodeld in Sources */,
+				7B4AF4561C7044D70051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
+				7B4AF4571C7044DA0051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,10 +1246,12 @@
 				7BA52EC61BCA558B00D69AE9 /* LocalSession.mm in Sources */,
 				7B243E891BF73860001EB2B5 /* DataSourceHeaderController.swift in Sources */,
 				7B88FB201C02D55200783E17 /* AssetListViewController.swift in Sources */,
+				7BCAA1931C6A0C8E009E0B1F /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7BD6CF311C0AF1080063C2ED /* PairingViewController.swift in Sources */,
 				7BB683C21C1C7E8C00A6DFAF /* KMLFile.swift in Sources */,
 				7BBA59D11B9DA59C0025B902 /* MapViewController.swift in Sources */,
 				7B6C069E1BB67266004902D3 /* ItemListNavigationController.swift in Sources */,
+				7BCAA1951C6A0C8E009E0B1F /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 				7BF05B6C1C2E3A4300A4A766 /* CustomActivity.swift in Sources */,
 				7BA92C801BEDCC6300CE0C56 /* NamedColorCell.swift in Sources */,
 				7B88FB221C02D58500783E17 /* AssetCell.swift in Sources */,
@@ -1136,8 +1261,10 @@
 				7B63A8BB1BDBD8E0004D95E3 /* ItemSelectorViewController.swift in Sources */,
 				7B6C06A01BB67AAC004902D3 /* ItemListViewController.swift in Sources */,
 				7BA92C841BEE238100CE0C56 /* ColorSelectingCell.swift in Sources */,
+				7BCAA1941C6A0C8E009E0B1F /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
+				7BCAA1961C6A0C8E009E0B1F /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
 				7B467F7C1BA1C2A9005719E7 /* InformationViewController.swift in Sources */,
-				7B9098281BA3DE2E00B03FD8 /* DVRemoteBrowser.m in Sources */,
+				7BCAA18C1C6A0C13009E0B1F /* LensLibrary.xcdatamodeld in Sources */,
 				7B243E8D1BF8212C001EB2B5 /* DataSourceDetailViewController.swift in Sources */,
 				7BA92C7E1BEDCC1700CE0C56 /* ColorPickerViewController.swift in Sources */,
 				7B52AA441BB0DE700068A842 /* InspectorTableView.swift in Sources */,
@@ -1146,7 +1273,6 @@
 				7B243E871BF22581001EB2B5 /* SimpleFooterViewController.swift in Sources */,
 				7B6C06A21BB68D30004902D3 /* NodeItemCell.swift in Sources */,
 				7B772C321BB1B31F00FA27E8 /* FullImageViewController.swift in Sources */,
-				7BD72C3C1B9DB2D500DDBC1A /* DVRemoteSession.m in Sources */,
 				7B7DDD091BAF9DD000C7A488 /* PreferencesViewController.swift in Sources */,
 				7BA52EBD1BC92A7100D69AE9 /* MessageView.swift in Sources */,
 			);
@@ -1156,7 +1282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AF4611C7044FE0051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
+				7B4AF4641C7045080051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7BE36A9A1C4201DA00501159 /* ActionRequestHandler.swift in Sources */,
+				7B4AF45A1C7044EF0051FCE2 /* LensLibrary.xcdatamodeld in Sources */,
+				7B4AF45C1C7044F30051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
+				7B4AF45F1C7044F90051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,6 +1296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE36AB51C42979D00501159 /* ActionRequestHandler.swift in Sources */,
+				7B4AF4651C7045090051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,7 +1304,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AF4601C7044FD0051FCE2 /* LensLibraryMapping2.1-2.2.xcmappingmodel in Sources */,
+				7B4AF4631C7045070051FCE2 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7BEDC6471C3D5D7D00B47C31 /* LocationActionViewController.swift in Sources */,
+				7B4AF4591C7044EA0051FCE2 /* LensLibrary.xcdatamodeld in Sources */,
+				7B4AF45B1C7044F20051FCE2 /* LensLibraryMapping1-2.xcmappingmodel in Sources */,
+				7B4AF45D1C7044F70051FCE2 /* LensLibraryMapping2-2.1.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1730,6 +1867,23 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BCAA1871C6A0C13009E0B1F /* LensLibrary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BCAA1881C6A0C13009E0B1F /* LensLibrary.xcdatamodel */,
+				7BCAA1891C6A0C13009E0B1F /* LensLibrary2.1.xcdatamodel */,
+				7BCAA18A1C6A0C13009E0B1F /* LensLibrary2.2.xcdatamodel */,
+				7BCAA18B1C6A0C13009E0B1F /* LensLibrary2.xcdatamodel */,
+			);
+			currentVersion = 7BCAA18A1C6A0C13009E0B1F /* LensLibrary2.2.xcdatamodel */;
+			name = LensLibrary.xcdatamodeld;
+			path = ../../OSX/DigViewer/LensLibrary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7BBA59C11B9DA59C0025B902 /* Project object */;
 }

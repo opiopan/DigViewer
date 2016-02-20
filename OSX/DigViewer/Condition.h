@@ -66,8 +66,11 @@ enum LFCONDITION_OP{
 
 @property (nonatomic, readonly) Condition* me;
 @property (nonatomic, readonly) NSString* summary;
+
+#if ! TARGET_OS_IPHONE
 @property (nonatomic, readonly) NSImage* icon;
 @property (nonatomic, readonly) NSDictionary* package;
+#endif
 
 @end
 

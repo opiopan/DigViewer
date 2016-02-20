@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, DVRCommand){
     DVRC_NOTIFY_PAIRCODE,
     DVRC_NOTIFY_AUTHENTICATED,
     DVRC_NOTIFY_FAIL_AUTH,
+    DVRC_NOTIFY_LENS_LIBRARY,
 };
 
 //-----------------------------------------------------------------------------------------
@@ -92,3 +93,5 @@ extern NSString* DVRCNMETA_DEVICE_TYPE;
 extern NSString* DVRCNMETA_DEVICE_CODE;
 extern NSString* DVRCNMETA_NAMESPACE_CHANGED;
 extern NSString* DVRCNMETA_ENTITY_CHANGED;
+extern NSString* DVRCNMETA_LENS_LIBRARY;
+extern NSString* DVRCNMETA_LENS_LIBRARY_DATE;

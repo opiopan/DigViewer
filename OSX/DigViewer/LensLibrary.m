@@ -8,7 +8,13 @@
 
 #import "LensLibrary.h"
 
+#if TARGET_OS_IPHONE
+#import "DVremoteConstants.h"
+#endif
+
 static NSURL* _storeDirectory;
+static NSString* _storeFileNameOld = @"LensLibrary.storedata";
+static NSString* _storeFileName = @"LensLibrary.storedata.bin";
 static LensLibrary* _sharedLensLibrary;
 
 @implementation LensLibrary
@@ -25,8 +31,13 @@ static LensLibrary* _sharedLensLibrary;
 +(LensLibrary*)sharedLensLibrary
 {
     if (!_storeDirectory){
-        NSURL *appSupportURL = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+#if ! TARGET_OS_IPHONE
+        NSURL* appSupportURL = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                                        inDomains:NSUserDomainMask] lastObject];
+#else
+        NSURL* appSupportURL =
+            [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:DVremoteAppGroupID];
+#endif
         _storeDirectory = [appSupportURL URLByAppendingPathComponent:@"com.opiopan.DigViewer"];
     }
     if (_storeDirectory && !_sharedLensLibrary){
@@ -36,9 +47,58 @@ static LensLibrary* _sharedLensLibrary;
 }
 
 //-----------------------------------------------------------------------------------------
+// ライブラリストアを更新 (置換)
+//-----------------------------------------------------------------------------------------
++(void)updateLensLibraryWithData:(NSData *)data
+{
+    LensLibrary* dummy = [LensLibrary sharedLensLibrary];
+    NSPersistentStoreCoordinator *coordinator = dummy.persistentStoreCoordinator;
+    coordinator = nil;
+    dummy = nil;
+    _sharedLensLibrary = nil;
+    NSFileManager* manager = [NSFileManager defaultManager];
+    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    [manager removeItemAtURL:url error:nil];
+    [data writeToFile:url.path atomically:NO];
+}
+
+//-----------------------------------------------------------------------------------------
+// XMLストアからバイナリストアへのマイグレーション
+//-----------------------------------------------------------------------------------------
+- (BOOL)migragteToBinary: (NSError * _Nullable *)error
+{
+#if ! TARGET_OS_IPHONE
+    NSURL* xmlStore = [_storeDirectory URLByAppendingPathComponent:_storeFileNameOld];
+    NSURL* binStore = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    NSFileManager* fs = [NSFileManager defaultManager];
+    
+    if ([fs fileExistsAtPath:[xmlStore path]]){
+        NSPersistentStoreCoordinator *coordinator =
+            [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        NSDictionary* option = @{NSMigratePersistentStoresAutomaticallyOption: @YES,
+                                 NSInferMappingModelAutomaticallyOption: @YES};
+        if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:xmlStore options:option error:error]) {
+            return NO;
+        }
+        
+        NSPersistentStore *oldStore = coordinator.persistentStores.lastObject;
+        
+        if (![coordinator migratePersistentStore:oldStore toURL:binStore options:nil withType:NSBinaryStoreType error:error]){
+            return NO;
+        }
+        
+        [fs removeItemAtURL:xmlStore error:nil];
+    }
+#endif
+    
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------
 // Core Data用プロパティの実装
 //-----------------------------------------------------------------------------------------
-- (NSManagedObjectModel*)managedObjectModel {
+- (NSManagedObjectModel*)managedObjectModel
+{
     if (_managedObjectModel) {
         return _managedObjectModel;
     }
@@ -72,14 +132,19 @@ static LensLibrary* _sharedLensLibrary;
         [fileManager createDirectoryAtPath:[_storeDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
     }
     
+    // レンズライブラリをXMLからバイナリにマイグレーション
+    if (![self migragteToBinary:&error]){
+        shouldFail = YES;
+    }
+    
     // レンズライブラリ初期化
     if (!shouldFail && !error) {
         NSPersistentStoreCoordinator *coordinator =
             [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-        NSURL* url = [_storeDirectory URLByAppendingPathComponent:@"LensLibrary.storedata"];
+        NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
         NSDictionary* option = @{NSMigratePersistentStoresAutomaticallyOption: @YES,
                                  NSInferMappingModelAutomaticallyOption: @YES};
-        if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:option error:&error]) {
+        if (![coordinator addPersistentStoreWithType:NSBinaryStoreType configuration:nil URL:url options:option error:&error]) {
             coordinator = nil;
         }
         _persistentStoreCoordinator = coordinator;
@@ -94,7 +159,12 @@ static LensLibrary* _sharedLensLibrary;
             dict[NSUnderlyingErrorKey] = error;
         }
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+#if ! TARGET_OS_IPHONE
         [[NSApplication sharedApplication] presentError:error];
+#else
+        NSLog(@"%@", error);
+        abort();
+#endif
     }
     return _persistentStoreCoordinator;
 }
@@ -108,7 +178,7 @@ static LensLibrary* _sharedLensLibrary;
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     
     return _managedObjectContext;
@@ -148,6 +218,22 @@ static LensLibrary* _sharedLensLibrary;
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Camera"];
     NSError* error = nil;
     _allCameraProfiles = [self.managedObjectContext executeFetchRequest:request error:&error];
+}
+
+//-----------------------------------------------------------------------------------------
+// 永続ストア属性の実装
+//-----------------------------------------------------------------------------------------
+- (NSDate *)storeModificationDate
+{
+    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    NSDictionary* attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil];
+    return [attrs valueForKey:NSFileModificationDate];
+}
+
+- (NSData *)storeData
+{
+    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    return [NSData dataWithContentsOfFile:url.path];
 }
 
 //-----------------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+
 //
 //  DVRemoteClient.m
 //  DigViewer
@@ -9,6 +10,8 @@
 #import "DVRemoteClient.h"
 #import "LocalSession.h"
 #import "LRUCache.h"
+#import "DVRemoteCommonLib.h"
+#import "DigViewerRemote-Swift.h"
 
 //-----------------------------------------------------------------------------------------
 // ThumbnailCacheEntry: サムネールキャッシュの要素
@@ -619,6 +622,28 @@
         NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (_tmpDelegate && [_tmpDelegate respondsToSelector:@selector(dvrClient:didRecieveServerInfo:)]){
             [_tmpDelegate dvrClient:self didRecieveServerInfo:args];
+        }
+    }else if (command == DVRC_NOTIFY_LENS_LIBRARY){
+        //-----------------------------------------------------------------------------------------
+        // レンズライブラリ受信
+        //-----------------------------------------------------------------------------------------
+        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSData* libraryData = [args valueForKey:DVRCNMETA_LENS_LIBRARY];
+        NSNumber* libraryDate = [args valueForKey:DVRCNMETA_LENS_LIBRARY_DATE];
+        ConfigurationController* controller = ConfigurationController.sharedController;
+
+        BOOL shouldBeUpdated = NO;
+        if (!controller.lensLibrarySource){
+            shouldBeUpdated = YES;
+        }else if ([self.serviceName isEqualToString:controller.lensLibrarySource] &&
+                  libraryDate.doubleValue > controller.lensLibraryDate){
+            shouldBeUpdated = YES;
+        }
+
+        if (shouldBeUpdated){
+            [LensLibrary updateLensLibraryWithData:libraryData];
+            controller.lensLibrarySource = self.serviceName;
+            controller.lensLibraryDate = libraryDate.doubleValue;
         }
     }
 }

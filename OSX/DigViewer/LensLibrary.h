@@ -18,8 +18,11 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (readonly, strong, nonatomic) NSArray* allLensProfiles;
 @property (readonly, strong, nonatomic) NSArray* allCameraProfiles;
+@property (readonly, strong, nonatomic) NSDate* storeModificationDate;
+@property (readonly, strong, nonatomic) NSData* storeData;
 
 + (LensLibrary*)sharedLensLibrary;
++ (void)updateLensLibraryWithData:(NSData*)data;
 
 - (Lens*)insertNewLensEntity;
 - (Camera*)insertNewCameraEntity;

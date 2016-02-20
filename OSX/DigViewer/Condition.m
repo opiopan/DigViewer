@@ -33,6 +33,7 @@
     return self;
 }
 
+#if ! TARGET_OS_IPHONE
 - (NSImage*)icon
 {
     return self.conditionType.intValue == LFCONDITION_TYPE_COMPARISON ? [NSImage imageNamed:NSImageNameActionTemplate] :
@@ -43,6 +44,7 @@
 {
     return @{@"name":[self summary], @"icon":[self icon]};
 }
+#endif
 
 //-----------------------------------------------------------------------------------------
 // 属性のアップデート

@@ -15,5 +15,4 @@ FOUNDATION_EXPORT double DVremoteCommonUIVersionNumber;
 FOUNDATION_EXPORT const unsigned char DVremoteCommonUIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <DVremoteCommonUI/PublicHeader.h>
-
-#import <
+//#import "DVRemoteCommonUI-Swift.h"

@@ -456,7 +456,6 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
             }
             
             // レンズライブラリから対応するレンズプロファイルを検索
-#if ! TARGET_OS_IPHONE
             LLMatchingProperties* properties = [LLMatchingProperties new];
             ImageMetadata* __weak weakSelf = self;
             id (^simpleValue)(int) = ^(int index){
@@ -478,7 +477,6 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
                     break;
                 }
             }
-#endif
         }
     }
     return self;

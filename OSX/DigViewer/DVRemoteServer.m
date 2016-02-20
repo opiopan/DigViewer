@@ -9,6 +9,7 @@
 #import "DVRemoteServer.h"
 #import "PathNode.h"
 #import "ImageMetadata.h"
+#import "LensLibrary.h"
 
 @implementation DVRemoteServer{
     BOOL _publishingFailed;
@@ -262,6 +263,7 @@
         if (_currentMeta){
             [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:NO];
         }
+        [self sendLensLibraryToSession:session];
     }
 }
 
@@ -273,6 +275,23 @@
     _currentMeta = [NSKeyedArchiver archivedDataWithRootObject:meta];
     for (DVRemoteSession* session in _authorizedSessions){
         [session sendCommand:DVRC_NOTIFY_META withData:_currentMeta replacingQue:YES];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// レンズライブラリ送信
+//-----------------------------------------------------------------------------------------
+- (void) sendLensLibraryToSession:(DVRemoteSession*)session
+{
+    LensLibrary* library = [LensLibrary sharedLensLibrary];
+    NSArray* lensProfiles = library.allLensProfiles;
+    if (lensProfiles.count > 0){
+        NSDate* modDate = library.storeModificationDate;
+        NSData* storeData = library.storeData;
+        NSDictionary* args = @{DVRCNMETA_LENS_LIBRARY: storeData,
+                               DVRCNMETA_LENS_LIBRARY_DATE: @(modDate.timeIntervalSince1970)};
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        [session sendCommand:DVRC_NOTIFY_LENS_LIBRARY withData:data replacingQue:NO];
     }
 }
 

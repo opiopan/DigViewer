@@ -1,10 +1,17 @@
 framework module DVremoteCommonLib {
     umbrella header "DVremoteCommonLib.h"
     
+    header "DVRemoteConstants.h"
     header "DVRemoteProtcol.h"
+    header "DVRemoteBrowser.h"
+    header "DVRemoteSession.h"
     header "ImageMetadata.h"
     header "ImageMetadataKV.h"
     header "PortableImageMetadata.h"
+    header "Lens.h"
+    header "Camera.h"
+    header "Condition.h"
+    header "LensLibrary.h"
     
     export *
     module * { export * }

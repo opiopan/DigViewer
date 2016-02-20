@@ -7,13 +7,7 @@
 //
 
 import UIKit
-
-
-//-----------------------------------------------------------------------------------------
-// MARK: App Groups 識別子
-//-----------------------------------------------------------------------------------------
-public let DVremoteAppGroupID = "group.com.opiopan.DVremote"
-public let DVremoteSharedSessionID = "sharedSession.com.opiopan.DVremote"
+import DVremoteCommonLib
 
 //-----------------------------------------------------------------------------------------
 // MARK: ユーザデフォルトキー名 / 列挙型定義
@@ -43,6 +37,9 @@ public struct UserDefaults {
     static public let DataSourcePinnedList = "DataSourcePinnedList2"
     
     static public let AuthenticationgKeys = "AuthenticatingKeys"
+    
+    static public let LensLibrarySource = "LensLibrarySource"
+    static public let LensLibraryDate = "LnesLibraryDate"
 }
 
 public enum MapType : Int {
@@ -161,6 +158,7 @@ public class ConfigurationController: NSObject {
             UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.InToolBar.rawValue,
             UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedDataWithRootObject([] as [ServerInfo]),
             UserDefaults.AuthenticationgKeys    : NSDictionary(),
+            UserDefaults.LensLibraryDate        : 0,
         ]
         controller.registerDefaults(defaults)
         establishedConnection = controller.valueForKey(UserDefaults.EstablishedConnection) as! String?
@@ -188,6 +186,8 @@ public class ConfigurationController: NSObject {
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
             as! [ServerInfo]
         authenticationgKeys = controller.valueForKey(UserDefaults.AuthenticationgKeys) as! [String:String]
+        lensLibrarySource = controller.valueForKey(UserDefaults.LensLibrarySource) as! String?
+        lensLibraryDate = controller.valueForKey(UserDefaults.LensLibraryDate) as! Double
         
         super.init()
         
@@ -450,6 +450,18 @@ public class ConfigurationController: NSObject {
     public var authenticationgKeys : [String:String] {
         didSet {
             controller.setValue(authenticationgKeys, forKey: UserDefaults.AuthenticationgKeys)
+        }
+    }
+    
+    public var lensLibrarySource : String? {
+        didSet {
+            controller.setValue(lensLibrarySource, forKey: UserDefaults.LensLibrarySource)
+        }
+    }
+    
+    public var lensLibraryDate : Double {
+        didSet {
+            controller.setValue(lensLibraryDate, forKey: UserDefaults.LensLibraryDate)
         }
     }
     

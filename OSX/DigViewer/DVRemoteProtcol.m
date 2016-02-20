@@ -63,3 +63,5 @@ NSString* DVRCNMETA_DEVICE_TYPE = @"devicetype";
 NSString* DVRCNMETA_DEVICE_CODE = @"devicecode";
 NSString* DVRCNMETA_NAMESPACE_CHANGED = @"namespacechanged";
 NSString* DVRCNMETA_ENTITY_CHANGED= @"entitychanged";
+NSString* DVRCNMETA_LENS_LIBRARY = @"lenslibrary";
+NSString* DVRCNMETA_LENS_LIBRARY_DATE = @"lenslibrarydate";

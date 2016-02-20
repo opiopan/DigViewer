@@ -15,7 +15,10 @@ FOUNDATION_EXPORT double DVremoteCommonLibVersionNumber;
 FOUNDATION_EXPORT const unsigned char DVremoteCommonLibVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <DVremoteCommonLib/PublicHeader.h>
+#import "DVRemoteConstants.h"
 #import "DVRemoteProtcol.h"
+#import "DVRemoteBrowser.h"
+#import "DVRemoteSession.h"
 #import "ImageMetadata.h"
 #import "ImageMetadataKV.h"
 #import "PortableImageMetadata.h"
