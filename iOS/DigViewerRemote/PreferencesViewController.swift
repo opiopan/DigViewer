@@ -8,6 +8,7 @@
 
 import UIKit
 import DVremoteCommonUI
+import DVremoteCommonLib
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     static private var headingDisplays = [
@@ -37,7 +38,8 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     ]
     
     static private var otherSectionIcons = [
-        "icon_about"
+        "icon_lenslibrary",
+        "icon_about",
     ]
     
     static private var icons : [[String]] = [
@@ -53,6 +55,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     @IBOutlet weak var connectionCell: UITableViewCell!
     @IBOutlet weak var headingDisplayCell: UITableViewCell!
     @IBOutlet weak var summaryDisplayCell: UITableViewCell!
+    @IBOutlet weak var lensLibraryCell: UITableViewCell!
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -75,6 +78,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
             PreferencesViewController.headingDisplays[configController.mapHeadingDisplay.rawValue]
         summaryDisplayCell.detailTextLabel!.text =
             PreferencesViewController.summaryDisplays[configController.mapSummaryDisplay.rawValue]
+        lensLibraryCell.detailTextLabel!.text = "\(LensLibrary.sharedLensLibrary().allLensProfiles.count)"
     }
     
     override func viewWillDisappear(animated: Bool) {

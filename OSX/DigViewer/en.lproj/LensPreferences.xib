@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <development version="6300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LensPreferences">
@@ -46,7 +47,7 @@
                                                 <tableColumns>
                                                     <tableColumn editable="NO" width="259" minWidth="40" maxWidth="1000" id="i3p-ym-QGB">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
-                                                            <font key="font" metaFont="cellTitle"/>
+                                                            <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                         </tableHeaderCell>
@@ -62,7 +63,7 @@
                                                     </tableColumn>
                                                     <tableColumn width="177" minWidth="10" maxWidth="3.4028234663852886e+38" id="pdN-iR-h9U">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Lens Specification">
-                                                            <font key="font" metaFont="cellTitle"/>
+                                                            <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                         </tableHeaderCell>
@@ -76,9 +77,9 @@
                                                             <binding destination="Co8-i2-P0c" name="value" keyPath="arrangedObjects.lensSpecString" id="AuR-Gt-x2L"/>
                                                         </connections>
                                                     </tableColumn>
-                                                    <tableColumn width="157" minWidth="10" maxWidth="3.4028234663852886e+38" id="Cf3-8G-vlO">
+                                                    <tableColumn width="159" minWidth="10" maxWidth="3.4028234663852886e+38" id="Cf3-8G-vlO">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Application Condition">
-                                                            <font key="font" metaFont="cellTitle"/>
+                                                            <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                         </tableHeaderCell>
@@ -101,7 +102,7 @@
                                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1mT-0e-sG6">
+                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1mT-0e-sG6">
                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>

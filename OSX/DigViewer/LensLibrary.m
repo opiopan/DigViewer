@@ -47,19 +47,26 @@ static LensLibrary* _sharedLensLibrary;
 }
 
 //-----------------------------------------------------------------------------------------
-// ライブラリストアを更新 (置換)
+// ライブラリストアを更新
 //-----------------------------------------------------------------------------------------
 +(void)updateLensLibraryWithData:(NSData *)data
 {
+    [LensLibrary resetLensLibrary];
+    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    [data writeToFile:url.path atomically:NO];
+}
+
++ (void)resetLensLibrary
+{
     LensLibrary* dummy = [LensLibrary sharedLensLibrary];
     NSPersistentStoreCoordinator *coordinator = dummy.persistentStoreCoordinator;
+    NSPersistentStore* store = coordinator.persistentStores.lastObject;
+    NSError* error = nil;
+    [coordinator removePersistentStore:store error:&error];
+    store = nil;
     coordinator = nil;
     dummy = nil;
     _sharedLensLibrary = nil;
-    NSFileManager* manager = [NSFileManager defaultManager];
-    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
-    [manager removeItemAtURL:url error:nil];
-    [data writeToFile:url.path atomically:NO];
 }
 
 //-----------------------------------------------------------------------------------------

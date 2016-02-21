@@ -8,6 +8,7 @@
 
 import UIKit
 import DVremoteCommonUI
+import DVremoteCommonLib
 
 class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRemoteClientDelegate {
 

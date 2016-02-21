@@ -23,6 +23,7 @@
 
 + (LensLibrary*)sharedLensLibrary;
 + (void)updateLensLibraryWithData:(NSData*)data;
++ (void)resetLensLibrary;
 
 - (Lens*)insertNewLensEntity;
 - (Camera*)insertNewCameraEntity;

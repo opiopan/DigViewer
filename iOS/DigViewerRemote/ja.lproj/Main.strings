@@ -131,3 +131,20 @@
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xsY-Ry-Pgo"; */
 "xsY-Ry-Pgo.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "Lens Library"; ObjectID = "gYS-da-ZtK"; */
+"gYS-da-ZtK.text" = "レンズライブラリ";
+
+/* Class = "UINavigationItem"; title = "Lens Library"; ObjectID = "Xmj-eZ-Cdb"; */
+"Xmj-eZ-Cdb.title" = "レンズライブラリ";
+
+/* Class = "UILabel"; text = "Synchronization Source"; ObjectID = "Kdb-he-V1V" */
+"Kdb-he-V1V.text" = "同期元";
+
+/* Class = "UIButton"; normalTitle = "Reset Lens Library"; ObjectID = "7IT-2b-2 cs"; */
+"7IT-2b-2cs.normalTitle" = "レンズライブラリのリセット";
+
+/* Class = "UILabel"; text = "By synchronizing..."
+ */
+"9ys-jW-sMr.text" = "レンズライブラリをMac上で動作しているDigViewerと同期することで、正確な視野角を表示したり、EXIFビューでのレンズ情報表示を正しい値でオーバライドすることができます。";
+
