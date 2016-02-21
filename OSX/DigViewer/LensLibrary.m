@@ -67,6 +67,9 @@ static LensLibrary* _sharedLensLibrary;
     coordinator = nil;
     dummy = nil;
     _sharedLensLibrary = nil;
+    
+    NSURL* url = [_storeDirectory URLByAppendingPathComponent:_storeFileName];
+    [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
 }
 
 //-----------------------------------------------------------------------------------------
