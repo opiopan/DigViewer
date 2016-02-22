@@ -75,11 +75,23 @@ class LensLibraryViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: - ライブラリリセット
     //-----------------------------------------------------------------------------------------
     @IBAction func resetLensLibrary(sender: AnyObject) {
-        LensLibrary.resetLensLibrary()
-        let controller = ConfigurationController.sharedController
-        controller.lensLibrarySource = nil
-        controller.lensLibraryDate = 0
-        updateDataSource()
+        let alert = UIAlertController(
+            title: NSLocalizedString("LL_RESET_TITLE", comment: ""),
+            message: NSLocalizedString("LL_RESET_MESSAGE", comment: ""),
+            preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Default){
+            [unowned self] action in
+            LensLibrary.resetLensLibrary()
+            let controller = ConfigurationController.sharedController
+            controller.lensLibrarySource = nil
+            controller.lensLibraryDate = 0
+            self.updateDataSource()
+        }
+        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
 
 }

@@ -5,6 +5,9 @@
   Created by opiopan on 2015/09/28.
   Copyright © 2015年 opiopan. All rights reserved.
 */
+"Cancel" = "キャンセル";
+"Yes" = "はい";
+"No" = "いいえ";
 
 "MSGVIEW_INITIALIIZING_MAP" = "マップ初期化中";
 "MSGVIEW_ESTABLISHED" = "データソース: %@";
@@ -85,7 +88,9 @@
 "CA_OPEN_GOOGLEMAPS" = "Google Mapsで開く";
 
 "LL_NOSOURCE" = "同期なし";
-"LL_PROFILE_TITLE" = "レンズプロファイル";
+"LL_PROFILE_TITLE" = "登録済みプロファイル";
+"LL_RESET_TITLE" = "確認";
+"LL_RESET_MESSAGE" = "レンズプロファイルをリセットしてもよろしいですか?";
 
 "MSG_DATASOURCE_DESCTIPTION" = "接続するデータソースを選択してください。\nこの iOS デバイスの写真ライブラリ、または Mac で実行している DigViewer をデーターソースとして指定できます。\nDigViewer を実行している Mac がリストに表示されない場合は、Mac とこの iOS デバイスが同じネットワークに接続されていることを確認してください。";
 

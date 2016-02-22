@@ -1538,7 +1538,7 @@
             </objects>
             <point key="canvasLocation" x="2043" y="1175"/>
         </scene>
-        <!--Lens Library-->
+        <!--Lens Profiles-->
         <scene sceneID="T9l-lM-bxt">
             <objects>
                 <viewController id="n8S-UH-LNr" customClass="LensLibraryViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
@@ -1576,22 +1576,23 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ys-jW-sMr">
-                                <rect key="frame" x="15" y="152" width="570" height="29"/>
-                                <string key="text">By synchronizing lens library with DigViewer running on the other Mac, DigViewer remote is able to display exact field of view angle, or to override lens information in EXIF view.</string>
+                                <rect key="frame" x="15" y="152" width="570" height="57.5"/>
+                                <string key="text">By synchronizing lens profiles with DigViewer running on the other Mac, DigViewer remote is able to display exact field of view angle, or to override lens information in EXIF view.
+In order to synchronize lens profiles, please input lens information to DigViewer on Mac. After that, select that Mac as a datasource from this iOS device.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IT-2b-2cs">
-                                <rect key="frame" x="450" y="191" width="135" height="32"/>
+                                <rect key="frame" x="446" y="219.5" width="139" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Reset Lens Library"/>
+                                <state key="normal" title="Reset Lens Profiles"/>
                                 <connections>
                                     <action selector="resetLensLibrary:" destination="n8S-UH-LNr" eventType="touchUpInside" id="TyZ-63-Vfm"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XKb-pv-lgh">
-                                <rect key="frame" x="0.0" y="233" width="600" height="407"/>
+                                <rect key="frame" x="0.0" y="261.5" width="600" height="378.5"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LensProfileCell" textLabel="HMs-El-JfM" detailTextLabel="M8g-mF-Pv4" style="IBUITableViewCellStyleSubtitle" id="QXj-UB-hie">
@@ -1637,7 +1638,7 @@
                             <constraint firstItem="MMc-bh-J1J" firstAttribute="top" secondItem="XKb-pv-lgh" secondAttribute="bottom" id="tO9-Bx-n5Y"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Lens Library" id="Xmj-eZ-Cdb">
+                    <navigationItem key="navigationItem" title="Lens Profiles" id="Xmj-eZ-Cdb">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="8c8-5p-Lbh">
                             <connections>
                                 <action selector="closeThisView:" destination="n8S-UH-LNr" id="Caf-D5-ZrZ"/>
@@ -2177,8 +2178,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Lens Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYS-da-ZtK">
-                                                    <rect key="frame" x="15" y="12" width="89" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Lens Profiles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYS-da-ZtK">
+                                                    <rect key="frame" x="15" y="12" width="93" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2277,10 +2278,10 @@
         <image name="pin_off" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QjS-Zo-NfZ"/>
         <segue reference="XyN-pQ-fCP"/>
+        <segue reference="QjS-Zo-NfZ"/>
         <segue reference="1Vi-gm-zmd"/>
+        <segue reference="JNz-7y-A5o"/>
         <segue reference="Ob7-tc-DRy"/>
-        <segue reference="ha4-5m-vCT"/>
     </inferredMetricsTieBreakers>
 </document>
