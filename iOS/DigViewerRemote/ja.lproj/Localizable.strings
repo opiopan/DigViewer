@@ -79,6 +79,9 @@
 "SUMMARY_PINNING_STYLE_LOWER_LEFT" = "左下";
 "SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "右下";
 
+"MAP_RESTORE_TITLE" = "確認";
+"MAP_RESTORE_MESSAGE" = "デフォルト設定に戻してもよろしいですか？";
+
 "SA_SHARE_LOCATION" = "位置情報を共有";
 "SA_SHARE_KML" = "Google Earth向けに共有";
 "SA_COPY_SUMMARY" = "サマリーをコピー";

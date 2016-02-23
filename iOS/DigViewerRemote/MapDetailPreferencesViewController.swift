@@ -197,22 +197,35 @@ class MapDetailPreferencesViewController: UITableViewController {
     }
     
     private func restoreDefaultSettings() {
-        beginUpdateCellCount()
-        configController.mapRelationSpan = configController.defaultValue(UserDefaults.MapRelationSpan)! as! Bool
-        configController.mapRelationSpanMethod =
-            MapRelationSpanMethod(rawValue: configController.defaultValue(UserDefaults.MapRelationSpanMethod)! as! Int)!
-        configController.mapTurnToHeading = configController.defaultValue(UserDefaults.MapTurnToHeading)! as! Bool
-        configController.mapHeadingShift = CGFloat(configController.defaultValue(UserDefaults.MapHeadingShift)! as! Double)
-        configController.mapSpan = CGFloat(configController.defaultValue(UserDefaults.MapSpan)! as! Double)
-        configController.mapTilt = CGFloat(configController.defaultValue(UserDefaults.MapTilt)! as! Double)
-        configController.mapPinColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-                configController.defaultValue(UserDefaults.MapPinColor)! as! NSData) as! UIColor
-        configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-            configController.defaultValue(UserDefaults.MapArrowColor)! as! NSData) as! UIColor
-        configController.mapFovColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-            configController.defaultValue(UserDefaults.MapFOVColor)! as! NSData) as! UIColor
-        endUpdateCellCount()
-        reflectToControl()
+        let alert = UIAlertController(
+            title: NSLocalizedString("MAP_RESTORE_TITLE", comment: ""),
+            message: NSLocalizedString("MAP_RESTORE_MESSAGE", comment: ""),
+            preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Default){
+            [unowned self] action in
+            self.beginUpdateCellCount()
+            self.configController.mapRelationSpan = self.configController.defaultValue(UserDefaults.MapRelationSpan)! as! Bool
+            self.configController.mapRelationSpanMethod =
+                MapRelationSpanMethod(rawValue: self.configController.defaultValue(UserDefaults.MapRelationSpanMethod)! as! Int)!
+            self.configController.mapTurnToHeading = self.configController.defaultValue(UserDefaults.MapTurnToHeading)! as! Bool
+            self.configController.mapHeadingShift =
+                CGFloat(self.configController.defaultValue(UserDefaults.MapHeadingShift)! as! Double)
+            self.configController.mapSpan = CGFloat(self.configController.defaultValue(UserDefaults.MapSpan)! as! Double)
+            self.configController.mapTilt = CGFloat(self.configController.defaultValue(UserDefaults.MapTilt)! as! Double)
+            self.configController.mapPinColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+                self.configController.defaultValue(UserDefaults.MapPinColor)! as! NSData) as! UIColor
+            self.configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+                self.configController.defaultValue(UserDefaults.MapArrowColor)! as! NSData) as! UIColor
+            self.configController.mapFovColor = NSKeyedUnarchiver.unarchiveObjectWithData(
+                self.configController.defaultValue(UserDefaults.MapFOVColor)! as! NSData) as! UIColor
+            self.endUpdateCellCount()
+            self.reflectToControl()
+        }
+        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     //-----------------------------------------------------------------------------------------

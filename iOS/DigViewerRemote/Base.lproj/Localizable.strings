@@ -71,6 +71,9 @@
 "SUMMARY_PINNING_STYLE_LOWER_LEFT" = "at the Lower Left";
 "SUMMARY_PINNING_STYLE_LOWER_RIGHT" = "at the Lower Right";
 
+"MAP_RESTORE_TITLE" = "Confirmation";
+"MAP_RESTORE_MESSAGE" = "Are you sure you want to restore default setting?";
+
 "SA_SHARE_LOCATION" = "Share Location";
 "SA_SHARE_KML" = "Share for Google Earth";
 "SA_COPY_SUMMARY" = "Copy Summary";
@@ -82,7 +85,7 @@
 "LL_NOSOURCE" = "None";
 "LL_PROFILE_TITLE" = "Registered Profiles";
 "LL_RESET_TITLE" = "Confirmation";
-"LL_RESET_MESSAGE" = "Do you really want to reset lens profiles?";
+"LL_RESET_MESSAGE" = "Are you sure you want to reset lens profiles?";
 
 
 "MSG_DATASOURCE_DESCTIPTION" = "Select a data source to connect.\nPhoto library in this iOS device and DigViewer running on Mac can be used as data source of DigViewer remote\nIf no Mac running DigViewer is shown in this list, please make sure the Mac and this iOS device are connected to same network.";
