@@ -148,3 +148,8 @@
  */
 "9ys-jW-sMr.text" = "レンズプロファイルをMac上で動作しているDigViewerと同期することで、正確な視野角を表示したり、EXIFビューでのレンズ情報表示を正しい値でオーバライドすることができます。\nレンズプロファイルを同期するには、まずMac上のDigViewerにレンズ情報を入力してください。その後、そのMacをデータソースとして選択してください。";
 
+/* Class = "UITableViewSection"; headerTitle = "Others"; ObjectID = "A8l-Iw-0sD; */
+"A8l-Iw-0sD.headerTitle" = "その他";
+
+/* Class = "UILabel"; text = "Omit Warming Up on Startup"; ObjectID = "SmQ-Ab-SGg"; */
+"SmQ-Ab-SGg.text" = "起動時のウォームアップ処理を省略";

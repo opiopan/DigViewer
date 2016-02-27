@@ -40,6 +40,10 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         mapView!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "onLongPress:"))
         
         initMessageView()
+
+        if !ConfigurationController.sharedController.mapNeedWarmUp {
+            initialConnect()
+        }
     }
     
     deinit{
@@ -54,6 +58,35 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - 初回接続処理
+    //-----------------------------------------------------------------------------------------
+    private func initialConnect() {
+        if (!initialized){
+            initialized = true
+            let client = DVRemoteClient.sharedClient()
+            client.isInitialized = true
+            client.addClientDelegate(self)
+            barTitle!.title = client.state != .Connected ? client.stateString : client.serviceName
+            if let name = ConfigurationController.sharedController.establishedConnection {
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
+                    if name == "" {
+                        client.connectToLocal()
+                    }else{
+                        let service = NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
+                        let key = ConfigurationController.sharedController.authenticationgKeys[name];
+                        client.connectToServer(service, withKey: key, fromDevice: AppDelegate.deviceID())
+                    }
+                })
+            }else{
+                firstConnecting = false;
+                showServersList()
+            }
+        }
     }
     
     //-----------------------------------------------------------------------------------------
@@ -215,29 +248,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     // MARK: - 地図データロード状況ごとの処理 (MKMapViewDelegateプロトコル)
     //-----------------------------------------------------------------------------------------
     override func mapViewDidFinishLoadingMap(view: MKMapView){
-        if (!initialized){
-            initialized = true
-            let client = DVRemoteClient.sharedClient()
-            client.isInitialized = true
-            client.addClientDelegate(self)
-            barTitle!.title = client.state != .Connected ? client.stateString : client.serviceName
-            if let name = ConfigurationController.sharedController.establishedConnection {
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
-                    if name == "" {
-                        client.connectToLocal()
-                    }else{
-                        let service = NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
-                        let key = ConfigurationController.sharedController.authenticationgKeys[name];
-                        client.connectToServer(service, withKey: key, fromDevice: AppDelegate.deviceID())
-                    }
-                })
-            }else{
-                firstConnecting = false;
-                showServersList()
-            }
-        }
-        
+        initialConnect()
         super.mapViewDidFinishLoadingMap(view)
     }
     

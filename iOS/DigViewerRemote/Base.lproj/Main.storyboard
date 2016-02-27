@@ -1006,7 +1006,7 @@
             <objects>
                 <tableViewController id="XQR-n8-rav" customClass="MapDetailPreferencesViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gb7-xT-K4o">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="950"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1050"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -1407,10 +1407,42 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="A8l-Iw-0sD">
+                            <tableViewSection headerTitle="Others" id="A8l-Iw-0sD">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="kkx-9J-trS">
+                                        <rect key="frame" x="0.0" y="847.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kkx-9J-trS" id="JKS-iX-XaJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Omit Warming Up on Startup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmQ-Ab-SGg">
+                                                    <rect key="frame" x="15" y="12" width="209.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9f-86-asq">
+                                                    <rect key="frame" x="536" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="actionForOmitWarmUpSwitch:" destination="XQR-n8-rav" eventType="touchUpInside" id="L7U-vb-Nfi"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="z9f-86-asq" secondAttribute="trailing" constant="15" id="7S8-9a-pT9"/>
+                                                <constraint firstItem="z9f-86-asq" firstAttribute="centerY" secondItem="JKS-iX-XaJ" secondAttribute="centerY" id="CNH-jI-ojh"/>
+                                                <constraint firstItem="SmQ-Ab-SGg" firstAttribute="leading" secondItem="JKS-iX-XaJ" secondAttribute="leading" constant="15" id="VAG-aa-O5W"/>
+                                                <constraint firstItem="SmQ-Ab-SGg" firstAttribute="centerY" secondItem="JKS-iX-XaJ" secondAttribute="centerY" id="yv3-Yd-lEq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Pvd-Eu-yCC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RestoreDefaultSettingsCell" textLabel="LBO-l7-dxk" style="IBUITableViewCellStyleDefault" id="Frf-6Z-TWk">
-                                        <rect key="frame" x="0.0" y="833.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="927.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Frf-6Z-TWk" id="Ay0-bv-JWc">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1442,13 +1474,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="950"/>
+                    <size key="freeformSize" width="600" height="1050"/>
                     <connections>
                         <outlet property="arrowColorLabel" destination="vzv-Qg-qPA" id="tAc-zD-7mU"/>
                         <outlet property="arrowColorView" destination="Yeg-OK-A6U" id="u0C-Me-YUM"/>
                         <outlet property="fovColorLabel" destination="D5a-8e-Hg6" id="Kyd-uG-6Mx"/>
                         <outlet property="fovColorView" destination="5FC-cW-L4J" id="Y9x-zr-vVE"/>
                         <outlet property="headingShiftSlider" destination="Pde-LX-DnY" id="Abj-ZX-iDY"/>
+                        <outlet property="omitWarmUpSwitch" destination="z9f-86-asq" id="pAH-C0-Hn0"/>
                         <outlet property="pinColorLabel" destination="UpM-1i-Lom" id="P3p-lI-xIB"/>
                         <outlet property="pinColorView" destination="uf8-yA-lmc" id="fdb-Fh-NjV"/>
                         <outlet property="relateSpanMethodCell" destination="9Uf-RZ-PCS" id="WOw-JQ-Lhw"/>
@@ -2281,7 +2314,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
         <segue reference="XyN-pQ-fCP"/>
         <segue reference="QjS-Zo-NfZ"/>
         <segue reference="1Vi-gm-zmd"/>
-        <segue reference="JNz-7y-A5o"/>
         <segue reference="Ob7-tc-DRy"/>
+        <segue reference="ha4-5m-vCT"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -36,6 +36,7 @@ class MapDetailPreferencesViewController: UITableViewController {
     @IBOutlet weak var fovColorView: UIView!
     @IBOutlet weak var fovColorLabel: UILabel!
     @IBOutlet weak var summaryPinningStyleCell: UITableViewCell!
+    @IBOutlet weak var omitWarmUpSwitch: UISwitch!
 
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -83,6 +84,7 @@ class MapDetailPreferencesViewController: UITableViewController {
         summaryPinningStyleCell.detailTextLabel!.text = MapDetailPreferencesViewController.summaryPinningStyles[
             configController.mapSummaryPinningStyle.rawValue
         ]
+        omitWarmUpSwitch.on = !configController.mapNeedWarmUp
     }
     
     //-----------------------------------------------------------------------------------------
@@ -167,6 +169,10 @@ class MapDetailPreferencesViewController: UITableViewController {
         tiltLabel.text = configController.mapTiltString
     }
 
+    @IBAction func actionForOmitWarmUpSwitch(sender: UISwitch) {
+        configController.mapNeedWarmUp = !sender.on
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: - セル選択に応じたアクション
     //-----------------------------------------------------------------------------------------

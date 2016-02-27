@@ -33,6 +33,7 @@ public struct UserDefaults {
     static public let MapArrowColor = "MapArrowColor"
     static public let MapFOVColor = "MapFOVColor"
     static public let MapSummaryPinningStyle = "MapSummaryPinningStyle"
+    static public let MapNeedWarmUp = "MapNeedWarmUp"
     
     static public let DataSourcePinnedList = "DataSourcePinnedList2"
     
@@ -156,6 +157,7 @@ public class ConfigurationController: NSObject {
             UserDefaults.MapArrowColor          : redColor,
             UserDefaults.MapFOVColor            : redColor,
             UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.InToolBar.rawValue,
+            UserDefaults.MapNeedWarmUp          : true,
             UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedDataWithRootObject([] as [ServerInfo]),
             UserDefaults.AuthenticationgKeys    : NSDictionary(),
             UserDefaults.LensLibraryDate        : 0,
@@ -182,6 +184,7 @@ public class ConfigurationController: NSObject {
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.MapFOVColor) as! NSData) as! UIColor
         mapSummaryPinningStyle =
             MapSummaryPinningStyle(rawValue: controller.valueForKey(UserDefaults.MapSummaryPinningStyle) as! Int)!
+        mapNeedWarmUp = controller.valueForKey(UserDefaults.MapNeedWarmUp) as! Bool
         dataSourcePinnedList =
             NSKeyedUnarchiver.unarchiveObjectWithData(controller.valueForKey(UserDefaults.DataSourcePinnedList) as! NSData)
             as! [ServerInfo]
@@ -435,6 +438,13 @@ public class ConfigurationController: NSObject {
     public var mapSummaryPinningStyle : MapSummaryPinningStyle {
         didSet {
             controller.setValue(mapSummaryPinningStyle.rawValue, forKey: UserDefaults.MapSummaryPinningStyle)
+            updateConfiguration()
+        }
+    }
+    
+    public var mapNeedWarmUp : Bool {
+        didSet {
+            controller.setValue(mapNeedWarmUp, forKey: UserDefaults.MapNeedWarmUp)
             updateConfiguration()
         }
     }
