@@ -168,7 +168,12 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 let location = CLLocation(latitude: geometry!.latitude, longitude: geometry!.longitude)
                 ReverseGeocoder.sharedCoder.performCoding(location){
                     [unowned self](coder : ReverseGeocoder) in
-                    self.popupViewController!.addressLabel.text = coder.address
+                    if self.geometry != nil {
+                        if self.geometry!.latitude == location.coordinate.latitude &&
+                           self.geometry!.longitude == location.coordinate.longitude {
+                            self.popupViewController!.addressLabel.text = coder.address
+                        }
+                    }
                 }
                 
                 // ブラーカバーを外す
@@ -178,6 +183,7 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 willStartToMove()
                 moveToDefaultPosition(self)
             }else{
+                geometry = nil
                 popupViewController!.addressLabel.text = NSLocalizedString("ADDRESS_NA", comment: "")
                 (popupViewController!.view as! PopupView).showAnchor = false
                 setBlurCover(true, isShowPopup: true)

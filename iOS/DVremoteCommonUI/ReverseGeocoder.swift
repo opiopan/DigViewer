@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 
+private extension CLLocation {
+}
+
 public class ReverseGeocoder: NSObject {
     
     public typealias CompleteHandler = (coder: ReverseGeocoder) -> Void
@@ -16,65 +19,116 @@ public class ReverseGeocoder: NSObject {
     public static let sharedCoder = ReverseGeocoder()
     
     private let geocoder = CLGeocoder()
+
+    public var location : CLLocation? {
+        get {
+            return currentLocation
+        }
+    }
     
     public var address : String? = nil
     
+    private enum QueryStatus {
+        case None
+        case Waiting
+        case Proceeding
+    }
+    
+    private var queryDate : NSDate?
     private var currentLocation : CLLocation?
-    private var isProceeding = false
+    private var queryStatus = QueryStatus.None
     private var currentHandlers : [CompleteHandler] = []
     
     private var pendingLocation : CLLocation?
     private var pendingHandlers : [CompleteHandler] = []
     
     public func performCoding(location : CLLocation, completeHandler : CompleteHandler?) {
-        if !isProceeding {
-            if location == currentLocation {
+        if queryStatus == .None {
+            if location.isEqual(currentLocation) {
                 if let handler = completeHandler {
                     handler(coder: self)
                 }
                 return
             }
-            
-            isProceeding = true
+
+            queryStatus = .Waiting
             currentLocation = location
             if let handler = completeHandler {
                 currentHandlers.append(handler)
             }
-            geocoder.reverseGeocodeLocation(location){
-                [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
-                if placemarks != nil && placemarks!.count > 0 && self.pendingLocation == nil{
-                    let placemark = placemarks![0]
-                    if self.currentLocation == location {
-                        self.address = self.recognizePlacemark(placemark)
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            [unowned self] in
-                            for handler in self.currentHandlers {
-                                handler(coder: self)
+
+            var interval = 0.0
+            let now = NSDate()
+            if queryDate != nil {
+                interval = max(0.3 - now.timeIntervalSinceDate(queryDate!), 0)
+            }
+
+            //NSLog("wait: \(location.coordinate.latitude) \(location.coordinate.longitude): \(interval)")
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(interval * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue()){
+                [unowned self] in
+                if self.queryStatus != .Waiting || self.currentLocation != location {
+                    self.queryStatus = .None
+                    let newLocation = self.currentLocation!
+                    self.currentLocation = nil
+                    var handler : CompleteHandler? = nil
+                    if self.currentHandlers.count > 0 {
+                        handler = self.currentHandlers.removeLast()
+                    }
+                    //NSLog("switch: \(newLocation.coordinate.latitude) \(newLocation.coordinate.longitude)")
+                    self.performCoding(newLocation, completeHandler: handler)
+                    return
+                }
+                //NSLog("start: \(location.coordinate.latitude) \(location.coordinate.longitude)")
+                self.queryDate = NSDate()
+                self.queryStatus = .Proceeding
+                self.geocoder.reverseGeocodeLocation(location){
+                    [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        [unowned self] in
+                        //NSLog("end: \(location.coordinate.latitude) \(location.coordinate.longitude)")
+                        self.queryDate = NSDate()
+                        if placemarks != nil && placemarks!.count > 0{
+                            let placemark = placemarks![0]
+                            if location.isEqual(self.currentLocation) {
+                                self.address = self.recognizePlacemark(placemark)
+                                for handler in self.currentHandlers {
+                                    handler(coder: self)
+                                }
                             }
-                            self.isProceeding = false
-                            if let pending = self.pendingLocation {
-                                self.pendingLocation = nil
-                                self.currentHandlers = self.pendingHandlers
-                                self.pendingHandlers = []
-                                self.performCoding(pending, completeHandler: nil)
-                            }else{
-                                self.currentHandlers = []
-                            }
+                        }
+                        self.queryStatus = .None
+                        if let pending = self.pendingLocation {
+                            self.pendingLocation = nil
+                            self.currentHandlers = self.pendingHandlers
+                            self.pendingHandlers = []
+                            self.performCoding(pending, completeHandler: nil)
+                        }else{
+                            self.currentHandlers = []
                         }
                     }
                 }
             }
-        }else if location == currentLocation {
+        }else if location.isEqual(currentLocation) {
+            //NSLog("pending1: \(location.coordinate.latitude) \(location.coordinate.longitude)")
             if let handler = completeHandler {
                 currentHandlers.append(handler)
             }
-        }else if location == pendingLocation {
+        }else if queryStatus == .Waiting {
+            //NSLog("pending2: \(location.coordinate.latitude) \(location.coordinate.longitude)")
+            if !location.isEqual(currentLocation) {
+                currentLocation = location
+                currentHandlers = []
+            }
             if let handler = completeHandler {
-                pendingHandlers.append(handler)
+                currentHandlers.append(handler)
             }
         }else{
-            pendingLocation = location
-            pendingHandlers = []
+            //NSLog("pending3: \(location.coordinate.latitude) \(location.coordinate.longitude)")
+            if !location.isEqual(pendingLocation) {
+                pendingLocation = location
+                pendingHandlers = []
+            }
             if let handler = completeHandler {
                 pendingHandlers.append(handler)
             }
