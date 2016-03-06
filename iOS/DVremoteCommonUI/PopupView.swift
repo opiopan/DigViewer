@@ -2,7 +2,7 @@
 //  PopupView.swift
 //  DigViewerRemote
 //
-//  Created by Hiroshi Murayama on 2015/09/28.
+//  Created by opiopan on 2015/09/28.
 //  Copyright © 2015年 opiopan. All rights reserved.
 //
 

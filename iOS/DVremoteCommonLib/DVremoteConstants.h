@@ -2,7 +2,7 @@
 //  DVremoteConstants.h
 //  DigViewerRemote
 //
-//  Created by Hiroshi Murayama on 2016/02/14.
+//  Created by opiopan on 2016/02/14.
 //  Copyright © 2016年 opiopan. All rights reserved.
 //
 

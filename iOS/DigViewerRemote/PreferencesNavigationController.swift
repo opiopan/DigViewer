@@ -2,7 +2,7 @@
 //  PreferencesNavigationController.swift
 //  DigViewerRemote
 //
-//  Created by Hiroshi Murayama on 2015/10/03.
+//  Created by opiopan on 2015/10/03.
 //  Copyright © 2015年 opiopan. All rights reserved.
 //
 

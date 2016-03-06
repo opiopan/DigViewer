@@ -220,6 +220,7 @@
 		7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderController.swift; sourceTree = "<group>"; };
 		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
 		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
+		7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = DVremoteCopySummaryAction.entitlements; path = DVremoteCopySummaryAction/DVremoteCopySummaryAction.entitlements; sourceTree = "<group>"; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVremoteConstants.m; sourceTree = "<group>"; };
 		7B4AF4531C7039940051FCE2 /* DVremoteConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVremoteConstants.h; sourceTree = "<group>"; };
@@ -600,6 +601,7 @@
 		7BBA59C01B9DA59C0025B902 = {
 			isa = PBXGroup;
 			children = (
+				7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */,
 				7BEDC6561C3D60DD00B47C31 /* MapKit.framework */,
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
 				7B6F23521C524AAA00E7B0A8 /* Extensions */,
@@ -992,6 +994,11 @@
 					7BE36A961C4201DA00501159 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					7BE36AB11C42979D00501159 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1700,6 +1707,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteCopySummaryAction/DVremoteCopySummaryAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1708,6 +1716,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1716,6 +1725,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DVremoteCopySummaryAction/DVremoteCopySummaryAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DVremoteCopySummaryAction/Info.plist;
@@ -1723,6 +1733,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DigViewerRemote.DVremoteCopySummaryAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

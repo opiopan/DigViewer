@@ -2,7 +2,7 @@
 //  NSString+escaping.h
 //  DigViewer
 //
-//  Created by Hiroshi Murayama on 2015/04/05.
+//  Created by opiopan on 2015/04/05.
 //  Copyright (c) 2015年 opiopan. All rights reserved.
 //
 

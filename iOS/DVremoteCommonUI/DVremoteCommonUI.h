@@ -2,7 +2,7 @@
 //  DVremoteCommonUI.h
 //  DVremoteCommonUI
 //
-//  Created by Hiroshi Murayama on 2016/01/01.
+//  Created by opiopan on 2016/01/01.
 //  Copyright © 2016年 opiopan. All rights reserved.
 //
 
