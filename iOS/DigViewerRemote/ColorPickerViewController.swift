@@ -68,7 +68,7 @@ class ColorPickerViewController: UITableViewController {
             var srcBlue : CGFloat = 0
             var srcAlpha : CGFloat = 0
             src.getRed(&srcRed, green: &srcGreen , blue: &srcBlue, alpha: &srcAlpha)
-            for var i = 0; i < colorList.count; i = i + 1 {
+            for i in 0 ..< colorList.count {
                 let dest = colorList[i].color
                 var destRed : CGFloat = 0
                 var destGreen : CGFloat = 0

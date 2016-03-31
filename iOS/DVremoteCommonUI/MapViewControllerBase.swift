@@ -38,7 +38,7 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             var frame = view.frame
             frame.size.width *= 2
         }
-        let recognizer = UITapGestureRecognizer(target: self, action: "tapOnThumbnail:")
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewControllerBase.tapOnThumbnail(_:)))
         popupViewController!.thumbnailView!.addGestureRecognizer(recognizer)
         popupViewController?.delegate = self
         
@@ -305,7 +305,7 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
     
     private func removeAnnotation() {
         if (annotation != nil){
-            popupViewController!.updateCount++
+            popupViewController!.updateCount += 1
             mapView!.removeAnnotation(annotation!)
             annotation = nil
         }
@@ -422,7 +422,7 @@ public class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             if popupViewController!.view.superview == nil {
                 popupViewController!.addToSuperView(coverView!, parentType: .NoLocationCover)
                 popupViewController!.view.alpha = 1.0
-                popupViewController!.updateCount++
+                popupViewController!.updateCount += 1
             }
         }
     }

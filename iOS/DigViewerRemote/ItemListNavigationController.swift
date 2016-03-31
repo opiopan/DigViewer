@@ -59,7 +59,7 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             let newNamespaceCounter = DVRemoteClient.sharedClient().namespaceCounter
             
             if document != nil && document == newDocument && newNamespaceCounter == namespaceCounter {
-                for var i = 0; i < path.count - 1; i++ {
+                for i in 0 ..< path.count - 1 {
                     if i < viewControllers.count && viewControllers[i].navigationItem.title == path[i] {
                         currentPath.append(path[i])
                         views.append(viewControllers[i])
@@ -74,7 +74,7 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             
             namespaceCounter = newNamespaceCounter
             
-            for var i = views.count; i < path.count - 1; i++ {
+            for i in views.count ..< path.count - 1 {
                 currentPath.append(path[i])
                 if isLocal && DVRemoteClient.sharedClient().isAssetCollection(currentPath, inDocument: newDocument) {
                     let view = self.storyboard!.instantiateViewControllerWithIdentifier("AssetListViewController")
@@ -127,7 +127,7 @@ class ItemListNavigationController: UINavigationController, DVRemoteClientDelega
             path = (lastController as! AssetListViewController).path
         }
         if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
-            for var i = 0; i < path!.count; i++ {
+            for i in 0 ..< path!.count {
                 if path![i] != newPath![i] {
                     needRearrange = true
                     break

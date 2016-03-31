@@ -116,7 +116,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         if indexPath.section == 1 && configController.mapType == .Map && indexPath.row > 0 {
             let newIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
             cell = super.tableView(tableView, cellForRowAtIndexPath: newIndexPath)
-            row++
+            row += 1
         }else{
             cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }

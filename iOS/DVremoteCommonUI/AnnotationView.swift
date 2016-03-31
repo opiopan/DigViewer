@@ -57,7 +57,7 @@ public class AnnotationView: MKPinAnnotationView {
                     calloutView.frame = frame
                     envelopeView = UIView(frame: frame)
                     if calloutView.superview != nil {
-                        calloutViewController!.updateCount++
+                        calloutViewController!.updateCount += 1
                         calloutViewController!.removeFromSuperView()
                     }
                     envelopeView!.addSubview(calloutView)

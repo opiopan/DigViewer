@@ -71,7 +71,7 @@ public class HeadingOverlayRenderer: MKOverlayRenderer {
             let startPoint = pointForMapPoint(points[0])
             CGContextBeginPath(context)
             CGContextMoveToPoint(context, startPoint.x, startPoint.y)
-            for var i = 1; i < points.count; i++ {
+            for i in 1 ..< points.count {
                 let point = pointForMapPoint(points[i])
                 CGContextAddLineToPoint(context, point.x, point.y)
             }

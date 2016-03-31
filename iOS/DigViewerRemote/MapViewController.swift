@@ -37,7 +37,8 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             self.performSegueWithIdentifier("FullImageView", sender: self)
         }
 
-        mapView!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "onLongPress:"))
+        mapView!.addGestureRecognizer(
+            UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.onLongPress(_:))))
         
         initMessageView()
 
@@ -264,7 +265,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         messageView.layer.zPosition = 10.0
         messageViewHeight = messageViewHeightConstraint.constant
 
-        let recognizer = UITapGestureRecognizer(target: self, action: "tapOnMessageView:")
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(MapViewController.tapOnMessageView(_:)))
         messageView.addGestureRecognizer(recognizer)
 
         updateMessageView()

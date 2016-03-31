@@ -241,7 +241,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         let newDocument = meta![DVRCNMETA_DOCUMENT] as? String
         let newPath = meta![DVRCNMETA_ID] as? [String]
         if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
-            for var i = 0; i < path!.count; i++ {
+            for i in 0 ..< path!.count {
                 if path![i] != newPath![i] {
                     return
                 }

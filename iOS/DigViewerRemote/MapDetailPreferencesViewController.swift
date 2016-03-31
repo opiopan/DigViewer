@@ -109,11 +109,11 @@ class MapDetailPreferencesViewController: UITableViewController {
     
     private func collectCellCount() {
         relationSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 0)
-        for var i = 1; i < relationSectionCellCount; i++ {
+        for i in 1 ..< relationSectionCellCount {
             relationSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 0))
         }
         headingSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 1)
-        for var i = 1; i < headingSectionCellCount; i++ {
+        for i in 1 ..< headingSectionCellCount {
             headingSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 1))
         }
     }

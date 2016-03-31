@@ -243,7 +243,7 @@ public class ConfigurationController: NSObject {
     }
     
     public func unregisterObserver(observer : ConfigurationControllerDelegate){
-        for var i = 0; i < observers.count; i++ {
+        for i in 0 ..< observers.count {
             if observers[i] as AnyObject === observer as AnyObject {
                 observers.removeAtIndex(i)
                 break
@@ -253,14 +253,14 @@ public class ConfigurationController: NSObject {
 
     private var updateCount = 0
     private func updateConfiguration(){
-        updateCount++
+        updateCount += 1
         for observer in observers {
             observer.notifyUpdateConfiguration?(self)
         }
     }
     
     private func updateMapDetailConfiguration() {
-        updateCount++
+        updateCount += 1
         if inMapDetailConfigurationTransaction == 0 {
             for observer in observers {
                 observer.notifyUpdateMapDetailConfiguration?(self)
@@ -269,7 +269,7 @@ public class ConfigurationController: NSObject {
     }
     
     private func updateDataSourceConfiguration() {
-        updateCount++
+        updateCount += 1
         for observer in observers {
             observer.notifyUpdateDataSourceConfiguration?(self)
         }
@@ -287,11 +287,11 @@ public class ConfigurationController: NSObject {
     //-----------------------------------------------------------------------------------------
     private var inMapDetailConfigurationTransaction = 0;
     public func beginMapDetailConfigurationTransaction() {
-        inMapDetailConfigurationTransaction++
+        inMapDetailConfigurationTransaction += 1
     }
     
     public func commitMapDetailConfigurationTransaction() {
-        inMapDetailConfigurationTransaction--
+        inMapDetailConfigurationTransaction -= 1
         updateMapDetailConfiguration()
     }
 

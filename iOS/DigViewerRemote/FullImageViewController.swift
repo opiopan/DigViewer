@@ -137,7 +137,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     func dvrClient(client: DVRemoteClient!, didRecieveFullImage image: UIImage!, ofId nodeId: [AnyObject]!, inDocument documentName: String!, withRotation rotation: Int) {
         var isSame = true
         if targetDocument == documentName && targetPath != nil && targetPath!.count == nodeId.count {
-            for var i = 0; i < nodeId.count; i++ {
+            for i in 0 ..< nodeId.count {
                 if nodeId[i] as! String != targetPath![i] {
                     isSame = false
                     break

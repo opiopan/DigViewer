@@ -123,7 +123,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
                 let currentPath = meta[DVRCNMETA_ID] as? [String]
                 if document != nil && document == currentDocument && newPath.count == currentPath!.count - 1 {
                     isCurrentFolder = true
-                    for var i = 0; i < newPath.count; i++ {
+                    for i in 0 ..< newPath.count {
                         if newPath[i] != currentPath![i] {
                             isCurrentFolder = false
                             break
@@ -180,7 +180,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             var isCurrentFolder = false
             if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
                 isCurrentFolder = true
-                for var i = 0; i < path!.count; i++ {
+                for i in 0 ..< path!.count {
                     if path![i] != newPath![i] {
                         isCurrentFolder = false
                         break
@@ -196,7 +196,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
                     cell.accessoryType = .Checkmark
                 }
             }else if selectedNode != nil {
-                for var i = 0; i < nodeList!.count; i++ {
+                for i in 0 ..< nodeList!.count {
                     let node = nodeList![i];
                     let name = node[DVRCNMETA_ITEM_NAME] as? String
                     if name == selectedNode {
@@ -239,7 +239,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     func dvrClient(client: DVRemoteClient!, didRecieveNodeList newNodeList: [AnyObject]!, forNode nodeID: [AnyObject]!, inDocument documentName: String!) {
         if document != nil && documentName == document && path!.count == nodeID!.count {
-            for var i = 0; i < path!.count; i++ {
+            for i in 0 ..< path!.count {
                 if path![i] != (nodeID![i] as! String) {
                     return
                 }
@@ -259,7 +259,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
         let newDocument = meta![DVRCNMETA_DOCUMENT] as? String
         let newPath = meta![DVRCNMETA_ID] as? [String]
         if document != nil && path != nil && document == newDocument && path!.count == newPath!.count - 1 {
-            for var i = 0; i < path!.count; i++ {
+            for i in 0 ..< path!.count {
                 if path![i] != newPath![i] {
                     return
                 }
