@@ -290,7 +290,8 @@ static NSData* pngFromNSImage(NSImage* image);
     NSString* description = [[machineEntry valueForKey:@"_LOCALIZABLE_"] valueForKey:@"description"];
     
     // iconファイル特定
-    NSString* iconDir = [machineImagePath stringByDeletingLastPathComponent];
+    NSString* iconDir = machineImagePath ? [machineImagePath stringByDeletingLastPathComponent] :
+                                           @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources";
     NSString* iconPath = nil;
     if ([machineID hasPrefix:@"MacBook"]){
         iconPath = [iconDir stringByAppendingPathComponent:@"SidebarLaptop.icns"];

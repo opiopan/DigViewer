@@ -33,11 +33,13 @@ public class SummarizedMeta: NSObject {
                 lens = nil
             }
             var condition : String = ""
-            for i in 5 ..< popupSummary.count {
-                if condition == "" {
-                    condition = popupSummary[i].value
-                }else if let value = popupSummary[i].value {
-                    condition = condition + " " + value
+            if popupSummary.count > 5 {
+                for i in 5 ..< popupSummary.count {
+                    if condition == "" {
+                        condition = popupSummary[i].value
+                    }else if let value = popupSummary[i].value {
+                        condition = condition + " " + value
+                    }
                 }
             }
             self.condition = condition

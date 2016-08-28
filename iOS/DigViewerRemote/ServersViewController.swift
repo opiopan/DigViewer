@@ -183,8 +183,12 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     func dvrClient(client: DVRemoteClient!, didRecieveServerInfo info: [NSObject : AnyObject]!) {
         let serverInfo = queryingServers[0];
         serverInfo.attributes = info[DVRCNMETA_SERVER_INFO] as! [String : String]
-        serverInfo.icon = UIImage(data: info[DVRCNMETA_SERVER_ICON] as! NSData)
-        serverInfo.image = UIImage(data: info[DVRCNMETA_SERVER_IMAGE] as! NSData)
+        if let data = info[DVRCNMETA_SERVER_ICON] as! NSData? {
+            serverInfo.icon = UIImage(data: data)
+        }
+        if let data = info[DVRCNMETA_SERVER_IMAGE] as! NSData? {
+            serverInfo.image = UIImage(data: data)
+        }
         registerServer(serverInfo)
         client.disconnect()
     }
