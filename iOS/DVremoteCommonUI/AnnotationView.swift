@@ -10,10 +10,6 @@ import UIKit
 import MapKit
 
 public class AnnotationView: MKPinAnnotationView {
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
     
     public override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)

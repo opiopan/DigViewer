@@ -10,7 +10,7 @@
 #import "ImageViewConfigController.h"
 #import "RelationalImageAccessor.h"
 
-@interface ClickableImageView : NSView
+@interface ClickableImageView : NSView <CALayerDelegate>
 
 @property (weak) id delegate;
 

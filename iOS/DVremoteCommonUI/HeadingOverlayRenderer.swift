@@ -60,7 +60,7 @@ public class HeadingOverlayRenderer: MKOverlayRenderer {
             
             let colorSpace = CGColorSpaceCreateDeviceRGB()
             let gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, locations.count)
-            CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, .DrawsAfterEndLocation)
+            CGContextDrawRadialGradient(context, gradient!, center, 0, center, radius, .DrawsAfterEndLocation)
             
             CGContextRestoreGState(context)
         }

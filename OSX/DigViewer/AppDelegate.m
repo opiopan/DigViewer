@@ -75,7 +75,7 @@ static NSString* serverEnableKey = @"dvremoteEnable";
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     _controller = [NSUserDefaultsController sharedUserDefaultsController];
-    [_controller addObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey] options:nil context:nil];
+    [_controller addObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey] options:0 context:nil];
     
     DVRemoteServer* server = [DVRemoteServer sharedServer];
     server.delegate = self;

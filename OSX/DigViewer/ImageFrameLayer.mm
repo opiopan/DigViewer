@@ -477,7 +477,7 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
         [timer invalidate];
         if (_swipeWillSucceed){
             if (self.delegate && _didEndSwipeSelector){
-                [self.delegate performSelector:_didEndSwipeSelector withObject:@(_swipeDirection) afterDelay:0];
+                [(NSObject*)self.delegate performSelector:_didEndSwipeSelector withObject:@(_swipeDirection) afterDelay:0];
             }
         }else{
             if (_swipeAnotherLayer){
@@ -541,7 +541,7 @@ static const CGFloat SWIPE_OUTRANGE_STOP = 1;
     super.backgroundColor = [NSColor whiteColor].CGColor;
     [CATransaction commit];
     if (self.delegate && _didEndSwipeSelector){
-        [self.delegate performSelector:_didEndSwipeSelector withObject:@(_swipeDirection) afterDelay:0];
+        [(NSObject*)self.delegate performSelector:_didEndSwipeSelector withObject:@(_swipeDirection) afterDelay:0];
     }
 }
 

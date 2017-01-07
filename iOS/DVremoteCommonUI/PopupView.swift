@@ -39,7 +39,7 @@ public class PopupView: UIView {
         let height = self.bounds.size.height - anchor
 
         if self.fillColor != nil {
-            CGContextSetFillColorWithColor(context, self.fillColor!.CGColor)
+            CGContextSetFillColorWithColor(context!, self.fillColor!.CGColor)
         }
         
         let rect = CGRectMake(0, 0, width, height)
@@ -52,22 +52,22 @@ public class PopupView: UIView {
             let maxY = CGRectGetMaxY(rect)
             let midY = CGRectGetMidY(rect)
             
-            CGContextMoveToPoint(context, midX + anchorHalfWidth, maxY)
-            CGContextAddArcToPoint(context, minX, maxY, minX, midY, radius)
-            CGContextAddArcToPoint(context, minX, minY, midX, minY, radius)
-            CGContextAddArcToPoint(context, maxX, minY, maxX, midY, radius)
-            CGContextAddArcToPoint(context, maxX, maxY, midX, maxY, radius)
+            CGContextMoveToPoint(context!, midX + anchorHalfWidth, maxY)
+            CGContextAddArcToPoint(context!, minX, maxY, minX, midY, radius)
+            CGContextAddArcToPoint(context!, minX, minY, midX, minY, radius)
+            CGContextAddArcToPoint(context!, maxX, minY, maxX, midY, radius)
+            CGContextAddArcToPoint(context!, maxX, maxY, midX, maxY, radius)
             
             if showAnchor {
-                CGContextAddLineToPoint(context, midX + anchorHalfWidth, maxY)
-                CGContextAddLineToPoint(context, midX, maxY + anchor)
-                CGContextAddLineToPoint(context, midX - anchorHalfWidth, maxY)
+                CGContextAddLineToPoint(context!, midX + anchorHalfWidth, maxY)
+                CGContextAddLineToPoint(context!, midX, maxY + anchor)
+                CGContextAddLineToPoint(context!, midX - anchorHalfWidth, maxY)
             }
             
-            CGContextClosePath(context)
-            CGContextFillPath(context)
+            CGContextClosePath(context!)
+            CGContextFillPath(context!)
         }else{
-            CGContextFillRect(context, rect)
+            CGContextFillRect(context!, rect)
         }
     }
     

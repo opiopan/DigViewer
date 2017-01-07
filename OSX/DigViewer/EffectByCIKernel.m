@@ -33,7 +33,9 @@
         _scale = @1.0;
         NSError* error;
         NSString* kernelProgram = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-        _kernel = [CIKernel kernelWithString:kernelProgram];
+        if (kernelProgram){
+            _kernel = [CIKernel kernelWithString:kernelProgram];
+        }
     }
     return self;
 }
