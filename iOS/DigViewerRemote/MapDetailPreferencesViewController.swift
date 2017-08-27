@@ -41,7 +41,7 @@ class MapDetailPreferencesViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
     //-----------------------------------------------------------------------------------------
-    private let configController = ConfigurationController.sharedController
+    fileprivate let configController = ConfigurationController.sharedController
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,26 +53,26 @@ class MapDetailPreferencesViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         reflectToControl()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
     }
 
-    @IBAction func closeThisView(sender: UIBarButtonItem?) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - コントロール状態へ反映
     //-----------------------------------------------------------------------------------------
     func reflectToControl() {
-        relateSpanSwitch.on = configController.mapRelationSpan
+        relateSpanSwitch.isOn = configController.mapRelationSpan
         relateSpanMethodCell.detailTextLabel!.text = MapDetailPreferencesViewController.spanRelationMethods[
             configController.mapRelationSpanMethod.rawValue
         ]
-        turnToHeadingSwitch.on = configController.mapTurnToHeading
+        turnToHeadingSwitch.isOn = configController.mapTurnToHeading
         headingShiftSlider.value = Float(configController.mapHeadingShift)
         spanLabel.text = configController.mapSpanString
         spanSlider.value = Float(log10(configController.mapSpan))
@@ -84,13 +84,13 @@ class MapDetailPreferencesViewController: UITableViewController {
         summaryPinningStyleCell.detailTextLabel!.text = MapDetailPreferencesViewController.summaryPinningStyles[
             configController.mapSummaryPinningStyle.rawValue
         ]
-        omitWarmUpSwitch.on = !configController.mapNeedWarmUp
+        omitWarmUpSwitch.isOn = !configController.mapNeedWarmUp
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 非表示セルの制御
     //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 && !configController.mapRelationSpan {
             return 1
         }else if section == 1 && !configController.mapTurnToHeading {
@@ -100,41 +100,41 @@ class MapDetailPreferencesViewController: UITableViewController {
         }
     }
     
-    private var relationSectionCellCount = 0
-    private var relationSectionCellIndexes : [NSIndexPath] = []
-    private var savedRelationState = false
-    private var headingSectionCellCount = 0
-    private var headingSectionCellIndexes : [NSIndexPath] = []
-    private var savedHeadingState = false
+    fileprivate var relationSectionCellCount = 0
+    fileprivate var relationSectionCellIndexes : [IndexPath] = []
+    fileprivate var savedRelationState = false
+    fileprivate var headingSectionCellCount = 0
+    fileprivate var headingSectionCellIndexes : [IndexPath] = []
+    fileprivate var savedHeadingState = false
     
-    private func collectCellCount() {
+    fileprivate func collectCellCount() {
         relationSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 0)
         for i in 1 ..< relationSectionCellCount {
-            relationSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 0))
+            relationSectionCellIndexes.append(IndexPath(item: i, section: 0))
         }
         headingSectionCellCount = super.tableView(tableView, numberOfRowsInSection: 1)
         for i in 1 ..< headingSectionCellCount {
-            headingSectionCellIndexes.append(NSIndexPath(forItem: i, inSection: 1))
+            headingSectionCellIndexes.append(IndexPath(item: i, section: 1))
         }
     }
     
-    private func beginUpdateCellCount() {
+    fileprivate func beginUpdateCellCount() {
         tableView.beginUpdates()
         configController.beginMapDetailConfigurationTransaction()
         savedRelationState = configController.mapRelationSpan
         savedHeadingState = configController.mapTurnToHeading
     }
     
-    private func endUpdateCellCount() {
+    fileprivate func endUpdateCellCount() {
         if savedRelationState && !configController.mapRelationSpan {
-            tableView.deleteRowsAtIndexPaths(relationSectionCellIndexes, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: relationSectionCellIndexes, with: .automatic)
         }else if !savedRelationState && configController.mapRelationSpan {
-            tableView.insertRowsAtIndexPaths(relationSectionCellIndexes, withRowAnimation: .Automatic)
+            tableView.insertRows(at: relationSectionCellIndexes, with: .automatic)
         }
         if savedHeadingState && !configController.mapTurnToHeading {
-            tableView.deleteRowsAtIndexPaths(headingSectionCellIndexes, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: headingSectionCellIndexes, with: .automatic)
         }else if !savedHeadingState && configController.mapTurnToHeading {
-            tableView.insertRowsAtIndexPaths(headingSectionCellIndexes, withRowAnimation: .Automatic)
+            tableView.insertRows(at: headingSectionCellIndexes, with: .automatic)
         }
         configController.commitMapDetailConfigurationTransaction()
         tableView.endUpdates()
@@ -143,41 +143,41 @@ class MapDetailPreferencesViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - UI要素のactionハンドラ
     //-----------------------------------------------------------------------------------------
-    @IBAction func actionForSpanRelationSwitch(sender: UISwitch) {
+    @IBAction func actionForSpanRelationSwitch(_ sender: UISwitch) {
         beginUpdateCellCount()
-        configController.mapRelationSpan = sender.on
+        configController.mapRelationSpan = sender.isOn
         endUpdateCellCount()
     }
     
-    @IBAction func actionForTurnToHeadingSwitch(sender: UISwitch) {
+    @IBAction func actionForTurnToHeadingSwitch(_ sender: UISwitch) {
         beginUpdateCellCount()
-        configController.mapTurnToHeading = sender.on
+        configController.mapTurnToHeading = sender.isOn
         endUpdateCellCount()
     }
 
-    @IBAction func actionForHeadingShiftSlider(sender: UISlider) {
+    @IBAction func actionForHeadingShiftSlider(_ sender: UISlider) {
         configController.mapHeadingShift = CGFloat(sender.value)
     }
     
-    @IBAction func actionForSpanSlider(sender: UISlider) {
+    @IBAction func actionForSpanSlider(_ sender: UISlider) {
         configController.mapSpan = CGFloat(pow(10.0, Double(sender.value)))
         spanLabel.text = configController.mapSpanString
     }
     
-    @IBAction func actionForTiltSlider(sender: UISlider) {
+    @IBAction func actionForTiltSlider(_ sender: UISlider) {
         configController.mapTilt = CGFloat(sender.value)
         tiltLabel.text = configController.mapTiltString
     }
 
-    @IBAction func actionForOmitWarmUpSwitch(sender: UISwitch) {
-        configController.mapNeedWarmUp = !sender.on
+    @IBAction func actionForOmitWarmUpSwitch(_ sender: UISwitch) {
+        configController.mapNeedWarmUp = !sender.isOn
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - セル選択に応じたアクション
     //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let targetCell = tableView.cellForRowAtIndexPath(indexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let targetCell = tableView.cellForRow(at: indexPath) {
             if let identifier = targetCell.reuseIdentifier {
                 if identifier == "ApplyCurrentMapCell" {
                     applyCurrentMap()
@@ -186,10 +186,10 @@ class MapDetailPreferencesViewController: UITableViewController {
                 }
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    private func applyCurrentMap() {
+    fileprivate func applyCurrentMap() {
         beginUpdateCellCount()
         let controller = self.navigationController as! PreferencesNavigationController
         configController.mapSpan = CGFloat(MapGeometry.mapToSpan(controller.mapView))
@@ -202,46 +202,46 @@ class MapDetailPreferencesViewController: UITableViewController {
         reflectToControl()
     }
     
-    private func restoreDefaultSettings() {
+    fileprivate func restoreDefaultSettings() {
         let alert = UIAlertController(
             title: NSLocalizedString("MAP_RESTORE_TITLE", comment: ""),
             message: NSLocalizedString("MAP_RESTORE_MESSAGE", comment: ""),
-            preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Default){
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default){
             [unowned self] action in
             self.beginUpdateCellCount()
-            self.configController.mapRelationSpan = self.configController.defaultValue(UserDefaults.MapRelationSpan)! as! Bool
+            self.configController.mapRelationSpan = self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapRelationSpan)! as! Bool
             self.configController.mapRelationSpanMethod =
-                MapRelationSpanMethod(rawValue: self.configController.defaultValue(UserDefaults.MapRelationSpanMethod)! as! Int)!
-            self.configController.mapTurnToHeading = self.configController.defaultValue(UserDefaults.MapTurnToHeading)! as! Bool
+                MapRelationSpanMethod(rawValue: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapRelationSpanMethod)! as! Int)!
+            self.configController.mapTurnToHeading = self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapTurnToHeading)! as! Bool
             self.configController.mapHeadingShift =
-                CGFloat(self.configController.defaultValue(UserDefaults.MapHeadingShift)! as! Double)
-            self.configController.mapSpan = CGFloat(self.configController.defaultValue(UserDefaults.MapSpan)! as! Double)
-            self.configController.mapTilt = CGFloat(self.configController.defaultValue(UserDefaults.MapTilt)! as! Double)
-            self.configController.mapPinColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-                self.configController.defaultValue(UserDefaults.MapPinColor)! as! NSData) as! UIColor
-            self.configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-                self.configController.defaultValue(UserDefaults.MapArrowColor)! as! NSData) as! UIColor
-            self.configController.mapFovColor = NSKeyedUnarchiver.unarchiveObjectWithData(
-                self.configController.defaultValue(UserDefaults.MapFOVColor)! as! NSData) as! UIColor
+                CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapHeadingShift)! as! Double)
+            self.configController.mapSpan = CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapSpan)! as! Double)
+            self.configController.mapTilt = CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapTilt)! as! Double)
+            self.configController.mapPinColor = NSKeyedUnarchiver.unarchiveObject(
+                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapPinColor)! as! Data) as! UIColor
+            self.configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObject(
+                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapArrowColor)! as! Data) as! UIColor
+            self.configController.mapFovColor = NSKeyedUnarchiver.unarchiveObject(
+                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapFOVColor)! as! Data) as! UIColor
             self.endUpdateCellCount()
             self.reflectToControl()
         }
         alert.addAction(okAction)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - Segue遷移処理
     //-----------------------------------------------------------------------------------------
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let targetCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let targetCell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) {
             if let identifier = targetCell.reuseIdentifier {
                 if identifier == "SelectSpanMethodCell" {
-                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let target = segue.destination as! ItemSelectorViewController
                     let identity = ItemSelectorIdentity()
                     identity.title = NSLocalizedString("SPAN_RELATION_METHOD", comment: "")
                     identity.selectionIndex = configController.mapRelationSpanMethod.rawValue
@@ -252,7 +252,7 @@ class MapDetailPreferencesViewController: UITableViewController {
                     }
                     target.identity = identity
                 }else if identifier == "SelectPinningStyleCell" {
-                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let target = segue.destination as! ItemSelectorViewController
                     let identity = ItemSelectorIdentity()
                     identity.title = targetCell.textLabel!.text
                     identity.selectionIndex = configController.mapSummaryPinningStyle.rawValue
@@ -263,7 +263,7 @@ class MapDetailPreferencesViewController: UITableViewController {
                     }
                     target.identity = identity
                 }else if identifier == "PinColorCell" {
-                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let target = segue.destination as! ColorPickerViewController
                     let identity = ColorPickerIdentity()
                     identity.title = pinColorLabel.text
                     identity.color = configController.mapPinColor
@@ -272,7 +272,7 @@ class MapDetailPreferencesViewController: UITableViewController {
                     }
                     target.identity = identity
                 }else if identifier == "ArrowColorCell" {
-                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let target = segue.destination as! ColorPickerViewController
                     let identity = ColorPickerIdentity()
                     identity.title = arrowColorLabel.text
                     identity.color = configController.mapArrowColor
@@ -281,7 +281,7 @@ class MapDetailPreferencesViewController: UITableViewController {
                     }
                     target.identity = identity
                 }else if identifier == "CircleColorCell" {
-                    let target = segue.destinationViewController as! ColorPickerViewController
+                    let target = segue.destination as! ColorPickerViewController
                     let identity = ColorPickerIdentity()
                     identity.title = fovColorLabel.text
                     identity.color = configController.mapFovColor

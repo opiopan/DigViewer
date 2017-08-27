@@ -12,63 +12,63 @@ import MapKit
 private extension CLLocation {
 }
 
-public class ReverseGeocoder: NSObject {
+open class ReverseGeocoder: NSObject {
     
-    public typealias CompleteHandler = (coder: ReverseGeocoder) -> Void
+    public typealias CompleteHandler = (_ coder: ReverseGeocoder) -> Void
 
-    public static let sharedCoder = ReverseGeocoder()
+    open static let sharedCoder = ReverseGeocoder()
     
-    private let geocoder = CLGeocoder()
+    fileprivate let geocoder = CLGeocoder()
 
-    public var location : CLLocation? {
+    open var location : CLLocation? {
         get {
             return currentLocation
         }
     }
     
-    public var address : String? = nil
+    open var address : String? = nil
     
-    private enum QueryStatus {
-        case None
-        case Waiting
-        case Proceeding
+    fileprivate enum QueryStatus {
+        case none
+        case waiting
+        case proceeding
     }
     
-    private var queryDate : NSDate?
-    private var currentLocation : CLLocation?
-    private var queryStatus = QueryStatus.None
-    private var currentHandlers : [CompleteHandler] = []
+    fileprivate var queryDate : Date?
+    fileprivate var currentLocation : CLLocation?
+    fileprivate var queryStatus = QueryStatus.none
+    fileprivate var currentHandlers : [CompleteHandler] = []
     
-    private var pendingLocation : CLLocation?
-    private var pendingHandlers : [CompleteHandler] = []
+    fileprivate var pendingLocation : CLLocation?
+    fileprivate var pendingHandlers : [CompleteHandler] = []
     
-    public func performCoding(location : CLLocation, completeHandler : CompleteHandler?) {
-        if queryStatus == .None {
+    open func performCoding(_ location : CLLocation, completeHandler : CompleteHandler?) {
+        if queryStatus == .none {
             if location.isEqual(currentLocation) {
                 if let handler = completeHandler {
-                    handler(coder: self)
+                    handler(self)
                 }
                 return
             }
 
-            queryStatus = .Waiting
+            queryStatus = .waiting
             currentLocation = location
             if let handler = completeHandler {
                 currentHandlers.append(handler)
             }
 
             var interval = 0.0
-            let now = NSDate()
+            let now = Date()
             if queryDate != nil {
-                interval = max(0.3 - now.timeIntervalSinceDate(queryDate!), 0)
+                interval = max(0.3 - now.timeIntervalSince(queryDate!), 0)
             }
 
             //NSLog("wait: \(location.coordinate.latitude) \(location.coordinate.longitude): \(interval)")
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(interval * Double(NSEC_PER_SEC)))
-            dispatch_after(time, dispatch_get_main_queue()){
+            let time = DispatchTime.now() + Double(Int64(interval * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: time){
                 [unowned self] in
-                if self.queryStatus != .Waiting || self.currentLocation != location {
-                    self.queryStatus = .None
+                if self.queryStatus != .waiting || self.currentLocation != location {
+                    self.queryStatus = .none
                     let newLocation = self.currentLocation!
                     self.currentLocation = nil
                     var handler : CompleteHandler? = nil
@@ -80,24 +80,24 @@ public class ReverseGeocoder: NSObject {
                     return
                 }
                 //NSLog("start: \(location.coordinate.latitude) \(location.coordinate.longitude)")
-                self.queryDate = NSDate()
-                self.queryStatus = .Proceeding
+                self.queryDate = Date()
+                self.queryStatus = .proceeding
                 self.geocoder.reverseGeocodeLocation(location){
-                    [unowned self](placemarks:[CLPlacemark]?, error : NSError?) -> Void in
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                    [unowned self](placemarks:[CLPlacemark]?, error : Error?) -> Void in
+                    OperationQueue.main.addOperation {
                         [unowned self] in
                         //NSLog("end: \(location.coordinate.latitude) \(location.coordinate.longitude)")
-                        self.queryDate = NSDate()
+                        self.queryDate = Date()
                         if placemarks != nil && placemarks!.count > 0{
                             let placemark = placemarks![0]
                             if location.isEqual(self.currentLocation) {
                                 self.address = self.recognizePlacemark(placemark)
                                 for handler in self.currentHandlers {
-                                    handler(coder: self)
+                                    handler(self)
                                 }
                             }
                         }
-                        self.queryStatus = .None
+                        self.queryStatus = .none
                         if let pending = self.pendingLocation {
                             self.pendingLocation = nil
                             self.currentHandlers = self.pendingHandlers
@@ -114,7 +114,7 @@ public class ReverseGeocoder: NSObject {
             if let handler = completeHandler {
                 currentHandlers.append(handler)
             }
-        }else if queryStatus == .Waiting {
+        }else if queryStatus == .waiting {
             //NSLog("pending2: \(location.coordinate.latitude) \(location.coordinate.longitude)")
             if !location.isEqual(currentLocation) {
                 currentLocation = location
@@ -135,7 +135,7 @@ public class ReverseGeocoder: NSObject {
         }
     }
     
-    private func recognizePlacemark(placemark : CLPlacemark) -> String? {
+    fileprivate func recognizePlacemark(_ placemark : CLPlacemark) -> String? {
         var address : String? = nil
         
         let interest = placemark.areasOfInterest
@@ -155,7 +155,7 @@ public class ReverseGeocoder: NSObject {
         }
         
         if units.count >= 2 {
-            let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: ""),units[1], units[0]) as String
+            let str = NSString(format: NSLocalizedString("ADDRESS_FORMAT", comment: "") as NSString,units[1], units[0]) as String
             if address == nil {
                 address = str
             }else{

@@ -247,7 +247,7 @@
 		7B6D6A311C369BA90060212A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ImageMetadata.mm; path = ../OSX/DigViewer/ImageMetadata.mm; sourceTree = SOURCE_ROOT; };
 		7B6D6A321C369BA90060212A /* ImageMetadataKV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetadataKV.h; path = ../OSX/DigViewer/ImageMetadataKV.h; sourceTree = SOURCE_ROOT; };
 		7B6D6A331C369BA90060212A /* ImageMetadataKV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetadataKV.m; path = ../OSX/DigViewer/ImageMetadataKV.m; sourceTree = SOURCE_ROOT; };
-		7B6D6A401C369E480060212A /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B6D6A401C369E480060212A /* DVremoteCommonLib.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = DVremoteCommonLib.modulemap; sourceTree = "<group>"; };
 		7B6D6A441C36A66B0060212A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B6F23561C52564400E7B0A8 /* PortableImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PortableImageMetadata.mm; path = DVremoteCommonLib/PortableImageMetadata.mm; sourceTree = SOURCE_ROOT; };
 		7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DVremoteCommonLib.h; path = DVremoteCommonLib/DVremoteCommonLib.h; sourceTree = SOURCE_ROOT; };
@@ -516,7 +516,7 @@
 			children = (
 				7B6F23591C5256E400E7B0A8 /* DVremoteCommonLib.h */,
 				7B6D6A441C36A66B0060212A /* Info.plist */,
-				7B6D6A401C369E480060212A /* module.modulemap */,
+				7B6D6A401C369E480060212A /* DVremoteCommonLib.modulemap */,
 				7B4AF4531C7039940051FCE2 /* DVremoteConstants.h */,
 				7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */,
 				7B6F235B1C5256FB00E7B0A8 /* PortableImageMetadata.h */,
@@ -965,7 +965,7 @@
 					7B6D6A061C3653C10060212A = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 					7B6D6A1E1C369B150060212A = {
 						CreatedOnToolsVersion = 7.2;
@@ -974,7 +974,7 @@
 					7B716B3B1C375F64002046B9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -987,7 +987,7 @@
 					7BBA59C81B9DA59C0025B902 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G3Y32477L5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -997,7 +997,7 @@
 					7BE36A961C4201DA00501159 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1016,7 +1016,7 @@
 					7BEDC6431C3D5D7C00B47C31 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = G3Y32477L5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1477,7 +1477,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1502,7 +1502,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1524,7 +1524,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				MODULEMAP_FILE = DVremoteCommonLib/DVremoteCommonLib.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1548,7 +1548,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = DVremoteCommonLib/module.modulemap;
+				MODULEMAP_FILE = DVremoteCommonLib/DVremoteCommonLib.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.opiopan.DVremoteCommonLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1572,7 +1572,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1590,7 +1590,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1699,7 +1699,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DigViewerRemote/DigViewerRemote-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1717,7 +1717,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DigViewerRemote/DigViewerRemote-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1736,7 +1736,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1754,7 +1754,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1806,7 +1806,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1824,7 +1824,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

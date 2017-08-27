@@ -11,22 +11,22 @@ import DVremoteCommonUI
 
 class KMLFile: NSObject, UIActivityItemSource {
     
-    private let titleName : String
-    private let pathString : String
-    private let contents : String
+    fileprivate let titleName : String
+    fileprivate let pathString : String
+    fileprivate let contents : String
     
     init(name : String, geometry : MapGeometry) {
         titleName = name
         
-        let fileName = name.stringByReplacingOccurrencesOfString("/", withString: "-")
+        let fileName = name.replacingOccurrences(of: "/", with: "-")
         let dirPath = "\(NSHomeDirectory())/tmp/KML"
         self.pathString = "\(dirPath)/\(fileName).kml"
         
-        let range = max(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter) / cos(geometry.cameraTilt / 180 * M_PI)
+        let range = max(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter) / cos(geometry.cameraTilt / 180 * Double.pi)
 
-        let manager = NSFileManager.defaultManager()
-        _ = try? manager.removeItemAtPath(dirPath)
-        _ = try? manager.createDirectoryAtPath(dirPath, withIntermediateDirectories: true, attributes: nil)
+        let manager = FileManager.default
+        _ = try? manager.removeItem(atPath: dirPath)
+        _ = try? manager.createDirectory(atPath: dirPath, withIntermediateDirectories: true, attributes: nil)
         
         contents =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -51,7 +51,7 @@ class KMLFile: NSObject, UIActivityItemSource {
     
     var path : String {
         get{
-            _ = try? contents.writeToFile(pathString, atomically: false, encoding: NSUTF8StringEncoding)
+            _ = try? contents.write(toFile: pathString, atomically: false, encoding: String.Encoding.utf8)
             return pathString
         }
     }
@@ -59,19 +59,19 @@ class KMLFile: NSObject, UIActivityItemSource {
     //-----------------------------------------------------------------------------------------
     // MARK: - UIActivityItemSourceプロトコル
     //-----------------------------------------------------------------------------------------
-    func activityViewControllerPlaceholderItem(controller: UIActivityViewController) -> AnyObject {
-        return NSData()
+    func activityViewControllerPlaceholderItem(_ controller: UIActivityViewController) -> Any {
+        return Data()
     }
     
-    func activityViewController(controller: UIActivityViewController, itemForActivityType type: String) -> AnyObject? {
-        return contents.dataUsingEncoding(NSUTF8StringEncoding)
+    func activityViewController(_ controller: UIActivityViewController, itemForActivityType type: UIActivityType) -> Any? {
+        return contents.data(using: String.Encoding.utf8)
     }
     
-    func activityViewController(controller: UIActivityViewController, dataTypeIdentifierForActivityType type: String?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, dataTypeIdentifierForActivityType type: UIActivityType?) -> String {
         return "com.google.earth.kml"
     }
     
-    func activityViewController(controller: UIActivityViewController, subjectForActivityType type: String?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, subjectForActivityType type: UIActivityType?) -> String {
         return titleName
     }
 }

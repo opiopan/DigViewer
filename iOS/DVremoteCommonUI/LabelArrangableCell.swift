@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class LabelArrangableCell: UITableViewCell {
-    @IBOutlet public weak var mainLabel: UILabel!
-    @IBOutlet public weak var textLabelWidthConstraint: NSLayoutConstraint!
-    @IBOutlet public weak var subTextLabel: UILabel!
-    @IBOutlet public weak var cellHeightConstraint: NSLayoutConstraint!
+open class LabelArrangableCell: UITableViewCell {
+    @IBOutlet open weak var mainLabel: UILabel!
+    @IBOutlet open weak var textLabelWidthConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var subTextLabel: UILabel!
+    @IBOutlet open weak var cellHeightConstraint: NSLayoutConstraint!
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
@@ -26,13 +26,13 @@ public class LabelArrangableCell: UITableViewCell {
     //-----------------------------------------------------------------------------------------
     // MARK: - テキストラベルの位置調整
     //-----------------------------------------------------------------------------------------
-    public var textLabelWidth : CGFloat = 32 {
+    open var textLabelWidth : CGFloat = 32 {
         didSet {
             self.textLabelWidthConstraint!.constant = textLabelWidth
         }
     }
     
-    public var cellHeight : CGFloat = 16 {
+    open var cellHeight : CGFloat = 16 {
         didSet {
             self.cellHeightConstraint!.constant = cellHeight
         }

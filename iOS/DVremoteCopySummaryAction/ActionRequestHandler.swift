@@ -15,23 +15,23 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
     var extensionContext: NSExtensionContext?
     
-    func beginRequestWithExtensionContext(context: NSExtensionContext) {
+    func beginRequest(with context: NSExtensionContext) {
         // Do not call super in an Action extension with no user interface
         self.extensionContext = context
         
         var imageFound = false
-        for item: AnyObject in self.extensionContext!.inputItems {
+        for item: Any in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
-            for provider: AnyObject in inputItem.attachments! {
+            for provider: Any in inputItem.attachments! {
                 let itemProvider = provider as! NSItemProvider
                 if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-                    itemProvider.loadItemForTypeIdentifier(kUTTypeImage as String, options: nil, completionHandler: {
+                    itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: {
                         [unowned self](data, error) in
-                        var imageData : NSData? = nil
+                        var imageData : Data? = nil
                         var image : UIImage? = nil
-                        if let url = data as? NSURL {
-                            imageData = NSData(contentsOfFile: url.path!)
-                            image = UIImage(contentsOfFile: url.path!)
+                        if let url = data as? URL {
+                            imageData = try? Data(contentsOf: URL(fileURLWithPath: url.path))
+                            image = UIImage(contentsOfFile: url.path)
                         }else if let imageObject = data as? UIImage {
                             image = imageObject
                             imageData = UIImagePNGRepresentation(imageObject)
@@ -40,10 +40,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
                         let type = NSLocalizedString("LS_IMAGE_TYPE_NAME", comment:"")
                         if imageData != nil && image != nil {
                             let meta = PortableImageMetadata(image: imageData, name: name, type: type)
-                            let summary = SummarizedMeta(meta: meta.portableData())
+                            let summary = SummarizedMeta(meta: (meta?.portableData())!)
                             summary.copySummaryToPasteboard()
                         }
-                        self.extensionContext!.completeRequestReturningItems([], completionHandler: nil)
+                        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
                         self.extensionContext = nil
                     })
                     
@@ -58,7 +58,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         }
         
         if !imageFound {
-            self.extensionContext!.completeRequestReturningItems([], completionHandler: nil)
+            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
             self.extensionContext = nil
         }
     }

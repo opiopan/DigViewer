@@ -20,7 +20,7 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let infoPlist =  NSBundle.mainBundle().infoDictionary
+        let infoPlist =  Bundle.main.infoDictionary
 
         let version = infoPlist!["CFBundleShortVersionString"] as! String
         let build = infoPlist!["OPBuildVersion"] as! String
@@ -28,8 +28,8 @@ class AboutViewController: UIViewController {
         
         let cautions = infoPlist!["OPCaution"] as! [String]
         if cautions.count > 0 {
-            let cautionString = cautions.enumerate().reduce(""){
-                let separator = $1.index == 0 ? "" : $1.index == cautions.count - 1 ? ", and " : ", "
+            let cautionString = cautions.enumerated().reduce(""){
+                let separator = $1.offset == 0 ? "" : $1.offset == cautions.count - 1 ? ", and " : ", "
                 return $0 + separator + $1.element
             }
             cautionLabel.text = "Caution:\nThis is NOT OFFICIAL BUILD which is \(cautionString)."
@@ -44,8 +44,8 @@ class AboutViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func closeThisView(sender: UIBarButtonItem?) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
 }

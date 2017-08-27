@@ -9,10 +9,10 @@
 import UIKit
 
 class CustomActivity: UIActivity {
-    private let type : String
-    private let title : String
-    private let icon : UIImage
-    private let action : (() -> Void)?
+    fileprivate let type : String
+    fileprivate let title : String
+    fileprivate let icon : UIImage
+    fileprivate let action : (() -> Void)?
     
     init(key : String, icon : UIImage, action : (() -> Void)?){
         self.type = key
@@ -21,31 +21,31 @@ class CustomActivity: UIActivity {
         self.action = action
     }
     
-    override func activityType() -> String? {
-        return type
+    override var activityType : UIActivityType? {
+        return UIActivityType(type)
     }
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         return title
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         return icon
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         return true
     }
     
-    override func prepareWithActivityItems(activityItems: [AnyObject]) {
-        super.prepareWithActivityItems(activityItems)
+    override func prepare(withActivityItems activityItems: [Any]) {
+        super.prepare(withActivityItems: activityItems)
     }
     
-    override func activityViewController() -> UIViewController? {
+    override var activityViewController : UIViewController? {
         return nil
     }
     
-    override func performActivity() {
+    override func perform() {
         if let action = self.action {
             action()
         }

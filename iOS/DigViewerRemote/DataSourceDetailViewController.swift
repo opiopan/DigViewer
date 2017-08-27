@@ -33,8 +33,8 @@ class DataSourceDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func closeServersView(sender : UIBarButtonItem?){
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeServersView(_ sender : UIBarButtonItem?){
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
     var serverInfo : ServerInfo? {
@@ -55,7 +55,7 @@ class DataSourceDetailViewController: UIViewController {
                 osVersionLabel.text = nil
                 dvVersionLabel.text = nil
                 
-                let components = info.service.name.componentsSeparatedByString("@")
+                let components = info.service.name.components(separatedBy: "@")
                 if components.count > 0 {
                     userLabel.text = NSLocalizedString("DSD_USER", comment: "") + components[0]
                 }
@@ -79,14 +79,14 @@ class DataSourceDetailViewController: UIViewController {
                 }
                 descriptionLabel.text = info.attributes[DVRCNMETA_DESCRIPTION]
                 
-                pinnedSwitch.on = info.isPinned
+                pinnedSwitch.isOn = info.isPinned
             }
         }
     }
     
-    @IBAction func changePinnedSwitch(sender: UISwitch) {
+    @IBAction func changePinnedSwitch(_ sender: UISwitch) {
         if let info = serverInfo {
-            info.isPinned = sender.on
+            info.isPinned = sender.isOn
             var pinnedList = ConfigurationController.sharedController.dataSourcePinnedList
             if info.isPinned {
                 let newInfo = ServerInfo(src: info)

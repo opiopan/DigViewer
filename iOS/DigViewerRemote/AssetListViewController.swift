@@ -9,8 +9,8 @@
 import UIKit
 
 extension UICollectionView {
-    func indexPathsForElementsInRect(rect:CGRect)->[NSIndexPath] {
-        let allLayoutAttributes = self.collectionViewLayout.layoutAttributesForElementsInRect(rect)
+    func indexPathsForElementsInRect(_ rect:CGRect)->[IndexPath] {
+        let allLayoutAttributes = self.collectionViewLayout.layoutAttributesForElements(in: rect)
         return allLayoutAttributes == nil ? [] : allLayoutAttributes!.map{$0.indexPath}
     }
 }
@@ -20,31 +20,31 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     var path : [String]? = nil
     var selectedNode : String? = nil
     var selectedNodeIndex : Int? = nil
-    var assets : PHFetchResult? = nil
+    var assets : PHFetchResult<PHAsset>? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCachedAssets()
     }
     
-    private var is1stTime = true;
+    fileprivate var is1stTime = true;
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if assets != nil && selectedNodeIndex != nil && is1stTime{
             is1stTime = false
-            let indexPath = NSIndexPath(forRow: selectedNodeIndex!, inSection: 0)
+            let indexPath = IndexPath(row: selectedNodeIndex!, section: 0)
             let collectionView = self.collectionView!
-            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: false)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0), dispatch_get_main_queue()){
-                collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: false)
+            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)){
+                collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
             }
-            DVRemoteClient.sharedClient().addClientDelegate(self)
+            DVRemoteClient.shared().add(self)
         }
         updateCachedAssets()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        DVRemoteClient.shared().remove(self)
     }
 
 
@@ -55,17 +55,17 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     //-----------------------------------------------------------------------------------------
     // MARK: コレクションビューのデータソース
     //-----------------------------------------------------------------------------------------
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return assets == nil ? 0 : assets!.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as! AssetCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as! AssetCell
     
         if selectedNodeIndex != nil && selectedNodeIndex! == indexPath.row {
             cell.checkMarkView.image = UIImage(named: "checkMark")
@@ -73,25 +73,25 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
             cell.checkMarkView.image = nil
         }
 
-        let asset = assets!.objectAtIndex(indexPath.row) as! PHAsset
-        let size = approximatelySize * Double(UIScreen.mainScreen().scale)
+        let asset = assets!.object(at: indexPath.row) 
+        let size = approximatelySize * Double(UIScreen.main.scale)
         let thumbnailSize = CGSize(width: size, height: size)
-        imageManager.requestImageForAsset(asset, targetSize: thumbnailSize, contentMode: .AspectFill, options: nil){
+        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil){
             if let image = $0.0 {
                 cell.imageView.image = image
             }
         }
-        if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoPanorama.rawValue) != 0 {
+        if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.photoPanorama.rawValue) != 0 {
             cell.badgeCell.image = UIImage(named: "badge_panorama")
-        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoHDR.rawValue) != 0 {
+        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.photoHDR.rawValue) != 0 {
             cell.badgeCell.image = UIImage(named: "badge_hdr")
-        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoScreenshot.rawValue) != 0 {
+        }else if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.photoScreenshot.rawValue) != 0 {
             cell.badgeCell.image = UIImage(named: "badge_screenshot")
         }else{
             cell.badgeCell.image = nil
         }
         if #available(iOS 9.1, *) {
-            if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.PhotoLive.rawValue) != 0 {
+            if (asset.mediaSubtypes.rawValue & PHAssetMediaSubtype.photoLive.rawValue) != 0 {
                 cell.badgeCell.image = UIImage(named: "badge_live")
             }
         }
@@ -102,126 +102,126 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     //-----------------------------------------------------------------------------------------
     // MARK: 最下行への移動
     //-----------------------------------------------------------------------------------------
-    @IBAction func moveToBottom(sender: AnyObject) {
+    @IBAction func moveToBottom(_ sender: AnyObject) {
         if assets != nil {
-            let indexPath = NSIndexPath(forRow: assets!.count - 1, inSection: 0)
-            collectionView!.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+            let indexPath = IndexPath(row: assets!.count - 1, section: 0)
+            collectionView!.scrollToItem(at: indexPath, at: .bottom, animated: true)
         }
     }
 
     //-----------------------------------------------------------------------------------------
     // MARK: ハイライト＆選択制御
     //-----------------------------------------------------------------------------------------
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        changeSelecting(indexPath, job: .Highlight)
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        changeSelecting(indexPath, job: .highlight)
         return true
     }
     
-    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-        changeSelecting(indexPath, job: .Unhighlight)
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        changeSelecting(indexPath, job: .unhighlight)
     }
 
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        changeSelecting(indexPath, job: .Select)
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        changeSelecting(indexPath, job: .select)
         return true
     }
     
-    private enum SelectingPhase {
-        case None
-        case Highlighting
-        case Highlight
-        case Unhighlighting
-        case Unhighlight
+    fileprivate enum SelectingPhase {
+        case none
+        case highlighting
+        case highlight
+        case unhighlighting
+        case unhighlight
     }
     
-    private enum SelectingJob {
-        case None
-        case Highlight
-        case Unhighlight
-        case Select
+    fileprivate enum SelectingJob {
+        case none
+        case highlight
+        case unhighlight
+        case select
     }
     
-    private var selectingPhase : SelectingPhase = .None
-    private var selectingIndexPath : NSIndexPath?
-    private var deferringJob : SelectingJob = .None
-    private let highlightPeriod = 0.2
+    fileprivate var selectingPhase : SelectingPhase = .none
+    fileprivate var selectingIndexPath : IndexPath?
+    fileprivate var deferringJob : SelectingJob = .none
+    fileprivate let highlightPeriod = 0.2
     
-    private func changeSelecting(indexPath : NSIndexPath,  job : SelectingJob) {
+    fileprivate func changeSelecting(_ indexPath : IndexPath,  job : SelectingJob) {
         if selectingIndexPath != nil && selectingIndexPath! != indexPath {
-            if let cell = collectionView!.cellForItemAtIndexPath(selectingIndexPath!) as! AssetCell? {
+            if let cell = collectionView!.cellForItem(at: selectingIndexPath!) as! AssetCell? {
                 cell.imageView.alpha = 1.0
             }
             selectingIndexPath = nil
-            selectingPhase = .None
-            deferringJob = .None
+            selectingPhase = .none
+            deferringJob = .none
         }
       
         selectingIndexPath = indexPath
         
-        if job == .Highlight {
-            selectingPhase = .Highlighting
-            deferringJob = .None
-            if let cell = collectionView!.cellForItemAtIndexPath(indexPath) as! AssetCell? {
-                UIView.animateWithDuration(highlightPeriod, animations: {
+        if job == .highlight {
+            selectingPhase = .highlighting
+            deferringJob = .none
+            if let cell = collectionView!.cellForItem(at: indexPath) as! AssetCell? {
+                UIView.animate(withDuration: highlightPeriod, animations: {
                     cell.imageView.alpha = 0.5
-                }){
+                }, completion: {
                     [unowned self] (Bool) in
                     if self.selectingIndexPath != nil && self.selectingIndexPath! == indexPath {
-                        self.selectingPhase = .Highlight
-                        if self.deferringJob != .None {
+                        self.selectingPhase = .highlight
+                        if self.deferringJob != .none {
                             self.changeSelecting(self.selectingIndexPath!, job: self.deferringJob)
                         }
                     }
-                }
+                })
             }
-        }else if job == .Unhighlight {
-            if selectingPhase == .Highlight {
-                selectingPhase = .Unhighlighting
-                if let cell = collectionView!.cellForItemAtIndexPath(indexPath) as! AssetCell? {
-                    UIView.animateWithDuration(highlightPeriod, animations: {
+        }else if job == .unhighlight {
+            if selectingPhase == .highlight {
+                selectingPhase = .unhighlighting
+                if let cell = collectionView!.cellForItem(at: indexPath) as! AssetCell? {
+                    UIView.animate(withDuration: highlightPeriod, animations: {
                         cell.imageView.alpha = 1.0
-                    }){
+                    }, completion: {
                         [unowned self] (Bool) in
                         if self.selectingIndexPath != nil && self.selectingIndexPath! == indexPath {
-                            self.selectingPhase = .Unhighlight
-                            if self.deferringJob != .None {
+                            self.selectingPhase = .unhighlight
+                            if self.deferringJob != .none {
                                 self.changeSelecting(self.selectingIndexPath!, job: self.deferringJob)
                             }
                         }
-                    }
+                    })
                 }
                 
-            }else if selectingPhase == .Highlighting {
+            }else if selectingPhase == .highlighting {
                 deferringJob = job
             }
-        }else if job == .Select {
+        }else if job == .select {
             var nodeID = path
-            let asset = assets!.objectAtIndex(indexPath.row) as! PHAsset
+            let asset = assets!.object(at: indexPath.row) 
             nodeID!.append(asset.localIdentifier)
-            DVRemoteClient.sharedClient().moveToNode(nodeID, inDocument: document)
-            if selectingPhase == .Highlighting || selectingPhase == .Unhighlighting {
+            DVRemoteClient.shared().move(toNode: nodeID, inDocument: document)
+            if selectingPhase == .highlighting || selectingPhase == .unhighlighting {
                 deferringJob = job
             }else{
-                let condition = UITraitCollection(horizontalSizeClass: .Regular)
-                let isiPad = UIApplication.sharedApplication().keyWindow!.traitCollection.containsTraitsInCollection(condition)
+                let condition = UITraitCollection(horizontalSizeClass: .regular)
+                let isiPad = UIApplication.shared.keyWindow!.traitCollection.containsTraits(in: condition)
                 if !isiPad {
                     (navigationController! as? ItemListNavigationController)?.backToMapView()
-                }else if selectingPhase == .Highlight {
-                    changeSelecting(indexPath, job: .Unhighlight)
+                }else if selectingPhase == .highlight {
+                    changeSelecting(indexPath, job: .unhighlight)
                 }
             }
             
         }
     }
     
-    private let approximatelySize = 78.0
-    private let separatorSize = 1.0
+    fileprivate let approximatelySize = 78.0
+    fileprivate let separatorSize = 1.0
     
     
     //-----------------------------------------------------------------------------------------
     // MARK: レイアウト
     //-----------------------------------------------------------------------------------------
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewWidth = Double(collectionView.frame.size.width)
         let rowNum = Double(Int(viewWidth / approximatelySize))
         let size = (viewWidth - separatorSize * (rowNum - 1)) / rowNum
@@ -232,9 +232,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     //-----------------------------------------------------------------------------------------
     // MARK: DVRemoteClientDelegate
     //-----------------------------------------------------------------------------------------
-    func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveMeta meta: [AnyHashable: Any]!) {
         if selectedNodeIndex != nil {
-            if let cell = collectionView!.cellForItemAtIndexPath(NSIndexPath(forRow: selectedNodeIndex!, inSection: 0)) {
+            if let cell = collectionView!.cellForItem(at: IndexPath(row: selectedNodeIndex!, section: 0)) {
                 (cell as! AssetCell).checkMarkView.image = nil
             }
         }
@@ -246,104 +246,104 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
                     return
                 }
             }
-            selectedNodeIndex = (meta![DVRCNMETA_INDEX_IN_PARENT] as? NSNumber)!.integerValue
-            let indexPath = NSIndexPath(forRow: selectedNodeIndex!, inSection: 0)
-            if let cell = collectionView!.cellForItemAtIndexPath(indexPath) {
+            selectedNodeIndex = (meta![DVRCNMETA_INDEX_IN_PARENT] as? NSNumber)!.intValue
+            let indexPath = IndexPath(row: selectedNodeIndex!, section: 0)
+            if let cell = collectionView!.cellForItem(at: indexPath) {
                 (cell as! AssetCell).checkMarkView.image = UIImage(named: "checkMark")
             }
-            collectionView!.scrollToItemAtIndexPath(indexPath, atScrollPosition:.CenteredVertically , animated: true)
+            collectionView!.scrollToItem(at: indexPath, at:.centeredVertically , animated: true)
         }
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: UIScrollViewDelegate
     //-----------------------------------------------------------------------------------------
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCachedAssets()
     }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - サムネールキャッシュ制御
     //-----------------------------------------------------------------------------------------
-    private let imageManager = PHCachingImageManager()
-    private var previousPreheatRect = CGRectZero
+    fileprivate let imageManager = PHCachingImageManager()
+    fileprivate var previousPreheatRect = CGRect.zero
     
     func resetCachedAssets() {
         imageManager.stopCachingImagesForAllAssets()
-        previousPreheatRect = CGRectZero;
+        previousPreheatRect = CGRect.zero;
     }
 
     func updateCachedAssets() {
-        let isViewVisible = isViewLoaded() && view.window != nil
+        let isViewVisible = isViewLoaded && view.window != nil
         if !isViewVisible {
             return
         }
         
         // The preheat window is twice the height of the visible rect.
         var preheatRect = collectionView!.bounds
-        preheatRect = CGRectInset(preheatRect, 0.0, -0.5 * CGRectGetHeight(preheatRect))
+        preheatRect = preheatRect.insetBy(dx: 0.0, dy: -0.5 * preheatRect.height)
         
         /*
         Check if the collection view is showing an area that is significantly
         different to the last preheated area.
         */
-        let delta = abs(CGRectGetMidY(preheatRect) - CGRectGetMidY(previousPreheatRect))
-        if delta > CGRectGetHeight(collectionView!.bounds) / 3.0 {
+        let delta = abs(preheatRect.midY - previousPreheatRect.midY)
+        if delta > collectionView!.bounds.height / 3.0 {
             
             // Compute the assets to start caching and to stop caching.
-            var addedIndexPaths:[NSIndexPath] = []
-            var removedIndexPaths:[NSIndexPath] = []
+            var addedIndexPaths:[IndexPath] = []
+            var removedIndexPaths:[IndexPath] = []
             
             let collectionView = self.collectionView!
             computeDifferenceBetweenRect(previousPreheatRect, newRect: preheatRect, removedHandler: {
                 let indexPaths = collectionView.indexPathsForElementsInRect($0)
-                removedIndexPaths.appendContentsOf(indexPaths)
+                removedIndexPaths.append(contentsOf: indexPaths)
             }){
                 let indexPaths = collectionView.indexPathsForElementsInRect($0)
-                addedIndexPaths.appendContentsOf(indexPaths)
+                addedIndexPaths.append(contentsOf: indexPaths)
             }
             
             let assetsToStartCaching = assetsAtIndexPaths(addedIndexPaths)
             let assetsToStopCaching = assetsAtIndexPaths(removedIndexPaths)
             
             // Update the assets the PHCachingImageManager is caching.
-            let size = approximatelySize * Double(UIScreen.mainScreen().scale)
+            let size = approximatelySize * Double(UIScreen.main.scale)
             let thumbnailSize = CGSize(width: size, height: size)
-            imageManager.startCachingImagesForAssets(
-                assetsToStartCaching, targetSize:thumbnailSize, contentMode:.AspectFill, options:nil)
-            imageManager.stopCachingImagesForAssets(
-                assetsToStopCaching, targetSize:thumbnailSize, contentMode:.AspectFill, options:nil)
+            imageManager.startCachingImages(
+                for: assetsToStartCaching, targetSize:thumbnailSize, contentMode:.aspectFill, options:nil)
+            imageManager.stopCachingImages(
+                for: assetsToStopCaching, targetSize:thumbnailSize, contentMode:.aspectFill, options:nil)
             
             // Store the preheat rect to compare against in the future.
             previousPreheatRect = preheatRect
         }
     }
 
-    func computeDifferenceBetweenRect(oldRect: CGRect, newRect: CGRect,
+    func computeDifferenceBetweenRect(_ oldRect: CGRect, newRect: CGRect,
         removedHandler:(CGRect)->Void, addedHandler:(CGRect)->Void) {
-        if CGRectIntersectsRect(newRect, oldRect) {
-            let oldMaxY = CGRectGetMaxY(oldRect)
-            let oldMinY = CGRectGetMinY(oldRect)
-            let newMaxY = CGRectGetMaxY(newRect)
-            let newMinY = CGRectGetMinY(newRect)
+        if newRect.intersects(oldRect) {
+            let oldMaxY = oldRect.maxY
+            let oldMinY = oldRect.minY
+            let newMaxY = newRect.maxY
+            let newMinY = newRect.minY
             
             if (newMaxY > oldMaxY) {
-                let rectToAdd = CGRectMake(newRect.origin.x, oldMaxY, newRect.size.width, (newMaxY - oldMaxY))
+                let rectToAdd = CGRect(x: newRect.origin.x, y: oldMaxY, width: newRect.size.width, height: (newMaxY - oldMaxY))
                 addedHandler(rectToAdd)
             }
             
             if (oldMinY > newMinY) {
-                let rectToAdd = CGRectMake(newRect.origin.x, newMinY, newRect.size.width, (oldMinY - newMinY))
+                let rectToAdd = CGRect(x: newRect.origin.x, y: newMinY, width: newRect.size.width, height: (oldMinY - newMinY))
                 addedHandler(rectToAdd)
             }
             
             if (newMaxY < oldMaxY) {
-                let rectToRemove = CGRectMake(newRect.origin.x, newMaxY, newRect.size.width, (oldMaxY - newMaxY))
+                let rectToRemove = CGRect(x: newRect.origin.x, y: newMaxY, width: newRect.size.width, height: (oldMaxY - newMaxY))
                 removedHandler(rectToRemove)
             }
             
             if (oldMinY < newMinY) {
-                let rectToRemove = CGRectMake(newRect.origin.x, oldMinY, newRect.size.width, (newMinY - oldMinY))
+                let rectToRemove = CGRect(x: newRect.origin.x, y: oldMinY, width: newRect.size.width, height: (newMinY - oldMinY))
                 removedHandler(rectToRemove)
             }
         } else {
@@ -352,8 +352,8 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         }
     }
     
-    func assetsAtIndexPaths(indexPaths:[NSIndexPath]) -> [PHAsset]{
-        return assets == nil ? [] : indexPaths.map{assets![$0.item] as! PHAsset}
+    func assetsAtIndexPaths(_ indexPaths:[IndexPath]) -> [PHAsset]{
+        return assets == nil ? [] : indexPaths.map{assets![$0.item] }
     }
     
 }

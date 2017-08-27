@@ -24,23 +24,23 @@ private let ArrowTemplate : [CGPoint] = [
     CGPoint(x: -HeadH, y: 1.0 - HeadV),
 ]
 
-public class HeadingOverlay: NSObject, MKOverlay {
-    private let center : CLLocationCoordinate2D
-    private let heading : Double
-    private let fov : Double
-    private let length : Double
+open class HeadingOverlay: NSObject, MKOverlay {
+    fileprivate let center : CLLocationCoordinate2D
+    fileprivate let heading : Double
+    fileprivate let fov : Double
+    fileprivate let length : Double
     
-    private var arrowGeometry : [MKMapPoint] = []
-    private let bound : MKMapRect
+    fileprivate var arrowGeometry : [MKMapPoint] = []
+    fileprivate let bound : MKMapRect
     
-    public var fovArcAngle : Double = 0
-    public var fovArcCenter : MKMapPoint = MKMapPoint()
-    public var fovArcStart : MKMapPoint = MKMapPoint()
+    open var fovArcAngle : Double = 0
+    open var fovArcCenter : MKMapPoint = MKMapPoint()
+    open var fovArcStart : MKMapPoint = MKMapPoint()
 
-    public var arrowColor = ConfigurationController.sharedController.mapArrowColor
-    public var fovColor = ConfigurationController.sharedController.mapFovColor
+    open var arrowColor = ConfigurationController.sharedController.mapArrowColor
+    open var fovColor = ConfigurationController.sharedController.mapFovColor
     
-    public var altitude: Double = 0
+    open var altitude: Double = 0
     
     public init(center : CLLocationCoordinate2D, heading : Double, fov : Double, vScale : Double, hScale : Double) {
         self.center = center
@@ -48,7 +48,7 @@ public class HeadingOverlay: NSObject, MKOverlay {
         self.fov = fov
         self.length = vScale
         
-        let rotation = -self.heading * M_PI / 180.0
+        let rotation = -self.heading * Double.pi / 180.0
         
         for point in ArrowTemplate {
             let offset = CGPoint(x: point.x * CGFloat(hScale), y: point.y * CGFloat(vScale))
@@ -61,7 +61,7 @@ public class HeadingOverlay: NSObject, MKOverlay {
         var yMin : Double
         if fov > 0 {
             let fovArcRadius = length * 2.5
-            fovArcAngle = fov * M_PI / 180.0
+            fovArcAngle = fov * Double.pi / 180.0
             fovArcCenter = MKMapPointForCoordinate(center)
             fovArcStart = MapGeometry.translateCoordinateToMapPoint(
                 center, offset: CGPoint(x: 0, y: fovArcRadius), rotation: CGFloat(rotation + fovArcAngle / 2))
@@ -101,19 +101,19 @@ public class HeadingOverlay: NSObject, MKOverlay {
         bound = MKMapRect(origin: MKMapPoint(x: xMin, y: yMin), size: MKMapSize(width: xMax - xMin, height: yMax - yMin))
     }
 
-    public var coordinate: CLLocationCoordinate2D {
+    open var coordinate: CLLocationCoordinate2D {
         get {
             return center
         }
     }
     
-    public var boundingMapRect: MKMapRect {
+    open var boundingMapRect: MKMapRect {
         get {
             return bound
         }
     }
     
-    public var arrowPointList: [MKMapPoint] {
+    open var arrowPointList: [MKMapPoint] {
         get {
             return arrowGeometry
         }

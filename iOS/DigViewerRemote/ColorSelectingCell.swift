@@ -9,7 +9,7 @@
 import UIKit
 
 class ColorSelectingCell: UITableViewCell {
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         if selected {
             beginUpdateSubview()
         }
@@ -19,7 +19,7 @@ class ColorSelectingCell: UITableViewCell {
         }
     }
 
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             beginUpdateSubview()
         }
@@ -29,9 +29,9 @@ class ColorSelectingCell: UITableViewCell {
         }
     }
     
-    var savedColor : UIColor = UIColor.blackColor()
+    var savedColor : UIColor = UIColor.black
     
-    private func beginUpdateSubview() {
+    fileprivate func beginUpdateSubview() {
         for subview in self.contentView.subviews {
             if subview.tag != 0 {
                 savedColor = subview.backgroundColor!
@@ -40,7 +40,7 @@ class ColorSelectingCell: UITableViewCell {
         }
     }
 
-    private func endUpdateSubview() {
+    fileprivate func endUpdateSubview() {
         for subview in self.contentView.subviews {
             if subview.tag != 0 {
                 subview.backgroundColor = savedColor

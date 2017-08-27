@@ -12,20 +12,20 @@ class NamedColorCell: UITableViewCell {
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var colorNameLabel: UILabel!
     
-    var color: UIColor = UIColor.blackColor() {
+    var color: UIColor = UIColor.black {
         didSet {
             colorView.backgroundColor = color
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             colorView.backgroundColor = color
         }
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         if highlighted {
             colorView.backgroundColor = color

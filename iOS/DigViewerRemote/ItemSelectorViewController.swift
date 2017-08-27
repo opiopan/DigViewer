@@ -33,8 +33,8 @@ class ItemSelectorViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    @IBAction func closeThisView(sender: UIBarButtonItem?) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
     //-----------------------------------------------------------------------------------------
@@ -50,19 +50,19 @@ class ItemSelectorViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - Table View データソース
     //-----------------------------------------------------------------------------------------
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return identity.items == nil ? 0 : identity.items!.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ItemSelectorCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemSelectorCell", for: indexPath)
 
         cell.textLabel!.text = identity.items![indexPath.row]
-        cell.accessoryType = indexPath.row == identity.selectionIndex ? .Checkmark : .None
+        cell.accessoryType = indexPath.row == identity.selectionIndex ? .checkmark : .none
 
         return cell
     }
@@ -70,14 +70,14 @@ class ItemSelectorViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - セル選択状態変更
     //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: identity.selectionIndex, inSection: 0))
-        let newCell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let oldCell = tableView.cellForRow(at: IndexPath(row: identity.selectionIndex, section: 0))
+        let newCell = tableView.cellForRow(at: indexPath)
         identity.selectionIndex = indexPath.row
-        oldCell!.accessoryType = .None
-        newCell!.accessoryType = .Checkmark
+        oldCell!.accessoryType = .none
+        newCell!.accessoryType = .checkmark
         identity.changeNotifier?(identity, indexPath.row)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

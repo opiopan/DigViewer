@@ -13,9 +13,9 @@ class InspectorTableView: UITableView {
         didSet {
             if (contentInset.top != 0){
                 let insets = oldValue
-                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
+                let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
                 let weakSelf = self
-                dispatch_after(time, dispatch_get_main_queue(), {[unowned weakSelf]() -> Void in
+                DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned weakSelf]() -> Void in
                     weakSelf.contentInset = insets
                 })
             }

@@ -9,11 +9,11 @@
 import UIKit
 import MapKit
 
-public class HeadingOverlayRenderer: MKOverlayRenderer {
-    private var displayMode : MapHeadingDisplay
+open class HeadingOverlayRenderer: MKOverlayRenderer {
+    fileprivate var displayMode : MapHeadingDisplay
 
-    private var components : [CGFloat]
-    private var locations : [CGFloat] = [0.0, 1.0]
+    fileprivate var components : [CGFloat]
+    fileprivate var locations : [CGFloat] = [0.0, 1.0]
     
     override public init(overlay : MKOverlay) {
         displayMode = ConfigurationController.sharedController.mapHeadingDisplay
@@ -24,9 +24,9 @@ public class HeadingOverlayRenderer: MKOverlayRenderer {
         var alpha : CGFloat = 0
         (overlay as! HeadingOverlay).fovColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         let startColor = UIColor(red: red, green: green, blue: blue, alpha: 0.4)
-        let startColorComponent = CGColorGetComponents(startColor.CGColor)
+        let startColorComponent:[CGFloat] = startColor.cgColor.components!
         let endColor = UIColor(red: red, green: green, blue: blue, alpha: 0)
-        let endColorComponent = CGColorGetComponents(endColor.CGColor)
+        let endColorComponent:[CGFloat] = endColor.cgColor.components!
         components = [
             startColorComponent[0], startColorComponent[1], startColorComponent[2], startColorComponent[3],
             endColorComponent[0], endColorComponent[1], endColorComponent[2], endColorComponent[3],
@@ -35,49 +35,49 @@ public class HeadingOverlayRenderer: MKOverlayRenderer {
         super.init(overlay: overlay)
     }
     
-    override public func drawMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale, inContext context: CGContext) {
+    override open func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
         let headingOverlay = overlay as? HeadingOverlay
 
         // FOVを表す扇形の描画
-        if displayMode == .FOV || displayMode == .ArrowAndFOV {
-            CGContextSaveGState(context)
-            let center = pointForMapPoint(headingOverlay!.fovArcCenter)
-            let start = pointForMapPoint(headingOverlay!.fovArcStart)
+        if displayMode == .fov || displayMode == .arrowAndFOV {
+            context.saveGState()
+            let center = point(for: headingOverlay!.fovArcCenter)
+            let start = point(for: headingOverlay!.fovArcStart)
             let startRel = CGPoint(x: start.x - center.x, y: start.y - center.y)
             let radius = sqrt(startRel.x * startRel.x + startRel.y * startRel.y)
             var startAngle = acos(startRel.x / radius)
             if startRel.y < 0 {
                 startAngle *= -1
             }
-            CGContextBeginPath(context)
-            CGContextMoveToPoint(context, center.x, center.y)
-            CGContextAddLineToPoint(context, start.x, start.y)
-            CGContextAddArc(
-                context, center.x, center.y, radius,
-                startAngle, startAngle + CGFloat(headingOverlay!.fovArcAngle), 0)
-            CGContextClosePath(context)
-            CGContextClip(context)
+            context.beginPath()
+            context.move(to: CGPoint(x: center.x, y: center.y))
+            context.addLine(to: CGPoint(x: start.x, y: start.y))
+            context.addArc(center: center, radius: radius,
+                           startAngle: startAngle, endAngle: startAngle + CGFloat(headingOverlay!.fovArcAngle),
+                           clockwise: false)
+            context.closePath()
+            context.clip()
             
             let colorSpace = CGColorSpaceCreateDeviceRGB()
-            let gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, locations.count)
-            CGContextDrawRadialGradient(context, gradient!, center, 0, center, radius, .DrawsAfterEndLocation)
+            let gradient = CGGradient(colorSpace: colorSpace, colorComponents: components, locations: locations, count: locations.count)
+            context.drawRadialGradient(gradient!, startCenter: center, startRadius: 0, endCenter: center, endRadius: radius, options: .drawsAfterEndLocation)
             
-            CGContextRestoreGState(context)
+            context.restoreGState()
         }
         
         // 矢印の描画
-        if displayMode == .Arrow || displayMode == .ArrowAndFOV {
+        if displayMode == .arrow || displayMode == .arrowAndFOV {
             let points = headingOverlay!.arrowPointList
-            let startPoint = pointForMapPoint(points[0])
-            CGContextBeginPath(context)
-            CGContextMoveToPoint(context, startPoint.x, startPoint.y)
+            let startPoint = point(for: points[0])
+            context.beginPath()
+            context.move(to: CGPoint(x: startPoint.x, y: startPoint.y))
             for i in 1 ..< points.count {
-                let point = pointForMapPoint(points[i])
-                CGContextAddLineToPoint(context, point.x, point.y)
+                let point = self.point(for: points[i])
+                context.addLine(to: CGPoint(x: point.x, y: point.y))
             }
-            CGContextClosePath(context)
-            CGContextSetFillColorWithColor(context, headingOverlay!.arrowColor.CGColor)
-            CGContextFillPath(context)
+            context.closePath()
+            context.setFillColor(headingOverlay!.arrowColor.cgColor)
+            context.fillPath()
         }
     }
 }

@@ -21,7 +21,7 @@ class DataSourceCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    @IBAction func onDetailButton(sender: AnyObject) {
+    @IBAction func onDetailButton(_ sender: AnyObject) {
         if detailTransitor != nil {
             detailTransitor!(self)
         }

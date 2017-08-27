@@ -8,18 +8,18 @@
 
 import UIKit
 
-public class InspectorImageCell: UITableViewCell {
+open class InspectorImageCell: UITableViewCell {
 
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    @IBOutlet public weak var thumbnailView: UIImageView!
-    @IBOutlet public weak var mainLabel: UILabel!
-    @IBOutlet public weak var subLabel: UILabel!
-    @IBOutlet public weak var thumbnailHightConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var thumbnailView: UIImageView!
+    @IBOutlet open weak var mainLabel: UILabel!
+    @IBOutlet open weak var subLabel: UILabel!
+    @IBOutlet open weak var thumbnailHightConstraint: NSLayoutConstraint!
 }

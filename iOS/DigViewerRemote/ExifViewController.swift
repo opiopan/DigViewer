@@ -16,21 +16,21 @@ class ExifViewController: ExifViewControllerBase, DVRemoteClientDelegate, Inform
 
         super.imageSelector = {
             [unowned self] (imageView) in
-            self.performSegueWithIdentifier("FullImageView", sender: self)
+            self.performSegue(withIdentifier: "FullImageView", sender: self)
         }
         
-        let client = DVRemoteClient.sharedClient()
+        let client = DVRemoteClient.shared()
         
-        let meta = client.meta
+        let meta = client?.meta
         if meta != nil {
             dvrClient(client, didRecieveMeta: meta)
         }
-        let thumbnail = client.thumbnail
+        let thumbnail = client?.thumbnail
         if meta != nil {
             dvrClient(client, didRecieveCurrentThumbnail: thumbnail)
         }
 
-        DVRemoteClient.sharedClient().addClientDelegate(self)
+        DVRemoteClient.shared().add(self)
     }
     
     deinit{
@@ -40,38 +40,38 @@ class ExifViewController: ExifViewControllerBase, DVRemoteClientDelegate, Inform
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        let client = DVRemoteClient.sharedClient()
-        client.addClientDelegate(self)
-        if client.meta != nil {
-            dvrClient(client, didRecieveMeta: client.meta)
+    override func viewWillAppear(_ animated: Bool) {
+        let client = DVRemoteClient.shared()
+        client?.add(self)
+        if client?.meta != nil {
+            dvrClient(client, didRecieveMeta: client?.meta)
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        DVRemoteClient.shared().remove(self)
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - InformationViewChildプロトコル
     //-----------------------------------------------------------------------------------------
-    private var informationViewController : InfomationViewController?
-    func setInformationViewController(controller: InfomationViewController) {
+    fileprivate var informationViewController : InfomationViewController?
+    func setInformationViewController(_ controller: InfomationViewController) {
         informationViewController = controller
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
+    func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
     }
 
-    func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
-        self.thumbnail = DVRemoteClient.sharedClient().thumbnail
+    func dvrClient(_ client: DVRemoteClient!, didRecieveMeta meta: [AnyHashable: Any]!) {
+        self.thumbnail = DVRemoteClient.shared().thumbnail
         self.meta = meta
     }
     
-    func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
         self.thumbnail = thumbnail
     }
 

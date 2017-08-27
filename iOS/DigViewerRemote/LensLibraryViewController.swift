@@ -31,38 +31,38 @@ class LensLibraryViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func closeThisView(sender: UIBarButtonItem?) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - テーブルビューのデータソース
     //-----------------------------------------------------------------------------------------
-    private var lensProfiles : [Lens]? = nil
+    fileprivate var lensProfiles : [Lens]? = nil
     
-    private func updateDataSource() {
+    fileprivate func updateDataSource() {
         let syncSource = ConfigurationController.sharedController.lensLibrarySource
         syncSourceLabel.text = syncSource == nil ? NSLocalizedString("LL_NOSOURCE", comment: ""): syncSource
-        lensProfiles = (LensLibrary.sharedLensLibrary().allLensProfiles as! [Lens]?)!.sort(){
-            $0.name.caseInsensitiveCompare($1.name) == NSComparisonResult.OrderedAscending
+        lensProfiles = (LensLibrary.shared().allLensProfiles as! [Lens]?)!.sorted(){
+            $0.name.caseInsensitiveCompare($1.name) == ComparisonResult.orderedAscending
         }
         tableView.reloadData()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return ConfigurationController.sharedController.lensLibrarySource == nil ? 0 : 1
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString("LL_PROFILE_TITLE", comment: "")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lensProfiles!.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LensProfileCell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LensProfileCell", for: indexPath)
         
         let lens = lensProfiles![indexPath.row];
         cell.textLabel!.text = lens.name
@@ -74,12 +74,12 @@ class LensLibraryViewController: UIViewController, UITableViewDataSource, UITabl
     //-----------------------------------------------------------------------------------------
     // MARK: - ライブラリリセット
     //-----------------------------------------------------------------------------------------
-    @IBAction func resetLensLibrary(sender: AnyObject) {
+    @IBAction func resetLensLibrary(_ sender: AnyObject) {
         let alert = UIAlertController(
             title: NSLocalizedString("LL_RESET_TITLE", comment: ""),
             message: NSLocalizedString("LL_RESET_MESSAGE", comment: ""),
-            preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Default){
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default){
             [unowned self] action in
             LensLibrary.resetLensLibrary()
             let controller = ConfigurationController.sharedController
@@ -88,10 +88,10 @@ class LensLibraryViewController: UIViewController, UITableViewDataSource, UITabl
             self.updateDataSource()
         }
         alert.addAction(okAction)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
 }

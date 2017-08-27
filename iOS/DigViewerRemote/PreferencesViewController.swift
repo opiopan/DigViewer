@@ -11,24 +11,24 @@ import DVremoteCommonUI
 import DVremoteCommonLib
 
 class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
-    static private var headingDisplays = [
+    static fileprivate var headingDisplays = [
         NSLocalizedString("HEADING_DISPLAY_NONE", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_ARROW", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_FOV", comment: ""),
         NSLocalizedString("HEADING_DISPLAY_ARROW_AND_FOV", comment: ""),
     ]
     
-    static private var summaryDisplays = [
+    static fileprivate var summaryDisplays = [
         NSLocalizedString("SUMMARY_DISPLAY_NONE", comment: ""),
         NSLocalizedString("SUMMARY_DISPLAY_BALLOON", comment: ""),
         NSLocalizedString("SUMMARY_DISPLAY_PINNING", comment: ""),
     ]
     
-    static private var dataSourceSeciotnIcons = [
+    static fileprivate var dataSourceSeciotnIcons = [
         "icon_datasource",
     ]
     
-    static private var mapSectionIcons = [
+    static fileprivate var mapSectionIcons = [
         "icon_maptype",
         "icon_maplabel",
         "icon_3dview",
@@ -37,12 +37,12 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         "icon_detailconfig",
     ]
     
-    static private var otherSectionIcons = [
+    static fileprivate var otherSectionIcons = [
         "icon_lenslibrary",
         "icon_about",
     ]
     
-    static private var icons : [[String]] = [
+    static fileprivate var icons : [[String]] = [
         PreferencesViewController.dataSourceSeciotnIcons,
         PreferencesViewController.mapSectionIcons,
         PreferencesViewController.otherSectionIcons,
@@ -60,7 +60,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
     //-----------------------------------------------------------------------------------------
-    private let configController = ConfigurationController.sharedController
+    fileprivate let configController = ConfigurationController.sharedController
     override func viewDidLoad() {
         super.viewDidLoad()
         reflectToControl()
@@ -70,23 +70,23 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        DVRemoteClient.sharedClient().addClientDelegate(self)
-        let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
+    override func viewWillAppear(_ animated: Bool) {
+        DVRemoteClient.shared().add(self)
+        let client = DVRemoteClient.shared()
+        connectionCell.detailTextLabel!.text = client?.state != .connected ? client?.stateString : AppDelegate.connectionName()
         headingDisplayCell.detailTextLabel!.text =
             PreferencesViewController.headingDisplays[configController.mapHeadingDisplay.rawValue]
         summaryDisplayCell.detailTextLabel!.text =
             PreferencesViewController.summaryDisplays[configController.mapSummaryDisplay.rawValue]
-        lensLibraryCell.detailTextLabel!.text = "\(LensLibrary.sharedLensLibrary().allLensProfiles.count)"
+        lensLibraryCell.detailTextLabel!.text = "\(LensLibrary.shared().allLensProfiles.count)"
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        DVRemoteClient.shared().remove(self)
     }
 
-    @IBAction func closeThisView(sender : UIBarButtonItem?){
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender : UIBarButtonItem?){
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
     //-----------------------------------------------------------------------------------------
@@ -94,49 +94,49 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     func reflectToControl() {
         mapTypeControl!.selectedSegmentIndex = configController.mapType.rawValue
-        mapLabelSwitch.on = configController.mapShowLabel
-        map3DSwitch.on = configController.map3DView
+        mapLabelSwitch.isOn = configController.mapShowLabel
+        map3DSwitch.isOn = configController.map3DView
 //        enableVolumeControl!.on = configController.enableVolumeButton
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 非表示セルの制御
     //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 && configController.mapType == .Map {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 && configController.mapType == .map {
             return super.tableView(tableView, numberOfRowsInSection: section) - 1
          }else{
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell! = nil
         var row = indexPath.row
-        if indexPath.section == 1 && configController.mapType == .Map && indexPath.row > 0 {
-            let newIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-            cell = super.tableView(tableView, cellForRowAtIndexPath: newIndexPath)
+        if indexPath.section == 1 && configController.mapType == .map && indexPath.row > 0 {
+            let newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            cell = super.tableView(tableView, cellForRowAt: newIndexPath)
             row += 1
         }else{
-            cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+            cell = super.tableView(tableView, cellForRowAt: indexPath)
         }
         cell.imageView!.image = UIImage(named: PreferencesViewController.icons[indexPath.section][row])
         return cell
     }
     
-    private var savedMapType : MapType = .Map
+    fileprivate var savedMapType : MapType = .map
     
-    private func beginUpdateCellCount() {
+    fileprivate func beginUpdateCellCount() {
         tableView.beginUpdates()
         savedMapType = configController.mapType
     }
     
-    private func endUpdateCellCount() {
-        let indexPaths = [NSIndexPath(forRow: 1, inSection: 1)]
-        if savedMapType == .Map && configController.mapType == .Satellite {
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
-        }else if savedMapType == .Satellite && configController.mapType == .Map {
-            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+    fileprivate func endUpdateCellCount() {
+        let indexPaths = [IndexPath(row: 1, section: 1)]
+        if savedMapType == .map && configController.mapType == .satellite {
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        }else if savedMapType == .satellite && configController.mapType == .map {
+            tableView.deleteRows(at: indexPaths, with: .automatic)
         }
         tableView.endUpdates()
     }
@@ -144,42 +144,42 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - UI要素のactionハンドラ
     //-----------------------------------------------------------------------------------------
-    @IBAction func actionForMapType(sender : UISegmentedControl) {
+    @IBAction func actionForMapType(_ sender : UISegmentedControl) {
         beginUpdateCellCount()
         configController.mapType = MapType(rawValue: sender.selectedSegmentIndex)!
         endUpdateCellCount()
         reflectToControl()
     }
     
-    @IBAction func actionForMapLabelSwitch(sender: UISwitch) {
-        configController.mapShowLabel = sender.on
+    @IBAction func actionForMapLabelSwitch(_ sender: UISwitch) {
+        configController.mapShowLabel = sender.isOn
     }
     
-    @IBAction func actionForMap3DSwitch(sender: UISwitch) {
-        configController.map3DView = sender.on
+    @IBAction func actionForMap3DSwitch(_ sender: UISwitch) {
+        configController.map3DView = sender.isOn
     }
     
-    @IBAction func actionForEnableVolume(sender : UISwitch) {
-        configController.enableVolumeButton = sender.on
+    @IBAction func actionForEnableVolume(_ sender : UISwitch) {
+        configController.enableVolumeButton = sender.isOn
         reflectToControl()
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 接続状態を反映
     //-----------------------------------------------------------------------------------------
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        let client = DVRemoteClient.sharedClient()
-        connectionCell.detailTextLabel!.text = client.state != .Connected ? client.stateString : AppDelegate.connectionName()
+    func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
+        let client = DVRemoteClient.shared()
+        connectionCell.detailTextLabel!.text = client?.state != .connected ? client?.stateString : AppDelegate.connectionName()
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - Navigation
     //-----------------------------------------------------------------------------------------
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let targetCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let targetCell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) {
             if let identifier = targetCell.reuseIdentifier {
                 if identifier == "selectHeadingCell" {
-                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let target = segue.destination as! ItemSelectorViewController
                     let identity = ItemSelectorIdentity()
                     identity.title = NSLocalizedString("HEADING_DISPLAY", comment: "")
                     identity.selectionIndex = configController.mapHeadingDisplay.rawValue
@@ -190,7 +190,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
                     }
                     target.identity = identity
                 }else if identifier == "selectSummaryCell" {
-                    let target = segue.destinationViewController as! ItemSelectorViewController
+                    let target = segue.destination as! ItemSelectorViewController
                     let identity = ItemSelectorIdentity()
                     identity.title = NSLocalizedString("SUMMARY_DISPLAY", comment: "")
                     identity.selectionIndex = configController.mapSummaryDisplay.rawValue
@@ -204,7 +204,7 @@ class PreferencesViewController: UITableViewController, DVRemoteClientDelegate {
             }
         }
         if let index = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(index, animated: true)
+            tableView.deselectRow(at: index, animated: true)
         }
     }
 

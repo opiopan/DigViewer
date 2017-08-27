@@ -16,8 +16,8 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     @IBOutlet var barTitle : UINavigationItem? = nil
     @IBOutlet weak var toolbar: UIToolbar!
 
-    private var initialized = false
-    private var firstConnecting = true
+    fileprivate var initialized = false
+    fileprivate var firstConnecting = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         splitViewController!.maximumPrimaryColumnWidth = 320
         
         navigationItem.hidesBackButton = true;
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController!.setNavigationBarHidden(true, animated: false)
         
         toolbar.layer.zPosition = 100
@@ -34,7 +34,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         
         super.imageSelector = {
             [unowned self] (imageView) in
-            self.performSegueWithIdentifier("FullImageView", sender: self)
+            self.performSegue(withIdentifier: "FullImageView", sender: self)
         }
 
         mapView!.addGestureRecognizer(
@@ -48,12 +48,12 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     }
     
     deinit{
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+        DVRemoteClient.shared().remove(self)
     }
 
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        super.preferredStatusBarStyle()
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        _ = super.preferredStatusBarStyle
+        return UIStatusBarStyle.lightContent
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,22 +65,22 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - 初回接続処理
     //-----------------------------------------------------------------------------------------
-    private func initialConnect() {
+    fileprivate func initialConnect() {
         if (!initialized){
             initialized = true
-            let client = DVRemoteClient.sharedClient()
-            client.isInitialized = true
-            client.addClientDelegate(self)
-            barTitle!.title = client.state != .Connected ? client.stateString : client.serviceName
+            let client = DVRemoteClient.shared()
+            client?.isInitialized = true
+            client?.add(self)
+            barTitle!.title = client?.state != .connected ? client?.stateString : client?.serviceName
             if let name = ConfigurationController.sharedController.establishedConnection {
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue(), {() -> Void in
+                let time = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: time, execute: {() -> Void in
                     if name == "" {
-                        client.connectToLocal()
+                        client?.connectToLocal()
                     }else{
-                        let service = NSNetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
+                        let service = NetService(domain: "local", type: DVR_SERVICE_TYPE, name: name);
                         let key = ConfigurationController.sharedController.authenticationgKeys[name];
-                        client.connectToServer(service, withKey: key, fromDevice: AppDelegate.deviceID())
+                        client?.connect(toServer: service, withKey: key, fromDevice: AppDelegate.deviceID())
                     }
                 })
             }else{
@@ -95,27 +95,27 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     var isEnableDoublePane = true;
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
-        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
+        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular))
         let mode = splitViewController!.displayMode
         if size.width > size.height && isReguler {
-            if mode != .PrimaryHidden {
-                splitViewController!.preferredDisplayMode = .PrimaryHidden
+            if mode != .primaryHidden {
+                splitViewController!.preferredDisplayMode = .primaryHidden
             }
             if isEnableDoublePane {
-                let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-                dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
-                    self.splitViewController!.preferredDisplayMode = .AllVisible
+                let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned self]() -> Void in
+                    self.splitViewController!.preferredDisplayMode = .allVisible
                 })
             }
         }else if size.height > size.width && isReguler {
-            if mode != .PrimaryHidden {
+            if mode != .primaryHidden {
                 UIView.beginAnimations(nil, context: nil)
                 UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = .PrimaryHidden
+                splitViewController!.preferredDisplayMode = .primaryHidden
                 UIView.commitAnimations()
             }
         }
@@ -125,19 +125,19 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // Information ボタン
     //-----------------------------------------------------------------------------------------
-    @IBAction func performInformationButton(sender : UIBarButtonItem) {
-        let bounds = UIScreen.mainScreen().bounds
-        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
-        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular))
+    @IBAction func performInformationButton(_ sender : UIBarButtonItem) {
+        let bounds = UIScreen.main.bounds
+        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular))
         if bounds.size.height > bounds.size.width {
             // 縦表示
             if isReguler {
                 UIView.beginAnimations(nil, context: nil)
                 UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+                splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.primaryOverlay
                 UIView.commitAnimations()
             }else{
-                performSegueWithIdentifier("ShowInformationView", sender: sender)
+                performSegue(withIdentifier: "ShowInformationView", sender: sender)
             }
         }else{
             // 横表示
@@ -145,10 +145,10 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 isEnableDoublePane = !isEnableDoublePane
                 UIView.beginAnimations(nil, context: nil)
                 UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = isEnableDoublePane ? .AllVisible : .PrimaryHidden
+                splitViewController!.preferredDisplayMode = isEnableDoublePane ? .allVisible : .primaryHidden
                 UIView.commitAnimations()
             }else{
-                performSegueWithIdentifier("ShowInformationView", sender: sender)
+                performSegue(withIdentifier: "ShowInformationView", sender: sender)
             }
         }
     }
@@ -156,57 +156,57 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // 次・前 ボタン
     //-----------------------------------------------------------------------------------------
-    @IBAction func moveToNextImage(sender : AnyObject) {
-        DVRemoteClient.sharedClient()!.moveToNextImage()
+    @IBAction func moveToNextImage(_ sender : AnyObject) {
+        DVRemoteClient.shared()!.moveToNextImage()
     }
     
-    @IBAction func moveToPreviousImage(sender : AnyObject) {
-        DVRemoteClient.sharedClient()!.moveToPreviousImage()
+    @IBAction func moveToPreviousImage(_ sender : AnyObject) {
+        DVRemoteClient.shared()!.moveToPreviousImage()
     }
     
     //-----------------------------------------------------------------------------------------
     // 設定ボタン
     //-----------------------------------------------------------------------------------------
-    @IBAction func configureApp(sender : AnyObject) {
-        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
-        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
-            traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
+    @IBAction func configureApp(_ sender : AnyObject) {
+        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular)) &&
+            traitCollection.containsTraits(in: UITraitCollection(verticalSizeClass: .regular))
         if isReguler {
-            performSegueWithIdentifier("PopoverConfigurationView", sender: sender)
+            performSegue(withIdentifier: "PopoverConfigurationView", sender: sender)
         }else{
-            performSegueWithIdentifier("ModalConfigurationView", sender: sender)
+            performSegue(withIdentifier: "ModalConfigurationView", sender: sender)
         }
     }
     
     //-----------------------------------------------------------------------------------------
     // Serversリスト表示
     //-----------------------------------------------------------------------------------------
-    private func showServersList() {
+    fileprivate func showServersList() {
         isOpenServerList = true
-        let traitCollection = UIApplication.sharedApplication().keyWindow!.traitCollection
-        let isReguler = traitCollection.containsTraitsInCollection(UITraitCollection(horizontalSizeClass: .Regular)) &&
-            traitCollection.containsTraitsInCollection(UITraitCollection(verticalSizeClass: .Regular))
+        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular)) &&
+            traitCollection.containsTraits(in: UITraitCollection(verticalSizeClass: .regular))
         if isReguler {
-            performSegueWithIdentifier("PopoverConfigurationView", sender: self)
+            performSegue(withIdentifier: "PopoverConfigurationView", sender: self)
         }else{
-            performSegueWithIdentifier("ModalConfigurationView", sender: self)
+            performSegue(withIdentifier: "ModalConfigurationView", sender: self)
         }
     }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコルの実装
     //-----------------------------------------------------------------------------------------
-    private var pendingPairingKey : String? = nil
+    fileprivate var pendingPairingKey : String? = nil
     
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
+    func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
         updateMessageView()
-        if client.state == .Disconnected {
+        if client.state == .disconnected {
             pendingPairingKey = nil
         }
-        if client.state == .Disconnected && firstConnecting {
+        if client.state == .disconnected && firstConnecting {
             firstConnecting = false
             showServersList()
-        }else if client.state == .Connected {
+        }else if client.state == .connected {
             super.isLocalSession = client.isConnectedToLocal
             firstConnecting = false
             if pendingPairingKey != nil {
@@ -219,36 +219,36 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         }
     }
     
-    func dvrClient(client: DVRemoteClient!, didRecievePairingKey key: String!, forServer service: NSNetService!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecievePairingKey key: String!, forServer service: NetService!) {
         pendingPairingKey = key
         let controller = ConfigurationController.sharedController
         var keys = controller.authenticationgKeys
         keys[service.name] = nil
         controller.authenticationgKeys = keys
      
-        performSegueWithIdentifier("ParingNotice", sender: self)
+        performSegue(withIdentifier: "ParingNotice", sender: self)
     }
     
-    private var geocoder : CLGeocoder? = nil
-    private var isGeocoding = false
-    private var pendingGeocodingRecquest : CLLocation? = nil
-    private var currentLocation : CLLocation? = nil
-    private var placemark : CLPlacemark? = nil
-    private var isFirst = true
+    fileprivate var geocoder : CLGeocoder? = nil
+    fileprivate var isGeocoding = false
+    fileprivate var pendingGeocodingRecquest : CLLocation? = nil
+    fileprivate var currentLocation : CLLocation? = nil
+    fileprivate var placemark : CLPlacemark? = nil
+    fileprivate var isFirst = true
     
-    func dvrClient(client: DVRemoteClient!, didRecieveMeta meta: [NSObject : AnyObject]!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveMeta meta: [AnyHashable: Any]!) {
         super.meta = meta
         super.thumbnail = client.thumbnail
     }
     
-    func dvrClient(client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveCurrentThumbnail thumbnail: UIImage!) {
         super.thumbnail = thumbnail
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 地図データロード状況ごとの処理 (MKMapViewDelegateプロトコル)
     //-----------------------------------------------------------------------------------------
-    override func mapViewDidFinishLoadingMap(view: MKMapView){
+    override func mapViewDidFinishLoadingMap(_ view: MKMapView){
         initialConnect()
         super.mapViewDidFinishLoadingMap(view)
     }
@@ -259,9 +259,9 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     @IBOutlet weak var messageView: MessageView!
     @IBOutlet weak var messageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: UILabel!
-    private var messageViewHeight : CGFloat = 0.0
+    fileprivate var messageViewHeight : CGFloat = 0.0
     
-    private func initMessageView() {
+    fileprivate func initMessageView() {
         messageView.layer.zPosition = 10.0
         messageViewHeight = messageViewHeightConstraint.constant
 
@@ -271,22 +271,22 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         updateMessageView()
     }
     
-    private func updateMessageView() {
-        let client = DVRemoteClient.sharedClient()
+    fileprivate func updateMessageView() {
+        let client = DVRemoteClient.shared()
         if initialized {
-            messageLabel.text = client.state != .Connected ? client.stateString :
+            messageLabel.text = client?.state != .connected ? client?.stateString :
                 AppDelegate.connectionName()
                 //NSString(format: NSLocalizedString("MSGVIEW_ESTABLISHED", comment: ""), AppDelegate.connectionName()!) as String
         }else{
             messageLabel.text = NSLocalizedString("MSGVIEW_INITIALIIZING_MAP", comment: "")
         }
-        let height = client.state == .Connected ? 0.0 : messageViewHeight
-        let delay = client.state == .Connected ? 2.0 : 0.0
+        let height = client?.state == .connected ? 0.0 : messageViewHeight
+        let delay = client?.state == .connected ? 2.0 : 0.0
         if messageViewHeightConstraint.constant != height {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 [unowned self]() in
-                UIView.animateWithDuration(
-                    0.5, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {
+                UIView.animate(
+                    withDuration: 0.5, delay: delay, options: UIViewAnimationOptions.curveLinear, animations: {
                         [unowned self]() -> Void in
                         self.messageViewHeightConstraint.constant = height
                         self.view.layoutIfNeeded()
@@ -295,35 +295,35 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         }
     }
     
-    func tapOnMessageView(recognizer: UIGestureRecognizer){
+    func tapOnMessageView(_ recognizer: UIGestureRecognizer){
         showServersList()
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 位置情報の共有
     //-----------------------------------------------------------------------------------------
-    private var documentInteractionController : UIDocumentInteractionController!
+    fileprivate var documentInteractionController : UIDocumentInteractionController!
     
-    func onLongPress(recognizer: UIGestureRecognizer){
-        let rect = CGRect(origin: recognizer.locationInView(self.view), size: CGSizeZero)
+    func onLongPress(_ recognizer: UIGestureRecognizer){
+        let rect = CGRect(origin: recognizer.location(in: self.view), size: CGSize.zero)
         
         if self.presentedViewController == nil {
-            let controller = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             if geometry != nil {
                 controller.addAction(UIAlertAction(
-                    title: NSLocalizedString("SA_SHARE_LOCATION", comment: ""), style: .Default){
+                    title: NSLocalizedString("SA_SHARE_LOCATION", comment: ""), style: .default){
                         [unowned self](action: UIAlertAction) in
                         self.showLocationSharingSheet(rect)
                     }
                 )
                 controller.addAction(UIAlertAction(
-                    title: NSLocalizedString("SA_SHARE_KML", comment: ""), style: .Default){
+                    title: NSLocalizedString("SA_SHARE_KML", comment: ""), style: .default){
                         [unowned self](action: UIAlertAction) in
                         self.showKMLSharingSheet(rect)
                     }
                 )
                 controller.addAction(UIAlertAction(
-                    title: NSLocalizedString("SA_COPY_SUMMARY", comment: ""), style: .Default){
+                    title: NSLocalizedString("SA_COPY_SUMMARY", comment: ""), style: .default){
                         [unowned self](action: UIAlertAction) in
                         if self.meta != nil {
                             let summary = SummarizedMeta(meta: self.meta)
@@ -333,19 +333,19 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 )
             }
             controller.addAction(UIAlertAction(
-                title: NSLocalizedString("SA_SHARE_CANCEL", comment: ""), style: .Cancel){(action: UIAlertAction) in}
+                title: NSLocalizedString("SA_SHARE_CANCEL", comment: ""), style: .cancel){(action: UIAlertAction) in}
             )
             if let popoverPresentationController = controller.popoverPresentationController {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
             }
             if controller.actions.count > 1 {
-                self.presentViewController(controller, animated: true){}
+                self.present(controller, animated: true){}
             }
         }
     }
 
-    private func showLocationSharingSheet(rect : CGRect) {
+    fileprivate func showLocationSharingSheet(_ rect : CGRect) {
         if let geometry = self.geometry {
             let lat = geometry.latitude
             let lng = geometry.longitude
@@ -366,7 +366,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 text += "\(address)\n"
             }
             let mapUrl = MapURL(geometry: geometry, title: popupViewController!.addressLabel.text!)
-            var items : [AnyObject] = [
+            var items : [Any] = [
                 text,
                 mapUrl,
             ]
@@ -387,23 +387,23 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 camera.heading = geometry.cameraHeading
                 camera.altitude = geometry.cameraAltitude
                 camera.pitch = CGFloat(geometry.cameraTilt)
-                let options = [
+                let options : [String : Any] = [
                     MKLaunchOptionsMapTypeKey: mapType.rawValue,
-                    MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: span),
+                    MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: span),
                     MKLaunchOptionsCameraKey: camera,
                 ]
-                mapItem.openInMapsWithLaunchOptions(options)
+                mapItem.openInMaps(launchOptions: options)
             }
             let mapScale = geometry.spanLongitudeMeter / Double(mapView!.frame.size.width)
             let gmapActivity = CustomActivity(key: "CA_OPEN_GOOGLEMAPS", icon: UIImage(named: "action_open_googlemaps")!){
                 let zoom = Int(max(0, min(19, round(log2(156543.033928 / mapScale)))))
-                var url : NSURL
-                if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemapsurl://")!){
-                    url = NSURL(string: "comgooglemapsurl://?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
+                var url : URL
+                if UIApplication.shared.canOpenURL(URL(string: "comgooglemapsurl://")!){
+                    url = URL(string: "comgooglemapsurl://?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
                 }else{
-                    url = NSURL(string: "https://www.google.com/maps?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
+                    url = URL(string: "https://www.google.com/maps?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
                 }
-                UIApplication.sharedApplication().openURL(url)
+                UIApplication.shared.openURL(url)
             }
             let activities = [mapActivity, gmapActivity]
             
@@ -413,33 +413,33 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 popoverPresentationController.sourceView = self.view
                 popoverPresentationController.sourceRect = rect
             }
-            self.presentViewController(controller, animated: true){}
+            self.present(controller, animated: true){}
         }
     }
     
-    private func showKMLSharingSheet(rect : CGRect) {
+    fileprivate func showKMLSharingSheet(_ rect : CGRect) {
         if self.presentedViewController == nil && geometry != nil{
             let date = self.popupViewController!.dateLabel.text
             let kml = KMLFile(name: date!, geometry: self.geometry!)
-            documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: kml.path))
+            documentInteractionController = UIDocumentInteractionController(url: URL(fileURLWithPath: kml.path))
             documentInteractionController.delegate = self
-            documentInteractionController.presentOpenInMenuFromRect(rect, inView: self.view, animated: true)
+            documentInteractionController.presentOpenInMenu(from: rect, in: self.view, animated: true)
         }
     }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - Segueコントロール
     //-----------------------------------------------------------------------------------------
-    private var isOpenServerList : Bool = false
+    fileprivate var isOpenServerList : Bool = false
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier! == "PopoverConfigurationView" || segue.identifier == "ModalConfigurationView" {
-            let controller = segue.destinationViewController as! PreferencesNavigationController
+            let controller = segue.destination as! PreferencesNavigationController
             controller.isOpenServerList = isOpenServerList
             controller.mapView = self.mapView
             isOpenServerList = false
         }else if segue.identifier! == "ParingNotice" {
-            let controller = segue.destinationViewController as! PairingViewController
+            let controller = segue.destination as! PairingViewController
             var bounds = controller.view.bounds
             bounds.size.width *= 2
             controller.hashLabel.text = NSString(format: "%04d", Int(pendingPairingKey!)! % 10000) as String

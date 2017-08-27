@@ -16,18 +16,18 @@ class ActionViewController: ExifViewControllerBase {
         super.viewDidLoad()
     
         var imageFound = false
-        for item: AnyObject in self.extensionContext!.inputItems {
+        for item: Any in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
-            for provider: AnyObject in inputItem.attachments! {
+            for provider: Any in inputItem.attachments! {
                 let itemProvider = provider as! NSItemProvider
                 if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-                    itemProvider.loadItemForTypeIdentifier(kUTTypeImage as String, options: nil, completionHandler: {
+                    itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: {
                         [unowned self] (data, error) in
-                        var imageData : NSData? = nil
+                        var imageData : Data? = nil
                         var image : UIImage? = nil
-                        if let url = data as? NSURL {
-                            imageData = NSData(contentsOfFile: url.path!)
-                            image = UIImage(contentsOfFile: url.path!)
+                        if let url = data as? URL {
+                            imageData = try? Data(contentsOf: URL(fileURLWithPath: url.path))
+                            image = UIImage(contentsOfFile: url.path)
                         }else if let imageObject = data as? UIImage {
                             image = imageObject
                             imageData = UIImagePNGRepresentation(imageObject)
@@ -36,7 +36,7 @@ class ActionViewController: ExifViewControllerBase {
                         let type = NSLocalizedString("LS_IMAGE_TYPE_NAME", comment:"")
                         if imageData != nil && image != nil {
                             let meta = PortableImageMetadata(image: imageData, name: name, type: type)
-                            NSOperationQueue.mainQueue().addOperationWithBlock {
+                            OperationQueue.main.addOperation {
                                 [unowned self] () in
                                 self.meta = meta!.portableData()
                                 self.thumbnail = image!
@@ -60,10 +60,10 @@ class ActionViewController: ExifViewControllerBase {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func done(sender: AnyObject) {
+    @IBAction func done(_ sender: AnyObject) {
         // Return any edited content to the host app.
         // This template doesn't do anything, so we just echo the passed in items.
-        self.extensionContext!.completeRequestReturningItems(self.extensionContext!.inputItems, completionHandler: nil)
+        self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
     }
 
 }

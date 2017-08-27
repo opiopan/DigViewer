@@ -9,13 +9,13 @@
 import UIKit
 import DVremoteCommonLib
 
-public class SummarizedMeta: NSObject {
-    public let date : String?
-    public let camera : String?
-    public let lens : String?
-    public let condition : String?
+open class SummarizedMeta: NSObject {
+    open let date : String?
+    open let camera : String?
+    open let lens : String?
+    open let condition : String?
     
-    public init(meta : [NSObject : AnyObject]) {
+    public init(meta : [AnyHashable: Any]) {
         if let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]? {
             if popupSummary.count > 0 {
                 date = popupSummary[0].value
@@ -51,7 +51,7 @@ public class SummarizedMeta: NSObject {
         }
     }
     
-    public var summaryText : String {
+    open var summaryText : String {
         get{
             let attributes : [String?] = [date, camera, lens, condition]
             let summary = attributes.reduce(""){
@@ -65,8 +65,8 @@ public class SummarizedMeta: NSObject {
         }
     }
     
-    public func copySummaryToPasteboard() {
-        let pasteboard = UIPasteboard.generalPasteboard()
+    open func copySummaryToPasteboard() {
+        let pasteboard = UIPasteboard.general
         pasteboard.setValue(self.summaryText, forPasteboardType: "public.text")
     }
     

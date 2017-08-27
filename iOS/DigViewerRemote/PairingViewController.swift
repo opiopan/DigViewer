@@ -20,22 +20,22 @@ class PairingViewController: UIViewController, DVRemoteClientDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        DVRemoteClient.sharedClient().addClientDelegate(self)
+    override func viewWillAppear(_ animated: Bool) {
+        DVRemoteClient.shared().add(self)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        DVRemoteClient.shared().remove(self)
     }
     
-    @IBAction func onCancel(sender: AnyObject) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCancel(_ sender: AnyObject) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        if state == .Connected {
+    func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
+        if state == .connected {
             onCancel(self)
-        }else if state == .Disconnected {
+        }else if state == .disconnected {
             onCancel(self)
         }
     }

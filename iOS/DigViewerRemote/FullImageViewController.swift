@@ -10,8 +10,8 @@ import UIKit
 
 class FullImageViewController: UIViewController, DVRemoteClientDelegate {
 
-    private var targetDocument : String? = nil
-    private var targetPath : [String]? = nil
+    fileprivate var targetDocument : String? = nil
+    fileprivate var targetPath : [String]? = nil
     
     @IBOutlet weak var imageView : UIImageView? = nil
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -21,31 +21,31 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let client = DVRemoteClient.sharedClient()
-        client.addClientDelegate(self)
+        let client = DVRemoteClient.shared()
+        client?.add(self)
 
         navigationController?.hidesBarsOnTap = true
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(time, dispatch_get_main_queue()){
+        let time = DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time){
             [unowned self]() in
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
         
         imageView!.alpha = 0
         
-        if let meta = DVRemoteClient.sharedClient().meta {
+        if let meta = DVRemoteClient.shared().meta {
             targetDocument = meta[DVRCNMETA_DOCUMENT] as? String
             targetPath = meta[DVRCNMETA_ID]as? [String]
             navigationItem.title = targetPath![targetPath!.count - 1]
         }
         
         FailedLabel.alpha = 0;
-        if let image = DVRemoteClient.sharedClient().fullImageForID(targetPath, inDocument: targetDocument, withMaxSize: 2048) {
+        if let image = DVRemoteClient.shared().fullImage(forID: targetPath, inDocument: targetDocument, withMaxSize: 2048) {
             indicatorView.layer.zPosition = -1;
             LoadingLabel.layer.zPosition = -1;
-            applyImage(image, rotation: DVRemoteClient.sharedClient().imageRotation, animation: false)
-            let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-            dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+            applyImage(image, rotation: DVRemoteClient.shared().imageRotation, animation: false)
+            let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned self]() -> Void in
                 self.applyTransform(self.imageView!.bounds.size)
             })
         }else{
@@ -56,7 +56,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     }
     
     deinit{
-        DVRemoteClient.sharedClient().removeClientDelegate(self)
+        DVRemoteClient.shared().remove(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,12 +64,12 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    @IBAction func exitView(sender: AnyObject) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func exitView(_ sender: AnyObject) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
     /*
@@ -81,23 +81,23 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-    private var imageSize : CGSize = CGSizeMake(0, 0)
-    private var imageTransform :  CGAffineTransform = CGAffineTransformIdentity
+    fileprivate var imageSize : CGSize = CGSize(width: 0, height: 0)
+    fileprivate var imageTransform :  CGAffineTransform = CGAffineTransform.identity
     
-    private func applyImage(image : UIImage?, rotation : Int, animation : Bool) {
+    fileprivate func applyImage(_ image : UIImage?, rotation : Int, animation : Bool) {
         imageSize = image!.size
-        imageTransform = CGAffineTransformIdentity
+        imageTransform = CGAffineTransform.identity
         if (rotation == 5 || rotation == 8){
             /* 90 degrees rotation */
-            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI_2 * 3));
-            imageSize = CGSizeMake(image!.size.height, image!.size.width)
+            imageTransform = imageTransform.rotated(by: CGFloat(Double.pi / 2 * 3));
+            imageSize = CGSize(width: image!.size.height, height: image!.size.width)
         }else if (rotation == 3 || rotation == 4){
             /* 180 degrees rotation */
-            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI));
+            imageTransform = imageTransform.rotated(by: CGFloat(Double.pi));
         }else if (rotation == 6 || rotation == 7){
             /* 270 degrees rotation */
-            imageTransform = CGAffineTransformRotate(imageTransform, CGFloat(M_PI_2));
-            imageSize = CGSizeMake(image!.size.height, image!.size.width)
+            imageTransform = imageTransform.rotated(by: CGFloat(Double.pi / 2));
+            imageSize = CGSize(width: image!.size.height, height: image!.size.width)
         }
         applyTransform(imageView!.bounds.size)
         if (animation){
@@ -112,18 +112,18 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         }
     }
     
-    private func applyTransform(viewSize : CGSize) {
+    fileprivate func applyTransform(_ viewSize : CGSize) {
         let hRatio = viewSize.width / imageSize.width
         let vRatio = viewSize.height / imageSize.height
         let ratio = min(hRatio, vRatio)
-        let transform = CGAffineTransformScale(imageTransform, ratio, ratio)
+        let transform = imageTransform.scaledBy(x: ratio, y: ratio)
         imageView!.transform = transform
     }
     //-----------------------------------------------------------------------------------------
     // MARK: - デバイス回転
     //-----------------------------------------------------------------------------------------
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
@@ -134,7 +134,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
-    func dvrClient(client: DVRemoteClient!, didRecieveFullImage image: UIImage!, ofId nodeId: [AnyObject]!, inDocument documentName: String!, withRotation rotation: Int) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveFullImage image: UIImage!, ofId nodeId: [AnyObject]!, inDocument documentName: String!, withRotation rotation: Int) {
         var isSame = true
         if targetDocument == documentName && targetPath != nil && targetPath!.count == nodeId.count {
             for i in 0 ..< nodeId.count {
@@ -152,8 +152,8 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         }
     }
     
-    func dvrClient(client: DVRemoteClient!, changeState state: DVRClientState) {
-        if (state == DVRClientState.Disconnected){
+    func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
+        if (state == DVRClientState.disconnected){
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationDuration(0.35)
             FailedLabel.alpha = 1

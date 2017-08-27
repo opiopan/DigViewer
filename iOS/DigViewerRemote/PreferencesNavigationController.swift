@@ -17,7 +17,7 @@ class PreferencesNavigationController: UINavigationController {
         
         if isOpenServerList {
             var controllers = viewControllers
-            let newController = storyboard!.instantiateViewControllerWithIdentifier("ServerViewController") as? ServerViewController
+            let newController = storyboard!.instantiateViewController(withIdentifier: "ServerViewController") as? ServerViewController
             newController!.preferredContentSize = controllers[0].preferredContentSize
             controllers.append(newController!)
             viewControllers = controllers

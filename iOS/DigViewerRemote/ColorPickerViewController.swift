@@ -16,7 +16,7 @@ class ColorPickerIdentity {
 }
 
 class ColorPickerViewController: UITableViewController {
-    private struct ColorEntry {
+    fileprivate struct ColorEntry {
         var name : String
         var color : UIColor
         init(name : String, color : UIColor){
@@ -25,21 +25,21 @@ class ColorPickerViewController: UITableViewController {
         }
     }
     
-    private let colorList : [ColorEntry] = [
-        ColorEntry(name: NSLocalizedString("COLOR_BLACK", comment:""), color: UIColor.blackColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_WHITE", comment:""), color: UIColor.whiteColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_RED", comment:""), color: UIColor.redColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_GREEN", comment:""), color: UIColor.greenColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_BLUE", comment:""), color: UIColor.blueColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_CYAN", comment:""), color: UIColor.cyanColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_YELLOW", comment:""), color: UIColor.yellowColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_MAGENTA", comment:""), color: UIColor.magentaColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_ORANGE", comment:""), color: UIColor.orangeColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_PURPLE", comment:""), color: UIColor.purpleColor()),
-        ColorEntry(name: NSLocalizedString("COLOR_BROWN", comment:""), color: UIColor.brownColor()),
+    fileprivate let colorList : [ColorEntry] = [
+        ColorEntry(name: NSLocalizedString("COLOR_BLACK", comment:""), color: UIColor.black),
+        ColorEntry(name: NSLocalizedString("COLOR_WHITE", comment:""), color: UIColor.white),
+        ColorEntry(name: NSLocalizedString("COLOR_RED", comment:""), color: UIColor.red),
+        ColorEntry(name: NSLocalizedString("COLOR_GREEN", comment:""), color: UIColor.green),
+        ColorEntry(name: NSLocalizedString("COLOR_BLUE", comment:""), color: UIColor.blue),
+        ColorEntry(name: NSLocalizedString("COLOR_CYAN", comment:""), color: UIColor.cyan),
+        ColorEntry(name: NSLocalizedString("COLOR_YELLOW", comment:""), color: UIColor.yellow),
+        ColorEntry(name: NSLocalizedString("COLOR_MAGENTA", comment:""), color: UIColor.magenta),
+        ColorEntry(name: NSLocalizedString("COLOR_ORANGE", comment:""), color: UIColor.orange),
+        ColorEntry(name: NSLocalizedString("COLOR_PURPLE", comment:""), color: UIColor.purple),
+        ColorEntry(name: NSLocalizedString("COLOR_BROWN", comment:""), color: UIColor.brown),
     ]
     
-    private var selectedIndex = 0
+    fileprivate var selectedIndex = 0
 
     //-----------------------------------------------------------------------------------------
     // MARK: - 画面オープン・クローズ
@@ -52,8 +52,8 @@ class ColorPickerViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func closeThisView(sender: UIBarButtonItem?) {
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
     //-----------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ class ColorPickerViewController: UITableViewController {
             var srcGreen : CGFloat = 0
             var srcBlue : CGFloat = 0
             var srcAlpha : CGFloat = 0
-            src.getRed(&srcRed, green: &srcGreen , blue: &srcBlue, alpha: &srcAlpha)
+            src?.getRed(&srcRed, green: &srcGreen , blue: &srcBlue, alpha: &srcAlpha)
             for i in 0 ..< colorList.count {
                 let dest = colorList[i].color
                 var destRed : CGFloat = 0
@@ -87,23 +87,23 @@ class ColorPickerViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - Table View データソース
     //-----------------------------------------------------------------------------------------
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return colorList.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NamedColorCell", forIndexPath: indexPath) as! NamedColorCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NamedColorCell", for: indexPath) as! NamedColorCell
 
         cell.colorNameLabel.text = colorList[indexPath.row].name
         cell.color = colorList[indexPath.row].color
         if indexPath.row == selectedIndex {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }else{
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
 
         return cell
@@ -112,14 +112,14 @@ class ColorPickerViewController: UITableViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - セル選択状態変更
     //-----------------------------------------------------------------------------------------
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0))
-        let newCell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let oldCell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0))
+        let newCell = tableView.cellForRow(at: indexPath)
         selectedIndex = indexPath.row
-        oldCell!.accessoryType = .None
-        newCell!.accessoryType = .Checkmark
+        oldCell!.accessoryType = .none
+        newCell!.accessoryType = .checkmark
         identity.changeNotifier?(colorList[selectedIndex].color)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

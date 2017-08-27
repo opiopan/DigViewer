@@ -10,7 +10,7 @@ import UIKit
 import DVremoteCommonUI
 
 protocol InformationViewChild {
-    func setInformationViewController(controller : InfomationViewController)
+    func setInformationViewController(_ controller : InfomationViewController)
 }
 
 class InfomationViewController: UIViewController {
@@ -23,8 +23,8 @@ class InfomationViewController: UIViewController {
         
         segmentedControll!.selectedSegmentIndex = ConfigurationController.sharedController.informationViewType
 
-        let time = dispatch_time(DISPATCH_TIME_NOW, 0)
-        dispatch_after(time, dispatch_get_main_queue(), {[unowned self]() -> Void in
+        let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned self]() -> Void in
             let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
             if let newController = controller{
                 let frame = self.placeholder!.bounds
@@ -40,14 +40,14 @@ class InfomationViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+    override func viewWillAppear(_ animated: Bool) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             navigationController!.setNavigationBarHidden(false, animated: true)
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+    override func viewWillDisappear(_ animated: Bool) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             navigationController!.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -59,24 +59,24 @@ class InfomationViewController: UIViewController {
     //-----------------------------------------------------------------------------------------
     // MARK: - コンテントビュー切り替え
     //-----------------------------------------------------------------------------------------
-    func viewControllerForSegmentIndex(index:Int) -> UIViewController?{
+    func viewControllerForSegmentIndex(_ index:Int) -> UIViewController?{
         ConfigurationController.sharedController.informationViewType = index
         let viewIdentifiers = ["ExifViewController", "ImageListNavigator"]
         if let storyboard = self.storyboard{
-            let controller = storyboard.instantiateViewControllerWithIdentifier(viewIdentifiers[index]) as UIViewController?
+            let controller = storyboard.instantiateViewController(withIdentifier: viewIdentifiers[index]) as UIViewController?
             (controller as! InformationViewChild).setInformationViewController(self)
             return controller
         }
         return nil
     }
     
-    @IBAction func segmentChange(sender:UISegmentedControl){
-        let options = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.TransitionFlipFromLeft]
+    @IBAction func segmentChange(_ sender:UISegmentedControl){
+        let options = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.transitionFlipFromLeft]
         let controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
         if let newController = controller{
             self.addChildViewController(newController);
-            self.transitionFromViewController(
-                currentViewController!, toViewController: newController, duration: 0.5,
+            self.transition(
+                from: currentViewController!, to: newController, duration: 0.5,
                 options: options[sender.selectedSegmentIndex],
                 animations: {[unowned self]() -> Void  in
                     self.currentViewController!.view .removeFromSuperview()
@@ -84,7 +84,7 @@ class InfomationViewController: UIViewController {
                     self.placeholder?.addSubview(newController.view)
                 },
                 completion: {[unowned self](result : Bool) -> Void in
-                    newController.didMoveToParentViewController(self)
+                    newController.didMove(toParentViewController: self)
                     self.currentViewController!.removeFromParentViewController()
                     self.currentViewController = newController
                 }
