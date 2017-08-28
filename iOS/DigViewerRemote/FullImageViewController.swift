@@ -134,7 +134,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコル
     //-----------------------------------------------------------------------------------------
-    func dvrClient(_ client: DVRemoteClient!, didRecieveFullImage image: UIImage!, ofId nodeId: [AnyObject]!, inDocument documentName: String!, withRotation rotation: Int) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveFullImage image: UIImage!, ofId nodeId: [Any]!, inDocument documentName: String!, withRotation rotation: Int) {
         var isSame = true
         if targetDocument == documentName && targetPath != nil && targetPath!.count == nodeId.count {
             for i in 0 ..< nodeId.count {

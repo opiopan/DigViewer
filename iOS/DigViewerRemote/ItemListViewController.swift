@@ -237,14 +237,15 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - DVRemoteClientDelegateプロトコルの実装
     //-----------------------------------------------------------------------------------------
-    func dvrClient(_ client: DVRemoteClient!, didRecieveNodeList newNodeList: [AnyObject]!, forNode nodeID: [AnyObject]!, inDocument documentName: String!) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveNodeList newNodeList: [Any]!, forNode nodeID: [Any]!,
+                   inDocument documentName: String!) {
         if document != nil && documentName == document && path!.count == nodeID!.count {
             for i in 0 ..< path!.count {
                 if path![i] != (nodeID![i] as! String) {
                     return
                 }
             }
-            nodeList = newNodeList as! [[String : AnyObject]]? as NSArray?
+            nodeList = newNodeList as NSArray?
             tableView.reloadData()
             updateNodeList()
         }
@@ -274,7 +275,8 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
         }
     }
 
-    func dvrClient(_ client: DVRemoteClient!, didRecieveThumbnail thumbnail: UIImage!, ofId nodeId: [AnyObject]!, inDocument documentName: String!, with index: Int) {
+    func dvrClient(_ client: DVRemoteClient!, didRecieveThumbnail thumbnail: UIImage!,
+                   ofId nodeId: [Any]!, inDocument documentName: String!, with index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
         if let cell = tableView!.cellForRow(at: indexPath) {
             let itemCell = cell as! NodeItemCell
