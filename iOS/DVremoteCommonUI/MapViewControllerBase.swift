@@ -420,7 +420,7 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 popupViewController!.removeFromSuperView()
             }
             if popupViewController!.view.superview == nil {
-                popupViewController!.addToSuperView(coverView!, parentType: .noLocationCover)
+                popupViewController!.addToSuperView(coverView!.contentView, parentType: .noLocationCover)
                 popupViewController!.view.alpha = 1.0
                 popupViewController!.updateCount += 1
             }
@@ -462,7 +462,7 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             summaryBarPosition.constant = summaryBarPositionDefault
             summaryBar2ndPosition.constant = summaryBar2ndPositionDefault
             if coverView?.superview != nil {
-                popupViewController?.addToSuperView(coverView!, parentType: .noLocationCover)
+                popupViewController?.addToSuperView(coverView!.contentView, parentType: .noLocationCover)
             }else{
                 removeAnnotation()
                 addAnnotation()

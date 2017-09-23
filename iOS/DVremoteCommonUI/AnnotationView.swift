@@ -60,8 +60,10 @@ open class AnnotationView: MKPinAnnotationView {
                     
                     let annotationViewBounds = self.bounds
                     var calloutViewFrame = calloutView?.frame
-                    calloutViewFrame?.origin.x = -((calloutViewFrame?.size.width)! - annotationViewBounds.size.width) * 0.5 - 8.0
-                    calloutViewFrame?.origin.y = -(calloutViewFrame?.size.height)!
+                    var origin = calloutViewFrame?.origin
+                    origin?.x = -((calloutViewFrame?.size.width)! - annotationViewBounds.size.width) * 0.5 - 8.0
+                    origin?.y = -(calloutViewFrame?.size.height)!
+                    calloutViewFrame?.origin = origin!
                     envelopeView!.frame = calloutViewFrame!;
                     envelopeView!.alpha = 0.0
                     addSubview(envelopeView!)
