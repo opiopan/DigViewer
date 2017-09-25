@@ -43,8 +43,6 @@
 				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
 				<integer>0</integer>
 			</dict>
-			<key>NSExtensionJavaScriptPreprocessingFile</key>
-			<string>Action</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.services</string>
