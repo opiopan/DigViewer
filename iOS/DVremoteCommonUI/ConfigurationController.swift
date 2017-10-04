@@ -141,6 +141,7 @@ open class ConfigurationController: NSObject {
     override init(){
         let redColor = NSKeyedArchiver.archivedData(withRootObject: UIColor.red)
         defaults = [
+            UserDefaults.EstablishedConnection  : "",
             UserDefaults.MapType                : MapType.map.rawValue,
             UserDefaults.MapShowLabel           : true,
             UserDefaults.Map3DView              : false,
