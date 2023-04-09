@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController">
@@ -24,11 +25,11 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="100232">
                         <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
@@ -85,7 +86,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" id="IT0-2I-Sqo">
+                        <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" misplaced="YES" id="IT0-2I-Sqo">
                             <rect key="frame" x="93" y="450" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -104,7 +105,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" id="XUN-ZE-OzR">
+                        <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" misplaced="YES" id="XUN-ZE-OzR">
                             <rect key="frame" x="238" y="451" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -125,7 +126,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" id="hTK-s2-ftt">
+                        <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" misplaced="YES" id="hTK-s2-ftt">
                             <rect key="frame" x="356" y="451" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -146,7 +147,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" id="axJ-VU-MXj">
+                        <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" misplaced="YES" id="axJ-VU-MXj">
                             <rect key="frame" x="563" y="451" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -165,7 +166,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Reload document" verticalHuggingPriority="750" id="LVm-bA-tJO">
+                        <button key="view" toolTip="Reload document" verticalHuggingPriority="750" misplaced="YES" id="LVm-bA-tJO">
                             <rect key="frame" x="563" y="451" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -199,14 +200,17 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="17"/>
             </connections>
+            <point key="canvasLocation" x="66" y="-58"/>
         </window>
         <treeController objectClassName="PathNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="100059">
+            <classReference key="objectClass" className="PathNode"/>
             <connections>
                 <binding destination="-2" name="contentObject" keyPath="self.document.root" id="jBT-iz-mm0"/>
                 <binding destination="-2" name="selectionIndexPaths" keyPath="self.selectionIndexPathsForTree" id="100256"/>
             </connections>
         </treeController>
         <arrayController objectClassName="PathNode" id="100087">
+            <classReference key="objectClass" className="PathNode"/>
             <connections>
                 <binding destination="100059" name="contentArray" keyPath="selection.images" id="100113"/>
                 <binding destination="-2" name="selectionIndexes" keyPath="self.selectionIndexesForImages" id="100258"/>
@@ -290,13 +294,13 @@
         </menu>
     </objects>
     <resources>
-        <image name="NSEnterFullScreenTemplate" width="15" height="15"/>
-        <image name="NSIconViewTemplate" width="10" height="10"/>
-        <image name="NSPathTemplate" width="16" height="10"/>
-        <image name="NSQuickLookTemplate" width="19" height="12"/>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
-        <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
-        <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSEnterFullScreenTemplate" width="20" height="19"/>
+        <image name="NSIconViewTemplate" width="19" height="18"/>
+        <image name="NSPathTemplate" width="25" height="15"/>
+        <image name="NSQuickLookTemplate" width="26" height="17"/>
+        <image name="NSRefreshTemplate" width="18" height="21"/>
+        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
+        <image name="NSShareTemplate" width="19" height="22"/>
         <image name="datetime" width="512" height="512"/>
         <image name="datetime_on" width="512" height="512"/>
         <image name="play" width="475" height="512"/>

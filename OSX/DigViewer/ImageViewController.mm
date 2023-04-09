@@ -263,7 +263,7 @@
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     PathNode* current = _imageArrayController.selectedObjects[0];
     NSArray* items = @[[NSURL fileURLWithPath:current.imagePath]];
-    if (items && items > 0){
+    if (items && items.count > 0){
         return [controller addSharingMenuForItems:items toMenuItem:menuItem];
     }else{
         return NO;

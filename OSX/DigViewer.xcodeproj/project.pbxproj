@@ -26,6 +26,7 @@
 		7B01210916B4C6A9004AA730 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B01210716B4C6A9004AA730 /* down.png */; };
 		7B01210D16B68DFF004AA730 /* NSViewController+Nested.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B01210C16B68DFF004AA730 /* NSViewController+Nested.m */; };
 		7B066F361B57D9C400288D57 /* Twister.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7B066F351B57D9C400288D57 /* Twister.qtz */; };
+		7B0BF6BB29E2B00F00732FF4 /* GPSMapView.js in Resources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7B0DBEB216A014B6000365F4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB116A014B6000365F4 /* MainViewController.m */; };
 		7B0DBEB616A01545000365F4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0DBEB416A01545000365F4 /* MainView.xib */; };
 		7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DBEC916A0F665000365F4 /* FolderOutlineViewController.m */; };
@@ -102,8 +103,6 @@
 		7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6148541B7DA49E00A03C45 /* ImageRepository.m */; };
 		7B661A6C1B47840A00C42D2C /* Mosaic.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
 		7B661A6D1B47840A00C42D2C /* Zoom.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
-		7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */; };
-		7B661A6F1B47848000C42D2C /* Zoom.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B661A6B1B47840A00C42D2C /* Zoom.cikernel */; };
 		7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717E71B36C86000B8D124 /* PresentationBaseViewController.m */; };
 		7B6717EA1B36C90200B8D124 /* PresentationBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6717E91B36C90200B8D124 /* PresentationBaseView.xib */; };
 		7B6717EE1B36D0E900B8D124 /* TransitionEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6717ED1B36D0E900B8D124 /* TransitionEffect.mm */; };
@@ -127,7 +126,6 @@
 		7B748D231AFDBC0600FDF471 /* ThumbnailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B748D221AFDBC0600FDF471 /* ThumbnailPreferences.m */; };
 		7B74FB801B3AC911005BC748 /* EffectByCIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB7F1B3AC911005BC748 /* EffectByCIFilter.m */; };
 		7B74FB821B3AD94D005BC748 /* FadeEffect.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
-		7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B74FB811B3AD94D005BC748 /* FadeEffect.cikernel */; };
 		7B74FB8B1B3E24B4005BC748 /* EditCustomEffectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB8A1B3E24B4005BC748 /* EditCustomEffectListController.m */; };
 		7B74FB8D1B3E35CA005BC748 /* SlideshowConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB8C1B3E35CA005BC748 /* SlideshowConfigController.m */; };
 		7B74FB921B3E933A005BC748 /* EditCustomEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74FB911B3E933A005BC748 /* EditCustomEffectController.m */; };
@@ -139,13 +137,9 @@
 		7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */; };
 		7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B24631AD101D1008F6E64 /* AppDelegate.m */; };
 		7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8518E7D91D0042337F /* GPSMapView.m */; };
-		7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
-		7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B9F9E8718E7DBBA0042337F /* GPSMapView.js */; };
 		7BA01D451B47EA3D00ADF567 /* BlurTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA01D441B47EA3D00ADF567 /* BlurTransition.m */; };
 		7BA1F9DD1B417719000D24D5 /* Cartain.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */; };
 		7BA1F9DE1B417719000D24D5 /* Shutter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
-		7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA1F9DC1B417719000D24D5 /* Shutter.cikernel */; };
-		7BA1F9E01B417916000D24D5 /* Cartain.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA1F9DB1B417719000D24D5 /* Cartain.cikernel */; };
 		7BA7AF2F1911210100BFCBE2 /* PreferencesDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7AF2E1911210100BFCBE2 /* PreferencesDefaultsController.m */; };
 		7BA81BF91AF513C9001E40D7 /* DocumentConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA81BF81AF513C9001E40D7 /* DocumentConfigController.m */; };
 		7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BA81BFE1AF73F6F001E40D7 /* EditImageSetSheet.xib */; };
@@ -175,7 +169,6 @@
 		7BCF7F051B527FE5001B0A7A /* Afterimage.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */; };
 		7BCF7F081B52802C001B0A7A /* ColorDivider.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F061B52802C001B0A7A /* ColorDivider.qtz */; };
 		7BCF7F091B52802C001B0A7A /* Door.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 7BCF7F071B52802C001B0A7A /* Door.qtz */; };
-		7BCF7F0A1B52809C001B0A7A /* Afterimage.cikernel in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */; };
 		7BD1B5001AEBEE93008DF5C2 /* ThumbnailConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B4FF1AEBEE93008DF5C2 /* ThumbnailConfigController.m */; };
 		7BD1B5031AEC7A4F008DF5C2 /* ThumbnailSampleView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1B5021AEC7A4F008DF5C2 /* ThumbnailSampleView.mm */; };
 		7BD1B5051AEC8478008DF5C2 /* thumbnailSampleSquare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5041AEC8478008DF5C2 /* thumbnailSampleSquare.jpg */; };
@@ -206,29 +199,6 @@
 		7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		7B17D21F19024B1400848FF0 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.js";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-			);
-			script = true;
-		};
-		7B74FB831B3ADA7D005BC748 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.cikernel";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-			);
-			script = true;
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXContainerItemProxy section */
 		7B5340621703F450008AEDB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -246,13 +216,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				7BCF7F0A1B52809C001B0A7A /* Afterimage.cikernel in CopyFiles */,
-				7B661A6E1B47848000C42D2C /* Mosaic.cikernel in CopyFiles */,
-				7B661A6F1B47848000C42D2C /* Zoom.cikernel in CopyFiles */,
-				7BA1F9DF1B417916000D24D5 /* Shutter.cikernel in CopyFiles */,
-				7BA1F9E01B417916000D24D5 /* Cartain.cikernel in CopyFiles */,
-				7B74FB841B3AE6BA005BC748 /* FadeEffect.cikernel in CopyFiles */,
-				7B9F9E8B18E7DD4F0042337F /* GPSMapView.js in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,8 +1115,6 @@
 				7B9F9E8A18E7DD450042337F /* CopyFiles */,
 			);
 			buildRules = (
-				7B74FB831B3ADA7D005BC748 /* PBXBuildRule */,
-				7B17D21F19024B1400848FF0 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -1168,16 +1129,17 @@
 		7B3920261696CA1800E139D0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = opiopan;
 			};
 			buildConfigurationList = 7B3920291696CA1800E139D0 /* Build configuration list for PBXProject "DigViewer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				ja,
+				Base,
 			);
 			mainGroup = 7B3920241696CA1800E139D0;
 			productRefGroup = 7B3920301696CA1800E139D0 /* Products */;
@@ -1195,6 +1157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0BF6BB29E2B00F00732FF4 /* GPSMapView.js in Resources */,
 				7B39203E1696CA1800E139D0 /* InfoPlist.strings in Resources */,
 				7BB4E61F1ADA0C3F0076630A /* AdvancedPreferences.xib in Resources */,
 				7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */,
@@ -1364,7 +1327,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone\n";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1387,13 +1350,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist",
 			);
 			name = "Run Script For Deciding Version";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\n         sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n         egrep '^V[0-9\\]' | head -1 | sed 's/^V//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\n            sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n            egrep '^V[0-9\\]' | head -1 | sed 's/^V//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\n            awk -v tag=V\"$RAWVERSION\" \\\n            'BEGIN{subv=0}\n             {for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=`git show -s --format=\"%ai\" $INIT| sed 's/-.*$//'`\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\n    BUILD=\"$BUILD+\"\n    BUNDLEVERSION=\"0.0\"\n    SUBVERSION=`expr $SUBVERSION + 1`\n    SUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\n    SUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\n    SUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\n    PERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\n    PERIOD=\"$BEGIN, $END\"\nelse\n    PERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :NSHumanReadableCopyright '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}";
+			shellScript = "PLISTBUDDY=/usr/libexec/PlistBuddy\nINFOPLIST=${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\n\nSEQ=`git log --oneline | wc -l | awk '{print $1}'`\nBUILD=`git show --format='%h' -s`\nINIT=`git log --oneline --pretty='%h' | tail -1`\nVERSION=`git log --oneline --pretty='%d' | \\\n         sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n         egrep '^V[0-9\\]' | head -1 | sed 's/^V//' | sed 's/-/ /g'`\nRAWVERSION=`git log --oneline --pretty='%d' | \\\n            sed 's/[(),]/ /g' | awk '{for(i=0;i<NF;i++){print $(i+1)}}' | \\\n            egrep '^V[0-9\\]' | head -1 | sed 's/^V//'`\n\nSUBVERSION=`git log --pretty=\"%h%d\" | sed 's/[(),]/ /g' | \\\n            awk -v tag=V\"$RAWVERSION\" \\\n            'BEGIN{subv=0}\n             {for (i=1; i <= NF; i++){if ($i == tag){print subv;exit 0;}} subv++}'`\nBUNDLEVERSION=`echo $VERSION | sed 's/ .*//'`.$SEQ\nEND=`git show -s --format=\"%ai\" $BUILD| sed 's/-.*$//'`\nBEGIN=`git show -s --format=\"%ai\" $INIT| sed 's/-.*$//'`\n\n${PLISTBUDDY} -c \"DELETE :OPCaution\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPCaution array\" ${INFOPLIST}\ngit branch | grep '^\\* master' > /dev/null\nif ! [ $? = 0 ] ;then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'belong to tentative branch'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=t${SUFFIX}\nfi\nif ! [ \"`git status --porcelain`\" = '' ]; then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'uncommited version'\" ${INFOPLIST}\n    BUILD=\"$BUILD+\"\n    BUNDLEVERSION=\"0.0\"\n    SUBVERSION=`expr $SUBVERSION + 1`\n    SUFFIX=u${SUFFIX}\nfi\nif [ \"$CONFIGURATION\" = Debug ];then\n    ${PLISTBUDDY} -c \"ADD :OPCaution:0 string 'build with debug option'\" ${INFOPLIST}\n    BUNDLEVERSION=\"0.0\"\n    SUFFIX=d${SUFFIX}\nfi\nif [ $SUBVERSION -ne 0 ];then\n    SUFFIX=\".$SUBVERSION$SUFFIX\"\nelse\n    SUFFIX=\" $SUFFIX\"\nfi\n\nif [ \"$BEGIN\" = \"$END\" ];then\n    PERIOD=\"$BEGIN\"\nelif [ \"$END\" = `expr $BEGIN + 1` ];then\n    PERIOD=\"$BEGIN, $END\"\nelse\n    PERIOD=\"$BEGIN-$END\"\nfi\nCOPYRIGHT=\"Copyright © $PERIOD opiopan. All rights reserved.\"\n\n${PLISTBUDDY} -c \"SET :CFBundleShortVersionString ${VERSION}${SUFFIX}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :CFBundleVersion ${BUNDLEVERSION}\" ${INFOPLIST}\n${PLISTBUDDY} -c \"SET :NSHumanReadableCopyright '${COPYRIGHT}'\" ${INFOPLIST}\n${PLISTBUDDY} -c \"DELETE :OPBuildVersion\" ${INFOPLIST}\n${PLISTBUDDY} -c \"ADD :OPBuildVersion string ${BUILD}\" ${INFOPLIST}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1436,7 +1400,6 @@
 				7B697E4E169DB4A700A9E247 /* LoadingSheetController.m in Sources */,
 				7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
-				7B9F9E8818E7DBBA0042337F /* GPSMapView.js in Sources */,
 				7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */,
 				7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */,
 				7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */,
@@ -1935,16 +1898,26 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1977,16 +1950,26 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2006,11 +1989,13 @@
 		7B3920511696CA1900E139D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2021,11 +2006,13 @@
 		7B3920521696CA1900E139D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2036,6 +2023,8 @@
 		7B5340601703F3F2008AEDB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2043,6 +2032,8 @@
 		7B5340611703F3F2008AEDB6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

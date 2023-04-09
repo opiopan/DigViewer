@@ -42,7 +42,7 @@
 {
     self = [super initWithNibName:@"InspectorView" bundle:nil];
     if (self) {
-        _initialized = nil;
+        _initialized = false;
     }
     return self;
 }

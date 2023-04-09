@@ -364,7 +364,7 @@ static const CGFloat SwipeGestureScale = 2.5;
 - (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition
 {
     if (_isDrawingByLayer){
-        [_frameLayer moveToDirection:direction withTransition:transition inScreen:_window.screen];
+        //[_frameLayer moveToDirection:direction withTransition:transition inScreen:_window.screen];
     }
 }
 
