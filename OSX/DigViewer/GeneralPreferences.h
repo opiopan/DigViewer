@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NSPreferencesModule.h"
 #import "DocumentConfigController.h"
-#import "SlideShowConfigController.h"
+#import "SlideshowConfigController.h"
 #import "ImageViewConfigController.h"
 
 

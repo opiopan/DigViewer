@@ -109,7 +109,7 @@ static SlideshowController* _currentController;
         frame.origin.x = 0;
         frame.origin.y = 0;
         _window = [[NSWindow alloc] initWithContentRect:frame
-                                              styleMask:NSBorderlessWindowMask
+                                              styleMask:NSWindowStyleMaskBorderless
                                                 backing:NSBackingStoreBuffered
                                                   defer:NO
                                                  screen:screen];

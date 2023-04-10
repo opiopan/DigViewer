@@ -95,14 +95,14 @@ static NSString* kMainView = @"mainView";
     
      // UserDefaultsの変更に対してObserverを登録
     DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
-    [documentConfig addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
+    [documentConfig addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:nil context:nil];
-    [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:nil context:nil];
-    [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:0 context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:0 context:nil];
+    [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:0 context:nil];
 
     // カレントフォルダ移動を追跡するためのObserverを登録
-    [_imageTreeController addObserver:self forKeyPath:@"selection" options:nil context:nil];
+    [_imageTreeController addObserver:self forKeyPath:@"selection" options:0 context:nil];
 
     // オープン時の表示設定を反映
     NSDictionary* windowPreferences = ((Document*)self.document).documentWindowPreferences;
@@ -135,7 +135,7 @@ static NSString* kMainView = @"mainView";
     self.sortByDateTimeButtonState = NO;
     
     // 共有ボタンのメッセージ送信条件を設定
-    [_shareButton sendActionOn:NSLeftMouseDownMask];
+    [_shareButton sendActionOn:NSEventMaskLeftMouseDown];
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -151,11 +151,11 @@ static NSString* kMainView = @"mainView";
         rect.size.width = [[windowPreferences valueForKey:kWindowWidth] doubleValue];
         rect.size.height = [[windowPreferences valueForKey:kWindowHeight] doubleValue];
         
-        if (!([[windowPreferences valueForKey:kInFullScreen] boolValue] && self.window.styleMask &  NSFullScreenWindowMask) &&
+        if (!([[windowPreferences valueForKey:kInFullScreen] boolValue] && self.window.styleMask &  NSWindowStyleMaskFullScreen) &&
             !CGRectEqualToRect(rect,self.window.frame)){
             [self.window setFrame:rect display:YES];
             if ([[windowPreferences valueForKey:kInFullScreen] boolValue] &&
-                !(self.window.styleMask &  NSFullScreenWindowMask)){
+                !(self.window.styleMask &  NSWindowStyleMaskFullScreen)){
                 [self performSelector:@selector(defferedEnterFullscreen) withObject:nil afterDelay:0];
             }
         }
@@ -178,7 +178,7 @@ static NSString* kMainView = @"mainView";
     if (_imageArrayController.selectedObjects.count > 0){
         PathNode* currentImage = _imageArrayController.selectedObjects[0];
         NSRect windowRect;
-        if (self.window.styleMask &  NSFullScreenWindowMask){
+        if (self.window.styleMask &  NSWindowStyleMaskFullScreen){
             windowRect = windowRectInNotFullscreen;
         }else{
             windowRect = self.window.frame;
@@ -194,7 +194,7 @@ static NSString* kMainView = @"mainView";
         [preferences setValue:@(!self.isCollapsedOutlineView) forKey:kShowNavigator];
         [preferences setValue:@(!self.isCollapsedInspectorView) forKey:kShowInspector];
         [preferences setValue:@(_toolbar.visible) forKey:kShowToolbar];
-        [preferences setValue:@(self.window.styleMask & NSFullScreenWindowMask) forKey:kInFullScreen];
+        [preferences setValue:@(self.window.styleMask & NSWindowStyleMaskFullScreen) forKey:kInFullScreen];
         [document saveDocumentWindowPreferences:preferences];
     }
     

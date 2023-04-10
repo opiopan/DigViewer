@@ -102,7 +102,7 @@
 //-----------------------------------------------------------------------------------------
 - (void) didEndSheet:(NSWindow*)sheet returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
 {
-    if (returnCode == NSOKButton){
+    if (returnCode == NSModalResponseOK){
         LensLibrary* library = [LensLibrary sharedLensLibrary];
         
         if (!_lensForEdit){
@@ -298,13 +298,13 @@
     if (_okButton.enabled){
         [self normalizeValues];
         [self.panel close];
-        [[NSApplication sharedApplication] endSheet:self.panel returnCode:NSOKButton];
+        [[NSApplication sharedApplication] endSheet:self.panel returnCode:NSModalResponseOK];
     }
 }
 
 - (IBAction)onCancel:(id)sender {
     [self.panel close];
-    [[NSApplication sharedApplication] endSheet:self.panel returnCode:NSCancelButton];
+    [[NSApplication sharedApplication] endSheet:self.panel returnCode:NSModalResponseCancel];
 }
 
 //-----------------------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 #import "ImageRenderer.h"
 #import "ImageFrameLayer.h"
 #import "TwoFingerGestureRecognizer.h"
+#import "ImageViewController.h"
 #include "CoreFoundationHelper.h"
 
 enum PanningMode{

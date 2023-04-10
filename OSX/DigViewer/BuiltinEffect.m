@@ -7,7 +7,6 @@
 //
 
 #import "BuiltinEffect.h"
-#import <Quartz/Quartz.h>
 
  enum _SlideshowTransition{
      SlideshowTransitionNone,

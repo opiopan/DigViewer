@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MapPreferences">
@@ -13,24 +13,40 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="700" height="296"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="contentRect" x="196" y="240" width="700" height="499"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="296"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="499"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" borderType="none" id="Afd-d8-fVl">
-                        <rect key="frame" x="-3" y="16" width="706" height="280"/>
+                    <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="Afd-d8-fVl">
+                        <rect key="frame" x="-3" y="-4" width="706" height="503"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <view key="contentView" id="g8H-HY-ouW">
-                            <rect key="frame" x="0.0" y="0.0" width="706" height="265"/>
+                        <view key="contentView" id="uwK-Dl-KLS">
+                            <rect key="frame" x="0.0" y="0.0" width="706" height="491"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="T3A-G5-Mh6">
-                                    <rect key="frame" x="90" y="228" width="161" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pax-yr-zmS">
+                                    <rect key="frame" x="91" y="347" width="526" height="136"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="r9B-mS-Xvj">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">DigViewer uses "Google Maps JavaScript API v3" to display a map and indicate location taking a photo. And you also need a Google API key to use this API.
+Please get a API key and specify it as following steps:
+
+    1: Go to "Google Developers Console" by pressing "Get API Key..." button
+    2: Create a project and enter that project
+    3: Enable "Google Maps JavaScript API"
+    4: Create a API Key for "Browser" at "Authentication" page</string>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3A-G5-Mh6">
+                                    <rect key="frame" x="91" y="223" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Exposure direction:" id="JX8-fD-b6Y">
                                         <font key="font" metaFont="system"/>
@@ -38,8 +54,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="F0j-m8-0Zg">
-                                    <rect key="frame" x="348" y="169" width="268" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0j-m8-0Zg">
+                                    <rect key="frame" x="349" y="164" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Gradation level" id="UTo-6i-984">
                                         <font key="font" metaFont="system"/>
@@ -47,8 +63,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <colorWell id="f0q-Qe-2FB">
-                                    <rect key="frame" x="267" y="222" width="75" height="23"/>
+                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Qe-2FB">
+                                    <rect key="frame" x="268" y="217" width="75" height="23"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -59,8 +75,8 @@
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <colorWell id="9Ba-9M-Idp">
-                                    <rect key="frame" x="267" y="193" width="75" height="23"/>
+                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ba-9M-Idp">
+                                    <rect key="frame" x="268" y="188" width="75" height="23"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
@@ -71,8 +87,40 @@
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ez7-TE-6iB">
-                                    <rect key="frame" x="348" y="225" width="268" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-0R-UfA">
+                                    <rect key="frame" x="90" y="295" width="162" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Google API Key:" id="wjz-QV-3cb">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fgq-Lf-AFs">
+                                    <rect key="frame" x="492" y="259" width="128" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="push" title="Get API key..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6p3-C0-V9w">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <connections>
+                                            <action selector="onGetApiKey:" target="-2" id="W8v-8y-4cF"/>
+                                        </connections>
+                                    </buttonCell>
+                                </button>
+                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-Hy-vdY">
+                                    <rect key="frame" x="267" y="291" width="348" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="0fJ-h2-GNM">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.googleMapsApiKey" id="CSo-ee-2x1"/>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ez7-TE-6iB">
+                                    <rect key="frame" x="349" y="220" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Field of view color" id="dnI-tz-3DZ">
                                         <font key="font" metaFont="system"/>
@@ -80,8 +128,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="n2a-4n-fZB">
-                                    <rect key="frame" x="348" y="196" width="268" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n2a-4n-fZB">
+                                    <rect key="frame" x="349" y="191" width="268" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Arrow color" id="JB4-SI-g5c">
                                         <font key="font" metaFont="system"/>
@@ -89,8 +137,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" id="o8K-nA-nR4">
-                                    <rect key="frame" x="265" y="117" width="268" height="26"/>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8K-nA-nR4">
+                                    <rect key="frame" x="266" y="112" width="268" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="eX5-eA-djm">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -107,8 +155,8 @@
                                         <binding destination="MyX-ZP-vVp" name="selectedIndex" keyPath="values.mapType" id="RSq-cV-eiI"/>
                                     </connections>
                                 </popUpButton>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dn4-nJ-MlM">
-                                    <rect key="frame" x="90" y="124" width="161" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dn4-nJ-MlM">
+                                    <rect key="frame" x="91" y="119" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Display at opening:" id="Iav-pi-HYw">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
@@ -116,8 +164,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="5GI-SZ-eBp">
-                                    <rect key="frame" x="90" y="77" width="161" height="17"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5GI-SZ-eBp">
+                                    <rect key="frame" x="91" y="72" width="161" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Others:" id="534-tp-bti">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
@@ -125,8 +173,8 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button id="lAg-TP-ygJ">
-                                    <rect key="frame" x="265" y="76" width="313" height="18"/>
+                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-TP-ygJ">
+                                    <rect key="frame" x="266" y="71" width="313" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Enable Google Street View" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qlO-Ag-XOq">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -136,8 +184,8 @@
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapEnableStreetView" id="HNC-z9-mtZ"/>
                                     </connections>
                                 </button>
-                                <button id="pSV-HE-kiL">
-                                    <rect key="frame" x="265" y="56" width="313" height="18"/>
+                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pSV-HE-kiL">
+                                    <rect key="frame" x="266" y="51" width="313" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Move to home position if no GPS data" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LWe-Nr-0Zp">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -147,13 +195,13 @@
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapMoveToHomePos" id="nbL-HW-c6K"/>
                                     </connections>
                                 </button>
-                                <textField verticalHuggingPriority="750" id="7WS-Z2-Lo2">
-                                    <rect key="frame" x="267" y="166" width="75" height="22"/>
+                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-Z2-Lo2">
+                                    <rect key="frame" x="268" y="161" width="75" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="BsN-7f-7i8">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Skb-Lg-cIX"/>
                                         <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
@@ -166,8 +214,8 @@
                                         <binding destination="MyX-ZP-vVp" name="minValue" keyPath="values.mapFovGradeMin" previousBinding="4sg-He-jzl" id="4F7-At-rRa"/>
                                     </connections>
                                 </textField>
-                                <button id="96A-Vs-OS6">
-                                    <rect key="frame" x="265" y="36" width="351" height="18"/>
+                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96A-Vs-OS6">
+                                    <rect key="frame" x="266" y="31" width="351" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Pass altitude when open external map appliccation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sIl-jE-S4z">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -179,12 +227,10 @@
                                 </button>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="360" y="277"/>
+            <point key="canvasLocation" x="360" y="378.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="MyX-ZP-vVp"/>
     </objects>

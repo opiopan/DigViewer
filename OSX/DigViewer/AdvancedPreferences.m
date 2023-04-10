@@ -60,7 +60,7 @@
     NSStringCompareOptions sortOption = _isCaseInsensitive ? NSCaseInsensitiveSearch : 0;
     sortOption |= _isSortAsNumeric ? NSNumericSearch : 0;
     NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
-        if (_sortType == 0){
+        if (self->_sortType == 0){
             if (o1.isImage && !o2.isImage){
                 return NSOrderedAscending;
             }else if (!o1.isImage && o2.isImage){
@@ -68,7 +68,7 @@
             }else{
                 return [o1.name compare:o2.name options:sortOption];
             }
-        }else if (_sortType == 1){
+        }else if (self->_sortType == 1){
             if (!o1.isImage && o2.isImage){
                 return NSOrderedAscending;
             }else if (o1.isImage && !o2.isImage){

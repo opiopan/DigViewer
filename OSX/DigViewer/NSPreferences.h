@@ -2,7 +2,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NSPreferencesModule.h"
 
-extern void _nsBeginNSPSupport();				// magic call to get NSPreferences working properly....
+extern void _nsBeginNSPSupport(void);				// magic call to get NSPreferences working properly....
 
 @interface NSPreferences : NSObject
 {

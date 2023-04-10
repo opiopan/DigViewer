@@ -8,6 +8,7 @@
 
 #import "ThumbnailConfigController.h"
 #import "PreferencesDefaultsController.h"
+#import "ThumbnailPreferences.h"
 
 @implementation ThumbnailConfigController{
     NSNumber* _deferredNotificationValue;

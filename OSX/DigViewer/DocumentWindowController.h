@@ -47,6 +47,8 @@
 - (IBAction)toggleSlideshowMode:(id)sender;
 - (IBAction)toggleDateTimeSort:(id)sender;
 
+- (IBAction)resetZoomRatio:(id)sender;
+
 - (BOOL)addOpenWithApplicationMenuForURL:(NSURL*)url toMenuItem:(NSMenuItem*)menuItem;
 - (BOOL)addSharingMenuForItems:(NSArray*)items toMenuItem:(NSMenuItem*)menuItem;
 - (void)copyItems:(NSArray*)items;

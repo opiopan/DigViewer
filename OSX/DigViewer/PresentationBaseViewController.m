@@ -7,7 +7,7 @@
 //
 
 #import "PresentationBaseViewController.h"
-#import "ImageVIewConfigController.h"
+#import "ImageViewConfigController.h"
 
 @implementation PresentationBaseViewController{
     ImageViewConfigController* _imageViewConfig;

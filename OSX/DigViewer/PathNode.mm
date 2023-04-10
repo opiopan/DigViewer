@@ -620,7 +620,7 @@ static const CGFloat ThumbnailMaxSizeDefault = 384;
     [NSGraphicsContext setCurrentContext:gc];
     NSRect targetRect = NSZeroRect;
     targetRect.size = destSize;
-    [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+    [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver
                 fraction:1.0 respectFlipped:YES hints:nil];
     [NSGraphicsContext restoreGraphicsState];
     return CGBitmapContextCreateImage(context);
@@ -701,7 +701,7 @@ static const CGFloat ThumbnailMaxSizeDefault = 384;
         NSRect targetRect = NSZeroRect;
         targetRect.size.width = targetRect.size.height = normalizedLength * _thumbnailConfig.folderIconSize.doubleValue;
         targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
-        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver
+        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver
                        fraction:_thumbnailConfig.folderIconOpacity.doubleValue
                  respectFlipped:YES hints:nil];
         [NSGraphicsContext restoreGraphicsState];
@@ -712,7 +712,7 @@ static const CGFloat ThumbnailMaxSizeDefault = 384;
         [NSGraphicsContext setCurrentContext:gc];
         NSRect targetRect = NSZeroRect;
         targetRect.size.width = targetRect.size.height = normalizedLength;
-        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
         [NSGraphicsContext restoreGraphicsState];
 
         // ソース画像を描画

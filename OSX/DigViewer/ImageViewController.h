@@ -17,5 +17,6 @@
 - (void)moveToDirection:(RelationalImageDirection)direction withTransition:(id)transition;
 - (void)beginSlideshow;
 - (void)endSlideshow;
+- (void)onDoubleClickableImageView:(id)sender;
 
 @end

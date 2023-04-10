@@ -9,6 +9,6 @@
 #import "TransitionEffect.h"
 #import <Quartz/Quartz.h>
 
-@interface EffectByCIFilter : TransitionEffect
+@interface EffectByCIFilter : TransitionEffect <CAAnimationDelegate>
 @property (readonly, nonatomic) CIFilter* filter;
 @end

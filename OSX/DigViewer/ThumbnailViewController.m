@@ -30,19 +30,19 @@
 - (void)awakeFromNib
 {
     [self performSelector:@selector(onDefaultSize:) withObject:self afterDelay:0.0f];
-    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     thumbnailView.menu = controller.contextMenu;
-    [controller addObserver:self forKeyPath:@"presentationViewType" options:nil context:nil];
-    [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:nil context:nil];
-    [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:nil context:nil];
+    [controller addObserver:self forKeyPath:@"presentationViewType" options:0 context:nil];
+    [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:0 context:nil];
+    [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndEnable"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndMultiple"
-                                                                 options:nil context:nil];
-    [[ThumbnailConfigController sharedController] addObserver:self forKeyPath:@"updateCount" options:nil context:nil];
+                                                                 options:0 context:nil];
+    [[ThumbnailConfigController sharedController] addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
     
     [self reflectDnDSettings];
 }

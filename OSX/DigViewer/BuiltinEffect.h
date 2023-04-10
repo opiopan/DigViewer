@@ -8,8 +8,10 @@
 
 #import "TransitionEffect.h"
 #import "SlideshowConfigController.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface BuiltinEffect : TransitionEffect
+
+@interface BuiltinEffect : TransitionEffect <CAAnimationDelegate>
 
 - (instancetype)initWithType:(NSString*)type;
 

@@ -86,7 +86,7 @@
             root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition
                                              option:&option progress:pathNodeProgress];
         }else{
-            self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil),
+            self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil);
             root = [PathNode pathNodeWithPath:path  ommitingCondition:condition option:&option progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
@@ -97,7 +97,7 @@
     isLoading = NO;
     if (isShowing){
         [panel close];
-        [[NSApplication sharedApplication] endSheet:panel returnCode:NSOKButton];
+        [[NSApplication sharedApplication] endSheet:panel returnCode:NSModalResponseOK];
         isShowing =NO;
     }
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
@@ -182,7 +182,7 @@
     isLoading = NO;
     if (isShowing){
         [panel close];
-        [[NSApplication sharedApplication] endSheet:panel returnCode:NSOKButton];
+        [[NSApplication sharedApplication] endSheet:panel returnCode:NSModalResponseOK];
         isShowing =NO;
     }
     [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];

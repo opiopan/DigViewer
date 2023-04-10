@@ -78,7 +78,7 @@
     // Google API Keyの変更を監視するするobserverを登録
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.googleMapsApiKey"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
 
     // サブビューの配置
     [self arrangeSubview];

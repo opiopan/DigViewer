@@ -37,7 +37,7 @@ static NSString* deviceListKey = @"dvremotePairingKeys";
     self = [super init];
     if (self){
         controller = [NSUserDefaultsController sharedUserDefaultsController];
-        [controller addObserver:self forKeyPath:[@"values." stringByAppendingString:deviceListKey] options:nil context:nil];
+        [controller addObserver:self forKeyPath:[@"values." stringByAppendingString:deviceListKey] options:0 context:nil];
     }
     return self;
 }

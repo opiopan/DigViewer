@@ -23,7 +23,7 @@
     if (self){
         _thumbnailConfig = [ThumbnailConfigController sharedController];
         _thumbnailConfig.delegate = self;
-        _thumbnailConfigUpdateCount = _thumbnailConfig.updateCount;
+        _thumbnailConfigUpdateCount = _thumbnailConfig.updateCount.longValue;
     }
     return self;
 }

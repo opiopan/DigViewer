@@ -17,4 +17,6 @@
 @property (weak, nonatomic) ThumbnailConfigController* thumbnailConfig;
 @property (strong, nonatomic) NSNumber* thumbnailSampleType;
 
+- (void)notifyUpdateCount:(NSNumber*)updateCount;
+
 @end

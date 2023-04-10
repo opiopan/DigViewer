@@ -37,13 +37,13 @@
 {
     [imageTableView setTarget:self];
     [imageTableView setDoubleAction:@selector(onDoubleClickImageTableView:)];
-    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:nil context:nil];
+    [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndEnable"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndMultiple"
-                                                                 options:nil context:nil];
+                                                                 options:0 context:nil];
     
     [self reflectDnDSettings];
 

@@ -60,7 +60,7 @@
     
     NSRect target = cellFrame;
     target.size.width = target.size.height;
-    [image drawInRect:target fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+    [image drawInRect:target fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0 respectFlipped:YES hints:nil];
     
     NSDictionary* attrs = [self.attributedStringValue attributesAtIndex:0 effectiveRange:nil];
     NSPoint p2 = [self namePositionWithIcon:image cellFrame:cellFrame name:name attributes:attrs];
