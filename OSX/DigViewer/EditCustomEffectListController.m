@@ -54,11 +54,9 @@
     _delegate = delegate;
     _didEndSelector = didEndSelector;
     
-    [[NSApplication sharedApplication] beginSheet:self.panel
-                                   modalForWindow:_window
-                                    modalDelegate:self
-                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                      contextInfo:nil];
+    [_window beginSheet:self.panel completionHandler:^(NSModalResponse returnCode){
+        [self didEndSheet:self.panel returnCode:returnCode contextInfo:nil];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -118,11 +116,15 @@
         // deleting
         if (_effectsArrayController.selectedObjects && _effectsArrayController.selectedObjects.count > 0){
             id effect = _effectsArrayController.selectedObjects[0];
-            NSBeginAlertSheet(NSLocalizedString(@"CEMSG_CONF_REMOVE", nill),
-                              NSLocalizedString(@"OK", nil), NSLocalizedString(@"Cancel", nil),
-                              nil, _panel,
-                              self, @selector(didEndConfirmRemovingEffect:returnCode:contextInfo:), nil, nil,
-                              @"%@", [effect valueForKey:@"name"]);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:NSLocalizedString(@"CEMSG_CONF_REMOVE", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+            [alert setInformativeText:[NSString stringWithFormat:@"%@", [effect valueForKey:@"name"]]];
+            [alert beginSheetModalForWindow:_panel completionHandler:^(NSModalResponse returnCode){
+                [self didEndConfirmRemovingEffect:self->_panel returnCode:returnCode contextInfo:nil];
+            }];
+
         }
     }
 }
@@ -234,9 +236,9 @@
 //-----------------------------------------------------------------------------------------
 // エフェクト削除確認
 //-----------------------------------------------------------------------------------------
-- (void)didEndConfirmRemovingEffect:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+- (void)didEndConfirmRemovingEffect:(NSWindow *)sheet returnCode:(NSModalResponse)returnCode contextInfo:(void  *)contextInfo
 {
-    if (returnCode == NSAlertDefaultReturn){
+    if (returnCode == NSAlertFirstButtonReturn){
         if (_effectsArrayController.selectedObjects && _effectsArrayController.selectedObjects.count > 0){
             id effect = _effectsArrayController.selectedObjects[0];
             [_effectsForEdit removeObject:effect];
@@ -252,10 +254,11 @@
 //-----------------------------------------------------------------------------------------
 - (void) showAlertSheetWithMessage:(NSString*)message andSubtext:(NSString*)subtext
 {
-    NSBeginAlertSheet(message,
-                      NSLocalizedString(@"OK", nil), nil, nil, _panel,
-                      self, nil, nil, nil,
-                      @"%@", subtext);
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:message];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+    [alert setInformativeText:[NSString stringWithFormat:@"%@", subtext]];
+    [alert beginSheetModalForWindow:_panel completionHandler:nil];
 }
 
 @end

@@ -49,7 +49,7 @@
     [self willChangeValueForKey:@"imageMinificationFilter"];
     [self willChangeValueForKey:@"imageUseEmbeddedThumbnailRAW"];
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
-    _backgroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:[defaults.values valueForKey:@"imageBackgroundColor"]];
+    _backgroundColor = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:[defaults.values valueForKey:@"imageBackgroundColor2"]];
     _magnificationFilter = [[defaults.values valueForKey:@"imageMagnificationFilter"] intValue];
     _minificationFilter = [[defaults.values valueForKey:@"imageMinificationFilter"] intValue];
     _useEmbeddedThumbnailRAW = [[defaults.values valueForKey:@"imageUseEmbeddedThumbnailRAW"] boolValue];
@@ -89,7 +89,7 @@
 {
     _backgroundColor = backgroundColor;
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
-    [defaults.values setValue:[NSArchiver archivedDataWithRootObject:_backgroundColor] forKey:@"imageBackgroundColor"];
+    [defaults.values setValue:[NSKeyedArchiver archivedDataWithRootObject:_backgroundColor] forKey:@"imageBackgroundColor2"];
     [self incrementUpdateCount];
 }
 

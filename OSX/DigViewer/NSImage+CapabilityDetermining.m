@@ -23,19 +23,23 @@ static NSMutableDictionary* capabilities = nil;
 
 + (void) buildCapabilityList
 {
-    NSArray* types = [NSImage imageFileTypes];
+    NSArray* types = [NSImage imageTypes];
     capabilities = [NSMutableDictionary dictionaryWithCapacity:types.count];
     for (int i = 0; i < types.count; i++){
-        NSString* type = [types[i] lowercaseString];
-        if ([type characterAtIndex:0] != '\'' && ![capabilities valueForKey:type]){
-            NSString* tmpFileName = [NSString stringWithFormat:@"/tmp/DigViewerTmp.%@", type];
-            NSFileManager* manager = [NSFileManager defaultManager];
-            [manager createFileAtPath:tmpFileName contents:nil attributes:nil];
-            NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
-            NSError* error;
-            NSString* remarks = [workspace localizedDescriptionForType:[workspace typeOfFile:tmpFileName error:&error]];
-            [capabilities setValue:remarks forKey:type];
-            [manager removeItemAtPath:tmpFileName error:&error];
+        NSArray *extensions =
+            (__bridge_transfer NSArray *)UTTypeCopyAllTagsWithClass((__bridge CFStringRef)types[i], kUTTagClassFilenameExtension);
+        for (int j = 0; j < extensions.count; j++){
+            NSString* type = [extensions[j] lowercaseString];
+            if ([type characterAtIndex:0] != '\'' && ![capabilities valueForKey:type]){
+                NSString* tmpFileName = [NSString stringWithFormat:@"/tmp/DigViewerTmp.%@", type];
+                NSFileManager* manager = [NSFileManager defaultManager];
+                [manager createFileAtPath:tmpFileName contents:nil attributes:nil];
+                NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
+                NSError* error;
+                NSString* remarks = [workspace localizedDescriptionForType:[workspace typeOfFile:tmpFileName error:&error]];
+                [capabilities setValue:remarks forKey:type];
+                [manager removeItemAtPath:tmpFileName error:&error];
+            }
         }
     }
 }

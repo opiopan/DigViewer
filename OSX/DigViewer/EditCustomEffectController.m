@@ -44,11 +44,9 @@
     _delegate = delegate;
     _didEndSelector = didEndSelector;
     
-    [[NSApplication sharedApplication] beginSheet:self.panel
-                                   modalForWindow:_window
-                                    modalDelegate:self
-                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                      contextInfo:nil];
+    [_window beginSheet:self.panel completionHandler:^(NSModalResponse returnCode){
+        [self didEndSheet:self.panel returnCode:returnCode contextInfo:nil];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------

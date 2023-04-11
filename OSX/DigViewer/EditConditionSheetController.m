@@ -90,11 +90,9 @@
     [self didChangeValueForKey:@"condition"];
     [_conditionTreeView expandItem:nil expandChildren:YES];
     
-    [[NSApplication sharedApplication] beginSheet:self.panel
-                                   modalForWindow:_window
-                                    modalDelegate:self
-                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                      contextInfo:nil];
+    [_window beginSheet:self.panel completionHandler:^(NSModalResponse returnCode){
+        [self didEndSheet:self.panel returnCode:returnCode contextInfo:nil];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -275,11 +273,10 @@
                 [self updateButtonState];
                 [self performSelector:@selector(didEndDeletingGroup) withObject:nil afterDelay:0];
             }else{
-                NSBeginAlertSheet(NSLocalizedString(@"CDMSG_ERROR_ONLYONE", nill),
-                                  NSLocalizedString(@"OK", nil), nil,
-                                  nil, _panel,
-                                  nil, nil, nil, nil,
-                                  @"");
+                NSAlert *alert = [[NSAlert alloc] init];
+                [alert setMessageText:NSLocalizedString(@"CDMSG_ERROR_ONLYONE", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+                [alert beginSheetModalForWindow:_panel completionHandler:nil];
             }
         }else{
             Condition* parent = current.parent;
@@ -387,11 +384,11 @@
         NSScanner* scanner = [NSScanner scannerWithString:comparisonValue];
         double numericValue;
         if (![scanner scanDouble:&numericValue]){
-            NSBeginAlertSheet(NSLocalizedString(@"CDMSG_ERROR_INVALID_AS_NUMERIC", nill),
-                              NSLocalizedString(@"OK", nil), nil,
-                              nil, _panel,
-                              nil, nil, nil, nil,
-                              @"%@", comparisonValue);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:NSLocalizedString(@"CDMSG_ERROR_INVALID_AS_NUMERIC", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+            [alert setInformativeText:[NSString stringWithFormat:@"%@", comparisonValue]];
+            [alert beginSheetModalForWindow:_panel completionHandler:nil];
             [self performSelector:@selector(comparisonValueReflection:) withObject:_comparisonValue afterDelay:0];
             return;
         }

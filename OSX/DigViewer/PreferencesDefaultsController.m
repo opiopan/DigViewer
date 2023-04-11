@@ -16,15 +16,15 @@
 {
     static NSDictionary* defaults = nil;
     if (!defaults){
-        NSData* blackData = [NSArchiver archivedDataWithRootObject:[NSColor blackColor]];
-        NSData* redData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
+        NSData* blackData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor blackColor]];
+        NSData* redData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
         NSArray* zeroArray = [NSArray array];
         defaults = @{@"saveWindowPreferences":        @YES,
                      @"imageSetType":                 @0,
                      @"imageSetMaxFileSize":          @5,
                      @"imageSetMaxFileSizeMin":       @0.1,
                      @"imageSetOmittingExt":          zeroArray,
-                     @"imageBackgroundColor":         blackData,
+                     @"imageBackgroundColor2":         blackData,
                      @"imageMagnificationFilter":     @(ImageViewFilterBilinear),
                      @"imageMinificationFilter":      @(ImageViewFilterBilinear),
                      @"imageUseEmbeddedThumbnailRAW": @YES,
@@ -37,8 +37,8 @@
                      @"slideshowShowOnTheOtherScreen":@YES,
                      @"slideshowCustomEffects":       @[],
                      @"slideshowDisableSleep":        @NO,
-                     @"mapFovColor":                  redData,
-                     @"mapArrowColor":                redData,
+                     @"mapFovColor2":                  redData,
+                     @"mapArrowColor2":                redData,
                      @"mapFovGrade":                  @30,
                      @"mapFovGradeMin":               @1,
                      @"mapFovGradeMax":               @100,

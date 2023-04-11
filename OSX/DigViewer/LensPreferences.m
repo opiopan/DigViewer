@@ -58,11 +58,14 @@
         NSArray* selectedObjects = self.lensArrayController.selectedObjects;
         if (selectedObjects.count > 0){
             Lens* lens = selectedObjects[0];
-            NSBeginAlertSheet(NSLocalizedString(@"LPMSG_CONF_REMOVE", nill),
-                              NSLocalizedString(@"OK", nil), NSLocalizedString(@"Cancel", nil),
-                              nil, _preferencesView.window,
-                              self, @selector(didEndConfirmRemovingLens:returnCode:contextInfo:), nil, nil,
-                              @"%@", lens.name);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:NSLocalizedString(@"LPMSG_CONF_REMOVE", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+            [alert setInformativeText:[NSString stringWithFormat:@"%@", lens.name]];
+            [alert beginSheetModalForWindow:_preferencesView.window completionHandler:^(NSModalResponse returnCode){
+                [self didEndConfirmRemovingLens:self->_preferencesView.window returnCode:returnCode contextInfo:nil];
+            }];
         }
     }
 }
@@ -103,9 +106,9 @@
 //-----------------------------------------------------------------------------------------
 // レンズプロファイル削除確認応答
 //-----------------------------------------------------------------------------------------
-- (void)didEndConfirmRemovingLens:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+- (void)didEndConfirmRemovingLens:(NSWindow *)sheet returnCode:(NSModalResponse)returnCode contextInfo:(void  *)contextInfo
 {
-    if (returnCode == NSAlertDefaultReturn){
+    if (returnCode == NSAlertFirstButtonReturn){
         NSArray* selectedObjects = self.lensArrayController.selectedObjects;
         if (selectedObjects.count > 0){
             Lens* lens = selectedObjects[0];

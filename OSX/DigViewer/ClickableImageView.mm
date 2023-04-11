@@ -61,7 +61,7 @@ enum PanningMode{
     
     _enableGesture = YES;
     
-    [self setAcceptsTouchEvents:YES];
+    self.allowedTouchTypes = NSTouchTypeMaskDirect | NSTouchTypeMaskIndirect;
 }
 
 //-----------------------------------------------------------------------------------------

@@ -78,11 +78,9 @@
     self.applicableList = applicableList;
     self.inapplicableList = inapplicableList;
     
-    [[NSApplication sharedApplication] beginSheet:self.panel
-                                   modalForWindow:_window
-                                    modalDelegate:self
-                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
-                                      contextInfo:nil];
+    [_window beginSheet:self.panel completionHandler:^(NSModalResponse returnCode){
+        [self didEndSheet:self.panel returnCode:returnCode contextInfo:nil];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -120,18 +118,23 @@
                     used = [used stringByAppendingFormat:@"%@\n", camera.name];
                 }
             }
+            NSAlert *alert = [[NSAlert alloc] init];
             if (used.length > 0){
-                NSBeginAlertSheet(NSLocalizedString(@"CPMSG_WARNING_USED", nill),
-                                  NSLocalizedString(@"OK", nil), NSLocalizedString(@"Cancel", nil),
-                                  nil, _panel,
-                                  self, @selector(didEndConfirmRemovingCamera:returnCode:contextInfo:), nil, nil,
-                                  @"%@", used);
+                [alert setMessageText:NSLocalizedString(@"CPMSG_WARNING_USED", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+                [alert setInformativeText:[NSString stringWithFormat:@"%@", used]];
+                [alert beginSheetModalForWindow:_panel completionHandler:^(NSModalResponse returnCode) {
+                    [self didEndConfirmRemovingCamera:self->_panel returnCode:returnCode contextInfo:nil];
+                }];
             }else{
-                NSBeginAlertSheet(NSLocalizedString(@"CPMSG_CONF_REMOVE", nill),
-                                  NSLocalizedString(@"OK", nil), NSLocalizedString(@"Cancel", nil),
-                                  nil, _panel,
-                                  self, @selector(didEndConfirmRemovingCamera:returnCode:contextInfo:), nil, nil,
-                                  @"%@", all);
+                [alert setMessageText:NSLocalizedString(@"CPMSG_CONF_REMOVE", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+                [alert setInformativeText:[NSString stringWithFormat:@"%@", all]];
+                [alert beginSheetModalForWindow:_panel completionHandler:^(NSModalResponse returnCode) {
+                    [self didEndConfirmRemovingCamera:self->_panel returnCode:returnCode contextInfo:nil];
+                }];
             }
         }
     }
@@ -142,11 +145,11 @@
     if (object){
         NSArray* check = [_lensLibrary findCameraByName:object];
         if (check && check.count > 0){
-            NSBeginAlertSheet(NSLocalizedString(@"CPMSG_ERROR_CONFLICT", nill),
-                              NSLocalizedString(@"OK", nil), nil,
-                              nil, _panel,
-                              nil, nil, nil, nil,
-                              @"%@", object);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:NSLocalizedString(@"CPMSG_ERROR_CONFLICT", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+            [alert setInformativeText:[NSString stringWithFormat:@"%@", object]];
+            [alert beginSheetModalForWindow:_panel completionHandler:nil];
             return;
         }
         
@@ -163,9 +166,9 @@
     }
 }
 
-- (void)didEndConfirmRemovingCamera:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+- (void)didEndConfirmRemovingCamera:(NSWindow *)sheet returnCode:(NSModalResponse)returnCode contextInfo:(void  *)contextInfo
 {
-    if (returnCode == NSAlertDefaultReturn){
+    if (returnCode == NSAlertFirstButtonReturn){
         NSArray* selectedObjects = [NSArray arrayWithArray:_inapplicableListController.selectedObjects];
         [self willChangeValueForKey:@"inapplicableList"];
         [_inapplicableList removeObjectsInArray:selectedObjects];

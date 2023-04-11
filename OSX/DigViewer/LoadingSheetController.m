@@ -112,11 +112,7 @@
 {
     if (isLoading && pathNodeProgress.progress < 50){
         isShowing = YES;
-        [[NSApplication sharedApplication] beginSheet:panel
-                                       modalForWindow:modalWindow
-                                        modalDelegate:nil
-                                       didEndSelector:nil
-                                          contextInfo:nil];
+        [modalWindow beginSheet:panel completionHandler:nil];
         [self performSelector:@selector(updateProgress) withObject:nil afterDelay:0.1f];
     }
 }

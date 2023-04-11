@@ -851,14 +851,14 @@ static NSString* kAppImage = @"image";
 
 - (NSDictionary*)applicationIDForURL:(NSURL*)url
 {
-    CFStringRef name;
-    LSCopyDisplayNameForURL((__bridge CFURLRef)url, &name);
+    NSString* name = nil;
+    NSError* error = nil;
+    [url getResourceValue:&name forKey:NSURLLocalizedNameKey error:&error];
     NSImage* image = [[NSWorkspace sharedWorkspace] iconForFile:url.path];
     [image setSize:NSMakeSize(18, 18)];
-    NSDictionary* rc = @{kAppName: (__bridge NSString*)name,
+    NSDictionary* rc = @{kAppName: name,
                          kAppURL: url,
                          kAppImage: image};
-    CFRelease(name);
     return rc;
 }
 

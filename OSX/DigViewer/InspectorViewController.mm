@@ -212,18 +212,18 @@
 - (void)reflectMapFovColor
 {
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSData* data = [[controller values] valueForKey:@"mapFovColor"];
+    NSData* data = [[controller values] valueForKey:@"mapFovColor2"];
     if (data){
-        self.mapView.fovColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
+        self.mapView.fovColor = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
 }
 
 - (void)reflectMapArrowColor
 {
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSData* data = [[controller values] valueForKey:@"mapArrowColor"];
+    NSData* data = [[controller values] valueForKey:@"mapArrowColor2"];
     if (data){
-        self.mapView.arrowColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:data];
+        self.mapView.arrowColor = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
 }
 
