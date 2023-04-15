@@ -180,6 +180,7 @@ static const NSInteger CACHE_SIZE = 6;
                 }
             }
             [_currentLayer setImage:current.image withRotation:current.rotation];
+            NSLog(@"image injection(%@, %@): %@", _currentLayer, current, [current.imageId name]);
         }
         current.state = CacheCurrent;
         _currentEntry = current;
@@ -189,11 +190,13 @@ static const NSInteger CACHE_SIZE = 6;
         [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
         _currentLayer.zPosition = 1;
         _currentLayer.hidden = NO;
+        _currentLayer.frame = self.frame;
         _nextLayer.zPosition = 0;
         _nextLayer.hidden = YES;
         _previousLayer.zPosition = 0;
         _previousLayer.hidden = YES;
         [CATransaction commit];
+        NSLog(@"switch layer (%@, %@)", _currentLayer, _currentEntry);
     }
     
     // 投機的キャッシング
@@ -239,7 +242,8 @@ static const NSInteger CACHE_SIZE = 6;
             
             ImageLayer* layer = _nextLayer;
             [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
-            
+            NSLog(@"image injection(%@, %@): %@", layer, next, [next.imageId name]);
+
             dispatch_async(_dispatchQue, ^(){
                 if (index == NSNotFound){
                     ImageRenderer* renderer;
@@ -286,7 +290,8 @@ static const NSInteger CACHE_SIZE = 6;
             
             ImageLayer* layer = _previousLayer;
             [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
-            
+            NSLog(@"image injection(%@, %@): %@", layer, previous, [previous.imageId name]);
+
             dispatch_async(_dispatchQue, ^(){
                 if (index == NSNotFound){
                     ImageRenderer* renderer;
