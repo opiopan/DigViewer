@@ -25,7 +25,7 @@ static inline NSTimeInterval nowInEpocTime(){
 // イメージキャッシュノード
 //-----------------------------------------------------------------------------------------
 enum _CacheState {
-    CacheFree, CacheProcessing, CacheCurrent, CacheNext, CachePrevious
+    CacheFree, CacheStandBy, CacheProcessing, CacheVarid
 };
 typedef enum _CacheState CacheState;
 
@@ -137,54 +137,37 @@ static const NSInteger CACHE_SIZE = 6;
     if (_relationalImage != relationalImage){
         _relationalImage = relationalImage;
         
-        // キャッシュヒットテスト & LRU処理
-        NSInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
-            return (BOOL)(((ImageCacheEntry*)obj).imageId == relationalImage);
-        }];
-        ImageCacheEntry* current = (index == NSNotFound) ? _imageCache.firstObject : _imageCache[index];
-        [_imageCache removeObject:current];
-        [_imageCache addObject:current];
-        
-        // ラスタライズ中であれば完了まで待つ
-        if (current.state == CacheProcessing){
-            dispatch_semaphore_wait(current.semaphore, DISPATCH_TIME_FOREVER);
-        }
-        
-        // レイヤーの役割交換 or ラスタライズ
+        // キャッシュ探索 & 必要であれば画像レンダリング
+        ImageCacheEntry* current = [self findCacheById:_relationalImage withImage:YES];
+        id nextNode = [_relationalImageAccessor nextObjectOfObject:_relationalImage];
+        ImageCacheEntry* next = nextNode ? [self findCacheById:nextNode withImage:NO] : nil;
+        id previousNode = [_relationalImageAccessor previousObjectOfObject:_relationalImage];
+        ImageCacheEntry* previous = previousNode ? [self findCacheById:previousNode withImage:NO] : nil;
+
+        // レイヤーの役割交換 & レイヤーへの画像割り当て
         ImageLayer* oldLayer = nil;
         if (current == _nextEntry){
-            oldLayer = _currentLayer;
+            oldLayer = _previousLayer;
+            _previousLayer = _currentLayer;
             _currentLayer = _nextLayer;
             _nextLayer = oldLayer;
-            _nextEntry = _currentEntry;
-            _nextEntry.state = CacheNext;
-            [self applyAttributesForLayer:_currentLayer];
+            [_nextLayer setImage:next.image withRotation:next.rotation];
         }else if (current == _previousEntry){
-            oldLayer = _currentLayer;
+            oldLayer = _nextLayer;
+            _nextLayer = _currentLayer;
             _currentLayer = _previousLayer;
             _previousLayer = oldLayer;
-            _previousEntry = _currentEntry;
-            _previousEntry.state = CachePrevious;
-            [self applyAttributesForLayer:_currentLayer];
+            [_previousLayer setImage:previous.image withRotation:previous.rotation];
         }else{
-            if (index == NSNotFound){
-                current.imageId = _relationalImage;
-                if (_relationalImage){
-                    ImageRenderer* renderer;
-                    renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
-                    current.image =  renderer.image;
-                    current.rotation = renderer.rotation;
-                }else{
-                    current.image = nil;
-                    current.rotation = 1;
-                }
-            }
             [_currentLayer setImage:current.image withRotation:current.rotation];
-            NSLog(@"image injection(%@, %@): %@", _currentLayer, current, [current.imageId name]);
+            [_nextLayer setImage:next.image withRotation:next.rotation];
+            [_previousLayer setImage:previous.image withRotation:previous.rotation];
         }
-        current.state = CacheCurrent;
         _currentEntry = current;
-        
+        _nextEntry = next;
+        _previousEntry = previous;
+        [self applyAttributesForLayer:_currentLayer];
+
         // 表示切り替え
         [CATransaction begin];
         [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
@@ -196,116 +179,73 @@ static const NSInteger CACHE_SIZE = 6;
         _previousLayer.zPosition = 0;
         _previousLayer.hidden = YES;
         [CATransaction commit];
-        NSLog(@"switch layer (%@, %@)", _currentLayer, _currentEntry);
     }
     
     // 投機的キャッシング
     if (relationalImage){
-        [self performSelector:@selector(fillCacheSpeculatively) withObject:nil afterDelay:0];
+        [self fillCacheSpeculatively];
     }
 }
 
 //-----------------------------------------------------------------------------------------
-// 投機的キャッシング
+// キャッシュ操作
 //-----------------------------------------------------------------------------------------
+- (ImageCacheEntry*)findCacheById:(id)relationalImage withImage:(BOOL)needImage
+{
+    NSInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
+        return (BOOL)(((ImageCacheEntry*)obj).imageId == relationalImage);
+    }];
+    ImageCacheEntry* entry = nil;
+    if (index == NSNotFound){
+        entry = [_imageCache firstObject];
+        entry.state = CacheStandBy;
+        entry.imageId = relationalImage;
+        entry.image = (__bridge id)(CGImageRef)_pendingImage;
+        entry.rotation = 1;
+        if (!relationalImage){
+            entry.state = CacheVarid;
+        }else if (needImage){
+            ImageRenderer* renderer =
+                [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:relationalImage]];
+            entry.image = renderer.image;
+            entry.rotation = renderer.rotation;
+            entry.state = CacheVarid;
+        }
+    }else{
+        entry = _imageCache[index];
+        if (entry.state != CacheVarid){
+            dispatch_semaphore_wait(entry.semaphore, DISPATCH_TIME_FOREVER);
+        }
+    }
+    
+    // process LRU
+    [_imageCache removeObject:entry];
+    [_imageCache addObject:entry];
+    
+    return entry;
+}
+
 - (void)fillCacheSpeculatively
 {
     RelationalImageAccessor* accessor = _relationalImageAccessor;
     
-    // 次の画像をキャッシュに充填
-    id nextNode = [accessor nextObjectOfObject:_relationalImage];
-    if (nextNode){
-        NSUInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
-            return (BOOL)(((ImageCacheEntry*)obj).imageId == nextNode);
-        }];
-        ImageCacheEntry* next = index == NSNotFound ? _imageCache.firstObject : _imageCache[index];
-        [_imageCache removeObject:next];
-        [_imageCache addObject:next];
-        if (next.state == CacheProcessing){
-            dispatch_semaphore_wait(next.semaphore, DISPATCH_TIME_FOREVER);
-        }
-        if (next == _nextEntry){
-            // nothing to do
-        }else if (next == _previousEntry){
-            ImageLayer* tmp = _previousLayer;
-            _previousLayer = _nextLayer;
-            _nextLayer = tmp;
-            _previousEntry = _nextEntry;
-            _previousEntry.state = CachePrevious;
-            _nextEntry = next;
-            _nextEntry.state = CacheNext;
-        }else{
-            _nextEntry = next;
-            next.imageId = nextNode;
-            next.state = CacheProcessing;
-            next.semaphore = dispatch_semaphore_create(0);
-            
-            ImageLayer* layer = _nextLayer;
-            [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
-            NSLog(@"image injection(%@, %@): %@", layer, next, [next.imageId name]);
-
+    for (NSInteger i = 0; i < _imageCache.count; i++){
+        ImageCacheEntry* entry = _imageCache[i];
+        if (entry.state == CacheStandBy){
+            entry.state = CacheProcessing;
+            entry.semaphore = dispatch_semaphore_create(0);
+            ImageLayer* layer = entry == _nextEntry ? _nextLayer :
+            entry == _previousEntry ? _previousLayer :
+            nil;
             dispatch_async(_dispatchQue, ^(){
-                if (index == NSNotFound){
-                    ImageRenderer* renderer;
-                    renderer = [ImageRenderer imageRendererWithPath:[accessor imagePathOfObject:nextNode]];
-                    next.image = renderer.image;
-                    next.rotation = renderer.rotation;
-                }
-                [layer setImage:next.image withRotation:next.rotation];
-                next.state = CacheNext;
-                dispatch_semaphore_signal(next.semaphore);
+                ImageRenderer* renderer = [ImageRenderer imageRendererWithPath:[accessor imagePathOfObject:entry.imageId]];
+                entry.image = renderer.image;
+                entry.rotation = renderer.rotation;
+                [layer setImage:entry.image withRotation:entry.rotation];
+                entry.state = CacheVarid;
+                dispatch_semaphore_signal(entry.semaphore);
             });
         }
-    }else{
-        _nextEntry = nil;
-    }
-
-    // 前の画像をキャッシュに充填
-    id previousNode = [accessor previousObjectOfObject:_relationalImage];
-    if (previousNode){
-        NSUInteger index = [_imageCache indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL* stop){
-            return (BOOL)(((ImageCacheEntry*)obj).imageId == previousNode);
-        }];
-        ImageCacheEntry* previous = index == NSNotFound ? _imageCache.firstObject : _imageCache[index];
-        [_imageCache removeObject:previous];
-        [_imageCache addObject:previous];
-        if (previous.state == CacheProcessing){
-            dispatch_semaphore_wait(previous.semaphore, DISPATCH_TIME_FOREVER);
-        }
-        if (previous == _previousEntry){
-            // nothing to do
-        }else if (previous == _nextEntry){
-            ImageLayer* tmp = _nextLayer;
-            _nextLayer = _previousLayer;
-            _previousLayer = tmp;
-            _nextEntry = _previousEntry;
-            _nextEntry.state = CacheNext;
-            _previousEntry = previous;
-            _previousEntry.state = CachePrevious;
-        }else{
-            _previousEntry = previous;
-            previous.imageId = previousNode;
-            previous.state = CacheProcessing;
-            previous.semaphore = dispatch_semaphore_create(0);
-            
-            ImageLayer* layer = _previousLayer;
-            [layer setImage:(__bridge id)(CGImageRef)_pendingImage withRotation:1];
-            NSLog(@"image injection(%@, %@): %@", layer, previous, [previous.imageId name]);
-
-            dispatch_async(_dispatchQue, ^(){
-                if (index == NSNotFound){
-                    ImageRenderer* renderer;
-                    renderer = [ImageRenderer imageRendererWithPath:[accessor imagePathOfObject:previousNode]];
-                    previous.image = renderer.image;
-                    previous.rotation = renderer.rotation;
-                }
-                [layer setImage:previous.image withRotation:previous.rotation];
-                previous.state = CachePrevious;
-                dispatch_semaphore_signal(previous.semaphore);
-            });
-        }
-    }else{
-        _previousEntry = nil;
     }
 }
 
