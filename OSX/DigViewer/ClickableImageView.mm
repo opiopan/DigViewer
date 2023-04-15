@@ -184,6 +184,16 @@ enum PanningMode{
     }
 }
 
+- (void)setFrame:(NSRect)frame
+{
+    super.frame = frame;
+    if (_isDrawingByLayer){
+        frame.origin.x = 0.f;
+        frame.origin.y = 0.f;
+        _frameLayer.frame = frame;
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // ImageViewFilterTypeからCALayerのフィルタータイプへの変換
 //-----------------------------------------------------------------------------------------

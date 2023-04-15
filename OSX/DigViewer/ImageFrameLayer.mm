@@ -79,7 +79,7 @@ typedef enum _SwipeInertiaState SwipeInertiaState;
 //-----------------------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------------------
-static const NSInteger CACHE_SIZE = 6;
+static const NSInteger CACHE_SIZE = 10;
 
 - (instancetype)init
 {
