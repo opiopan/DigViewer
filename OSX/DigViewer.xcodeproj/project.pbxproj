@@ -2000,6 +2000,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2017,6 +2019,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
