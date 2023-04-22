@@ -33,8 +33,12 @@ var msgInvalidKey = "msgInvalidKey";
 var msgSpecifyKeyButton = "msgSpecifyKeyButton"
 
 window.onload = function (){
-    window.digViewerBridge.onLoad();
+    sendHostMessage("onLoad");
 };
+
+function sendHostMessage(message){
+    window.webkit.messageHandlers.DigViewer.postMessage(message);
+}
 
 function setKey(key){
     var primaryMsg = document.getElementById("primary_msg");
@@ -49,8 +53,9 @@ function setKey(key){
         secondaryMsg.firstChild.nodeValue = msgInvalidKey;
         var script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "http://maps.googleapis.com/maps/api/js?";
-        script.src += "libraries=geometry,drawing&sensor=false&callback=initialize";
+        script.src = "https://maps.googleapis.com/maps/api/js?key=";
+        script.src += key
+        script.src += "&libraries=geometry,drawing&sensor=false&callback=initialize";
         document.body.appendChild(script);
     }
     document.control.key.value = msgSpecifyKeyButton;
@@ -90,7 +95,8 @@ function initialize() {
         scaleControl: true,
         streetViewControl: enableStreetView,
         overviewMapControl: true,
-        tilt: tilt
+        tilt: tilt,
+        controlSize: 24
     };
     if (imageLocation){
         mapOptions.center = imageLocation;
@@ -98,8 +104,8 @@ function initialize() {
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
     google.maps.event.addListener(map, "bounds_changed", function(){if (isIncompleteArrow) setHeading();});
-    google.maps.event.addListener(map, "zoom_changed", function(){setHeading(); window.digViewerBridge.onChangeZoom()});
-    window.digViewerBridge.reflectGpsInfo();
+    google.maps.event.addListener(map, "zoom_changed", function(){setHeading(); sendHostMessage("onChangeZoom")});
+    sendHostMessage("reflectGpsInfo");
 }
 
 function setMarker(latitude, longitude, heading, angle, scale, fovc, arrc, fovg) {
@@ -260,7 +266,7 @@ function headingLength() {
 }
 
 function specifyKey() {
-    window.digViewerBridge.onSpecifyKey();
+    sendHostMessage("onSpecifyKey");
 }
 
 function setStreetViewControll(state) {

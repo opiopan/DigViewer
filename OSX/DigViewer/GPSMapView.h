@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "ImageMetadata.h"
 
-@interface GPSMapView : WebView <WebUIDelegate>
+@interface GPSMapView : NSView <WKUIDelegate, WKScriptMessageHandler>
 
 @property (copy) NSString* apiKey;
 @property (strong) GPSInfo* gpsInfo;

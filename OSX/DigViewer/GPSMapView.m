@@ -12,7 +12,10 @@
 #import "NSString+escaping.h"
 #include <math.h>
 
+static NSString* JSHandlerName = @"DigViewer";
+
 @implementation GPSMapView{
+    WKWebView*  _webview;
     NSString*   _apiKey;
     GPSInfo*    _gpsInfo;
     NSColor*    _fovColor;
@@ -22,13 +25,13 @@
     BOOL        _hasBeenInitialized;
 }
 
-+ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
+- (void)awakeFromNib
 {
-    if (aSelector == @selector(onLoad)) return NO;
-    if (aSelector == @selector(reflectGpsInfo)) return NO;
-    if (aSelector == @selector(onSpecifyKey)) return NO;
-    if (aSelector == @selector(onChangeZoom)) return NO;
-    return YES;
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    [configuration.userContentController addScriptMessageHandler:self name:JSHandlerName];
+    _webview = [[WKWebView alloc] initWithFrame:self.frame configuration:configuration];
+    _webview.UIDelegate = self;
+    [self addSubview:_webview];
 }
 
 - (NSString*) apiKey
@@ -40,34 +43,30 @@
 {
     _apiKey = [apiKey copy];
 
-    self.UIDelegate = self;
-    WebScriptObject* win = [self windowScriptObject];
-    [win setValue:self forKey:@"digViewerBridge"];
-    
     NSString* htmlString = @
         "<!DOCTYPE html>"
         "<html>"
         "   <head>"
         "       <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\" />"
         "       <style type=\"text/css\">"
-        "           html { height: 100%%; font-family: sans-serif; font-size: 9pt }"
-        "           body { height: 100%%; margin: 0; padding: 0 }"
+        "           html { height: 100%; font-family: sans-serif; font-size: 9pt }"
+        "           body { height: 100%; margin: 0; padding: 0 }"
         "           .c_wrapper {"
         "               position: absolute; top: 0px; left: 0px; background: #FFFFFF"
         "           }"
         "           .c_content {"
-        "               position: relative; top: 50%%; -webkit-transform: translateY(-50%%);"
+        "               position: relative; top: 50%; -webkit-transform: translateY(-50%);"
         "               margin: 10px;"
         "           }"
-        "           #map_canvas { height: 100%% }"
+        "           #map_canvas { height: 100% }"
         "       </style>"
         "       <script type=\"text/javascript\" src=\"GPSMapView.js\"></script>"
         "   </head>"
         "   <body>"
-        "       <div id=\"map_canvas\" class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:1\">"
+        "       <div id=\"map_canvas\" class=\"c_wrapper\" style=\"width:100%; height:100%; z-index:1\">"
         "           <div id=\"primary_msg\" class=\"c_content\" style=\"text-align:center\"> </div>"
         "       </div>"
-        "       <div class=\"c_wrapper\" style=\"width:100%%; height:100%%; z-index:0\">"
+        "       <div class=\"c_wrapper\" style=\"width:100%; height:100%; z-index:0\">"
         "           <div id=\"secondary_msg\" class=\"c_content\">"
         "               <br><br>"
         "               <div style=\"text-align:center\">"
@@ -79,36 +78,80 @@
         "       </div>"
         "   </body>"
         "</html>";
-    [[self mainFrame] loadHTMLString:htmlString baseURL:[[NSBundle mainBundle] resourceURL]];
+    [_webview loadHTMLString:htmlString baseURL:[[NSBundle mainBundle] resourceURL]];
 }
 
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:JSHandlerName]){
+        if ([message.body isKindOfClass:[NSString class]]){
+            NSString* name = message.body;
+            if ([name isEqualToString:@"onLoad"]){
+                [self onLoad];
+            }else if ([name isEqualToString:@"reflectGpsInfo"]){
+                [self reflectGpsInfo];
+            }else if ([name isEqualToString:@"onSpecifyKey"]){
+                [self onSpecifyKey];
+            }else if ([name isEqualToString:@"onChangeZoom"]){
+                [self onChangeZoom];
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// Methods callable from JavaScript
+//-----------------------------------------------------------------------------------------
 - (void)onLoad
 {
     NSString* script = nil;
     script = [NSString stringWithFormat:@"msgLoading = \"%@\"", NSLocalizedString(@"MVMSG_LOADING", nil)];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"msgNoKey = \"%@\"", NSLocalizedString(@"MVMSG_NOKEY", nil)];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"msgInvalidKey = \"%@\"", NSLocalizedString(@"MVMSG_INVALIDKEY", nil)];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"msgSpecifyKeyButton = \"%@\"", NSLocalizedString(@"MVMSG_SPECIFYKEYBUTTON", nil)];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"enableStreetView = %@", _enableStreetView ? @"true" : @"false"];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"mapType = %@", _mapType];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     script = [NSString stringWithFormat:@"tilt = %@", _tilt];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     if (_zoomLevel){
         script = [NSString stringWithFormat:@"zoomLevel = %@", _zoomLevel];
-        [[self windowScriptObject] evaluateWebScript:script];
+        [_webview evaluateJavaScript:script completionHandler:nil];
     }
     script = [NSString stringWithFormat:@"setKey(\"%@\")", [NSString escapedStringForJavascript:_apiKey]];
-    [[self windowScriptObject] evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
     
     _hasBeenInitialized = YES;
 }
 
+- (void) reflectGpsInfo
+{
+    if (_gpsInfo){
+        self.gpsInfo = _gpsInfo;
+    }
+}
+
+- (void)onSpecifyKey
+{
+    AppDelegate* appDelegate = (AppDelegate*)((NSApplication*)NSApp).delegate;
+    [appDelegate showMapPreferences: self];
+}
+
+- (void)onChangeZoom
+{
+    if (_delegate && _notifyChangeZoomSelector){
+        [_delegate performSelector:_notifyChangeZoomSelector withObject:self afterDelay:0];
+    }
+}
+
+//-----------------------------------------------------------------------------------------
+// proterty accessors and setters
+//-----------------------------------------------------------------------------------------
 - (GPSInfo*) gpsInfo
 {
     return _gpsInfo;
@@ -117,7 +160,6 @@
 - (void) setGpsInfo:(GPSInfo *)gpsInfo
 {
     _gpsInfo = gpsInfo;
-    WebScriptObject* window = [self windowScriptObject];
     NSString* script = nil;
     if (_gpsInfo){
         double FOVangle = -1;
@@ -136,7 +178,7 @@
     }else{
         script = _enableHomePosition ? @"resetMarker(1);" : @"resetMarker(0);";
     }
-    [window evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
 }
 
 - (NSColor*) fovColor
@@ -181,14 +223,13 @@
 {
     _enableStreetView = enableStreetView;
     NSString* script = _enableStreetView ? @"setStreetViewControll(true)" : @"setStreetViewControll(false)";
-    WebScriptObject* window = [self windowScriptObject];
-    [window evaluateWebScript:script];
+    [_webview evaluateJavaScript:script completionHandler:nil];
 }
 
 - (NSNumber *)zoomLevel
 {
     if (_hasBeenInitialized){
-        _zoomLevel = [[self windowScriptObject] evaluateWebScript:@"getMapZoomLevel()"];
+        //_zoomLevel = [self evaluateJavaScript:@"getMapZoomLevel()" completionHandler:nil];
     }
     return _zoomLevel;
 }
@@ -196,7 +237,7 @@
 - (NSNumber *)tilt
 {
     if (_hasBeenInitialized){
-        _tilt = [[self windowScriptObject] evaluateWebScript:@"getTilt()"];
+        //_tilt = [[self windowScriptObject] evaluateWebScript:@"getTilt()"];
     }
     return _tilt;
 }
@@ -204,7 +245,7 @@
 - (NSNumber *)mapType
 {
     if (_hasBeenInitialized){
-        _mapType = [[self windowScriptObject] evaluateWebScript:@"getMapType()"];
+        //_mapType = [[self windowScriptObject] evaluateWebScript:@"getMapType()"];
     }
     return _mapType;
 }
@@ -212,7 +253,7 @@
 - (NSNumber *)spanLatitude
 {
     if (_hasBeenInitialized){
-        _spanLatitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLatitude()"];
+        //_spanLatitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLatitude()"];
     }
     return _spanLatitude;
 }
@@ -220,38 +261,21 @@
 - (NSNumber *)spanLongitude
 {
     if (_hasBeenInitialized){
-        _spanLongitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLongitude()"];
+        //_spanLongitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLongitude()"];
     }
     return _spanLongitude;
-}
-
-- (void) reflectGpsInfo
-{
-    if (_gpsInfo){
-        self.gpsInfo = _gpsInfo;
-    }
-}
-
-- (void)onSpecifyKey
-{
-    AppDelegate* appDelegate = (AppDelegate*)((NSApplication*)NSApp).delegate;
-    [appDelegate showMapPreferences: self];
-}
-
-- (void)onChangeZoom
-{
-    if (_delegate && _notifyChangeZoomSelector){
-        [_delegate performSelector:_notifyChangeZoomSelector withObject:self afterDelay:0];
-    }
 }
 
 - (void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
-    WebScriptObject* window = [self windowScriptObject];
-    [window evaluateWebScript:@"setHeading();"];
+    _webview.frame = frameRect;
+    [_webview evaluateJavaScript:@"setHeading();" completionHandler:nil];
 }
 
+//-----------------------------------------------------------------------------------------
+// JavaScript alert panel handling
+//-----------------------------------------------------------------------------------------
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame
 {
     NSLog(@"Javascript: %@\n", message);
