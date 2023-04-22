@@ -103,8 +103,10 @@ function initialize() {
         mapOptions.zoom = zoomLevel;
     }
     map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-    google.maps.event.addListener(map, "bounds_changed", function(){if (isIncompleteArrow) setHeading();});
-    google.maps.event.addListener(map, "zoom_changed", function(){setHeading(); sendHostMessage("onChangeZoom")});
+    google.maps.event.addListener(map, "bounds_changed", function(){if (isIncompleteArrow){setHeading()} sendBounds()});
+    google.maps.event.addListener(map, "zoom_changed", function(){setHeading(); sendMapConfig(); sendHostMessage("onChangeZoom")});
+    google.maps.event.addListener(map, "maptypeid_changed", function(){sendMapConfig()});
+    google.maps.event.addListener(map, "tilt_changed", function(){sendMapConfig()});
     sendHostMessage("reflectGpsInfo");
 }
 
@@ -279,15 +281,13 @@ function setStreetViewControll(state) {
     }
 }
 
-function getMapZoomLevel() {
+function sendMapConfig(){
+    var retZoomLevel;
     if (map && imageLocation){
-        return map.getZoom();
+        retZoomLevel = map.getZoom();
     }else{
-        return zoomLevel;
+        retZoomLevel = zoomLevel;
     }
-}
-
-function getMapType() {
     var convertedMapType;
     if (map){
         var value = map.getMapTypeId();
@@ -303,33 +303,29 @@ function getMapType() {
     }else{
         convertedMapType = mapType;
     }
-    return convertedMapType;
-}
-
-function getTilt() {
+    var retTilt;
     if (map){
-        return map.getTilt();
+        retTilt = map.getTilt();
     }else{
-        return tilt;
+        retTilt = tilt;
     }
+    
+    sendHostMessage({
+        name: "changeMapConfig",
+        zoomLevel: retZoomLevel,
+        mapType: convertedMapType,
+        tilt: retTilt
+    });
 }
 
-function getSpanLatitude() {
+function sendBounds() {
     if (map){
         var bounds = map.getBounds();
         var span = bounds.toSpan();
-        return span.lat();
-    }else{
-        return null;
-    }
-}
-
-function getSpanLongitude() {
-    if (map){
-        var bounds = map.getBounds();
-        var span = bounds.toSpan();
-        return span.lng();
-    }else{
-        return null;
+        sendHostMessage({
+            name: "changeBounds",
+            spanLatitude: span.lat(),
+            spanLongitude: span.lng()
+        });
     }
 }

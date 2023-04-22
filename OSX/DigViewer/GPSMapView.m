@@ -84,8 +84,9 @@ static NSString* JSHandlerName = @"DigViewer";
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:JSHandlerName]){
-        if ([message.body isKindOfClass:[NSString class]]){
-            NSString* name = message.body;
+        id body = message.body;
+        if ([body isKindOfClass:[NSString class]]){
+            NSString* name = body;
             if ([name isEqualToString:@"onLoad"]){
                 [self onLoad];
             }else if ([name isEqualToString:@"reflectGpsInfo"]){
@@ -94,6 +95,14 @@ static NSString* JSHandlerName = @"DigViewer";
                 [self onSpecifyKey];
             }else if ([name isEqualToString:@"onChangeZoom"]){
                 [self onChangeZoom];
+            }
+        }else if ([body isKindOfClass:[NSDictionary class]]){
+            NSDictionary* dict = body;
+            NSString* name = [dict objectForKey:@"name"];
+            if ([name isEqualToString:@"changeMapConfig"]){
+                [self onChangeMapConfig:dict];
+            }else if ([name isEqualToString:@"changeBounds"]){
+                [self onChangeBounds:dict];
             }
         }
     }
@@ -147,6 +156,19 @@ static NSString* JSHandlerName = @"DigViewer";
     if (_delegate && _notifyChangeZoomSelector){
         [_delegate performSelector:_notifyChangeZoomSelector withObject:self afterDelay:0];
     }
+}
+
+- (void) onChangeMapConfig:(NSDictionary*) data
+{
+    _mapType = [data objectForKey:@"mapType"];
+    _zoomLevel = [data objectForKey:@"zoomLevel"];
+    _tilt = [data objectForKey:@"tilt"];
+}
+
+- (void) onChangeBounds:(NSDictionary*) data
+{
+    _spanLatitude = [data objectForKey:@"spanLatitude"];
+    _spanLongitude = [data objectForKey:@"spanLongitude"];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -228,41 +250,26 @@ static NSString* JSHandlerName = @"DigViewer";
 
 - (NSNumber *)zoomLevel
 {
-    if (_hasBeenInitialized){
-        //_zoomLevel = [self evaluateJavaScript:@"getMapZoomLevel()" completionHandler:nil];
-    }
     return _zoomLevel;
 }
 
 - (NSNumber *)tilt
 {
-    if (_hasBeenInitialized){
-        //_tilt = [[self windowScriptObject] evaluateWebScript:@"getTilt()"];
-    }
     return _tilt;
 }
 
 - (NSNumber *)mapType
 {
-    if (_hasBeenInitialized){
-        //_mapType = [[self windowScriptObject] evaluateWebScript:@"getMapType()"];
-    }
     return _mapType;
 }
 
 - (NSNumber *)spanLatitude
 {
-    if (_hasBeenInitialized){
-        //_spanLatitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLatitude()"];
-    }
     return _spanLatitude;
 }
 
 - (NSNumber *)spanLongitude
 {
-    if (_hasBeenInitialized){
-        //_spanLongitude = [[self windowScriptObject] evaluateWebScript:@"getSpanLongitude()"];
-    }
     return _spanLongitude;
 }
 
