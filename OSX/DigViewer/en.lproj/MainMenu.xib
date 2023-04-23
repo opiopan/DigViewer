@@ -319,17 +319,17 @@ DQ
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="o2j-DA-KmL" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
-            <rect key="contentRect" x="139" y="85" width="529" height="226"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="contentRect" x="139" y="85" width="543" height="226"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
             <view key="contentView" autoresizesSubviews="NO" id="bWT-A0-l57">
-                <rect key="frame" x="0.0" y="0.0" width="529" height="226"/>
+                <rect key="frame" x="0.0" y="0.0" width="543" height="226"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <box autoresizesSubviews="NO" fixedFrame="YES" boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Dl6-GM-ASh">
-                        <rect key="frame" x="0.0" y="0.0" width="529" height="226"/>
+                        <rect key="frame" x="0.0" y="0.0" width="543" height="226"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="contentView" id="9Lu-Vx-Oef">
-                            <rect key="frame" x="1" y="1" width="527" height="224"/>
+                            <rect key="frame" x="1" y="1" width="541" height="224"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y99-eA-yKn">
@@ -338,7 +338,7 @@ DQ
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DigViewer" id="ARt-57-qu2"/>
                                 </imageView>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-zy-TBg">
-                                    <rect key="frame" x="259" y="107" width="227" height="17"/>
+                                    <rect key="frame" x="269" y="106" width="227" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
                                         <font key="font" metaFont="cellTitle"/>
@@ -350,11 +350,11 @@ DQ
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-gV-lo7">
-                                    <rect key="frame" x="255" y="56" width="243" height="19"/>
+                                    <rect key="frame" x="255" y="56" width="254" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="sVe-Z7-my4">
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="sVe-Z7-my4">
                                         <font key="font" metaFont="miniSystem"/>
-                                        <string key="title">Copyright © 2013 opiopan. All rights reserved.
+                                        <string key="title">© 2013-2014 Hiroshi Murayama &lt;opiopan@gmail.com&gt;. All rights reserved.
 </string>
                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -364,7 +364,7 @@ DQ
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="231" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-DF-HkZ">
-                                    <rect key="frame" x="255" y="27" width="235" height="31"/>
+                                    <rect key="frame" x="255" y="27" width="254" height="31"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Special thanks to Ninataki for many contributions and ideas to improve DigViewer." allowsEditingTextAttributes="YES" id="R3f-cu-87c">
                                         <font key="font" metaFont="miniSystem"/>
@@ -373,7 +373,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKi-yH-WdT">
-                                    <rect key="frame" x="263" y="128" width="219" height="56"/>
+                                    <rect key="frame" x="273" y="129" width="219" height="56"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DigViewer" id="017-vO-LtC">
                                         <font key="font" size="47" name="HelveticaNeue-UltraLight"/>
@@ -382,7 +382,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="r1P-e4-v4i">
-                                    <rect key="frame" x="251" y="113" width="242" height="81"/>
+                                    <rect key="frame" x="261" y="114" width="242" height="81"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
                                         <font key="font" size="12" name="Arial-BoldMT"/>
@@ -402,7 +402,7 @@ This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branc
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="60.5" y="193"/>
+            <point key="canvasLocation" x="67.5" y="193"/>
         </window>
         <customObject id="I0P-4d-rdw" customClass="AppDelegate"/>
         <customObject id="pfv-YF-3Sx" userLabel="InfoPlistController" customClass="InfoPlistController"/>
