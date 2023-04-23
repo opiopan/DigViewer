@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+#import "GPSMapWebView.h"
 #import "ImageMetadata.h"
 
 @interface GPSMapView : NSView <WKUIDelegate, WKScriptMessageHandler>

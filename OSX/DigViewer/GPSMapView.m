@@ -15,7 +15,7 @@
 static NSString* JSHandlerName = @"DigViewer";
 
 @implementation GPSMapView{
-    WKWebView*  _webview;
+    GPSMapWebView*  _webview;
     NSString*   _apiKey;
     GPSInfo*    _gpsInfo;
     NSColor*    _fovColor;
@@ -29,7 +29,7 @@ static NSString* JSHandlerName = @"DigViewer";
 {
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     [configuration.userContentController addScriptMessageHandler:self name:JSHandlerName];
-    _webview = [[WKWebView alloc] initWithFrame:self.frame configuration:configuration];
+    _webview = [[GPSMapWebView alloc] initWithFrame:self.frame configuration:configuration];
     _webview.UIDelegate = self;
     [self addSubview:_webview];
 }

@@ -120,6 +120,7 @@
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
 		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
 		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
+		7B6F8E2D29F536DB00C7C014 /* GPSMapWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F8E2C29F536DB00C7C014 /* GPSMapWebView.m */; };
 		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */; };
 		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B71F0981B7E3D41002F83D3 /* TemporaryFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B71F0971B7E3D41002F83D3 /* TemporaryFileController.m */; };
@@ -385,6 +386,8 @@
 		7B6D83611B306301004A2426 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SlideshowPreferences.strings; sourceTree = "<group>"; };
 		7B6D83651B32F6DA004A2426 /* SlideshowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowController.h; sourceTree = "<group>"; };
 		7B6D83661B32F6DA004A2426 /* SlideshowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowController.m; sourceTree = "<group>"; };
+		7B6F8E2B29F535A300C7C014 /* GPSMapWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPSMapWebView.h; sourceTree = "<group>"; };
+		7B6F8E2C29F536DB00C7C014 /* GPSMapWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPSMapWebView.m; sourceTree = "<group>"; };
 		7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFrameLayer.h; sourceTree = "<group>"; };
 		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageFrameLayer.mm; sourceTree = "<group>"; };
 		7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
@@ -682,6 +685,8 @@
 				7B9F9E8418E7D91D0042337F /* GPSMapView.h */,
 				7B9F9E8518E7D91D0042337F /* GPSMapView.m */,
 				7B9F9E8718E7DBBA0042337F /* GPSMapView.js */,
+				7B6F8E2B29F535A300C7C014 /* GPSMapWebView.h */,
+				7B6F8E2C29F536DB00C7C014 /* GPSMapWebView.m */,
 			);
 			name = "GPS view";
 			sourceTree = "<group>";
@@ -1398,6 +1403,7 @@
 				7B5C0A2D1B66586D004FE1A0 /* EditConditionSheetController.m in Sources */,
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
 				7B6AE01A1B99DE4C00FA0335 /* DVRemoteProtcol.m in Sources */,
+				7B6F8E2D29F536DB00C7C014 /* GPSMapWebView.m in Sources */,
 				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
 				7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
