@@ -1342,7 +1342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PRODUCT=DigViewer\nSRC=\"${SRCROOT}/${PRODUCT}/DiskImageResources/${PRODUCT}-in.sparseimage\"\nIN=\"${DERIVED_FILE_DIR}/${PRODUCT}-in.sparseimage\"\nMP=\"${DERIVED_FILE_DIR}/mp\"\nOUT=\"${TARGET_BUILD_DIR}/${PRODUCT}.dmg\"\nrm -rf \"${DERIVED_FILE_DIR}\"\nmkdir \"${DERIVED_FILE_DIR}\"\nmkdir \"$MP\"\ncp \"$SRC\" \"$IN\"\nhdiutil attach \"$IN\" -mountpoint \"$MP\"\nrm -rf \"$MP\"/${PRODUCT}.app\ncp -r \"${TARGET_BUILD_DIR}/${PRODUCT}.app\" \"$MP\"\nhdiutil detach \"$MP\"\nrm -f \"$OUT\"\nhdiutil convert -format UDZO -o \"$OUT\" \"$IN\"\nrm -r \"$MP\"\nrm -f \"$IN\"";
+			shellScript = "PRODUCT=DigViewer\nSRC=\"${SRCROOT}/${PRODUCT}/DiskImageResources/${PRODUCT}-in.sparseimage\"\nIN=\"${DERIVED_FILE_DIR}/${PRODUCT}-in.sparseimage\"\nMP=\"${DERIVED_FILE_DIR}/mp\"\nOUT=\"${TARGET_BUILD_DIR}/${PRODUCT}.dmg\"\nrm -rf \"${DERIVED_FILE_DIR}\"\nmkdir \"${DERIVED_FILE_DIR}\"\nmkdir \"$MP\"\ncp \"$SRC\" \"$IN\"\nhdiutil attach \"$IN\" -mountpoint \"$MP\"\nrm -rf \"$MP\"/${PRODUCT}.app\ncp -r \"${TARGET_BUILD_DIR}/${PRODUCT}.app\" \"$MP\"\nhdiutil detach \"$MP\"\nrm -f \"$OUT\"\nhdiutil convert -format UDZO -o \"$OUT\" \"$IN\"\nrm -r \"$MP\"\nrm -f \"$IN\"\n";
 		};
 		7BB7E29218D350FB0055DAAC /* Run Script For Deciding Version */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -91,8 +91,8 @@
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
                                                                         <textFieldCell key="dataCell" controlSize="mini" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="2yT-mH-Qgk">
-                                                                            <font key="font" metaFont="smallSystemBold"/>
-                                                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <connections>
                                                                                 <binding destination="U3M-Qx-Ilb" name="value" keyPath="selection.key" id="hit-5L-nQk"/>
@@ -178,8 +178,8 @@
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
                                                                         <textFieldCell key="dataCell" controlSize="mini" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="n2W-Po-qK7">
-                                                                            <font key="font" metaFont="smallSystemBold"/>
-                                                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <connections>
                                                                                 <binding destination="U3M-Qx-Ilb" name="value" keyPath="selection.key" id="aTO-E0-61e"/>

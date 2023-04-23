@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ThumbnailViewController">
@@ -18,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" id="100312">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100312">
                     <rect key="frame" x="10" y="243" width="38" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Zoom" id="100313">
@@ -27,7 +28,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <slider toolTip="Change the icon size" verticalHuggingPriority="750" id="100310">
+                <slider toolTip="Change the icon size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100310">
                     <rect key="frame" x="51" y="244" width="96" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="32" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="100311"/>
@@ -35,7 +36,7 @@
                         <binding destination="-2" name="value" keyPath="self.zoomRethio" id="100316"/>
                     </connections>
                 </slider>
-                <button toolTip="Change the icon size to default" verticalHuggingPriority="750" id="100319" userLabel="Default size Button">
+                <button toolTip="Change the icon size to default" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100319" userLabel="Default size Button">
                     <rect key="frame" x="153" y="241" width="95" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundTextured" title="Default Size" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100320">
@@ -46,7 +47,7 @@
                         <action selector="onDefaultSize:" target="-2" id="100321"/>
                     </connections>
                 </button>
-                <button toolTip="Move to parent folder" verticalHuggingPriority="750" id="100322" userLabel="Up Button">
+                <button toolTip="Move to parent folder" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100322" userLabel="Up Button">
                     <rect key="frame" x="274" y="241" width="38" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="up" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100323">
@@ -59,7 +60,7 @@
                         <action selector="onUpFolder:" target="-2" id="100324"/>
                     </connections>
                 </button>
-                <button toolTip="Move to the selected folder or show full size image" verticalHuggingPriority="750" id="100325" userLabel="Down Button">
+                <button toolTip="Move to the selected folder or show full size image" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100325" userLabel="Down Button">
                     <rect key="frame" x="320" y="241" width="38" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="down" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100326">
@@ -72,17 +73,17 @@
                         <action selector="onDownFolder:" target="-2" id="100328"/>
                     </connections>
                 </button>
-                <scrollView borderType="none" horizontalLineScroll="120" horizontalPageScroll="10" verticalLineScroll="120" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100302">
+                <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="120" horizontalPageScroll="10" verticalLineScroll="120" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="100302">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" copiesOnScroll="NO" id="H9S-M1-ZBf">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.60499012470245361" allowsEmptySelection="NO" id="100303" customClass="EnhancedImageBrowserView">
+                            <ikImageBrowserView autoresizesSubviews="NO" fixedFrame="YES" zoomValue="0.60499012470245361" allowsEmptySelection="NO" translatesAutoresizingMaskIntoConstraints="NO" id="100303" customClass="EnhancedImageBrowserView">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <ikCellsStyle key="cellsStyleMask" none="YES" titled="YES"/>
+                                <ikCellsStyle key="cellsStyleMask" titled="YES"/>
                                 <autoresizingMask key="contentResizingMask" heightSizable="YES"/>
                                 <size key="cellSize" width="100" height="100"/>
                                 <connections>
@@ -94,25 +95,24 @@
                             </ikImageBrowserView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="100305">
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="100305">
                         <rect key="frame" x="0.0" y="221" width="480" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100304">
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="100304">
                         <rect key="frame" x="464" y="0.0" width="16" height="237"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="skn-El-j5g">
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="skn-El-j5g">
                     <rect key="frame" x="0.0" y="235" width="480" height="5"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
             </subviews>
+            <point key="canvasLocation" x="62" y="-36"/>
         </view>
         <arrayController objectClassName="PathNode" id="100087" customClass="DraggingSourceArrayController">
+            <classReference key="objectClass" className="PathNode"/>
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="representedObject.controller.imageArrayController.arrangedObjects" id="EsD-H9-GbN"/>
                 <binding destination="-2" name="selectionIndexes" keyPath="representedObject.controller.imageArrayController.selectionIndexes" id="ZRf-Pt-OSc"/>

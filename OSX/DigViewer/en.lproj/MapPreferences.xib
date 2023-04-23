@@ -41,7 +41,7 @@ Please get a API key and specify it as following steps:
     2: Create a project and enter that project
     3: Enable "Google Maps JavaScript API"
     4: Create a API Key for "Browser" at "Authentication" page</string>
-                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>

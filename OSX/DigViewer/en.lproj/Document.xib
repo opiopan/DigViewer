@@ -49,7 +49,7 @@
                         <size key="minSize" width="67" height="25"/>
                         <size key="maxSize" width="67" height="25"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="ENh-J0-P5m">
-                            <rect key="frame" x="151" y="451" width="67" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="67" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
                                 <font key="font" metaFont="system"/>
@@ -68,7 +68,7 @@
                         <size key="minSize" width="67" height="25"/>
                         <size key="maxSize" width="67" height="25"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="XDI-Iv-r7r">
-                            <rect key="frame" x="9" y="451" width="67" height="25"/>
+                            <rect key="frame" x="1" y="14" width="67" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CaW-zR-O9m">
                                 <font key="font" metaFont="system"/>
@@ -87,7 +87,7 @@
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
                         <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" misplaced="YES" id="IT0-2I-Sqo">
-                            <rect key="frame" x="93" y="450" width="38" height="25"/>
+                            <rect key="frame" x="19" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="TEa-05-Y7c"/>
@@ -106,7 +106,7 @@
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
                         <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" misplaced="YES" id="XUN-ZE-OzR">
-                            <rect key="frame" x="238" y="451" width="38" height="25"/>
+                            <rect key="frame" x="14" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="txZ-vL-wa0"/>
@@ -127,7 +127,7 @@
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
                         <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" misplaced="YES" id="hTK-s2-ftt">
-                            <rect key="frame" x="356" y="451" width="38" height="25"/>
+                            <rect key="frame" x="18" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="V0X-1u-2fw"/>
@@ -148,7 +148,7 @@
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
                         <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" misplaced="YES" id="axJ-VU-MXj">
-                            <rect key="frame" x="563" y="451" width="38" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="rp6-rt-7JM"/>
@@ -167,7 +167,7 @@
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
                         <button key="view" toolTip="Reload document" verticalHuggingPriority="750" misplaced="YES" id="LVm-bA-tJO">
-                            <rect key="frame" x="563" y="451" width="38" height="25"/>
+                            <rect key="frame" x="3" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="Ua2-vC-alo"/>
