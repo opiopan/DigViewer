@@ -495,7 +495,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     if (_imagePath){
         return [[NSWorkspace sharedWorkspace] iconForFileType:[_name pathExtension].lowercaseString];
     }else{
-        return [[NSWorkspace sharedWorkspace] iconForFile:@"/var"];
+        return [[NSWorkspace sharedWorkspace] iconForFile:@"/var/log"];
     }
 }
 
