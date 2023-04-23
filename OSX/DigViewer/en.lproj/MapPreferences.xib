@@ -68,9 +68,9 @@ Please get a API key and specify it as following steps:
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapFovColor" id="tXq-7N-IMh">
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapFovColor3" id="CXH-xB-SZ5">
                                             <dictionary key="options">
-                                                <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                                <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
                                             </dictionary>
                                         </binding>
                                     </connections>
@@ -80,9 +80,9 @@ Please get a API key and specify it as following steps:
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapArrowColor" id="N5I-jg-2sG">
+                                        <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapArrowColor3" id="KMX-oZ-UYy">
                                             <dictionary key="options">
-                                                <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                                <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
                                             </dictionary>
                                         </binding>
                                     </connections>

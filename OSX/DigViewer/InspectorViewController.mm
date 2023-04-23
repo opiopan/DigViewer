@@ -89,10 +89,10 @@
     [self reflectMapEnableStreetView];
     [self reflectMapMoveToHomePos];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:@"values.mapFovColor"
+                                                              forKeyPath:@"values.mapFovColor3"
                                                                  options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:@"values.mapArrowColor"
+                                                              forKeyPath:@"values.mapArrowColor3"
                                                                  options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.mapFovGrade"
@@ -155,8 +155,8 @@
 //-----------------------------------------------------------------------------------------
 - (void) prepareForClose
 {
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovColor"];
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapArrowColor"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovColor3"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapArrowColor3"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapFovGrade"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapType"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.mapEnableStreetView"];
@@ -173,11 +173,11 @@
     if (object == self.imageArrayController && [keyPath isEqualToString:@"selectionIndexes"]){
         [self reflectMetadata];
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
-              [keyPath isEqualToString:@"values.mapFovColor"]){
+              [keyPath isEqualToString:@"values.mapFovColor3"]){
         [self reflectMapFovColor];
     }
     else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
-             [keyPath isEqualToString:@"values.mapArrowColor"]){
+             [keyPath isEqualToString:@"values.mapArrowColor3"]){
         [self reflectMapArrowColor];
     }else if (object == [NSUserDefaultsController sharedUserDefaultsController] &&
               [keyPath isEqualToString:@"values.mapFovGrade"]){
@@ -212,7 +212,7 @@
 - (void)reflectMapFovColor
 {
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSData* data = [[controller values] valueForKey:@"mapFovColor2"];
+    NSData* data = [[controller values] valueForKey:@"mapFovColor3"];
     if (data){
         self.mapView.fovColor = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -221,7 +221,7 @@
 - (void)reflectMapArrowColor
 {
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSData* data = [[controller values] valueForKey:@"mapArrowColor2"];
+    NSData* data = [[controller values] valueForKey:@"mapArrowColor3"];
     if (data){
         self.mapView.arrowColor = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
