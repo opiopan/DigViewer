@@ -121,6 +121,7 @@ static SlideshowController* _currentController;
         [_window.contentView associateSubViewWithController:_imageViewController];
         [_window makeKeyAndOrderFront:self];
         [_window makeFirstResponder:_imageViewController.view];
+        self.window = _window;
     }
     
     if ([self shouldHideCursor]){
