@@ -25,7 +25,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1667"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
@@ -86,11 +86,11 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" misplaced="YES" id="IT0-2I-Sqo">
+                        <button key="view" toolTip="Scale up the image that fit to the window" verticalHuggingPriority="750" id="IT0-2I-Sqo">
                             <rect key="frame" x="19" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="38" id="TEa-05-Y7c"/>
+                                <constraint firstAttribute="width" constant="36" id="TEa-05-Y7c"/>
                             </constraints>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSEnterFullScreenTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rsz-9d-hop">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -105,11 +105,11 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" misplaced="YES" id="XUN-ZE-OzR">
+                        <button key="view" toolTip="Start or stop slideshow" verticalHuggingPriority="750" id="XUN-ZE-OzR">
                             <rect key="frame" x="14" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="38" id="txZ-vL-wa0"/>
+                                <constraint firstAttribute="width" constant="36" id="txZ-vL-wa0"/>
                             </constraints>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="play" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kv3-KI-sYJ">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -126,11 +126,11 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" misplaced="YES" id="hTK-s2-ftt">
+                        <button key="view" toolTip="Sort images by date &amp; time" verticalHuggingPriority="750" id="hTK-s2-ftt">
                             <rect key="frame" x="18" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="38" id="V0X-1u-2fw"/>
+                                <constraint firstAttribute="width" constant="36" id="V0X-1u-2fw"/>
                             </constraints>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="datetime" imagePosition="only" alignment="center" alternateImage="datetime_on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n6p-4n-S5X">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -147,11 +147,11 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" misplaced="YES" id="axJ-VU-MXj">
+                        <button key="view" toolTip="Share selected items" verticalHuggingPriority="750" id="axJ-VU-MXj">
                             <rect key="frame" x="0.0" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="38" id="rp6-rt-7JM"/>
+                                <constraint firstAttribute="width" constant="36" id="rp6-rt-7JM"/>
                             </constraints>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S5z-Gb-wng">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -166,11 +166,11 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
-                        <button key="view" toolTip="Reload document" verticalHuggingPriority="750" misplaced="YES" id="LVm-bA-tJO">
+                        <button key="view" toolTip="Reload document" verticalHuggingPriority="750" id="LVm-bA-tJO">
                             <rect key="frame" x="3" y="14" width="38" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="38" id="Ua2-vC-alo"/>
+                                <constraint firstAttribute="width" constant="36" id="Ua2-vC-alo"/>
                             </constraints>
                             <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cKs-9U-ps2">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

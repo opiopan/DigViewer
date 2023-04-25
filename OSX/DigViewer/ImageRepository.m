@@ -42,7 +42,8 @@ static int iconSize = 18;
 
 - (NSImage *)iconGoogleEarth
 {
-    return [self iconForType:@"com.Google.GoogleEarthPlus"];
+    NSImage* pro = [self iconForType:@"com.google.GoogleEarthPro"];
+    return pro ? pro : [self iconForType:@"com.Google.GoogleEarthPlus"];
 }
 
 //-----------------------------------------------------------------------------------------

@@ -173,7 +173,7 @@ static const NSInteger CACHE_SIZE = 10;
         [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
         _currentLayer.zPosition = 1;
         _currentLayer.hidden = NO;
-        _currentLayer.frame = self.frame;
+        _currentLayer.frame = self.bounds;
         _nextLayer.zPosition = 0;
         _nextLayer.hidden = YES;
         _previousLayer.zPosition = 0;

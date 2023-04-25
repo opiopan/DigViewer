@@ -654,7 +654,9 @@ static NSString* CategoryKML = @"KML";
     [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
 
     // Google EarthでKMLファイルをオープン
-    [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"];
+    if (![[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"]){
+        [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth Pro.app"];
+    }
 }
 
 - (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
