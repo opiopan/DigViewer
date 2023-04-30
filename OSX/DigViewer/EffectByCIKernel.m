@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 opiopan. All rights reserved.
 //
 
+#import <CoreImage/CoreImage.h>
 #import "EffectByCIKernel.h"
 
 //=========================================================================================
@@ -21,6 +22,24 @@
 
 @implementation FilterForTransition{
     CIKernel* _kernel;
+}
+
+- (void)setInputImage:(CIImage*) image
+{
+    _inputImage = image;
+    NSLog(@"from image: %@", _inputImage);
+}
+
+- (void)setInputTargetImage:(CIImage *)image
+{
+    _inputTargetImage = image;
+    NSLog(@"target image: %@", _inputImage);
+}
+
+- (void)setInputTime:(NSNumber *)value
+{
+    _inputTime = value;
+    NSLog(@"time: %@", value);
 }
 
 //-----------------------------------------------------------------------------------------
@@ -39,6 +58,21 @@
     }
     return self;
 }
+
+- (instancetype)initWithShaderName:(NSString *)name url:(NSURL*)url
+{
+    self = [self init];
+    if (self){
+        _scale = @1.0;
+        NSError* error;
+        NSData* metalLibrary = [NSData dataWithContentsOfURL:url];
+        if (metalLibrary){
+            _kernel = [CIKernel kernelWithFunctionName:name fromMetalLibraryData:metalLibrary error:&error];
+        }
+    }
+    return self;
+}
+
 
 //-----------------------------------------------------------------------------------------
 // コピー
@@ -73,6 +107,7 @@
 //=========================================================================================
 @implementation EffectByCIKernel{
     FilterForTransition* _filter;
+    CIFilter* _filter2;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -84,6 +119,29 @@
     if (self){
         self.duration = duration;
         _filter = [[FilterForTransition alloc] initWithShaderPath:path];
+        //_filter2 = [CIFilter filterWithName:@"CIPageCurlTransition"];
+        //[_filter2 setValue:@(3.1415926 / 3) forKey:@"inputAngle"];
+    }
+    return self;
+}
+
+- (instancetype)initWithMetalShaderName:(NSString*)name duration:(CGFloat)duration
+{
+    self = [self init];
+    if (self){
+        self.duration = duration;
+        NSURL* url = [[NSBundle mainBundle] URLForResource:@"default" withExtension:@"metallib"];
+        _filter = [[FilterForTransition alloc] initWithShaderName:name url:url];
+    }
+    return self;
+}
+
+- (instancetype)initWithMetalShaderLibraryURL:(NSURL*)url duration:(CGFloat)duration
+{
+    self = [self init];
+    if (self){
+        self.duration = duration;
+        _filter = [[FilterForTransition alloc] initWithShaderName:@"dv_transition" url:url];
     }
     return self;
 }
@@ -93,7 +151,7 @@
 //-----------------------------------------------------------------------------------------
 - (CIFilter *)filter
 {
-    return _filter;
+    return _filter2 ? _filter2 : _filter;
 }
 
 //-----------------------------------------------------------------------------------------

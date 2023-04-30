@@ -121,6 +121,7 @@
 		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
 		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
 		7B6F8E2D29F536DB00C7C014 /* GPSMapWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F8E2C29F536DB00C7C014 /* GPSMapWebView.m */; };
+		7B6F8E3129FC8C6C00C7C014 /* Shutter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F8E3029FC8C6C00C7C014 /* Shutter.metal */; };
 		7B6FEEDA1B10A48F0077AC29 /* ImageFrameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */; };
 		7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6FEEDC1B10AF360077AC29 /* ImageLayer.m */; };
 		7B71F0981B7E3D41002F83D3 /* TemporaryFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B71F0971B7E3D41002F83D3 /* TemporaryFileController.m */; };
@@ -388,6 +389,7 @@
 		7B6D83661B32F6DA004A2426 /* SlideshowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowController.m; sourceTree = "<group>"; };
 		7B6F8E2B29F535A300C7C014 /* GPSMapWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPSMapWebView.h; sourceTree = "<group>"; };
 		7B6F8E2C29F536DB00C7C014 /* GPSMapWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPSMapWebView.m; sourceTree = "<group>"; };
+		7B6F8E3029FC8C6C00C7C014 /* Shutter.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shutter.metal; sourceTree = "<group>"; };
 		7B6FEED81B10A48F0077AC29 /* ImageFrameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFrameLayer.h; sourceTree = "<group>"; };
 		7B6FEED91B10A48F0077AC29 /* ImageFrameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageFrameLayer.mm; sourceTree = "<group>"; };
 		7B6FEEDB1B10AF360077AC29 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				7B661A6A1B47840A00C42D2C /* Mosaic.cikernel */,
 				7B661A6B1B47840A00C42D2C /* Zoom.cikernel */,
 				7BCF7F041B527FE5001B0A7A /* Afterimage.cikernel */,
+				7B6F8E3029FC8C6C00C7C014 /* Shutter.metal */,
 			);
 			name = "Core Image Kernel";
 			sourceTree = "<group>";
@@ -1449,6 +1452,7 @@
 				7BB4E5F61AD9431A0076630A /* GeneralPreferences.m in Sources */,
 				7B4BED981B47A6F300E20A5A /* DisableTextColorTransformer.m in Sources */,
 				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
+				7B6F8E3129FC8C6C00C7C014 /* Shutter.metal in Sources */,
 				7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B5C0A211B65E04E004FE1A0 /* InputCameraNameController.m in Sources */,
@@ -2009,6 +2013,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTLLINKER_FLAGS = "-fcikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2028,6 +2034,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTLLINKER_FLAGS = "-fcikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opiopan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

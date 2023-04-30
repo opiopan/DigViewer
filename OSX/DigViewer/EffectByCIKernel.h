@@ -11,5 +11,7 @@
 @interface EffectByCIKernel : EffectByCIFilter
 
 - (instancetype)initWithShaderPath:(NSString*)path duration:(CGFloat)duration;
+- (instancetype)initWithMetalShaderName:(NSString*)name duration:(CGFloat)duration;
+- (instancetype)initWithMetalShaderLibraryURL:(NSURL*)url duration:(CGFloat)duration;
 
 @end

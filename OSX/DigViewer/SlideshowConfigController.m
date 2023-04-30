@@ -186,10 +186,7 @@ typedef TransitionEffect* (^EffectFactory)(id);
                                                   type:effectBuiltIn path:kSlideshowTransitionShutter
                                               duration:0
                                          effectFactory:^(EffectEntry* entry){
-                                             id rc = [EffectByCIKernel alloc];
-                                             return [rc initWithShaderPath:[[NSBundle mainBundle] pathForResource:@"Shutter"
-                                                                                                           ofType:@"cikernel"]
-                                                                  duration:0.5];
+                                             return [[EffectByCIKernel alloc] initWithMetalShaderName:@"shutter" duration:0.5];
                                          }],
                             [EffectEntry entryWithName:NSLocalizedString(kSlideshowTransitionCartain, nil)
                                                   type:effectBuiltIn path:kSlideshowTransitionCartain

@@ -38,7 +38,6 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     [self invokeDelegateWhenDidEnd];
-    
 }
 
 
