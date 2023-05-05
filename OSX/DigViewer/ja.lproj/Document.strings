@@ -97,3 +97,9 @@
 
 /* Class = "NSMenuItem"; title = "Move to Photograhing place  as Center"; ObjectID = "RFT-mh-SWl"; */
 "fAP-Yu-QNh.title" = "撮影場所にセンタリング";
+
+/* Class = "NSMenuItem"; title = "New Context..."; ObjectID = "0f0-FO-ceq"; */
+"0f0-FO-ceq.title" = "新規コンテキスト...";
+
+/* Class = "NSMenuItem"; title = "Manage Contexts..."; ObjectID = "GKK-cC-a66"; */
+"GKK-cC-a66.title" = "コンテキストを管理...";

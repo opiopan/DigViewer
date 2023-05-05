@@ -117,6 +117,10 @@
 		7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AE1081ADAAEAF0039EA62 /* DraggingSourceArrayController.m */; };
 		7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6B3B1318E438D00004098F /* WebKit.framework */; };
 		7B6B57DE1AE25E2500FE15AF /* EditLensSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */; };
+		7B6C3F2A2A032B4100364AF8 /* BrowseContextArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F292A032B4100364AF8 /* BrowseContextArray.m */; };
+		7B6C3F2D2A052BA700364AF8 /* NewBrowsingContextSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F2B2A052BA700364AF8 /* NewBrowsingContextSheet.xib */; };
+		7B6C3F302A05302400364AF8 /* NewBrowsingContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */; };
+		7B6C3F332A05471300364AF8 /* NewBrowsingContextSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F312A05471300364AF8 /* NewBrowsingContextSheet.strings */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
 		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
 		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
@@ -381,6 +385,12 @@
 		7B6B3B1318E438D00004098F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		7B6B57DC1AE25E2500FE15AF /* EditLensSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLensSheetController.h; sourceTree = "<group>"; };
 		7B6B57DD1AE25E2500FE15AF /* EditLensSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLensSheetController.m; sourceTree = "<group>"; };
+		7B6C3F282A032B4100364AF8 /* BrowseContextArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseContextArray.h; sourceTree = "<group>"; };
+		7B6C3F292A032B4100364AF8 /* BrowseContextArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseContextArray.m; sourceTree = "<group>"; };
+		7B6C3F2C2A052BA700364AF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewBrowsingContextSheet.xib; sourceTree = "<group>"; };
+		7B6C3F2E2A05302400364AF8 /* NewBrowsingContextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewBrowsingContextController.h; sourceTree = "<group>"; };
+		7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewBrowsingContextController.m; sourceTree = "<group>"; };
+		7B6C3F322A05471300364AF8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NewBrowsingContextSheet.strings; sourceTree = "<group>"; };
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
@@ -632,6 +642,8 @@
 			children = (
 				7B553BBC1AE1D21B00618590 /* Document */,
 				7B553BBD1AE1D22D00618590 /* Lens Library */,
+				7B6C3F282A032B4100364AF8 /* BrowseContextArray.h */,
+				7B6C3F292A032B4100364AF8 /* BrowseContextArray.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -969,6 +981,8 @@
 				7B1AC4A718B05384004136CD /* InspectorViewController.mm */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
+				7B6C3F2E2A05302400364AF8 /* NewBrowsingContextController.h */,
+				7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */,
 			);
 			name = "Each Document";
 			sourceTree = "<group>";
@@ -1047,6 +1061,8 @@
 				7B61484C1B7BA1D200A03C45 /* InspectorView.strings */,
 				7B697E53169DB8A000A9E247 /* LoadingSheet.xib */,
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
+				7B6C3F2B2A052BA700364AF8 /* NewBrowsingContextSheet.xib */,
+				7B6C3F312A05471300364AF8 /* NewBrowsingContextSheet.strings */,
 				7B40A41B1AFD08FD006ED497 /* pause.png */,
 				7B40A41C1AFD08FD006ED497 /* play.png */,
 				7B35D9241B06D7E2000CA4F1 /* datetime.png */,
@@ -1221,6 +1237,7 @@
 				7B5C0A241B661DD6004FE1A0 /* InputCameraName.strings in Resources */,
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
+				7B6C3F332A05471300364AF8 /* NewBrowsingContextSheet.strings in Resources */,
 				7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */,
@@ -1238,6 +1255,7 @@
 				7B3CDB511AE2A3AE005B6EAE /* EditLensSheet.strings in Resources */,
 				7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */,
 				7B74FB9E1B3EC8DD005BC748 /* EditCustomEffectList.strings in Resources */,
+				7B6C3F2D2A052BA700364AF8 /* NewBrowsingContextSheet.xib in Resources */,
 				7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */,
 				7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */,
 				7B18B06B1B06E545006BC48A /* datetime_on.png in Resources */,
@@ -1335,7 +1353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone\n";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences NewBrowsingContextSheet; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone\n";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1398,6 +1416,7 @@
 				7B61484B1B7B97AE00A03C45 /* InspectorArrayController.m in Sources */,
 				7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */,
 				7B5C0A361B67726D004FE1A0 /* SelectNewConditionSheetController.m in Sources */,
+				7B6C3F302A05302400364AF8 /* NewBrowsingContextController.m in Sources */,
 				7B30AC2E18ADFF3000A70555 /* NSObject+MenuItemValidator.m in Sources */,
 				7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */,
 				7B6FEEDD1B10AF360077AC29 /* ImageLayer.m in Sources */,
@@ -1440,6 +1459,7 @@
 				7B74FB801B3AC911005BC748 /* EffectByCIFilter.m in Sources */,
 				7B0DBECA16A0F665000365F4 /* FolderOutlineViewController.m in Sources */,
 				7B9B24641AD101D1008F6E64 /* AppDelegate.m in Sources */,
+				7B6C3F2A2A032B4100364AF8 /* BrowseContextArray.m in Sources */,
 				7B9F9E8618E7D91D0042337F /* GPSMapView.m in Sources */,
 				7B0DBECE16A0F767000365F4 /* ImageViewController.mm in Sources */,
 				7B1CC21618D86DC5007527E6 /* InfoPlistController.m in Sources */,
@@ -1716,6 +1736,22 @@
 				7B697E52169DB8A000A9E247 /* en */,
 			);
 			name = LoadingSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B6C3F2B2A052BA700364AF8 /* NewBrowsingContextSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B6C3F2C2A052BA700364AF8 /* en */,
+			);
+			name = NewBrowsingContextSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B6C3F312A05471300364AF8 /* NewBrowsingContextSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B6C3F322A05471300364AF8 /* ja */,
+			);
+			name = NewBrowsingContextSheet.strings;
 			sourceTree = "<group>";
 		};
 		7B6D83601B306301004A2426 /* SlideshowPreferences.strings */ = {

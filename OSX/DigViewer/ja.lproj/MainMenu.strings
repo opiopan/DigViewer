@@ -166,3 +166,6 @@
 
 /* Class = "NSMenuItem"; title = "Map"; ObjectID = "M6J-Wn-d9f"; */
 "M6J-Wn-d9f.title" = "地図";
+
+/* Class = "NSMenuItem"; title = "Browsing Contexts"; ObjectID = "HMo-kJ-nqD"; */
+"HMo-kJ-nqD.title" = "ブラウズ コンテキスト";

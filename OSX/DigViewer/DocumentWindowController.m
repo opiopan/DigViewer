@@ -15,6 +15,7 @@
 #import "NSView+ViewControllerAssociation.h"
 #import "LoadingSheetController.h"
 #import "ImageViewController.h"
+#import "NewBrowsingContextController.h"
 
 static NSString* kCurrentImage = @"currentImage";
 static NSString* kWindowX = @"windowX";
@@ -28,6 +29,8 @@ static NSString* kShowNavigator = @"defShowNavigator";
 static NSString* kShowInspector = @"defShowInspector";
 static NSString* kShowToolbar = @"defShowToolbar";
 static NSString* kMainView = @"mainView";
+static NSString* kBrowseContexts = @"browseContexts";
+static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 
 //-----------------------------------------------------------------------------------------
 // RepresentedObject: 子ビューコントローラの代表オブジェクト用プレースホルダ
@@ -54,6 +57,7 @@ static NSString* kMainView = @"mainView";
 @property IBOutlet NSToolbar* toolbar;
 @property IBOutlet NSButton* shareButton;
 @property IBOutlet NSMenu* templateContextMenuForMap;
+@property IBOutlet NSMenu* templateMenuForBrowsingContext;
 @end
 
 @implementation DocumentWindowController{
@@ -64,6 +68,8 @@ static NSString* kMainView = @"mainView";
     BOOL firstTime;
     NSRect windowRectInNotFullscreen;
     NSMenu* _contextMenuForMap;
+    NSMenu* _menuForBrowsingContext;
+    NewBrowsingContextController* _newBrowsingContextController;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -137,6 +143,11 @@ static NSString* kMainView = @"mainView";
     // 共有ボタンのメッセージ送信条件を設定
     [_shareButton sendActionOn:NSEventMaskLeftMouseDown];
     
+    // Restore browse contexts
+    _browseContexts = [BrowseContextArray arrayWithArray:[windowPreferences valueForKey:kBrowseContexts]
+                                             currentPath:[windowPreferences valueForKey:kCurrentImage]];
+    [_browseContexts changeCurrentContextWithName:[windowPreferences valueForKey:kCurrentBrowseContext]];
+    
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
 }
@@ -177,13 +188,17 @@ static NSString* kMainView = @"mainView";
     Document* document = self.document;
     if (_imageArrayController.selectedObjects.count > 0){
         PathNode* currentImage = _imageArrayController.selectedObjects[0];
+        NSArray* currentPath = currentImage.portablePath;
+        [_browseContexts updateCurrentContextWithPath:currentPath];
         NSRect windowRect;
         if (self.window.styleMask &  NSWindowStyleMaskFullScreen){
             windowRect = windowRectInNotFullscreen;
         }else{
             windowRect = self.window.frame;
         }
-        [preferences setValue:currentImage.portablePath  forKey:kCurrentImage];
+        [preferences setValue:currentPath  forKey:kCurrentImage];
+        [preferences setValue:_browseContexts.currentContext.name forKey:kCurrentBrowseContext];
+        [preferences setValue:_browseContexts.arrayForSave forKey:kBrowseContexts];
         [preferences setValue:@(windowRect.origin.x) forKey:kWindowX];
         [preferences setValue:@(windowRect.origin.y) forKey:kWindowY];
         [preferences setValue:@(windowRect.size.width) forKey:kWindowWidth];
@@ -992,6 +1007,82 @@ static NSString* kAppImage = @"image";
     return !mainViewController.isCollapsedInspectorView &&
     mainViewController.inspectorViewController.viewSelector == 1 &&
     [mainViewController.inspectorViewController validateForOpenMapWithGoogleEarth:menuItem];
+}
+
+//-----------------------------------------------------------------------------------------
+// Handling browsing context
+//-----------------------------------------------------------------------------------------
+- (NSMenu*) menuForBrowsingContext
+{
+    if (!_menuForBrowsingContext){
+        _menuForBrowsingContext = [[NSMenu alloc] initWithTitle:@"Menu For Browsing Context"];
+        for (NSMenuItem* item in _templateMenuForBrowsingContext.itemArray){
+            [_menuForBrowsingContext addItem:[item copy]];
+        }
+        
+        // Add menu items representing each browsing context
+        for (id<BrowseContext> context in _browseContexts.array){
+            NSMenuItem* item = [[NSMenuItem alloc] initWithTitle:context.name
+                                                          action:@selector(changeBrowsingContextFromMenu:)
+                                                   keyEquivalent:@""];
+            [_menuForBrowsingContext addItem:item];
+        }
+    }
+    return _menuForBrowsingContext;
+}
+
+- (IBAction)changeBrowsingContextFromMenu:(id)sender
+{
+    if ([sender isKindOfClass:[NSMenuItem class]]){
+        NSMenuItem* item = sender;
+        [self changeBrowsingContextWithName:item.title];
+    }
+}
+
+- (BOOL)validateForChangeBrowsingContextFromMenu:(NSMenuItem*)menuItem
+{
+    menuItem.state = [_browseContexts.currentContext.name isEqualToString:menuItem.title] ? NSControlStateValueOn : NSControlStateValueOff;
+    return TRUE;
+}
+
+- (IBAction)performBrowsingContextSubMenu:(id)sender
+{
+}
+
+- (BOOL)validateForPerformBrowsingContextSubMenu:(NSMenuItem*)menuItem
+{
+    menuItem.submenu = self.menuForBrowsingContext;
+    return YES;
+}
+
+- (void)changeBrowsingContextWithName:(NSString*)name
+{
+    PathNode* currentNode = _imageArrayController.selectedObjects[0];
+    NSArray* currentPath = currentNode.portablePath;
+    [_browseContexts updateCurrentContextWithPath:currentPath];
+    [_browseContexts changeCurrentContextWithName:name];
+    NSArray* newPath = _browseContexts.currentContext.path;
+    PathNode* nextNode = [((Document*)self.document).root nearestNodeAtPortablePath:newPath];
+    [self moveToImageNode:nextNode];
+}
+
+- (IBAction)performNewBrowsingContext:(id)sender
+{
+    _newBrowsingContextController = [NewBrowsingContextController new];
+    [_newBrowsingContextController inputContextNameforWindow:self.window modalDelegate:self didEndSelector:@selector(didEndInputContextName:)];
+    
+}
+
+- (void)didEndInputContextName:(id)object
+{
+    if (object){
+        id<BrowseContext> newContext = [_browseContexts forkCurrentContextWithName:object];
+        if (newContext){
+            [_browseContexts.array addObject:newContext];
+            [_browseContexts changeCurrentContextWithName:newContext.name];
+            _menuForBrowsingContext = nil;
+        }
+    }
 }
 
 @end

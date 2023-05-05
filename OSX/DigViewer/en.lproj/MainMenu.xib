@@ -278,6 +278,20 @@ DQ
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="fDN-R7-V6P"/>
+                            <menuItem title="Browsing Contexts" id="HMo-kJ-nqD">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Browsing Contexts" id="Lgq-Dr-jtH">
+                                    <items>
+                                        <menuItem title="Item" id="bDw-Lh-sdM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                                <connections>
+                                    <action selector="performBrowsingContextSubMenu:" target="-1" id="tL1-Lu-3lj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="a7G-5d-y5o"/>
                             <menuItem title="Toggle Slideshow" id="rYP-b6-FaY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -315,7 +329,7 @@ DQ
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="28" y="154"/>
+            <point key="canvasLocation" x="68" y="397"/>
         </menu>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="o2j-DA-KmL" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>

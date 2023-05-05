@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Document.h"
 #import "ImageRepository.h"
+#import "BrowseContextArray.h"
 
 @interface DocumentWindowController : NSWindowController <NSWindowDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, readonly) ImageRepository* imageRepository;
 @property (nonatomic) IBOutlet NSMenu* contextMenu;
 @property (nonatomic, readonly) NSMenu* contextMenuForMap;
+@property (nonatomic, readonly) NSMenu* menuForBrowsingContext;
 
 @property (assign) int presentationViewType;
 @property (assign) BOOL isFitWindow;
@@ -32,6 +34,8 @@
 @property (strong, nonatomic) NSString* slideshowButtonTooltip;
 @property (assign, nonatomic) BOOL sortByDateTimeButtonState;
 @property (strong, nonatomic) NSImage* sortByDateTimeButtonImage;
+
+@property (strong, nonatomic, readonly) BrowseContextArray* browseContexts;
 
 - (void)moveToNextImage:(id)sender;
 - (void)moveToPreviousImage:(id)sender;

@@ -14,6 +14,7 @@
                 <outlet property="placeHolder" destination="100232" id="100240"/>
                 <outlet property="shareButton" destination="axJ-VU-MXj" id="jB4-7J-Cig"/>
                 <outlet property="templateContextMenuForMap" destination="bTe-9X-fM6" id="RQc-xp-t5c"/>
+                <outlet property="templateMenuForBrowsingContext" destination="NwB-Ov-j7Q" id="3Kc-Uj-EtD"/>
                 <outlet property="toolbar" destination="WIq-XK-m9I" id="bN8-q4-Yaa"/>
                 <outlet property="viewSelectionButton" destination="ENh-J0-P5m" id="yUJ-Ve-XOl"/>
                 <outlet property="window" destination="5" id="100241"/>
@@ -200,7 +201,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="17"/>
             </connections>
-            <point key="canvasLocation" x="66" y="-58"/>
+            <point key="canvasLocation" x="407" y="371"/>
         </window>
         <treeController objectClassName="PathNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="100059">
             <classReference key="objectClass" className="PathNode"/>
@@ -291,6 +292,20 @@
                 </menuItem>
             </items>
             <point key="canvasLocation" x="509" y="736.5"/>
+        </menu>
+        <menu id="NwB-Ov-j7Q" userLabel="Browsing Context Menu">
+            <items>
+                <menuItem title="New Context..." keyEquivalent="C" id="0f0-FO-ceq">
+                    <connections>
+                        <action selector="performNewBrowsingContext:" target="-2" id="NqZ-1d-Nbw"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Manage Contexts..." id="GKK-cC-a66">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="YE9-Ud-r8H"/>
+            </items>
+            <point key="canvasLocation" x="510" y="866"/>
         </menu>
     </objects>
     <resources>
