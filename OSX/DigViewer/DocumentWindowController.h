@@ -57,5 +57,7 @@
 - (BOOL)addSharingMenuForItems:(NSArray*)items toMenuItem:(NSMenuItem*)menuItem;
 - (void)copyItems:(NSArray*)items;
 
+- (void)changeBrowsingContextWithName:(NSString*)name;
+
 @end
 

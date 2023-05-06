@@ -16,6 +16,7 @@
 #import "LoadingSheetController.h"
 #import "ImageViewController.h"
 #import "NewBrowsingContextController.h"
+#import "ManageBrowsingContextConroller.h"
 
 static NSString* kCurrentImage = @"currentImage";
 static NSString* kWindowX = @"windowX";
@@ -69,7 +70,9 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     NSRect windowRectInNotFullscreen;
     NSMenu* _contextMenuForMap;
     NSMenu* _menuForBrowsingContext;
+    BOOL _needToRebuildMenuForBrowsingContext;
     NewBrowsingContextController* _newBrowsingContextController;
+    ManageBrowsingContextConroller* _manageBrowsingContextController;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -83,6 +86,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
         transitionStateCount = 0;
         firstTime = YES;
         _imageRepository = [ImageRepository sharedImageRepository];
+        _needToRebuildMenuForBrowsingContext = TRUE;
     }
     return self;
 }
@@ -147,6 +151,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     _browseContexts = [BrowseContextArray arrayWithArray:[windowPreferences valueForKey:kBrowseContexts]
                                              currentPath:[windowPreferences valueForKey:kCurrentImage]];
     [_browseContexts changeCurrentContextWithName:[windowPreferences valueForKey:kCurrentBrowseContext]];
+    _menuForBrowsingContext = self.menuForBrowsingContext;
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -1012,9 +1017,16 @@ static NSString* kAppImage = @"image";
 //-----------------------------------------------------------------------------------------
 // Handling browsing context
 //-----------------------------------------------------------------------------------------
+- (void)updateCurrentBrowsingContext
+{
+    PathNode* currentNode = _imageArrayController.selectedObjects[0];
+    NSArray* currentPath = currentNode.portablePath;
+    [_browseContexts updateCurrentContextWithPath:currentPath];
+}
+
 - (NSMenu*) menuForBrowsingContext
 {
-    if (!_menuForBrowsingContext){
+    if (!_needToRebuildMenuForBrowsingContext || !_menuForBrowsingContext){
         _menuForBrowsingContext = [[NSMenu alloc] initWithTitle:@"Menu For Browsing Context"];
         for (NSMenuItem* item in _templateMenuForBrowsingContext.itemArray){
             [_menuForBrowsingContext addItem:[item copy]];
@@ -1027,6 +1039,7 @@ static NSString* kAppImage = @"image";
                                                    keyEquivalent:@""];
             [_menuForBrowsingContext addItem:item];
         }
+        _needToRebuildMenuForBrowsingContext = FALSE;
     }
     return _menuForBrowsingContext;
 }
@@ -1057,9 +1070,7 @@ static NSString* kAppImage = @"image";
 
 - (void)changeBrowsingContextWithName:(NSString*)name
 {
-    PathNode* currentNode = _imageArrayController.selectedObjects[0];
-    NSArray* currentPath = currentNode.portablePath;
-    [_browseContexts updateCurrentContextWithPath:currentPath];
+    [self updateCurrentBrowsingContext];
     [_browseContexts changeCurrentContextWithName:name];
     NSArray* newPath = _browseContexts.currentContext.path;
     PathNode* nextNode = [((Document*)self.document).root nearestNodeAtPortablePath:newPath];
@@ -1070,19 +1081,32 @@ static NSString* kAppImage = @"image";
 {
     _newBrowsingContextController = [NewBrowsingContextController new];
     [_newBrowsingContextController inputContextNameforWindow:self.window modalDelegate:self didEndSelector:@selector(didEndInputContextName:)];
-    
 }
 
 - (void)didEndInputContextName:(id)object
 {
     if (object){
+        [self updateCurrentBrowsingContext];
         id<BrowseContext> newContext = [_browseContexts forkCurrentContextWithName:object];
         if (newContext){
             [_browseContexts.array addObject:newContext];
             [_browseContexts changeCurrentContextWithName:newContext.name];
-            _menuForBrowsingContext = nil;
+            _needToRebuildMenuForBrowsingContext = TRUE;
         }
     }
+    _newBrowsingContextController = nil;
+}
+
+- (IBAction)performManageBrowsingContext:(id)sender
+{
+    [self updateCurrentBrowsingContext];
+    _manageBrowsingContextController = [ManageBrowsingContextConroller new];
+    [_manageBrowsingContextController manageContexsforWindow:self.window array:_browseContexts.array modalDelegate:self didEndSelector:@selector(didEndManageBrowsingContext:)];
+}
+
+- (void)didEndManageBrowsingContext:(id)object
+{
+    _manageBrowsingContextController = nil;
 }
 
 @end

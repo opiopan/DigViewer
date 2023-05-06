@@ -39,10 +39,11 @@ static NSString* kDefaultContextName = @"Default";
 {
     _path = path;
     NSMutableString* pathString = [NSMutableString string];
-    for (int i = 0; i << path.count; i++){
-        [pathString appendString:path[i]];
+    for (NSString* flagment in path){
+        [pathString appendString:@"/"];
+        [pathString appendString:flagment];
     }
-    self.pathString = pathString;
+    self.pathString = [NSString stringWithString:pathString];
 }
 
 - (BOOL) isCurrent

@@ -266,3 +266,7 @@
 "MVMSG_NOKEY" = "Google APIキーが指定されていません。環境設定パネルでキーを指定してください。";
 "MVMSG_INVALIDKEY" = "指定されたGoogle APIキーは使用できません。指定したキーに誤りがないことを確認してください。";
 "MVMSG_SPECIFYKEYBUTTON" = "APIキーの設定...";
+
+// messages for browsing context operation
+"BCTX_CONFIRM_REMOVE" = "選択されたブラウズ コンテキスト '%@' を削除してもよろしいですか?";
+"BCTX_REMOVE_ERROR_DUE_TO_ACTIVE" = "選択されたブラウズ コンテキスト '%@' はアクティブのため削除できません";

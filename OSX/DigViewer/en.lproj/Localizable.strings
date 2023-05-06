@@ -115,3 +115,7 @@
 // スライドショーボタンのtool tip
 "SLIDESHOW_TOOLTIP_BEGIN" = "Begin slideshow";
 "SLIDESHOW_TOOLTIP_END" = "End slideshow";
+
+// messages for browsing context operation
+"BCTX_CONFIRM_REMOVE" = "Are you sure you want to remove selected browsing '%@' context?";
+"BCTX_REMOVE_ERROR_DUE_TO_ACTIVE" = "Selected browsing context '%@' cannot be removed since it is active.";

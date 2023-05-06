@@ -241,6 +241,27 @@ DQ
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Navigate" id="538">
                         <items>
+                            <menuItem title="Browsing Contexts" id="HMo-kJ-nqD">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Browsing Contexts" id="Lgq-Dr-jtH">
+                                    <items>
+                                        <menuItem title="New Context..." keyEquivalent="N" id="LPl-1F-SVM">
+                                            <connections>
+                                                <action selector="performNewBrowsingContext:" target="-1" id="UZ3-y0-th1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Manage Contexts..." keyEquivalent="C" id="gHM-ZD-e3O">
+                                            <connections>
+                                                <action selector="performManageBrowsingContext:" target="-1" id="ldT-vA-W5Y"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                                <connections>
+                                    <action selector="performBrowsingContextSubMenu:" target="-1" id="tL1-Lu-3lj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="a7G-5d-y5o"/>
                             <menuItem title="Next Image" keyEquivalent="" id="539">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 <connections>
@@ -278,20 +299,6 @@ DQ
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="fDN-R7-V6P"/>
-                            <menuItem title="Browsing Contexts" id="HMo-kJ-nqD">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Browsing Contexts" id="Lgq-Dr-jtH">
-                                    <items>
-                                        <menuItem title="Item" id="bDw-Lh-sdM">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                                <connections>
-                                    <action selector="performBrowsingContextSubMenu:" target="-1" id="tL1-Lu-3lj"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="a7G-5d-y5o"/>
                             <menuItem title="Toggle Slideshow" id="rYP-b6-FaY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -334,7 +341,7 @@ DQ
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="o2j-DA-KmL" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
             <rect key="contentRect" x="139" y="85" width="543" height="226"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" autoresizesSubviews="NO" id="bWT-A0-l57">
                 <rect key="frame" x="0.0" y="0.0" width="543" height="226"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

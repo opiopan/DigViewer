@@ -121,6 +121,9 @@
 		7B6C3F2D2A052BA700364AF8 /* NewBrowsingContextSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F2B2A052BA700364AF8 /* NewBrowsingContextSheet.xib */; };
 		7B6C3F302A05302400364AF8 /* NewBrowsingContextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */; };
 		7B6C3F332A05471300364AF8 /* NewBrowsingContextSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F312A05471300364AF8 /* NewBrowsingContextSheet.strings */; };
+		7B6C3F362A05D19300364AF8 /* ManageBrowsingContextSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F342A05D19300364AF8 /* ManageBrowsingContextSheet.xib */; };
+		7B6C3F3A2A060D8300364AF8 /* ManageBrowsingContextConroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F392A060D8300364AF8 /* ManageBrowsingContextConroller.m */; };
+		7B6C3F3D2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F3B2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
 		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
 		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
@@ -391,6 +394,10 @@
 		7B6C3F2E2A05302400364AF8 /* NewBrowsingContextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewBrowsingContextController.h; sourceTree = "<group>"; };
 		7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewBrowsingContextController.m; sourceTree = "<group>"; };
 		7B6C3F322A05471300364AF8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NewBrowsingContextSheet.strings; sourceTree = "<group>"; };
+		7B6C3F352A05D19300364AF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ManageBrowsingContextSheet.xib; sourceTree = "<group>"; };
+		7B6C3F382A060D8300364AF8 /* ManageBrowsingContextConroller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManageBrowsingContextConroller.h; sourceTree = "<group>"; };
+		7B6C3F392A060D8300364AF8 /* ManageBrowsingContextConroller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManageBrowsingContextConroller.m; sourceTree = "<group>"; };
+		7B6C3F3C2A068BFB00364AF8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ManageBrowsingContextSheet.strings; sourceTree = "<group>"; };
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
@@ -884,6 +891,17 @@
 			name = "DV Remote Protocol";
 			sourceTree = "<group>";
 		};
+		7B6C3F372A060D2300364AF8 /* Browsing Context */ = {
+			isa = PBXGroup;
+			children = (
+				7B6C3F2E2A05302400364AF8 /* NewBrowsingContextController.h */,
+				7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */,
+				7B6C3F382A060D8300364AF8 /* ManageBrowsingContextConroller.h */,
+				7B6C3F392A060D8300364AF8 /* ManageBrowsingContextConroller.m */,
+			);
+			name = "Browsing Context";
+			sourceTree = "<group>";
+		};
 		7B6D83631B32F1D6004A2426 /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,8 +999,7 @@
 				7B1AC4A718B05384004136CD /* InspectorViewController.mm */,
 				7B697E4C169DB4A700A9E247 /* LoadingSheetController.h */,
 				7B697E4D169DB4A700A9E247 /* LoadingSheetController.m */,
-				7B6C3F2E2A05302400364AF8 /* NewBrowsingContextController.h */,
-				7B6C3F2F2A05302400364AF8 /* NewBrowsingContextController.m */,
+				7B6C3F372A060D2300364AF8 /* Browsing Context */,
 			);
 			name = "Each Document";
 			sourceTree = "<group>";
@@ -1063,6 +1080,8 @@
 				7BFF729316CF4A2E00A94515 /* LoadingSheet.strings */,
 				7B6C3F2B2A052BA700364AF8 /* NewBrowsingContextSheet.xib */,
 				7B6C3F312A05471300364AF8 /* NewBrowsingContextSheet.strings */,
+				7B6C3F342A05D19300364AF8 /* ManageBrowsingContextSheet.xib */,
+				7B6C3F3B2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings */,
 				7B40A41B1AFD08FD006ED497 /* pause.png */,
 				7B40A41C1AFD08FD006ED497 /* play.png */,
 				7B35D9241B06D7E2000CA4F1 /* datetime.png */,
@@ -1213,6 +1232,7 @@
 				7B5C0A331B676CF9004FE1A0 /* EditConditionSheet.strings in Resources */,
 				7B5C0A301B676CAE004FE1A0 /* SelectNewConditionSheet.xib in Resources */,
 				7B44007B1AFDC697006CE7D6 /* ThumbnailPreferences.strings in Resources */,
+				7B6C3F3D2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings in Resources */,
 				7B36F79F1B6CF6C0006F06CB /* Cube.qtz in Resources */,
 				7B5C0A2A1B664340004FE1A0 /* EditConditionSheet.xib in Resources */,
 				7BB4E6031AD96D550076630A /* GeneralPreferences.xib in Resources */,
@@ -1238,6 +1258,7 @@
 				7B40A41E1AFD08FD006ED497 /* play.png in Resources */,
 				7BB3327C1AEBB50700C74944 /* unavailable.png in Resources */,
 				7B6C3F332A05471300364AF8 /* NewBrowsingContextSheet.strings in Resources */,
+				7B6C3F362A05D19300364AF8 /* ManageBrowsingContextSheet.xib in Resources */,
 				7BA81BFC1AF73F6F001E40D7 /* EditImageSetSheet.xib in Resources */,
 				7B01210916B4C6A9004AA730 /* down.png in Resources */,
 				7BCA29A91B4E70B500FCFD7A /* Mod.qtz in Resources */,
@@ -1353,7 +1374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences NewBrowsingContextSheet; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone\n";
+			shellScript = "for f in MainMenu Document FolderOutlineView ThumbnailView LoadingSheet \\\n         GeneralPreferences MapPreferences LensPreferences AdvancedPreferences \\\n         EditLensSheet EditImageSetSheet ThumbnailPreferences SlideshowPreferences\\\n         RenderingPreferences EditCustomEffectList EditCustomEffect EditCameraSheet\\\n         InputCameraName EditConditionSheet SelectDeletingConditionSheet SelectNewConditionSheet\\\n         InspectorView PairingWindow DevicePreferences NewBrowsingContextSheet\\\n         ManageBrowsingContextSheet; do\n    ibtool --import-strings-file DigViewer/ja.lproj/${f}.strings \\\n           --compile \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj/${f}.nib\" \\\n           --output-format binary1 DigViewer/en.lproj/${f}.xib || exit 1\ndone\n";
 		};
 		7B5340641703F45F008AEDB6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1473,6 +1494,7 @@
 				7B4BED981B47A6F300E20A5A /* DisableTextColorTransformer.m in Sources */,
 				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
 				7B6F8E3129FC8C6C00C7C014 /* Shutter.metal in Sources */,
+				7B6C3F3A2A060D8300364AF8 /* ManageBrowsingContextConroller.m in Sources */,
 				7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
 				7B5C0A211B65E04E004FE1A0 /* InputCameraNameController.m in Sources */,
@@ -1752,6 +1774,22 @@
 				7B6C3F322A05471300364AF8 /* ja */,
 			);
 			name = NewBrowsingContextSheet.strings;
+			sourceTree = "<group>";
+		};
+		7B6C3F342A05D19300364AF8 /* ManageBrowsingContextSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B6C3F352A05D19300364AF8 /* en */,
+			);
+			name = ManageBrowsingContextSheet.xib;
+			sourceTree = "<group>";
+		};
+		7B6C3F3B2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B6C3F3C2A068BFB00364AF8 /* ja */,
+			);
+			name = ManageBrowsingContextSheet.strings;
 			sourceTree = "<group>";
 		};
 		7B6D83601B306301004A2426 /* SlideshowPreferences.strings */ = {
