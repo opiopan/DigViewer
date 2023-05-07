@@ -10,6 +10,7 @@
 
 static NSString* kContextName = @"name";
 static NSString* kContextPath = @"path";
+static NSString* kContextPresentationViewType = @"viewType";
 static NSString* kDefaultContextName = @"Default";
 
 //-----------------------------------------------------------------------------------------
@@ -19,6 +20,7 @@ static NSString* kDefaultContextName = @"Default";
 @property (nonatomic) NSString* name;
 @property (nonatomic) NSArray* path;
 @property (nonatomic) NSString* pathString;
+@property (nonatomic) int presentationViewType;
 @property (nonatomic, readonly) BOOL isCurrent;
 @end
 
@@ -31,6 +33,7 @@ static NSString* kDefaultContextName = @"Default";
     self = [super init];
     if (self){
         _holder = holder;
+        _presentationViewType = 0;
     }
     return self;
 }
@@ -70,6 +73,12 @@ static NSString* kDefaultContextName = @"Default";
                 BrowseContextImp* element = [[BrowseContextImp alloc] initWithHolder:self];
                 element.name = name;
                 element.path = path;
+                id viewType = [obj objectForKey:kContextPresentationViewType];
+                if ([viewType isKindOfClass:[NSNumber class]]){
+                    element.presentationViewType = (int)[(NSNumber*)viewType integerValue];
+                }else{
+                    element.presentationViewType = 0;
+                }
                 [_array addObject:element];
             }
         }];
@@ -77,6 +86,7 @@ static NSString* kDefaultContextName = @"Default";
             BrowseContextImp* element = [[BrowseContextImp alloc] initWithHolder:self];
             element.name =  kDefaultContextName;
             element.path = path;
+            element.presentationViewType = 0;
             [_array addObject:element];
         }
         _currentContext = _array[0];
@@ -104,9 +114,10 @@ static NSString* kDefaultContextName = @"Default";
     }
 }
 
-- (void) updateCurrentContextWithPath: (NSArray*) path
+- (void) updateCurrentContextWithPath: (NSArray*) path presentationViewType:(int)type
 {
     _currentContext.path = path;
+    _currentContext.presentationViewType = type;
 }
 
 - (NSArray*) arrayForSave
@@ -116,6 +127,7 @@ static NSString* kDefaultContextName = @"Default";
         [array addObject:@{
             kContextName : ((BrowseContextImp*)obj).name,
             kContextPath : ((BrowseContextImp*)obj).path,
+            kContextPresentationViewType : [NSNumber numberWithInt:((BrowseContextImp*)obj).presentationViewType],
         }];
     }];
     return array;

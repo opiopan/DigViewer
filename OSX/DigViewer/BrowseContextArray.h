@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSString* name;
 @property (nonatomic) NSString* pathString;
 @property (nonatomic) NSArray* path;
+@property (nonatomic) int presentationViewType;
 @property (nonatomic, readonly) BOOL isCurrent;
 @end
 
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) id<BrowseContext> currentContext;
 + (BrowseContextArray*) arrayWithArray:(NSArray*)array currentPath:(NSArray*) path;
 - (void) changeCurrentContextWithName:(NSString*)name;
-- (void) updateCurrentContextWithPath:(NSArray*)path;
+- (void) updateCurrentContextWithPath: (NSArray*) path presentationViewType:(int)type;
 - (NSArray*) arrayForSave;
 - (id<BrowseContext>) forkCurrentContextWithName:(NSString*)name;
 @end

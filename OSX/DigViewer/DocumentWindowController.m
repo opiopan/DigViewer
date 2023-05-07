@@ -194,7 +194,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     if (_imageArrayController.selectedObjects.count > 0){
         PathNode* currentImage = _imageArrayController.selectedObjects[0];
         NSArray* currentPath = currentImage.portablePath;
-        [_browseContexts updateCurrentContextWithPath:currentPath];
+        [_browseContexts updateCurrentContextWithPath:currentPath presentationViewType:self.presentationViewType];
         NSRect windowRect;
         if (self.window.styleMask &  NSWindowStyleMaskFullScreen){
             windowRect = windowRectInNotFullscreen;
@@ -1021,7 +1021,7 @@ static NSString* kAppImage = @"image";
 {
     PathNode* currentNode = _imageArrayController.selectedObjects[0];
     NSArray* currentPath = currentNode.portablePath;
-    [_browseContexts updateCurrentContextWithPath:currentPath];
+    [_browseContexts updateCurrentContextWithPath:currentPath presentationViewType:self.presentationViewType];
 }
 
 - (NSMenu*) menuForBrowsingContext
@@ -1075,6 +1075,7 @@ static NSString* kAppImage = @"image";
     NSArray* newPath = _browseContexts.currentContext.path;
     PathNode* nextNode = [((Document*)self.document).root nearestNodeAtPortablePath:newPath];
     [self moveToImageNode:nextNode];
+    self.presentationViewType = _browseContexts.currentContext.presentationViewType;
 }
 
 - (IBAction)performNewBrowsingContext:(id)sender
