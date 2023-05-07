@@ -37,7 +37,7 @@
                 <binding destination="-2" name="contentArray" keyPath="self.summary" id="d6G-lY-kL1"/>
             </connections>
         </arrayController>
-        <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" id="B6R-MO-chK">
+        <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" transparent="YES" id="B6R-MO-chK">
             <rect key="frame" x="0.0" y="0.0" width="343" height="609"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" id="reP-YP-nnH">
