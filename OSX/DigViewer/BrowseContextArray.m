@@ -22,6 +22,8 @@ static NSString* kDefaultContextName = @"Default";
 @property (nonatomic) NSString* pathString;
 @property (nonatomic) int presentationViewType;
 @property (nonatomic, readonly) BOOL isCurrent;
+- (void) willChangeIsCurrent;
+- (void) didChangeIsCurrent;
 @end
 
 @implementation BrowseContextImp{
@@ -53,6 +55,28 @@ static NSString* kDefaultContextName = @"Default";
 {
     return self == _holder.currentContext;
 }
+
+- (void) willChangeIsCurrent
+{
+    [self willChangeValueForKey:@"isCurrent"];
+    [self willChangeValueForKey:@"isCurrentString"];
+}
+
+- (void) didChangeIsCurrent
+{
+    [self didChangeValueForKey:@"isCurrent"];
+    [self didChangeValueForKey:@"isCurrentString"];
+}
+
+- (NSString*) isCurrentString
+{
+    if (self.isCurrent){
+        return @"⚫︎";
+    }else{
+        return @"";
+    }
+}
+
 
 @end
 
@@ -110,7 +134,12 @@ static NSString* kDefaultContextName = @"Default";
         }
     }
     if (found){
+        BrowseContextImp* old = (BrowseContextImp*)_currentContext;
+        [old willChangeIsCurrent];
+        [found willChangeIsCurrent];
         _currentContext = found;
+        [old didChangeIsCurrent];
+        [found didChangeIsCurrent];
     }
 }
 
@@ -140,6 +169,7 @@ static NSString* kDefaultContextName = @"Default";
         newContext = [[BrowseContextImp new] initWithHolder:self];
         newContext.name = name;
         newContext.path = _currentContext.path;
+        newContext.presentationViewType = _currentContext.presentationViewType;
     }
     return newContext;
 }

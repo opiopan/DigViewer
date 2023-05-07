@@ -13,8 +13,9 @@
 -(void)drawRect:(NSRect)dirtyRect
 {
     NSRect rect=[self bounds];
-    CGFloat brightness = 0.85;
-    [[NSColor colorWithCalibratedRed:brightness green:brightness blue:brightness alpha:1.0] set];
+    //CGFloat brightness = 0.85;
+    //[[NSColor colorWithCalibratedRed:brightness green:brightness blue:brightness alpha:1.0] set];
+    [[NSColor windowBackgroundColor] set];
     [NSBezierPath fillRect:rect];
 }
 

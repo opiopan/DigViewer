@@ -91,7 +91,7 @@
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
                                                                         <textFieldCell key="dataCell" controlSize="mini" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="2yT-mH-Qgk">
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <connections>
@@ -178,7 +178,7 @@
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
                                                                         <textFieldCell key="dataCell" controlSize="mini" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="right" title="Text Cell" id="n2W-Po-qK7">
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <connections>

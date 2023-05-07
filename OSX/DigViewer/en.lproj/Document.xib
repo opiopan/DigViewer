@@ -26,7 +26,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>

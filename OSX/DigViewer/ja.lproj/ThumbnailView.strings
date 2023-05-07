@@ -9,7 +9,7 @@
 "100319.ibShadowedToolTip" = "デフォルトのアイコンサイズに戻します";
 
 /* Class = "NSButtonCell"; title = "Default Size"; ObjectID = "100320"; */
-"100320.title" = "デフォルト";
+"100320.title" = "デフォルト サイズ";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Move to parent folder"; ObjectID = "100322"; */
 "100322.ibShadowedToolTip" = "一つ上のフォルダに移動します";

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -1292,6 +1292,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		7B4E8E3716C82E0B001C5D09 /* Run Script For Creating Localized NIB */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
