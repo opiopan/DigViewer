@@ -19,7 +19,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="142" y="89" width="558" height="381"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1667"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="bzt-Qg-e0p">
                 <rect key="frame" x="0.0" y="0.0" width="556" height="381"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -111,6 +111,7 @@
                                                                 <constraints>
                                                                     <constraint firstItem="Xkd-b9-EL0" firstAttribute="centerY" secondItem="wsv-Fo-apG" secondAttribute="centerY" id="BFk-l5-uYa"/>
                                                                     <constraint firstItem="Xkd-b9-EL0" firstAttribute="leading" secondItem="wsv-Fo-apG" secondAttribute="leading" constant="1" id="KRj-LR-Sev"/>
+                                                                    <constraint firstItem="eDq-Lc-pMV" firstAttribute="leading" secondItem="Xkd-b9-EL0" secondAttribute="trailing" constant="2" id="b23-Ty-oRT"/>
                                                                     <constraint firstItem="eDq-Lc-pMV" firstAttribute="leading" secondItem="wsv-Fo-apG" secondAttribute="leading" constant="16" id="ddx-o5-SVa"/>
                                                                     <constraint firstItem="eDq-Lc-pMV" firstAttribute="centerY" secondItem="wsv-Fo-apG" secondAttribute="centerY" id="pXh-6G-Pcc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="eDq-Lc-pMV" secondAttribute="trailing" constant="2" id="rTS-zP-ncn"/>
@@ -226,6 +227,7 @@ DQ
                                 <constraint firstItem="ATm-xz-akh" firstAttribute="top" secondItem="EIb-sx-CnH" secondAttribute="bottom" constant="20" id="OWT-3P-wYS"/>
                                 <constraint firstAttribute="trailing" secondItem="y1B-OJ-P1I" secondAttribute="trailing" constant="20" symbolic="YES" id="Roi-gu-8sU"/>
                                 <constraint firstAttribute="bottom" secondItem="y1B-OJ-P1I" secondAttribute="bottom" constant="14" id="SCC-Oj-oen"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ATm-xz-akh" secondAttribute="trailing" constant="471" id="V6B-T6-rGF"/>
                                 <constraint firstItem="EIb-sx-CnH" firstAttribute="leading" secondItem="WDb-I1-h1B" secondAttribute="leading" constant="20" symbolic="YES" id="WFC-xQ-BUE"/>
                                 <constraint firstItem="TDg-OU-YNa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WDb-I1-h1B" secondAttribute="leading" constant="20" symbolic="YES" id="WQZ-LD-Z4x"/>
                                 <constraint firstItem="EIb-sx-CnH" firstAttribute="top" secondItem="WDb-I1-h1B" secondAttribute="top" constant="20" id="cgh-Om-wUj"/>

@@ -24,14 +24,16 @@
                 <subviews>
                     <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="Afd-d8-fVl">
                         <rect key="frame" x="-3" y="-4" width="706" height="503"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="contentView" id="uwK-Dl-KLS">
                             <rect key="frame" x="0.0" y="0.0" width="706" height="491"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pax-yr-zmS">
-                                    <rect key="frame" x="91" y="347" width="526" height="136"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pax-yr-zmS">
+                                    <rect key="frame" x="90" y="355" width="526" height="128"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="e7n-Yl-VnK"/>
+                                    </constraints>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="r9B-mS-Xvj">
                                         <font key="font" metaFont="system"/>
                                         <string key="title">DigViewer uses "Google Maps JavaScript API v3" to display a map and indicate location taking a photo. And you also need a Google API key to use this API.
@@ -45,27 +47,28 @@ Please get a API key and specify it as following steps:
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3A-G5-Mh6">
-                                    <rect key="frame" x="91" y="223" width="161" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T3A-G5-Mh6">
+                                    <rect key="frame" x="131" y="221" width="121" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Exposure direction:" id="JX8-fD-b6Y">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0j-m8-0Zg">
-                                    <rect key="frame" x="349" y="164" width="268" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F0j-m8-0Zg">
+                                    <rect key="frame" x="349" y="163" width="95" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Gradation level" id="UTo-6i-984">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Qe-2FB">
-                                    <rect key="frame" x="268" y="217" width="75" height="23"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Qe-2FB">
+                                    <rect key="frame" x="265" y="217" width="75" height="23"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="19" id="PgQ-dW-qg7"/>
+                                        <constraint firstAttribute="width" constant="69" id="gRb-5R-0SA"/>
+                                    </constraints>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapFovColor3" id="CXH-xB-SZ5">
@@ -75,9 +78,12 @@ Please get a API key and specify it as following steps:
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ba-9M-Idp">
-                                    <rect key="frame" x="268" y="188" width="75" height="23"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="9Ba-9M-Idp">
+                                    <rect key="frame" x="265" y="188" width="75" height="23"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="69" id="Q5J-70-3Xb"/>
+                                        <constraint firstAttribute="height" constant="19" id="rbI-hW-k6i"/>
+                                    </constraints>
                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapArrowColor3" id="KMX-oZ-UYy">
@@ -87,18 +93,16 @@ Please get a API key and specify it as following steps:
                                         </binding>
                                     </connections>
                                 </colorWell>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-0R-UfA">
-                                    <rect key="frame" x="90" y="295" width="162" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-0R-UfA">
+                                    <rect key="frame" x="151" y="295" width="101" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Google API Key:" id="wjz-QV-3cb">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fgq-Lf-AFs">
-                                    <rect key="frame" x="492" y="259" width="128" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fgq-Lf-AFs">
+                                    <rect key="frame" x="504" y="260" width="118" height="27"/>
                                     <buttonCell key="cell" type="push" title="Get API key..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6p3-C0-V9w">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
@@ -107,9 +111,11 @@ Please get a API key and specify it as following steps:
                                         </connections>
                                     </buttonCell>
                                 </button>
-                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-Hy-vdY">
-                                    <rect key="frame" x="267" y="291" width="348" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-Hy-vdY">
+                                    <rect key="frame" x="268" y="292" width="348" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="348" id="Ppp-TH-WeD"/>
+                                    </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="0fJ-h2-GNM">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -119,27 +125,24 @@ Please get a API key and specify it as following steps:
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.googleMapsApiKey" id="CSo-ee-2x1"/>
                                     </connections>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ez7-TE-6iB">
-                                    <rect key="frame" x="349" y="220" width="268" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ez7-TE-6iB">
+                                    <rect key="frame" x="349" y="221" width="114" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Field of view color" id="dnI-tz-3DZ">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n2a-4n-fZB">
-                                    <rect key="frame" x="349" y="191" width="268" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n2a-4n-fZB">
+                                    <rect key="frame" x="349" y="192" width="74" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Arrow color" id="JB4-SI-g5c">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8K-nA-nR4">
-                                    <rect key="frame" x="266" y="112" width="268" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o8K-nA-nR4">
+                                    <rect key="frame" x="265" y="112" width="127" height="25"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="eX5-eA-djm">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -155,27 +158,24 @@ Please get a API key and specify it as following steps:
                                         <binding destination="MyX-ZP-vVp" name="selectedIndex" keyPath="values.mapType" id="RSq-cV-eiI"/>
                                     </connections>
                                 </popUpButton>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dn4-nJ-MlM">
-                                    <rect key="frame" x="91" y="119" width="161" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dn4-nJ-MlM">
+                                    <rect key="frame" x="125" y="120" width="127" height="13"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Display at opening:" id="Iav-pi-HYw">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5GI-SZ-eBp">
-                                    <rect key="frame" x="91" y="72" width="161" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5GI-SZ-eBp">
+                                    <rect key="frame" x="201" y="78" width="51" height="13"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Others:" id="534-tp-bti">
                                         <font key="font" size="13" name="HiraKakuProN-W3"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-TP-ygJ">
-                                    <rect key="frame" x="266" y="71" width="313" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="lAg-TP-ygJ">
+                                    <rect key="frame" x="266" y="75" width="187" height="18"/>
                                     <buttonCell key="cell" type="check" title="Enable Google Street View" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qlO-Ag-XOq">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -184,9 +184,8 @@ Please get a API key and specify it as following steps:
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapEnableStreetView" id="HNC-z9-mtZ"/>
                                     </connections>
                                 </button>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pSV-HE-kiL">
-                                    <rect key="frame" x="266" y="51" width="313" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pSV-HE-kiL">
+                                    <rect key="frame" x="266" y="53" width="254" height="18"/>
                                     <buttonCell key="cell" type="check" title="Move to home position if no GPS data" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LWe-Nr-0Zp">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -195,9 +194,12 @@ Please get a API key and specify it as following steps:
                                         <binding destination="MyX-ZP-vVp" name="value" keyPath="values.mapMoveToHomePos" id="nbL-HW-c6K"/>
                                     </connections>
                                 </button>
-                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-Z2-Lo2">
-                                    <rect key="frame" x="268" y="161" width="75" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-Z2-Lo2">
+                                    <rect key="frame" x="268" y="160" width="75" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="75" id="RLN-pG-vD0"/>
+                                        <constraint firstAttribute="height" constant="22" id="U64-Pw-Ej1"/>
+                                    </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="BsN-7f-7i8">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Skb-Lg-cIX"/>
                                         <font key="font" metaFont="system"/>
@@ -214,9 +216,8 @@ Please get a API key and specify it as following steps:
                                         <binding destination="MyX-ZP-vVp" name="minValue" keyPath="values.mapFovGradeMin" previousBinding="4sg-He-jzl" id="4F7-At-rRa"/>
                                     </connections>
                                 </textField>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96A-Vs-OS6">
-                                    <rect key="frame" x="266" y="31" width="351" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="96A-Vs-OS6">
+                                    <rect key="frame" x="266" y="31" width="333" height="18"/>
                                     <buttonCell key="cell" type="check" title="Pass altitude when open external map appliccation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sIl-jE-S4z">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -226,6 +227,55 @@ Please get a API key and specify it as following steps:
                                     </connections>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="lAg-TP-ygJ" firstAttribute="leading" secondItem="5GI-SZ-eBp" secondAttribute="trailing" constant="18" id="15g-No-EK6"/>
+                                <constraint firstItem="f0q-Qe-2FB" firstAttribute="top" secondItem="Ryk-Hy-vdY" secondAttribute="bottom" constant="54" id="4dy-Rp-dqD"/>
+                                <constraint firstItem="pSV-HE-kiL" firstAttribute="leading" secondItem="lAg-TP-ygJ" secondAttribute="leading" id="55I-02-7HY"/>
+                                <constraint firstItem="96A-Vs-OS6" firstAttribute="leading" secondItem="lAg-TP-ygJ" secondAttribute="leading" id="5Cl-hl-RuH"/>
+                                <constraint firstItem="F0j-m8-0Zg" firstAttribute="centerY" secondItem="7WS-Z2-Lo2" secondAttribute="centerY" id="5VZ-be-F4e"/>
+                                <constraint firstItem="o8K-nA-nR4" firstAttribute="centerY" secondItem="Dn4-nJ-MlM" secondAttribute="centerY" id="AYW-Ln-dOX"/>
+                                <constraint firstItem="pSV-HE-kiL" firstAttribute="top" secondItem="lAg-TP-ygJ" secondAttribute="bottom" constant="6" id="Bg2-2C-hjm"/>
+                                <constraint firstItem="9Ba-9M-Idp" firstAttribute="top" secondItem="f0q-Qe-2FB" secondAttribute="bottom" constant="10" id="Bue-yQ-G6h"/>
+                                <constraint firstItem="7WS-Z2-Lo2" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="D7l-Mi-GCh"/>
+                                <constraint firstItem="F0j-m8-0Zg" firstAttribute="leading" secondItem="7WS-Z2-Lo2" secondAttribute="trailing" constant="8" id="FBJ-Di-Y8e"/>
+                                <constraint firstItem="n2a-4n-fZB" firstAttribute="leading" secondItem="ez7-TE-6iB" secondAttribute="leading" id="FUj-EI-b1R"/>
+                                <constraint firstItem="Ryk-Hy-vdY" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="FyG-Uc-Cok"/>
+                                <constraint firstItem="7WS-Z2-Lo2" firstAttribute="top" secondItem="9Ba-9M-Idp" secondAttribute="bottom" constant="8" id="Gkb-Y0-X12"/>
+                                <constraint firstItem="o8K-nA-nR4" firstAttribute="leading" secondItem="Dn4-nJ-MlM" secondAttribute="trailing" constant="18" id="Gsr-Hy-kFZ"/>
+                                <constraint firstItem="o8K-nA-nR4" firstAttribute="top" secondItem="7WS-Z2-Lo2" secondAttribute="bottom" constant="24" id="HOT-TC-0Ww"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="n2a-4n-fZB" secondAttribute="trailing" constant="285" id="IfD-gY-dbN"/>
+                                <constraint firstItem="f0q-Qe-2FB" firstAttribute="leading" secondItem="T3A-G5-Mh6" secondAttribute="trailing" constant="18" id="Ng1-YI-LaA"/>
+                                <constraint firstItem="ez7-TE-6iB" firstAttribute="centerY" secondItem="f0q-Qe-2FB" secondAttribute="centerY" id="Ny4-BQ-PFi"/>
+                                <constraint firstItem="f0q-Qe-2FB" firstAttribute="centerY" secondItem="T3A-G5-Mh6" secondAttribute="centerY" id="O8r-hn-JvO"/>
+                                <constraint firstItem="F0j-m8-0Zg" firstAttribute="leading" secondItem="ez7-TE-6iB" secondAttribute="leading" id="Pij-8p-aqG"/>
+                                <constraint firstItem="9Ba-9M-Idp" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="QKC-MT-u3f"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ez7-TE-6iB" secondAttribute="trailing" constant="245" id="RKk-PV-BsN"/>
+                                <constraint firstItem="Fgq-Lf-AFs" firstAttribute="leading" relation="lessThanOrEqual" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="510" id="RxD-kD-Jtv"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="F0j-m8-0Zg" secondAttribute="trailing" constant="264" id="Seo-Ce-SAY"/>
+                                <constraint firstItem="Ryk-Hy-vdY" firstAttribute="centerY" secondItem="Efq-0R-UfA" secondAttribute="centerY" id="Tma-Xk-of5"/>
+                                <constraint firstItem="Pax-yr-zmS" firstAttribute="top" secondItem="uwK-Dl-KLS" secondAttribute="top" constant="8" id="Unt-fI-7j1"/>
+                                <constraint firstItem="Dn4-nJ-MlM" firstAttribute="leading" relation="lessThanOrEqual" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="127" id="VCf-KA-fsJ"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pax-yr-zmS" secondAttribute="trailing" constant="20" symbolic="YES" id="W9k-ec-K5h"/>
+                                <constraint firstItem="Efq-0R-UfA" firstAttribute="leading" relation="lessThanOrEqual" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="153" id="X97-W3-Dfy"/>
+                                <constraint firstItem="Fgq-Lf-AFs" firstAttribute="trailing" secondItem="Ryk-Hy-vdY" secondAttribute="trailing" id="bhT-P7-KOs"/>
+                                <constraint firstItem="n2a-4n-fZB" firstAttribute="centerY" secondItem="9Ba-9M-Idp" secondAttribute="centerY" id="cvQ-2s-4Ar"/>
+                                <constraint firstItem="96A-Vs-OS6" firstAttribute="top" secondItem="pSV-HE-kiL" secondAttribute="bottom" constant="6" id="gKd-0g-ZvG"/>
+                                <constraint firstItem="o8K-nA-nR4" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="jQm-G2-qEG"/>
+                                <constraint firstItem="f0q-Qe-2FB" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="kP6-xU-3qr"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o8K-nA-nR4" secondAttribute="trailing" constant="190" id="km8-9o-ad4"/>
+                                <constraint firstItem="Ryk-Hy-vdY" firstAttribute="top" secondItem="Pax-yr-zmS" secondAttribute="bottom" constant="42" id="n4k-70-69h"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="96A-Vs-OS6" secondAttribute="trailing" constant="150" id="o1y-zh-DWB"/>
+                                <constraint firstItem="Pax-yr-zmS" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="92" id="oFC-Nf-00y"/>
+                                <constraint firstItem="Fgq-Lf-AFs" firstAttribute="top" secondItem="Ryk-Hy-vdY" secondAttribute="bottom" constant="9" id="pCm-Im-oND"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="pSV-HE-kiL" secondAttribute="trailing" constant="186" id="rt0-4u-yCL"/>
+                                <constraint firstItem="5GI-SZ-eBp" firstAttribute="leading" relation="lessThanOrEqual" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="203" id="v8e-eO-Mco"/>
+                                <constraint firstItem="lAg-TP-ygJ" firstAttribute="centerY" secondItem="5GI-SZ-eBp" secondAttribute="centerY" id="vkb-Ni-Q5X"/>
+                                <constraint firstItem="lAg-TP-ygJ" firstAttribute="leading" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="268" id="xyu-kg-JSS"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="lAg-TP-ygJ" secondAttribute="trailing" constant="253" id="y5D-Rz-dTD"/>
+                                <constraint firstItem="T3A-G5-Mh6" firstAttribute="leading" relation="lessThanOrEqual" secondItem="uwK-Dl-KLS" secondAttribute="leading" constant="133" id="ypc-j0-guf"/>
+                                <constraint firstItem="Ryk-Hy-vdY" firstAttribute="leading" secondItem="Efq-0R-UfA" secondAttribute="trailing" constant="18" id="z5f-0d-yyi"/>
+                                <constraint firstItem="lAg-TP-ygJ" firstAttribute="top" secondItem="o8K-nA-nR4" secondAttribute="bottom" constant="24" id="zz3-02-3Mr"/>
+                            </constraints>
                         </view>
                     </box>
                 </subviews>

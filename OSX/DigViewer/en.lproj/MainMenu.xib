@@ -353,70 +353,100 @@ DQ
                             <rect key="frame" x="1" y="1" width="541" height="224"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y99-eA-yKn">
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y99-eA-yKn">
                                     <rect key="frame" x="32" y="15" width="188" height="200"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="200" id="ToQ-6e-fxh"/>
+                                    </constraints>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DigViewer" id="ARt-57-qu2"/>
                                 </imageView>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-zy-TBg">
-                                    <rect key="frame" x="269" y="106" width="227" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
-                                        <font key="font" metaFont="cellTitle"/>
-                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="pfv-YF-3Sx" name="value" keyPath="self.version" id="cXU-ip-9Qf"/>
-                                    </connections>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-gV-lo7">
-                                    <rect key="frame" x="255" y="56" width="254" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="sVe-Z7-my4">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <string key="title">© 2013-2014 Hiroshi Murayama &lt;opiopan@gmail.com&gt;. All rights reserved.
-</string>
-                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="pfv-YF-3Sx" name="value" keyPath="self.copyright" id="1Ma-Sx-Slm"/>
-                                    </connections>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="231" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-DF-HkZ">
-                                    <rect key="frame" x="255" y="27" width="254" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Special thanks to Ninataki for many contributions and ideas to improve DigViewer." allowsEditingTextAttributes="YES" id="R3f-cu-87c">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKi-yH-WdT">
-                                    <rect key="frame" x="273" y="129" width="219" height="56"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DigViewer" id="017-vO-LtC">
-                                        <font key="font" size="47" name="HelveticaNeue-UltraLight"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="r1P-e4-v4i">
-                                    <rect key="frame" x="261" y="114" width="242" height="81"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
-                                        <font key="font" size="12" name="Arial-BoldMT"/>
-                                        <string key="title">Caution:
+                                <box borderType="line" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XkM-4K-ZG6">
+                                    <rect key="frame" x="233" y="-4" width="311" height="230"/>
+                                    <view key="contentView" id="Nkg-T8-KGN">
+                                        <rect key="frame" x="4" y="5" width="303" height="222"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-zy-TBg">
+                                                <rect key="frame" x="70" y="109" width="164" height="15"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.0 (build 0123456)" id="gkE-dC-oOc">
+                                                    <font key="font" metaFont="cellTitle"/>
+                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pfv-YF-3Sx" name="value" keyPath="self.version" id="cXU-ip-9Qf"/>
+                                                </connections>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="231" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-DF-HkZ">
+                                                <rect key="frame" x="22" y="28" width="259" height="22"/>
+                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Special thanks to Ninataki for many contributions and ideas to improve DigViewer." allowsEditingTextAttributes="YES" id="R3f-cu-87c">
+                                                    <font key="font" metaFont="miniSystem"/>
+                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HKi-yH-WdT">
+                                                <rect key="frame" x="56" y="134" width="192" height="54"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="Prp-3k-KoQ"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DigViewer" id="017-vO-LtC">
+                                                    <font key="font" size="47" name="HelveticaNeue-UltraLight"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="r1P-e4-v4i">
+                                                <rect key="frame" x="31" y="146" width="242" height="56"/>
+                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="b7b-Pg-vWE">
+                                                    <font key="font" size="12" name="Arial-BoldMT"/>
+                                                    <string key="title">Caution:
 This is NOT OFFICIAL BUILD that is uncommited version, belong to tentative branch, and build with debug option.</string>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="pfv-YF-3Sx" name="value" keyPath="self.caution" id="wQp-nJ-y98"/>
-                                    </connections>
-                                </textField>
+                                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pfv-YF-3Sx" name="value" keyPath="self.caution" id="wQp-nJ-y98"/>
+                                                </connections>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-gV-lo7">
+                                                <rect key="frame" x="22" y="77" width="259" height="22"/>
+                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="© 2013-2014 Hiroshi Murayama &lt;opiopan@gmail.com&gt;. All rights reserved." id="sVe-Z7-my4">
+                                                    <font key="font" metaFont="miniSystem"/>
+                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pfv-YF-3Sx" name="value" keyPath="self.copyright" id="1Ma-Sx-Slm"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="WqM-DF-HkZ" secondAttribute="bottom" constant="28" id="61y-x2-jN8"/>
+                                            <constraint firstAttribute="trailing" secondItem="WqM-DF-HkZ" secondAttribute="trailing" constant="24" id="7bd-ZO-ywF"/>
+                                            <constraint firstAttribute="trailing" secondItem="UNe-gV-lo7" secondAttribute="trailing" constant="24" id="AQi-xa-SRc"/>
+                                            <constraint firstItem="WJx-zy-TBg" firstAttribute="top" secondItem="HKi-yH-WdT" secondAttribute="bottom" constant="10" id="BGv-Ad-krZ"/>
+                                            <constraint firstItem="UNe-gV-lo7" firstAttribute="top" secondItem="WJx-zy-TBg" secondAttribute="bottom" constant="10" id="Dz4-0J-dpg"/>
+                                            <constraint firstItem="HKi-yH-WdT" firstAttribute="centerX" secondItem="Nkg-T8-KGN" secondAttribute="centerX" id="Luk-jH-m7a"/>
+                                            <constraint firstItem="HKi-yH-WdT" firstAttribute="top" secondItem="Nkg-T8-KGN" secondAttribute="top" constant="34" id="N6M-Zt-PBd"/>
+                                            <constraint firstItem="WqM-DF-HkZ" firstAttribute="leading" secondItem="Nkg-T8-KGN" secondAttribute="leading" constant="24" id="aSN-sA-zvT"/>
+                                            <constraint firstItem="UNe-gV-lo7" firstAttribute="leading" secondItem="Nkg-T8-KGN" secondAttribute="leading" constant="24" id="cPu-tp-ffk"/>
+                                            <constraint firstItem="r1P-e4-v4i" firstAttribute="centerX" secondItem="Nkg-T8-KGN" secondAttribute="centerX" id="sx0-qs-dcv"/>
+                                            <constraint firstItem="WJx-zy-TBg" firstAttribute="centerX" secondItem="Nkg-T8-KGN" secondAttribute="centerX" id="xMO-QQ-1Cy"/>
+                                            <constraint firstItem="r1P-e4-v4i" firstAttribute="top" secondItem="Nkg-T8-KGN" secondAttribute="top" constant="20" id="yiW-tI-lqP"/>
+                                        </constraints>
+                                    </view>
+                                </box>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="y99-eA-yKn" firstAttribute="leading" secondItem="9Lu-Vx-Oef" secondAttribute="leading" constant="32" id="0cS-ob-29q"/>
+                                <constraint firstItem="XkM-4K-ZG6" firstAttribute="leading" secondItem="y99-eA-yKn" secondAttribute="trailing" constant="16" id="0jD-xw-wlA"/>
+                                <constraint firstItem="y99-eA-yKn" firstAttribute="top" secondItem="9Lu-Vx-Oef" secondAttribute="top" constant="9" id="4K6-Om-QOe"/>
+                                <constraint firstAttribute="bottom" secondItem="XkM-4K-ZG6" secondAttribute="bottom" id="4Y2-Ug-VgT"/>
+                                <constraint firstItem="XkM-4K-ZG6" firstAttribute="leading" secondItem="9Lu-Vx-Oef" secondAttribute="leading" constant="236" id="Dbd-jc-P8C"/>
+                                <constraint firstItem="XkM-4K-ZG6" firstAttribute="top" secondItem="9Lu-Vx-Oef" secondAttribute="top" id="JxC-VH-168"/>
+                                <constraint firstAttribute="trailing" secondItem="XkM-4K-ZG6" secondAttribute="trailing" id="eN4-jz-mca"/>
+                            </constraints>
                         </view>
                         <color key="borderColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="fillColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
