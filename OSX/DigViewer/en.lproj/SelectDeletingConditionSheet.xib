@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SelectDeletingConditionSheetController">
@@ -12,79 +13,107 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="FTR-Nb-mbU" customClass="NSPanel">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="FTR-Nb-mbU" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="139" y="85" width="542" height="144"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="4KB-Of-pGS">
-                <rect key="frame" x="0.0" y="5" width="542" height="144"/>
+                <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" id="YEK-3w-RUM">
-                        <rect key="frame" x="41" y="107" width="409" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Please select a way to remove the group node." id="3eW-dJ-4il">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" id="RSE-Zp-fdl">
-                        <rect key="frame" x="61" y="61" width="437" height="38"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        <size key="cellSize" width="437" height="18"/>
-                        <size key="intercellSpacing" width="4" height="2"/>
-                        <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="9Ag-ki-aqN">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <cells>
-                            <column>
-                                <buttonCell type="radio" title="Remove all conditions including in the group also" imagePosition="left" alignment="left" tag="1" inset="2" id="wRc-XW-8XP">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <buttonCell type="radio" title="Move conditions including in the group to upper group" imagePosition="left" alignment="left" state="on" inset="2" id="DAF-aH-ktr">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </column>
-                        </cells>
-                        <connections>
-                            <binding destination="-2" name="selectedIndex" keyPath="self.deletingWay" id="kXd-K1-FbK"/>
-                        </connections>
-                    </matrix>
-                    <button verticalHuggingPriority="750" id="WtR-pO-dnY">
-                        <rect key="frame" x="135" y="13" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vWz-ia-9yc">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
+                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eiV-SG-OxT">
+                        <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
+                        <view key="contentView" id="sO8-sf-PsV">
+                            <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEK-3w-RUM">
+                                    <rect key="frame" x="18" y="108" width="286" height="16"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Please select a way to remove the group node." id="3eW-dJ-4il">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSE-Zp-fdl">
+                                    <rect key="frame" x="38" y="62" width="355" height="38"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="355" height="18"/>
+                                    <size key="intercellSpacing" width="4" height="2"/>
+                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="9Ag-ki-aqN">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="Remove all conditions including in the group also" imagePosition="left" alignment="left" tag="1" inset="2" id="wRc-XW-8XP">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Move conditions including in the group to upper group" imagePosition="left" alignment="left" state="on" inset="2" id="DAF-aH-ktr">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <binding destination="-2" name="selectedIndex" keyPath="self.deletingWay" id="kXd-K1-FbK"/>
+                                    </connections>
+                                </matrix>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WtR-pO-dnY">
+                                    <rect key="frame" x="134" y="13" width="118" height="32"/>
+                                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vWz-ia-9yc">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="onCancel:" target="-2" id="BgU-fu-oSF"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" id="KsT-AH-Vhg">
-                        <rect key="frame" x="290" y="13" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5ra-hU-alz">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="onCancel:" target="-2" id="BgU-fu-oSF"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KsT-AH-Vhg">
+                                    <rect key="frame" x="289" y="13" width="118" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="104" id="O0Z-Qf-Ibg"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5ra-hU-alz">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="onOk:" target="-2" id="PUp-Qi-Z2G"/>
-                        </connections>
-                    </button>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="onOk:" target="-2" id="PUp-Qi-Z2G"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="KsT-AH-Vhg" secondAttribute="bottom" constant="20" symbolic="YES" id="2An-3x-kH6"/>
+                                <constraint firstItem="YEK-3w-RUM" firstAttribute="leading" secondItem="sO8-sf-PsV" secondAttribute="leading" constant="20" symbolic="YES" id="4f2-MU-xEI"/>
+                                <constraint firstItem="YEK-3w-RUM" firstAttribute="top" secondItem="sO8-sf-PsV" secondAttribute="top" constant="20" symbolic="YES" id="FWr-aS-m68"/>
+                                <constraint firstItem="RSE-Zp-fdl" firstAttribute="leading" secondItem="sO8-sf-PsV" secondAttribute="leading" constant="38" id="VsO-zL-Ov7"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="YEK-3w-RUM" secondAttribute="trailing" constant="240" id="YX1-VL-wiW"/>
+                                <constraint firstItem="KsT-AH-Vhg" firstAttribute="leading" secondItem="WtR-pO-dnY" secondAttribute="trailing" constant="51" id="asw-mv-sW9"/>
+                                <constraint firstItem="KsT-AH-Vhg" firstAttribute="width" secondItem="WtR-pO-dnY" secondAttribute="width" id="bLF-6T-xP3"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="KsT-AH-Vhg" secondAttribute="trailing" constant="142" id="fjh-KI-0mJ"/>
+                                <constraint firstItem="KsT-AH-Vhg" firstAttribute="bottom" secondItem="WtR-pO-dnY" secondAttribute="bottom" id="lc0-Wg-bLj"/>
+                                <constraint firstItem="RSE-Zp-fdl" firstAttribute="top" secondItem="YEK-3w-RUM" secondAttribute="bottom" constant="8" symbolic="YES" id="qjV-YM-0z5"/>
+                                <constraint firstItem="WtR-pO-dnY" firstAttribute="leading" secondItem="sO8-sf-PsV" secondAttribute="leading" constant="141" id="w1p-kq-dgW"/>
+                            </constraints>
+                        </view>
+                        <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </box>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="eiV-SG-OxT" secondAttribute="bottom" id="ZPA-NZ-VCs"/>
+                    <constraint firstItem="eiV-SG-OxT" firstAttribute="top" secondItem="4KB-Of-pGS" secondAttribute="top" id="gfx-zJ-JNy"/>
+                    <constraint firstAttribute="trailing" secondItem="eiV-SG-OxT" secondAttribute="trailing" id="kYm-jQ-4y7"/>
+                    <constraint firstItem="eiV-SG-OxT" firstAttribute="leading" secondItem="4KB-Of-pGS" secondAttribute="leading" id="sUO-cg-62a"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="301" y="185"/>
         </window>

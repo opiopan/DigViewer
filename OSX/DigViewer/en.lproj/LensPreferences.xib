@@ -18,28 +18,26 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="700" height="341"/>
+            <rect key="contentRect" x="196" y="240" width="706" height="348"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="341"/>
+                <rect key="frame" x="0.0" y="0.0" width="706" height="348"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-tP-qWE">
-                        <rect key="frame" x="-3" y="-4" width="706" height="345"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <box autoresizesSubviews="NO" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-tP-qWE">
+                        <rect key="frame" x="0.0" y="0.0" width="706" height="348"/>
                         <view key="contentView" id="qMb-4c-mZZ">
-                            <rect key="frame" x="0.0" y="0.0" width="706" height="333"/>
+                            <rect key="frame" x="0.0" y="0.0" width="706" height="348"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-7T-SMh">
-                                    <rect key="frame" x="50" y="24" width="606" height="227"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-7T-SMh">
+                                    <rect key="frame" x="50" y="20" width="606" height="226"/>
                                     <clipView key="contentView" id="itZ-JH-iIu">
-                                        <rect key="frame" x="1" y="1" width="604" height="225"/>
+                                        <rect key="frame" x="1" y="1" width="604" height="224"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="x7s-6o-AXE" viewBased="YES" id="hOy-Hh-WKd">
-                                                <rect key="frame" x="0.0" y="0.0" width="604" height="208"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="604" height="207"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +73,7 @@
                                                             <binding destination="Co8-i2-P0c" name="value" keyPath="arrangedObjects.lensSpecString" id="AuR-Gt-x2L"/>
                                                         </connections>
                                                     </tableColumn>
-                                                    <tableColumn width="150" minWidth="10" maxWidth="3.4028234663852886e+38" id="Cf3-8G-vlO">
+                                                    <tableColumn width="121" minWidth="10" maxWidth="3.4028234663852886e+38" id="Cf3-8G-vlO">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Application Condition">
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -107,9 +105,8 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </tableHeaderView>
                                 </scrollView>
-                                <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNJ-bP-iWt">
-                                    <rect key="frame" x="48" y="260" width="71" height="24"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hNJ-bP-iWt">
+                                    <rect key="frame" x="47" y="254" width="71" height="24"/>
                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="OrQ-U3-e9d">
                                         <font key="font" metaFont="system"/>
                                         <segments>
@@ -125,9 +122,11 @@
                                         <action selector="addOrRemoveLens:" target="-2" id="nab-sA-9JO"/>
                                     </connections>
                                 </segmentedControl>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPz-Z1-dJi">
-                                    <rect key="frame" x="90" y="299" width="526" height="34"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPz-Z1-dJi">
+                                    <rect key="frame" x="90" y="296" width="526" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="xYQ-IY-g0C"/>
+                                    </constraints>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="btu-gX-rs6">
                                         <font key="font" metaFont="system"/>
                                         <string key="title">By registering lens detail information to lens library, DigViewer is able to display exact feald of view angle, or to override lens information in inspector pane.</string>
@@ -136,9 +135,26 @@
                                     </textFieldCell>
                                 </textField>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="Qdy-7T-SMh" firstAttribute="top" secondItem="hNJ-bP-iWt" secondAttribute="bottom" constant="10" id="5HR-T1-gwM"/>
+                                <constraint firstAttribute="bottom" secondItem="Qdy-7T-SMh" secondAttribute="bottom" constant="20" id="9WX-wC-jOO"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="HPz-Z1-dJi" secondAttribute="trailing" constant="92" id="9Zi-ch-wUO"/>
+                                <constraint firstItem="Qdy-7T-SMh" firstAttribute="leading" secondItem="hNJ-bP-iWt" secondAttribute="leading" id="Lrn-ah-5pM"/>
+                                <constraint firstItem="hNJ-bP-iWt" firstAttribute="top" secondItem="HPz-Z1-dJi" secondAttribute="bottom" constant="20" id="UGW-yQ-TYI"/>
+                                <constraint firstItem="Qdy-7T-SMh" firstAttribute="leading" secondItem="qMb-4c-mZZ" secondAttribute="leading" constant="50" id="XYw-yL-8lf"/>
+                                <constraint firstItem="HPz-Z1-dJi" firstAttribute="top" secondItem="qMb-4c-mZZ" secondAttribute="top" constant="20" id="Xz4-7F-wnH"/>
+                                <constraint firstItem="HPz-Z1-dJi" firstAttribute="leading" secondItem="qMb-4c-mZZ" secondAttribute="leading" constant="92" id="he5-Zl-PJb"/>
+                                <constraint firstAttribute="trailing" secondItem="Qdy-7T-SMh" secondAttribute="trailing" constant="50" id="yxK-fC-otZ"/>
+                            </constraints>
                         </view>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fD5-tP-qWE" secondAttribute="trailing" id="MDA-6R-Eso"/>
+                    <constraint firstItem="fD5-tP-qWE" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="SKm-gW-pnM"/>
+                    <constraint firstAttribute="bottom" secondItem="fD5-tP-qWE" secondAttribute="bottom" id="XPL-nG-fXR"/>
+                    <constraint firstItem="fD5-tP-qWE" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="uzi-l8-bkP"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="360" y="446.5"/>
         </window>

@@ -10,6 +10,8 @@
 #import "PreferencesDefaultsController.h"
 #import "ThumbnailPreferences.h"
 
+#include <math.h>
+
 @implementation ThumbnailConfigController{
     NSNumber* _deferredNotificationValue;
 }
@@ -119,7 +121,7 @@
 //-----------------------------------------------------------------------------------------
 - (void)setDefaultSize:(NSNumber *)defaultSize
 {
-    _defaultSize = defaultSize;
+    _defaultSize = @(round(defaultSize.doubleValue * 10.) / 10.);
     NSUserDefaultsController* defaults = [NSUserDefaultsController sharedUserDefaultsController];
     [[defaults values] setValue:_defaultSize forKey:@"thumbDefaultSize"];
     [_delegate performSelector:@selector(notifyUpdateCount:) withObject:_updateCount];

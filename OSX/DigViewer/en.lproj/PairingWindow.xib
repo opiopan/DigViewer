@@ -17,7 +17,7 @@
         <window title="Pairing with remote device" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="196" y="240" width="540" height="277"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="540" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>

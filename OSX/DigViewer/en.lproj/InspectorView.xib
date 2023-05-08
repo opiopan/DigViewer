@@ -44,7 +44,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="609"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="27K-1X-0LF">
+                    <box appearanceType="aqua" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="27K-1X-0LF">
                         <rect key="frame" x="0.0" y="574" width="343" height="5"/>
                     </box>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9i-hD-e7V">
@@ -74,7 +74,7 @@
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-xg-q69">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
-                                                    <clipView key="contentView" id="vVv-de-ZMO">
+                                                    <clipView key="contentView" drawsBackground="NO" id="vVv-de-ZMO">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
@@ -82,7 +82,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="576"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
-                                                                <color key="backgroundColor" red="0.89094344429347827" green="0.89094344429347827" blue="0.89094344429347827" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
                                                                     <tableColumn editable="NO" width="110" minWidth="40" maxWidth="1000" id="thC-Z2-YU4">
@@ -124,6 +124,7 @@
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
+                                                        <nil key="backgroundColor"/>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="bjl-B4-Dxi">
                                                         <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
@@ -161,7 +162,7 @@
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-we-DpE">
                                                     <rect key="frame" x="0.0" y="426" width="343" height="150"/>
-                                                    <clipView key="contentView" id="vxn-AW-peD">
+                                                    <clipView key="contentView" drawsBackground="NO" id="vxn-AW-peD">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
@@ -169,7 +170,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
-                                                                <color key="backgroundColor" red="0.89094344430000005" green="0.89094344430000005" blue="0.89094344430000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
                                                                     <tableColumn editable="NO" width="110" minWidth="40" maxWidth="1000" id="uYh-IS-HTB">
@@ -219,6 +220,7 @@
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
+                                                        <nil key="backgroundColor"/>
                                                     </clipView>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Lng-qa-IhJ"/>
