@@ -17,7 +17,11 @@
 
 - (NSColor *)dividerColor
 {
-    return [NSColor separatorColor];
+    if (@available(macOS 10.14, *)) {
+        return [NSColor separatorColor];
+    } else {
+        return [NSColor windowFrameColor];
+    }
 }
 
 #pragma clang diagnostic push

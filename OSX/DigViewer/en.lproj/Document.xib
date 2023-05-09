@@ -26,7 +26,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="609" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="609" height="480"/>
@@ -48,15 +48,15 @@
                     <toolbarItem implicitItemIdentifier="84036123-1FFA-46B3-86AB-81B28D3D28BE" label="Sub Pane" paletteLabel="Sub Pane" id="aOg-7W-h2L">
                         <nil key="toolTip"/>
                         <size key="minSize" width="67" height="25"/>
-                        <size key="maxSize" width="67" height="25"/>
+                        <size key="maxSize" width="77" height="26"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="ENh-J0-P5m">
-                            <rect key="frame" x="0.0" y="14" width="67" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="77" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
-                                    <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
+                                    <segment toolTip="Show or hide the Navigator" image="rectangle.leftthird.inset.filled" catalog="system" width="32"/>
+                                    <segment toolTip="Show or hide the Inspector" image="rectangle.rightthird.inset.filled" catalog="system" width="32" tag="1"/>
                                 </segments>
                             </segmentedCell>
                             <connections>
@@ -67,14 +67,14 @@
                     <toolbarItem implicitItemIdentifier="F064D896-83B5-4DB0-BE3D-34AF03AB75C5" label="Image View" paletteLabel="Image View" id="SWS-gJ-pzs">
                         <nil key="toolTip"/>
                         <size key="minSize" width="67" height="25"/>
-                        <size key="maxSize" width="67" height="25"/>
+                        <size key="maxSize" width="77" height="26"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="XDI-Iv-r7r">
-                            <rect key="frame" x="1" y="14" width="67" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="77" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CaW-zR-O9m">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Show the Image view" image="NSQuickLookTemplate" width="32"/>
+                                    <segment toolTip="Show the Image view" image="photo" catalog="system" width="32"/>
                                     <segment toolTip="Show the Thumbnail view" image="NSIconViewTemplate" width="32" selected="YES" tag="1"/>
                                 </segments>
                             </segmentedCell>
@@ -102,7 +102,7 @@
                             </connections>
                         </button>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="63B491D9-CD29-4914-9C33-28DF0399E0D8" label="Slide Show" paletteLabel="Slide Show" image="play" id="it6-bE-VIJ">
+                    <toolbarItem implicitItemIdentifier="63B491D9-CD29-4914-9C33-28DF0399E0D8" label="Slide Show" paletteLabel="Slide Show" image="NSTouchBarPlayTemplate" id="it6-bE-VIJ">
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
@@ -112,18 +112,17 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="36" id="txZ-vL-wa0"/>
                             </constraints>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="play" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kv3-KI-sYJ">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSTouchBarPlayTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kv3-KI-sYJ">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="toggleSlideshowMode:" target="-2" id="bkv-nF-H5G"/>
-                                <binding destination="-2" name="image" keyPath="self.slideshowButtonImage" id="vON-KQ-UPs"/>
-                                <binding destination="-2" name="toolTip" keyPath="self.slideshowButtonTooltip" previousBinding="vON-KQ-UPs" id="RYx-6I-bhV"/>
+                                <binding destination="-2" name="toolTip" keyPath="self.slideshowButtonTooltip" id="X1W-op-UsR"/>
                             </connections>
                         </button>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="697A892F-C18D-499A-BEA7-FF798136A700" label="Sort by Time" paletteLabel="Sort by Time" image="datetime" id="e2H-Y0-Zel">
+                    <toolbarItem implicitItemIdentifier="697A892F-C18D-499A-BEA7-FF798136A700" label="Sort by Time" paletteLabel="Sort by Time" image="NSTouchBarHistoryTemplate" id="e2H-Y0-Zel">
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="25"/>
                         <size key="maxSize" width="38" height="25"/>
@@ -133,13 +132,12 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="36" id="V0X-1u-2fw"/>
                             </constraints>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="datetime" imagePosition="only" alignment="center" alternateImage="datetime_on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n6p-4n-S5X">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSTouchBarHistoryTemplate" imagePosition="only" alignment="center" alternateImage="datetime_on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n6p-4n-S5X">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="toggleDateTimeSort:" target="-2" id="H0O-kQ-nOX"/>
-                                <binding destination="-2" name="image" keyPath="self.sortByDateTimeButtonImage" id="2gA-rZ-Pg7"/>
                                 <binding destination="-2" name="value" keyPath="self.sortByDateTimeButtonState" id="MZG-6o-xJe"/>
                             </connections>
                         </button>
@@ -313,13 +311,13 @@
     <resources>
         <image name="NSEnterFullScreenTemplate" width="20" height="19"/>
         <image name="NSIconViewTemplate" width="19" height="18"/>
-        <image name="NSPathTemplate" width="25" height="15"/>
-        <image name="NSQuickLookTemplate" width="26" height="17"/>
         <image name="NSRefreshTemplate" width="18" height="21"/>
-        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
         <image name="NSShareTemplate" width="19" height="22"/>
-        <image name="datetime" width="512" height="512"/>
+        <image name="NSTouchBarHistoryTemplate" width="20" height="20"/>
+        <image name="NSTouchBarPlayTemplate" width="15" height="17"/>
         <image name="datetime_on" width="512" height="512"/>
-        <image name="play" width="475" height="512"/>
+        <image name="photo" catalog="system" width="18" height="14"/>
+        <image name="rectangle.leftthird.inset.filled" catalog="system" width="18" height="14"/>
+        <image name="rectangle.rightthird.inset.filled" catalog="system" width="18" height="14"/>
     </resources>
 </document>

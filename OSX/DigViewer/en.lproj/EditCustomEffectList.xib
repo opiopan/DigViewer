@@ -19,7 +19,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="139" y="85" width="576" height="403"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
             <view key="contentView" id="8Wh-gY-MQJ">
                 <rect key="frame" x="0.0" y="0.0" width="576" height="403"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -95,7 +95,7 @@
                                                 <binding destination="f97-B5-ENa" name="value" keyPath="arrangedObjects.typeString" id="2kS-tj-sHT"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn editable="NO" width="210" minWidth="10" maxWidth="3.4028234663852886e+38" id="ScN-jI-CaD">
+                                        <tableColumn editable="NO" width="181" minWidth="10" maxWidth="3.4028234663852886e+38" id="ScN-jI-CaD">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Path">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -162,10 +162,10 @@ DQ
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="neY-fy-deb">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment toolTip="Move up a selected effect" image="up" width="32">
+                                <segment toolTip="Move up a selected effect" image="NSTouchBarGoUpTemplate" width="32">
                                     <nil key="label"/>
                                 </segment>
-                                <segment toolTip="Move down a selected effect" image="down" width="32" tag="1">
+                                <segment toolTip="Move down a selected effect" image="NSTouchBarGoDownTemplate" width="32" tag="1">
                                     <nil key="label"/>
                                 </segment>
                             </segments>
@@ -187,7 +187,7 @@ DQ
     <resources>
         <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
-        <image name="down" width="256" height="256"/>
-        <image name="up" width="256" height="256"/>
+        <image name="NSTouchBarGoDownTemplate" width="18" height="11"/>
+        <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>
     </resources>
 </document>
