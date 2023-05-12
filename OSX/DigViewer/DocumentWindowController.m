@@ -17,6 +17,7 @@
 #import "ImageViewController.h"
 #import "NewBrowsingContextController.h"
 #import "ManageBrowsingContextConroller.h"
+#import "PortableSystemImages.h"
 
 static NSString* kCurrentImage = @"currentImage";
 static NSString* kWindowX = @"windowX";
@@ -152,6 +153,11 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
                                              currentPath:[windowPreferences valueForKey:kCurrentImage]];
     [_browseContexts changeCurrentContextWithName:[windowPreferences valueForKey:kCurrentBrowseContext]];
     _menuForBrowsingContext = self.menuForBrowsingContext;
+    
+    // replace some toolbar button images to modern style
+    [self.viewSelectionButton setImage:[PortableSystemImages iconLeftPane] forSegment:0];
+    [self.viewSelectionButton setImage:[PortableSystemImages iconRightPane] forSegment:1];
+    [self.thumbnailSelectionButton setImage:[PortableSystemImages iconView] forSegment:0];
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];

@@ -17,6 +17,7 @@
 @property (strong) NSIndexSet* selectionIndexesForImages;
 @property (weak) IBOutlet NSView *placeHolder;
 @property (weak) IBOutlet NSSegmentedControl *viewSelectionButton;
+@property (weak) IBOutlet NSSegmentedControl *thumbnailSelectionButton;
 @property (strong) IBOutlet NSTreeController *imageTreeController;
 @property (strong) IBOutlet NSArrayController *imageArrayController;
 

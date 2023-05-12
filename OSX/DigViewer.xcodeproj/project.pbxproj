@@ -124,6 +124,7 @@
 		7B6C3F362A05D19300364AF8 /* ManageBrowsingContextSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F342A05D19300364AF8 /* ManageBrowsingContextSheet.xib */; };
 		7B6C3F3A2A060D8300364AF8 /* ManageBrowsingContextConroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F392A060D8300364AF8 /* ManageBrowsingContextConroller.m */; };
 		7B6C3F3D2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C3F3B2A068BFB00364AF8 /* ManageBrowsingContextSheet.strings */; };
+		7B6C3F402A0DD40400364AF8 /* PortableSystemImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C3F3F2A0DD40400364AF8 /* PortableSystemImages.m */; };
 		7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */; };
 		7B6D83621B306301004A2426 /* SlideshowPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B6D83601B306301004A2426 /* SlideshowPreferences.strings */; };
 		7B6D83671B32F6DA004A2426 /* SlideshowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D83661B32F6DA004A2426 /* SlideshowController.m */; };
@@ -398,6 +399,8 @@
 		7B6C3F382A060D8300364AF8 /* ManageBrowsingContextConroller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManageBrowsingContextConroller.h; sourceTree = "<group>"; };
 		7B6C3F392A060D8300364AF8 /* ManageBrowsingContextConroller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManageBrowsingContextConroller.m; sourceTree = "<group>"; };
 		7B6C3F3C2A068BFB00364AF8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ManageBrowsingContextSheet.strings; sourceTree = "<group>"; };
+		7B6C3F3E2A0DD40400364AF8 /* PortableSystemImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PortableSystemImages.h; sourceTree = "<group>"; };
+		7B6C3F3F2A0DD40400364AF8 /* PortableSystemImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PortableSystemImages.m; sourceTree = "<group>"; };
 		7B6CE7B718B38F9100CD445A /* CoreFoundationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundationHelper.h; sourceTree = "<group>"; };
 		7B6CE7B818B3970F00CD445A /* ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageMetadata.h; sourceTree = "<group>"; };
 		7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageMetadata.mm; sourceTree = "<group>"; };
@@ -1139,6 +1142,8 @@
 				7BD874911AD13A3C009C43BF /* NSString+escaping.h */,
 				7BD874921AD13A3C009C43BF /* NSString+escaping.m */,
 				7B4BED971B47A6F300E20A5A /* DisableTextColorTransformer.m */,
+				7B6C3F3E2A0DD40400364AF8 /* PortableSystemImages.h */,
+				7B6C3F3F2A0DD40400364AF8 /* PortableSystemImages.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1456,6 +1461,7 @@
 				7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */,
 				7B36259618DE761E008471E2 /* KeyUncapturedTabView.m in Sources */,
 				7B6717E81B36C86000B8D124 /* PresentationBaseViewController.m in Sources */,
+				7B6C3F402A0DD40400364AF8 /* PortableSystemImages.m in Sources */,
 				7BE7B62B1B207207009619E2 /* ImageViewConfigController.m in Sources */,
 				7BE7B6221B1F2842009619E2 /* RenderingPreferences.m in Sources */,
 				7B6CE7BA18B3970F00CD445A /* ImageMetadata.mm in Sources */,

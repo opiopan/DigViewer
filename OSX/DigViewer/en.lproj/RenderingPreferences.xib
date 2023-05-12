@@ -16,31 +16,28 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="700" height="403"/>
+            <rect key="contentRect" x="196" y="240" width="700" height="306"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="403"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="306"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="mIv-sp-AtN">
-                        <rect key="frame" x="-3" y="68" width="706" height="337"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <box autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="mIv-sp-AtN">
+                        <rect key="frame" x="-3" y="-4" width="706" height="312"/>
                         <view key="contentView" id="7aD-74-v43">
-                            <rect key="frame" x="4" y="5" width="698" height="329"/>
+                            <rect key="frame" x="4" y="5" width="698" height="304"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qf2-hz-i7A">
-                                    <rect key="frame" x="98" y="284" width="190" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qf2-hz-i7A">
+                                    <rect key="frame" x="18" y="266" width="274" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Magnification filter:" id="Lxb-qT-K8X">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8A-6Y-3zK">
-                                    <rect key="frame" x="295" y="279" width="261" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A8A-6Y-3zK">
+                                    <rect key="frame" x="295" y="260" width="168" height="25"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="pOC-fT-Vyh">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -56,18 +53,16 @@
                                         <binding destination="-2" name="selectedIndex" keyPath="self.imageViewConfig.magnificationFilter" id="qZe-pW-w7r"/>
                                     </connections>
                                 </popUpButton>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-Um-tX6">
-                                    <rect key="frame" x="98" y="257" width="190" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-Um-tX6">
+                                    <rect key="frame" x="18" y="236" width="274" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Minification filter:" id="Qx8-lf-hyW">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C29-Z9-cDT">
-                                    <rect key="frame" x="295" y="252" width="261" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C29-Z9-cDT">
+                                    <rect key="frame" x="295" y="230" width="168" height="25"/>
                                     <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="sMB-dA-ZHr" id="NqH-C7-RP0">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -83,18 +78,16 @@
                                         <binding destination="-2" name="selectedIndex" keyPath="self.imageViewConfig.minificationFilter" id="h47-yT-RCC"/>
                                     </connections>
                                 </popUpButton>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2D-gM-zrn">
-                                    <rect key="frame" x="66" y="211" width="222" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x2D-gM-zrn">
+                                    <rect key="frame" x="18" y="198" width="274" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Embedded thumbnail in raw image:" id="6P3-zJ-A1D">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pa0-M4-gLg">
-                                    <rect key="frame" x="295" y="210" width="343" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pa0-M4-gLg">
+                                    <rect key="frame" x="296" y="197" width="382" height="18"/>
                                     <buttonCell key="cell" type="check" title="Use embedded thumbnail to display image" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="z6Q-a4-Qtl">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -103,9 +96,8 @@
                                         <binding destination="-2" name="value" keyPath="self.imageViewConfig.useEmbeddedThumbnailRAW" id="Ny3-F7-bw9"/>
                                     </connections>
                                 </button>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dm2-eE-Nb2">
-                                    <rect key="frame" x="295" y="190" width="343" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="dm2-eE-Nb2">
+                                    <rect key="frame" x="296" y="175" width="382" height="18"/>
                                     <buttonCell key="cell" type="check" title="Use embedded thumbnail to display thumbnail" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="slN-vB-KE0">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -114,9 +106,8 @@
                                         <binding destination="-2" name="value" keyPath="self.thumbnailConfig.useEmbeddedThumbnailForRAW" id="Iwx-tP-7LH"/>
                                     </connections>
                                 </button>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDW-4h-pVF">
-                                    <rect key="frame" x="314" y="116" width="310" height="70"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDW-4h-pVF">
+                                    <rect key="frame" x="316" y="102" width="312" height="70"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="MAW-qW-IEh">
                                         <font key="font" metaFont="smallSystem"/>
                                         <string key="title">Serious performance problem will be occured if these options are disabled.
@@ -125,18 +116,16 @@ Usually, embedded thumbnail in raw image  has egnough quality. It is strongly re
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-Yt-hy0">
-                                    <rect key="frame" x="86" y="80" width="202" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-Yt-hy0">
+                                    <rect key="frame" x="18" y="66" width="274" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Embedded thumbnail in JPEG:" id="Npr-D8-dBX">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-DF-SNY">
-                                    <rect key="frame" x="295" y="79" width="343" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="ptn-DF-SNY">
+                                    <rect key="frame" x="296" y="65" width="382" height="18"/>
                                     <buttonCell key="cell" type="check" title="Use embedded thumbnail to display thumbnail" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mT8-RE-LzO">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -145,9 +134,11 @@ Usually, embedded thumbnail in raw image  has egnough quality. It is strongly re
                                         <binding destination="-2" name="value" keyPath="self.thumbnailConfig.useEmbeddedThumbnail" id="jTf-M2-Q7E"/>
                                     </connections>
                                 </button>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzZ-nL-Z9S">
-                                    <rect key="frame" x="314" y="16" width="310" height="59"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzZ-nL-Z9S">
+                                    <rect key="frame" x="316" y="20" width="312" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="42" id="5Sp-MX-uAL"/>
+                                    </constraints>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="hih-UN-f13">
                                         <font key="font" metaFont="smallSystem"/>
                                         <string key="title">Displaying thumbnails will be extreamly fast if this option is enabled, at the expence of image quality when thumbnail size is large.</string>
@@ -156,9 +147,51 @@ Usually, embedded thumbnail in raw image  has egnough quality. It is strongly re
                                     </textFieldCell>
                                 </textField>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="dzZ-nL-Z9S" firstAttribute="trailing" secondItem="gDW-4h-pVF" secondAttribute="trailing" id="1Ri-Lf-B2S"/>
+                                <constraint firstItem="C29-Z9-cDT" firstAttribute="width" secondItem="A8A-6Y-3zK" secondAttribute="width" id="1cD-s6-d84"/>
+                                <constraint firstItem="gDW-4h-pVF" firstAttribute="top" secondItem="dm2-eE-Nb2" secondAttribute="bottom" constant="4" id="4Of-4n-Cad"/>
+                                <constraint firstItem="pa0-M4-gLg" firstAttribute="centerY" secondItem="x2D-gM-zrn" secondAttribute="centerY" id="5dV-6Q-5vl"/>
+                                <constraint firstItem="C29-Z9-cDT" firstAttribute="top" secondItem="A8A-6Y-3zK" secondAttribute="bottom" constant="10" symbolic="YES" id="9MZ-pG-TkW"/>
+                                <constraint firstItem="A8A-6Y-3zK" firstAttribute="centerY" secondItem="qf2-hz-i7A" secondAttribute="centerY" id="Aa2-9D-FP9"/>
+                                <constraint firstItem="A8A-6Y-3zK" firstAttribute="leading" secondItem="qf2-hz-i7A" secondAttribute="trailing" constant="8" symbolic="YES" id="Fc1-OK-rCL"/>
+                                <constraint firstItem="gDW-4h-pVF" firstAttribute="leading" secondItem="dm2-eE-Nb2" secondAttribute="leading" constant="20" id="Fc7-mZ-jVJ"/>
+                                <constraint firstItem="A8A-6Y-3zK" firstAttribute="leading" secondItem="7aD-74-v43" secondAttribute="leading" constant="298" id="HRV-PW-Sdj"/>
+                                <constraint firstItem="C29-Z9-cDT" firstAttribute="leading" secondItem="A8A-6Y-3zK" secondAttribute="leading" id="J3Y-mz-fVL"/>
+                                <constraint firstItem="ptn-DF-SNY" firstAttribute="leading" secondItem="A8A-6Y-3zK" secondAttribute="leading" id="JxN-2Z-Y5Y"/>
+                                <constraint firstItem="A8A-6Y-3zK" firstAttribute="top" secondItem="7aD-74-v43" secondAttribute="top" constant="20" symbolic="YES" id="Nvl-n4-hGg"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="A8A-6Y-3zK" secondAttribute="trailing" constant="239" id="P6s-wx-x9M"/>
+                                <constraint firstItem="TR3-Um-tX6" firstAttribute="leading" secondItem="qf2-hz-i7A" secondAttribute="leading" id="PHy-VM-Lwd"/>
+                                <constraint firstItem="pa0-M4-gLg" firstAttribute="top" secondItem="C29-Z9-cDT" secondAttribute="bottom" constant="20" id="ReC-Oo-Doz"/>
+                                <constraint firstItem="ptn-DF-SNY" firstAttribute="centerY" secondItem="xcL-Yt-hy0" secondAttribute="centerY" id="S7O-WC-hXE"/>
+                                <constraint firstItem="ptn-DF-SNY" firstAttribute="trailing" secondItem="pa0-M4-gLg" secondAttribute="trailing" id="T44-PR-UpW"/>
+                                <constraint firstItem="x2D-gM-zrn" firstAttribute="leading" secondItem="qf2-hz-i7A" secondAttribute="leading" id="XWP-fZ-iJL"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="C29-Z9-cDT" secondAttribute="trailing" constant="239" id="ZgJ-Px-utf"/>
+                                <constraint firstItem="xcL-Yt-hy0" firstAttribute="leading" secondItem="qf2-hz-i7A" secondAttribute="leading" id="bxj-vG-73h"/>
+                                <constraint firstItem="TR3-Um-tX6" firstAttribute="trailing" secondItem="qf2-hz-i7A" secondAttribute="trailing" id="dIm-hA-okR"/>
+                                <constraint firstItem="x2D-gM-zrn" firstAttribute="trailing" secondItem="qf2-hz-i7A" secondAttribute="trailing" id="dXd-2M-nx2"/>
+                                <constraint firstItem="xcL-Yt-hy0" firstAttribute="trailing" secondItem="qf2-hz-i7A" secondAttribute="trailing" id="deQ-2z-rwM"/>
+                                <constraint firstItem="pa0-M4-gLg" firstAttribute="leading" secondItem="A8A-6Y-3zK" secondAttribute="leading" id="ex1-b0-oBJ"/>
+                                <constraint firstItem="dzZ-nL-Z9S" firstAttribute="leading" secondItem="gDW-4h-pVF" secondAttribute="leading" id="iKP-5e-IY0"/>
+                                <constraint firstAttribute="trailing" secondItem="pa0-M4-gLg" secondAttribute="trailing" constant="20" symbolic="YES" id="jGy-lr-0w4"/>
+                                <constraint firstItem="dm2-eE-Nb2" firstAttribute="leading" secondItem="A8A-6Y-3zK" secondAttribute="leading" id="kDs-XL-9M6"/>
+                                <constraint firstItem="C29-Z9-cDT" firstAttribute="centerY" secondItem="TR3-Um-tX6" secondAttribute="centerY" id="l3Z-a5-N0Y"/>
+                                <constraint firstItem="ptn-DF-SNY" firstAttribute="top" secondItem="gDW-4h-pVF" secondAttribute="bottom" constant="20" id="mMH-kW-RlM"/>
+                                <constraint firstItem="gDW-4h-pVF" firstAttribute="trailing" secondItem="dm2-eE-Nb2" secondAttribute="trailing" constant="-52" id="pDN-uE-pgC"/>
+                                <constraint firstItem="dm2-eE-Nb2" firstAttribute="trailing" secondItem="pa0-M4-gLg" secondAttribute="trailing" id="rLJ-Jh-9Jc"/>
+                                <constraint firstItem="dzZ-nL-Z9S" firstAttribute="top" secondItem="ptn-DF-SNY" secondAttribute="bottom" constant="4" id="rPe-wb-RiR"/>
+                                <constraint firstItem="dm2-eE-Nb2" firstAttribute="top" secondItem="pa0-M4-gLg" secondAttribute="bottom" constant="6" symbolic="YES" id="yJI-aR-faO"/>
+                                <constraint firstItem="qf2-hz-i7A" firstAttribute="leading" secondItem="7aD-74-v43" secondAttribute="leading" constant="20" symbolic="YES" id="yuB-87-uB6"/>
+                            </constraints>
                         </view>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="mIv-sp-AtN" secondAttribute="trailing" id="0L6-yV-ama"/>
+                    <constraint firstAttribute="bottom" secondItem="mIv-sp-AtN" secondAttribute="bottom" id="7vU-8W-4wd"/>
+                    <constraint firstItem="mIv-sp-AtN" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="nUf-ro-EsD"/>
+                    <constraint firstItem="mIv-sp-AtN" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="u7U-lE-epQ"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="360" y="476.5"/>
         </window>

@@ -15,6 +15,7 @@
                 <outlet property="shareButton" destination="axJ-VU-MXj" id="jB4-7J-Cig"/>
                 <outlet property="templateContextMenuForMap" destination="bTe-9X-fM6" id="RQc-xp-t5c"/>
                 <outlet property="templateMenuForBrowsingContext" destination="NwB-Ov-j7Q" id="3Kc-Uj-EtD"/>
+                <outlet property="thumbnailSelectionButton" destination="XDI-Iv-r7r" id="4YE-Nq-3N1"/>
                 <outlet property="toolbar" destination="WIq-XK-m9I" id="bN8-q4-Yaa"/>
                 <outlet property="viewSelectionButton" destination="ENh-J0-P5m" id="yUJ-Ve-XOl"/>
                 <outlet property="window" destination="5" id="100241"/>
@@ -55,8 +56,8 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectAny" id="jRg-Bi-fUN">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Show or hide the Navigator" image="rectangle.leftthird.inset.filled" catalog="system" width="32"/>
-                                    <segment toolTip="Show or hide the Inspector" image="rectangle.rightthird.inset.filled" catalog="system" width="32" tag="1"/>
+                                    <segment toolTip="Show or hide the Navigator" image="NSPathTemplate" width="32"/>
+                                    <segment toolTip="Show or hide the Inspector" image="NSRevealFreestandingTemplate" width="32" tag="1"/>
                                 </segments>
                             </segmentedCell>
                             <connections>
@@ -74,7 +75,7 @@
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CaW-zR-O9m">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="Show the Image view" image="photo" catalog="system" width="32"/>
+                                    <segment toolTip="Show the Image view" image="NSQuickLookTemplate" width="32"/>
                                     <segment toolTip="Show the Thumbnail view" image="NSIconViewTemplate" width="32" selected="YES" tag="1"/>
                                 </segments>
                             </segmentedCell>
@@ -311,13 +312,13 @@
     <resources>
         <image name="NSEnterFullScreenTemplate" width="20" height="19"/>
         <image name="NSIconViewTemplate" width="19" height="18"/>
+        <image name="NSPathTemplate" width="25" height="15"/>
+        <image name="NSQuickLookTemplate" width="26" height="17"/>
         <image name="NSRefreshTemplate" width="18" height="21"/>
+        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
         <image name="NSShareTemplate" width="19" height="22"/>
         <image name="NSTouchBarHistoryTemplate" width="20" height="20"/>
         <image name="NSTouchBarPlayTemplate" width="15" height="17"/>
         <image name="datetime_on" width="512" height="512"/>
-        <image name="photo" catalog="system" width="18" height="14"/>
-        <image name="rectangle.leftthird.inset.filled" catalog="system" width="18" height="14"/>
-        <image name="rectangle.rightthird.inset.filled" catalog="system" width="18" height="14"/>
     </resources>
 </document>
