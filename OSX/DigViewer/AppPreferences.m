@@ -35,9 +35,21 @@
     return self;
 }
 
+- (void) showPreferencesPanelWithInitialSheet:(NSUInteger)sheetIndex
+{
+    NSUserDefaultsController* config = [NSUserDefaultsController sharedUserDefaultsController];
+    [config.values setValue:@(sheetIndex) forKey:@"NSPreferencesSelectedIndex"];
+    [self showPreferencesPanel];
+}
+
 - (BOOL) usesButtons
 {
     return NO;
+}
+
+- (void) cancel: (id) sender
+{
+    [_preferencesPanel close];
 }
 
 @end

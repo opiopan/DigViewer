@@ -9,6 +9,17 @@
 #import <Cocoa/Cocoa.h>
 #import "NSPreferences.h"
 
-@interface AppPreferences : NSPreferences
+enum AppPreferenceSheet{
+    AppPreferenceSheetGeneral = 0,
+    AppPreferenceSheetRendering,
+    AppPreferenceSheetThumbnail,
+    AppPreferenceSheetSlideshow,
+    AppPreferenceSheetMap,
+    AppPreferenceSheetLens,
+    AppPreferenceSheetDevice,
+    AppPreferenceSheetAdvanced,
+};
 
+@interface AppPreferences : NSPreferences
+- (void) showPreferencesPanelWithInitialSheet:(NSUInteger)sheetIndex;
 @end

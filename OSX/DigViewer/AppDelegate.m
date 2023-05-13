@@ -102,7 +102,7 @@ static NSString* serverEnableKey = @"dvremoteEnable";
 - (IBAction)showMapPreferences:(id)sender
 {
     [NSPreferences setDefaultPreferencesClass: [AppPreferences class]];
-    [[NSPreferences sharedPreferences] showPreferencesPanel];
+    [(AppPreferences*)[NSPreferences sharedPreferences] showPreferencesPanelWithInitialSheet:AppPreferenceSheetMap];
 }
 
 - (IBAction)openFolder:(id)sender
