@@ -16,8 +16,8 @@ static NSDictionary* fallback;
     if (!fallback){
         fallback = @{
             @"photo": NSImageNameQuickLookTemplate,
-            @"rectangle.rightthird.inset.filled": NSImageNameRevealFreestandingTemplate,
-            @"rectangle.leftthird.inset.filled": NSImageNamePathTemplate,
+            @"sidebar.left": NSImageNameRevealFreestandingTemplate,
+            @"sidebar.right": NSImageNamePathTemplate,
         };
     }
     if (@available(macOS 11.0, *)) {
@@ -35,11 +35,11 @@ static NSDictionary* fallback;
 
 + (NSImage*)iconLeftPane
 {
-    return [[self class] portableImageWithName:@"rectangle.leftthird.inset.filled"];
+    return [[self class] portableImageWithName:@"sidebar.left"];
 }
 
 + (NSImage*)iconRightPane
 {
-    return [[self class] portableImageWithName:@"rectangle.rightthird.inset.filled"];
+    return [[self class] portableImageWithName:@"sidebar.right"];
 }
 @end
