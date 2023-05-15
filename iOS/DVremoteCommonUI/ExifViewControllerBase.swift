@@ -95,7 +95,7 @@ open class ExifViewControllerBase: UITableViewController {
 
     fileprivate static var cellForEstimate : LabelArrangableCell?
     fileprivate static var cellForEstimateSize : CGSize!
-    fileprivate static var valueTextAttributes : [String : AnyObject]!
+    fileprivate static var valueTextAttributes : [NSAttributedString.Key : AnyObject]!
     fileprivate static var valueTextHeight = CGFloat(0)
     
     override open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -120,12 +120,12 @@ open class ExifViewControllerBase: UITableViewController {
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
                 ExifViewControllerBase.valueTextAttributes = [
-                    NSFontAttributeName : font!,
-                    NSParagraphStyleAttributeName : paragraphStyle
+                    NSAttributedString.Key.font : font!,
+                    NSAttributedString.Key.paragraphStyle : paragraphStyle
                 ]
                 ExifViewControllerBase.valueTextHeight = ExifViewControllerBase.cellForEstimate!.subTextLabel.bounds.size.height
                 ExifViewControllerBase.cellForEstimateSize =
-                    ExifViewControllerBase.cellForEstimate!.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+                ExifViewControllerBase.cellForEstimate!.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             }
             
             setupCell(ExifViewControllerBase.cellForEstimate!, indexPath: indexPath)
@@ -204,12 +204,12 @@ open class ExifViewControllerBase: UITableViewController {
             return width
         }else{
             let font = (cell as! LabelArrangableCell).mainLabel!.font
-            let attributes = [NSFontAttributeName : font!]
+            let attributes = [NSAttributedString.Key.font : font!]
             var width : Double = 0
             if let exif = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]? {
                 for entry in exif {
                     if let key = entry.key {
-                        let size = (key as NSString).size(attributes: attributes)
+                        let size = (key as NSString).size(withAttributes: attributes)
                         width = max(width, Double(size.width))
                     }
                 }
@@ -217,7 +217,7 @@ open class ExifViewControllerBase: UITableViewController {
             if let gps = meta[DVRCNMETA_GPS_SUMMARY] as! [ImageMetadataKV]? {
                 for entry in gps {
                     if let key = entry.key {
-                        let size = (key as NSString).size(attributes: attributes)
+                        let size = (key as NSString).size(withAttributes: attributes)
                         width = max(width, Double(size.width))
                     }
                 }

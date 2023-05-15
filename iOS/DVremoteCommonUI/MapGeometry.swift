@@ -14,27 +14,27 @@ private let SPAN_TO_ALTITUDE_RATIO = 1.875
 private let DEGREE_TO_METER_RATIO = 111000.0
 
 open class MapGeometry: NSObject {
-    open let latitude : Double
-    open let longitude : Double
-    open let viewLatitude : Double
-    open let viewLongitude : Double
+    public let latitude : Double
+    public let longitude : Double
+    public let viewLatitude : Double
+    public let viewLongitude : Double
     
-    open let spanLatitude : Double
-    open let spanLongitude : Double
-    open let spanLatitudeMeter : Double
-    open let spanLongitudeMeter : Double
+    public let spanLatitude : Double
+    public let spanLongitude : Double
+    public let spanLatitudeMeter : Double
+    public let spanLongitudeMeter : Double
     
-    open let heading : Double?
+    public let heading : Double?
     
-    open let centerCoordinate : CLLocationCoordinate2D
-    open let photoCoordinate : CLLocationCoordinate2D
+    public let centerCoordinate : CLLocationCoordinate2D
+    public let photoCoordinate : CLLocationCoordinate2D
     
-    open let mapSpan : MKCoordinateSpan
-    open let cameraAltitude : Double
-    open let cameraHeading : Double
-    open let cameraTilt : Double
+    public let mapSpan : MKCoordinateSpan
+    public let cameraAltitude : Double
+    public let cameraHeading : Double
+    public let cameraTilt : Double
     
-    open let fovAngle : Double
+    public let fovAngle : Double
     
     public init(meta: [AnyHashable: Any]!, viewSize : CGSize, isLocalSession : Bool){
         let controller = ConfigurationController.sharedController
@@ -73,7 +73,7 @@ open class MapGeometry: NSObject {
         
         photoCoordinate = CLLocationCoordinate2DMake(latitude, longitude)
         centerCoordinate = CLLocationCoordinate2DMake(viewLatitude, viewLongitude)
-        mapSpan = MKCoordinateSpanMake(spanLatitude, spanLongitude)
+        mapSpan = MKCoordinateSpan(latitudeDelta: spanLatitude, longitudeDelta: spanLongitude)
 
         let vRatio = spanLatitudeMeter / Double(viewSize.height)
         let hRatio = spanLongitudeMeter / Double(viewSize.width)
@@ -112,7 +112,7 @@ open class MapGeometry: NSObject {
         let deltaY = offset.x * sinTheta + offset.y * cosTheta
         let deltaLat = Double(deltaY) / DEGREE_TO_METER_RATIO
         let deltaLong = Double(deltaX) / DEGREE_TO_METER_RATIO / fabs(cos(point.latitude / 180.0 * Double.pi))
-        return MKMapPointForCoordinate(
+        return MKMapPoint(
             CLLocationCoordinate2D(latitude:point.latitude + deltaLat, longitude: point.longitude + deltaLong))
     }
 }

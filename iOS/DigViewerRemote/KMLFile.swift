@@ -63,15 +63,15 @@ class KMLFile: NSObject, UIActivityItemSource {
         return Data()
     }
     
-    func activityViewController(_ controller: UIActivityViewController, itemForActivityType type: UIActivityType) -> Any? {
+    func activityViewController(_ controller: UIActivityViewController, itemForActivityType type: UIActivity.ActivityType?) -> Any? {
         return contents.data(using: String.Encoding.utf8)
     }
     
-    func activityViewController(_ controller: UIActivityViewController, dataTypeIdentifierForActivityType type: UIActivityType?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, dataTypeIdentifierForActivityType type: UIActivity.ActivityType?) -> String {
         return "com.google.earth.kml"
     }
     
-    func activityViewController(_ controller: UIActivityViewController, subjectForActivityType type: UIActivityType?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, subjectForActivityType type: UIActivity.ActivityType?) -> String {
         return titleName
     }
 }

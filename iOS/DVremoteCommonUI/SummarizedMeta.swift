@@ -10,10 +10,10 @@ import UIKit
 import DVremoteCommonLib
 
 open class SummarizedMeta: NSObject {
-    open let date : String?
-    open let camera : String?
-    open let lens : String?
-    open let condition : String?
+    public let date : String?
+    public let camera : String?
+    public let lens : String?
+    public let condition : String?
     
     public init(meta : [AnyHashable: Any]) {
         if let popupSummary = meta[DVRCNMETA_POPUP_SUMMARY] as! [ImageMetadataKV]? {

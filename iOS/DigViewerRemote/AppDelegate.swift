@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, U
         DVRemoteClient.shared().remove(self)
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let client = DVRemoteClient.shared()
         client?.add(self)
         return true
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, U
     //-----------------------------------------------------------------------------------------
     // MARK: - アプリ間連携
     //-----------------------------------------------------------------------------------------
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         DVRemoteClient.shared().regeisterSharedImage(url)
         return true
     }

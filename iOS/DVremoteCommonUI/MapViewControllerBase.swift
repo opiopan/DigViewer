@@ -259,7 +259,7 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
         }
         if (isUpdatedLocation || !configController.map3DView){
             if geometry != nil {
-                let region = MKCoordinateRegionMake(geometry!.photoCoordinate, geometry!.mapSpan)
+                let region = MKCoordinateRegion(center: geometry!.photoCoordinate, span: geometry!.mapSpan)
                 mapView!.setRegion(region, animated: !isUpdatedLocation)
                 if !isUpdatedLocation {
                     addOverlay()
@@ -339,7 +339,7 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
         }
     }
 
-    open func tapOnThumbnail(_ recognizer: UIGestureRecognizer){
+    @objc open func tapOnThumbnail(_ recognizer: UIGestureRecognizer){
         viewFullImage(self)
     }
     
@@ -357,13 +357,13 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 center: geometry!.photoCoordinate, heading: geometry!.heading!, fov: geometry!.fovAngle,
                 vScale: vScale, hScale: hScale)
             overlay.altitude = mapView!.camera.altitude
-            mapView!.add(overlay, level: .aboveLabels)
+            mapView!.addOverlay(overlay, level: .aboveLabels)
         }
     }
     
     fileprivate func removeOverlay() {
         for overlay in mapView!.overlays {
-            mapView!.remove(overlay)
+            mapView!.removeOverlay(overlay)
         }
     }
     
@@ -396,14 +396,14 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             let constraintFormat1 =
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "H:|-[childView]-|",
-                    options : NSLayoutFormatOptions(rawValue: 0),
+                    options : NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: viewDictionary)
             constraints.addObjects(from: constraintFormat1)
             let constraintFormat2 =
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|-[childView]-|",
-                    options : NSLayoutFormatOptions(rawValue: 0),
+                    options : NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: viewDictionary)
             constraints.addObjects(from: constraintFormat2)

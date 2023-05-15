@@ -62,7 +62,7 @@ open class HeadingOverlay: NSObject, MKOverlay {
         if fov > 0 {
             let fovArcRadius = length * 2.5
             fovArcAngle = fov * Double.pi / 180.0
-            fovArcCenter = MKMapPointForCoordinate(center)
+            fovArcCenter = MKMapPoint(center)
             fovArcStart = MapGeometry.translateCoordinateToMapPoint(
                 center, offset: CGPoint(x: 0, y: fovArcRadius), rotation: CGFloat(rotation + fovArcAngle / 2))
             let width = sin(fovArcAngle / 2) * fovArcRadius

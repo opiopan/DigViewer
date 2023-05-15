@@ -89,13 +89,13 @@ open class SummaryPopupViewController: UIViewController {
             views: viewDictionary)
         constraints.addObjects(from: constraintFormat1)
         
-        var option : NSLayoutFormatOptions
+        var option : NSLayoutConstraint.FormatOptions
         var constraintString : String
         if parentType == .noLocationCover {
             option = .alignAllCenterX
             constraintString = "V:[parentView]-(<=1)-[childView(==viewHeight)]"
         }else{
-            option = NSLayoutFormatOptions(rawValue: 0)
+            option = NSLayoutConstraint.FormatOptions(rawValue: 0)
             constraintString = "V:[parentView]-100-[childView(==viewHeight)]"
         }
         let constraintFormat2 = NSLayoutConstraint.constraints(
@@ -133,13 +133,13 @@ open class SummaryPopupViewController: UIViewController {
     open var pinMode : SummaryPopupPinMode = .off {
         didSet{
             if pinMode == .toolbar{
-                pinButton.setImage(UIImage(named: "pin_on"), for: UIControlState())
+                pinButton.setImage(UIImage(named: "pin_on"), for: UIControl.State())
                 popupView.backgroundMode = .none
             }else if pinMode == .left || pinMode == .right {
-                pinButton.setImage(UIImage(named: "pin_on"), for: UIControlState())
+                pinButton.setImage(UIImage(named: "pin_on"), for: UIControl.State())
                 popupView.backgroundMode = .rectangle
             }else{
-                pinButton.setImage(UIImage(named: "pin_off"), for: UIControlState())
+                pinButton.setImage(UIImage(named: "pin_off"), for: UIControl.State())
                 popupView.backgroundMode = .balloon
             }
             popupView.setNeedsDisplay()

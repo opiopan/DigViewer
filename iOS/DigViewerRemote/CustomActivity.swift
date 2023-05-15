@@ -21,8 +21,8 @@ class CustomActivity: UIActivity {
         self.action = action
     }
     
-    override var activityType : UIActivityType? {
-        return UIActivityType(type)
+    override var activityType : UIActivity.ActivityType? {
+        return UIActivity.ActivityType(type)
     }
     
     override var activityTitle : String? {

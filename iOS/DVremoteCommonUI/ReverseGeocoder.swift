@@ -16,7 +16,7 @@ open class ReverseGeocoder: NSObject {
     
     public typealias CompleteHandler = (_ coder: ReverseGeocoder) -> Void
 
-    open static let sharedCoder = ReverseGeocoder()
+    public static let sharedCoder = ReverseGeocoder()
     
     fileprivate let geocoder = CLGeocoder()
 

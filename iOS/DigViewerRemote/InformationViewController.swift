@@ -28,7 +28,7 @@ class InfomationViewController: UIViewController {
             let controller = self.viewControllerForSegmentIndex(self.segmentedControll!.selectedSegmentIndex)
             if let newController = controller{
                 let frame = self.placeholder!.bounds
-                self.addChildViewController(newController)
+                self.addChild(newController)
                 newController.view.frame = frame
                 self.placeholder!.addSubview(newController.view)
                 self.currentViewController = newController;
@@ -71,10 +71,10 @@ class InfomationViewController: UIViewController {
     }
     
     @IBAction func segmentChange(_ sender:UISegmentedControl){
-        let options = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.transitionFlipFromLeft]
+        let options = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.transitionFlipFromLeft]
         let controller = viewControllerForSegmentIndex(sender.selectedSegmentIndex)
         if let newController = controller{
-            self.addChildViewController(newController);
+            self.addChild(newController);
             self.transition(
                 from: currentViewController!, to: newController, duration: 0.5,
                 options: options[sender.selectedSegmentIndex],
@@ -84,8 +84,8 @@ class InfomationViewController: UIViewController {
                     self.placeholder?.addSubview(newController.view)
                 },
                 completion: {[unowned self](result : Bool) -> Void in
-                    newController.didMove(toParentViewController: self)
-                    self.currentViewController!.removeFromParentViewController()
+                    newController.didMove(toParent: self)
+                    self.currentViewController!.removeFromParent()
                     self.currentViewController = newController
                 }
             )

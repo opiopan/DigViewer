@@ -130,7 +130,7 @@ open class ServerInfo : NSObject, NSCoding {
 // MARK: - ConfigurationController クラス定義
 //-----------------------------------------------------------------------------------------
 open class ConfigurationController: NSObject {
-    static open let sharedController = ConfigurationController()
+    static public let sharedController = ConfigurationController()
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 初期化

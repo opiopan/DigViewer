@@ -34,19 +34,19 @@ class MapURL: NSObject, UIActivityItemSource {
         return url
     }
     
-    func activityViewController(_ controller: UIActivityViewController, itemForActivityType type: UIActivityType) -> Any? {
+    func activityViewController(_ controller: UIActivityViewController, itemForActivityType type: UIActivity.ActivityType?) -> Any? {
         return url
     }
     
-    func activityViewController(_ controller: UIActivityViewController, dataTypeIdentifierForActivityType type: UIActivityType?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, dataTypeIdentifierForActivityType type: UIActivity.ActivityType?) -> String {
         return "public.url"
     }
     
-    func activityViewController(_ controller: UIActivityViewController, subjectForActivityType type: UIActivityType?) -> String {
+    func activityViewController(_ controller: UIActivityViewController, subjectForActivityType type: UIActivity.ActivityType?) -> String {
         return ""
     }
     
-    func activityViewController(_ controller: UIActivityViewController, thumbnailImageForActivityType type: UIActivityType?, suggestedSize size: CGSize) -> UIImage? {
+    func activityViewController(_ controller: UIActivityViewController, thumbnailImageForActivityType type: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
         return nil
     }
 

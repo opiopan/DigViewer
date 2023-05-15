@@ -32,7 +32,7 @@ class LocationActionViewController: MapViewControllerBase {
                             image = UIImage(contentsOfFile: url.path)
                         }else if let imageObject = data as? UIImage {
                             image = imageObject
-                            imageData = UIImagePNGRepresentation(imageObject)
+                            imageData = imageObject.pngData()
                         }
                         let name = ""
                         let type = NSLocalizedString("LS_IMAGE_TYPE_NAME", comment:"")
