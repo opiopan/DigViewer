@@ -192,9 +192,8 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 //-----------------------------------------------------------------------------------------
 // Windowクローズ
 //-----------------------------------------------------------------------------------------
-- (void)windowWillClose:(NSNotification *)notification
+- (void)saveWindowPreferences
 {
-    // 次回オープン用にWindowの設定を保存
     NSMutableDictionary* preferences = [NSMutableDictionary dictionary];
     Document* document = self.document;
     if (_imageArrayController.selectedObjects.count > 0){
@@ -223,7 +222,12 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
         [preferences setValue:@(self.window.styleMask & NSWindowStyleMaskFullScreen) forKey:kInFullScreen];
         [document saveDocumentWindowPreferences:preferences];
     }
-    
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    // 次回オープン用にWindowの設定を保存
+    [self saveWindowPreferences];
     // スライドショー環境回収
     [slideshowController cancelSlideshow];
     
@@ -1082,6 +1086,7 @@ static NSString* kAppImage = @"image";
     PathNode* nextNode = [((Document*)self.document).root nearestNodeAtPortablePath:newPath];
     [self moveToImageNode:nextNode];
     self.presentationViewType = _browseContexts.currentContext.presentationViewType;
+    [self saveWindowPreferences];
 }
 
 - (IBAction)performNewBrowsingContext:(id)sender

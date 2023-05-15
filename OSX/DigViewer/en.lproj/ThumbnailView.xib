@@ -95,7 +95,7 @@
                                     </constraints>
                                     <buttonCell key="cell" type="push" title="Default Size" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100320">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system" size="11"/>
+                                        <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
                                     <connections>
                                         <action selector="onDefaultSize:" target="-2" id="100321"/>
