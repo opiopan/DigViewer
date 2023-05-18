@@ -130,7 +130,7 @@ open class ServerInfo : NSObject, NSCoding {
 // MARK: - ConfigurationController クラス定義
 //-----------------------------------------------------------------------------------------
 open class ConfigurationController: NSObject {
-    static public let sharedController = ConfigurationController()
+    @objc static public let sharedController = ConfigurationController()
     
     //-----------------------------------------------------------------------------------------
     // MARK: - 初期化
@@ -464,13 +464,13 @@ open class ConfigurationController: NSObject {
         }
     }
     
-    open var lensLibrarySource : String? {
+    @objc open var lensLibrarySource : String? {
         didSet {
             controller.setValue(lensLibrarySource, forKey: UserDefaults.LensLibrarySource)
         }
     }
     
-    open var lensLibraryDate : Double {
+    @objc open var lensLibraryDate : Double {
         didSet {
             controller.setValue(lensLibraryDate, forKey: UserDefaults.LensLibraryDate)
         }

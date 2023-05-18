@@ -77,7 +77,8 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         let size = approximatelySize * Double(UIScreen.main.scale)
         let thumbnailSize = CGSize(width: size, height: size)
         imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil){
-            if let image = $0.0 {
+            image, info in
+            if let image = image {
                 cell.imageView.image = image
             }
         }

@@ -134,7 +134,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             if isReguler {
                 UIView.beginAnimations(nil, context: nil)
                 UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.primaryOverlay
+                splitViewController!.preferredDisplayMode = UISplitViewController.DisplayMode.primaryOverlay
                 UIView.commitAnimations()
             }else{
                 performSegue(withIdentifier: "ShowInformationView", sender: sender)
@@ -286,7 +286,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             OperationQueue.main.addOperation {
                 [unowned self]() in
                 UIView.animate(
-                    withDuration: 0.5, delay: delay, options: UIViewAnimationOptions.curveLinear, animations: {
+                    withDuration: 0.5, delay: delay, options: UIView.AnimationOptions.curveLinear, animations: {
                         [unowned self]() -> Void in
                         self.messageViewHeightConstraint.constant = height
                         self.view.layoutIfNeeded()
@@ -295,7 +295,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         }
     }
     
-    func tapOnMessageView(_ recognizer: UIGestureRecognizer){
+    @objc func tapOnMessageView(_ recognizer: UIGestureRecognizer){
         showServersList()
     }
     
@@ -304,7 +304,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     fileprivate var documentInteractionController : UIDocumentInteractionController!
     
-    func onLongPress(_ recognizer: UIGestureRecognizer){
+    @objc func onLongPress(_ recognizer: UIGestureRecognizer){
         let rect = CGRect(origin: recognizer.location(in: self.view), size: CGSize.zero)
         
         if self.presentedViewController == nil {
