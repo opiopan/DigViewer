@@ -11,13 +11,16 @@
 @interface PathfinderPinnedFile : NSObject
 
 @property (readonly) NSString* path;
-@property (readonly) NSString* name;
+@property (readonly) NSUInteger fileSize;
+@property (readonly) NSUInteger currentPoint;
+@property (readonly) NSUInteger currentEntry;
 
 + (PathfinderPinnedFile*) pinnedFileWithPath:(NSString*) path;
 
-- (NSUInteger) count;
-- (BOOL) isFileAtIndex:(NSUInteger)index;
-- (NSString*) absolutePathAtIndex:(NSUInteger)index;
-- (NSString*) relativePathAtIndex:(NSUInteger)index;
+- (BOOL) movePointerToNextEntry;
+- (BOOL) isReachedEOF;
+- (BOOL) isRegularFile;
+- (NSString*) absolutePath;
+- (NSString*) relativePath;
 
 @end

@@ -93,16 +93,16 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     PathNode* root = nil;
     NSArray* last = nil;
     NSMutableArray* context = [NSMutableArray array];
-    NSUInteger lines = [pinnedFile count];
+    NSUInteger fileSize = [pinnedFile fileSize];
     progress.progress = 0.0;
-    for (int i = 0; i < lines; i++){
+    for (; !pinnedFile.isReachedEOF; [pinnedFile movePointerToNextEntry]){
         if (progress.isCanceled){
             return nil;
         }
-        if ([pinnedFile isFileAtIndex:i] && [NSImage isSupportedFileAtPath:[pinnedFile relativePathAtIndex:i]] &&
-            ! [cond isOmmitingImagePath:[pinnedFile relativePathAtIndex:i]]){
-            NSArray* pathComponents = [[pinnedFile relativePathAtIndex:i] pathComponents];
-            NSString* filePath = [pinnedFile absolutePathAtIndex:i];
+        if (pinnedFile.isRegularFile && [NSImage isSupportedFileAtPath:pinnedFile.relativePath] &&
+            ! [cond isOmmitingImagePath:pinnedFile.relativePath]){
+            NSArray* pathComponents = [pinnedFile.relativePath pathComponents];
+            NSString* filePath = pinnedFile.absolutePath;
             if (!root){
                 NSString* rootpath = pinnedFile.path;
                 root = [[PathNode alloc] initWithName:pathComponents[0] parent:nil path:nil originalPath:rootpath];
@@ -115,7 +115,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             [context[j - 1] mergePathComponents:pathComponents atIndex:j withPath:filePath context:context];
             last = pathComponents;
         }
-        progress.progress = i * 100.0 / lines;
+        progress.progress = pinnedFile.currentPoint * 100.0 / fileSize;
     }
     
     return root;

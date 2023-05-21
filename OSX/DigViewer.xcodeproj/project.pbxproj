@@ -204,7 +204,7 @@
 		7BEB80951B03A33A006F052A /* SortOmittedArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB80941B03A33A006F052A /* SortOmittedArrayController.m */; };
 		7BF678AD16983C7C00FE39B4 /* PathNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678AC16983C7C00FE39B4 /* PathNode.mm */; };
 		7BF678B61699143B00FE39B4 /* NSImage+CapabilityDetermining.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */; };
-		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */; };
+		7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.mm */; };
 		7BF8E2A516AA7C9F0007E788 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8E2A416AA7C9F0007E788 /* up.png */; };
 		7BFA83A318AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA83A218AF1B0300B1BCBC /* NSWindow+TracingResponderChain.m */; };
 /* End PBXBuildFile section */
@@ -526,7 +526,7 @@
 		7BF678B41699143B00FE39B4 /* NSImage+CapabilityDetermining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+CapabilityDetermining.h"; sourceTree = "<group>"; };
 		7BF678B51699143B00FE39B4 /* NSImage+CapabilityDetermining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+CapabilityDetermining.m"; sourceTree = "<group>"; };
 		7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathfinderPinnedFile.h; sourceTree = "<group>"; };
-		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathfinderPinnedFile.m; sourceTree = "<group>"; };
+		7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PathfinderPinnedFile.mm; sourceTree = "<group>"; };
 		7BF8E2A416AA7C9F0007E788 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = up.png; path = resources/up.png; sourceTree = "<group>"; };
 		7BF8E2A716AA7DEB0007E788 /* up.idraw */ = {isa = PBXFileReference; lastKnownFileType = file; name = up.idraw; path = resources/up.idraw; sourceTree = "<group>"; };
 		7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+TracingResponderChain.h"; sourceTree = "<group>"; };
@@ -1131,7 +1131,7 @@
 				7B0DBED516A0FE24000365F4 /* NSView+ViewControllerAssociation.h */,
 				7B0DBED616A0FE24000365F4 /* NSView+ViewControllerAssociation.m */,
 				7BF678B71699359A00FE39B4 /* PathfinderPinnedFile.h */,
-				7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.m */,
+				7BF678B81699359A00FE39B4 /* PathfinderPinnedFile.mm */,
 				7B30AC2C18ADFF3000A70555 /* NSObject+MenuItemValidator.h */,
 				7B30AC2D18ADFF3000A70555 /* NSObject+MenuItemValidator.m */,
 				7BFA83A118AF1B0300B1BCBC /* NSWindow+TracingResponderChain.h */,
@@ -1453,7 +1453,7 @@
 				7B6AE1091ADAAEAF0039EA62 /* DraggingSourceArrayController.m in Sources */,
 				7B6AE01A1B99DE4C00FA0335 /* DVRemoteProtcol.m in Sources */,
 				7B6F8E2D29F536DB00C7C014 /* GPSMapWebView.m in Sources */,
-				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.m in Sources */,
+				7BF678B91699359A00FE39B4 /* PathfinderPinnedFile.mm in Sources */,
 				7B6148551B7DA49E00A03C45 /* ImageRepository.m in Sources */,
 				38C57FF3190F7E0A004D373F /* NSColor+JavascriptColorSpace.m in Sources */,
 				7B697E3B169C547200A9E247 /* ImageWithTextCell.m in Sources */,
@@ -2085,6 +2085,7 @@
 		7B3920511696CA1900E139D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -2106,6 +2107,7 @@
 		7B3920521696CA1900E139D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
