@@ -27,4 +27,6 @@
 - (void) loadImageDateTimeForPathNode:(PathNode*)pathNode forWindow:(NSWindow*)window
                         modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector;
 
+- (void) cleanupSheet;
+
 @end

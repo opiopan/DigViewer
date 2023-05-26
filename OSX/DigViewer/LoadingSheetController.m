@@ -95,14 +95,24 @@
 
 - (void) didEndLoading{
     isLoading = NO;
+    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+    root.sortType = ((NSNumber*)[[controller values] valueForKey:@"pathNodeSortType"]).intValue;
+    if (didEndSelector){
+        progress = [NSNumber numberWithDouble:pathNodeProgress.progress];
+        progressIndicator.doubleValue = progress.doubleValue;
+        [modalDelegate performSelector:didEndSelector withObject:root afterDelay: root && !isIndeterminate && isShowing ? 0.4f : 0.0f];
+    }else{
+        [self cleanupSheet];
+    }
+}
+
+- (void) cleanupSheet
+{
     if (isShowing){
         [panel close];
         [[NSApplication sharedApplication] endSheet:panel returnCode:NSModalResponseOK];
         isShowing =NO;
     }
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    root.sortType = ((NSNumber*)[[controller values] valueForKey:@"pathNodeSortType"]).intValue;
-    [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
     panel = nil;
     topLevelObjects = nil;
     root = nil;
@@ -176,15 +186,11 @@
 - (void) didEndLoadingImageDateTime
 {
     isLoading = NO;
-    if (isShowing){
-        [panel close];
-        [[NSApplication sharedApplication] endSheet:panel returnCode:NSModalResponseOK];
-        isShowing =NO;
+    if (didEndSelector){
+        [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
+    }else{
+        [self cleanupSheet];
     }
-    [modalDelegate performSelector:didEndSelector withObject:root afterDelay:0.0f];
-    panel = nil;
-    topLevelObjects = nil;
-    root = nil;
 }
 
 @end

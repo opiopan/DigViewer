@@ -116,6 +116,7 @@
             [self.windowForSheet close];
         }
     }
+    [loader cleanupSheet];
     loadingModelOption = nil;
     loader = nil;
     if (pendingReloadRequest){

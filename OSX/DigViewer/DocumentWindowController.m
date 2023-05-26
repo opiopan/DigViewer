@@ -703,6 +703,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 {
     current.isSortByDateTime = _sortByDateTimeButtonState;
     self.imageArrayController.content = current.images;
+    [loadingSheet cleanupSheet];
     loadingSheet = nil;
 }
 
