@@ -119,6 +119,11 @@ static SlideshowController* _currentController;
         _window.backgroundColor = [[ImageViewConfigController sharedController] backgroundColor];
         _window.level = NSScreenSaverWindowLevel + 1;
         [_window.contentView associateSubViewWithController:_imageViewController];
+        NSRect vframe = frame;
+        if (@available(macOS 12.0, *)) {
+            vframe.size.height -= screen.auxiliaryTopLeftArea.size.height;
+        }
+        _imageViewController.view.frame = vframe;
         [_window makeKeyAndOrderFront:self];
         [_window makeFirstResponder:_imageViewController.view];
         self.window = _window;
