@@ -22,14 +22,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eiV-SG-OxT">
+                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiV-SG-OxT">
                         <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
                         <view key="contentView" id="sO8-sf-PsV">
                             <rect key="frame" x="0.0" y="0.0" width="542" height="144"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEK-3w-RUM">
-                                    <rect key="frame" x="18" y="108" width="286" height="16"/>
+                                    <rect key="frame" x="18" y="108" width="506" height="16"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Please select a way to remove the group node." id="3eW-dJ-4il">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -96,7 +96,7 @@ DQ
                                 <constraint firstItem="YEK-3w-RUM" firstAttribute="leading" secondItem="sO8-sf-PsV" secondAttribute="leading" constant="20" symbolic="YES" id="4f2-MU-xEI"/>
                                 <constraint firstItem="YEK-3w-RUM" firstAttribute="top" secondItem="sO8-sf-PsV" secondAttribute="top" constant="20" symbolic="YES" id="FWr-aS-m68"/>
                                 <constraint firstItem="RSE-Zp-fdl" firstAttribute="leading" secondItem="sO8-sf-PsV" secondAttribute="leading" constant="38" id="VsO-zL-Ov7"/>
-                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="YEK-3w-RUM" secondAttribute="trailing" constant="240" id="YX1-VL-wiW"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="YEK-3w-RUM" secondAttribute="trailing" constant="20" symbolic="YES" id="YX1-VL-wiW"/>
                                 <constraint firstItem="KsT-AH-Vhg" firstAttribute="leading" secondItem="WtR-pO-dnY" secondAttribute="trailing" constant="51" id="asw-mv-sW9"/>
                                 <constraint firstItem="KsT-AH-Vhg" firstAttribute="width" secondItem="WtR-pO-dnY" secondAttribute="width" id="bLF-6T-xP3"/>
                                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="KsT-AH-Vhg" secondAttribute="trailing" constant="142" id="fjh-KI-0mJ"/>

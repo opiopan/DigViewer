@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="172"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="IaK-zD-B9A">
+                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IaK-zD-B9A">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="172"/>
                         <view key="contentView" id="J0s-hk-LtB">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="172"/>

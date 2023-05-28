@@ -25,7 +25,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="653" height="348"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Ado-ZC-uUl">
+                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ado-ZC-uUl">
                         <rect key="frame" x="0.0" y="0.0" width="653" height="348"/>
                         <view key="contentView" id="eMr-gN-90v">
                             <rect key="frame" x="0.0" y="0.0" width="653" height="348"/>
@@ -184,10 +184,10 @@
                                                                         <binding destination="-2" name="value" keyPath="self.comparisonValue" id="BKo-ft-vpe"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <box autoresizesSubviews="NO" boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Xu0-l8-bLc">
-                                                                    <rect key="frame" x="8" y="8" width="325" height="112"/>
+                                                                <box autoresizesSubviews="NO" borderType="line" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Xu0-l8-bLc">
+                                                                    <rect key="frame" x="5" y="4" width="331" height="118"/>
                                                                     <view key="contentView" ambiguous="YES" id="wOe-00-5U3">
-                                                                        <rect key="frame" x="1" y="1" width="323" height="110"/>
+                                                                        <rect key="frame" x="4" y="5" width="323" height="110"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Kw-re-FMt">
@@ -209,8 +209,6 @@
                                                                             <constraint firstItem="3Kw-re-FMt" firstAttribute="leading" secondItem="wOe-00-5U3" secondAttribute="leading" constant="8" id="xcs-1S-2bb"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                                                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </box>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q21-qk-AsD">
                                                                     <rect key="frame" x="6" y="124" width="65" height="16"/>
@@ -273,7 +271,7 @@
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                 <tableColumns>
-                                                    <tableColumn editable="NO" width="226" minWidth="40" maxWidth="1000" id="Qti-Sc-OfR">
+                                                    <tableColumn editable="NO" width="197" minWidth="40" maxWidth="1000" id="Qti-Sc-OfR">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>

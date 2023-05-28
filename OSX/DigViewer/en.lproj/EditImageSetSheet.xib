@@ -24,9 +24,9 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="4KB-Of-pGS">
                 <rect key="frame" x="0.0" y="0.0" width="653" height="371"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="2j5-89-e6r">
+                    <box boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2j5-89-e6r">
                         <rect key="frame" x="0.0" y="0.0" width="653" height="371"/>
                         <view key="contentView" id="SIV-qL-lTU">
                             <rect key="frame" x="0.0" y="0.0" width="653" height="371"/>
@@ -68,7 +68,7 @@
                                                             <binding destination="ohW-v5-i2R" name="value" keyPath="arrangedObjects.me" id="FeN-Mq-IPc"/>
                                                         </connections>
                                                     </tableColumn>
-                                                    <tableColumn editable="NO" width="176" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
+                                                    <tableColumn editable="NO" width="147" minWidth="40" maxWidth="1000" id="pfQ-U0-ASJ">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -140,7 +140,7 @@
                                                             </binding>
                                                         </connections>
                                                     </tableColumn>
-                                                    <tableColumn editable="NO" width="176" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
+                                                    <tableColumn editable="NO" width="147" minWidth="40" maxWidth="1000" id="Xya-mE-msB">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remarks">
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
