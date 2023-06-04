@@ -49,6 +49,10 @@
                                                               forKeyPath:@"values.dndMultiple"
                                                                  options:0 context:nil];
     [[ThumbnailConfigController sharedController] addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scrollViewDidScroll)
+                                                 name:NSScrollViewDidEndLiveScrollNotification
+                                               object:nil];
     
     [self reflectDnDSettings];
 }
@@ -65,6 +69,7 @@
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndEnable"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndMultiple"];
     [[ThumbnailConfigController sharedController] removeObserver:self forKeyPath:@"updateCount"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewDidEndLiveScrollNotification object:nil];
 }
 
 - (NSView*)representationView;
@@ -82,6 +87,15 @@
         [thumbnailView reloadData];
     }else{
         [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
+    }
+}
+
+- (void)scrollViewDidScroll
+{
+    NSIndexSet* indexSet = self.thumbnailView.visibleItemIndexes;
+    if (indexSet.count > 0){
+        Document* document = [self.representedObject valueForKey:@"document"];
+        [document.thumnailCache rescheduleWaitingQueueWithArrayController:self.imageArrayController indexes:indexSet];
     }
 }
 

@@ -12,6 +12,7 @@
 
 @property (assign) double zoomRethio;
 @property (weak) IBOutlet IKImageBrowserView *thumbnailView;
+@property (weak) IBOutlet NSScrollView *scrollView;
 @property (weak) IBOutlet NSArrayController *imageArrayController;
 
 - (IBAction)onDefaultSize:(id)sender;

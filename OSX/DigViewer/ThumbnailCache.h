@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (CGImageRef) getThumbnailImageOf:(id)node size:(CGFloat)size;
 - (CGImageRef) getThumbnailImageOf:(id)node completion:(void (^)(__weak id)) completion;
 - (void) clearWaitingQueue;
+- (void) rescheduleWaitingQueueWithArrayController:(NSArrayController*)array indexes:(NSIndexSet*)indexes;
 @end
 
 NS_ASSUME_NONNULL_END

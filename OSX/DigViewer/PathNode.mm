@@ -607,6 +607,11 @@ static const CGFloat ThumbnailMaxSizeDefault = 384;
     return (__bridge_transfer id)thumbnail.transferOwnership();
 }
 
+- (void) updateThumbnailCounter
+{
+    _thumbnailUpdateCounter++;
+}
+
 - (void) notifyUpdatedThumnailImage
 {
     _thumbnailUpdateCounter++;

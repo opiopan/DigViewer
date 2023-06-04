@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ThumbnailViewController">
             <connections>
                 <outlet property="imageArrayController" destination="100087" id="YjA-UB-Nac"/>
+                <outlet property="scrollView" destination="100302" id="dw9-VX-cik"/>
                 <outlet property="thumbnailView" destination="100303" id="100314"/>
                 <outlet property="view" destination="mVi-Ce-X89" id="1Jf-K3-7KF"/>
             </connections>

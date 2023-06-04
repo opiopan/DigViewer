@@ -106,6 +106,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 // サムネール生成
 - (void)setThumbnailCache:(id)thumbnailCache withDocument:(id)document;
 - (id) thumbnailImage:(CGFloat)thumbnailSize;
+- (void) updateThumbnailCounter;
 
 // IndexPath作成
 - (NSIndexPath*) indexPath;

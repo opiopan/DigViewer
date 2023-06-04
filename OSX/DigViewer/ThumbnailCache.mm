@@ -402,7 +402,9 @@ public:
                 entry->is_raster_image = image_node.isRasterImage;
                 entry->completion = completion;
                 queue.push_back(entry);
-                queue_index[(__bridge void*)node] = queue.end();
+                auto itr = queue.end();
+                itr--;
+                queue_index[(__bridge void*)node] = itr;
                 cv.notify_all();
             }
             auto image{stock_image_processing};
@@ -412,8 +414,31 @@ public:
     
     void cleare_waiting_queue(){
         std::lock_guard<std::mutex> lock{mutex};
+        for (auto itr = queue.begin(); itr != queue.end(); itr++){
+            [(*itr)->image_node->node updateThumbnailCounter];
+            if ((*itr)->folder_node){
+                [(*itr)->folder_node->node updateThumbnailCounter];
+            }
+        }
         queue.clear();
         queue_index.clear();
+    }
+    
+    void reschedule_waitaing_queue(NSArrayController* array, NSIndexSet* indexes){
+        std::lock_guard<std::mutex> lock{mutex};
+        NSArray* objects = array.arrangedObjects;
+        [indexes enumerateRangesUsingBlock:^(NSRange range, BOOL* end){
+            for (auto i = range.location; i < range.location + range.length; i++){
+                void* key = (__bridge void*)objects[i];
+                if (this->queue_index.count(key) > 0){
+                    auto itr = this->queue_index[key];
+                    auto value = *itr;
+                    this->queue.erase(itr);
+                    this->queue.push_front(value);
+                    this->queue_index[key] = this->queue.begin();
+                }
+            }
+        }];
     }
 };
 
@@ -481,5 +506,9 @@ public:
 
 - (void) clearWaitingQueue{
     _manager->cleare_waiting_queue();
+}
+
+- (void) rescheduleWaitingQueueWithArrayController:(NSArrayController*)array indexes:(NSIndexSet*)indexes{
+    _manager->reschedule_waitaing_queue(array, indexes);
 }
 @end
