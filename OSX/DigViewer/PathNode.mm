@@ -13,11 +13,27 @@
 #import "NSImage+CapabilityDetermining.h"
 #import "ThumbnailConfigController.h"
 #import "ImageMetadata.h"
+#import "ThumbnailCache.h"
+#import "Document.h"
 
 #include "CoreFoundationHelper.h"
 #include <stdlib.h>
 #include <sys/stat.h>
 
+//-----------------------------------------------------------------------------------------
+// Cache manager holder
+//-----------------------------------------------------------------------------------------
+@interface CacheManager: NSObject
+@property ThumbnailCache* thumbnailCache;
+@property __weak Document* document;
+@end
+
+@implementation CacheManager
+@end
+
+//-----------------------------------------------------------------------------------------
+// imprementation of PathNode
+//-----------------------------------------------------------------------------------------
 static ThumbnailConfigController* __weak _thumbnailConfig;
 
 @implementation PathNode{
@@ -38,6 +54,9 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     NSInteger       _updateCountForRepresentationImages;
     NSInteger       _updateCountForSort;
     BOOL            _isSortByDateTimeForRepresentationImages;
+    CacheManager*   _caches;
+    NSUInteger      _thumbnailUpdateCounter;
+    BOOL            _isPendingThumbnailViewUpdating;
 }
 
 @synthesize name = _name;
@@ -47,7 +66,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 @synthesize isRawImage = _isRawImage;
 
 //-----------------------------------------------------------------------------------------
-// イメージファイルが存在しない場合に表示するイメージ
+// stock images
 //-----------------------------------------------------------------------------------------
 + (NSImage*) unavailableImage
 {
@@ -58,6 +77,17 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }
     
     return _unavailableImage;
+}
+
++ (NSImage*) processingImage
+{
+    static NSImage* _processingImage = nil;
+    
+    if (!_processingImage){
+        _processingImage = [[NSBundle mainBundle] imageForResource:@"processing.png"];
+    }
+    
+    return _processingImage;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -81,6 +111,8 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _graphConfig.sortType = SortTypeImageIsPrior;
         _graphConfig.sortByCaseInsensitive = YES;
         _graphConfig.sortAsNumeric = YES;
+        _thumbnailUpdateCounter = 0;
+        _isPendingThumbnailViewUpdating = NO;
     }
     return self;
 }
@@ -133,6 +165,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _isRasterImage = path ? [NSImage isRasterImageAtPath:path] : NO;
         _originalPath = op;
         _rootNode = _parent ? _parent->_rootNode : self;
+        _caches = _parent? _parent->_caches : [CacheManager new];
         if (!_parent){
             _indexInParentForSameKind = 0;
             _indexInParentForAllNodes = 0;
@@ -159,6 +192,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _originalPath = path;
         _parent = p;
         _rootNode = _parent ? _parent->_rootNode : self;
+        _caches = _parent ? _parent->_caches : [CacheManager new];
         if (!_parent){
             _indexInParentForSameKind = 0;
             _indexInParentForAllNodes = 0;
@@ -520,215 +554,72 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     BOOL useEmbeddedThumbs = (self.imageNode.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
                              (!self.imageNode.isRawImage && self.imageNode.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail);
     if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
-        NSString* extention = [NSString stringWithFormat:@".file:%d", useEmbeddedThumbs];
+        NSString* extention = [NSString stringWithFormat:@".file:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
-        NSString* extention = [NSString stringWithFormat:@".folder:%d", useEmbeddedThumbs];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }else{
-        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@", useEmbeddedThumbs,
-                                                                              _thumbnailConfig.folderIconSize,
-                                                                              _thumbnailConfig.folderIconOpacity];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@:%lu", useEmbeddedThumbs,
+                                                                                  _thumbnailConfig.folderIconSize,
+                                                                                  _thumbnailConfig.folderIconOpacity,
+                                                                                  _thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }
 }
 
 - (NSString*) imageRepresentationType
 {
-    return self.imageNode.isRasterImage || !self.isImage ? IKImageBrowserCGImageRepresentationType :
-                                                           IKImageBrowserNSImageRepresentationType;
+    return IKImageBrowserCGImageRepresentationType;
 }
-
 
 - (id) imageRepresentation
 {
-    return [self thumbnailImage:0];
+    return [self thumbnailImage:0 waitUntilDone:NO];
+}
+
+- (void)setThumbnailCache:(id)thumbnailCache withDocument:(id)document
+{
+    _caches.thumbnailCache = thumbnailCache;
+    _caches.document = document;
 }
 
 static const CGFloat ThumbnailMaxSizeDefault = 384;
 
 - (id) thumbnailImage:(CGFloat)thumbnailSize
 {
+    return [self thumbnailImage:thumbnailSize waitUntilDone:YES];
+}
+
+- (id) thumbnailImage:(CGFloat)thumbnailSize waitUntilDone:(BOOL)sync
+{
     CGFloat ThumbnailMaxSize = thumbnailSize == 0 ? ThumbnailMaxSizeDefault : thumbnailSize;
-    PathNode* node = self.imageNode;
     
-    if (node.isRasterImage || !self.isImage){
-        static NSDictionary* thumbnailOption = nil;
-        static NSDictionary* thumbnailOptionUsingEmbedded = nil;
-        if (!thumbnailOption){
-            thumbnailOptionUsingEmbedded = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize),
-                                             (__bridge NSString*)kCGImageSourceCreateThumbnailWithTransform:@(YES)};
-            thumbnailOption = @{(__bridge NSString*)kCGImageSourceThumbnailMaxPixelSize:@(ThumbnailMaxSize),
-                                (__bridge NSString*)kCGImageSourceCreateThumbnailFromImageAlways:@(YES),
-                                (__bridge NSString*)kCGImageSourceCreateThumbnailWithTransform:@(YES)};
-        }
-        ECGImageRef thumbnail;
-        if (node.isRasterImage){
-            NSURL* url = [NSURL fileURLWithPath:node.imagePath];
-            ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-            if (!imageSource.isNULL()){
-                int orientation = 1;
-                NSDictionary* option = (node.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
-                                       (!node.isRawImage && node.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail) ||
-                                       thumbnailSize != 0 ?
-                                       thumbnailOptionUsingEmbedded : thumbnailOption;
-                thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)option);
-                if (thumbnail.isNULL()){
-                    thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
-                    NSDictionary* meta = (__bridge_transfer NSDictionary*)CGImageSourceCopyPropertiesAtIndex(imageSource, NULL, 0);
-                    NSNumber* data = [meta valueForKey:(__bridge NSString*)kCGImagePropertyOrientation];
-                    orientation = data ? data.intValue : 1;
-                }
-                if (orientation != 1 ||
-                    CGImageGetWidth(thumbnail) > ThumbnailMaxSize || CGImageGetHeight(thumbnail) > ThumbnailMaxSize){
-                    thumbnail = [self rotateImage:thumbnail to:orientation withSize:ThumbnailMaxSize];
-                }
-            }else{
-                thumbnail = [self CGImageFromNSImage:[PathNode unavailableImage] withSize:ThumbnailMaxSize];
-            }
-        }else{
-            thumbnail = [self CGImageFromNSImage:node.image withSize:ThumbnailMaxSize];
-        }
-        
-        if (!self.isImage && _thumbnailConfig.representationType != FolderThumbnailOnlyImage){
-            thumbnail = [self compositFolderImage:thumbnail compositType:_thumbnailConfig.representationType
-                                             size:ThumbnailMaxSize];
-        }
-        
-        return (__bridge_transfer id)thumbnail.transferOwnership();
+    ECGImageRef thumbnail;
+    if (!sync && _caches.thumbnailCache){
+        thumbnail = [_caches.thumbnailCache getThumbnailImageOf:self completion:^(PathNode* node){
+            [node performSelectorOnMainThread:@selector(notifyUpdatedThumnailImage) withObject:nil waitUntilDone:NO];
+        }];
     }else{
-        return node.image;
+        thumbnail = [ThumbnailCache getThumbnailImageOf:self size:ThumbnailMaxSize];
+    }
+    
+    return (__bridge_transfer id)thumbnail.transferOwnership();
+}
+
+- (void) notifyUpdatedThumnailImage
+{
+    _thumbnailUpdateCounter++;
+    if (!_isPendingThumbnailViewUpdating){
+        [self performSelector:@selector(updateThumbnailView) withObject:nil afterDelay:0.4];
+        _isPendingThumbnailViewUpdating = YES;
     }
 }
 
-- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage withSize:(CGFloat)ThumbnailMaxSize
+- (void) updateThumbnailView
 {
-    if (ThumbnailMaxSize == 0){
-        ThumbnailMaxSize = ThumbnailMaxSizeDefault;
-    }
-    
-    NSSize srcSize= srcImage.size;
-    CGFloat gain = ThumbnailMaxSize / MAX(srcSize.width, srcSize.height);
-    NSSize destSize;
-    destSize.width = srcSize.width * gain;
-    destSize.height = srcSize.height * gain;
-    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
-    ECGContextRef context(CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0,
-                                                colorSpace, kCGImageAlphaPremultipliedLast));
-    NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-    [NSGraphicsContext saveGraphicsState];
-    [NSGraphicsContext setCurrentContext:gc];
-    NSRect targetRect = NSZeroRect;
-    targetRect.size = destSize;
-    [srcImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver
-                fraction:1.0 respectFlipped:YES hints:nil];
-    [NSGraphicsContext restoreGraphicsState];
-    return CGBitmapContextCreateImage(context);
-}
-
-- (CGImageRef) rotateImage:(CGImageRef)src to:(int)rotation withSize:(CGFloat)ThumbnailMaxSize
-{
-    // 回転後イメージを表すビットマップコンテキストを生成
-    CGSize size = CGSizeMake(CGImageGetWidth(src), CGImageGetHeight(src));
-    CGFloat destRatio = MIN(ThumbnailMaxSize / size.width, ThumbnailMaxSize / size.height);
-    CGSize destSize = size;
-    if (destRatio < 1){
-        destSize.width *= destRatio;
-        destSize.height *= destRatio;
-    }
-    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
-    ECGContextRef context;
-    if (rotation >= 5 && rotation <= 8){
-        context = CGBitmapContextCreate(NULL, destSize.height, destSize.width, 8, 0,colorSpace, kCGImageAlphaNoneSkipLast);
-    }else{
-        context = CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0, colorSpace, kCGImageAlphaNoneSkipLast);
-    }
-
-    // 変換行列設定
-    switch (rotation){
-        case 1:
-        case 2:
-            /* nothing to do */
-            break;
-        case 5:
-        case 8:
-            /* 90 degrees rotation */
-            CGContextRotateCTM(context, M_PI / 2.);
-            CGContextTranslateCTM (context, 0, -destSize.height);
-            break;
-        case 3:
-        case 4:
-            /* 180 degrees rotation */
-            CGContextRotateCTM(context, -M_PI);
-            CGContextTranslateCTM (context, -destSize.width, -destSize.height);
-            break;
-        case 6:
-        case 7:
-            /* 270 degrees rotation */
-            CGContextRotateCTM(context, -M_PI / 2.);
-            CGContextTranslateCTM (context, -destSize.width, 0);
-            break;
-    }
-    
-    //回転後イメージを描画
-    CGContextDrawImage(context, CGRectMake(0, 0, destSize.width, destSize.height), src);
-    return CGBitmapContextCreateImage(context);
-}
-
-- (CGImageRef) compositFolderImage:(CGImageRef)src compositType:(FolderThumbnailRepresentationType)type
-                              size:(CGFloat)ThumbnailMaxSize
-{
-    // コンポジット後のイメージを保持するビットマップコンテキストを作成
-    CGFloat width = src ? CGImageGetWidth(src) : ThumbnailMaxSize;
-    CGFloat height = src ? CGImageGetHeight(src) : ThumbnailMaxSize;
-    CGFloat normalizedLength = MAX(width, height);
-    ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
-    ECGContextRef context(CGBitmapContextCreate(NULL, normalizedLength, normalizedLength, 8, 0,
-                                                colorSpace, kCGImageAlphaPremultipliedLast));
-
-    // フォルダーアイコンイメージの取得
-    NSImage* folderImage = [NSImage imageNamed:NSImageNameFolder];
-    
-    if (type == FolderThumbnailIconOnImage){
-        // ソース画像を描画
-        CGContextDrawImage(context, CGRectMake((normalizedLength - width) / 2, (normalizedLength - height) / 2,
-                                               CGImageGetWidth(src), CGImageGetHeight(src)), src);
-        
-        // フォルダー画像を描画
-        NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-        [NSGraphicsContext saveGraphicsState];
-        [NSGraphicsContext setCurrentContext:gc];
-        NSRect targetRect = NSZeroRect;
-        targetRect.size.width = targetRect.size.height = normalizedLength * _thumbnailConfig.folderIconSize.doubleValue;
-        targetRect.origin.x = normalizedLength - targetRect.size.width * 1.11;
-        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver
-                       fraction:_thumbnailConfig.folderIconOpacity.doubleValue
-                 respectFlipped:YES hints:nil];
-        [NSGraphicsContext restoreGraphicsState];
-    }else{
-        // フォルダー画像を描画
-        NSGraphicsContext *gc = [NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-        [NSGraphicsContext saveGraphicsState];
-        [NSGraphicsContext setCurrentContext:gc];
-        NSRect targetRect = NSZeroRect;
-        targetRect.size.width = targetRect.size.height = normalizedLength;
-        [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
-        [NSGraphicsContext restoreGraphicsState];
-
-        // ソース画像を描画
-        CGFloat minLength = MIN(width, height);
-        ECGImageRef clipedImage;
-        clipedImage = CGImageCreateWithImageInRect(src, CGRectMake((width - minLength) / 2,(height - minLength) / 2,
-                                                                   minLength , minLength));
-        CGFloat ratio = 0.55 * (normalizedLength / minLength);
-        CGFloat xOffset = (normalizedLength - minLength * ratio) / 2;
-        CGFloat yOffset = (normalizedLength - minLength * ratio) / 2 - normalizedLength * 0.05;
-        CGContextTranslateCTM (context, xOffset, yOffset);
-        CGContextScaleCTM(context, ratio, ratio);
-        CGContextDrawImage(context, CGRectMake(0, 0, minLength , minLength), clipedImage);
-    }
-    
-    return CGBitmapContextCreateImage(context);
+    _isPendingThumbnailViewUpdating = NO;
+    [_caches.document updateThumbnailCacheCounter];
 }
 
 - (NSString *) imageTitle

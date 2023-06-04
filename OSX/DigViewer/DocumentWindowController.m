@@ -40,14 +40,15 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 @interface RepresentedObject : NSObject
 @property (weak) Document* document;
 @property (weak) DocumentWindowController* controller;
-+ representedObjectWithController:controller;
++ representedObjectWithController:(id)controller withDocument:(id)document;
 @end
 
 @implementation RepresentedObject
-+ (id)representedObjectWithController:(id)controller
++ (id)representedObjectWithController:(id)controller withDocument:(id)document
 {
     RepresentedObject* object = [[RepresentedObject alloc] init];
     object.controller = controller;
+    object.document = document;
     return object;
 }
 @end
@@ -100,7 +101,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     [super windowDidLoad];
     
     mainViewController = [[MainViewController alloc] init];
-    mainViewController.representedObject = [RepresentedObject representedObjectWithController:self];
+    mainViewController.representedObject = [RepresentedObject representedObjectWithController:self withDocument:self.document];
     [self.placeHolder associateSubViewWithController:mainViewController];
     [self reflectValueToViewSelectionButton];
     

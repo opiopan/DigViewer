@@ -14,6 +14,8 @@
 
 @property (strong) PathNode* root;
 @property (nonatomic, readonly) NSDictionary* documentWindowPreferences;
+@property (nonatomic, readonly) NSUInteger thumbnailCacheCounter;
+@property (nonatomic, readonly) id thumnailCache;
 
 - (void)loadDocument:(id)sender;
 - (void)saveDocumentWindowPreferences:(NSDictionary*)preferences;
@@ -21,5 +23,7 @@
 - (void)sendThumbnail:(NSArray*)ids;
 - (void)sendFullImage:(NSArray *)nodeId withSize:(CGFloat)maxSize;
 - (void)sendNodeListInFolder:(NSArray*)nodeId bySession:(DVRemoteSession*)session;
+
+- (void)updateThumbnailCacheCounter;
 
 @end

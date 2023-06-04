@@ -93,8 +93,9 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
                             progress:(PathNodeProgress*)progress;
 + (PathNode*) psudoPathNodeWithName:(NSString*)name imagePath:(NSString*)path isFolder:(BOOL)isFolder;
 
-// イメージファイルが存在しない場合に表示するイメージ
+// stock image accesser
 + (NSImage*) unavailableImage;
++ (NSImage*) processingImage;
 
 // ツリーウォーキング
 - (PathNode*) nextImageNode;
@@ -103,6 +104,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 - (PathNode*) previousFolderNode;
 
 // サムネール生成
+- (void)setThumbnailCache:(id)thumbnailCache withDocument:(id)document;
 - (id) thumbnailImage:(CGFloat)thumbnailSize;
 
 // IndexPath作成
@@ -111,8 +113,5 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 // portabilityがあるパスに対する操作
 - (NSArray*) portablePath;
 - (PathNode*) nearestNodeAtPortablePath:(NSArray*)path;
-
-// イメージ操作部品
-- (CGImageRef) CGImageFromNSImage:(NSImage*)srcImage withSize:(CGFloat)ThumbnailMaxSize;
 
 @end

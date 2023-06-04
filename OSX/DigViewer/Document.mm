@@ -12,6 +12,7 @@
 #import "LoadingSheetController.h"
 #import "DVRemoteServer.h"
 #import "ImageRenderer.h"
+#import "ThumbnailCache.h"
 
 #include "CoreFoundationHelper.h"
 
@@ -58,6 +59,7 @@
 {
     self = [super init];
     if (self) {
+        _thumbnailCacheCounter = 0;
     }
     return self;
 }
@@ -110,6 +112,8 @@
 {
     if (node){
         modelOption = loadingModelOption;
+        _thumnailCache = [ThumbnailCache new];
+        [node setThumbnailCache:_thumnailCache withDocument:self];
         [windowController setDocumentData:node];
     }else{
         if (!root){
@@ -250,6 +254,19 @@ static const CGFloat thumbnailSize = 256;
             [[DVRemoteServer sharedServer] sendFolderItems:list forNodeID:path inDocument:documentName bySession:session];
         });
     });
+}
+
+//-----------------------------------------------------------------------------------------
+// update counter for thumbnail cache
+//    Update the property that has been provided to allow other view controllers
+//    to observe the state changes of an asynchronously rendered thumbnail image pool
+//    using KVO
+//-----------------------------------------------------------------------------------------
+- (void)updateThumbnailCacheCounter
+{
+    [self willChangeValueForKey:@"thumbnailCacheCounter"];
+    _thumbnailCacheCounter++;
+    [self didChangeValueForKey:@"thumbnailCacheCounter"];
 }
 
 @end

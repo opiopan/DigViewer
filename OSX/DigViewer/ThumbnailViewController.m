@@ -14,8 +14,11 @@
 #import "DraggingSourceTreeController.h"
 #import "DraggingSourceArrayController.h"
 #import "ThumbnailConfigController.h"
+#import "ThumbnailCache.h"
 
-@implementation ThumbnailViewController
+@implementation ThumbnailViewController{
+    __weak ThumbnailCache* _thumnailCache;
+}
 
 @synthesize zoomRethio;
 @synthesize thumbnailView;
@@ -33,9 +36,12 @@
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     thumbnailView.menu = controller.contextMenu;
+    Document* document = [self.representedObject valueForKey:@"document"];
+    _thumnailCache = document.thumnailCache;
     [controller addObserver:self forKeyPath:@"presentationViewType" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:0 context:nil];
+    [document addObserver:self forKeyPath:@"thumbnailCacheCounter" options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndEnable"
                                                                  options:0 context:nil];
@@ -51,9 +57,11 @@
 {
     [imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
+    Document* document = [self.representedObject valueForKey:@"document"];
     [controller removeObserver:self forKeyPath:@"presentationViewType"];
     [controller removeObserver:self forKeyPath:@"isCollapsedInspectorView"];
     [controller removeObserver:self forKeyPath:@"isCollapsedOutlineView"];
+    [document removeObserver:self forKeyPath:@"thumbnailCacheCounter"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndEnable"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndMultiple"];
     [[ThumbnailConfigController sharedController] removeObserver:self forKeyPath:@"updateCount"];
@@ -68,6 +76,8 @@
 {
     if ([keyPath isEqualToString:@"values.dndMultiple"] || [keyPath isEqualToString:@"values.dndEnable"]){
         [self reflectDnDSettings];
+    }else if (object == [self.representedObject valueForKey:@"document"]){
+        [thumbnailView reloadData];
     }else if (object == [ThumbnailConfigController sharedController]){
         [thumbnailView reloadData];
     }else{

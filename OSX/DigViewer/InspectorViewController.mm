@@ -688,11 +688,7 @@ static NSString* CategoryKML = @"KML";
 {
     // サムネールイメージ取得
     ECGImageRef thumbnail;
-    if ([node imageRepresentationType] == IKImageBrowserCGImageRepresentationType){
-        thumbnail = (__bridge_retained CGImageRef)[node imageRepresentation];
-    }else{
-        thumbnail = [node CGImageFromNSImage:[node imageRepresentation] withSize:0];
-    }
+    thumbnail = (__bridge_retained CGImageRef)[node imageRepresentation];
     NSImage* image = [[NSImage alloc] initWithCGImage:thumbnail
                                                  size:NSMakeSize(CGImageGetWidth(thumbnail)/2, CGImageGetHeight(thumbnail)/2)];
 
