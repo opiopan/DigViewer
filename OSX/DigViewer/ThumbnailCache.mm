@@ -85,6 +85,7 @@ struct rendering_command{
     cache_entry_ptr image_node;
     cache_entry_ptr folder_node;
     NSString* image_path;
+    bool is_valid_command{true};
     bool is_image;
     bool is_raster_image;
     bool is_raw_image;
@@ -315,6 +316,13 @@ public:
                     break;
                 }
                 auto itr = queue.begin();
+                if (!(*itr)->is_valid_command){
+                    (*itr)->completion((*itr)->image_node->node);
+                    if ((*itr)->folder_node){
+                        (*itr)->completion((*itr)->folder_node->node);
+                    }
+                    continue;
+                }
                 current = *itr;
                 queue.erase(itr);
                 if (current->is_image){
@@ -415,10 +423,7 @@ public:
     void cleare_waiting_queue(){
         std::lock_guard<std::mutex> lock{mutex};
         for (auto itr = queue.begin(); itr != queue.end(); itr++){
-            [(*itr)->image_node->node updateThumbnailCounter];
-            if ((*itr)->folder_node){
-                [(*itr)->folder_node->node updateThumbnailCounter];
-            }
+            (*itr)->is_valid_command = false;
         }
         queue.clear();
         queue_index.clear();

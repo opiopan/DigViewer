@@ -17,7 +17,9 @@
 #import "ThumbnailCache.h"
 
 @implementation ThumbnailViewController{
+    __weak Document* _document;
     __weak ThumbnailCache* _thumnailCache;
+    BOOL _isRescheduling;
 }
 
 @synthesize zoomRethio;
@@ -27,6 +29,7 @@
 - (id)init
 {
     self = [super initWithNibName:@"ThumbnailView" bundle:nil];
+    _isRescheduling = NO;
     return self;
 }
 
@@ -34,14 +37,15 @@
 {
     [self performSelector:@selector(onDefaultSize:) withObject:self afterDelay:0.0f];
     [imageArrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
+    [imageArrayController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
     thumbnailView.menu = controller.contextMenu;
-    Document* document = [self.representedObject valueForKey:@"document"];
-    _thumnailCache = document.thumnailCache;
+    _document = [self.representedObject valueForKey:@"document"];
+    _thumnailCache = _document.thumnailCache;
     [controller addObserver:self forKeyPath:@"presentationViewType" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedInspectorView" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"isCollapsedOutlineView" options:0 context:nil];
-    [document addObserver:self forKeyPath:@"thumbnailCacheCounter" options:0 context:nil];
+    [_document addObserver:self forKeyPath:@"thumbnailCacheCounter" options:0 context:nil];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.dndEnable"
                                                                  options:0 context:nil];
@@ -49,27 +53,28 @@
                                                               forKeyPath:@"values.dndMultiple"
                                                                  options:0 context:nil];
     [[ThumbnailConfigController sharedController] addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
+    [_scrollView.contentView setPostsBoundsChangedNotifications:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(scrollViewDidScroll)
-                                                 name:NSScrollViewDidEndLiveScrollNotification
+                                             selector:@selector(contentViewBoundsChange)
+                                                 name:NSViewBoundsDidChangeNotification
                                                object:nil];
-    
+
     [self reflectDnDSettings];
 }
 
 - (void)prepareForClose
 {
     [imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
+    [imageArrayController removeObserver:self forKeyPath:@"arrangedObjects"];
     DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    Document* document = [self.representedObject valueForKey:@"document"];
     [controller removeObserver:self forKeyPath:@"presentationViewType"];
     [controller removeObserver:self forKeyPath:@"isCollapsedInspectorView"];
     [controller removeObserver:self forKeyPath:@"isCollapsedOutlineView"];
-    [document removeObserver:self forKeyPath:@"thumbnailCacheCounter"];
+    [_document removeObserver:self forKeyPath:@"thumbnailCacheCounter"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndEnable"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.dndMultiple"];
     [[ThumbnailConfigController sharedController] removeObserver:self forKeyPath:@"updateCount"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewDidEndLiveScrollNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:nil];
 }
 
 - (NSView*)representationView;
@@ -85,18 +90,28 @@
         [thumbnailView reloadData];
     }else if (object == [ThumbnailConfigController sharedController]){
         [thumbnailView reloadData];
+    }else if ([keyPath isEqualToString:@"arrangedObjects"]){
+        [_document.thumnailCache clearWaitingQueue];
     }else{
         [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
     }
 }
 
-- (void)scrollViewDidScroll
+- (void)contentViewBoundsChange
+{
+    if (!_isRescheduling){
+        _isRescheduling = YES;
+        [self performSelector:@selector(rescheduleThumbnailRendering) withObject:nil afterDelay:0.5];
+    }
+}
+
+- (void)rescheduleThumbnailRendering
 {
     NSIndexSet* indexSet = self.thumbnailView.visibleItemIndexes;
     if (indexSet.count > 0){
-        Document* document = [self.representedObject valueForKey:@"document"];
-        [document.thumnailCache rescheduleWaitingQueueWithArrayController:self.imageArrayController indexes:indexSet];
+        [_document.thumnailCache rescheduleWaitingQueueWithArrayController:self.imageArrayController indexes:indexSet];
     }
+    _isRescheduling = NO;
 }
 
 - (void)reflectDnDSettings
