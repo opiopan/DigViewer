@@ -91,7 +91,7 @@
     }else if (object == [ThumbnailConfigController sharedController]){
         [thumbnailView reloadData];
     }else if ([keyPath isEqualToString:@"arrangedObjects"]){
-        [_document.thumnailCache clearWaitingQueue];
+        [self contentViewBoundsChange];
     }else{
         [thumbnailView scrollIndexToVisible:[[thumbnailView selectionIndexes] firstIndex]];
     }
@@ -101,7 +101,7 @@
 {
     if (!_isRescheduling){
         _isRescheduling = YES;
-        [self performSelector:@selector(rescheduleThumbnailRendering) withObject:nil afterDelay:0.5];
+        [self performSelector:@selector(rescheduleThumbnailRendering) withObject:nil afterDelay:0.3];
     }
 }
 

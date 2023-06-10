@@ -295,6 +295,7 @@ class cache_manager{
     lru_cache folder_cache{FOLDER_CACHE_SIZE};
     std::thread renderer;
     thumbnail_config rendering_config;
+    std::unordered_map<void*, void*> priority_targets;
     
 public:
     static thumbnail_config& make_rendering_config(thumbnail_config& config){
@@ -409,7 +410,11 @@ public:
                 entry->is_raw_image = image_node.isRawImage;
                 entry->is_raster_image = image_node.isRasterImage;
                 entry->completion = completion;
-                queue.push_back(entry);
+                if (priority_targets.count((__bridge void*)node) > 0){
+                    queue.push_front(entry);
+                }else{
+                    queue.push_back(entry);
+                }
                 auto itr = queue.end();
                 itr--;
                 queue_index[(__bridge void*)node] = itr;
@@ -427,23 +432,34 @@ public:
         }
         queue.clear();
         queue_index.clear();
+        priority_targets.clear();
     }
     
     void reschedule_waitaing_queue(NSArrayController* array, NSIndexSet* indexes){
         std::lock_guard<std::mutex> lock{mutex};
+        priority_targets.clear();
         NSArray* objects = array.arrangedObjects;
         [indexes enumerateRangesUsingBlock:^(NSRange range, BOOL* end){
             for (auto i = range.location; i < range.location + range.length; i++){
                 void* key = (__bridge void*)objects[i];
-                if (this->queue_index.count(key) > 0){
-                    auto itr = this->queue_index[key];
-                    auto value = *itr;
-                    this->queue.erase(itr);
-                    this->queue.push_front(value);
-                    this->queue_index[key] = this->queue.begin();
-                }
+                priority_targets[key] = key;
             }
         }];
+        wait_queue_itr next;
+        for (auto itr = queue.begin(); itr != queue.end(); itr = next){
+            auto key = (__bridge void*)((*itr)->folder_node ? (*itr)->folder_node->node : (*itr)->image_node->node);
+            next = itr;
+            next++;
+            if (priority_targets.count(key) == 0){
+                if ((*itr)->folder_node){
+                    [(*itr)->folder_node->node updateThumbnailCounter];
+                }else{
+                    [(*itr)->image_node->node updateThumbnailCounter];
+                }
+                queue.erase(itr);
+                queue_index.erase(key);
+            }
+        }
     }
 };
 
