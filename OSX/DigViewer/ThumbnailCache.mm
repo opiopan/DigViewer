@@ -410,11 +410,7 @@ public:
                 entry->is_raw_image = image_node.isRawImage;
                 entry->is_raster_image = image_node.isRasterImage;
                 entry->completion = completion;
-                if (priority_targets.count((__bridge void*)node) > 0){
-                    queue.push_front(entry);
-                }else{
-                    queue.push_back(entry);
-                }
+                queue.push_back(entry);
                 auto itr = queue.end();
                 itr--;
                 queue_index[(__bridge void*)node] = itr;
