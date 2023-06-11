@@ -84,10 +84,21 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     static NSImage* _processingImage = nil;
     
     if (!_processingImage){
-        _processingImage = [[NSBundle mainBundle] imageForResource:@"processing.png"];
+        _processingImage = [[NSBundle mainBundle] imageForResource:@"rendering.png"];
     }
     
     return _processingImage;
+}
+
++ (NSImage*) corruptedImage
+{
+    static NSImage* _corruptedImage = nil;
+    
+    if (!_corruptedImage){
+        _corruptedImage = [[NSBundle mainBundle] imageForResource:@"corrupted.png"];
+    }
+    
+    return _corruptedImage;
 }
 
 //-----------------------------------------------------------------------------------------

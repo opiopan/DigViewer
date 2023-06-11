@@ -96,6 +96,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 // stock image accesser
 + (NSImage*) unavailableImage;
 + (NSImage*) processingImage;
++ (NSImage*) corruptedImage;
 
 // ツリーウォーキング
 - (PathNode*) nextImageNode;

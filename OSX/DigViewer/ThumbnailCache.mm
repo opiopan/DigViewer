@@ -27,6 +27,7 @@ static constexpr auto THUMBNAIL_MAX_SIZE = 384.;
 //-----------------------------------------------------------------------------------------
 static ECGImageRef stock_image_unavailable;
 static ECGImageRef stock_image_processing;
+static ECGImageRef stock_image_corrupted;
 
 //-----------------------------------------------------------------------------------------
 // Image cache pool
@@ -341,7 +342,11 @@ public:
                     lock.unlock();
                     auto&& image = render_thumbnail_image(*current, 0, config);
                     lock.lock();
-                    current->image_node->image = image;
+                    if (image){
+                        current->image_node->image = image;
+                    }else{
+                        current->image_node->image = stock_image_corrupted;
+                    }
                     cache.put(current->image_node->node, current->image_node);
                     current->completion(current->image_node->node);
                 }
@@ -474,6 +479,9 @@ public:
         }
         if (!stock_image_processing){
             stock_image_processing = CGImage_from_NSImage([PathNode processingImage], THUMBNAIL_MAX_SIZE);
+        }
+        if (!stock_image_corrupted){
+            stock_image_corrupted = CGImage_from_NSImage([PathNode corruptedImage], THUMBNAIL_MAX_SIZE);
         }
         _manager = std::make_unique<cache_manager>();
 
