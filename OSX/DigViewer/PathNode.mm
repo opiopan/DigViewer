@@ -565,16 +565,16 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     BOOL useEmbeddedThumbs = (self.imageNode.isRawImage && _thumbnailConfig.useEmbeddedThumbnailForRAW) ||
                              (!self.imageNode.isRawImage && self.imageNode.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail);
     if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
-        NSString* extention = [NSString stringWithFormat:@".file:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter];
+        NSString* extention = [NSString stringWithFormat:@".file:%d:%lu", useEmbeddedThumbs, (unsigned long)self.imageNode->_thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
-        NSString* extention = [NSString stringWithFormat:@".folder:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter];
+        NSString* extention = [NSString stringWithFormat:@".folder:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter + self.imageNode->_thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }else{
         NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@:%lu", useEmbeddedThumbs,
                                                                                   _thumbnailConfig.folderIconSize,
                                                                                   _thumbnailConfig.folderIconOpacity,
-                                                                                  _thumbnailUpdateCounter];
+                                                                                  _thumbnailUpdateCounter + self.imageNode->_thumbnailUpdateCounter];
         return [self.imagePath stringByAppendingString:extention];
     }
 }

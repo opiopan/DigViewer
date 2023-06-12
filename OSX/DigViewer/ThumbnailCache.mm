@@ -360,7 +360,7 @@ public:
                         auto&& image = composit_folder_image(src, config.representation_type, THUMBNAIL_MAX_SIZE, config);
                         lock.lock();
                         current->folder_node->image = image;
-                        folder_cache.put(current->folder_node->node, current->folder_node);
+                        folder_cache.put(current->image_node->node, current->folder_node);
                     }
                     current->completion(current->folder_node->node);
                 }
@@ -395,8 +395,7 @@ public:
         std::lock_guard<std::mutex> lock{mutex};
         auto need_rendering_as_folder = !node.isImage && rendering_config.representation_type != FolderThumbnailOnlyImage;
         PathNode* image_node = node.imageNode;
-        id target_id = need_rendering_as_folder ? node : image_node;
-        auto cached_entry = need_rendering_as_folder ? folder_cache.get(target_id) : cache.get(target_id);
+        auto cached_entry = need_rendering_as_folder ? folder_cache.get(image_node) : cache.get(image_node);
         if (cached_entry){
             auto image{cached_entry->image};
             return image.transferOwnership();
