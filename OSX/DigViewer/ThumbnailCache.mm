@@ -33,6 +33,7 @@ static ECGImageRef stock_image_corrupted;
 // Image cache pool
 //-----------------------------------------------------------------------------------------
 struct cache_entry{
+    void* key;
     __weak id node {nullptr};
     ECGImageRef image{nullptr};
 };
@@ -63,10 +64,11 @@ public:
     }
     
     void put(__weak id key, cache_entry_ptr& value){
+        value->key = (__bridge void*)key;
         if (pool.size() >= size){
             auto itr = pool.end();
             itr--;
-            index.erase((__bridge  void*)(*itr)->node);
+            index.erase((*itr)->key);
             pool.pop_back();
         }
         pool.push_front(value);

@@ -43,6 +43,22 @@
 
 - (void) awakeFromNib
 {
+    [_arrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:nil];
+}
+
+- (void)prepareForClose
+{
+    [_arrayController removeObserver:self forKeyPath:@"selectionIndexes"];
+}
+
+//-----------------------------------------------------------------------------------------
+// Observing other objects
+//-----------------------------------------------------------------------------------------
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if (object == _arrayController){
+        [_tableView scrollRowToVisible:_tableView.selectedRowIndexes.firstIndex];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

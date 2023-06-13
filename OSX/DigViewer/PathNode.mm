@@ -620,12 +620,24 @@ static const CGFloat ThumbnailMaxSizeDefault = 384;
 
 - (void) updateThumbnailCounter
 {
-    _thumbnailUpdateCounter++;
+    if (self.isImage){
+        _thumbnailUpdateCounter++;
+    }else{
+        for (PathNode* target = self.imageNode.parent; target; target = target.parent){
+            target->_thumbnailUpdateCounter++;
+        }
+    }
 }
 
 - (void) notifyUpdatedThumnailImage
 {
-    _thumbnailUpdateCounter++;
+    if (self.isImage){
+        _thumbnailUpdateCounter++;
+    }else{
+        for (PathNode* target = self.imageNode.parent; target; target = target.parent){
+            target->_thumbnailUpdateCounter++;
+        }
+    }
     if (!_isPendingThumbnailViewUpdating){
         [self performSelector:@selector(updateThumbnailView) withObject:nil afterDelay:0.4];
         _isPendingThumbnailViewUpdating = YES;
