@@ -75,6 +75,8 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     BOOL _needToRebuildMenuForBrowsingContext;
     NewBrowsingContextController* _newBrowsingContextController;
     ManageBrowsingContextConroller* _manageBrowsingContextController;
+    NSTimeInterval _lastMouseMoveTime;
+    NSTimer* _eventObservingTimer;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -159,6 +161,13 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     [self.viewSelectionButton setImage:[PortableSystemImages iconLeftPane] forSegment:0];
     [self.viewSelectionButton setImage:[PortableSystemImages iconRightPane] forSegment:1];
     [self.thumbnailSelectionButton setImage:[PortableSystemImages iconView] forSegment:0];
+    
+    // enabel mouse move event
+    self.window.acceptsMouseMovedEvents = YES;
+    _lastMouseMoveTime = [NSDate timeIntervalSinceReferenceDate];
+    _eventObservingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 repeats:YES block:^(NSTimer* timer){
+        [self hideMouseCursorIfNeeded];
+    }];
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -1121,6 +1130,34 @@ static NSString* kAppImage = @"image";
 - (void)didEndManageBrowsingContext:(id)object
 {
     _manageBrowsingContextController = nil;
+}
+
+//-----------------------------------------------------------------------------------------
+// mouse coursor visibility control
+//-----------------------------------------------------------------------------------------
+#define HIDE_CURSOR_TIMEPERIOD 4
+
+- (void)mouseMoved:(NSEvent *)event
+{
+    [self showMouseCursorIfNeeded];
+}
+
+- (void)showMouseCursorIfNeeded
+{
+    CGDisplayShowCursor(kCGDirectMainDisplay);
+    _lastMouseMoveTime = [NSDate timeIntervalSinceReferenceDate];
+}
+
+- (void)hideMouseCursorIfNeeded
+{
+    NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+    if (now - _lastMouseMoveTime > HIDE_CURSOR_TIMEPERIOD){
+        if (self.window.isKeyWindow && self.window.firstResponder){
+            CGDisplayHideCursor(kCGDirectMainDisplay);
+        }else{
+            _lastMouseMoveTime = now;
+        }
+    }
 }
 
 @end
