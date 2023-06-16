@@ -22,7 +22,7 @@
     BOOL _isRescheduling;
 }
 
-@synthesize zoomRethio;
+@synthesize zoomRatio;
 @synthesize thumbnailView;
 @synthesize imageArrayController;
 
@@ -139,21 +139,33 @@
     }
 }
 
-- (void)setZoomRethio:(double)value
+- (void)setZoomRathio:(double)value
 {
-    zoomRethio = value;
-    NSSize size = {zoomRethio, zoomRethio};
-    thumbnailView.cellSize = size;
+    zoomRatio = value;
+    [self setThumbnailCellSize];
 }
 
-- (double)zoomRethio
+- (double)zoomRathio
 {
-    return zoomRethio;
+    return zoomRatio;
+}
+
+- (void)setIsMagnifiedThumbnail:(BOOL)value
+{
+    _isMagnifiedThumbnail = value;
+    [self setThumbnailCellSize];
+}
+
+- (void)setThumbnailCellSize
+{
+    double length = zoomRatio * (_isMagnifiedThumbnail ? 2.0 : 1.0);
+    NSSize size = {length, length};
+    thumbnailView.cellSize = size;
 }
 
 - (IBAction)onDefaultSize:(id)sender
 {
-    self.zoomRethio = [[[ThumbnailConfigController sharedController] defaultSize] doubleValue];
+    self.zoomRatio = [[[ThumbnailConfigController sharedController] defaultSize] doubleValue];
 }
 
 - (IBAction)onUpFolder:(id)sender
@@ -171,10 +183,14 @@
 // View状態属性の実装
 //-----------------------------------------------------------------------------------------
 static NSString* kZoomRatio = @"zoomRatio";
+static NSString* kMagnifyThumbnail = @"magnifyThumbnail";
 
 - (NSDictionary *)preferences
 {
-    NSDictionary* rc = @{kZoomRatio: @(zoomRethio)};
+    NSDictionary* rc = @{
+        kZoomRatio: @(zoomRatio),
+        kMagnifyThumbnail: @(_isMagnifiedThumbnail),
+    };
     return rc;
 }
 
@@ -185,8 +201,8 @@ static NSString* kZoomRatio = @"zoomRatio";
 
 - (void)reflectPreferences:(NSDictionary *)preferences
 {
-    self.zoomRethio = [[preferences valueForKey:kZoomRatio] doubleValue];
-
+    self.zoomRatio = [[preferences valueForKey:kZoomRatio] doubleValue];
+    self.isMagnifiedThumbnail = [[preferences valueForKey:kMagnifyThumbnail] boolValue];
 }
 
 @end

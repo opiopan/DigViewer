@@ -86,7 +86,7 @@
                                     </constraints>
                                     <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="32" maxValue="256" doubleValue="64" tickMarkPosition="above" sliderType="linear" id="100311"/>
                                     <connections>
-                                        <binding destination="-2" name="value" keyPath="self.zoomRethio" id="100316"/>
+                                        <binding destination="-2" name="value" keyPath="self.zoomRatio" id="epC-Jg-TYj"/>
                                     </connections>
                                 </slider>
                                 <button toolTip="Change the icon size to default" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100319" userLabel="Default size Button">
@@ -132,13 +132,31 @@
                                         <action selector="onDownFolder:" target="-2" id="100328"/>
                                     </connections>
                                 </button>
+                                <button toolTip="Increase the icon size by 2X" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Tx-Ho-abr" userLabel="Magnify Button">
+                                    <rect key="frame" x="392" y="-1" width="50" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="36" id="SaG-pU-nlG"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="push" title="▼" bezelStyle="rounded" image="magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cMI-dG-5o2">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <string key="keyEquivalent"></string>
+                                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.isMagnifiedThumbnail" id="FvF-B3-1Wa"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="0Tx-Ho-abr" firstAttribute="centerY" secondItem="b1G-I7-XQS" secondAttribute="centerY" id="6BM-lz-46z"/>
                                 <constraint firstItem="100322" firstAttribute="leading" secondItem="100319" secondAttribute="trailing" constant="32" id="8Z8-YE-s4d"/>
                                 <constraint firstItem="100325" firstAttribute="centerY" secondItem="b1G-I7-XQS" secondAttribute="centerY" id="C8r-BG-boB"/>
+                                <constraint firstItem="0Tx-Ho-abr" firstAttribute="leading" secondItem="100325" secondAttribute="trailing" constant="32" id="Fig-iI-pJ5"/>
                                 <constraint firstItem="100325" firstAttribute="leading" secondItem="100322" secondAttribute="trailing" constant="12" symbolic="YES" id="Flu-IY-1Z4"/>
                                 <constraint firstItem="100319" firstAttribute="leading" secondItem="100310" secondAttribute="trailing" constant="8" symbolic="YES" id="KMd-RD-7rl"/>
                                 <constraint firstItem="100310" firstAttribute="leading" secondItem="100312" secondAttribute="trailing" constant="8" symbolic="YES" id="QEK-zV-l9z"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Tx-Ho-abr" secondAttribute="trailing" constant="20" symbolic="YES" id="XPz-eD-rnz"/>
                                 <constraint firstItem="100322" firstAttribute="centerY" secondItem="b1G-I7-XQS" secondAttribute="centerY" id="YT3-pT-OHW"/>
                                 <constraint firstItem="100310" firstAttribute="centerY" secondItem="b1G-I7-XQS" secondAttribute="centerY" id="flc-Ol-AeX"/>
                                 <constraint firstItem="100312" firstAttribute="centerY" secondItem="b1G-I7-XQS" secondAttribute="centerY" id="ggR-vY-U0h"/>
@@ -170,5 +188,6 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="18" height="11"/>
         <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>
+        <image name="magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>
 </document>

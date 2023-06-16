@@ -10,10 +10,11 @@
 
 @interface ThumbnailViewController : NSViewController
 
-@property (assign) double zoomRethio;
+@property (assign) double zoomRatio;
 @property (weak) IBOutlet IKImageBrowserView *thumbnailView;
 @property (weak) IBOutlet NSScrollView *scrollView;
 @property (weak) IBOutlet NSArrayController *imageArrayController;
+@property (nonatomic) BOOL isMagnifiedThumbnail;
 
 - (IBAction)onDefaultSize:(id)sender;
 - (IBAction)onUpFolder:(id)sender;

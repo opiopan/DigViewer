@@ -16,3 +16,6 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Move to the selected folder or show full size image"; ObjectID = "100325"; */
 "100325.ibShadowedToolTip" = "選択したフォルダに移動、または選択した画像を拡大表示します";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Increase the icon size by 2X"; ObjectID = "0Tx-Ho-abr"; */
+"0Tx-Ho-abr.ibShadowedToolTip" = "アイコンを２倍に拡大表示します";

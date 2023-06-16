@@ -75,8 +75,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     BOOL _needToRebuildMenuForBrowsingContext;
     NewBrowsingContextController* _newBrowsingContextController;
     ManageBrowsingContextConroller* _manageBrowsingContextController;
-    NSTimeInterval _lastMouseMoveTime;
-    NSTimer* _eventObservingTimer;
+    BOOL _isCursorEnabled;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -164,10 +163,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     
     // enabel mouse move event
     self.window.acceptsMouseMovedEvents = YES;
-    _lastMouseMoveTime = [NSDate timeIntervalSinceReferenceDate];
-    _eventObservingTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 repeats:YES block:^(NSTimer* timer){
-        [self hideMouseCursorIfNeeded];
-    }];
+    _isCursorEnabled = YES;
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -361,6 +357,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 - (void)moveToNextImage:(id)sender
 {
     [self moveToImageNode:[[self.imageArrayController selectedObjects][0] nextImageNode]];
+    [self hideMouseCursorIfNeeded];
 }
 
 - (BOOL)validateForMoveToNextImage:(NSMenuItem*)menuItem
@@ -371,6 +368,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 - (void)moveToPreviousImage:(id)sender
 {
     [self moveToImageNode:[[self.imageArrayController selectedObjects][0] previousImageNode]];
+    [self hideMouseCursorIfNeeded];
 }
 
 - (BOOL)validateForMoveToPreviousImage:(NSMenuItem*)menuItem
@@ -397,6 +395,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 - (void)moveToNextFolder:(id)sender
 {
     [self moveToFolderNode:[[_imageTreeController selectedObjects][0] nextFolderNode]];
+    [self hideMouseCursorIfNeeded];
 }
 
 - (BOOL)validateForMoveToNextFolder:(NSMenuItem*)menuItem
@@ -407,6 +406,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 - (void)moveToPreviousFolder:(id)sender
 {
     [self moveToFolderNode:[[_imageTreeController selectedObjects][0] previousFolderNode]];
+    [self hideMouseCursorIfNeeded];
 }
 
 - (BOOL)validateForMoveToPreviousFolder:(NSMenuItem*)menuItem
@@ -520,11 +520,13 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
         [self setSlideshowMode:NO];
     }
     mainViewController.presentationViewType = type;
+    [self hideMouseCursorIfNeeded];
 }
 
 - (void) togglePresentationView:(id)sender
 {
     self.presentationViewType = self.presentationViewType == typeImageView ? typeThumbnailView : typeImageView;
+    [self hideMouseCursorIfNeeded];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -1135,7 +1137,10 @@ static NSString* kAppImage = @"image";
 //-----------------------------------------------------------------------------------------
 // mouse coursor visibility control
 //-----------------------------------------------------------------------------------------
-#define HIDE_CURSOR_TIMEPERIOD 4
+- (void)windowDidResignMain:(NSNotification *)notification
+{
+    [self showMouseCursorIfNeeded];
+}
 
 - (void)mouseMoved:(NSEvent *)event
 {
@@ -1144,19 +1149,21 @@ static NSString* kAppImage = @"image";
 
 - (void)showMouseCursorIfNeeded
 {
-    CGDisplayShowCursor(kCGDirectMainDisplay);
-    _lastMouseMoveTime = [NSDate timeIntervalSinceReferenceDate];
+    if (!_isCursorEnabled){
+        CGDisplayShowCursor(kCGDirectMainDisplay);
+        _isCursorEnabled = YES;
+    }
 }
 
 - (void)hideMouseCursorIfNeeded
 {
-    NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
-    if (now - _lastMouseMoveTime > HIDE_CURSOR_TIMEPERIOD){
-        if (self.window.isKeyWindow && self.window.firstResponder){
+    if (self.presentationViewType == typeImageView){
+        if (_isCursorEnabled){
             CGDisplayHideCursor(kCGDirectMainDisplay);
-        }else{
-            _lastMouseMoveTime = now;
+            _isCursorEnabled = NO;
         }
+    }else{
+        [self showMouseCursorIfNeeded];
     }
 }
 
