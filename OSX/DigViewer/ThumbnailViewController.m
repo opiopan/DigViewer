@@ -139,13 +139,13 @@
     }
 }
 
-- (void)setZoomRathio:(double)value
+- (void)setZoomRatio:(double)value
 {
     zoomRatio = value;
     [self setThumbnailCellSize];
 }
 
-- (double)zoomRathio
+- (double)zoomRatio
 {
     return zoomRatio;
 }

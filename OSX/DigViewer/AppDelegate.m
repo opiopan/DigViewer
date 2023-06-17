@@ -109,11 +109,15 @@ static NSString* serverEnableKey = @"dvremoteEnable";
 {
     NSOpenPanel* openPanel = [NSOpenPanel openPanel];
     openPanel.canChooseDirectories = YES;
-    openPanel.canChooseFiles = NO;
+    openPanel.canChooseFiles = YES;
     if ([openPanel runModal] == NSModalResponseOK){
         NSDocumentController* controller = [NSDocumentController sharedDocumentController];
         [controller openDocumentWithContentsOfURL:openPanel.URL display:YES
-                                completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){}];
+                                completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){
+            if (error){
+                [NSApp presentError:error];
+            }
+        }];
     }
 }
 
