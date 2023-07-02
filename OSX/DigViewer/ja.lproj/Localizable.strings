@@ -110,10 +110,11 @@
 "CDMSG_ERROR_ONLYONE" = "1つだけしか条件が存在しないため削除することができません。";
 
 // Loadingシート
-"Now loading a pinned file in the folder:" = "ピン留めファイルをロード中:";
-"Now recognizing a pinned file in the folder:" = "ピン留めファイルを解析中:";
-"Now searching image files in the folder:" = "画像ファイルを検索中:";
-"Now extracting image date time in a folder:" = "画像の撮影日時を抽出中:";
+"LDMSG_OPENNING_PINNED_FILE" = "ピン留めファイルをロード中:";
+"LDMSG_RECOGNIZING_PINNED_FILE" = "ピン留めファイルを解析中:";
+"LDMSG_SEARCHING_IMAGE" = "画像ファイルを検索中:";
+"LDMSG_LOADING_LIBRARY" = "写真ライブラリをロード中:";
+"LDMSG_EXTRACTING_TIME" = "画像の撮影日時を抽出中:";
 
 // メニュータイトル
 "Show Navigator" = "ナビゲーターを表示";
@@ -270,3 +271,10 @@
 // messages for browsing context operation
 "BCTX_CONFIRM_REMOVE" = "選択されたブラウズ コンテキスト '%@' を削除してもよろしいですか?";
 "BCTX_REMOVE_ERROR_DUE_TO_ACTIVE" = "選択されたブラウズ コンテキスト '%@' はアクティブのため削除できません";
+
+// Photos Library category names
+"PLC_PHOTOS" = "写真";
+"PLC_ALBUMS" = "アルバム";
+"PLC_SHARED_ALBUMS" = "共有アルバム";
+"PLC_PHOTO_STREAM" = "マイフォトストリーム";
+"PLC_MY_ALBUMS" = "マイアルバム";

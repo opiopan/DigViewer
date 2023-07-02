@@ -98,6 +98,7 @@
 		7B5C0A481B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */; };
 		7B5CD6E22A35C81100ED2434 /* corrupted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5CD6E02A35C81100ED2434 /* corrupted.png */; };
 		7B5CD6E32A35C81100ED2434 /* rendering.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5CD6E12A35C81100ED2434 /* rendering.png */; };
+		7B5CD6E52A4136AA00ED2434 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5CD6E42A4136A900ED2434 /* Photos.framework */; };
 		7B613F1D1C1076D6001B7E23 /* DevicePreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B613F1B1C1076D6001B7E23 /* DevicePreferences.strings */; };
 		7B61484B1B7B97AE00A03C45 /* InspectorArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */; };
 		7B61484E1B7BA1D200A03C45 /* InspectorView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B61484C1B7BA1D200A03C45 /* InspectorView.strings */; };
@@ -360,6 +361,7 @@
 		7B5C0A471B6A7899004FE1A0 /* ConditionMigrationPolicy2.1-2.2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConditionMigrationPolicy2.1-2.2.m"; sourceTree = "<group>"; };
 		7B5CD6E02A35C81100ED2434 /* corrupted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corrupted.png; path = resources/corrupted.png; sourceTree = "<group>"; };
 		7B5CD6E12A35C81100ED2434 /* rendering.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rendering.png; path = resources/rendering.png; sourceTree = "<group>"; };
+		7B5CD6E42A4136A900ED2434 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		7B613F1C1C1076D6001B7E23 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DevicePreferences.strings; sourceTree = "<group>"; };
 		7B6148491B7B97AE00A03C45 /* InspectorArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorArrayController.h; sourceTree = "<group>"; };
 		7B61484A1B7B97AE00A03C45 /* InspectorArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorArrayController.m; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 				7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */,
 				7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */,
 				7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */,
+				7B5CD6E52A4136AA00ED2434 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +594,7 @@
 		7B3920321696CA1800E139D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B5CD6E42A4136A900ED2434 /* Photos.framework */,
 				7B6148511B7C78C600A03C45 /* CoreLocation.framework */,
 				7B61484F1B7C78AD00A03C45 /* MapKit.framework */,
 				7B6B3B1318E438D00004098F /* WebKit.framework */,

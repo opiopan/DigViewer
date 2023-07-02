@@ -56,6 +56,13 @@
 "CEMSG_CONF_REMOVE" = "Are you sure you want to remove selected custom effect?";
 "CEMSG_ERROR_INVALID_COMPOSITION" = "Specified Quartz Composer Composition file is a format which DigViewer could not run.";
 
+// Loadingシート
+"LDMSG_OPENNING_PINNED_FILE" = "Now loading a pinned file in the folder:";
+"LDMSG_RECOGNIZING_PINNED_FILE" = "Now recognizing a pinned file in the folder:";
+"LDMSG_SEARCHING_IMAGE" = "Now searching image files in the folder:";
+"LDMSG_LOADING_LIBRARY" = "Now loading a Photos Library:";
+"LDMSG_EXTRACTING_TIME" = "Now extracting image date time in a folder:";
+
 // レンズプロファイル適用条件の表示名
 "LENS_MATCHING_BY_LENSNAME" = "By lens name";
 "LENS_MATCHING_BY_LENSNAME_AND_CAMERANAME" = "By lens name and camera name";
@@ -119,3 +126,10 @@
 // messages for browsing context operation
 "BCTX_CONFIRM_REMOVE" = "Are you sure you want to remove selected browsing '%@' context?";
 "BCTX_REMOVE_ERROR_DUE_TO_ACTIVE" = "Selected browsing context '%@' cannot be removed since it is active.";
+
+// Photos Library category names
+"PLC_PHOTOS" = "Photos";
+"PLC_ALBUMS" = "Albums";
+"PLC_SHARED_ALBUMS" = "Shared Albums";
+"PLC_PHOTO_STREAM" = "My Photo Stream";
+"PLC_MY_ALBUMS" = "My Albums";

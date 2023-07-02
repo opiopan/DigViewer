@@ -6,6 +6,7 @@
 //  Copyright © 2023 Hiroshi Murayama <opiopan@gmail.com>. All rights reserved.
 //
 
+#import <Photos/Photos.h>
 #import "ThumbnailCache.h"
 #import "PathNode.h"
 #import "ThumbnailConfigController.h"
@@ -92,6 +93,7 @@ struct rendering_command{
     bool is_image;
     bool is_raster_image;
     bool is_raw_image;
+    bool is_photos_library;
     void (^completion)(__weak id);
 };
 using rendering_command_ptr = std::shared_ptr<rendering_command>;
@@ -193,7 +195,29 @@ static CGImageRef render_thumbnail_image(const rendering_command& command, CGFlo
     CGFloat thumbnail_max_size = thumbnail_size == 0. ? THUMBNAIL_MAX_SIZE : thumbnail_size;
     
     ECGImageRef thumbnail;
-    if (command.is_raster_image){
+    if (command.is_photos_library){
+        if (@available(macOS 10.15, *)){
+            PHFetchResult<PHAsset*>* assets = [PHAsset fetchAssetsWithLocalIdentifiers:@[command.image_path] options:nil];
+            __block NSImage* image = nil;
+            if (assets.count > 0){
+                PHImageRequestOptions* options = [PHImageRequestOptions new];
+                options.synchronous = YES;
+                options.networkAccessAllowed = YES;
+                //options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+                [[PHImageManager defaultManager] requestImageForAsset:assets[0]
+                                                           targetSize:CGSizeMake(thumbnail_max_size, thumbnail_max_size)
+                                                          contentMode:PHImageContentModeAspectFit options:options
+                                                        resultHandler:^(NSImage* result, NSDictionary* info){
+                    image = result;
+                }];
+                if (image){
+                    thumbnail = CGImage_from_NSImage(image, thumbnail_max_size);
+                }else{
+                    thumbnail = stock_image_unavailable;
+                }
+            }
+        }
+    }else if (command.is_raster_image){
         NSURL* url = [NSURL fileURLWithPath:command.image_path];
         ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
         if (!imageSource.isNULL()){
@@ -415,6 +439,7 @@ public:
                 entry->image_path = image_node.imagePath;
                 entry->is_raw_image = image_node.isRawImage;
                 entry->is_raster_image = image_node.isRasterImage;
+                entry->is_photos_library = image_node.isPhotosLibraryImage;
                 entry->completion = completion;
                 queue.push_back(entry);
                 auto itr = queue.end();
@@ -512,6 +537,7 @@ public:
     entry.image_path = image_node.imagePath;
     entry.is_raw_image = image_node.isRawImage;
     entry.is_raster_image = image_node.isRasterImage;
+    entry.is_photos_library = image_node.isPhotosLibraryImage;
     thumbnail_config config;
     cache_manager::make_rendering_config(config);
     auto&& image = render_thumbnail_image(entry, size, config);

@@ -104,7 +104,7 @@
     }
     loadingModelOption = option;
     loader = [[LoadingSheetController alloc] init];
-    [loader loadPath:[self.fileURL path] forWindow:self.windowForSheet modalDelegate:self
+    [loader loadPath:[self.fileURL path] ofType:self.fileType forWindow:self.windowForSheet modalDelegate:self
       didEndSelector:@selector(didEndLoadingDocument:) condition:loadingModelOption.condition];
 }
 

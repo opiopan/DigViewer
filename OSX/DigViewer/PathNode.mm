@@ -7,6 +7,7 @@
 //
 
 #import <quartz/Quartz.h>
+#import <Photos/Photos.h>
 
 #import "PathNode.h"
 #import "PathfinderPinnedFile.h"
@@ -19,6 +20,7 @@
 #include "CoreFoundationHelper.h"
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <vector>
 
 //-----------------------------------------------------------------------------------------
 // Cache manager holder
@@ -64,6 +66,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 @synthesize imagePath = _imagePath;
 @synthesize originalPath = _originalPath;
 @synthesize isRawImage = _isRawImage;
+@synthesize isPhotosLibraryImage = _isPhotosLibraryImage;
 
 //-----------------------------------------------------------------------------------------
 // stock images
@@ -124,6 +127,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _graphConfig.sortAsNumeric = YES;
         _thumbnailUpdateCounter = 0;
         _isPendingThumbnailViewUpdating = NO;
+        _isPhotosLibraryImage = NO;
     }
     return self;
 }
@@ -281,6 +285,55 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }
 }
 
++ (PathNode*) pathNodeForPhotosLibraryWithName:(NSString*)name
+                              omitingCondition:(PathNodeOmmitingCondition*)cond
+                                        option:(PathNodeCreateOption*)option
+                                      progress:(PathNodeProgress*)progress
+{
+    struct category{
+        PHAssetCollectionType type;
+        PHAssetCollectionSubtype subtype;
+        __strong NSArray<NSString*>* path;
+    };
+    static std::vector<category> categories{
+        category{PHAssetCollectionTypeSmartAlbum, PHAssetCollectionSubtypeAny, @[NSLocalizedString(@"PLC_PHOTOS", nil)]},
+        category{
+            PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumCloudShared,
+            @[NSLocalizedString(@"PLC_ALBUMS", nil), NSLocalizedString(@"PLC_SHARED_ALBUMS", nil)]
+        },
+        category{
+            PHAssetCollectionTypeAlbum, PHAssetCollectionSubtypeAlbumMyPhotoStream,
+            @[NSLocalizedString(@"PLC_ALBUMS", nil), NSLocalizedString(@"PLC_PHOTO_STREAM", nil)]
+        },
+    };
+    
+    if (@available(macOS 10.15, *)) {
+        PathNode* root = [[PathNode alloc] initWithName:name parent:nil path:nil originalPath:nil];
+        
+        for (auto& category : categories){
+            PHFetchResult<PHAssetCollection*>* collection =
+                [PHAssetCollection fetchAssetCollectionsWithType:category.type subtype:category.subtype options:nil];
+            for (PHAssetCollection* assets in collection){
+                [root mergePhotosLibraryCollection:assets withPrefix:category.path];
+            }
+        }
+        
+        static NSArray* path = @[NSLocalizedString(@"PLC_ALBUMS", nil), NSLocalizedString(@"PLC_MY_ALBUMS", nil)];
+        PHFetchResult<PHCollection*>* my_albums = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
+        for (PHCollection* list in my_albums){
+            [root mergePhotosLibraryCollection:list withPrefix:path];
+        }
+        
+        if (root->_allChildren.count > 0){
+            return root;
+        }else{
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
 + (PathNode *)psudoPathNodeWithName:(NSString *)name imagePath:(NSString *)path isFolder:(BOOL)isFolder
 {
     PathNode* parent = nil;
@@ -294,6 +347,75 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     }else{
         return child;
     }
+}
+
+//-----------------------------------------------------------------------------------------
+// Building tree from Photos Library
+//-----------------------------------------------------------------------------------------
+- (void) mergePhotosLibraryCollection:(PHCollection*)collection withPrefix:(NSArray<NSString*>*)prefix
+{
+    if (@available(macOS 10.15, *)) {
+        if (prefix.count > 0){
+            auto index = _folderChildren ? [_folderChildren indexOfObjectPassingTest:^(PathNode* obj, NSUInteger idx, BOOL* stop){
+                return [obj.name isEqualToString:prefix[0]];
+            }] : NSNotFound;
+            PathNode* child = nil;
+            if (index != NSNotFound){
+                child = _folderChildren[index];
+            }else{
+                child = [[PathNode alloc] initWithName:prefix[0] parent:self path:nil originalPath:nil];
+            }
+            NSArray* newprefix = prefix.count > 1 ? [prefix subarrayWithRange:NSMakeRange(1, prefix.count - 1)] : nil;
+            [child mergePhotosLibraryCollection:collection withPrefix:newprefix];
+            if (index == NSNotFound && child->_allChildren){
+                [self addChildNode: child];
+            }
+        }else{
+            PathNode* child = [[PathNode alloc] initWithName:collection.localizedTitle parent:self path:nil originalPath:nil];
+            if ([collection isKindOfClass:PHAssetCollection.class]){
+                PHFetchResult<PHAsset*>* assets = [PHAsset fetchAssetsInAssetCollection:(PHAssetCollection*)collection options:nil];
+                for (PHAsset* asset in assets){
+                    NSString* imageName = [NSString stringWithFormat:@"image%lu", (unsigned long)child->_allChildren.count + 1];
+                    PathNode* image = [[PathNode alloc] initWithName: imageName parent:child
+                                                                path:asset.localIdentifier
+                                                        originalPath:asset.localIdentifier];
+                    image->_isPhotosLibraryImage = YES;
+                    [child addChildNode:image];
+                }
+            }else if ([collection isKindOfClass:PHCollectionList.class]){
+                PHFetchResult<PHCollection*>* subcollections =
+                    [PHCollectionList fetchCollectionsInCollectionList:(PHCollectionList*)collection options:nil];
+                for (PHCollection* subcollection in subcollections){
+                    [child mergePhotosLibraryCollection:subcollection withPrefix:nil];
+                }
+            }
+            if (child->_allChildren){
+                [self addChildNode:child];
+            }
+        }
+    }
+}
+
+- (void) addChildNode:(PathNode*)child
+{
+    if (!_allChildren){
+        _allChildren = [NSMutableArray new];
+    }
+    if (child->_imagePath){
+        if (!_imageChildren){
+            _imageChildren = [NSMutableArray new];
+        }
+        child->_indexInParentForSameKind = _imageChildren.count;
+        [(NSMutableArray*)_imageChildren addObject:child];
+    }else{
+        if (!_folderChildren){
+            _folderChildren = [NSMutableArray new];
+        }
+        child->_indexInParentForSameKind = _folderChildren.count;
+        [(NSMutableArray*)_folderChildren addObject:child];
+    }
+    child->_indexInParentForAllNodes = _allChildren.count;
+    [(NSMutableArray*)_allChildren addObject:child];
 }
 
 //-----------------------------------------------------------------------------------------

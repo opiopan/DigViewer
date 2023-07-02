@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------------------
 // μs精度通算秒
 //-----------------------------------------------------------------------------------------
-static inline NSTimeInterval nowInEpocTime(){
+static inline NSTimeInterval nowInEpocTime(void){
     struct timeval timeval;
     gettimeofday(&timeval, NULL);
     return (double)timeval.tv_sec + (double)timeval.tv_usec / 1000000.0;

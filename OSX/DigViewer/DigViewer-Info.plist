@@ -62,5 +62,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>DigViewer display images in the Photos Library, but it does not modify or delete any data in  the library.</string>
 </dict>
 </plist>

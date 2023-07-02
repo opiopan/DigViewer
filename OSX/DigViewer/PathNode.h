@@ -65,6 +65,7 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 @property (nonatomic, readonly) BOOL            isImage;
 @property (nonatomic, readonly) BOOL            isRawImage;
 @property (nonatomic, readonly) BOOL            isRasterImage;
+@property (nonatomic, readonly) BOOL            isPhotosLibraryImage;
 @property (nonatomic, readonly) NSArray*        images;
 @property (nonatomic, readonly) NSUInteger      indexInParent;
 @property (nonatomic, readonly) PathNode*       imageNode;
@@ -91,6 +92,10 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
                    ommitingCondition:(PathNodeOmmitingCondition*)cond
                               option:(PathNodeCreateOption*)option
                             progress:(PathNodeProgress*)progress;
++ (PathNode*) pathNodeForPhotosLibraryWithName:(NSString*)name
+                              omitingCondition:(PathNodeOmmitingCondition*)cond
+                                        option:(PathNodeCreateOption*)option
+                                      progress:(PathNodeProgress*)progress;
 + (PathNode*) psudoPathNodeWithName:(NSString*)name imagePath:(NSString*)path isFolder:(BOOL)isFolder;
 
 // stock image accesser

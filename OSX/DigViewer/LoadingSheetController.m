@@ -6,11 +6,14 @@
 //  Copyright (c) 2013年 opiopan. All rights reserved.
 //
 
+#import <Photos/Photos.h>
+
 #import "LoadingSheetController.h"
 #import "PathNode.h"
 
 @implementation LoadingSheetController{
     NSString*                  path;
+    NSString*                  fileType;
     PathNode*                  root;
     PathNodeProgress*          pathNodeProgress;
     NSWindow*                  modalWindow;
@@ -55,10 +58,11 @@
 //-----------------------------------------------------------------------------------------
 // ドキュメントロード
 //-----------------------------------------------------------------------------------------
-- (void) loadPath:(NSString*)p forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
+- (void) loadPath:(NSString*)p ofType:(NSString*)type forWindow:(NSWindow*)window modalDelegate:(id)delegate didEndSelector:(SEL)selector
         condition:(PathNodeOmmitingCondition*)cond;
 {
     path = p;
+    fileType = type;
     modalWindow = window;
     modalDelegate = delegate;
     didEndSelector = selector;
@@ -66,6 +70,32 @@
     isLoading = YES;
     isShowing = NO;
     
+    if ([fileType isEqualToString:@"com.apple.photos.library"]){
+        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+        if (status == PHAuthorizationStatusAuthorized){
+            [self proceedLoadPath];
+        }else if (status == PHAuthorizationStatusNotDetermined){
+            LoadingSheetController* __weak weakSelf = self;
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
+                if (status == PHAuthorizationStatusAuthorized){
+                    [weakSelf proceedLoadPath];
+                }else{
+                    [weakSelf proceedLoadPath];
+                }
+            }];
+        }else{
+            LoadingSheetController* __weak weakSelf = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf proceedLoadPath];
+            });
+        }
+    }else{
+        [self proceedLoadPath];
+    }
+}
+
+- (void)proceedLoadPath
+{
     [self performSelectorInBackground:@selector(loadPinnedFileInBackground) withObject:nil];
     [self performSelector:@selector(showPanel) withObject:nil afterDelay:0.5f];
 }
@@ -73,21 +103,27 @@
 - (void) loadPinnedFileInBackground
 {
     @autoreleasepool {
-        self.phase = NSLocalizedString(@"Now loading a pinned file in the folder:", nil);
+        self.phase = NSLocalizedString(@"LDMSG_OPENNING_PINNED_FILE", nil);
         self.targetFolder = path;
-        PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
         NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
         PathNodeCreateOption option;
         option.isSortByCaseInsensitive = [[controller.values valueForKey:@"pathNodeSortCaseInsensitive"] boolValue];
         option.isSortAsNumeric = [[controller.values valueForKey:@"pathNodeSortAsNumeric"] boolValue];
-        if (pinnedFile){
-            self.phase = NSLocalizedString(@"Now recognizing a pinned file in the folder:", nil);
-            self.isIndeterminate = NO;
-            root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition
-                                             option:&option progress:pathNodeProgress];
-        }else{
-            self.phase = NSLocalizedString(@"Now searching image files in the folder:", nil);
-            root = [PathNode pathNodeWithPath:path  ommitingCondition:condition option:&option progress:pathNodeProgress];
+        if ([fileType isEqualToString:@"public.folder"]){
+            PathfinderPinnedFile* pinnedFile = [PathfinderPinnedFile pinnedFileWithPath:path];
+            if (pinnedFile){
+                self.phase = NSLocalizedString(@"LDMSG_RECOGNIZING_PINNED_FILE", nil);
+                self.isIndeterminate = NO;
+                root = [PathNode pathNodeWithPinnedFile:pinnedFile ommitingCondition:condition
+                                                 option:&option progress:pathNodeProgress];
+            }else{
+                self.phase = NSLocalizedString(@"LDMSG_SEARCHING_IMAGE", nil);
+                root = [PathNode pathNodeWithPath:path  ommitingCondition:condition option:&option progress:pathNodeProgress];
+            }
+        }else if ([fileType isEqualToString:@"com.apple.photos.library"]){
+            self.phase = NSLocalizedString(@"LDMSG_LOADING_LIBRARY", nil);
+            root = [PathNode pathNodeForPhotosLibraryWithName:path.lastPathComponent.stringByDeletingPathExtension
+                                             omitingCondition:condition option:&option progress:pathNodeProgress];
         }
         [self performSelectorOnMainThread:@selector(didEndLoading) withObject:nil waitUntilDone:NO];
     }
@@ -163,7 +199,7 @@
 - (void)loadImageDateTimeInBackground
 {
     @autoreleasepool {
-        self.phase = NSLocalizedString(@"Now extracting image date time in a folder:", nil);
+        self.phase = NSLocalizedString(@"LDMSG_EXTRACTING_TIME", nil);
         self.isIndeterminate = NO;
         self.targetFolder = root.originalPath;
         NSArray* children = root.images;

@@ -20,7 +20,7 @@
 @property (strong) IBOutlet NSPanel *panel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
-- (void) loadPath:(NSString*)path forWindow:(NSWindow*)window
+- (void) loadPath:(NSString*)path ofType:(NSString*)type forWindow:(NSWindow*)window
     modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector
         condition:(PathNodeOmmitingCondition*)cond;
 
