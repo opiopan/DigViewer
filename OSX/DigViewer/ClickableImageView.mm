@@ -431,7 +431,7 @@ static const CGFloat SwipeGestureScale = 2.5;
         }
         CGFloat xOffset = (boundsRect.size.width - imageSize.width * ratio) / 2;
         CGFloat yOffset = (boundsRect.size.height - imageSize.height * ratio) / 2;
-        CGContextRef context = reinterpret_cast<CGContext*>([[NSGraphicsContext currentContext] graphicsPort]);
+        CGContextRef context = reinterpret_cast<CGContext*>([[NSGraphicsContext currentContext] CGContext]);
         switch (rotation){
             case 1:
             case 2:

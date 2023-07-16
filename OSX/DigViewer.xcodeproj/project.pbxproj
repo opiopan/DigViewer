@@ -189,6 +189,7 @@
 		7BD1B5081AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5061AECCF1A008DF5C2 /* thumbnailSampleHorizontal.jpg */; };
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */; };
+		7BD51D052A62C20D00896530 /* DataCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD51D042A62C20D00896530 /* DataCache.mm */; };
 		7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */; };
 		7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */; };
 		7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */; };
@@ -503,6 +504,9 @@
 		7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnailSampleVertical.jpg; path = resources/thumbnailSampleVertical.jpg; sourceTree = "<group>"; };
 		7BD4BB3D1B78E116006C75BB /* EnhancedImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnhancedImageBrowserView.h; sourceTree = "<group>"; };
 		7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnhancedImageBrowserView.m; sourceTree = "<group>"; };
+		7BD51D032A62C1F400896530 /* DataCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
+		7BD51D042A62C20D00896530 /* DataCache.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DataCache.mm; sourceTree = "<group>"; };
+		7BD51D062A62C61A00896530 /* cache_common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = cache_common.h; sourceTree = "<group>"; };
 		7BD6CF2A1C0ACDA90063C2ED /* PairingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairingWindowController.h; sourceTree = "<group>"; };
 		7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingWindowController.m; sourceTree = "<group>"; };
 		7BD6CF331C0B202F0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PairingWindow.xib; sourceTree = "<group>"; };
@@ -706,13 +710,16 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		7B3D576B2A231B2A0004A8CF /* ThumbnailCache */ = {
+		7B3D576B2A231B2A0004A8CF /* Cache */ = {
 			isa = PBXGroup;
 			children = (
 				7B3D576C2A231B840004A8CF /* ThumbnailCache.h */,
 				7B3D576D2A231B840004A8CF /* ThumbnailCache.mm */,
+				7BD51D032A62C1F400896530 /* DataCache.h */,
+				7BD51D042A62C20D00896530 /* DataCache.mm */,
+				7BD51D062A62C61A00896530 /* cache_common.h */,
 			);
-			name = ThumbnailCache;
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		7B467D641B1200BD00969442 /* Touch gesture recognizers */ = {
@@ -756,7 +763,7 @@
 				7B6CE7B918B3970F00CD445A /* ImageMetadata.mm */,
 				7B9098301BA447E100B03FD8 /* ImageMetadataKV.h */,
 				7B9098311BA447E100B03FD8 /* ImageMetadataKV.m */,
-				7B3D576B2A231B2A0004A8CF /* ThumbnailCache */,
+				7B3D576B2A231B2A0004A8CF /* Cache */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -1200,7 +1207,8 @@
 		7B3920261696CA1800E139D0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1420;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = opiopan;
 			};
 			buildConfigurationList = 7B3920291696CA1800E139D0 /* Build configuration list for PBXProject "DigViewer" */;
@@ -1527,6 +1535,7 @@
 				7B3D576E2A231B840004A8CF /* ThumbnailCache.mm in Sources */,
 				7B467D671B12017A00969442 /* TouchGestureRecognizer.m in Sources */,
 				7B6F8E3129FC8C6C00C7C014 /* Shutter.metal in Sources */,
+				7BD51D052A62C20D00896530 /* DataCache.mm in Sources */,
 				7B6C3F3A2A060D8300364AF8 /* ManageBrowsingContextConroller.m in Sources */,
 				7B5C0A3F1B679C69004FE1A0 /* SelectDeletingConditionSheetController.m in Sources */,
 				7B0DBEDD16A296DC000365F4 /* ThumbnailViewController.m in Sources */,
@@ -2117,6 +2126,12 @@
 				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					QC_SILENCE_GL_DEPRECATION,
+					CI_SILENCE_GL_DEPRECATION,
+				);
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
@@ -2139,6 +2154,10 @@
 				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigViewer/DigViewer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					QC_SILENCE_GL_DEPRECATION,
+					CI_SILENCE_GL_DEPRECATION,
+				);
 				INFOPLIST_FILE = "DigViewer/DigViewer-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = DigViewer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";

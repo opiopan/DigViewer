@@ -181,7 +181,7 @@ static const CGFloat thumbnailSize = 256;
         NSData* data = [image TIFFRepresentation];
         NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
         NSDictionary* option = @{NSImageCompressionFactor: @0.7};
-        NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+        NSData* jpegData = [tiffRep representationUsingType:NSBitmapImageFileTypeJPEG properties:option];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[DVRemoteServer sharedServer] sendThumbnail:jpegData forNodeID:pathID
@@ -216,7 +216,7 @@ static const CGFloat thumbnailSize = 256;
         NSData* data = [image TIFFRepresentation];
         NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
         NSDictionary* option = @{NSImageCompressionFactor: @0.7};
-        NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+        NSData* jpegData = [tiffRep representationUsingType:NSBitmapImageFileTypeJPEG properties:option];
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[DVRemoteServer sharedServer] sendFullimage:jpegData forNodeID:nodeId inDocument:documentName

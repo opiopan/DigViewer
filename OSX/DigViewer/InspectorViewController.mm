@@ -698,7 +698,7 @@ static NSString* CategoryKML = @"KML";
     
     // TIFF→JPEG変換
     NSDictionary* option = @{NSImageCompressionFactor: @0.5};
-    NSData* jpegData = [tiffRep representationUsingType:NSJPEGFileType properties:option];
+    NSData* jpegData = [tiffRep representationUsingType:NSBitmapImageFileTypeJPEG properties:option];
     
     //ファイル出力
     return [jpegData writeToFile:path atomically:NO];

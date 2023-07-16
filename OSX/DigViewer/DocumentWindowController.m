@@ -597,7 +597,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 
 - (BOOL)validateForFitImageToScreen:(NSMenuItem*)menuItem
 {
-    [menuItem setState:self.isFitWindow ? NSOnState : NSOffState];
+    [menuItem setState:self.isFitWindow ? NSControlStateValueOn : NSControlStateValueOff];
     return YES;
 }
 
@@ -707,7 +707,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 
 - (BOOL)validateForToggleDateTimeSort:(NSMenuItem*)menuItem
 {
-    menuItem.state = _sortByDateTimeButtonState ? NSOnState : NSOffState;
+    menuItem.state = _sortByDateTimeButtonState ? NSControlStateValueOn : NSControlStateValueOff;
     return YES;
 }
 

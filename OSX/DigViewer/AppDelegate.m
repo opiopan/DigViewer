@@ -381,6 +381,6 @@ static NSData* pngFromNSImage(NSImage* image)
     [repImage addRepresentation:rep];
     NSData* data = [repImage TIFFRepresentation];
     NSBitmapImageRep* tiffRep = [NSBitmapImageRep imageRepWithData:data];
-    NSData* pngData = [tiffRep representationUsingType:NSPNGFileType properties:@{}];
+    NSData* pngData = [tiffRep representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
     return pngData;
 }

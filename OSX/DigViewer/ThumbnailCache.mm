@@ -11,12 +11,10 @@
 #import "PathNode.h"
 #import "ThumbnailConfigController.h"
 
-#include <memory>
 #include <string>
 #include <thread>
-#include <list>
-#include <unordered_map>
 #include <optional>
+#include "cache_common.h"
 #include "CoreFoundationHelper.h"
 
 static constexpr auto CACHE_SIZE = 300;
@@ -39,48 +37,7 @@ struct cache_entry{
     ECGImageRef image{nullptr};
 };
 using cache_entry_ptr = std::shared_ptr<cache_entry>;
-
-class lru_cache{
-    size_t size;
-    using pool_type = std::list<cache_entry_ptr>;
-    using pool_itr = pool_type::iterator;
-    pool_type pool;
-    std::unordered_map<void*, pool_itr> index;
-    
-public:
-    lru_cache(size_t size):size{size}{}
-    
-    std::shared_ptr<cache_entry> get(__weak id key){
-        auto keypt = (__bridge void*)key;
-        if (index.count(keypt) > 0){
-            auto value_itr = index[keypt];
-            auto value = *value_itr;
-            pool.erase(value_itr);
-            pool.push_front(value);
-            index[keypt] = pool.begin();
-            return value;
-        }else{
-            return nullptr;
-        }
-    }
-    
-    void put(__weak id key, cache_entry_ptr& value){
-        value->key = (__bridge void*)key;
-        if (pool.size() >= size){
-            auto itr = pool.end();
-            itr--;
-            index.erase((*itr)->key);
-            pool.pop_back();
-        }
-        pool.push_front(value);
-        index[(__bridge void*)key] = pool.begin();
-    }
-    
-    void clear(){
-        pool.clear();
-        index.clear();
-    }
-};
+using thumbnail_lru_cache = lru_cache<void*, cache_entry>;
 
 //-----------------------------------------------------------------------------------------
 // Rendering command definition
@@ -318,8 +275,8 @@ class cache_manager{
     wait_queue queue;
     std::unordered_map<void*, wait_queue_itr> queue_index;
     rendering_command_ptr current;
-    lru_cache cache{CACHE_SIZE};
-    lru_cache folder_cache{FOLDER_CACHE_SIZE};
+    thumbnail_lru_cache cache{CACHE_SIZE};
+    thumbnail_lru_cache folder_cache{FOLDER_CACHE_SIZE};
     std::thread renderer;
     thumbnail_config rendering_config;
     std::unordered_map<void*, void*> priority_targets;
@@ -360,7 +317,7 @@ public:
                 }
 
                 // render thumbnail of image node if necessary
-                auto&& image_entry = cache.get(current->image_node->node);
+                auto&& image_entry = cache.get((__bridge void*)current->image_node->node);
                 if (image_entry){
                     current->image_node = image_entry;
                 }else{
@@ -373,7 +330,8 @@ public:
                     }else{
                         current->image_node->image = stock_image_corrupted;
                     }
-                    cache.put(current->image_node->node, current->image_node);
+                    current->image_node->key = (__bridge void*)current->image_node->node;
+                    cache.put((__bridge void*)current->image_node->node, current->image_node);
                     current->completion(current->image_node->node);
                 }
                 
@@ -386,7 +344,8 @@ public:
                         auto&& image = composit_folder_image(src, config.representation_type, THUMBNAIL_MAX_SIZE, config);
                         lock.lock();
                         current->folder_node->image = image;
-                        folder_cache.put(current->image_node->node, current->folder_node);
+                        current->folder_node->key = (__bridge void*)current->image_node->node;
+                        folder_cache.put((__bridge void*)current->image_node->node, current->folder_node);
                     }
                     current->completion(current->folder_node->node);
                 }
@@ -421,7 +380,7 @@ public:
         std::lock_guard<std::mutex> lock{mutex};
         auto need_rendering_as_folder = !node.isImage && rendering_config.representation_type != FolderThumbnailOnlyImage;
         PathNode* image_node = node.imageNode;
-        auto cached_entry = need_rendering_as_folder ? folder_cache.get(image_node) : cache.get(image_node);
+        auto cached_entry = need_rendering_as_folder ? folder_cache.get((__bridge void*)image_node) : cache.get((__bridge void*)image_node);
         if (cached_entry){
             auto image{cached_entry->image};
             return image.transferOwnership();

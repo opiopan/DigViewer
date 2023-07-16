@@ -283,9 +283,11 @@ static NSString* JSHandlerName = @"DigViewer";
 //-----------------------------------------------------------------------------------------
 // JavaScript alert panel handling
 //-----------------------------------------------------------------------------------------
+/*
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame
 {
     NSLog(@"Javascript: %@\n", message);
 }
+ */
 
 @end
