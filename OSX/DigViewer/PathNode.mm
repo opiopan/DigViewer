@@ -685,6 +685,12 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     return _imageDateTime;
 }
 
+- (BOOL)isPhotosLibraryImage
+{
+    PathNode* node = self.imageNode;
+    return node ? node->_isPhotosLibraryImage : NO;
+}
+
 //-----------------------------------------------------------------------------------------
 // asynchronous operations
 //-----------------------------------------------------------------------------------------

@@ -206,7 +206,8 @@ static const NSInteger CACHE_SIZE = 10;
             entry.state = CacheVarid;
         }else if (needImage){
             ImageRenderer* renderer =
-                [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:relationalImage]];
+                [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:relationalImage]
+                                isPhotosLibraryImage:[_relationalImageAccessor isPhotosLibraryOfObject:relationalImage]];
             entry.image = renderer.image;
             entry.rotation = renderer.rotation;
             entry.state = CacheVarid;
@@ -238,7 +239,8 @@ static const NSInteger CACHE_SIZE = 10;
             entry == _previousEntry ? _previousLayer :
             nil;
             dispatch_async(_dispatchQue, ^(){
-                ImageRenderer* renderer = [ImageRenderer imageRendererWithPath:[accessor imagePathOfObject:entry.imageId]];
+                ImageRenderer* renderer = [ImageRenderer imageRendererWithPath:[accessor imagePathOfObject:entry.imageId]
+                                                          isPhotosLibraryImage:[accessor isPhotosLibraryOfObject:entry.imageId]];
                 entry.image = renderer.image;
                 entry.rotation = renderer.rotation;
                 [layer setImage:entry.image withRotation:entry.rotation];

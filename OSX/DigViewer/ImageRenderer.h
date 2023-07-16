@@ -11,9 +11,10 @@
 @interface ImageRenderer : NSObject
 
 @property (readonly, nonatomic) NSString* imagePath;
+@property (readonly, nonatomic) BOOL isPhotosLibraryImage;
 @property (readonly, nonatomic) id image;
 @property (readonly, nonatomic) NSInteger rotation;
 
-+ (id) imageRendererWithPath:(NSString*)imagePath;
++ (id) imageRendererWithPath:(NSString*)imagePath isPhotosLibraryImage:(BOOL)isPhotosLibraryImage;
 
 @end

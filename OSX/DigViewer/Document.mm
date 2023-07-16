@@ -198,10 +198,11 @@ static const CGFloat thumbnailSize = 256;
     NSString* documentName = self.fileURL.path;
     PathNode* currentNode = [root nearestNodeAtPortablePath:nodeId];
     NSString* imagePath = currentNode.imagePath;
+    BOOL isPhotosLibraryImage = currentNode.isPhotosLibraryImage;
 
     dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(que, ^(void){
-        ImageRenderer* renderer = [ImageRenderer imageRendererWithPath: imagePath];
+        ImageRenderer* renderer = [ImageRenderer imageRendererWithPath: imagePath isPhotosLibraryImage:isPhotosLibraryImage];
         NSInteger rotation = renderer.rotation;
         NSImage* image;
         id fullImage = renderer.image;

@@ -91,9 +91,10 @@ enum PanningMode{
     if (_isDrawingByLayer || _relationalImage != relationalImage){
         _relationalImage = relationalImage;
         if (_relationalImage){
-            _renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]];
+            _renderer = [ImageRenderer imageRendererWithPath:[_relationalImageAccessor imagePathOfObject:_relationalImage]
+                                        isPhotosLibraryImage:[_relationalImageAccessor isPhotosLibraryOfObject:_relationalImage]];
         }else{
-            _renderer = [ImageRenderer imageRendererWithPath:nil];
+            _renderer = [ImageRenderer imageRendererWithPath:nil isPhotosLibraryImage:NO];
         }
         _scale = 1.0;
         [self displayIfNeeded];

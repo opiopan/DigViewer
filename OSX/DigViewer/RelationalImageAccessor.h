@@ -14,10 +14,12 @@ typedef enum _RelationalImageDirection RelationalImageDirection;
 @interface RelationalImageAccessor : NSObject
 
 @property (nonatomic) SEL imagePathGetter;
+@property (nonatomic) SEL isPhotosLibraryImageGetter;
 @property (nonatomic) SEL nextObjectGetter;
 @property (nonatomic) SEL previousObjectGetter;
 
 - (NSString*)imagePathOfObject:(id)object;
+- (BOOL)isPhotosLibraryOfObject:(id)object;
 - (id)nextObjectOfObject:(id)object;
 - (id)previousObjectOfObject:(id)object;
 

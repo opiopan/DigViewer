@@ -10,18 +10,21 @@
 
 @interface RelationalImage : NSObject
 - (NSString*)imagePath;
+- (BOOL)isPhotosLibraryImage;
 - (id)nextImageNode;
 - (id)previousImageNode;
 @end
 
 @implementation RelationalImage
 - (NSString *)imagePath{return nil;}
+- (BOOL)isPhotosLibraryImage{return NO;}
 - (id)nextImageNode{return nil;}
 - (id)previousImageNode{return nil;}
 @end
 
 @implementation RelationalImageAccessor{
     NSInvocation* _imagePathInvocation;
+    NSInvocation* _isPhotosLibraryImageInvocation;
     NSInvocation* _nextObjectInvocation;
     NSInvocation* _previousObjectInvocation;
 }
@@ -40,6 +43,11 @@
         signature = [relationalImage methodSignatureForSelector:@selector(imagePath)];
         _imagePathInvocation = [NSInvocation invocationWithMethodSignature:signature];
         _imagePathInvocation.selector = _imagePathGetter;
+        
+        _isPhotosLibraryImageGetter = @selector(isPhotosLibraryImage);
+        signature = [relationalImage methodSignatureForSelector:@selector(isPhotosLibraryImage)];
+        _isPhotosLibraryImageInvocation = [NSInvocation invocationWithMethodSignature:signature];
+        _isPhotosLibraryImageInvocation.selector = _isPhotosLibraryImageGetter;
         
         _nextObjectGetter = @selector(nextImageNode);
         signature = [relationalImage methodSignatureForSelector:_nextObjectGetter];
@@ -63,6 +71,12 @@
     _imagePathInvocation.selector = _imagePathGetter;
 }
 
+- (void)setIsPhotosLibraryImageGetter:(SEL)isPhotosLibraryImageGetter
+{
+    _isPhotosLibraryImageGetter = isPhotosLibraryImageGetter;
+    _isPhotosLibraryImageInvocation.selector = _isPhotosLibraryImageGetter;
+}
+
 - (void)setNextObjectGetter:(SEL)nextObjectGetter
 {
     _nextObjectGetter = nextObjectGetter;
@@ -81,6 +95,11 @@
 - (NSString *)imagePathOfObject:(id)object
 {
     return [self invokeMethodForObject:object withInvocation:_imagePathInvocation];
+}
+
+- (BOOL)isPhotosLibraryOfObject:(id)object
+{
+    return [self invokeBoolMethodForObject:object withInvocation:_isPhotosLibraryImageInvocation];
 }
 
 - (id)nextObjectOfObject:(id)object
@@ -109,5 +128,16 @@
     
     return robject;
 }
+
+- (BOOL)invokeBoolMethodForObject:(id)object withInvocation:(NSInvocation*)invocation
+{
+    BOOL rc;
+    invocation.target = object;
+    [invocation invoke];
+    [invocation getReturnValue:&rc];
+    invocation.target = nil;
+    return rc;
+}
+
 
 @end
