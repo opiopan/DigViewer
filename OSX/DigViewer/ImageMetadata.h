@@ -40,7 +40,7 @@
 @property (readonly) NSArray* gpsInfoStrings;
 
 #if ! TARGET_OS_IPHONE
-- (id)initWithPathNode:(PathNode*)pathNode;
+- (id)initWithPathNode:(PathNode*)pathNode imageData:(NSData*)data type:(NSString*)uti;
 #endif
 - (id)initWithImage:(CGImageSourceRef)imageSource name:(NSString *)name typeName:(NSString*)typeName;
 - (NSArray*)summaryWithFilter:(NSArray*)filter;

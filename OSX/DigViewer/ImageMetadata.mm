@@ -415,16 +415,12 @@ extern NSString* dateTimeOfImage(PathNode* pathNode)
 // 初期化
 //-----------------------------------------------------------------------------------------
 #if ! TARGET_OS_IPHONE
-- (id)initWithPathNode:(PathNode *)pathNode
+- (id)initWithPathNode:(PathNode *)pathNode imageData:(NSData*)data type:(NSString*)uti
 {
     NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
     if (pathNode.isImage){
-        NSError* error;
-        NSString* type = [workspace localizedDescriptionForType:[workspace typeOfFile:pathNode.imagePath error:&error]];
-        NSURL* url = [NSURL fileURLWithPath:pathNode.imagePath];
-        ECGImageSourceRef imageSource(CGImageSourceCreateWithURL((__bridge CFURLRef)url, NULL));
-        
-        self = [self initWithImage:imageSource name:pathNode.name typeName:type];
+        ECGImageSourceRef imageSource(CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL));
+        self = [self initWithImage:imageSource name:pathNode.name typeName:[workspace localizedDescriptionForType:uti]];
         
         // PathNodeオブジェクトの撮影日時を更新
         NSString* dateTime = [_properties[propertyEXIF] valueForKey:(__bridge NSString*)kCGImagePropertyExifDateTimeOriginal];

@@ -16,6 +16,9 @@
 #include <stdexcept>
 #include "cache_common.h"
 
+
+namespace data_cache{
+
 static constexpr auto CACHE_SIZE = 16;
 static constexpr auto PROCESSING_NUM = 8;
 
@@ -25,6 +28,7 @@ static constexpr auto PROCESSING_NUM = 8;
 struct cache_entry{
     std::string key;
     NSData* data{nullptr};
+    NSString* uti;
 };
 using data_lru_cache = lru_cache<std::string, cache_entry>;
 using cache_entry_ptr = data_lru_cache::value_ptr;
@@ -70,6 +74,7 @@ public:
                 }
                 lock.unlock();
                 __block NSData* image_data = nil;
+                __block NSString* uti = nil;
                 if (@available(macOS 10.15, *)) {
                     NSString* identifier = [NSString stringWithUTF8String:context.entry->key.c_str()];
                     PHFetchResult<PHAsset*>* assets = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
@@ -82,15 +87,17 @@ public:
                                                                                                   CGImagePropertyOrientation orientation,
                                                                                                   NSDictionary* info){
                             image_data = data;
+                            uti = dataUTI;
                         }];
                     }
                 }
                 context.entry->data = image_data;
+                context.entry->uti = uti;
                 this->manager.add_data(context.entry);
                 lock.lock();
                 for (auto itr = context.completion_handlers.begin(); itr != context.completion_handlers.end(); itr++){
                     auto completion = *itr;
-                    dispatch_async(dispatch_get_main_queue(), ^{completion(image_data);});
+                    dispatch_async(dispatch_get_main_queue(), ^{completion(image_data, uti);});
                 }
                 auto entry = context.entry;
                 context.entry = nullptr;
@@ -135,7 +142,7 @@ public:
         }else{
             // It is theoretically possible to reach this route with an extremely low probability.
             // Unfortunately, if this route is entered, it will behave as if it cannot instantiate the image data.
-            dispatch_async(dispatch_get_main_queue(), ^{completion(nil);});
+            dispatch_async(dispatch_get_main_queue(), ^{completion(nil, @"");});
         }
     }
 };
@@ -180,8 +187,9 @@ public:
                 auto entry = cache.get(cmd->identifier);
                 if (entry){
                     NSData* data = entry->data;
+                    NSString* uti = entry->uti;
                     auto completion = cmd->completion;
-                    dispatch_async(dispatch_get_main_queue(), ^{completion(data);});
+                    dispatch_async(dispatch_get_main_queue(), ^{completion(data, uti);});
                 }else if (running_threads.count(cmd->identifier) > 0){
                     threads[running_threads[cmd->identifier]]->add_completion_handler(cmd->completion);
                 }else{
@@ -196,7 +204,7 @@ public:
         });
     }
     
-    ~cache_manager_imp(){
+    virtual ~cache_manager_imp(){
         stop();
     }
     
@@ -210,14 +218,16 @@ public:
     }
     
     void get_data(const std::string& identifier, DataCacheCompletion completion) override{
-        std::lock_guard lock{mutex};
+        std::unique_lock lock{mutex};
         auto entry = cache.get(identifier);
         if (entry){
             if ([NSThread isMainThread]){
-                completion(entry->data);
+                lock.unlock();
+                completion(entry->data, entry->uti);
             }else{
                 NSData* data = entry->data;
-                dispatch_async(dispatch_get_main_queue(), ^{completion(data);});
+                NSString* uti = entry->uti;
+                dispatch_async(dispatch_get_main_queue(), ^{completion(data, uti);});
             }
         }else{
             auto cmd = std::make_shared<command>();
@@ -242,18 +252,20 @@ public:
     }
 };
 
+} // end of namespace data_cache
+
 //-----------------------------------------------------------------------------------------
 // Image data cache accessor
 //-----------------------------------------------------------------------------------------
 @implementation DataCache{
-    std::unique_ptr<cache_manager_imp> _manager;
+    std::unique_ptr<data_cache::cache_manager_imp> _manager;
 }
 
 - (id) init
 {
     self = [super init];
     if (self){
-        _manager = std::make_unique<cache_manager_imp>();
+        _manager = std::make_unique<data_cache::cache_manager_imp>();
     }
     return self;
 }

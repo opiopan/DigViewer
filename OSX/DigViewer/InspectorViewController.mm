@@ -199,13 +199,17 @@
     NSArray* selectedObjects = [self.imageArrayController selectedObjects];
     if (selectedObjects.count > 0){
         PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
-        _metadata = [[ImageMetadata alloc] initWithPathNode:current];
-        self.summary = _metadata.summary;
-        if (_viewSelector == 1){
-            self.gpsInfo = _metadata.gpsInfoStrings;
-            self.mapView.gpsInfo = _metadata.gpsInfo;
-        }
-        [self reflectMetaToRemoteApp:current];
+        __weak InspectorViewController* weak_self = self;
+        [current instanciateImageDataWithCompletion:^(NSData* data, NSString* uti){
+            InspectorViewController* strong_self = weak_self;
+            strong_self->_metadata = [[ImageMetadata alloc] initWithPathNode:current imageData:data type:uti];
+            strong_self.summary = strong_self->_metadata.summary;
+            if (strong_self->_viewSelector == 1){
+                strong_self.gpsInfo = strong_self->_metadata.gpsInfoStrings;
+                strong_self.mapView.gpsInfo = strong_self->_metadata.gpsInfo;
+            }
+            [strong_self reflectMetaToRemoteApp:current];
+        }];
     }
 }
 
@@ -380,60 +384,64 @@ static NSString* kViewSelector = @"viewSelector";
 - (IBAction)copySummary:(id)sender
 {
     PathNode* current = [[self.imageArrayController selectedObjects] objectAtIndex:0];
-    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:current];
-    NSArray* filter = @[@0, @4, @5, @7, @8, @11, @13, @14, @15];
-    NSArray* summary = [meta summaryWithFilter:filter];
-    
-    NSString* date = ((ImageMetadataKV*)summary[0]).value;
-    NSString* cameraMake =
-        [((ImageMetadataKV*)summary[2]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString* cameraModel =
-        [((ImageMetadataKV*)summary[3]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString* lensMake =
-        [((ImageMetadataKV*)summary[4]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString* lensModel = ((ImageMetadataKV*)summary[5]).value;
-    NSString* focalLength = ((ImageMetadataKV*)summary[7]).value;
-    NSString* exposureTime = ((ImageMetadataKV*)summary[8]).value;
-    NSString* aperture = ((ImageMetadataKV*)summary[9]).value;
-    NSString* isoSpeed = ((ImageMetadataKV*)summary[10]).value;
-    
-    if (lensMake && lensModel &&
-        [lensModel rangeOfString:lensMake options:NSCaseInsensitiveSearch].location == NSNotFound &&
-        (!cameraModel || [lensModel rangeOfString:cameraModel options:NSCaseInsensitiveSearch].location == NSNotFound)){
-        lensModel = [NSString stringWithFormat:@"%@ %@", lensMake, lensModel];
-    }
-    if (cameraMake && cameraModel &&
-        [cameraModel rangeOfString:cameraMake options:NSCaseInsensitiveSearch].location == NSNotFound){
-        cameraModel = [NSString stringWithFormat:@"%@ %@", cameraMake, cameraModel];
-    }
-    
-    NSString* condition = nil;
-    NSString* elements[] = {focalLength, exposureTime, aperture, isoSpeed};
-    for (int i = 0; i < sizeof(elements) / sizeof(NSString*); i++){
-        NSString* element = elements[i];
-        if (element){
-            if (condition){
-                condition = [NSString stringWithFormat:@"%@ %@", condition, element];
-            }else{
-                condition = element;
+    __weak InspectorViewController* weak_self = self;
+    [current instanciateImageDataWithCompletion:^(NSData* data, NSString* type){
+        InspectorViewController* strong_self = weak_self;
+        ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:current imageData:data type:type];
+        NSArray* filter = @[@0, @4, @5, @7, @8, @11, @13, @14, @15];
+        NSArray* summary = [meta summaryWithFilter:filter];
+        
+        NSString* date = ((ImageMetadataKV*)summary[0]).value;
+        NSString* cameraMake =
+            [((ImageMetadataKV*)summary[2]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString* cameraModel =
+            [((ImageMetadataKV*)summary[3]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString* lensMake =
+            [((ImageMetadataKV*)summary[4]).value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString* lensModel = ((ImageMetadataKV*)summary[5]).value;
+        NSString* focalLength = ((ImageMetadataKV*)summary[7]).value;
+        NSString* exposureTime = ((ImageMetadataKV*)summary[8]).value;
+        NSString* aperture = ((ImageMetadataKV*)summary[9]).value;
+        NSString* isoSpeed = ((ImageMetadataKV*)summary[10]).value;
+        
+        if (lensMake && lensModel &&
+            [lensModel rangeOfString:lensMake options:NSCaseInsensitiveSearch].location == NSNotFound &&
+            (!cameraModel || [lensModel rangeOfString:cameraModel options:NSCaseInsensitiveSearch].location == NSNotFound)){
+            lensModel = [NSString stringWithFormat:@"%@ %@", lensMake, lensModel];
+        }
+        if (cameraMake && cameraModel &&
+            [cameraModel rangeOfString:cameraMake options:NSCaseInsensitiveSearch].location == NSNotFound){
+            cameraModel = [NSString stringWithFormat:@"%@ %@", cameraMake, cameraModel];
+        }
+        
+        NSString* condition = nil;
+        NSString* elements[] = {focalLength, exposureTime, aperture, isoSpeed};
+        for (int i = 0; i < sizeof(elements) / sizeof(NSString*); i++){
+            NSString* element = elements[i];
+            if (element){
+                if (condition){
+                    condition = [NSString stringWithFormat:@"%@ %@", condition, element];
+                }else{
+                    condition = element;
+                }
             }
         }
-    }
-    
-    NSString* summaryString = nil;
-    for (NSString* element in @[date, cameraModel, lensModel, condition]) {
-        if (element){
-            if (summaryString){
-                summaryString = [NSString stringWithFormat:@"%@%@\n", summaryString, element];
-            }else{
-                summaryString = [element stringByAppendingString:@"\n"];
+        
+        NSString* summaryString = nil;
+        for (NSString* element in @[date, cameraModel, lensModel, condition]) {
+            if (element){
+                if (summaryString){
+                    summaryString = [NSString stringWithFormat:@"%@%@\n", summaryString, element];
+                }else{
+                    summaryString = [element stringByAppendingString:@"\n"];
+                }
             }
         }
-    }
-    
-    NSPasteboard* pboard = [NSPasteboard generalPasteboard];
-    [pboard declareTypes:@[NSPasteboardTypeString] owner:self];
-    [pboard setString:summaryString forType:NSPasteboardTypeString];
+        
+        NSPasteboard* pboard = [NSPasteboard generalPasteboard];
+        [pboard declareTypes:@[NSPasteboardTypeString] owner:strong_self];
+        [pboard setString:summaryString forType:NSPasteboardTypeString];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -618,45 +626,45 @@ static NSString* CategoryKML = @"KML";
         "    </Placemark>\n"
         "</kml>\n";
     PathNode* current = _imageArrayController.selectedObjects[0];
-
-    // 説明テキスト(HTML flagment)生成
-    NSString* description = [self descriptionForPathNode:current.imageNode];
     
-    // 表示位置、高度、範囲、方向を抽出
-    MapGeometry geometry = [self mapGeometory];
-    NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
-    NSNumber* altitude;
-    NSString* altMode;
-    if (geometry.isEnableAltitude && [[controller.values valueForKey:@"mapPassAltitudeToExternalMap"] boolValue]){
-        altitude = @(geometry.altitude);
-        altMode = @"absolute";
-    }else{
-        altitude = @0;
-        altMode = @"clampToGround";
-    }
-    NSNumber* range = @(MAX(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter));
-    
-    //サムネール画像保存
-    TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
-    NSString* thumbnailPath = [temporaryFile allocatePathWithSuffix:@".jpg" forCategory:CategoryKML];
-    [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
+    // 説明テキスト(HTML flagment)生成 - 非同期
+    [self descriptionForPathNode:current.imageNode completion:^(NSString* description){
+        // 表示位置、高度、範囲、方向を抽出
+        MapGeometry geometry = [self mapGeometory];
+        NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
+        NSNumber* altitude;
+        NSString* altMode;
+        if (geometry.isEnableAltitude && [[controller.values valueForKey:@"mapPassAltitudeToExternalMap"] boolValue]){
+            altitude = @(geometry.altitude);
+            altMode = @"absolute";
+        }else{
+            altitude = @0;
+            altMode = @"clampToGround";
+        }
+        NSNumber* range = @(MAX(geometry.spanLatitudeMeter, geometry.spanLongitudeMeter));
+        
+        //サムネール画像保存
+        TemporaryFileController* temporaryFile = [TemporaryFileController sharedController];
+        NSString* thumbnailPath = [temporaryFile allocatePathWithSuffix:@".jpg" forCategory:CategoryKML];
+        [self saveThumbnailForPlacemarkWithPath:thumbnailPath pathNode:current.imageNode];
 
-    //KMLファイル保存
-    NSString* kmlPath = [temporaryFile allocatePathWithSuffix:@".kml" forCategory:CategoryKML];
-    NSString* kmlString = [NSString stringWithFormat:format,
-                           current.imageNode.name,
-                           thumbnailPath, description,
-                           altMode,
-                           @(geometry.longitude), @(geometry.latitude), altitude,
-                           @(geometry.viewLongitude), @(geometry.viewLatitude), @(geometry.heading),
-                           @(geometry.tilt), range];
-    NSError* error;
-    [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+        //KMLファイル保存
+        NSString* kmlPath = [temporaryFile allocatePathWithSuffix:@".kml" forCategory:CategoryKML];
+        NSString* kmlString = [NSString stringWithFormat:format,
+                               current.imageNode.name,
+                               thumbnailPath, description,
+                               altMode,
+                               @(geometry.longitude), @(geometry.latitude), altitude,
+                               @(geometry.viewLongitude), @(geometry.viewLatitude), @(geometry.heading),
+                               @(geometry.tilt), range];
+        NSError* error;
+        [kmlString writeToFile:kmlPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
 
-    // Google EarthでKMLファイルをオープン
-    if (![[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"]){
-        [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth Pro.app"];
-    }
+        // Google EarthでKMLファイルをオープン
+        if (![[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth.app"]){
+            [[NSWorkspace sharedWorkspace] openFile:kmlPath withApplication:@"Google Earth Pro.app"];
+        }
+    }];
 }
 
 - (BOOL)validateForOpenMapWithGoogleEarth:(NSMenuItem*)menuItem
@@ -664,24 +672,25 @@ static NSString* CategoryKML = @"KML";
     return self.mapView.gpsInfo != nil;
 }
 
-- (NSString*)descriptionForPathNode:(PathNode*)node
+- (void)descriptionForPathNode:(PathNode*)node completion:(void (^)(NSString*))completion
 {
-    NSMutableString* rc = [NSMutableString string];
-    [rc appendString:@"<table align=\"center\" style=\"font-family: sans-serif\">"];
-    
-    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node];
-    NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
-    NSArray* summary = [meta summaryWithFilter:filter];
-    for (id kv in summary){
-        NSString* key = [kv valueForKey:@"key"];
-        NSString* value = [kv valueForKey:@"value"];
-        if (key){
-            [rc appendFormat:@"<tr><td align=\"right\">%@</td><td>%@</td></tr>", key, value ? value : @""];
+    [node instanciateImageDataWithCompletion:^(NSData* image_data, NSString* uti){
+        NSMutableString* rc = [NSMutableString string];
+        [rc appendString:@"<table align=\"center\" style=\"font-family: sans-serif\">"];
+        
+        ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node imageData:image_data type:uti];
+        NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
+        NSArray* summary = [meta summaryWithFilter:filter];
+        for (id kv in summary){
+            NSString* key = [kv valueForKey:@"key"];
+            NSString* value = [kv valueForKey:@"value"];
+            if (key){
+                [rc appendFormat:@"<tr><td align=\"right\">%@</td><td>%@</td></tr>", key, value ? value : @""];
+            }
         }
-    }
-    
-    [rc appendString:@"</table>"];
-    return rc;
+        [rc appendString:@"</table>"];
+        completion(rc);
+    }];
 }
 
 - (BOOL)saveThumbnailForPlacemarkWithPath:(NSString*)path pathNode:(PathNode*)node
@@ -709,51 +718,55 @@ static NSString* CategoryKML = @"KML";
 //-----------------------------------------------------------------------------------------
 - (void)reflectMetaToRemoteApp:(PathNode*)node
 {
-    NSMutableDictionary* data = [NSMutableDictionary dictionary];
-    DocumentWindowController* controller = [self.representedObject valueForKey:@"controller"];
-    Document* document = controller.document;
-    [data setValue:document.fileURL.path forKey:DVRCNMETA_DOCUMENT];
-    [data setValue:node.portablePath forKey:DVRCNMETA_ID];
-    [data setValue:@(node.indexInParent) forKey:DVRCNMETA_INDEX_IN_PARENT];
-    if (_metadata.gpsInfo){
-        MapGeometry geometry = [self mapGeometory];
-        
-        [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
-        [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
-        if (geometry.isEnableAltitude){
-            [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
-        }
-        if (geometry.isEnableHeading){
-            [data setValue:@(geometry.heading) forKey:DVRCNMETA_HEADING];
-        }
-        [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
-        [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
-        [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
-        [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
-        [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
-        [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
-        [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
-        [data setValue:@(geometry.standLatitude) forKey:DVRCNMETA_STAND_LATITUDE];
-        [data setValue:@(geometry.standLongitude) forKey:DVRCNMETA_STAND_LONGITUDE];
-        [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
+    __weak InspectorViewController* weak_self = self;
+    [node instanciateImageDataWithCompletion:^(NSData* image_data, NSString* uti){
+        InspectorViewController* strong_self = weak_self;
+        NSMutableDictionary* data = [NSMutableDictionary dictionary];
+        DocumentWindowController* controller = [strong_self.representedObject valueForKey:@"controller"];
+        Document* document = controller.document;
+        [data setValue:document.fileURL.path forKey:DVRCNMETA_DOCUMENT];
+        [data setValue:node.portablePath forKey:DVRCNMETA_ID];
+        [data setValue:@(node.indexInParent) forKey:DVRCNMETA_INDEX_IN_PARENT];
+        if (strong_self->_metadata.gpsInfo){
+            MapGeometry geometry = [self mapGeometory];
+            
+            [data setValue:@(geometry.latitude) forKey:DVRCNMETA_LATITUDE];
+            [data setValue:@(geometry.longitude) forKey:DVRCNMETA_LONGITUDE];
+            if (geometry.isEnableAltitude){
+                [data setValue:@(geometry.altitude) forKey:DVRCNMETA_ALTITUDE];
+            }
+            if (geometry.isEnableHeading){
+                [data setValue:@(geometry.heading) forKey:DVRCNMETA_HEADING];
+            }
+            [data setValue:@(geometry.spanLatitude) forKey:DVRCNMETA_SPAN_LATITUDE];
+            [data setValue:@(geometry.spanLongitude) forKey:DVRCNMETA_SPAN_LONGITUDE];
+            [data setValue:@(geometry.spanLatitudeMeter) forKey:DVRCNMETA_SPAN_LATITUDE_METER];
+            [data setValue:@(geometry.spanLongitudeMeter) forKey:DVRCNMETA_SPAN_LONGITUDE_METER];
+            [data setValue:@(geometry.viewLatitude) forKey:DVRCNMETA_VIEW_LATITUDE];
+            [data setValue:@(geometry.viewLongitude) forKey:DVRCNMETA_VIEW_LONGITUDE];
+            [data setValue:@(geometry.tilt) forKey:DVRCNMETA_TILT];
+            [data setValue:@(geometry.standLatitude) forKey:DVRCNMETA_STAND_LATITUDE];
+            [data setValue:@(geometry.standLongitude) forKey:DVRCNMETA_STAND_LONGITUDE];
+            [data setValue:@(geometry.standAltitude) forKey:DVRCNMETA_STAND_ALTITUDE];
 
-        [data setValue:_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
-        
-        if (_metadata.gpsInfo.fovLong){
-            NSNumber* fovAngle = _metadata.gpsInfo.rotation.intValue < 5 ?
-                                 _metadata.gpsInfo.fovLong : _metadata.gpsInfo.fovShort;
-            [data setValue:fovAngle forKey:DVRCNMETA_FOV_ANGLE];
+            [data setValue:strong_self->_metadata.gpsInfoStrings forKey:DVRCNMETA_GPS_SUMMARY];
+            
+            if (strong_self->_metadata.gpsInfo.fovLong){
+                NSNumber* fovAngle = strong_self->_metadata.gpsInfo.rotation.intValue < 5 ?
+                                     strong_self->_metadata.gpsInfo.fovLong : strong_self->_metadata.gpsInfo.fovShort;
+                [data setValue:fovAngle forKey:DVRCNMETA_FOV_ANGLE];
+            }
         }
-    }
-    
-    [data setValue:_metadata.summary forKey:DVRCNMETA_SUMMARY];
-    
-    ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node];
-    NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
-    NSArray* summary = [meta summaryWithFilter:filter];
-    [data setValue:summary forKey:DVRCNMETA_POPUP_SUMMARY];
-    
-    [[DVRemoteServer sharedServer] sendMeta:data];
+        
+        [data setValue:strong_self->_metadata.summary forKey:DVRCNMETA_SUMMARY];
+        
+        ImageMetadata* meta = [[ImageMetadata alloc] initWithPathNode:node imageData:image_data type:uti];
+        NSArray* filter = @[@0, @5, @8, @11, @13, @14, @15];
+        NSArray* summary = [meta summaryWithFilter:filter];
+        [data setValue:summary forKey:DVRCNMETA_POPUP_SUMMARY];
+        
+        [[DVRemoteServer sharedServer] sendMeta:data];
+    }];
 }
 
 //-----------------------------------------------------------------------------------------

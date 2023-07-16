@@ -6,9 +6,9 @@
 //  Copyright © 2023 Hiroshi Murayama <opiopan@gmail.com>. All rights reserved.
 //
 
-#pragma once
+#import <Foundation/Foundation.h>
 
-typedef void (^DataCacheCompletion)(NSData*);
+typedef void (^DataCacheCompletion)(NSData* data, NSString* uti);
 
 @interface DataCache : NSObject
 - (void) getNSdataOf:(NSString*)localIdentifier completion:(DataCacheCompletion)completion;

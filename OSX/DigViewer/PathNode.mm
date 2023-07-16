@@ -15,6 +15,7 @@
 #import "ThumbnailConfigController.h"
 #import "ImageMetadata.h"
 #import "ThumbnailCache.h"
+#import "DataCache.h"
 #import "Document.h"
 
 #include "CoreFoundationHelper.h"
@@ -27,6 +28,7 @@
 //-----------------------------------------------------------------------------------------
 @interface CacheManager: NSObject
 @property ThumbnailCache* thumbnailCache;
+@property DataCache* dataCache;
 @property __weak Document* document;
 @end
 
@@ -660,7 +662,11 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 - (NSImage*) icon
 {
     if (_imagePath){
-        return [[NSWorkspace sharedWorkspace] iconForFileType:[_name pathExtension].lowercaseString];
+        if (_isPhotosLibraryImage){
+            return [[NSWorkspace sharedWorkspace] iconForFileType:@"jpg"];
+        }else{
+            return [[NSWorkspace sharedWorkspace] iconForFileType:[_name pathExtension].lowercaseString];
+        }
     }else{
         return [[NSWorkspace sharedWorkspace] iconForFile:@"/var/log"];
     }
@@ -677,6 +683,25 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
         _imageDateTime = dateTimeOfImage(self);
     }
     return _imageDateTime;
+}
+
+//-----------------------------------------------------------------------------------------
+// asynchronous operations
+//-----------------------------------------------------------------------------------------
+- (void) instanciateImageDataWithCompletion: (void (^)(NSData* data, NSString* uti))completion
+{
+    if (!self.isImage){
+        completion(nil, @"");
+    }else if (_isPhotosLibraryImage){
+        [_caches.dataCache getNSdataOf:self.imagePath completion:completion];
+    }else{
+        NSURL* url = [NSURL fileURLWithPath:self.imagePath];
+        NSData* data = [NSData dataWithContentsOfURL:url];
+        NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
+        NSError* error;
+        NSString* uti = [workspace typeOfFile:self.imagePath error:&error];
+        completion(data, uti);
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -715,6 +740,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 {
     _caches.thumbnailCache = thumbnailCache;
     _caches.document = document;
+    _caches.dataCache = [DataCache new];
 }
 
 static const CGFloat ThumbnailMaxSizeDefault = 384;

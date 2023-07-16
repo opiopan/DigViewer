@@ -28,6 +28,7 @@ static ECGImageRef stock_image_unavailable;
 static ECGImageRef stock_image_processing;
 static ECGImageRef stock_image_corrupted;
 
+namespace thumbnail_cache{
 //-----------------------------------------------------------------------------------------
 // Image cache pool
 //-----------------------------------------------------------------------------------------
@@ -82,7 +83,7 @@ static CGImageRef rotate_image(CGImageRef src, int rotation, CGFloat thumbnail_s
     }else{
         context = CGBitmapContextCreate(NULL, destSize.width, destSize.height, 8, 0, colorSpace, kCGImageAlphaNoneSkipLast);
     }
-
+    
     // set transform-matrix up
     switch (rotation){
         case 1:
@@ -180,9 +181,9 @@ static CGImageRef render_thumbnail_image(const rendering_command& command, CGFlo
         if (!imageSource.isNULL()){
             int orientation = 1;
             NSDictionary* option = (command.is_raw_image && config.use_embedded_thumbnail_for_RAW) ||
-                                   (!command.is_raw_image && command.is_raster_image && config.use_embedded_thumbnail) ||
-                                   thumbnail_size != 0 ?
-                                   thumbnailOptionUsingEmbedded : thumbnailOption;
+            (!command.is_raw_image && command.is_raster_image && config.use_embedded_thumbnail) ||
+            thumbnail_size != 0 ?
+            thumbnailOptionUsingEmbedded : thumbnailOption;
             thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)option);
             if (thumbnail.isNULL()){
                 thumbnail = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
@@ -217,7 +218,7 @@ static CGImageRef composit_folder_image(CGImageRef src, FolderThumbnailRepresent
     ECGColorSpaceRef colorSpace(CGColorSpaceCreateDeviceRGB());
     ECGContextRef context(CGBitmapContextCreate(NULL, normalizedLength, normalizedLength, 8, 0,
                                                 colorSpace, kCGImageAlphaPremultipliedLast));
-
+    
     // get folder icon image
     NSImage* folderImage = [NSImage imageNamed:NSImageNameFolder];
     
@@ -246,7 +247,7 @@ static CGImageRef composit_folder_image(CGImageRef src, FolderThumbnailRepresent
         targetRect.size.width = targetRect.size.height = normalizedLength;
         [folderImage drawInRect:targetRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
         [NSGraphicsContext restoreGraphicsState];
-
+        
         // draw source image
         CGFloat minLength = MIN(width, height);
         ECGImageRef clipedImage;
@@ -315,7 +316,7 @@ public:
                 }else{
                     queue_index.erase((__bridge void*)current->folder_node->node);
                 }
-
+                
                 // render thumbnail of image node if necessary
                 auto&& image_entry = cache.get((__bridge void*)current->image_node->node);
                 if (image_entry){
@@ -449,26 +450,28 @@ public:
     }
 };
 
+} // end of namespace thumbnail_cache
+
 //-----------------------------------------------------------------------------------------
 // Image cache interface for Objective-C code
 //-----------------------------------------------------------------------------------------
 @implementation ThumbnailCache{
-    std::unique_ptr<cache_manager> _manager;
+    std::unique_ptr<thumbnail_cache::cache_manager> _manager;
 }
 
 - (id) init{
     self = [super init];
     if (self){
         if (!stock_image_unavailable){
-            stock_image_unavailable = CGImage_from_NSImage([PathNode unavailableImage], THUMBNAIL_MAX_SIZE);
+            stock_image_unavailable = thumbnail_cache::CGImage_from_NSImage([PathNode unavailableImage], THUMBNAIL_MAX_SIZE);
         }
         if (!stock_image_processing){
-            stock_image_processing = CGImage_from_NSImage([PathNode processingImage], THUMBNAIL_MAX_SIZE);
+            stock_image_processing = thumbnail_cache::CGImage_from_NSImage([PathNode processingImage], THUMBNAIL_MAX_SIZE);
         }
         if (!stock_image_corrupted){
-            stock_image_corrupted = CGImage_from_NSImage([PathNode corruptedImage], THUMBNAIL_MAX_SIZE);
+            stock_image_corrupted = thumbnail_cache::CGImage_from_NSImage([PathNode corruptedImage], THUMBNAIL_MAX_SIZE);
         }
-        _manager = std::make_unique<cache_manager>();
+        _manager = std::make_unique<thumbnail_cache::cache_manager>();
 
         _manager->set_rendering_config();
         ThumbnailConfigController* controller = [ThumbnailConfigController sharedController];
@@ -489,16 +492,16 @@ public:
 
 + (CGImageRef) getThumbnailImageOf:(PathNode*)node size:(CGFloat)size{
     PathNode* image_node = node.imageNode;
-    rendering_command entry;
-    entry.image_node = std::make_shared<cache_entry>();
+    thumbnail_cache::rendering_command entry;
+    entry.image_node = std::make_shared<thumbnail_cache::cache_entry>();
     entry.image_node->node = image_node;
     entry.is_image = node.isImage;
     entry.image_path = image_node.imagePath;
     entry.is_raw_image = image_node.isRawImage;
     entry.is_raster_image = image_node.isRasterImage;
     entry.is_photos_library = image_node.isPhotosLibraryImage;
-    thumbnail_config config;
-    cache_manager::make_rendering_config(config);
+    thumbnail_cache::thumbnail_config config;
+    thumbnail_cache::cache_manager::make_rendering_config(config);
     auto&& image = render_thumbnail_image(entry, size, config);
     if (node.isImage || config.representation_type == FolderThumbnailOnlyImage){
         return image;

@@ -114,6 +114,9 @@ typedef struct _PathNodeCreateOption PathNodeCreateOption;
 - (id) thumbnailImage:(CGFloat)thumbnailSize;
 - (void) updateThumbnailCounter;
 
+// asynchronous operation
+- (void) instanciateImageDataWithCompletion: (void (^)(NSData* data, NSString* uti))completion;
+
 // IndexPath作成
 - (NSIndexPath*) indexPath;
 
