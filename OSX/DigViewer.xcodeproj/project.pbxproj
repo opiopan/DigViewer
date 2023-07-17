@@ -190,6 +190,7 @@
 		7BD1B5091AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7BD1B5071AECCF1A008DF5C2 /* thumbnailSampleVertical.jpg */; };
 		7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */; };
 		7BD51D052A62C20D00896530 /* DataCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD51D042A62C20D00896530 /* DataCache.mm */; };
+		7BD51D082A64DAED00896530 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD51D072A64DAED00896530 /* UniformTypeIdentifiers.framework */; };
 		7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */; };
 		7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */; };
 		7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */; };
@@ -507,6 +508,7 @@
 		7BD51D032A62C1F400896530 /* DataCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
 		7BD51D042A62C20D00896530 /* DataCache.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DataCache.mm; sourceTree = "<group>"; };
 		7BD51D062A62C61A00896530 /* cache_common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = cache_common.h; sourceTree = "<group>"; };
+		7BD51D072A64DAED00896530 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		7BD6CF2A1C0ACDA90063C2ED /* PairingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairingWindowController.h; sourceTree = "<group>"; };
 		7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingWindowController.m; sourceTree = "<group>"; };
 		7BD6CF331C0B202F0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PairingWindow.xib; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				7B6148501B7C78AD00A03C45 /* MapKit.framework in Frameworks */,
 				7B6B3B1418E438D00004098F /* WebKit.framework in Frameworks */,
 				7B0DBEE216A2A2FD000365F4 /* Quartz.framework in Frameworks */,
+				7BD51D082A64DAED00896530 /* UniformTypeIdentifiers.framework in Frameworks */,
 				7B3920341696CA1800E139D0 /* Cocoa.framework in Frameworks */,
 				7B5CD6E52A4136AA00ED2434 /* Photos.framework in Frameworks */,
 			);
@@ -598,6 +601,7 @@
 		7B3920321696CA1800E139D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BD51D072A64DAED00896530 /* UniformTypeIdentifiers.framework */,
 				7B5CD6E42A4136A900ED2434 /* Photos.framework */,
 				7B6148511B7C78C600A03C45 /* CoreLocation.framework */,
 				7B61484F1B7C78AD00A03C45 /* MapKit.framework */,

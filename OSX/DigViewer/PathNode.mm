@@ -311,6 +311,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     
     if (@available(macOS 10.15, *)) {
         PathNode* root = [[PathNode alloc] initWithName:name parent:nil path:nil originalPath:name];
+        root->_isPhotosLibraryImage = YES;
         
         for (auto& category : categories){
             PHFetchResult<PHAssetCollection*>* collection =
@@ -478,35 +479,37 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
 {
     if (_updateCountForSort != _rootNode->_graphConfig.updateCountForSort ||
         _isSortByDateTime != _isSortByDateTimeForRepresentationImages){
-        NSStringCompareOptions sortOption = _rootNode->_graphConfig.sortByCaseInsensitive ? NSCaseInsensitiveSearch : 0;
-        sortOption |= _rootNode->_graphConfig.sortAsNumeric ? NSNumericSearch : 0;
-        NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
-            return [o1.name compare:o2.name options:sortOption];
-        };
-        BOOL needSortByDateTime = _isSortByDateTime;
-        NSComparisonResult (^comparatorForImage)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
-            if(needSortByDateTime){
-                NSComparisonResult rc = [o1.imageDateTime compare:o2.imageDateTime];
-                if (rc != NSOrderedSame){
-                    return rc;
+        if (!_rootNode->_isPhotosLibraryImage){
+            NSStringCompareOptions sortOption = _rootNode->_graphConfig.sortByCaseInsensitive ? NSCaseInsensitiveSearch : 0;
+            sortOption |= _rootNode->_graphConfig.sortAsNumeric ? NSNumericSearch : 0;
+            NSComparisonResult (^comparator)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
+                return [o1.name compare:o2.name options:sortOption];
+            };
+            BOOL needSortByDateTime = _isSortByDateTime;
+            NSComparisonResult (^comparatorForImage)(PathNode* o1, PathNode* o2) = ^(PathNode* o1, PathNode* o2){
+                if(needSortByDateTime){
+                    NSComparisonResult rc = [o1.imageDateTime compare:o2.imageDateTime];
+                    if (rc != NSOrderedSame){
+                        return rc;
+                    }
                 }
+                return [o1.name compare:o2.name options:sortOption];
+            };
+            _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
+            _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
+            _imageChildren = [_imageChildren sortedArrayUsingComparator:comparatorForImage];
+            for (NSInteger i = 0; i < _allChildren.count; i++){
+                PathNode* node = _allChildren[i];
+                node->_indexInParentForAllNodes = i;
             }
-            return [o1.name compare:o2.name options:sortOption];
-        };
-        _allChildren = [_allChildren sortedArrayUsingComparator:comparator];
-        _folderChildren = [_folderChildren sortedArrayUsingComparator:comparator];
-        _imageChildren = [_imageChildren sortedArrayUsingComparator:comparatorForImage];
-        for (NSInteger i = 0; i < _allChildren.count; i++){
-            PathNode* node = _allChildren[i];
-            node->_indexInParentForAllNodes = i;
-        }
-        for (NSInteger i = 0; i < _folderChildren.count; i++){
-            PathNode* node = _folderChildren[i];
-            node->_indexInParentForSameKind = i;
-        }
-        for (NSInteger i = 0; i < _imageChildren.count; i++){
-            PathNode* node = _imageChildren[i];
-            node->_indexInParentForSameKind = i;
+            for (NSInteger i = 0; i < _folderChildren.count; i++){
+                PathNode* node = _folderChildren[i];
+                node->_indexInParentForSameKind = i;
+            }
+            for (NSInteger i = 0; i < _imageChildren.count; i++){
+                PathNode* node = _imageChildren[i];
+                node->_indexInParentForSameKind = i;
+            }
         }
         _updateCountForSort = _rootNode->_graphConfig.updateCountForSort;
     }
@@ -670,7 +673,15 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             return [[NSWorkspace sharedWorkspace] iconForFileType:[_name pathExtension].lowercaseString];
         }
     }else{
-        return [[NSWorkspace sharedWorkspace] iconForFile:@"/var/log"];
+        if (_isPhotosLibraryImage && !_parent){
+            if (@available(macOS 11.0, *)) {
+                return [[NSWorkspace sharedWorkspace] iconForContentType:[UTType typeWithIdentifier:@"com.apple.photos.library"]];
+            } else {
+                return [[NSWorkspace sharedWorkspace] iconForFile:@"/var/log"];
+            }
+        }else{
+            return [[NSWorkspace sharedWorkspace] iconForFile:@"/var/log"];
+        }
     }
 }
 
