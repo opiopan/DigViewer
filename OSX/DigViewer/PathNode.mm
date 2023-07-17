@@ -310,7 +310,7 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
     };
     
     if (@available(macOS 10.15, *)) {
-        PathNode* root = [[PathNode alloc] initWithName:name parent:nil path:nil originalPath:nil];
+        PathNode* root = [[PathNode alloc] initWithName:name parent:nil path:nil originalPath:name];
         
         for (auto& category : categories){
             PHFetchResult<PHAssetCollection*>* collection =
@@ -365,7 +365,8 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
             if (index != NSNotFound){
                 child = _folderChildren[index];
             }else{
-                child = [[PathNode alloc] initWithName:prefix[0] parent:self path:nil originalPath:nil];
+                child = [[PathNode alloc] initWithName:prefix[0] parent:self path:nil
+                                          originalPath:[NSString stringWithFormat:@"%@/%@", _originalPath, prefix[0]]];
             }
             NSArray* newprefix = prefix.count > 1 ? [prefix subarrayWithRange:NSMakeRange(1, prefix.count - 1)] : nil;
             [child mergePhotosLibraryCollection:collection withPrefix:newprefix];
@@ -373,14 +374,15 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
                 [self addChildNode: child];
             }
         }else{
-            PathNode* child = [[PathNode alloc] initWithName:collection.localizedTitle parent:self path:nil originalPath:nil];
+            PathNode* child = [[PathNode alloc] initWithName:collection.localizedTitle parent:self path:nil
+                                                originalPath:[NSString stringWithFormat:@"%@/%@", _originalPath, collection.localizedTitle]];
             if ([collection isKindOfClass:PHAssetCollection.class]){
                 PHFetchResult<PHAsset*>* assets = [PHAsset fetchAssetsInAssetCollection:(PHAssetCollection*)collection options:nil];
                 for (PHAsset* asset in assets){
                     NSString* imageName = [NSString stringWithFormat:@"image%lu", (unsigned long)child->_allChildren.count + 1];
                     PathNode* image = [[PathNode alloc] initWithName: imageName parent:child
                                                                 path:asset.localIdentifier
-                                                        originalPath:asset.localIdentifier];
+                                                        originalPath:[NSString stringWithFormat:@"%@/%@", child.originalPath, imageName]];
                     image->_isPhotosLibraryImage = YES;
                     [child addChildNode:image];
                 }
@@ -719,16 +721,16 @@ static ThumbnailConfigController* __weak _thumbnailConfig;
                              (!self.imageNode.isRawImage && self.imageNode.isRasterImage && _thumbnailConfig.useEmbeddedThumbnail);
     if (self.isImage || _thumbnailConfig.representationType == FolderThumbnailOnlyImage){
         NSString* extention = [NSString stringWithFormat:@".file:%d:%lu", useEmbeddedThumbs, (unsigned long)self.imageNode->_thumbnailUpdateCounter];
-        return [self.imagePath stringByAppendingString:extention];
+        return [self.imageNode.originalPath stringByAppendingString:extention];
     }else if (_thumbnailConfig.representationType == FolderThumbnailImageInIcon){
         NSString* extention = [NSString stringWithFormat:@".folder:%d:%lu", useEmbeddedThumbs, (unsigned long)_thumbnailUpdateCounter + self.imageNode->_thumbnailUpdateCounter];
-        return [self.imagePath stringByAppendingString:extention];
+        return [self.imageNode.originalPath stringByAppendingString:extention];
     }else{
         NSString* extention = [NSString stringWithFormat:@".folder:%d:%@:%@:%lu", useEmbeddedThumbs,
                                                                                   _thumbnailConfig.folderIconSize,
                                                                                   _thumbnailConfig.folderIconOpacity,
                                                                                   _thumbnailUpdateCounter + self.imageNode->_thumbnailUpdateCounter];
-        return [self.imagePath stringByAppendingString:extention];
+        return [self.imageNode.originalPath stringByAppendingString:extention];
     }
 }
 
