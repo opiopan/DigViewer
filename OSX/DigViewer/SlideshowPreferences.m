@@ -22,6 +22,10 @@
 @end
 
 @implementation RelationalImageForSample
+- (BOOL) isPhotosLibraryImage
+{
+    return NO;
+}
 @end
 
 //-----------------------------------------------------------------------------------------
