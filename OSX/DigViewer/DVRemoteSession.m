@@ -234,7 +234,7 @@ static NSString* QUE_ELEMENT_DATA = @"data";
             }
         }
         
-        if (!_inputStreamHasBeenScheduled){
+        if (_runLoop && !_inputStreamHasBeenScheduled){
             [_inputStream scheduleInRunLoop:_runLoop forMode:NSDefaultRunLoopMode];
             _inputStreamHasBeenScheduled = YES;
         }

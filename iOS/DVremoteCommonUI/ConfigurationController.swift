@@ -111,9 +111,9 @@ open class ServerInfo : NSObject, NSCoding {
         let type = aDecoder.decodeObject(forKey: "type") as! String
         let name = aDecoder.decodeObject(forKey: "name") as! String
         service = NetService(domain: domain, type: type, name: name)
-        icon = aDecoder.decodeObject(forKey: "icon") as! UIImage
-        image = aDecoder.decodeObject(forKey: "image") as! UIImage
-        attributes = NSDictionary(coder: aDecoder) as! [String:String]
+        icon = aDecoder.decodeObject(forKey: "icon") as? UIImage
+        image = aDecoder.decodeObject(forKey: "image") as? UIImage
+        attributes = NSDictionary(coder: aDecoder) as? [String:String]
     }
     
     open func encode(with aCoder: NSCoder) {
