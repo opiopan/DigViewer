@@ -13,6 +13,7 @@
 #import "DocumentWindowController.h"
 #import "InfoPlistController.h"
 #import "PairingWindowController.h"
+#import "MacProductName.h"
 #include <stdlib.h>
 
 //-----------------------------------------------------------------------------------------
@@ -261,30 +262,56 @@ static NSString* pairingKeysName = @"dvremotePairingKeys";
 // DVremoveへサーバー情報を返却
 //-----------------------------------------------------------------------------------------
 static NSDictionary* systemProperties(NSString* key);
+static NSDictionary* ioregProperties(void);
 static NSData* pngFromNSImage(NSImage* image);
 - (void)dvrServer:(DVRemoteServer *)server needSendServerInfoToClient:(DVRemoteSession *)session
 {
     // キー情報抽出
+    NSString* cpu;
+    int coreNum = 0;
+    NSString* memory;
+    NSString* gpu;
+    int gpuCoreNum = 0;
+
     NSDictionary* mainDict = systemProperties(@"SPHardwareDataType");
     NSString* machineID = [mainDict valueForKey:@"machine_model"];
-    NSString* serialNumber = [mainDict valueForKey:@"serial_number"];
-    NSString* cpu = [NSString stringWithFormat:@"%@ %@",
-                     [mainDict valueForKey:@"current_processor_speed"],
-                     [mainDict valueForKey:@"cpu_type"]];
-    int coreNum = [[mainDict valueForKey:@"number_processors"] intValue] * [[mainDict valueForKey:@"packages"] intValue];
-    NSString* memorySize = [mainDict valueForKey:@"physical_memory"];
+    if ([mainDict valueForKey:@"cpu_type"]){
+        //
+        // Intel Mac
+        //
+        cpu = [NSString stringWithFormat:@"%@ %@",
+               [mainDict valueForKey:@"current_processor_speed"],
+               [mainDict valueForKey:@"cpu_type"]];
+        coreNum = [[mainDict valueForKey:@"number_processors"] intValue] * [[mainDict valueForKey:@"packages"] intValue];
+        NSString* memorySize = [mainDict valueForKey:@"physical_memory"];
+        NSDictionary* memDict = [[systemProperties(@"SPMemoryDataType") valueForKey:@"_items"] objectAtIndex:0];
+        memory = [NSString stringWithFormat:@"%@ %@ %@", memorySize,
+                  [memDict valueForKey:@"dimm_type"], [memDict valueForKey:@"dimm_speed"]];
+        NSDictionary* gpuDict = systemProperties(@"SPDisplaysDataType");
+        NSString* vramSize = [gpuDict valueForKey:@"spdisplays_vram"];
+        if (!vramSize){
+            vramSize = [gpuDict valueForKey:@"spdisplays_vram_shared"];
+        }
+        gpu = [NSString stringWithFormat:@"%@ (%@)", [gpuDict valueForKey:@"sppci_model"], vramSize];
+    }else{
+        //
+        // Apple Silicon Mac
+        //
+        cpu = [mainDict valueForKey:@"chip_type"];
+        NSString* corenum_info = [mainDict valueForKey:@"number_processors"];
+        coreNum = [corenum_info stringByReplacingOccurrencesOfString:@"(\\w+)\\s(\\d+):(\\d+):(\\d)"
+                                                          withString:@"$2"
+                                                             options:NSRegularExpressionSearch
+                                                               range:NSMakeRange(0, corenum_info.length)].intValue;
+        memory = [mainDict valueForKey:@"physical_memory"];
+        NSDictionary* gpuDict = systemProperties(@"SPDisplaysDataType");
+        gpu = [gpuDict valueForKey:@"sppci_model"];
+        gpuCoreNum = [[gpuDict valueForKey:@"sppci_cores"] intValue];
+    }
+
     NSDictionary* osDict = systemProperties(@"SPSoftwareDataType");
     NSString* osVersion = [osDict valueForKey:@"os_version"];
-    NSDictionary* memDict = [[systemProperties(@"SPMemoryDataType") valueForKey:@"_items"] objectAtIndex:0];
-    NSString* memory = [NSString stringWithFormat:@"%@ %@ %@", memorySize,
-                        [memDict valueForKey:@"dimm_type"], [memDict valueForKey:@"dimm_speed"]];
-    NSDictionary* gpuDict = systemProperties(@"SPDisplaysDataType");
-    NSString* vramSize = [gpuDict valueForKey:@"spdisplays_vram"];
-    if (!vramSize){
-        vramSize = [gpuDict valueForKey:@"spdisplays_vram_shared"];
-    }
-    NSString* gpu = [NSString stringWithFormat:@"%@ (%@)", [gpuDict valueForKey:@"sppci_model"], vramSize];
-    
+
     // ServerInformation.framework バンドルから詳細情報を抽出
     NSBundle* bundle = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/ServerInformation.framework"];
     NSString* plistPath = [bundle pathForResource:@"SIMachineAttributes" ofType:@"plist"];
@@ -311,52 +338,47 @@ static NSData* pngFromNSImage(NSImage* image);
         iconPath = [iconDir stringByAppendingPathComponent:@"SidebarLaptop.icns"];
     }
 
-    // モデル名をWebサービスより取得
-    NSString* urlString = [NSString stringWithFormat:@"http://support-sp.apple.com/sp/product?cc=%@",
-                           [serialNumber substringFromIndex:serialNumber.length - 4]];
-    NSURL* url = [NSURL URLWithString:urlString];
-    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession* urlSession = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
-    NSURLSessionTask* task = [urlSession dataTaskWithURL:url
-                                    completionHandler:^(NSData* data, NSURLResponse* response, NSError* error){
-        if (data != nil){
-            ModelNameExtractor* extractor = [ModelNameExtractor new];
-            [extractor extractFromData:data];
-            
-            // 返却データを組立て
-            NSMutableDictionary* serverInfo = [NSMutableDictionary dictionary];
-            [serverInfo setValue:extractor.modelName forKey:DVRCNMETA_MACHINE_NAME];
-            [serverInfo setValue:cpu forKey:DVRCNMETA_CPU];
-            [serverInfo setValue:@(coreNum).stringValue forKey:DVRCNMETA_CPU_CORE_NUM];
-            [serverInfo setValue:memory forKey:DVRCNMETA_MEMORY_SIZE];
-            [serverInfo setValue:gpu forKey:DVRCNMETA_GPU];
-            [serverInfo setValue:osVersion forKey:DVRCNMETA_OS_VERSION];
-            [serverInfo setValue:description forKey:DVRCNMETA_DESCRIPTION];
-            InfoPlistController* infoPlist = [InfoPlistController new];
-            [serverInfo setValue:[infoPlist.version substringFromIndex:8] forKey:DVRCNMETA_DV_VERSION];
-            
-            NSMutableDictionary* rd = [NSMutableDictionary dictionary];
-            [rd setValue:serverInfo forKey:DVRCNMETA_SERVER_INFO];
-            
-            NSImage* icon = [[NSImage alloc] initWithContentsOfFile:iconPath];
-            [rd setValue:pngFromNSImage(icon) forKey:DVRCNMETA_SERVER_ICON];
-            NSImage* image = [[NSImage alloc] initWithContentsOfFile:machineImagePath];
-            [rd setValue:pngFromNSImage(image) forKey:DVRCNMETA_SERVER_IMAGE];
-            
-            // クライアントに返却
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [server sendServerInfo:rd bySession:session];
-            });
-        }
-    }];
-    [task resume];
+    // identifying the product name
+    NSString* product_name = [MacProductName productNameOfIdentifier:machineID];
+    if (!product_name){
+        NSDictionary* ioreg = ioregProperties();
+        product_name = [[NSString alloc] initWithData:[ioreg valueForKey:@"product-name"] encoding:NSUTF8StringEncoding];
+    }
+    
+    // 返却データを組立て
+    NSMutableDictionary* serverInfo = [NSMutableDictionary dictionary];
+    [serverInfo setValue:product_name forKey:DVRCNMETA_MACHINE_NAME];
+    [serverInfo setValue:cpu forKey:DVRCNMETA_CPU];
+    [serverInfo setValue:@(coreNum).stringValue forKey:DVRCNMETA_CPU_CORE_NUM];
+    [serverInfo setValue:memory forKey:DVRCNMETA_MEMORY_SIZE];
+    [serverInfo setValue:gpu forKey:DVRCNMETA_GPU];
+    if (gpuCoreNum > 0){
+        [serverInfo setValue:@(gpuCoreNum).stringValue forKey:DVRCNMETA_GPU_CORE_NUM];
+    }
+    [serverInfo setValue:osVersion forKey:DVRCNMETA_OS_VERSION];
+    [serverInfo setValue:description forKey:DVRCNMETA_DESCRIPTION];
+    InfoPlistController* infoPlist = [InfoPlistController new];
+    [serverInfo setValue:[infoPlist.version substringFromIndex:8] forKey:DVRCNMETA_DV_VERSION];
+    
+    NSMutableDictionary* rd = [NSMutableDictionary dictionary];
+    [rd setValue:serverInfo forKey:DVRCNMETA_SERVER_INFO];
+    
+    NSImage* icon = [[NSImage alloc] initWithContentsOfFile:iconPath];
+    [rd setValue:pngFromNSImage(icon) forKey:DVRCNMETA_SERVER_ICON];
+    NSImage* image = [NSImage imageNamed:NSImageNameComputer];
+    [rd setValue:pngFromNSImage(image) forKey:DVRCNMETA_SERVER_IMAGE];
+    
+    // クライアントに返却
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [server sendServerInfo:rd bySession:session];
+    });
 }
 
 @end
 
 
 //-----------------------------------------------------------------------------------------
-// PNGデータ変換
+// Retrieve system information
 //-----------------------------------------------------------------------------------------
 static NSDictionary* systemProperties(NSString* key)
 {
@@ -368,6 +390,18 @@ static NSDictionary* systemProperties(NSString* key)
     [tmpFileController cleanUpForCategory:@"serverInfo"];
 
     return [info[0] valueForKey:@"_items"][0];
+}
+
+static NSDictionary* ioregProperties(void)
+{
+    TemporaryFileController* tmpFileController = [TemporaryFileController sharedController];
+    NSString* infoFile = [tmpFileController allocatePathWithSuffix:@".plist" forCategory:@"ioregInfo"];
+    NSString* cmd = [NSString stringWithFormat:@"/usr/sbin/ioreg -abr -k 'product-name' > %@", infoFile];
+    system(cmd.UTF8String);
+    NSArray* info = [NSArray arrayWithContentsOfFile:infoFile];
+    [tmpFileController cleanUpForCategory:@"serverInfo"];
+    
+    return info[0];
 }
 
 //-----------------------------------------------------------------------------------------

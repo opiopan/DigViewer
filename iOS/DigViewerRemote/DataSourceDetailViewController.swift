@@ -71,7 +71,12 @@ class DataSourceDetailViewController: UIViewController {
                     memoryLabel.text = NSLocalizedString("DSD_MEMORY", comment: "") + memory
                 }
                 if let gpu = info.attributes[DVRCNMETA_GPU] {
-                    gpuLabel.text = NSLocalizedString("DSD_GPU", comment: "") + gpu
+                    if let coreNum = info.attributes[DVRCNMETA_GPU_CORE_NUM]{
+                        let core = " (\(coreNum)\(NSLocalizedString("DSD_CORE", comment: "")))"
+                        gpuLabel.text = NSLocalizedString("DSD_GPU", comment: "") + gpu + core
+                    }else{
+                        gpuLabel.text = NSLocalizedString("DSD_GPU", comment: "") + gpu
+                    }
                 }
                 osVersionLabel.text = info.attributes[DVRCNMETA_OS_VERSION]
                 if let version = info.attributes[DVRCNMETA_DV_VERSION] {

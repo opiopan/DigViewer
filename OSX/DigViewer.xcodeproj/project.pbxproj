@@ -191,6 +191,7 @@
 		7BD4BB3F1B78E116006C75BB /* EnhancedImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4BB3E1B78E116006C75BB /* EnhancedImageBrowserView.m */; };
 		7BD51D052A62C20D00896530 /* DataCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD51D042A62C20D00896530 /* DataCache.mm */; };
 		7BD51D082A64DAED00896530 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD51D072A64DAED00896530 /* UniformTypeIdentifiers.framework */; };
+		7BD51D0B2A6F943900896530 /* MacProductName.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BD51D0A2A6F943900896530 /* MacProductName.mm */; };
 		7BD6CF2C1C0ACDA90063C2ED /* PairingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */; };
 		7BD6CF321C0B202F0063C2ED /* PairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF341C0B202F0063C2ED /* PairingWindow.xib */; };
 		7BD6CF371C0B20B50063C2ED /* PairingWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD6CF351C0B20B50063C2ED /* PairingWindow.strings */; };
@@ -509,6 +510,8 @@
 		7BD51D042A62C20D00896530 /* DataCache.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DataCache.mm; sourceTree = "<group>"; };
 		7BD51D062A62C61A00896530 /* cache_common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = cache_common.h; sourceTree = "<group>"; };
 		7BD51D072A64DAED00896530 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		7BD51D092A6F936400896530 /* MacProductName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacProductName.h; sourceTree = "<group>"; };
+		7BD51D0A2A6F943900896530 /* MacProductName.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacProductName.mm; sourceTree = "<group>"; };
 		7BD6CF2A1C0ACDA90063C2ED /* PairingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairingWindowController.h; sourceTree = "<group>"; };
 		7BD6CF2B1C0ACDA90063C2ED /* PairingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairingWindowController.m; sourceTree = "<group>"; };
 		7BD6CF331C0B202F0063C2ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PairingWindow.xib; sourceTree = "<group>"; };
@@ -1178,6 +1181,8 @@
 				7B4BED971B47A6F300E20A5A /* DisableTextColorTransformer.m */,
 				7B6C3F3E2A0DD40400364AF8 /* PortableSystemImages.h */,
 				7B6C3F3F2A0DD40400364AF8 /* PortableSystemImages.m */,
+				7BD51D092A6F936400896530 /* MacProductName.h */,
+				7BD51D0A2A6F943900896530 /* MacProductName.mm */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1505,6 +1510,7 @@
 				7B5C09F81B64DBD4004FE1A0 /* Condition.m in Sources */,
 				7B6717F51B3833D400B8D124 /* FocusCatchableTextField.m in Sources */,
 				7B74FB8B1B3E24B4005BC748 /* EditCustomEffectListController.m in Sources */,
+				7BD51D0B2A6F943900896530 /* MacProductName.mm in Sources */,
 				7B553BC01AE1ED0A00618590 /* LensLibrary.xcdatamodeld in Sources */,
 				7B6717F21B36D83500B8D124 /* BuiltinEffect.m in Sources */,
 				7B9098321BA447E100B03FD8 /* ImageMetadataKV.m in Sources */,

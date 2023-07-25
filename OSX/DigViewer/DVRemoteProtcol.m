@@ -55,6 +55,7 @@ NSString* DVRCNMETA_DESCRIPTION = @"description";
 NSString* DVRCNMETA_DV_VERSION = @"dvverstion";
 NSString* DVRCNMETA_OS_VERSION = @"osversion";
 NSString* DVRCNMETA_GPU = @"gpu";
+NSString* DVRCNMETA_GPU_CORE_NUM = @"gpucorenum";
 NSString* DVRCNMETA_CPU_CORE_NUM = @"cpucorenum";
 NSString* DVRCNMETA_PAIRCODE = @"paircode";
 NSString* DVRCNMETA_DEVICE_ID = @"deviceid";
