@@ -365,7 +365,8 @@ static NSData* pngFromNSImage(NSImage* image);
     
     NSImage* icon = [[NSImage alloc] initWithContentsOfFile:iconPath];
     [rd setValue:pngFromNSImage(icon) forKey:DVRCNMETA_SERVER_ICON];
-    NSImage* image = [NSImage imageNamed:NSImageNameComputer];
+    OSType code = UTGetOSTypeFromString((CFStringRef)CFSTR("root"));
+    NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(code)];
     [rd setValue:pngFromNSImage(image) forKey:DVRCNMETA_SERVER_IMAGE];
     
     // クライアントに返却
