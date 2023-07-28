@@ -71,5 +71,12 @@
 			</dict>
 		</dict>
 	</dict>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Find the DigViewer running on Mac</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dv-remote._tcp</string>
+        <string>_dv-remote._udp</string>
+    </array>
 </dict>
 </plist>
