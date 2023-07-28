@@ -133,3 +133,6 @@
 "PLC_SHARED_ALBUMS" = "Shared Albums";
 "PLC_PHOTO_STREAM" = "My Photo Stream";
 "PLC_MY_ALBUMS" = "My Albums";
+
+// miscellaneous text
+MISC_PHOTOS_LIBRARY_IMAGE = "Photos library image";

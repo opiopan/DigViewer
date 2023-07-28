@@ -278,3 +278,6 @@
 "PLC_SHARED_ALBUMS" = "共有アルバム";
 "PLC_PHOTO_STREAM" = "マイフォトストリーム";
 "PLC_MY_ALBUMS" = "マイアルバム";
+
+// miscellaneous text
+MISC_PHOTOS_LIBRARY_IMAGE = "写真ライブラリ イメージ";

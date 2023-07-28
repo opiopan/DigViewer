@@ -241,8 +241,12 @@ static const CGFloat thumbnailSize = 256;
             NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
             NSString* type;
             if (node.isImage){
-                NSError* error;
-                type = [workspace localizedDescriptionForType:[workspace typeOfFile:node.imagePath error:&error]];
+                if (node.isPhotosLibraryImage){
+                    type = NSLocalizedString(@"MISC_PHOTOS_LIBRARY_IMAGE", nil);
+                }else{
+                    NSError* error;
+                    type = [workspace localizedDescriptionForType:[workspace typeOfFile:node.imagePath error:&error]];
+                }
             }else{
                 type = [workspace localizedDescriptionForType:@"public.folder"];
             }
