@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bqX-2x-2CQ">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -13,7 +13,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MasterViewController" id="wal-e0-61e" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hbI-IS-5gg">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -29,7 +29,7 @@
             <objects>
                 <navigationController id="x8Z-jo-MT8" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Usn-o8-D5A">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -58,15 +58,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="ExifViewController" id="4hL-YA-ZLq" customClass="ExifViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="20" sectionHeaderHeight="20" sectionFooterHeight="20" id="dbR-GS-T8X">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExifEntry" id="aAg-li-UFo" customClass="LabelArrangableCell" customModule="DVremoteCommonUI">
-                                <rect key="frame" x="0.0" y="50" width="390" height="20"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="20"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aAg-li-UFo" id="4ts-Oj-AEK">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="20"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Um-6E-tFf">
@@ -79,7 +79,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFx-H6-Pbw">
-                                            <rect key="frame" x="54" y="0.0" width="336" height="14.333333333333334"/>
+                                            <rect key="frame" x="54" y="0.0" width="339" height="14.333333333333334"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -113,14 +113,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="90" id="sgA-gJ-CBZ" customClass="InspectorImageCell" customModule="DVremoteCommonUI">
-                                <rect key="frame" x="0.0" y="70" width="390" height="90"/>
+                                <rect key="frame" x="0.0" y="70" width="393" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sgA-gJ-CBZ" id="FZx-3G-azk">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-aK-uvS">
-                                            <rect key="frame" x="0.0" y="4" width="390" height="82"/>
+                                            <rect key="frame" x="0.0" y="4" width="393" height="82"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -153,15 +153,15 @@
             <objects>
                 <viewController id="45G-hC-5DD" customClass="FullImageViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xid-MV-8z6">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Fx-Jr-Exf">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-7Q-c3l">
-                                <rect key="frame" x="176.66666666666666" y="398.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="178" y="402.66666666666669" width="37" height="37"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ngz-Xt-aDJ">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
@@ -169,7 +169,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now Downloading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flg-IM-cxb">
-                                <rect key="frame" x="46" y="354.66666666666669" width="298" height="21"/>
+                                <rect key="frame" x="47.666666666666657" y="358.66666666666669" width="298" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="298" id="OM3-7f-wnB"/>
                                     <constraint firstAttribute="height" constant="21" id="o4Q-RL-TXd"/>
@@ -179,7 +179,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed to Download a Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knt-Bv-kuD">
-                                <rect key="frame" x="90.666666666666671" y="407" width="208.66666666666663" height="20.333333333333314"/>
+                                <rect key="frame" x="92.333333333333329" y="411" width="208.66666666666669" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -223,7 +223,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ImageListNavigator" id="2UK-hK-uUS" customClass="ItemListNavigationController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EgR-qo-lcF">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                 </navigationController>
@@ -236,22 +236,22 @@
             <objects>
                 <tableViewController storyboardIdentifier="ImageListViewController" id="BYt-a7-zmq" customClass="ItemListViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="79" sectionHeaderHeight="28" sectionFooterHeight="28" id="iv9-Om-LuP">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" id="6nj-74-h3Y">
-                                <rect key="frame" x="0.0" y="50" width="390" height="79"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6nj-74-h3Y" id="a0b-dh-IS0">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-qv-HoW">
-                                            <rect key="frame" x="129.66666666666666" y="29.666666666666671" width="20" height="20"/>
+                                            <rect key="frame" x="131.33333333333334" y="29.666666666666671" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCB-Ot-OqI">
-                                            <rect key="frame" x="157.66666666666666" y="29.333333333333336" width="74.666666666666657" height="20.333333333333336"/>
+                                            <rect key="frame" x="159.33333333333334" y="29.333333333333336" width="74.666666666666657" height="20.333333333333336"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -266,10 +266,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NodeItemCell" id="BOM-3T-RXY" customClass="NodeItemCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="129" width="390" height="79"/>
+                                <rect key="frame" x="0.0" y="129" width="393" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BOM-3T-RXY" id="88d-ew-K9R">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NQG-dK-MjI">
@@ -280,16 +280,16 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GFX-gc-tAE">
-                                            <rect key="frame" x="99" y="24" width="291" height="31.333333333333329"/>
+                                            <rect key="frame" x="99" y="24" width="294" height="31.333333333333329"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4z-0K-CMb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="291" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4z-0K-CMb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="294" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ9-Ad-NX7">
-                                                    <rect key="frame" x="0.0" y="17" width="291" height="14.333333333333336"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ9-Ad-NX7">
+                                                    <rect key="frame" x="0.0" y="17" width="294" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -351,7 +351,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="AssetListViewController" id="yI9-ln-fMe" customClass="AssetListViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="d0d-FK-iKh">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="0GG-1q-J2I">
@@ -426,7 +426,7 @@
             <objects>
                 <navigationController id="UWM-7A-nOd" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aba-Y2-I7a">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -442,11 +442,11 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="wEo-tl-BVd" customClass="InfomationViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="soL-1J-bLl">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auc-OZ-1LV">
-                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -500,7 +500,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QXw-bD-AXM">
-                                        <rect key="frame" x="96" y="8" width="242" height="84.333333333333343"/>
+                                        <rect key="frame" x="96" y="8" width="242" height="84.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhz-7F-MTv">
                                                 <rect key="frame" x="0.0" y="0.0" width="242" height="17"/>
@@ -604,23 +604,23 @@
             <objects>
                 <viewController id="VWf-1y-Fjl" customClass="PairingViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QgN-rw-0vA">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input following numbers on a Mac to pair with this iOS device." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEf-27-9Ie">
-                                <rect key="frame" x="34" y="274" width="322" height="79"/>
+                                <rect key="frame" x="34" y="304.33333333333331" width="325" height="52.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWR-fG-jr3">
-                                <rect key="frame" x="130.33333333333331" y="387" width="129.33333333333331" height="60"/>
+                                <rect key="frame" x="132" y="391" width="129.33333333333337" height="60"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsY-Ry-Pgo">
-                                <rect key="frame" x="158.66666666666666" y="713" width="73" height="41"/>
+                                <rect key="frame" x="160" y="721" width="73" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.34711077810000002" green="0.9582975507" blue="0.99910140039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -655,15 +655,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="ServerViewController" id="rj1-As-3ds" customClass="ServerViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="56" sectionHeaderHeight="18" sectionFooterHeight="18" id="uXn-Ev-egb">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerCell" id="rPc-FI-jde" customClass="DataSourceCell" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="390" height="56"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="393" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rPc-FI-jde" id="nQK-tA-bsZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4us-M7-aLR">
@@ -691,7 +691,7 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzr-hl-Rbo">
-                                            <rect key="frame" x="353" y="13" width="22" height="30"/>
+                                            <rect key="frame" x="356" y="13" width="22" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="5hs-kC-At6"/>
                                                 <constraint firstAttribute="width" constant="22" id="BJY-Um-UsZ"/>
@@ -748,7 +748,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv6-gc-SUK">
-                                <rect key="frame" x="15" y="55" width="170" height="14.333333333333329"/>
+                                <rect key="frame" x="15" y="67" width="170" height="14.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1556,11 +1556,11 @@
             <objects>
                 <viewController id="n8S-UH-LNr" customClass="LensLibraryViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ks7-0b-juI">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d98-mU-3NI">
-                                <rect key="frame" x="0.0" y="86" width="390" height="48"/>
+                                <rect key="frame" x="0.0" y="86" width="393" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synchronization Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdb-he-V1V">
                                         <rect key="frame" x="15" y="14" width="172" height="20"/>
@@ -1569,7 +1569,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFq-1Q-UyZ">
-                                        <rect key="frame" x="335" y="14" width="40" height="20"/>
+                                        <rect key="frame" x="338" y="14" width="40" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1585,7 +1585,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ys-jW-sMr">
-                                <rect key="frame" x="15" y="144" width="360" height="86"/>
+                                <rect key="frame" x="15" y="144" width="363" height="86"/>
                                 <string key="text">By synchronizing lens profiles with DigViewer running on the other Mac, DigViewer remote is able to display exact field of view angle, or to override lens information in EXIF view.
 In order to synchronize lens profiles, please input lens information to DigViewer on Mac. After that, select that Mac as a datasource from this iOS device.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1593,7 +1593,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IT-2b-2cs">
-                                <rect key="frame" x="236" y="240" width="139" height="32"/>
+                                <rect key="frame" x="239" y="240" width="139" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Reset Lens Profiles"/>
                                 <connections>
@@ -1601,14 +1601,14 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XKb-pv-lgh">
-                                <rect key="frame" x="0.0" y="282" width="390" height="552"/>
+                                <rect key="frame" x="0.0" y="282" width="393" height="560"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LensProfileCell" textLabel="HMs-El-JfM" detailTextLabel="M8g-mF-Pv4" style="IBUITableViewCellStyleSubtitle" id="QXj-UB-hie">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="393" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QXj-UB-hie" id="F93-6B-mGD">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HMs-El-JfM">
@@ -1669,39 +1669,39 @@ In order to synchronize lens profiles, please input lens information to DigViewe
             <objects>
                 <viewController id="Rib-t3-csh" customClass="AboutViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" id="axh-4J-psV">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epa-Tg-hdx" customClass="ScrollableContentView" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="384"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="384"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 opiopan. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vEC-xR-50J">
-                                        <rect key="frame" x="53.666666666666657" y="351" width="283" height="17"/>
+                                        <rect key="frame" x="55" y="351" width="283" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DVremote" translatesAutoresizingMaskIntoConstraints="NO" id="GIx-gL-uHc">
-                                        <rect key="frame" x="131" y="38" width="128" height="128"/>
+                                        <rect key="frame" x="132.66666666666666" y="38" width="127.99999999999997" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="GIx-gL-uHc" secondAttribute="height" multiplier="1:1" id="3nF-4T-CMQ"/>
                                             <constraint firstAttribute="width" constant="128" id="8Wk-1R-65M"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DigViewer remote" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="XN3-qx-BJj">
-                                        <rect key="frame" x="83" y="204" width="224" height="37"/>
+                                        <rect key="frame" x="84.666666666666686" y="204" width="224" height="37"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqD-WZ-x2r">
-                                        <rect key="frame" x="162" y="249" width="66" height="16"/>
+                                        <rect key="frame" x="163.66666666666666" y="249" width="66" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caution" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCS-Ls-Civ">
-                                        <rect key="frame" x="24" y="280" width="342" height="17"/>
+                                        <rect key="frame" x="24" y="280" width="345" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1802,17 +1802,17 @@ In order to synchronize lens profiles, please input lens information to DigViewe
             <objects>
                 <viewController id="KXb-Jb-PaG" customClass="MapViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ywu-ch-6z2">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OqM-XB-U5S">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUM-ns-Duw" customClass="MessageView" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="43" width="390" height="80"/>
+                                <rect key="frame" x="0.0" y="15" width="393" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppl-CZ-4Vv">
-                                        <rect key="frame" x="0.0" y="54" width="390" height="18"/>
+                                        <rect key="frame" x="0.0" y="94" width="393" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="0.96954255705544834" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1821,16 +1821,16 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59803340517241377" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ppl-CZ-4Vv" firstAttribute="leading" secondItem="KUM-ns-Duw" secondAttribute="leading" id="DIW-Lb-V1T"/>
-                                    <constraint firstAttribute="height" constant="80" id="MUl-qj-4bf"/>
+                                    <constraint firstAttribute="height" constant="120" id="MUl-qj-4bf"/>
                                     <constraint firstAttribute="trailing" secondItem="ppl-CZ-4Vv" secondAttribute="trailing" id="eQd-Rg-9s6"/>
                                     <constraint firstAttribute="bottom" secondItem="ppl-CZ-4Vv" secondAttribute="bottom" constant="8" id="kdM-3D-mzI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJa-dP-S1q" userLabel="Summary View">
-                                <rect key="frame" x="0.0" y="770" width="390" height="300"/>
+                                <rect key="frame" x="0.0" y="778" width="393" height="300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbd-0c-jFJ" userLabel="Summary View Placeholder">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="YTB-fM-wnQ"/>
@@ -1846,7 +1846,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XN-Gy-7L5" userLabel="2nd Summary View">
-                                <rect key="frame" x="0.0" y="804" width="390" height="300"/>
+                                <rect key="frame" x="0.0" y="812" width="393" height="300"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wS5-MQ-bsT" userLabel="Left Placeholder">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1857,7 +1857,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                         </constraints>
                                     </view>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzJ-Vs-aaE" userLabel="Right Placeholder">
-                                        <rect key="frame" x="340" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="343" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="CEv-b7-ZtA"/>
@@ -1874,8 +1874,12 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                     <constraint firstItem="wS5-MQ-bsT" firstAttribute="top" secondItem="0XN-Gy-7L5" secondAttribute="top" id="psd-NC-uTX"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx4-cW-xPf" userLabel="filler">
+                                <rect key="frame" x="0.0" y="778" width="393" height="74"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-4E-Kc7">
-                                <rect key="frame" x="0.0" y="770" width="390" height="40"/>
+                                <rect key="frame" x="0.0" y="778" width="393" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0jD-qi-Aq3"/>
@@ -1915,21 +1919,25 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                         <viewLayoutGuide key="safeArea" id="iJo-7e-UUT"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="iJo-7e-UUT" firstAttribute="trailing" secondItem="fJa-dP-S1q" secondAttribute="trailing" id="0g1-aA-hSv"/>
+                            <constraint firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="01b-fk-fH8"/>
                             <constraint firstItem="l4r-4E-Kc7" firstAttribute="leading" secondItem="iJo-7e-UUT" secondAttribute="leading" id="2UI-a7-Z1D"/>
-                            <constraint firstItem="iJo-7e-UUT" firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="6u4-R6-MqF"/>
+                            <constraint firstItem="KUM-ns-Duw" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="AdM-Wd-W2k"/>
+                            <constraint firstItem="nx4-cW-xPf" firstAttribute="leading" secondItem="OqM-XB-U5S" secondAttribute="leading" id="GmD-dS-AKQ"/>
                             <constraint firstAttribute="bottomMargin" secondItem="fJa-dP-S1q" secondAttribute="bottom" constant="-260" id="KOR-ZJ-TNj"/>
                             <constraint firstAttribute="bottom" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="Ldf-MS-AVO"/>
-                            <constraint firstItem="KUM-ns-Duw" firstAttribute="top" secondItem="iJo-7e-UUT" secondAttribute="top" constant="-48" id="Oww-8I-BYG"/>
-                            <constraint firstItem="fJa-dP-S1q" firstAttribute="leading" secondItem="iJo-7e-UUT" secondAttribute="leading" id="Tbe-bd-MFl"/>
+                            <constraint firstItem="KUM-ns-Duw" firstAttribute="top" secondItem="iJo-7e-UUT" secondAttribute="top" constant="-88" id="Oww-8I-BYG"/>
                             <constraint firstItem="iJo-7e-UUT" firstAttribute="trailing" secondItem="0XN-Gy-7L5" secondAttribute="trailing" id="UlK-e9-NUq"/>
                             <constraint firstItem="OqM-XB-U5S" firstAttribute="top" secondItem="ywu-ch-6z2" secondAttribute="top" id="Y7Z-Da-jye"/>
-                            <constraint firstItem="KUM-ns-Duw" firstAttribute="leading" secondItem="iJo-7e-UUT" secondAttribute="leading" id="ZSI-GL-Cr1"/>
-                            <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="iJo-7e-UUT" secondAttribute="leading" id="aPH-7K-tuh"/>
                             <constraint firstItem="0XN-Gy-7L5" firstAttribute="leading" secondItem="iJo-7e-UUT" secondAttribute="leading" id="aPw-mV-zQm"/>
-                            <constraint firstItem="iJo-7e-UUT" firstAttribute="trailing" secondItem="KUM-ns-Duw" secondAttribute="trailing" id="hJV-n4-Vsf"/>
+                            <constraint firstItem="nx4-cW-xPf" firstAttribute="bottom" secondItem="OqM-XB-U5S" secondAttribute="bottom" id="dt4-Rn-gW3"/>
+                            <constraint firstItem="nx4-cW-xPf" firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="eT9-9k-68x"/>
+                            <constraint firstItem="fJa-dP-S1q" firstAttribute="leading" secondItem="OqM-XB-U5S" secondAttribute="leading" id="fVV-EQ-ykG"/>
+                            <constraint firstAttribute="trailing" secondItem="KUM-ns-Duw" secondAttribute="trailing" id="gJV-2B-M3k"/>
+                            <constraint firstItem="OqM-XB-U5S" firstAttribute="leading" secondItem="ywu-ch-6z2" secondAttribute="leading" id="h1g-0z-3pb"/>
+                            <constraint firstItem="nx4-cW-xPf" firstAttribute="top" secondItem="l4r-4E-Kc7" secondAttribute="top" id="hqj-bw-uGb"/>
                             <constraint firstItem="iJo-7e-UUT" firstAttribute="bottom" secondItem="l4r-4E-Kc7" secondAttribute="bottom" id="jRD-ez-v7I"/>
                             <constraint firstItem="iJo-7e-UUT" firstAttribute="trailing" secondItem="l4r-4E-Kc7" secondAttribute="trailing" id="ylz-po-Sgs"/>
+                            <constraint firstItem="fJa-dP-S1q" firstAttribute="trailing" secondItem="OqM-XB-U5S" secondAttribute="trailing" id="zDM-1f-Zua"/>
                             <constraint firstAttribute="bottom" secondItem="0XN-Gy-7L5" secondAttribute="bottom" constant="-260" id="zZf-D9-e5Q"/>
                         </constraints>
                     </view>
@@ -1964,7 +1972,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ua2-Qv-qXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-425" y="-320"/>
+            <point key="canvasLocation" x="-425.19083969465646" y="-320.42253521126764"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="ZXX-sj-Jl3">
@@ -2259,7 +2267,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
             <objects>
                 <navigationController id="2Ld-xr-uD4" customClass="PreferencesNavigationController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mgQ-WQ-KDS">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

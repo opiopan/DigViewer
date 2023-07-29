@@ -395,14 +395,14 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
             let constraints = NSMutableArray()
             let constraintFormat1 =
                 NSLayoutConstraint.constraints(
-                    withVisualFormat: "H:|-[childView]-|",
+                    withVisualFormat: "H:|-(0)-[childView]-(0)-|",
                     options : NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: viewDictionary)
             constraints.addObjects(from: constraintFormat1)
             let constraintFormat2 =
                 NSLayoutConstraint.constraints(
-                    withVisualFormat: "V:|-[childView]-|",
+                    withVisualFormat: "V:|-(0)-[childView]-(0)-|",
                     options : NSLayoutConstraint.FormatOptions(rawValue: 0),
                     metrics: nil,
                     views: viewDictionary)
