@@ -141,7 +141,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="ETZ-FC-MkB"/>
+                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" modalPresentationStyle="fullScreen" id="ETZ-FC-MkB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTo-p1-J5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,15 +153,15 @@
             <objects>
                 <viewController id="45G-hC-5DD" customClass="FullImageViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xid-MV-8z6">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Fx-Jr-Exf">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-7Q-c3l">
-                                <rect key="frame" x="178" y="402.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ngz-Xt-aDJ">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
@@ -169,7 +169,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now Downloading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flg-IM-cxb">
-                                <rect key="frame" x="47.666666666666657" y="358.66666666666669" width="298" height="21"/>
+                                <rect key="frame" x="47.666666666666657" y="363.66666666666669" width="298" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="298" id="OM3-7f-wnB"/>
                                     <constraint firstAttribute="height" constant="21" id="o4Q-RL-TXd"/>
@@ -179,7 +179,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed to Download a Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knt-Bv-kuD">
-                                <rect key="frame" x="92.333333333333329" y="411" width="208.66666666666669" height="20.333333333333314"/>
+                                <rect key="frame" x="92.333333333333329" y="416" width="208.66666666666669" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -282,13 +282,13 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GFX-gc-tAE">
                                             <rect key="frame" x="99" y="24" width="294" height="31.333333333333329"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4z-0K-CMb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4z-0K-CMb">
                                                     <rect key="frame" x="0.0" y="0.0" width="294" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ9-Ad-NX7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ9-Ad-NX7">
                                                     <rect key="frame" x="0.0" y="17" width="294" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -426,7 +426,7 @@
             <objects>
                 <navigationController id="UWM-7A-nOd" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aba-Y2-I7a">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -604,23 +604,23 @@
             <objects>
                 <viewController id="VWf-1y-Fjl" customClass="PairingViewController" customModule="DigViewerRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QgN-rw-0vA">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input following numbers on a Mac to pair with this iOS device." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEf-27-9Ie">
-                                <rect key="frame" x="34" y="304.33333333333331" width="325" height="52.666666666666686"/>
+                                <rect key="frame" x="34" y="309.33333333333331" width="325" height="52.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWR-fG-jr3">
-                                <rect key="frame" x="132" y="391" width="129.33333333333337" height="60"/>
+                                <rect key="frame" x="132" y="396" width="129.33333333333337" height="60"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsY-Ry-Pgo">
-                                <rect key="frame" x="160" y="721" width="73" height="41"/>
+                                <rect key="frame" x="160" y="731" width="73" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.34711077810000002" green="0.9582975507" blue="0.99910140039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -635,8 +635,9 @@
                         <constraints>
                             <constraint firstItem="GWR-fG-jr3" firstAttribute="top" secondItem="vEf-27-9Ie" secondAttribute="bottom" constant="34" id="311-OV-z9G"/>
                             <constraint firstItem="GWR-fG-jr3" firstAttribute="centerX" secondItem="pOU-Bh-ul0" secondAttribute="centerX" id="3s9-jZ-nec"/>
-                            <constraint firstItem="pOU-Bh-ul0" firstAttribute="trailing" secondItem="vEf-27-9Ie" secondAttribute="trailing" constant="34" id="5P0-10-j7k"/>
-                            <constraint firstItem="vEf-27-9Ie" firstAttribute="leading" secondItem="pOU-Bh-ul0" secondAttribute="leading" constant="34" id="GH4-7g-36y"/>
+                            <constraint firstItem="pOU-Bh-ul0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vEf-27-9Ie" secondAttribute="trailing" constant="34" id="5P0-10-j7k"/>
+                            <constraint firstItem="vEf-27-9Ie" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pOU-Bh-ul0" secondAttribute="leading" constant="34" id="GH4-7g-36y"/>
+                            <constraint firstItem="vEf-27-9Ie" firstAttribute="centerX" secondItem="QgN-rw-0vA" secondAttribute="centerX" id="HCN-Ps-DZY"/>
                             <constraint firstItem="xsY-Ry-Pgo" firstAttribute="centerX" secondItem="pOU-Bh-ul0" secondAttribute="centerX" id="ZHr-nu-Z1w"/>
                             <constraint firstItem="pOU-Bh-ul0" firstAttribute="bottom" secondItem="xsY-Ry-Pgo" secondAttribute="bottom" constant="80" id="cU6-Q9-1hv"/>
                             <constraint firstItem="GWR-fG-jr3" firstAttribute="centerY" secondItem="QgN-rw-0vA" secondAttribute="centerY" id="lQr-81-xbF"/>
@@ -1963,11 +1964,11 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                         <outlet property="toolbar" destination="l4r-4E-Kc7" id="HaF-II-2Q4"/>
                         <segue destination="wal-e0-61e" kind="show" identifier="ShowInformationView" id="1Vi-gm-zmd"/>
                         <segue destination="2Ld-xr-uD4" kind="presentation" identifier="ModalConfigurationView" id="1lN-Fx-bf5"/>
-                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" id="XyN-pQ-fCP"/>
+                        <segue destination="UWM-7A-nOd" kind="presentation" identifier="FullImageView" modalPresentationStyle="fullScreen" id="XyN-pQ-fCP"/>
                         <segue destination="2Ld-xr-uD4" kind="popoverPresentation" identifier="PopoverConfigurationView" popoverAnchorBarButtonItem="G61-6W-1Ki" id="QjS-Zo-NfZ">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="VWf-1y-Fjl" kind="presentation" identifier="ParingNotice" id="40X-b4-YMb"/>
+                        <segue destination="VWf-1y-Fjl" kind="presentation" identifier="ParingNotice" modalPresentationStyle="fullScreen" id="40X-b4-YMb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ua2-Qv-qXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2280,10 +2281,10 @@ In order to synchronize lens profiles, please input lens information to DigViewe
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QjS-Zo-NfZ"/>
+        <segue reference="1lN-Fx-bf5"/>
         <segue reference="ha4-5m-vCT"/>
         <segue reference="Ob7-tc-DRy"/>
-        <segue reference="XyN-pQ-fCP"/>
+        <segue reference="ETZ-FC-MkB"/>
         <segue reference="1Vi-gm-zmd"/>
     </inferredMetricsTieBreakers>
     <resources>
