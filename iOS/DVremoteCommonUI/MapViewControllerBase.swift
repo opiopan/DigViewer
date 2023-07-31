@@ -277,6 +277,14 @@ open class MapViewControllerBase: UIViewController, MKMapViewDelegate,
                 addOverlay()
             }
         }
+        let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned self]() -> Void in
+            if let annotation = self.annotation {
+                if self.configController.mapSummaryDisplay == .balloon {
+                    self.mapView!.selectAnnotation(annotation, animated:true)
+                }
+            }
+        })
     }
     
     //-----------------------------------------------------------------------------------------
