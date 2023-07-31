@@ -41,7 +41,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         
         FailedLabel.alpha = 0;
         if let image = DVRemoteClient.shared().fullImage(forID: targetPath, inDocument: targetDocument, withMaxSize: 2048) {
-            indicatorView.layer.zPosition = -1;
+            indicatorView.layer.isHidden = true;
             LoadingLabel.layer.zPosition = -1;
             applyImage(image, rotation: DVRemoteClient.shared().imageRotation, animation: false)
             let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
@@ -49,7 +49,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
                 self.applyTransform(self.imageView!.bounds.size)
             })
         }else{
-            indicatorView.layer.zPosition = 1;
+            indicatorView.layer.isHidden = false;
             LoadingLabel.layer.zPosition = 1;
             indicatorView.startAnimating()
         }
