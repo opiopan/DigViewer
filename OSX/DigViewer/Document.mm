@@ -170,7 +170,7 @@ static const CGFloat thumbnailSize = 256;
     PathNode* currentNode = [root nearestNodeAtPortablePath:pathID];
     dispatch_async(que, ^(void){
         NSImage* image;
-        id thumbnail = [currentNode thumbnailImage:thumbnailSize];
+        id thumbnail = [currentNode.imageNode thumbnailImage:thumbnailSize];
         if ([thumbnail isKindOfClass:[NSImage class]]){
             image = thumbnail;
         }else{
