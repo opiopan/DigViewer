@@ -101,11 +101,10 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         }
         applyTransform(imageView!.bounds.size)
         if (animation){
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.35)
-            imageView!.alpha = 1
-            imageView!.image = image
-            UIView.commitAnimations()
+            UIView.animate(withDuration: 0.35){
+                self.imageView!.alpha = 1
+                self.imageView!.image = image
+            }
         }else{
             imageView!.alpha = 1
             imageView!.image = image
@@ -125,10 +124,9 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
-        applyTransform(size)
-        UIView.commitAnimations()
+        UIView.animate(withDuration: 0.2){
+            self.applyTransform(size)
+        }
     }
     
     //-----------------------------------------------------------------------------------------
@@ -154,13 +152,12 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     
     func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
         if (state == DVRClientState.disconnected){
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.35)
-            FailedLabel.alpha = 1
-            LoadingLabel.alpha = 0
-            indicatorView.stopAnimating()
-            indicatorView.alpha = 0
-            UIView.commitAnimations()
+            UIView.animate(withDuration: 0.35){
+                self.FailedLabel.alpha = 1
+                self.LoadingLabel.alpha = 0
+                self.indicatorView.stopAnimating()
+                self.indicatorView.alpha = 0
+            }
         }
     }
     

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImageMetadataKV : NSObject <NSCoding>
+@interface ImageMetadataKV : NSObject <NSSecureCoding>
 @property NSString* key;
 @property NSString* value;
 @property NSString* remark;

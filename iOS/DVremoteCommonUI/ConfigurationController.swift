@@ -85,7 +85,9 @@ public enum MapSummaryPinningStyle : Int {
 //-----------------------------------------------------------------------------------------
 // MARK: - Server情報
 //-----------------------------------------------------------------------------------------
-open class ServerInfo : NSObject, NSCoding {
+open class ServerInfo : NSObject, NSSecureCoding {
+    public static var supportsSecureCoding: Bool = true
+    
     open var service: NetService!
     open var icon: UIImage!
     open var image: UIImage!
@@ -139,7 +141,7 @@ open class ConfigurationController: NSObject {
     fileprivate let controller = Foundation.UserDefaults(suiteName: DVremoteAppGroupID)!
 
     override init(){
-        let redColor = NSKeyedArchiver.archivedData(withRootObject: UIColor.red)
+        let redColor = try!NSKeyedArchiver.archivedData(withRootObject: UIColor.red, requiringSecureCoding: true)
         defaults = [
             UserDefaults.EstablishedConnection  : "",
             UserDefaults.MapType                : MapType.map.rawValue,
@@ -159,7 +161,7 @@ open class ConfigurationController: NSObject {
             UserDefaults.MapFOVColor            : redColor,
             UserDefaults.MapSummaryPinningStyle : MapSummaryPinningStyle.inToolBar.rawValue,
             UserDefaults.MapNeedWarmUp          : true,
-            UserDefaults.DataSourcePinnedList   : NSKeyedArchiver.archivedData(withRootObject: [] as [ServerInfo]),
+            UserDefaults.DataSourcePinnedList   : try!NSKeyedArchiver.archivedData(withRootObject: [] as [ServerInfo], requiringSecureCoding: true),
             UserDefaults.AuthenticationgKeys    : NSDictionary(),
             UserDefaults.LensLibraryDate        : 0,
         ]
@@ -177,18 +179,18 @@ open class ConfigurationController: NSObject {
         mapHeadingShift = controller.value(forKey: UserDefaults.MapHeadingShift) as! CGFloat
         mapSpan = controller.value(forKey: UserDefaults.MapSpan) as! CGFloat
         mapTilt = controller.value(forKey: UserDefaults.MapTilt) as! CGFloat
-        mapPinColor =
-            NSKeyedUnarchiver.unarchiveObject(with: controller.value(forKey: UserDefaults.MapPinColor) as! Data) as! UIColor
-        mapArrowColor =
-            NSKeyedUnarchiver.unarchiveObject(with: controller.value(forKey: UserDefaults.MapArrowColor) as! Data) as! UIColor
-        mapFovColor =
-            NSKeyedUnarchiver.unarchiveObject(with: controller.value(forKey: UserDefaults.MapFOVColor) as! Data) as! UIColor
+        mapPinColor = try!NSKeyedUnarchiver.unarchivedObject(ofClasses:[UIColor.self],
+                                                             from: controller.value(forKey: UserDefaults.MapPinColor) as! Data) as! UIColor
+        mapArrowColor = try!NSKeyedUnarchiver.unarchivedObject(ofClasses:[UIColor.self],
+                                                               from: controller.value(forKey: UserDefaults.MapArrowColor) as! Data) as! UIColor
+        mapFovColor = try!NSKeyedUnarchiver.unarchivedObject(ofClasses:[UIColor.self],
+                                                             from: controller.value(forKey: UserDefaults.MapFOVColor) as! Data) as! UIColor
         mapSummaryPinningStyle =
             MapSummaryPinningStyle(rawValue: controller.value(forKey: UserDefaults.MapSummaryPinningStyle) as! Int)!
         mapNeedWarmUp = controller.value(forKey: UserDefaults.MapNeedWarmUp) as! Bool
         dataSourcePinnedList =
-            NSKeyedUnarchiver.unarchiveObject(with: controller.value(forKey: UserDefaults.DataSourcePinnedList) as! Data)
-            as! [ServerInfo]
+            try!NSKeyedUnarchiver.unarchivedObject(ofClasses: [ServerInfo.self, NSArray.self, UIImage.self],
+                                                   from: controller.value(forKey: UserDefaults.DataSourcePinnedList) as! Data) as! [ServerInfo]
         authenticationgKeys = controller.value(forKey: UserDefaults.AuthenticationgKeys) as! [String:String]
         lensLibrarySource = controller.value(forKey: UserDefaults.LensLibrarySource) as! String?
         lensLibraryDate = controller.value(forKey: UserDefaults.LensLibraryDate) as! Double
@@ -218,17 +220,17 @@ open class ConfigurationController: NSObject {
             mapHeadingShift = src.value(forKey: UserDefaults.MapHeadingShift) as! CGFloat
             mapSpan = src.value(forKey: UserDefaults.MapSpan) as! CGFloat
             mapTilt = src.value(forKey: UserDefaults.MapTilt) as! CGFloat
-            mapPinColor =
-                NSKeyedUnarchiver.unarchiveObject(with: src.value(forKey: UserDefaults.MapPinColor) as! Data) as! UIColor
-            mapArrowColor =
-                NSKeyedUnarchiver.unarchiveObject(with: src.value(forKey: UserDefaults.MapArrowColor) as! Data) as! UIColor
-            mapFovColor =
-                NSKeyedUnarchiver.unarchiveObject(with: src.value(forKey: UserDefaults.MapFOVColor) as! Data) as! UIColor
+            mapPinColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self], from: src.value(forKey: UserDefaults.MapPinColor) as! Data) as! UIColor
+            mapArrowColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self], from: src.value(forKey: UserDefaults.MapArrowColor) as! Data) as! UIColor
+            mapFovColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self], from: src.value(forKey: UserDefaults.MapFOVColor) as! Data) as! UIColor
             mapSummaryPinningStyle =
                 MapSummaryPinningStyle(rawValue: src.value(forKey: UserDefaults.MapSummaryPinningStyle) as! Int)!
-            dataSourcePinnedList =
-                NSKeyedUnarchiver.unarchiveObject(with: src.value(forKey: UserDefaults.DataSourcePinnedList) as! Data)
-                as! [ServerInfo]
+            dataSourcePinnedList = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [ServerInfo.self, NSArray.self, UIImage.self],
+                from: src.value(forKey: UserDefaults.DataSourcePinnedList) as! Data) as! [ServerInfo]
             authenticationgKeys = src.value(forKey: UserDefaults.AuthenticationgKeys) as! [String:String]
             
             controller.setValue(true, forKey: UserDefaults.GroupsMigration)
@@ -414,7 +416,7 @@ open class ConfigurationController: NSObject {
     
     open var mapPinColor : UIColor {
         didSet {
-            let data = NSKeyedArchiver.archivedData(withRootObject: mapPinColor)
+            let data = try!NSKeyedArchiver.archivedData(withRootObject: mapPinColor, requiringSecureCoding: true)
             controller.setValue(data, forKey: UserDefaults.MapPinColor)
             updateConfiguration()
         }
@@ -422,7 +424,7 @@ open class ConfigurationController: NSObject {
     
     open var mapArrowColor : UIColor {
         didSet {
-            let data = NSKeyedArchiver.archivedData(withRootObject: mapArrowColor)
+            let data = try!NSKeyedArchiver.archivedData(withRootObject: mapArrowColor, requiringSecureCoding: true)
             controller.setValue(data, forKey: UserDefaults.MapArrowColor)
             updateConfiguration()
         }
@@ -430,7 +432,7 @@ open class ConfigurationController: NSObject {
     
     open var mapFovColor : UIColor {
         didSet {
-            let data = NSKeyedArchiver.archivedData(withRootObject: mapFovColor)
+            let data = try!NSKeyedArchiver.archivedData(withRootObject: mapFovColor, requiringSecureCoding: true)
             controller.setValue(data, forKey: UserDefaults.MapFOVColor)
             updateConfiguration()
         }
@@ -452,7 +454,7 @@ open class ConfigurationController: NSObject {
     
     open var dataSourcePinnedList : [ServerInfo] {
         didSet {
-            let data = NSKeyedArchiver.archivedData(withRootObject: dataSourcePinnedList)
+            let data = try!NSKeyedArchiver.archivedData(withRootObject: dataSourcePinnedList, requiringSecureCoding: true)
             controller.setValue(data, forKey: UserDefaults.DataSourcePinnedList)
             updateDataSourceConfiguration()
         }

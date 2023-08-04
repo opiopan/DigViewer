@@ -98,7 +98,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let traitCollection = DVRKeyWindow()!.traitCollection
         let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular))
         let mode = splitViewController!.displayMode
         if size.width > size.height && isReguler {
@@ -113,10 +113,9 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             }
         }else if size.height > size.width && isReguler {
             if mode != .primaryHidden {
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = .primaryHidden
-                UIView.commitAnimations()
+                UIView.animate(withDuration: 0.2){
+                    self.splitViewController!.preferredDisplayMode = .primaryHidden
+                }
             }
         }
     }
@@ -127,15 +126,14 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     @IBAction func performInformationButton(_ sender : UIBarButtonItem) {
         let bounds = UIScreen.main.bounds
-        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let traitCollection = DVRKeyWindow()!.traitCollection
         let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular))
         if bounds.size.height > bounds.size.width {
             // 縦表示
             if isReguler {
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = UISplitViewController.DisplayMode.primaryOverlay
-                UIView.commitAnimations()
+                UIView.animate(withDuration: 0.2){
+                    self.splitViewController!.preferredDisplayMode = UISplitViewController.DisplayMode.primaryOverlay
+                }
             }else{
                 performSegue(withIdentifier: "ShowInformationView", sender: sender)
             }
@@ -143,10 +141,9 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             // 横表示
             if isReguler {
                 isEnableDoublePane = !isEnableDoublePane
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationDuration(0.2)
-                splitViewController!.preferredDisplayMode = isEnableDoublePane ? .allVisible : .primaryHidden
-                UIView.commitAnimations()
+                UIView.animate(withDuration: 0.2){
+                    self.splitViewController!.preferredDisplayMode = self.isEnableDoublePane ? .allVisible : .primaryHidden
+                }
             }else{
                 performSegue(withIdentifier: "ShowInformationView", sender: sender)
             }
@@ -168,7 +165,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     // 設定ボタン
     //-----------------------------------------------------------------------------------------
     @IBAction func configureApp(_ sender : AnyObject) {
-        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let traitCollection = DVRKeyWindow()!.traitCollection
         let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular)) &&
             traitCollection.containsTraits(in: UITraitCollection(verticalSizeClass: .regular))
         if isReguler {
@@ -183,7 +180,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     fileprivate func showServersList() {
         isOpenServerList = true
-        let traitCollection = UIApplication.shared.keyWindow!.traitCollection
+        let traitCollection = DVRKeyWindow()!.traitCollection
         let isReguler = traitCollection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular)) &&
             traitCollection.containsTraits(in: UITraitCollection(verticalSizeClass: .regular))
         if isReguler {
@@ -403,7 +400,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
                 }else{
                     url = URL(string: "https://www.google.com/maps?ll=\(lat),\(lng)&z=\(zoom)&q=\(lat),\(lng)")!
                 }
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options:[:])
             }
             let activities = [mapActivity, gmapActivity]
             

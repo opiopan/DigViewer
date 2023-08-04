@@ -38,9 +38,9 @@ open class ExifViewControllerBase: UITableViewController {
     
     open var meta : [AnyHashable: Any]! {
         didSet {
-            exifData = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]
+            exifData = meta[DVRCNMETA_SUMMARY] as? [ImageMetadataKV]
             if let tmp = meta[DVRCNMETA_GPS_SUMMARY]{
-                gpsData = tmp as! [ImageMetadataKV]
+                gpsData = tmp as? [ImageMetadataKV]
             }else{
                 gpsData = nil
             }

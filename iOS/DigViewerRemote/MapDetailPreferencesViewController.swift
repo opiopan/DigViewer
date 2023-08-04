@@ -218,12 +218,15 @@ class MapDetailPreferencesViewController: UITableViewController {
                 CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapHeadingShift)! as! Double)
             self.configController.mapSpan = CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapSpan)! as! Double)
             self.configController.mapTilt = CGFloat(self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapTilt)! as! Double)
-            self.configController.mapPinColor = NSKeyedUnarchiver.unarchiveObject(
-                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapPinColor)! as! Data) as! UIColor
-            self.configController.mapArrowColor = NSKeyedUnarchiver.unarchiveObject(
-                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapArrowColor)! as! Data) as! UIColor
-            self.configController.mapFovColor = NSKeyedUnarchiver.unarchiveObject(
-                with: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapFOVColor)! as! Data) as! UIColor
+            self.configController.mapPinColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self],
+                from: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapPinColor)! as! Data) as! UIColor
+            self.configController.mapArrowColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self],
+                from: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapArrowColor)! as! Data) as! UIColor
+            self.configController.mapFovColor = try!NSKeyedUnarchiver.unarchivedObject(
+                ofClasses: [UIColor.self],
+                from: self.configController.defaultValue(DVremoteCommonUI.UserDefaults.MapFOVColor)! as! Data) as! UIColor
             self.endUpdateCellCount()
             self.reflectToControl()
         }

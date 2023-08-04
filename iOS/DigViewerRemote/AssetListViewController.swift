@@ -204,7 +204,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
                 deferringJob = job
             }else{
                 let condition = UITraitCollection(horizontalSizeClass: .regular)
-                let isiPad = UIApplication.shared.keyWindow!.traitCollection.containsTraits(in: condition)
+                let isiPad = DVRKeyWindow()!.traitCollection.containsTraits(in: condition)
                 if !isiPad {
                     (navigationController! as? ItemListNavigationController)?.backToMapView()
                 }else if selectingPhase == .highlight {

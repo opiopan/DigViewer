@@ -13,6 +13,12 @@
 //-----------------------------------------------------------------------------------------
 @implementation ImageMetadataKV
 
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+    
+}
+
 + (id)kvWithKey:(NSString *)key value:(NSString *)value
 {
     ImageMetadataKV* kv = [[ImageMetadataKV alloc] init];

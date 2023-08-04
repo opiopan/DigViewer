@@ -157,7 +157,8 @@ static const int NAME_CLIP_LENGTH = 13;
         NSArray* summary = meta.summary;
         NSArray* gpsInfo = meta.gpsInfoStrings;
         NSDictionary* templateMeta = @{DVRCNMETA_SUMMARY:summary, DVRCNMETA_GPS_SUMMARY:gpsInfo};
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:templateMeta];
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:templateMeta
+                                             requiringSecureCoding:YES error:nil];
         [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_TEMPLATE_META withData:data];
     }
     
@@ -165,7 +166,8 @@ static const int NAME_CLIP_LENGTH = 13;
         PHAsset* asset = _sharedImage ? nil : _currentAssets[_currentIndexInAssets];
         LocalSession* __weak weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+            LocalSession* strongSelf = weakSelf;
+            [strongSelf notifyMetaForAsset:asset indexInParent:strongSelf->_currentIndexInAssets
                         namespaceChanged:NO entityChanged:YES];
         });
     }
@@ -320,11 +322,12 @@ static const int NAME_CLIP_LENGTH = 13;
     }
     
     if (_delegate){
+        LocalSession* __weak weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (_sharedImage || _currentAssets.count > 0){
-                PHAsset* asset = _currentAssets ? _currentAssets[_currentIndexInAssets] : nil;
-                LocalSession* __weak weakSelf = self;
-                [weakSelf notifyMetaForAsset:asset indexInParent:_currentIndexInAssets
+            LocalSession* strongSelf = weakSelf;
+            if (strongSelf->_sharedImage || strongSelf->_currentAssets.count > 0){
+                PHAsset* asset = strongSelf->_currentAssets ? strongSelf->_currentAssets[strongSelf->_currentIndexInAssets] : nil;
+                [weakSelf notifyMetaForAsset:asset indexInParent:strongSelf->_currentIndexInAssets
                             namespaceChanged:YES entityChanged:shouldBeReset];
             }
         });
@@ -386,8 +389,8 @@ static const CGFloat SPAN_IN_METER = 450.0;
 {
     LocalSession* __weak weakSelf = self;
     if (asset){
-        [_imageManager requestImageDataForAsset:asset options:nil resultHandler:
-         ^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+        [_imageManager requestImageDataAndOrientationForAsset:asset options:nil resultHandler:
+         ^(NSData *imageData, NSString *dataUTI, CGImagePropertyOrientation orientation, NSDictionary *info) {
              [weakSelf notifyMetaForAsset:asset indexInParent:indexInParent imageData:imageData
                          namespaceChanged:namespaceChanged entityChanged:entityChanged];
          }];
@@ -423,7 +426,8 @@ static const CGFloat SPAN_IN_METER = 450.0;
     meta.namespaceChanged = namespaceChanged;
     meta.entityChanged = entityChanged;
     
-    NSData* sdata = [NSKeyedArchiver archivedDataWithRootObject:meta.portableData];
+    NSData* sdata = [NSKeyedArchiver archivedDataWithRootObject:meta.portableData
+                                          requiringSecureCoding:YES error:nil];
     [_delegate dvrSession:nil recieveCommand:DVRC_NOTIFY_META withData:sdata];
 }
 

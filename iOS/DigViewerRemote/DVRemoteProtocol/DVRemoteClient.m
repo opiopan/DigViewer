@@ -327,7 +327,7 @@
 {
     if (_state == DVRClientConnected && _meta){
         NSString* document = [_meta valueForKey:DVRCNMETA_DOCUMENT];
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:document];
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:document requiringSecureCoding:YES error:nil];
         [_session sendCommand:command withData:data replacingQue:NO];
         [self startWatchDog];
     }
@@ -341,7 +341,7 @@
     }else{
         NSDictionary* args = @{DVRCNMETA_DOCUMENT: documentName,
                                DVRCNMETA_ID: nodeID};
-        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args requiringSecureCoding:YES error:nil];
         [_session sendCommand:DVRC_MOVE_NODE withData:data replacingQue:YES];
     }
 }
@@ -359,7 +359,8 @@
         NSString* key = [self keyForID:nodeID inDocument:documentName];
         UIImage* thumbnail = [_thumbnailCache valueForKey:key];
         if (!thumbnail && downloadIfNeed){
-            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args
+                                                 requiringSecureCoding:YES error:nil];
             [_session sendCommand:DVRC_REQUEST_THUMBNAIL withData:data replacingQue:NO];
         }
         
@@ -382,7 +383,8 @@
         }
         
         if (!rc){
-            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs];
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:commandArgs
+                                                 requiringSecureCoding:YES error:nil];
             [_session sendCommand:DVRC_REQUEST_FULLIMAGE withData:data replacingQue:YES];
             [self startWatchDog];
         }
@@ -423,7 +425,8 @@
                 return nodeList;
             }
             
-            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args];
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:args
+                                                 requiringSecureCoding:YES error:nil];
             DVRemoteSession* session = _session;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [session sendCommand:DVRC_REQUEST_FOLDER_ITEMS withData:data replacingQue:NO];
@@ -488,7 +491,10 @@
         //-----------------------------------------------------------------------------------------
         // ペアリングキー受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         _pairingKey = [args valueForKey:DVRCNMETA_PAIRCODE];
         if (_delegates.count){
             for (id <DVRemoteClientDelegate> delegate in _delegates){
@@ -513,7 +519,10 @@
         //-----------------------------------------------------------------------------------------
         // テンプレートメタ受信
         //-----------------------------------------------------------------------------------------
-        _templateMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, ImageMetadataKV.class, nil];
+        _templateMeta = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         if (_state != DVRClientConnected){
             _state = DVRClientConnected;
             [self notifyStateChange];
@@ -522,7 +531,10 @@
         //-----------------------------------------------------------------------------------------
         // メタデータ受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* newMeta = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, ImageMetadataKV.class, nil];
+        NSDictionary* newMeta = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         _meta = newMeta;
         _thumbnail = nil;
         _fullImage = nil;
@@ -557,7 +569,10 @@
         //-----------------------------------------------------------------------------------------
         // サムネール受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         NSData* tiffData = [args valueForKey:DVRCNMETA_THUMBNAIL];
         UIImage* image = [UIImage imageWithData:tiffData];
         NSString* key = [self keyForID:[args valueForKey:DVRCNMETA_ID] inDocument:[args valueForKey:DVRCNMETA_DOCUMENT]];
@@ -582,7 +597,9 @@
         //-----------------------------------------------------------------------------------------
         // フル画像受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class, NSString.class, NSData.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         NSData* tiffData = [args valueForKey:DVRCNMETA_FULLIMAGE];
         UIImage* image = [UIImage imageWithData:tiffData];
         if ([self compareWithMeta:_meta andMeta:args] && !_fullImage){
@@ -601,7 +618,10 @@
         //-----------------------------------------------------------------------------------------
         // フォルダ内要素一覧受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         if ([self compareWithMeta:args andMetasParent:_meta]){
             _nodeListWrap = args;
         }
@@ -619,7 +639,10 @@
         //-----------------------------------------------------------------------------------------
         // サーバー情報受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         if (_tmpDelegate && [_tmpDelegate respondsToSelector:@selector(dvrClient:didRecieveServerInfo:)]){
             [_tmpDelegate dvrClient:self didRecieveServerInfo:args];
         }
@@ -627,7 +650,10 @@
         //-----------------------------------------------------------------------------------------
         // レンズライブラリ受信
         //-----------------------------------------------------------------------------------------
-        NSDictionary* args = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSError* error;
+        NSSet* classes = [NSSet setWithObjects:NSDictionary.class, NSArray.class,NSString.class,
+                          NSData.class, NSNumber.class, nil];
+        NSDictionary* args = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         NSData* libraryData = [args valueForKey:DVRCNMETA_LENS_LIBRARY];
         NSNumber* libraryDate = [args valueForKey:DVRCNMETA_LENS_LIBRARY_DATE];
         ConfigurationController* controller = ConfigurationController.sharedController;
@@ -673,7 +699,9 @@
     }else{
         cmd = DVRC_REQUEST_PAIRING;
     }
-    [_session sendCommand:cmd withData:[NSKeyedArchiver archivedDataWithRootObject:args] replacingQue:YES];
+    [_session sendCommand:cmd withData:[NSKeyedArchiver archivedDataWithRootObject:args
+                                                             requiringSecureCoding:YES error:nil]
+             replacingQue:YES];
 }
 
 //-----------------------------------------------------------------------------------------

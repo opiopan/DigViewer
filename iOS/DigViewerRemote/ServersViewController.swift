@@ -20,9 +20,9 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         browser.searchServers()
 
         headerController =
-            storyboard!.instantiateViewController(withIdentifier: "dataSourceHeader") as! DataSourceHeaderController
+            storyboard!.instantiateViewController(withIdentifier: "dataSourceHeader") as? DataSourceHeaderController
         footerController =
-            storyboard!.instantiateViewController(withIdentifier: "SimpleFooter") as! SimpleFooterViewController
+            storyboard!.instantiateViewController(withIdentifier: "SimpleFooter") as? SimpleFooterViewController
         let localBrowser = browser
         let localHeader = headerController
         
@@ -182,7 +182,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     
     func dvrClient(_ client: DVRemoteClient!, didRecieveServerInfo info: [AnyHashable: Any]!) {
         let serverInfo = queryingServers[0];
-        serverInfo.attributes = info[DVRCNMETA_SERVER_INFO] as! [String : String]
+        serverInfo.attributes = info[DVRCNMETA_SERVER_INFO] as? [String : String]
         if let data = info[DVRCNMETA_SERVER_ICON] as! Data? {
             serverInfo.icon = UIImage(data: data)
         }
@@ -226,27 +226,28 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             cell.accessoryType = .checkmark
         }
 
-        if animated {
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.35)
+        let block = {
+            if isRemote && !self.servers[indexPath.row].isActive {
+                cell.selectionStyle = .none
+                cell.iconImageVIew.alpha = 0.27
+                cell.dataSourceLabel.alpha = 0.27
+                cell.descriptionLabel.alpha = 0.45
+                //            cell.dataSourceLabel.textColor = UIColor.lightGrayColor()
+                //            cell.descriptionLabel.textColor = UIColor.lightGrayColor()
+            }else{
+                cell.selectionStyle = .default
+                cell.iconImageVIew.alpha = 1.0
+                cell.dataSourceLabel.alpha = 1.0
+                cell.descriptionLabel.alpha = 1.0
+                //            cell.dataSourceLabel.textColor = UIColor.blackColor()
+                //            cell.descriptionLabel.textColor = UIColor(red: 111/256, green: 113/256, blue: 121/256, alpha: 1)
+            }
         }
-        if isRemote && !servers[indexPath.row].isActive {
-            cell.selectionStyle = .none
-            cell.iconImageVIew.alpha = 0.27
-            cell.dataSourceLabel.alpha = 0.27
-            cell.descriptionLabel.alpha = 0.45
-//            cell.dataSourceLabel.textColor = UIColor.lightGrayColor()
-//            cell.descriptionLabel.textColor = UIColor.lightGrayColor()
+        
+        if animated {
+            UIView.animate(withDuration: 0.35, animations: block)
         }else{
-            cell.selectionStyle = .default
-            cell.iconImageVIew.alpha = 1.0
-            cell.dataSourceLabel.alpha = 1.0
-            cell.descriptionLabel.alpha = 1.0
-//            cell.dataSourceLabel.textColor = UIColor.blackColor()
-//            cell.descriptionLabel.textColor = UIColor(red: 111/256, green: 113/256, blue: 121/256, alpha: 1)
-        }
-        if animated {
-            UIView.commitAnimations()
+            UIView.performWithoutAnimation(block)
         }
     }
 

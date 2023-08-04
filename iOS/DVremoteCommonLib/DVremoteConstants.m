@@ -6,7 +6,7 @@
 //  Copyright © 2016年 opiopan. All rights reserved.
 //
 
-#import "DVremoteConstants.h"
+#import "DVRemoteConstants.h"
 
 //-----------------------------------------------------------------------------------------
 // MARK: App Groups 識別子

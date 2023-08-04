@@ -163,7 +163,7 @@ class ItemListViewController: UITableViewController, DVRemoteClientDelegate {
             var nodeID = path
             nodeID!.append(selectedNode!)
             DVRemoteClient.shared().move(toNode: nodeID, inDocument: document)
-            let collection = UIApplication.shared.keyWindow!.traitCollection
+            let collection = DVRKeyWindow()!.traitCollection
             if !collection.containsTraits(in: UITraitCollection(horizontalSizeClass: .regular)) {
                 (navigationController! as? ItemListNavigationController)?.backToMapView()
             }
