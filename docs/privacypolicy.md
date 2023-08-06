@@ -1,5 +1,6 @@
 ---
 layout: default
+title: DigViewer
 simple_header: true
 no_description: true
 ---
