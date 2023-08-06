@@ -1704,12 +1704,12 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epa-Tg-hdx" customClass="ScrollableContentView" customModule="DigViewerRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="382.66666666666669"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="542.66666666666663"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 opiopan. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vEC-xR-50J">
-                                        <rect key="frame" x="61.666666666666657" y="351" width="270" height="15.666666666666686"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 opiopan. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vEC-xR-50J">
+                                        <rect key="frame" x="40" y="282" width="313.33333333333331" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DVremote" translatesAutoresizingMaskIntoConstraints="NO" id="GIx-gL-uHc">
@@ -1726,31 +1726,53 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqD-WZ-x2r">
-                                        <rect key="frame" x="163.66666666666666" y="249" width="66" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="161.33333333333334" y="249" width="70.333333333333343" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caution" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCS-Ls-Civ">
-                                        <rect key="frame" x="24" y="280" width="345" height="17"/>
+                                        <rect key="frame" x="24" y="315" width="345" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWl-36-8Oc">
+                                        <rect key="frame" x="20" y="372" width="353" height="108.66666666666669"/>
+                                        <string key="text">The source code of DigViewer remote, along with the source code of DigViewer for Mac, is open-source and available on the following GitHub repository. You are free to modify, redistribute, and use the code for commercial purposes within the scope of the license.
+You can also download the installation disk image of DigViewer for Mac from this repository.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uc-s5-1bB">
+                                        <rect key="frame" x="90.666666666666686" y="488.66666666666663" width="212" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Move to GitHub repository"/>
+                                        <connections>
+                                            <action selector="openGithubRepository:" destination="Rib-t3-csh" eventType="touchUpInside" id="MYC-vW-6dc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="LCS-Ls-Civ" firstAttribute="leading" secondItem="epa-Tg-hdx" secondAttribute="leading" constant="24" id="0tT-0X-Q8C"/>
+                                    <constraint firstItem="LCS-Ls-Civ" firstAttribute="top" secondItem="vEC-xR-50J" secondAttribute="bottom" constant="16" id="2nF-d9-B4G"/>
+                                    <constraint firstItem="vEC-xR-50J" firstAttribute="top" secondItem="WqD-WZ-x2r" secondAttribute="bottom" constant="16" id="4Mb-iH-cEQ"/>
+                                    <constraint firstItem="KWl-36-8Oc" firstAttribute="leading" secondItem="epa-Tg-hdx" secondAttribute="leading" constant="20" symbolic="YES" id="5Hy-Y8-YeN"/>
                                     <constraint firstItem="XN3-qx-BJj" firstAttribute="centerX" secondItem="epa-Tg-hdx" secondAttribute="centerX" id="6SU-GP-1Ew"/>
                                     <constraint firstItem="WqD-WZ-x2r" firstAttribute="centerX" secondItem="epa-Tg-hdx" secondAttribute="centerX" id="BQw-0p-9s0"/>
                                     <constraint firstItem="GIx-gL-uHc" firstAttribute="top" secondItem="epa-Tg-hdx" secondAttribute="top" constant="38" id="DWL-EF-bAY"/>
                                     <constraint firstItem="XN3-qx-BJj" firstAttribute="top" secondItem="GIx-gL-uHc" secondAttribute="bottom" constant="38" id="I79-Yj-KM6"/>
                                     <constraint firstAttribute="trailing" secondItem="LCS-Ls-Civ" secondAttribute="trailing" constant="24" id="ILx-bb-Dce"/>
-                                    <constraint firstAttribute="bottom" secondItem="vEC-xR-50J" secondAttribute="bottom" constant="16" id="MzV-un-y6h"/>
+                                    <constraint firstItem="3uc-s5-1bB" firstAttribute="top" secondItem="KWl-36-8Oc" secondAttribute="bottom" constant="8" symbolic="YES" id="JVB-q0-Cx4"/>
+                                    <constraint firstItem="3uc-s5-1bB" firstAttribute="centerX" secondItem="epa-Tg-hdx" secondAttribute="centerX" id="MLz-fw-GW6"/>
+                                    <constraint firstAttribute="bottom" secondItem="3uc-s5-1bB" secondAttribute="bottom" constant="20" symbolic="YES" id="RRO-rq-9LD"/>
                                     <constraint firstItem="GIx-gL-uHc" firstAttribute="centerX" secondItem="epa-Tg-hdx" secondAttribute="centerX" id="UuP-sR-iO8"/>
+                                    <constraint firstItem="KWl-36-8Oc" firstAttribute="top" secondItem="LCS-Ls-Civ" secondAttribute="bottom" constant="40" id="ZSK-0n-BAo"/>
                                     <constraint firstItem="WqD-WZ-x2r" firstAttribute="top" secondItem="XN3-qx-BJj" secondAttribute="bottom" constant="8" id="dDB-XD-2CZ"/>
-                                    <constraint firstItem="vEC-xR-50J" firstAttribute="top" secondItem="LCS-Ls-Civ" secondAttribute="bottom" constant="54" id="j1a-6P-E2v"/>
                                     <constraint firstItem="vEC-xR-50J" firstAttribute="centerX" secondItem="epa-Tg-hdx" secondAttribute="centerX" id="l2M-xz-6Yt"/>
-                                    <constraint firstItem="LCS-Ls-Civ" firstAttribute="top" secondItem="WqD-WZ-x2r" secondAttribute="bottom" constant="15" id="ltD-PU-DPb"/>
+                                    <constraint firstAttribute="trailing" secondItem="KWl-36-8Oc" secondAttribute="trailing" constant="20" symbolic="YES" id="pFY-hg-nUV"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1777,7 +1799,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYe-WI-Ri8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1323" y="2480"/>
+            <point key="canvasLocation" x="1322.9007633587785" y="2479.5774647887324"/>
         </scene>
         <!--Item Selectore-->
         <scene sceneID="IjY-rE-6kc">

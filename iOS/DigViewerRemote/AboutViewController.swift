@@ -44,6 +44,12 @@ class AboutViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    @IBAction func openGithubRepository(_ sender: UIButton) {
+        if let url = URL(string: "https://github.com/opiopan/DigViewer"){
+            UIApplication.shared.open(url)
+        }
+    }
+    
     @IBAction func closeThisView(_ sender: UIBarButtonItem?) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
