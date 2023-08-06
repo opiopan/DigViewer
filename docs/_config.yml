@@ -1,0 +1,7 @@
+title: DigViewer
+description: Photo viewer for Mac, iPhone and iPad
+github:
+  owner_name: Hiroshi Murayama
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme
