@@ -1712,7 +1712,7 @@ In order to synchronize lens profiles, please input lens information to DigViewe
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DVremote" translatesAutoresizingMaskIntoConstraints="NO" id="GIx-gL-uHc">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DVremote_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GIx-gL-uHc">
                                         <rect key="frame" x="132.66666666666666" y="38" width="127.99999999999997" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="GIx-gL-uHc" secondAttribute="height" multiplier="1:1" id="3nF-4T-CMQ"/>
@@ -2337,7 +2337,7 @@ You can also download the installation disk image of DigViewer for Mac from this
         <image name="BottomButton" width="31" height="31"/>
         <image name="CenteringButton" width="30" height="30"/>
         <image name="ConfigureButton" width="31" height="31"/>
-        <image name="DVremote" width="512" height="512"/>
+        <image name="DVremote_icon" width="512" height="512"/>
         <image name="LeftButton" width="31" height="31"/>
         <image name="ListButton" width="31" height="31"/>
         <image name="RightButton" width="31" height="31"/>

@@ -6,5 +6,7 @@
 	<array>
 		<string>group.com.opiopan.DVremote</string>
 	</array>
+    <key>com.apple.developer.device-information.user-assigned-device-name</key>
+    <true/>
 </dict>
 </plist>

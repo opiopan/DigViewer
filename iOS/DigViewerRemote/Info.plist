@@ -7,13 +7,15 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Image</string>
+			<string>Image Files</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.image</string>
+				<string>public.jpeg</string>
+				<string>public.heif</string>
+				<string>public.heic</string>
 			</array>
 		</dict>
 	</array>
@@ -35,6 +37,28 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>support-sp.apple.com</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_dv-remote._tcp</string>
+		<string>_dv-remote._udp</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Find the DigViewer running on Mac</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To show photo's meta data by this app</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -56,46 +80,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To show photo&apos;s meta data by this app</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>support-sp.apple.com</key>
-			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>Find the DigViewer running on Mac</string>
-    <key>NSBonjourServices</key>
-    <array>
-        <string>_dv-remote._tcp</string>
-        <string>_dv-remote._udp</string>
-    </array>
-    <key>CFBundleDocumentTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeName</key>
-            <string>Image Files</string>
-            <key>LSHandlerRank</key>
-            <string>Alternate</string>
-            <key>LSItemContentTypes</key>
-            <array>
-                <string>public.jpeg</string>
-                <string>public.heif</string>
-                <string>public.heic</string>
-            </array>
-        </dict>
-    </array>
-    <key>UISupportsDocumentBrowser</key>
-    <true/>
-    <key>LSSupportsOpeningDocumentsInPlace</key>
-    <true/>
 </dict>
 </plist>
