@@ -1,0 +1,45 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.storebtn {
+    display: inline-block;
+    margin-left: 1rem;
+
+    img {
+        height: 3.2rem;
+        vertical-align: -1.15rem;
+    }
+
+    @include medium {
+        img{
+            height: 2.8rem;
+            vertical-Align: -1.05rem;
+        }
+    }
+
+    @include small {
+        margin-left: 0rem;
+
+        img {
+            height: 3.2rem;
+            vertical-Align: -1.05rem;
+        }
+    }
+}
+
+.btn {
+    @include small {
+        display: block;
+        width: 12em;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0.5em 0.9em;
+        font-size: 1em;
+
+        + .btn{
+            margin-left: auto;
+        }
+    }
+}
