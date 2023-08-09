@@ -1,10 +1,9 @@
 ---
 layout: default
-title: DigViewer
+title: DigViewer Privacy Policy
 simple_header: true
 no_description: true
 ---
-# Privacy Policy
 DigViewer is the app for Mac and DigViewer remote is the app for iPhone and iPad.
 Those apps are developed and maintained by Hiroshi Murayama("me").<br>
 This page explain how I treat personal information that DigViewer collects and receives when you use the app.
