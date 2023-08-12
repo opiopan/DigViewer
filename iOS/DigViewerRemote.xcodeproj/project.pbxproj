@@ -219,7 +219,7 @@
 		7B243E881BF73860001EB2B5 /* DataSourceHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderController.swift; sourceTree = "<group>"; };
 		7B243E8A1BF8100E001EB2B5 /* DataSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCell.swift; sourceTree = "<group>"; };
 		7B243E8C1BF8212C001EB2B5 /* DataSourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceDetailViewController.swift; sourceTree = "<group>"; };
-		7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = DVremoteCopySummaryAction.entitlements; path = DVremoteCopySummaryAction/DVremoteCopySummaryAction.entitlements; sourceTree = "<group>"; };
+		7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DVremoteCopySummaryAction.entitlements; sourceTree = "<group>"; };
 		7B3E811E2A7C719B00191566 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7B467F7B1BA1C2A9005719E7 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		7B4AF4511C70383E0051FCE2 /* DVremoteConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVremoteConstants.m; sourceTree = "<group>"; };
@@ -609,7 +609,6 @@
 		7BBA59C01B9DA59C0025B902 = {
 			isa = PBXGroup;
 			children = (
-				7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */,
 				7BEDC6561C3D60DD00B47C31 /* MapKit.framework */,
 				7BBA59CB1B9DA59C0025B902 /* DigViewerRemote */,
 				7B6F23521C524AAA00E7B0A8 /* Extensions */,
@@ -727,6 +726,7 @@
 		7BE36A981C4201DA00501159 /* DVremoteCopySummaryAction */ = {
 			isa = PBXGroup;
 			children = (
+				7B2E45B91C8BEC20003A3BC0 /* DVremoteCopySummaryAction.entitlements */,
 				7BE36A991C4201DA00501159 /* ActionRequestHandler.swift */,
 				7BE36A9D1C4201DA00501159 /* Info.plist */,
 				7BE36AAB1C4203D200501159 /* InfoPlist.strings */,

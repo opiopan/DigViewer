@@ -19,18 +19,29 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-        <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+        <h1 class="project-name">
+            {% if page.titlelogo %}
+                <img src="images/{{ page.titlelogo }}" class="titlelogo"/>
+            {% endif %}
+            {{ page.title | default: site.title | default: site.github.repository_name }}
+        </h1>
         {% unless page.no_description %}
         <h2 class="project-tagline">{{ page.description | default: site.description | default:
             site.github.project_tagline }}</h2>
         {% endunless %}
         {% unless page.simple_header %}
         {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+        <a href="{{ site.github.repository_url }}" class="btn">
+            <img src="images/github-mark.png" />
+            View on GitHub
+        </a>
         {% endif %}
-        <a href="https://github.com/opiopan/DigViewer/releases/latest/download/DigViewer.dmg" class="btn">Download for Mac</a>
+        <a href="https://github.com/opiopan/DigViewer/releases/latest/download/DigViewer.dmg" class="btn">
+            <img src="images/maclogo.png" />
+            Download for Mac
+        </a>
         <a href="https://apps.apple.com/jp/app/digviewer-remote/id1289202224?itsct=apps_box_badge&amp;itscg=30200" class="storebtn">
-            <img src="images/black.svg" alt="Download on the App Store">
+            <img src="images/black.svg" alt="Download on the App Store"/>
         </a>
         {% endunless %}
         </a>
