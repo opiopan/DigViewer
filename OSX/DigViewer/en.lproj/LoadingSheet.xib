@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +18,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="139" y="85" width="437" height="125"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="437" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -76,7 +76,9 @@ Gw
                     <constraint firstItem="37" firstAttribute="top" secondItem="76" secondAttribute="bottom" constant="11" id="W7N-xx-Sc8"/>
                     <constraint firstItem="7" firstAttribute="centerX" secondItem="5" secondAttribute="centerX" id="agv-iH-q4K"/>
                     <constraint firstAttribute="trailing" secondItem="122" secondAttribute="trailing" constant="22" id="oP5-gg-F2f"/>
+                    <constraint firstItem="76" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="uHg-xo-TLF"/>
                     <constraint firstItem="76" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="8" symbolic="YES" id="x6S-k6-MFS"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="76" secondAttribute="trailing" constant="20" symbolic="YES" id="zzk-wg-cia"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="28" y="148"/>
