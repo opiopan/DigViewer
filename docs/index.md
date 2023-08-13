@@ -6,6 +6,10 @@ no_description: false
 titlelogo: DigViewer.png
 ---
 
+<a href="images/digviewer-showcase.jpg" target="_blank">
+    <img alt="DigViewer running on mutiple device" src="images/digviewer-showcase.jpg">
+</a>
+
 # Agile photo browsing
 DigViewer is a photo viewer designed for photographers who have a large volume of photo data and need to browse through them daily while confirming the data.
 It is designed with the fundamental philosophy of allowing comfortable and agile browsing of photos, and you can witness this through the following distinctive features.
@@ -29,15 +33,29 @@ One of the advantages of digitizing photos is the ability to record the conditio
 DigViewer goes beyond simply displaying metadata recorded as EXIF data in numeric or textual form. It allows you to visualize and confirm the capture location, direction, and field of view on a map.
 * [How to accurately correct lens information](correct_lens_info.md)
 
+<a href="images/metadata.jpg" target="_blank">
+    <img alt="Displaying metadata in various formats" src="images/metadata.jpg">
+</a>
+
 # Integration with other devices
 There is also a companion app named **DigViewer remote** available for iPhone and iPad. 
 By pairing DigViewer with DigViewer remote, you can display the metadata of the photos being shown on your Mac on your iPhone or iPad 
-([as shown in the demo video](https://youtu.be/t86bAb83PQM)). <br>
+as shown in the following demo video. <br>
+
+<div align="center" class="movie">
+    <iframe
+        src="https://www.youtube.com/embed/t86bAb83PQM" 
+        title="YouTube video player" frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+    </iframe>
+</div>
+
 Please download it from the App Store and give it a try.
 
 <div align="center" class="app-store-link">
     <img alt="DigViewer remote at App Store" src="images/qr-code.jpg">
-    <a href="https://apps.apple.com/jp/app/digviewer-remote/id1289202224?itsct=apps_box_badge&amp;itscg=30200" class="storebtn-general">
+    <a href="https://apps.apple.com/jp/app/digviewer-remote/id1289202224?itsct=apps_box_badge&amp;itscg=30200"  class="storebtn-general">
         <img src="images/black.svg" alt="Download on the App Store"/>
     </a>
 </div>
