@@ -32,7 +32,7 @@ It is designed with the fundamental philosophy of allowing comfortable and agile
     Despite such conditions, user interactions like scrolling remain unaffected, as demonstrated in the video.
 
 <p align="center">
-    <img alt="Browsing in slow environment" src="images/browsing_on_nas.gif" width="512px">
+    <img alt="Browsing in slow environment" src="images/browsing_on_nas.gif" width="640px">
 </p>
 
 # Displaying metadata
