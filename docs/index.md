@@ -26,7 +26,14 @@ It is designed with the fundamental philosophy of allowing comfortable and agile
 
 * **Asynchronous loading and rendering**<Br>
     In Thumbnail mode, the loading and rendering of image files are processed completely asynchronously from the user's interactions.
-    This allows for smooth and responsive scrolling through folders containing files on NAS or large files, as well as swift navigation between folders.
+    This allows for smooth and responsive scrolling through folders containing files on NAS or large files, as well as swift navigation between folders.<br>
+    The following video was recorded in an environment with very slow storage access, 
+    where approximately 15MB RAW images stored on HDD-based NAS are accessed via WiFi.
+    Despite such conditions, user interactions like scrolling remain unaffected, as demonstrated in the video.
+
+<p align="center">
+    <img alt="Browsing in slow environment" src="images/browsing_on_nas.gif" width="512px">
+</p>
 
 # Displaying metadata
 One of the advantages of digitizing photos is the ability to record the conditions under which they were taken as metadata, allowing for later review. This includes not only camera settings such as focal length, aperture value, and shutter speed, but also, as seen in smartphones, recording the location and direction of capture using built-in GPS and compass features. Even in DSLRs, camera manufacturers offer GPS attachments for retrofitting to record location information.<br>
