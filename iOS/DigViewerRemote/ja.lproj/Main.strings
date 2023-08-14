@@ -155,7 +155,7 @@
 "SmQ-Ab-SGg.text" = "起動時のウォームアップ処理を省略";
 
 /* Class = "UIButton"; normalTitle = "DigViewer GitHub repository"; ObjectID = "3uc-s5-1bB"; */
-"3uc-s5-1bB.normalTitle" = "GitHubリポジトリに移動";
+"3uc-s5-1bB.normalTitle" = "DigViewer Webサイトにアクセス";
 
 /* Class = "UILabel"; text = "The source code of DigViewer remote..."; ObjectID = "KWl-36-8Oc"; */
-"KWl-36-8Oc.text" = "DigViewer remoteのソースコードはMac版DivViewerのソースコードと共に以下のGitHubリポジトリでオープンソースとして公開されています。このリポジトリ内のコードはライセンスの範囲内で自由に改変、再配布、商用利用できます。\nまたこのリポジトリからMac版DigViewerのインストール用ディスクイメージをダウンロードできます。";
+"KWl-36-8Oc.text" = "DigViewer remoteのソースコードはMac版DivViewerのソースコードと共にGitHubリポジトリでオープンソースとして公開されています。このリポジトリ内のコードはライセンスの範囲内で自由に改変、再配布、商用利用できます。\n詳しくはDigViewerのオフィシャルサイトをご覧ください。\nまたMac版DigViewerのインストール用ディスクイメージをこのサイトからダウンロードできます。";

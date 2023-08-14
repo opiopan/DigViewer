@@ -37,7 +37,7 @@ DigViewer goes beyond simply displaying metadata recorded as EXIF data in numeri
     <img alt="Displaying metadata in various formats" src="images/metadata.jpg">
 </a>
 
-# Integration with other devices
+# Integration with iPhone and iPad
 There is also a companion app named **DigViewer remote** available for iPhone and iPad. 
 By pairing DigViewer with DigViewer remote, you can display the metadata of the photos being shown on your Mac on your iPhone or iPad 
 as shown in the following demo video. <br>
@@ -59,6 +59,11 @@ Please download it from the App Store and give it a try.
         <img src="images/black.svg" alt="Download on the App Store"/>
     </a>
 </div>
+
+# It's Open Source
+DigViewer and DigViewre remote are developed as open source. Those source code is available on [the GitHub repository](https://github.com/opiopan/DigViewer). 
+You are free to modify, redistribute, and use the code for commercial purposes within the scope of the license.
+* [DigViewer GitHub repository](https://github.com/opiopan/DigViewer)
 
 # Other information
 * [DigViewer Privacy Policy](privacypolicy.md)

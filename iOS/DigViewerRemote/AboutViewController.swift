@@ -24,7 +24,8 @@ class AboutViewController: UIViewController {
 
         let version = infoPlist!["CFBundleShortVersionString"] as! String
         let build = infoPlist!["OPBuildVersion"] as! String
-        versionLabel.text = "Version \(version) (\(build))"
+        versionLabel.text = build.contains(":") ? "Version \(version) (\(build))\nDevelopment Build" :
+                                                  "Version \(version) (\(build))"
         
         let cautions = infoPlist!["OPCaution"] as! [String]
         if cautions.count > 0 {
@@ -45,7 +46,7 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func openGithubRepository(_ sender: UIButton) {
-        if let url = URL(string: "https://github.com/opiopan/DigViewer"){
+        if let url = URL(string: "https://opiopan.github.io/DigViewer/"){
             UIApplication.shared.open(url)
         }
     }
