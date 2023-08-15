@@ -19,7 +19,7 @@ It is designed with the fundamental philosophy of allowing comfortable and agile
     By using keyboard shortcuts, you can browse through all the images in the repository sequentially, transcending folder boundaries. 
     For more details, refer to [this page](shortcuts.html).
     - [Keyboard shortcuts for browsing](shortcuts.html)
-    - [Tips: Reducing opening folder time](reducing_time.html)
+    - [Tips: Reducing opening folder time](precreatedindex.html)
     <br><br>
 
 * **Utilization of embedded thumbnail**<Br>
