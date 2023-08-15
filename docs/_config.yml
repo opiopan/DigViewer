@@ -8,6 +8,5 @@ plugins:
 - jekyll-remote-theme
 show_downloads: true
 exclude:
-- imgsrc
 - Gemfile
 - Gemfile.lock

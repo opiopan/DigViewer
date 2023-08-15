@@ -15,9 +15,11 @@ DigViewer is a photo viewer designed for photographers who have a large volume o
 It is designed with the fundamental philosophy of allowing comfortable and agile browsing of photos, and you can witness this through the following distinctive features.
 
 * **Folder based architecture**<br>
-    DigViewer does not create database or index files to manage photos. It displays the photos contained in the specified folders in their original folder structure. This approach is based on the empirical observation of the creater of DigViewer and their friends that those who regularly add many photos to their repositories find folder-based classification to be the most convenient.
-    - [Keyboard shortcuts for browsing](shortcuts.md)
-    - [Tips: Reducing opening folder time](reducing_time.md)
+    DigViewer does not create database or index files to manage photos. It displays the photos contained in the specified folders in their original folder structure. This approach is based on the empirical observation of the creater of DigViewer and their friends that those who regularly add many photos to their repositories find folder-based classification to be the most convenient.<br>
+    By using keyboard shortcuts, you can browse through all the images in the repository sequentially, transcending folder boundaries. 
+    For more details, refer to [this page](shortcuts.html).
+    - [Keyboard shortcuts for browsing](shortcuts.html)
+    - [Tips: Reducing opening folder time](reducing_time.html)
     <br><br>
 
 * **Utilization of embedded thumbnail**<Br>
@@ -32,7 +34,7 @@ It is designed with the fundamental philosophy of allowing comfortable and agile
     Despite such conditions, user interactions like scrolling remain unaffected, as demonstrated in the video.
 
 <p align="center">
-    <img alt="Browsing in slow environment" src="images/browsing_on_nas.gif" width="640px">
+    <img alt="Browsing in slow environment" src="images/browsing_on_nas.gif" width="540px">
 </p>
 
 # Displaying metadata
@@ -73,4 +75,4 @@ You are free to modify, redistribute, and use the code for commercial purposes w
 * [DigViewer GitHub repository](https://github.com/opiopan/DigViewer)
 
 # Other information
-* [DigViewer Privacy Policy](privacypolicy.md)
+* [DigViewer Privacy Policy](privacypolicy.html)

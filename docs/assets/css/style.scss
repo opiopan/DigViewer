@@ -148,3 +148,18 @@
         height: 100%;
     }
 }
+
+pre {
+    &:has(> .language-mermaid) {
+        border: 0;
+        background-color: white;
+    }
+}
+
+.language-mermaid {
+    svg{
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
