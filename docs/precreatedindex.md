@@ -46,7 +46,7 @@ BASE=`basename $1`
     cd "${DIR}"
     find "${BASE}" -type d | awk '{print "D " $0}'
     find "${BASE}" -type f | awk '{print "F " $0}'
-) | grep -v \.AppleDouble > "${BASE}"/.Pathfinder.pflist 
+) | grep -v \.AppleDouble > "${DIR}"/"${BASE}"/.Pathfinder.pflist 
 ```
 
 By regularly executing this script on your NAS or running it when you upload a large number of photos, you can significantly reduce the time it takes to open an image repository on your NAS using DigViewer.
