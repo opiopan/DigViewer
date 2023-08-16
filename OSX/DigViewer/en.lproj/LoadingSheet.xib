@@ -16,9 +16,8 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Loading document" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="4" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="139" y="85" width="437" height="125"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1692"/>
+            <rect key="contentRect" x="504" y="379" width="437" height="125"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="437" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -35,7 +34,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="76" userLabel="Static Text - Target">
-                        <rect key="frame" x="200" y="75" width="37" height="14"/>
+                        <rect key="frame" x="18" y="75" width="401" height="14"/>
                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="77">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -78,7 +77,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="122" secondAttribute="trailing" constant="22" id="oP5-gg-F2f"/>
                     <constraint firstItem="76" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="uHg-xo-TLF"/>
                     <constraint firstItem="76" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="8" symbolic="YES" id="x6S-k6-MFS"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="76" secondAttribute="trailing" constant="20" symbolic="YES" id="zzk-wg-cia"/>
+                    <constraint firstAttribute="trailing" secondItem="76" secondAttribute="trailing" constant="20" symbolic="YES" id="zzk-wg-cia"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="28" y="148"/>

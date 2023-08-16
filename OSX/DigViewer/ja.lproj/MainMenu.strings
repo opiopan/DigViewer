@@ -100,9 +100,6 @@
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
 "296.title" = "表示";
 
-/* Class = "NSMenuItem"; title = "Help"; ObjectID = "491"; */
-"491.title" = "ヘルプ";
-
 /* Class = "NSMenuItem"; title = "Navigate"; ObjectID = "537"; */
 "537.title" = "ナビゲート";
 
@@ -169,3 +166,18 @@
 
 /* Class = "NSMenuItem"; title = "Browsing Contexts"; ObjectID = "HMo-kJ-nqD"; */
 "HMo-kJ-nqD.title" = "ブラウズ コンテキスト";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "vcO-4L-xws"; */
+"vcO-4L-xws.title" = "ヘルプ";
+
+/* Class = "NSButtonCell"; title = "GitHub"; ObjectID = "Qs1-rk-5H5"; */
+"Qs1-rk-5H5.title" = "GitHub";
+
+/* Class = "NSMenuItem"; title = "GitHub Repository"; ObjectID = "0Kp-kI-XBq"; */
+"0Kp-kI-XBq.title" = "GitHubリポジトリ";
+
+/* Class = "NSMenuItem"; title = "Website"; ObjectID = "5dt-kK-z3l"; */
+"5dt-kK-z3l.title" = "Webサイト";
+
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "Gj1-Hc-pzp"; */
+"Gj1-Hc-pzp.title" = "Webサイト";

@@ -375,6 +375,21 @@ static NSData* pngFromNSImage(NSImage* image);
     });
 }
 
+//-----------------------------------------------------------------------------------------
+// Go to the official web site
+//-----------------------------------------------------------------------------------------
+- (IBAction)gotoWebSite:(id)sender
+{
+    NSURL* url = [NSURL URLWithString:@"https://opiopan.github.io/DigViewer"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+- (IBAction)gotoGitHub:(id)sender
+{
+    NSURL* url = [NSURL URLWithString:@"https://github.com/opiopan/DigViewer"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
 @end
 
 
