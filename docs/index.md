@@ -1,14 +1,13 @@
 ---
 layout: default
 title: DigViewer
+release_info: true
 simple_header: false
-no_description: false
+no_description: true
 titlelogo: DigViewer.png
+banner_image: images/digviewer-showcase.jpg
+banner_title: Photo viewer for Photographers
 ---
-
-<a href="images/digviewer-showcase.jpg" target="_blank">
-    <img alt="DigViewer running on mutiple device" src="images/digviewer-showcase.jpg">
-</a>
 
 # Agile photo browsing
 DigViewer is a photo viewer designed for photographers who have a large volume of photo data and need to browse through them daily while confirming the data.

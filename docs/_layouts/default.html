@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
 
-    {% include googleanalytics.html %}
     {% seo %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
@@ -20,24 +19,26 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-        <h1 class="project-name">
+        {% unless page.simple_header %}
+        <h1 class="project-name" id="product-title">
             {% if page.titlelogo %}
                 <img src="images/{{ page.titlelogo }}" class="titlelogo"/>
             {% endif %}
             {{ page.title | default: site.title | default: site.github.repository_name }}
         </h1>
+        {% endunless %}
+        {% if page.simple_header %}
+        <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+        {% endif %}
         {% unless page.no_description %}
         <h2 class="project-tagline">{{ page.description | default: site.description | default:
             site.github.project_tagline }}</h2>
         {% endunless %}
-        {% unless page.simple_header %}
-        {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">
-            <img src="images/github-mark.png" />
-            View on GitHub
-        </a>
+        {% if page.release_info %}
+        <h2 class="project-tagline" id="latest-release">Latest Virsion:</h2>
         {% endif %}
-        <a href="https://github.com/opiopan/DigViewer/releases/latest/download/DigViewer.dmg" class="btn">
+        {% unless page.simple_header %}
+        <a href="https://github.com/opiopan/DigViewer/releases/latest/" class="btn" id="download-url">
             <img src="images/maclogo.png" />
             Download for Mac
         </a>
@@ -45,7 +46,14 @@
             <img src="images/black.svg" alt="Download on the App Store"/>
         </a>
         {% endunless %}
-        </a>
+        <div class="banner">
+            {% if page.banner_image %}
+            <h1>{{ page.banner_title }}</h1>
+            <a href="{{ page.banner_image }}" target="_blank">
+                <img alt="DigViewer banner" src="{{ page.banner_image }}">
+            </a>
+            {% endif %}
+        </div>
     </header>
 
     <main id="content" class="main-content" role="main">
@@ -62,6 +70,10 @@
         </footer>
     </main>
 </body>
+
+{% if page.release_info == true %}
+{% include release.html %}
+{% endif %}
 
 {% if page.mermaid == true %}
 {% include mermaid.html %}

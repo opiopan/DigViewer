@@ -1,0 +1,16 @@
+<script>
+    fetch('/release.json')
+        .then(res =>{
+            if (!res.ok){
+                throw new Error(`${res.status} ${res.statusText}`);
+            }
+            return res.json();
+        }).then (json =>{
+            const version = document.getElementById('latest-release');
+            version.innerText = `Latest Version: ${json.version}`;
+            const url = document.getElementById('download-url');
+            url.setAttribute('href', json.url);
+        }).catch(reason =>{
+            console.log(reason);
+        })
+</script>

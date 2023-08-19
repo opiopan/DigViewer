@@ -5,18 +5,51 @@
 
 .page-header {
     @include large {
-        padding: 3rem 4rem;
+        padding: 2.1rem 0rem;
+        padding-bottom: 0;
     }
 
     @include medium {
-        padding: 2rem 2rem;
+        padding: 1.2em 0rem;
+        padding-bottom: 0;
     }
 
     @include small {
-        padding: 1.5rem 1rem;
+        padding: 1.2rem 0rem;
+        padding-bottom: 0;
     }
 }
 
+.banner {
+    background-color: white;
+    margin-top: 2.5em;
+    padding-bottom: 0.01em;
+
+    @include medium {
+        margin-top: 1.5em;
+    }
+
+    @include small {
+        margin-top: 1.2em;
+    }
+
+    h1 {
+        padding-top: 0.5em;
+        //color: #159957;
+        color: #404040;
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        font-weight: lighter;
+        font-size: 6vw;
+    }
+
+    img {
+        max-width: 95%;
+
+        @include large {
+            max-width: 90%;
+        }
+    }
+}
 .storebtn {
     display: inline-block;
     margin-left: 1rem;
@@ -94,19 +127,46 @@
 }
 
 .project-tagline {
+
+    @include large {
+        margin-top: 0.3em;
+        margin-bottom: 1em;    }
+
     @include medium {
-        margin-top: 0.6em;
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
     }
 
     @include small {
-        margin-top: 0.6em;
+        margin-top: 0.7em;
+        margin-bottom: 0.7em;
+    }
+}
+
+#product-title {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    font-weight: lighter;
+    
+    @include large {
+        font-size: 5.8em;
+        margin-top: -0.2em;
+    }
+
+    @include medium {
+        font-size: 4.5em;
+        margin-top: -0.1em;
+    }
+
+    @include small {
+        font-size: 3.2em;
+        margin-top: -0.1em;
     }
 }
 
 .titlelogo {
-    height: 2em;
-    margin-top: -0.3em;
-    margin-bottom: -0.68em;
+    height: 1.2em;
+    margin-top: -0.4em;
+    margin-bottom: -0.31em;
 }
 
 .app-store-link{
