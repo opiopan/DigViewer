@@ -11,4 +11,4 @@ show_downloads: true
 exclude:
 - Gemfile
 - Gemfile.lock
-google_analytics_id: G-RJMTR48W1Z
+#google_analytics_id: G-RJMTR48W1Z

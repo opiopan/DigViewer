@@ -5,7 +5,7 @@ on:
     branches: ["master"]
 
   release:
-    types: [published, released]
+    types: [released]
 
   workflow_dispatch:
 
