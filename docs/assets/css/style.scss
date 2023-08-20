@@ -3,6 +3,15 @@
 
 @import "{{ site.theme }}";
 
+body {
+    font-family: 
+        "Helvetica Neue", Arial, sans-serif;
+}
+
+main {
+    font-weight: 300;
+}
+
 .page-header {
     @include large {
         padding: 2.1rem 0rem;
@@ -37,8 +46,7 @@
         padding-top: 0.5em;
         //color: #159957;
         color: #404040;
-        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-        font-weight: lighter;
+        font-weight: 150;
         font-size: 6vw;
 
         @include small {
@@ -131,6 +139,7 @@
 }
 
 .project-tagline {
+    font-weight: 300;
 
     @include large {
         margin-top: 0.3em;
@@ -148,8 +157,7 @@
 }
 
 #product-title {
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    font-weight: lighter;
+    font-weight: 100;
     
     @include large {
         font-size: 5.8em;

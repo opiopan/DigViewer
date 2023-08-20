@@ -46,7 +46,7 @@ DigViewer goes beyond simply displaying metadata recorded as EXIF data in numeri
 </a>
 
 # Integration with iPhone and iPad
-There is also a companion app named **DigViewer remote** available for iPhone and iPad. 
+There is also a companion app named [***DigViewer remote***](https://apps.apple.com/jp/app/digviewer-remote/id1289202224?itsct=apps_box_badge&amp;itscg=30200) available for iPhone and iPad. 
 By pairing DigViewer with DigViewer remote, you can display the metadata of the photos being shown on your Mac on your iPhone or iPad 
 as shown in the following demo video. <br>
 
