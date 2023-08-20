@@ -10,6 +10,16 @@ body {
 
 main {
     font-weight: 300;
+
+    @include small {
+        font-weight: 400;
+    }
+}
+
+.main-content {
+    @include small {
+        font-size: 1.15rem;
+    }
 }
 
 .page-header {
@@ -44,13 +54,13 @@ main {
 
     h1 {
         padding-top: 0.5em;
-        //color: #159957;
         color: #404040;
-        font-weight: 150;
+        font-weight: 100;
         font-size: 6vw;
 
         @include small {
             font-size: 8.5vw;
+            font-weight: 200;
         }
     }
 
