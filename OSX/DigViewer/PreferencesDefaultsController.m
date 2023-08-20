@@ -64,6 +64,7 @@
                      @"pathNodeSortByDateTime":       @NO,
                      @"dvremotePairingKeys":          @{},
                      @"dvremoteEnable":               @YES,
+                     @"openDocsOnAppExit":            @[],
                      };
     }
     return defaults;

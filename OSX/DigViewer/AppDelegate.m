@@ -67,6 +67,7 @@
 // AppDelegateの実装
 //-----------------------------------------------------------------------------------------
 static NSString* serverEnableKey = @"dvremoteEnable";
+static NSString* openDocsKey = @"openDocsOnAppExit";
 
 @implementation AppDelegate {
     PairingWindowController* _pairingWindowController;
@@ -77,6 +78,22 @@ static NSString* serverEnableKey = @"dvremoteEnable";
 {
     _controller = [NSUserDefaultsController sharedUserDefaultsController];
     [_controller addObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey] options:0 context:nil];
+    
+    NSArray<NSString*>* docs = [_controller.values valueForKey:openDocsKey];
+    if (docs.count > 0){
+        [docs enumerateObjectsUsingBlock:^(NSString* path, NSUInteger idx, BOOL *stop) {
+            NSURL* url = [NSURL fileURLWithPath:path];
+            NSDocumentController* controller = [NSDocumentController sharedDocumentController];
+            [controller openDocumentWithContentsOfURL:url display:YES
+                                    completionHandler:^(NSDocument* document, BOOL alreadyOpened, NSError* error){
+                if (error){
+                    NSLog(@"Cannot open folder: %@, %@", path, error.description);
+                }
+            }];
+        }];
+    }else{
+        [self openFolder:self];
+    }
     
     DVRemoteServer* server = [DVRemoteServer sharedServer];
     server.delegate = self;
@@ -91,6 +108,12 @@ static NSString* serverEnableKey = @"dvremoteEnable";
 {
     [_controller removeObserver:self forKeyPath:[@"values." stringByAppendingString:serverEnableKey]];
     [[TemporaryFileController sharedController] cleanUpAllCategories];
+    
+    NSMutableArray* docs = [NSMutableArray array];
+    [sender.orderedDocuments enumerateObjectsUsingBlock:^(NSDocument* document, NSUInteger idx, BOOL *stop) {
+        [docs addObject:document.fileURL.path];
+    }];
+    [_controller.values setValue:docs forKey:openDocsKey];
     return NSTerminateNow;
 }
 
