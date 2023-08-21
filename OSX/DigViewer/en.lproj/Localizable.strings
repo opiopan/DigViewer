@@ -11,6 +11,14 @@
 "EXIFSEP_CONDITIONS" = "Conditions";
 "EXIFSEP_SOFTOWARE" = "Developing";
 
+// EXIF item name
+"Focal Length in 35mm:" = "35mm Equivalent:";
+"Scene Cpature Type:" = "Scean Type:";
+"Subject Distance Range:" = "Distance Range:";
+"Processing Software:" = "Processing SW:";
+"Geodetic Reference System:" = "Geo. Ref. System:";
+
+
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
 "MENU_RESET_ZOOM_RATIO" = "Reset Zoom Ratio";
