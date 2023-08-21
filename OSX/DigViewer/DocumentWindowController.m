@@ -106,17 +106,17 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     [self.placeHolder associateSubViewWithController:mainViewController];
     [self reflectValueToViewSelectionButton];
     
-     // UserDefaultsの変更に対してObserverを登録
+    // UserDefaultsの変更に対してObserverを登録
     DocumentConfigController* documentConfig = [DocumentConfigController sharedController];
     [documentConfig addObserver:self forKeyPath:@"updateCount" options:0 context:nil];
     NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortType" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortCaseInsensitive" options:0 context:nil];
     [controller addObserver:self forKeyPath:@"values.pathNodeSortAsNumeric" options:0 context:nil];
-
+    
     // カレントフォルダ移動を追跡するためのObserverを登録
     [_imageTreeController addObserver:self forKeyPath:@"selection" options:0 context:nil];
-
+    
     // オープン時の表示設定を反映
     NSDictionary* windowPreferences = ((Document*)self.document).documentWindowPreferences;
     if (windowPreferences){
@@ -248,10 +248,10 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     
     // ビューコントローラーのクローズ準備
     [mainViewController prepareForClose];
-
+    
     // サブビューのデタッチ
     [mainViewController detachSubviews];
- 
+    
     // サブビューの解放を順番に実施
     [self performSelector:@selector(releaseSubviews:) withObject:@0 afterDelay:0];
 }
@@ -722,7 +722,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
 - (void)setSortByDateTimeButtonState:(BOOL)sortByDateTimeButtonState
 {
     _sortByDateTimeButtonState = sortByDateTimeButtonState;
-
+    
     static NSImage* offImage = nil;
     static NSImage* onImage = nil;
     if (!offImage){
@@ -769,7 +769,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     }else{
         menuItem.title = NSLocalizedString(@"Show Toolbar", nil);
     }
-
+    
     return YES;
 }
 
@@ -908,8 +908,8 @@ static NSString* kAppImage = @"image";
 - (NSMenuItem*)menuItemForApplicationID:(NSDictionary*)applicationID asPrimeryItem:(BOOL)isPrimeryItem
 {
     NSString* title = isPrimeryItem ? [NSString stringWithFormat:NSLocalizedString(@"MENU_DEFAULT_APPLICATION", nil),
-                                                                 [applicationID valueForKey:kAppName]]
-                                    : [applicationID valueForKey:kAppName];
+                                       [applicationID valueForKey:kAppName]]
+    : [applicationID valueForKey:kAppName];
     NSMenuItem* rc = [[NSMenuItem alloc] initWithTitle:title action:@selector(performOpenWithApplication:) keyEquivalent:@""];
     rc.target = self;
     rc.image = [applicationID valueForKey:kAppImage];
@@ -1009,8 +1009,8 @@ static NSString* kAppImage = @"image";
 - (BOOL)validateForOpenMapWithBrowser:(NSMenuItem*)menuItem
 {
     return !mainViewController.isCollapsedInspectorView &&
-           mainViewController.inspectorViewController.viewSelector == 1 &&
-           [mainViewController.inspectorViewController validateForOpenMapWithBrowser:menuItem];
+    mainViewController.inspectorViewController.viewSelector == 1 &&
+    [mainViewController.inspectorViewController validateForOpenMapWithBrowser:menuItem];
 }
 
 - (IBAction)openMapWithMapApp:(id)sender
@@ -1021,8 +1021,8 @@ static NSString* kAppImage = @"image";
 - (BOOL)validateForOpenMapWithMapApp:(NSMenuItem*)menuItem
 {
     return !mainViewController.isCollapsedInspectorView &&
-           mainViewController.inspectorViewController.viewSelector == 1 &&
-           [mainViewController.inspectorViewController validateForOpenMapWithMapApp:menuItem];
+    mainViewController.inspectorViewController.viewSelector == 1 &&
+    [mainViewController.inspectorViewController validateForOpenMapWithMapApp:menuItem];
 }
 
 - (IBAction)openMapWithGoogleEarth:(id)sender
@@ -1104,6 +1104,7 @@ static NSString* kAppImage = @"image";
 
 - (IBAction)performNewBrowsingContext:(id)sender
 {
+    [self showMouseCursorIfNeeded];
     _newBrowsingContextController = [NewBrowsingContextController new];
     [_newBrowsingContextController inputContextNameforWindow:self.window modalDelegate:self didEndSelector:@selector(didEndInputContextName:)];
 }
@@ -1120,10 +1121,12 @@ static NSString* kAppImage = @"image";
         }
     }
     _newBrowsingContextController = nil;
+    [self hideMouseCursorIfNeeded];
 }
 
 - (IBAction)performManageBrowsingContext:(id)sender
 {
+    [self showMouseCursorIfNeeded];
     [self updateCurrentBrowsingContext];
     _manageBrowsingContextController = [ManageBrowsingContextConroller new];
     [_manageBrowsingContextController manageContexsforWindow:self.window array:_browseContexts.array modalDelegate:self didEndSelector:@selector(didEndManageBrowsingContext:)];
@@ -1132,6 +1135,7 @@ static NSString* kAppImage = @"image";
 - (void)didEndManageBrowsingContext:(id)object
 {
     _manageBrowsingContextController = nil;
+    [self hideMouseCursorIfNeeded];
 }
 
 //-----------------------------------------------------------------------------------------
