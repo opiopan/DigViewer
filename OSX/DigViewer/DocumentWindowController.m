@@ -76,6 +76,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     NewBrowsingContextController* _newBrowsingContextController;
     ManageBrowsingContextConroller* _manageBrowsingContextController;
     BOOL _isCursorEnabled;
+    BOOL _inModal;
 }
 @synthesize selectionIndexPathsForTree = _selectionIndexPathsForTree;
 
@@ -164,6 +165,7 @@ static NSString* kCurrentBrowseContext = @"currentBrowseContext";
     // enabel mouse move event
     self.window.acceptsMouseMovedEvents = YES;
     _isCursorEnabled = YES;
+    _inModal = NO;
     
     // ドキュメントロードをスケジュール
     [self.document performSelector:@selector(loadDocument:) withObject:self  afterDelay:0.0f];
@@ -1104,6 +1106,7 @@ static NSString* kAppImage = @"image";
 
 - (IBAction)performNewBrowsingContext:(id)sender
 {
+    _inModal = YES;
     [self showMouseCursorIfNeeded];
     _newBrowsingContextController = [NewBrowsingContextController new];
     [_newBrowsingContextController inputContextNameforWindow:self.window modalDelegate:self didEndSelector:@selector(didEndInputContextName:)];
@@ -1121,11 +1124,13 @@ static NSString* kAppImage = @"image";
         }
     }
     _newBrowsingContextController = nil;
+    _inModal = NO;
     [self hideMouseCursorIfNeeded];
 }
 
 - (IBAction)performManageBrowsingContext:(id)sender
 {
+    _inModal = YES;
     [self showMouseCursorIfNeeded];
     [self updateCurrentBrowsingContext];
     _manageBrowsingContextController = [ManageBrowsingContextConroller new];
@@ -1135,6 +1140,7 @@ static NSString* kAppImage = @"image";
 - (void)didEndManageBrowsingContext:(id)object
 {
     _manageBrowsingContextController = nil;
+    _inModal = NO;
     [self hideMouseCursorIfNeeded];
 }
 
@@ -1161,7 +1167,7 @@ static NSString* kAppImage = @"image";
 
 - (void)hideMouseCursorIfNeeded
 {
-    if (self.presentationViewType == typeImageView){
+    if (self.presentationViewType == typeImageView && !_inModal){
         if (_isCursorEnabled){
             CGDisplayHideCursor(kCGDirectMainDisplay);
             _isCursorEnabled = NO;
