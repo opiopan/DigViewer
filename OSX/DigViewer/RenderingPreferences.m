@@ -35,4 +35,13 @@
     return NO;
 }
 
+- (NSImage *) imageForPreferenceNamed: (NSString *) prefName
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"photo" accessibilityDescription:nil];
+    } else {
+        return [[NSBundle mainBundle] imageForResource:@"RenderingPreferences.png"];
+    }
+}
+
 @end

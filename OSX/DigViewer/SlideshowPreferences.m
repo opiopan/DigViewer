@@ -99,6 +99,15 @@
     return NO;
 }
 
+- (NSImage *) imageForPreferenceNamed: (NSString *) prefName
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"play.rectangle" accessibilityDescription:nil];
+    } else {
+        return [[NSBundle mainBundle] imageForResource:@"SlideshowPreferences.png"];
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // エフェクトの選択index属性
 //-----------------------------------------------------------------------------------------

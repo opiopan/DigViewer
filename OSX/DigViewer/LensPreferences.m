@@ -20,6 +20,15 @@
     return NO;
 }
 
+- (NSImage *) imageForPreferenceNamed: (NSString *) prefName
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"camera.aperture" accessibilityDescription:nil];
+    } else {
+        return [[NSBundle mainBundle] imageForResource:@"LensPreferences.png"];
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------------------

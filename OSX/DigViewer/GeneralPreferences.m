@@ -21,7 +21,11 @@
 
 - (NSImage *) imageForPreferenceNamed: (NSString *) prefName
 {
-    return [NSImage imageNamed:NSImageNamePreferencesGeneral];
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"gearshape" accessibilityDescription:nil];
+    } else {
+        return [NSImage imageNamed:NSImageNamePreferencesGeneral];
+    }
 }
 
 //-----------------------------------------------------------------------------------------

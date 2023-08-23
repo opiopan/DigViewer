@@ -42,6 +42,15 @@
     return NO;
 }
 
+- (NSImage *) imageForPreferenceNamed: (NSString *) prefName
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"square.grid.3x3" accessibilityDescription:nil];
+    } else {
+        return [[NSBundle mainBundle] imageForResource:@"ThumbnailPreferences.png"];
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // サムネイル設定のリセット
 //-----------------------------------------------------------------------------------------

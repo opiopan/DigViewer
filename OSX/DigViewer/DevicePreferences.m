@@ -29,6 +29,15 @@ static NSString* deviceListKey = @"dvremotePairingKeys";
     return NO;
 }
 
+- (NSImage *) imageForPreferenceNamed: (NSString *) prefName
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"ipad.and.iphone" accessibilityDescription:nil];
+    } else {
+        return [[NSBundle mainBundle] imageForResource:@"DevicePreferences.png"];
+    }
+}
+
 //-----------------------------------------------------------------------------------------
 // 初期化・回収
 //-----------------------------------------------------------------------------------------
