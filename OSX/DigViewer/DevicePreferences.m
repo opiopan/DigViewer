@@ -82,17 +82,30 @@ static NSString* deviceListKey = @"dvremotePairingKeys";
     for (NSString* devID in list){
         NSDictionary* device = [list valueForKey:devID];
         NSString* deviceCode = [device valueForKey:DVRCNMETA_DEVICE_CODE];
-        NSString* path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPhone.icns";
-        if ([deviceCode hasPrefix:@"iPhone"]){
-            path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPhone.icns";
-        }else if ([deviceCode hasPrefix:@"iPad"]){
-            path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPad.icns";
-        }else if ([deviceCode hasPrefix:@"iPod"]){
-            path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPodTouch.icns";
+        NSString* deviceType = [device valueForKey:DVRCNMETA_DEVICE_TYPE];
+        NSImage* icon = nil;
+        if (@available(macOS 11.0, *)) {
+            if ([deviceType hasPrefix:@"iPad"]){
+                icon = [NSImage imageWithSystemSymbolName:@"ipad" accessibilityDescription:nil];
+            }else if ([deviceType hasPrefix:@"iPod"]){
+                icon = [NSImage imageWithSystemSymbolName:@"ipodtouch" accessibilityDescription:nil];
+            }else{
+                icon = [NSImage imageWithSystemSymbolName:@"iphone" accessibilityDescription:nil];
+            }
+        } else {
+            NSString* path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPhone.icns";
+            if ([deviceCode hasPrefix:@"iPhone"]){
+                path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPhone.icns";
+            }else if ([deviceCode hasPrefix:@"iPad"]){
+                path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPad.icns";
+            }else if ([deviceCode hasPrefix:@"iPod"]){
+                path = @"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebariPodTouch.icns";
+            }
+            icon = [[NSImage alloc] initByReferencingFile:path];
         }
-        NSDictionary* entry = @{@"deviceName": @{@"icon": [[NSImage alloc] initByReferencingFile:path],
+        NSDictionary* entry = @{@"deviceName": @{@"icon": icon,
                                                  @"name": [device valueForKey:DVRCNMETA_DEVICE_NAME]},
-                                @"deviceType": [device valueForKey:DVRCNMETA_DEVICE_TYPE],
+                                @"deviceType": deviceType,
                                 @"deviceID": devID};
         [devices addObject:entry];
     }

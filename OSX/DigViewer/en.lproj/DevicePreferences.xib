@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,13 +31,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-7T-SMh">
-                                    <rect key="frame" x="38" y="60" width="630" height="231"/>
+                                    <rect key="frame" x="38" y="60" width="630" height="93"/>
                                     <clipView key="contentView" id="itZ-JH-iIu">
-                                        <rect key="frame" x="1" y="1" width="628" height="229"/>
+                                        <rect key="frame" x="1" y="1" width="628" height="91"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="30" headerView="x7s-6o-AXE" viewBased="YES" id="hOy-Hh-WKd">
-                                                <rect key="frame" x="0.0" y="0.0" width="628" height="206"/>
+                                            <tableView focusRingType="exterior" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="30" headerView="x7s-6o-AXE" viewBased="YES" id="hOy-Hh-WKd">
+                                                <rect key="frame" x="0.0" y="0.0" width="628" height="68"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="4"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -54,9 +54,49 @@
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        <connections>
-                                                            <binding destination="Co8-i2-P0c" name="value" keyPath="arrangedObjects.deviceName" id="5mG-NU-4JM"/>
-                                                        </connections>
+                                                        <prototypeCellViews>
+                                                            <tableCellView id="p9A-XJ-LCE">
+                                                                <rect key="frame" x="1" y="2" width="371" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A3X-id-rMt">
+                                                                        <rect key="frame" x="3" y="-4" width="28" height="39"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" secondItem="A3X-id-rMt" secondAttribute="height" multiplier="1:1" id="LKU-eq-fcy"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" alignment="left" imageScaling="proportionallyUpOrDown" image="NSActionTemplate" catalog="system" id="0Fh-Sx-gpx"/>
+                                                                        <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <connections>
+                                                                            <binding destination="p9A-XJ-LCE" name="value" keyPath="objectValue.deviceName.icon" id="YB9-Rq-flj"/>
+                                                                        </connections>
+                                                                    </imageView>
+                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ref-Lh-CeK">
+                                                                        <rect key="frame" x="33" y="7" width="338" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="N9r-CW-8Ix">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <connections>
+                                                                            <binding destination="p9A-XJ-LCE" name="value" keyPath="objectValue.deviceName.name" id="95I-di-Ueh"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="A3X-id-rMt" firstAttribute="leading" secondItem="p9A-XJ-LCE" secondAttribute="leading" constant="3" id="2DL-sI-6Y0"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="A3X-id-rMt" secondAttribute="bottom" constant="1" id="68J-xi-T1C"/>
+                                                                    <constraint firstItem="ref-Lh-CeK" firstAttribute="centerY" secondItem="p9A-XJ-LCE" secondAttribute="centerY" id="F8h-lZ-gsm"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="ref-Lh-CeK" secondAttribute="trailing" constant="2" id="M5e-B6-axY"/>
+                                                                    <constraint firstItem="ref-Lh-CeK" firstAttribute="leading" secondItem="A3X-id-rMt" secondAttribute="trailing" constant="4" id="Mg2-ko-ZtU"/>
+                                                                    <constraint firstItem="A3X-id-rMt" firstAttribute="centerY" secondItem="p9A-XJ-LCE" secondAttribute="centerY" id="jtB-rv-eDm"/>
+                                                                    <constraint firstItem="A3X-id-rMt" firstAttribute="top" secondItem="p9A-XJ-LCE" secondAttribute="top" constant="1" id="sqL-WQ-WmH"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="imageView" destination="A3X-id-rMt" id="euy-gf-S3G"/>
+                                                                    <outlet property="textField" destination="ref-Lh-CeK" id="AHf-lx-Ie5"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                        </prototypeCellViews>
                                                     </tableColumn>
                                                     <tableColumn width="160.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="pdN-iR-h9U">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Device Type">
@@ -69,11 +109,39 @@
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        <connections>
-                                                            <binding destination="Co8-i2-P0c" name="value" keyPath="arrangedObjects.deviceType" id="Ykd-bJ-wAJ"/>
-                                                        </connections>
+                                                        <prototypeCellViews>
+                                                            <tableCellView id="05K-ij-b8Q">
+                                                                <rect key="frame" x="374.5" y="2" width="164" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ddj-Dk-Dae">
+                                                                        <rect key="frame" x="0.0" y="7" width="146" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="mKF-mt-Drd">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <connections>
+                                                                            <binding destination="05K-ij-b8Q" name="value" keyPath="objectValue.deviceType" id="AjL-uq-Ki2"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="ddj-Dk-Dae" secondAttribute="trailing" constant="20" symbolic="YES" id="014-Du-NgC"/>
+                                                                    <constraint firstItem="ddj-Dk-Dae" firstAttribute="leading" secondItem="05K-ij-b8Q" secondAttribute="leading" constant="2" id="e5y-8e-YXT"/>
+                                                                    <constraint firstItem="ddj-Dk-Dae" firstAttribute="centerY" secondItem="05K-ij-b8Q" secondAttribute="centerY" id="mqw-eT-qVd"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="textField" destination="ddj-Dk-Dae" id="VMU-TX-Bel"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                        </prototypeCellViews>
                                                     </tableColumn>
                                                 </tableColumns>
+                                                <connections>
+                                                    <binding destination="Co8-i2-P0c" name="content" keyPath="arrangedObjects" id="P5h-Xf-S04"/>
+                                                    <binding destination="Co8-i2-P0c" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="P5h-Xf-S04" id="rpO-HW-CGR"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                     </clipView>
@@ -101,7 +169,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rY7-cN-yTA">
-                                    <rect key="frame" x="36" y="297" width="98" height="16"/>
+                                    <rect key="frame" x="36" y="159" width="98" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Paired Devices:" id="aSs-lS-NFC">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -119,7 +187,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
                                     </connections>
                                 </button>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="p6i-2M-oAb">
-                                    <rect key="frame" x="36" y="332" width="285" height="18"/>
+                                    <rect key="frame" x="36" y="194" width="285" height="156"/>
                                     <buttonCell key="cell" type="check" title="Enable relationship with remote iOS device" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="sHb-5u-j6s">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -167,4 +235,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
         </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="zZg-Og-ebk"/>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" catalog="system" width="20" height="20"/>
+    </resources>
 </document>
