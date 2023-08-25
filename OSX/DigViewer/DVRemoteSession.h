@@ -17,6 +17,7 @@
 @interface DVRemoteSession : NSObject <NSStreamDelegate>
 
 @property (weak, nonatomic) id <DVRemoteSessionDelegate> delegate;
+@property (strong, nonatomic) NSString* deviceID;
 
 - (id)initWithInputStream:(NSInputStream*)inputStream outputStream:(NSOutputStream*)outputStream;
 - (void)scheduleInRunLoop:(NSRunLoop*)runLoop;

@@ -16,3 +16,6 @@
 
 /* Class = "NSButtonCell"; title = "Enable relationship with remote iOS device"; ObjectID = "sHb-5u-j6s"; */
 "sHb-5u-j6s.title" = "iOS デバイスとの連携機能を有効にする";
+
+/* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "tbA-f3-rvZ"; */
+"tbA-f3-rvZ.headerCell.title" = "状態";

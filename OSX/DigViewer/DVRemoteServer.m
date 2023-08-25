@@ -18,6 +18,7 @@
     NSMutableArray* _reservedSessions;
     NSMutableArray* _authorizedSessions;
     NSMutableArray* _sidebandSessions;
+    NSMutableArray<NSString*>* _authorizedDevices;
     
     NSData* _currentMeta;
     NSData* _templateMeta;
@@ -52,6 +53,7 @@
         _reservedSessions = [NSMutableArray array];
         _authorizedSessions = [NSMutableArray array];
         _sidebandSessions = [NSMutableArray array];
+        _authorizedDevices = [NSMutableArray array];
         
         ImageMetadata* meta = [[ImageMetadata alloc] init];
         NSArray* summary = meta.summary;
@@ -116,7 +118,7 @@
       outputStream:(NSOutputStream *)outputStream
 {
     DVRemoteSession* session = [[DVRemoteSession alloc] initWithInputStream:inputStream outputStream:outputStream];
-    [_authorizedSessions addObject:session];
+    [_reservedSessions addObject:session];
     session.delegate = self;
     [session scheduleInRunLoop:_runLoop];
     [session sendCommand:DVRC_NOTIFY_ACCEPTED withData:nil replacingQue:NO];
@@ -203,6 +205,16 @@
 
 - (void)drvSession:(DVRemoteSession*)session shouldBeClosedByCause:(NSError*)error
 {
+    [self discardSession:session];
+}
+
+//-----------------------------------------------------------------------------------------
+// セション切断
+//-----------------------------------------------------------------------------------------
+- (void)discardSession:(DVRemoteSession *)session
+{
+    [_delegate dvrServer:self needCancelPairingForClient:session];
+    [self removeClientID:session.deviceID];
     [session close];
     [_reservedSessions removeObject:session];
     [_authorizedSessions removeObject:session];
@@ -220,26 +232,16 @@
     }
 }
 
-//-----------------------------------------------------------------------------------------
-// セション切断
-//-----------------------------------------------------------------------------------------
-- (void)discardSession:(DVRemoteSession *)session
+- (void)discardSessionWithDeviceID:(NSString*)deviceID
 {
-    [session close];
-    [_reservedSessions removeObject:session];
-    [_authorizedSessions removeObject:session];
-    [_sidebandSessions removeObject:session];
-    NSMutableArray* removingKeys = [NSMutableArray array];
-    for (NSString* key in _fullImageQue){
-        NSMutableArray* sessions = [_fullImageQue valueForKey:key];
-        [sessions removeObject:session];
-        if (sessions.count == 0){
-            [removingKeys addObject:key];
+    [_authorizedSessions indexOfObjectPassingTest:^(DVRemoteSession* session, NSUInteger idx, BOOL* stop){
+        if ([session.deviceID isEqualToString:deviceID]){
+            [self discardSession:session];
+            return YES;
+        }else{
+            return NO;
         }
-    }
-    for (NSString* key in removingKeys){
-        [_fullImageQue removeObjectForKey:key];
-    }
+    }];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -258,6 +260,7 @@
     
     if (succeeded){
         [_reservedSessions removeObject:session];
+        [self addClientID:session.deviceID];
         [_authorizedSessions addObject:session];
         [session sendCommand:DVRC_NOTIFY_TEMPLATE_META withData:_templateMeta replacingQue:YES];
         if (_currentMeta){
@@ -367,6 +370,13 @@
             break;
         }
     }
+    if (!targetSession){
+        for (targetSession in _reservedSessions){
+            if (targetSession == session){
+                break;
+            }
+        }
+    }
     if (targetSession){
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:serverInfo];
         [targetSession sendCommand:DVRC_NOTIFY_SERVER_INFO withData:data replacingQue:NO];
@@ -384,6 +394,33 @@
         rc = [rc stringByAppendingFormat:@"/%@", element];
     }
     return rc;
+}
+
+//-----------------------------------------------------------------------------------------
+// Managing connected client IDs
+//-----------------------------------------------------------------------------------------
+static NSString* connectedDevicesKey = @"connectedDevices";
+- (NSArray<NSString*>*) connectedDevices
+{
+    return _authorizedDevices;
+}
+
+- (void)addClientID:(NSString*)deviceID
+{
+    if (deviceID){
+        [self willChangeValueForKey:connectedDevicesKey];
+        [self->_authorizedDevices addObject:deviceID];
+        [self didChangeValueForKey:connectedDevicesKey];
+    }
+}
+
+- (void)removeClientID:(NSString*)deviceID
+{
+    if (deviceID){
+        [self willChangeValueForKey:connectedDevicesKey];
+        [_authorizedDevices removeObject:deviceID];
+        [self didChangeValueForKey:connectedDevicesKey];
+    }
 }
 
 @end

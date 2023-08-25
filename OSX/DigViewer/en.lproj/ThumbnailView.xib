@@ -137,13 +137,14 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="36" id="SaG-pU-nlG"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="push" title="▼" bezelStyle="rounded" image="arrow.up.left.and.down.right.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cMI-dG-5o2">
+                                    <buttonCell key="cell" type="push" title="▼" bezelStyle="rounded" image="NSRevealFreestandingTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cMI-dG-5o2">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                         <string key="keyEquivalent"></string>
                                         <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                     </buttonCell>
                                     <connections>
+                                        <binding destination="-2" name="image" keyPath="self.magnifyingglass" id="ZCC-D5-Hl7"/>
                                         <binding destination="-2" name="value" keyPath="self.isMagnifiedThumbnail" id="FvF-B3-1Wa"/>
                                     </connections>
                                 </button>
@@ -186,8 +187,8 @@
         </box>
     </objects>
     <resources>
+        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
         <image name="NSTouchBarGoDownTemplate" width="18" height="11"/>
         <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>
-        <image name="arrow.up.left.and.down.right.magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>
 </document>

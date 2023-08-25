@@ -18,7 +18,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="114" y="469" width="706" height="437"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="924"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="919"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="706" height="437"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -31,13 +31,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="34" horizontalPageScroll="10" verticalLineScroll="34" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-7T-SMh">
-                                    <rect key="frame" x="38" y="60" width="630" height="93"/>
+                                    <rect key="frame" x="38" y="60" width="634" height="36"/>
                                     <clipView key="contentView" id="itZ-JH-iIu">
-                                        <rect key="frame" x="1" y="1" width="628" height="91"/>
+                                        <rect key="frame" x="1" y="1" width="632" height="34"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView focusRingType="exterior" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="30" headerView="x7s-6o-AXE" viewBased="YES" id="hOy-Hh-WKd">
-                                                <rect key="frame" x="0.0" y="0.0" width="628" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="632" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="4"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -67,6 +67,7 @@
                                                                         <imageCell key="cell" alignment="left" imageScaling="proportionallyUpOrDown" image="NSActionTemplate" catalog="system" id="0Fh-Sx-gpx"/>
                                                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <connections>
+                                                                            <binding destination="p9A-XJ-LCE" name="enabled" keyPath="objectValue.isConnected" id="HCQ-d5-ton"/>
                                                                             <binding destination="p9A-XJ-LCE" name="value" keyPath="objectValue.deviceName.icon" id="YB9-Rq-flj"/>
                                                                         </connections>
                                                                     </imageView>
@@ -78,6 +79,11 @@
                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
                                                                         <connections>
+                                                                            <binding destination="p9A-XJ-LCE" name="textColor" keyPath="objectValue.isConnected" id="fEg-0i-Ai7">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">ConnectionStatusColorTransformer</string>
+                                                                                </dictionary>
+                                                                            </binding>
                                                                             <binding destination="p9A-XJ-LCE" name="value" keyPath="objectValue.deviceName.name" id="95I-di-Ueh"/>
                                                                         </connections>
                                                                     </textField>
@@ -98,7 +104,7 @@
                                                             </tableCellView>
                                                         </prototypeCellViews>
                                                     </tableColumn>
-                                                    <tableColumn width="160.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="pdN-iR-h9U">
+                                                    <tableColumn width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="pdN-iR-h9U">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Device Type">
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -111,17 +117,22 @@
                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         <prototypeCellViews>
                                                             <tableCellView id="05K-ij-b8Q">
-                                                                <rect key="frame" x="374.5" y="2" width="164" height="30"/>
+                                                                <rect key="frame" x="375" y="2" width="120" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ddj-Dk-Dae">
-                                                                        <rect key="frame" x="0.0" y="7" width="146" height="16"/>
+                                                                        <rect key="frame" x="0.0" y="7" width="102" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="mKF-mt-Drd">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
                                                                         <connections>
+                                                                            <binding destination="05K-ij-b8Q" name="textColor" keyPath="objectValue.isConnected" id="vnQ-rB-JOL">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">ConnectionStatusColorTransformer</string>
+                                                                                </dictionary>
+                                                                            </binding>
                                                                             <binding destination="05K-ij-b8Q" name="value" keyPath="objectValue.deviceType" id="AjL-uq-Ki2"/>
                                                                         </connections>
                                                                     </textField>
@@ -133,6 +144,50 @@
                                                                 </constraints>
                                                                 <connections>
                                                                     <outlet property="textField" destination="ddj-Dk-Dae" id="VMU-TX-Bel"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                        </prototypeCellViews>
+                                                    </tableColumn>
+                                                    <tableColumn width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="tbA-f3-rvZ">
+                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
+                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </tableHeaderCell>
+                                                        <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Ual-nb-ICp">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                        <prototypeCellViews>
+                                                            <tableCellView id="MUp-ou-YCg">
+                                                                <rect key="frame" x="498" y="2" width="124" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCa-MD-zTD">
+                                                                        <rect key="frame" x="0.0" y="7" width="124" height="16"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="D37-H3-iQy">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <connections>
+                                                                            <binding destination="MUp-ou-YCg" name="textColor" keyPath="objectValue.isConnected" id="Xej-Tx-wEQ">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">ConnectionStatusColorTransformer</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="MUp-ou-YCg" name="value" keyPath="objectValue.isConnected" id="uZj-X3-sZz">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">ConnectionStatusStringTransformer</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <connections>
+                                                                    <outlet property="textField" destination="UCa-MD-zTD" id="adE-3l-K6t"/>
                                                                 </connections>
                                                             </tableCellView>
                                                         </prototypeCellViews>
@@ -154,7 +209,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <tableHeaderView key="headerView" wantsLayer="YES" id="x7s-6o-AXE">
-                                        <rect key="frame" x="0.0" y="0.0" width="628" height="23"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="632" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </tableHeaderView>
                                 </scrollView>
@@ -169,7 +224,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rY7-cN-yTA">
-                                    <rect key="frame" x="36" y="159" width="98" height="16"/>
+                                    <rect key="frame" x="36" y="102" width="98" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Paired Devices:" id="aSs-lS-NFC">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -187,7 +242,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
                                     </connections>
                                 </button>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="p6i-2M-oAb">
-                                    <rect key="frame" x="36" y="194" width="285" height="156"/>
+                                    <rect key="frame" x="36" y="137" width="285" height="213"/>
                                     <buttonCell key="cell" type="check" title="Enable relationship with remote iOS device" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="sHb-5u-j6s">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -198,6 +253,7 @@ Please try DigViewer remote on your iPhone or iPad.</string>
                                 </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="Qdy-7T-SMh" firstAttribute="centerX" secondItem="dJp-Z2-Ztd" secondAttribute="centerX" id="3Oj-Tk-WHo"/>
                                 <constraint firstItem="rY7-cN-yTA" firstAttribute="leading" secondItem="dJp-Z2-Ztd" secondAttribute="leading" constant="38" id="EAL-d0-1Vl"/>
                                 <constraint firstItem="evg-hf-TkP" firstAttribute="leading" secondItem="dJp-Z2-Ztd" secondAttribute="leading" constant="38" id="F53-aH-k06"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rY7-cN-yTA" secondAttribute="trailing" constant="20" symbolic="YES" id="Qfe-FI-1zV"/>

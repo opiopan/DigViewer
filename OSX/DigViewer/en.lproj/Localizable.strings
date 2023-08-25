@@ -142,5 +142,9 @@
 "PLC_PHOTO_STREAM" = "My Photo Stream";
 "PLC_MY_ALBUMS" = "My Albums";
 
+// DVremote client connection status
+"DEVCON_CONNECTED" = "Connected";
+"DEVCON_DISCONNECTED" = "Disconnected";
+
 // miscellaneous text
 MISC_PHOTOS_LIBRARY_IMAGE = "Photos library image";

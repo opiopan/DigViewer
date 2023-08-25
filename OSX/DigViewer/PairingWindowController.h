@@ -15,7 +15,9 @@ typedef void (^PairingWindowCompletionHandler)(BOOL isOK);
 @property NSString* modelName;
 @property NSString* modelType;
 @property NSInteger keyHash;
+@property NSString* deviceID;
 
 - (void) startPairingWithCompletionHandler: (PairingWindowCompletionHandler) handler;
+- (void) closeWindow;
 
 @end

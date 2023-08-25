@@ -19,12 +19,14 @@
 
 @property (weak, nonatomic) id <DVRemoteServerDelegate> delegate;
 @property (strong, nonatomic) NSRunLoop* runLoop;
+@property (weak, nonatomic, readonly) NSArray<NSString*>* connectedDevices;
 
 + (DVRemoteServer*)sharedServer;
 
 - (BOOL)establishServer;
 - (void)shutdownServer;
 - (void)discardSession:(DVRemoteSession*)session;
+- (void)discardSessionWithDeviceID:(NSString*)deviceID;
 
 - (void)sendMeta:(NSDictionary*)meta;
 - (void)sendThumbnail:(NSData*)thumbnail forNodeID:(NSArray*)nodeID inDocument:(NSString*)documentName
@@ -54,6 +56,7 @@
         bySession:(DVRemoteSession*)session;
 - (void)dvrServer:(DVRemoteServer*)server needSendServerInfoToClient:(DVRemoteSession*)session;
 - (void)dvrServer:(DVRemoteServer*)server needPairingForClient:(DVRemoteSession*)session withAttributes:(NSDictionary*)attrs;
+- (void)dvrServer:(DVRemoteServer*)server needCancelPairingForClient:(DVRemoteSession*)session;
 - (void)dvrServer:(DVRemoteServer*)server needAuthenticateClient:(DVRemoteSession*)session withAttributes:(NSDictionary*)attrs;
 @end
 

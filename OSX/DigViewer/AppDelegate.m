@@ -238,6 +238,11 @@ static NSString* pairingKeysName = @"dvremotePairingKeys";
 
 - (void)dvrServer:(DVRemoteServer *)server needPairingForClient:(DVRemoteSession *)session withAttributes:(NSDictionary *)attrs
 {
+    if (_pairingWindowController){
+        [server discardSession:session];
+        return;
+    }
+    
     UInt32 key = arc4random();
     NSString* keyString = @(key).stringValue;
     NSMutableDictionary* args = [NSMutableDictionary dictionaryWithDictionary:attrs];
@@ -252,18 +257,32 @@ static NSString* pairingKeysName = @"dvremotePairingKeys";
     _pairingWindowController.modelName = deviceName;
     _pairingWindowController.modelType = deviceType;
     _pairingWindowController.keyHash = hash;
+    _pairingWindowController.deviceID = deviceID;
+    session.deviceID = deviceID;
     [_pairingWindowController startPairingWithCompletionHandler:^(BOOL isOK){
         if (isOK){
             NSUserDefaultsController* controller = [NSUserDefaultsController sharedUserDefaultsController];
             NSMutableDictionary* keyes =
                 [NSMutableDictionary dictionaryWithDictionary:[controller.values valueForKey:pairingKeysName]];
             [keyes setValue:args forKey:deviceID];
-            [controller.values setValue:keyes forKey:pairingKeysName];
+            session.deviceID = deviceID;
             [server completeAuthenticationAsResult:YES ofSession:session];
+            [controller.values setValue:keyes forKey:pairingKeysName];
         }else{
             [server discardSession:session];
         }
+        self->_pairingWindowController = nil;
     }];
+}
+
+- (void)dvrServer:(DVRemoteServer *)server needCancelPairingForClient:(DVRemoteSession *)session
+{
+    if ([_pairingWindowController.deviceID isEqualToString:session.deviceID]){
+        PairingWindowController* windowController = _pairingWindowController;
+        dispatch_after(0, dispatch_get_main_queue(), ^{
+            [windowController closeWindow];
+        });
+    }
 }
 
 - (void)dvrServer:(DVRemoteServer *)server needAuthenticateClient:(DVRemoteSession *)session withAttributes:(NSDictionary *)attrs
@@ -275,6 +294,7 @@ static NSString* pairingKeysName = @"dvremotePairingKeys";
     NSDictionary* values = [keys valueForKey:deviceID];
     NSString* key = [values valueForKey:DVRCNMETA_PAIRCODE];
     if ([key isEqualToString:charengedKey]){
+        session.deviceID = deviceID;
         [server completeAuthenticationAsResult:YES ofSession:session];
     }else{
         [server completeAuthenticationAsResult:NO ofSession:session];

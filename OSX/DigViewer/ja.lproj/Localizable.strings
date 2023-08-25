@@ -279,5 +279,9 @@
 "PLC_PHOTO_STREAM" = "マイフォトストリーム";
 "PLC_MY_ALBUMS" = "マイアルバム";
 
+// DVremote client connection status
+"DEVCON_CONNECTED" = "接続済";
+"DEVCON_DISCONNECTED" = "未接続";
+
 // miscellaneous text
 MISC_PHOTOS_LIBRARY_IMAGE = "写真ライブラリ イメージ";

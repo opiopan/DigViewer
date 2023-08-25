@@ -205,4 +205,16 @@ static NSString* kMagnifyThumbnail = @"magnifyThumbnail";
     self.isMagnifiedThumbnail = [[preferences valueForKey:kMagnifyThumbnail] boolValue];
 }
 
+//-----------------------------------------------------------------------------------------
+// Image abstractor
+//-----------------------------------------------------------------------------------------
+- (NSImage*)magnifyingglass
+{
+    if (@available(macOS 11.0, *)) {
+        return [NSImage imageWithSystemSymbolName:@"arrow.up.left.and.down.right.magnifyingglass" accessibilityDescription:nil];
+    } else {
+        return [NSImage imageNamed:NSImageNameRevealFreestandingTemplate];
+    }
+}
+
 @end
