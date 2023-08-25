@@ -11,6 +11,7 @@ import UIKit
 class PairingViewController: UIViewController, DVRemoteClientDelegate {
 
     @IBOutlet weak var hashLabel: UILabel!
+    weak var client: DVRemoteClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,9 @@ class PairingViewController: UIViewController, DVRemoteClientDelegate {
     
     @IBAction func onCancel(_ sender: AnyObject) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
+        if let sclient = client{
+            sclient.disconnect()
+        }
     }
     
     func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {

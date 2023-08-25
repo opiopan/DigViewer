@@ -216,12 +216,15 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
         }
     }
     
+    fileprivate weak var clientToParing : DVRemoteClient? = nil
+    
     func dvrClient(_ client: DVRemoteClient!, didRecievePairingKey key: String!, forServer service: NetService!) {
         pendingPairingKey = key
         let controller = ConfigurationController.sharedController
         var keys = controller.authenticationgKeys
         keys[service.name] = nil
         controller.authenticationgKeys = keys
+        clientToParing = client;
      
         performSegue(withIdentifier: "ParingNotice", sender: self)
     }
@@ -440,6 +443,7 @@ class MapViewController: MapViewControllerBase, DVRemoteClientDelegate {
             var bounds = controller.view.bounds
             bounds.size.width *= 2
             controller.hashLabel.text = NSString(format: "%04d", Int(pendingPairingKey!)! % 10000) as String
+            controller.client = clientToParing
         }
     }
 
