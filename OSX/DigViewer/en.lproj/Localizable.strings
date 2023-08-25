@@ -18,7 +18,6 @@
 "Processing Software:" = "Processing SW:";
 "Geodetic Reference System:" = "Geo. Ref. System:";
 
-
 // メインメニューテキスト
 "MENU_DEFAULT_APPLICATION" = "%@ (Default)";
 "MENU_RESET_ZOOM_RATIO" = "Reset Zoom Ratio";

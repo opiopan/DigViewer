@@ -15,6 +15,13 @@
 "EXIF-BASIC" = "Basic";
 "EXIF-LOCATION" = "Location";
 
+// EXIF item name
+"Focal Length in 35mm:" = "35mm Equivalent:";
+"Scene Cpature Type:" = "Scean Type:";
+"Subject Distance Range:" = "Distance Range:";
+"Processing Software:" = "Processing SW:";
+"Geodetic Reference System:" = "Geo. Ref. System:";
+
 "DSNAME_LOCAL" = "Local Photo Library";
 "DSNAME_LOCAL_IPHONE" = "This iPhone";
 "DSNAME_LOCAL_IPAD" = "This iPad";

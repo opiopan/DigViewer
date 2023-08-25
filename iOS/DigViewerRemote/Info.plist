@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<false/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -58,7 +60,7 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Find the DigViewer running on Mac</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To show photo's meta data by this app</string>
+	<string>To show photo&apos;s meta data by this app</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
