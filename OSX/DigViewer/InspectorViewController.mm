@@ -28,11 +28,19 @@
 @property (nonatomic) IBOutlet NSMenu* attributesMenu;
 @end
 
+struct TextLength{
+    CGFloat key;
+    CGFloat value;
+};
+
 @implementation InspectorViewController{
     int     _viewSelector;
     bool    _initialized;
     NSDictionary* _preferences;
     ImageMetadata* _metadata;
+    TextLength _exifTextLen;
+    TextLength _gpsTextLen;
+    NSDictionary* _fontAttrs;
 }
 
 //-----------------------------------------------------------------------------------------
@@ -52,35 +60,48 @@
     // EXIF用テーブルビューの第一カラムの幅を決定
     NSCell* cell = self.keyColumn.dataCell;
     NSFont* font = cell.font;
-    NSDictionary* attributes = @{NSFontAttributeName:font};
+    _fontAttrs = @{NSFontAttributeName:font};
     ImageMetadata* meta = [[ImageMetadata alloc] init];
     NSArray* summary = meta.summary;
     CGFloat width = 0;
     for (int i = 0; i < summary.count; i++){
         ImageMetadataKV* kv = summary[i];
-        NSSize size = [kv.key sizeWithAttributes:attributes];
+        NSSize size = [kv.key sizeWithAttributes:_fontAttrs];
         if (size.width > width){
             width = size.width;
         }
     }
-    [self.keyColumn setWidth:width + 10.0];
+    _exifTextLen.key = width + 10;
+    __weak InspectorViewController* weak_self = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewFrameDidChangeNotification
+                                                      object:_summaryView queue:nil
+                                                  usingBlock:^(NSNotification* note){
+        InspectorViewController* strong_self = weak_self;
+        [strong_self arrangeColumnWidthWith:strong_self->_exifTextLen
+                               forKeyColumn:strong_self.keyColumn valueColumn:strong_self.valueColumn];
+    }];
 
     // GPS用テーブルビューの第一カラムの幅を決定
-    cell = self.gpsKeyColumn.dataCell;
-    font = cell.font;
-    attributes = @{NSFontAttributeName:font};
     meta = [[ImageMetadata alloc] init];
     NSArray* gpsInfo = meta.gpsInfoStrings;
     width = 0;
     for (int i = 0; i < gpsInfo.count; i++){
         ImageMetadataKV* kv = gpsInfo[i];
-        NSSize size = [kv.key sizeWithAttributes:attributes];
+        NSSize size = [kv.key sizeWithAttributes:_fontAttrs];
         if (size.width > width){
             width = size.width;
         }
     }
-    [self.gpsKeyColumn setWidth:width + 10.0];
-    
+    _gpsTextLen.key = width + 10;
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewFrameDidChangeNotification
+                                                      object:_gpsInfoView queue:nil
+                                                  usingBlock:^(NSNotification* note){
+        InspectorViewController* strong_self = weak_self;
+        [strong_self arrangeColumnWidthWith:strong_self->_gpsTextLen
+                               forKeyColumn:strong_self.gpsKeyColumn valueColumn:strong_self.gpsValueColumn];
+    }];
+
+        
     // Google Map表示に関わる設定変更を監視するobserverを登録
     [self reflectMapFovColor];
     [self reflectMapArrowColor];
@@ -149,7 +170,6 @@
     _initialized = true;
 }
 
-
 //-----------------------------------------------------------------------------------------
 // クローズ準備
 //-----------------------------------------------------------------------------------------
@@ -164,6 +184,48 @@
     [self.imageArrayController removeObserver:self forKeyPath:@"selectionIndexes"];
 }
 
+//-----------------------------------------------------------------------------------------
+// Arrange colum width
+//-----------------------------------------------------------------------------------------
+- (void) arrangeColumnWidthWith:(TextLength&)textLen forKeyColumn:(NSTableColumn*)key valueColumn:(NSTableColumn*) value
+{
+    auto budget = self.view.frame.size.width - 32;
+    auto keyWidth = textLen.key;
+    auto valueWidth = textLen.value;
+
+    if (keyWidth > budget){
+        valueWidth = 0;
+    }else if (keyWidth + valueWidth > budget){
+        valueWidth = budget - keyWidth;
+    }if (keyWidth > valueWidth){
+        if (keyWidth * 2 < budget){
+            keyWidth = valueWidth = budget / 2;
+        }else{
+            valueWidth += budget - keyWidth - valueWidth;
+        }
+    }else{
+        if (valueWidth * 2 < budget){
+            keyWidth = valueWidth = budget / 2;
+        }else{
+            keyWidth += budget - keyWidth - valueWidth;
+        }
+    }
+    [key setWidth:keyWidth];
+    [value setWidth:valueWidth];
+}
+
+- (void) updateValueTextLength:(TextLength&)textLen values:(NSArray*)values
+{
+    CGFloat width = 0;
+    for (int i = 0; i < values.count; i++){
+        ImageMetadataKV* kv = values[i];
+        NSSize size = [kv.value sizeWithAttributes:_fontAttrs];
+        if (size.width > width){
+            width = size.width;
+        }
+    }
+    textLen.value = width + 10;
+}
 
 //-----------------------------------------------------------------------------------------
 // キー値監視
@@ -204,9 +266,15 @@
             InspectorViewController* strong_self = weak_self;
             strong_self->_metadata = [[ImageMetadata alloc] initWithPathNode:current imageData:data type:uti];
             strong_self.summary = strong_self->_metadata.summary;
+            [strong_self updateValueTextLength:strong_self->_exifTextLen values:strong_self->_summary];
+            [strong_self arrangeColumnWidthWith:strong_self->_exifTextLen
+                                   forKeyColumn:strong_self.keyColumn valueColumn:strong_self.valueColumn];
             if (strong_self->_viewSelector == 1){
                 strong_self.gpsInfo = strong_self->_metadata.gpsInfoStrings;
                 strong_self.mapView.gpsInfo = strong_self->_metadata.gpsInfo;
+                [strong_self updateValueTextLength:strong_self->_gpsTextLen values:strong_self->_gpsInfo];
+                [strong_self arrangeColumnWidthWith:strong_self->_gpsTextLen
+                                       forKeyColumn:strong_self.gpsKeyColumn valueColumn:strong_self.gpsValueColumn];
             }
             [strong_self reflectMetaToRemoteApp:current];
         }];

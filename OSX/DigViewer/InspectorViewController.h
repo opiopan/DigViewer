@@ -17,7 +17,9 @@
 @property (weak) IBOutlet NSView *gpsPlaceHolder;
 @property (weak) IBOutlet NSArrayController* imageArrayController;
 @property (weak) IBOutlet NSTableColumn* keyColumn;
+@property (weak) IBOutlet NSTableColumn* valueColumn;
 @property (weak) IBOutlet NSTableColumn *gpsKeyColumn;
+@property (weak) IBOutlet NSTableColumn *gpsValueColumn;
 @property (weak) IBOutlet GPSMapView *mapView;
 @property (strong) NSArray* summary;
 @property (strong) NSArray* gpsInfo;

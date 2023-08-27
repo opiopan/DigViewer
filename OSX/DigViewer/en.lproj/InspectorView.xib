@@ -14,12 +14,14 @@
                 <outlet property="gpsInfoView" destination="hrr-15-ccA" id="prR-3A-S56"/>
                 <outlet property="gpsKeyColumn" destination="uYh-IS-HTB" id="jTj-1G-QXp"/>
                 <outlet property="gpsPlaceHolder" destination="P7T-3L-YRb" id="VlJ-N9-ENC"/>
+                <outlet property="gpsValueColumn" destination="Hpb-tm-lGo" id="SP5-qj-74L"/>
                 <outlet property="imageArrayController" destination="COi-PN-SQm" id="E4e-Zv-Sm1"/>
                 <outlet property="keyColumn" destination="thC-Z2-YU4" id="6pD-0j-Phd"/>
                 <outlet property="mapView" destination="sxX-2G-pLZ" id="Urv-p8-HqM"/>
                 <outlet property="summaryController" destination="U3M-Qx-Ilb" id="UxV-t9-Vb6"/>
                 <outlet property="summaryView" destination="E20-1g-GeM" id="kui-1p-v9J"/>
                 <outlet property="tabView" destination="kLz-Qk-Xgg" id="Dii-Y3-SpD"/>
+                <outlet property="valueColumn" destination="Sh1-fR-G9p" id="QIz-Zu-5Eb"/>
                 <outlet property="view" destination="B6R-MO-chK" id="OVt-Gp-cuH"/>
             </connections>
         </customObject>
@@ -216,11 +218,11 @@
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="15" horizontalPageScroll="10" verticalLineScroll="15" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-we-DpE">
                                                     <rect key="frame" x="0.0" y="426" width="343" height="150"/>
-                                                    <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="vxn-AW-peD">
+                                                    <clipView key="contentView" drawsBackground="NO" id="vxn-AW-peD">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" typeSelect="NO" rowHeight="15" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="hrr-15-ccA">
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" typeSelect="NO" rowHeight="15" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="hrr-15-ccA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
