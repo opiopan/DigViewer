@@ -66,6 +66,7 @@ open class ExifViewControllerBase: UITableViewController {
                     sectionData[sectionData.count - 1] = data!
                 }
             }
+            resetFieldWidth()
             tableView.reloadData()
         }
     }
@@ -199,18 +200,27 @@ open class ExifViewControllerBase: UITableViewController {
     //-----------------------------------------------------------------------------------------
     fileprivate var calculatedFirstFieldWidth : Double? = nil
     
+    fileprivate func resetFieldWidth(){
+        calculatedFirstFieldWidth = nil
+    }
+    
     fileprivate func firstFieldWidth(_ cell : UITableViewCell) -> Double {
         if let width = calculatedFirstFieldWidth {
             return width
         }else{
             let font = (cell as! LabelArrangableCell).mainLabel!.font
             let attributes = [NSAttributedString.Key.font : font!]
-            var width : Double = 0
+            var keyWidth = 0.0
+            var valueWidth = 0.0
             if let exif = meta[DVRCNMETA_SUMMARY] as! [ImageMetadataKV]? {
                 for entry in exif {
                     if let key = entry.key {
                         let size = (key as NSString).size(withAttributes: attributes)
-                        width = max(width, Double(size.width))
+                        keyWidth = max(keyWidth, Double(size.width))
+                    }
+                    if let value = entry.value {
+                        let size = (value as NSString).size(withAttributes: attributes)
+                        valueWidth = max(valueWidth, Double(size.width))
                     }
                 }
             }
@@ -218,12 +228,45 @@ open class ExifViewControllerBase: UITableViewController {
                 for entry in gps {
                     if let key = entry.key {
                         let size = (key as NSString).size(withAttributes: attributes)
-                        width = max(width, Double(size.width))
+                        keyWidth = max(keyWidth, Double(size.width))
+                    }
+                    if let value = entry.value {
+                        let size = (value as NSString).size(withAttributes: attributes)
+                        valueWidth = max(valueWidth, Double(size.width))
                     }
                 }
             }
-            calculatedFirstFieldWidth = width + 1
+            keyWidth += 8
+            valueWidth += 8
+            let budget =  view.bounds.size.width - 32
+            if keyWidth + valueWidth < budget {
+                if keyWidth > valueWidth {
+                    if keyWidth * 2 < budget {
+                        keyWidth = budget / 2
+                    }
+                }else{
+                    if valueWidth * 2 < budget {
+                        keyWidth = budget / 2
+                    }else{
+                        keyWidth += budget - keyWidth - valueWidth
+                    }
+                }
+            }
+            
+            calculatedFirstFieldWidth = keyWidth
             return calculatedFirstFieldWidth!
         }
+    }
+
+    //-----------------------------------------------------------------------------------------
+    // MARK: - デバイス回転
+    //-----------------------------------------------------------------------------------------
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+        }, completion: { _ in
+            self.resetFieldWidth()
+            self.tableView.reloadData()
+        })
     }
 }
