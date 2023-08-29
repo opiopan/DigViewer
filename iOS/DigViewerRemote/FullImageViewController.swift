@@ -132,15 +132,22 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     }
     
     func setNavigator(_ enabled: Bool){
-        UIView.animate(withDuration: 0.2){
+        UIView.animate(withDuration: 0.2, animations:{
             [unowned self]()->Void in
-            self.navigationController?.setNavigationBarHidden(!enabled, animated: true)
-            self.baseView?.backgroundColor = enabled ? UIColor.systemBackground : UIColor.black
-            self.indicatorAutoHidden = !enabled
+            navigationController?.setNavigationBarHidden(!enabled, animated: true)
+            baseView?.backgroundColor = enabled ? UIColor.systemBackground : UIColor.black
+            indicatorAutoHidden = !enabled
+            statusBarHidden = !enabled
             let labelColor = enabled ? UIColor.label : UIColor.white
-            self.LoadingLabel.textColor = labelColor
-            self.FailedLabel.textColor = labelColor
-        }
+            LoadingLabel.textColor = labelColor
+            FailedLabel.textColor = labelColor
+        }, completion:{
+            [unowned self] (_) in
+            UIView.animate(withDuration: 0.2){
+                [unowned self] in
+                applyTransform(imageView!.bounds.size)
+            }
+        })
     }
     
     private var indicatorAutoHidden:Bool = false {
@@ -152,6 +159,16 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return self.indicatorAutoHidden
     }
+    
+    private var statusBarHidden:Bool = false {
+        didSet {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     //-----------------------------------------------------------------------------------------
     // MARK: - デバイス回転
@@ -160,6 +177,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         
         UIView.animate(withDuration: 0.2){
+            [unowned self] in
             self.applyTransform(size)
         }
     }
@@ -188,6 +206,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     func dvrClient(_ client: DVRemoteClient!, change state: DVRClientState) {
         if (state == DVRClientState.disconnected){
             UIView.animate(withDuration: 0.35){
+                [unowned self] in
                 self.FailedLabel.alpha = 1
                 self.LoadingLabel.alpha = 0
                 self.indicatorView.stopAnimating()
