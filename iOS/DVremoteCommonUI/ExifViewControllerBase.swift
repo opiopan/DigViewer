@@ -23,6 +23,13 @@ open class ExifViewControllerBase: UITableViewController {
     }
 
     override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let time = DispatchTime.now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time){
+            [unowned self]() in
+            self.resetFieldWidth()
+            self.tableView.reloadData()
+        }
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
@@ -264,7 +271,8 @@ open class ExifViewControllerBase: UITableViewController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { _ in
-        }, completion: { _ in
+        }, completion: {
+            [unowned self] _ in
             self.resetFieldWidth()
             self.tableView.reloadData()
         })

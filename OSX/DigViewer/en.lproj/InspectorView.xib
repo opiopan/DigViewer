@@ -106,7 +106,7 @@
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6cH-Tj-l9b">
                                                                                         <rect key="frame" x="0.0" y="1" width="115" height="14"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Table View Cell" id="vRB-eF-Qkw">
-                                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                                            <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
@@ -148,7 +148,7 @@
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="oZt-Tg-eRn">
                                                                                         <rect key="frame" x="0.0" y="1" width="202" height="14"/>
                                                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="Gpo-O7-kis">
-                                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                                            <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
@@ -248,7 +248,7 @@
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="a1d-gh-b10">
                                                                                         <rect key="frame" x="0.0" y="1" width="115" height="14"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Table View Cell" id="ONl-33-eKd">
-                                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                                            <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
@@ -294,7 +294,7 @@
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-93-W9y">
                                                                                         <rect key="frame" x="0.0" y="1" width="202" height="14"/>
                                                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="K3o-s0-jZg">
-                                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                                            <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>

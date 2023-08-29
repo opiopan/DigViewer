@@ -13,6 +13,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     fileprivate var targetDocument : String? = nil
     fileprivate var targetPath : [String]? = nil
     
+    @IBOutlet weak var baseView: UIView? = nil
     @IBOutlet weak var imageView : UIImageView? = nil
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var LoadingLabel: UILabel!
@@ -24,11 +25,10 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         let client = DVRemoteClient.shared()
         client?.add(self)
 
-        navigationController?.hidesBarsOnTap = true
         let time = DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time){
             [unowned self]() in
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.setNavigator(false)
         }
         
         imageView!.alpha = 0
@@ -64,9 +64,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+//    override var prefersStatusBarHidden : Bool {true}
     
     @IBAction func exitView(_ sender: AnyObject) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
@@ -81,6 +79,10 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Displaying Image
+    //-----------------------------------------------------------------------------------------
     fileprivate var imageSize : CGSize = CGSize(width: 0, height: 0)
     fileprivate var imageTransform :  CGAffineTransform = CGAffineTransform.identity
     
@@ -102,6 +104,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         applyTransform(imageView!.bounds.size)
         if (animation){
             UIView.animate(withDuration: 0.35){
+                [unowned self] in
                 self.imageView!.alpha = 1
                 self.imageView!.image = image
             }
@@ -118,6 +121,38 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         let transform = imageTransform.scaledBy(x: ratio, y: ratio)
         imageView!.transform = transform
     }
+
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Toggle navigation bar
+    //-----------------------------------------------------------------------------------------
+    @IBAction func tapImageView(_ sender: AnyObject){
+        if let barState = self.navigationController?.isNavigationBarHidden {
+            setNavigator(barState)
+        }
+    }
+    
+    func setNavigator(_ enabled: Bool){
+        UIView.animate(withDuration: 0.2){
+            [unowned self]()->Void in
+            self.navigationController?.setNavigationBarHidden(!enabled, animated: true)
+            self.baseView?.backgroundColor = enabled ? UIColor.systemBackground : UIColor.black
+            self.indicatorAutoHidden = !enabled
+            let labelColor = enabled ? UIColor.label : UIColor.white
+            self.LoadingLabel.textColor = labelColor
+            self.FailedLabel.textColor = labelColor
+        }
+    }
+    
+    private var indicatorAutoHidden:Bool = false {
+        didSet {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
+    }
+
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return self.indicatorAutoHidden
+    }
+
     //-----------------------------------------------------------------------------------------
     // MARK: - デバイス回転
     //-----------------------------------------------------------------------------------------

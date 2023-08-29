@@ -41,6 +41,7 @@ class ExifViewController: ExifViewControllerBase, DVRemoteClientDelegate, Inform
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let client = DVRemoteClient.shared()
         client?.add(self)
         if client?.meta != nil {
@@ -49,6 +50,7 @@ class ExifViewController: ExifViewControllerBase, DVRemoteClientDelegate, Inform
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         DVRemoteClient.shared().remove(self)
     }
     

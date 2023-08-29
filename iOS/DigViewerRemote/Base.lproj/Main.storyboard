@@ -158,7 +158,8 @@
                         <subviews>
                             <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Fx-Jr-Exf">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="808"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-7Q-c3l">
                                 <rect key="frame" x="178" y="385.66666666666669" width="37" height="37"/>
@@ -183,20 +184,31 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-mZ-HQI" userLabel="Frontend View">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="808"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UvY-TT-HWZ" appends="YES" id="QQc-62-wZe"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SEp-x5-sVd"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SEp-x5-sVd" firstAttribute="trailing" secondItem="3Fx-Jr-Exf" secondAttribute="trailing" id="0RK-un-RgE"/>
+                            <constraint firstItem="k0r-mZ-HQI" firstAttribute="leading" secondItem="Xid-MV-8z6" secondAttribute="leading" id="4bA-yu-fjz"/>
                             <constraint firstItem="flg-IM-cxb" firstAttribute="centerX" secondItem="SEp-x5-sVd" secondAttribute="centerX" id="68J-lj-PSS"/>
                             <constraint firstItem="CFa-7Q-c3l" firstAttribute="top" secondItem="flg-IM-cxb" secondAttribute="bottom" constant="23" id="8GW-O3-BTJ"/>
                             <constraint firstItem="Knt-Bv-kuD" firstAttribute="centerY" secondItem="Xid-MV-8z6" secondAttribute="centerY" id="8tG-qJ-lmN"/>
+                            <constraint firstItem="k0r-mZ-HQI" firstAttribute="top" secondItem="Xid-MV-8z6" secondAttribute="topMargin" id="9hR-jP-Hgb"/>
                             <constraint firstItem="3Fx-Jr-Exf" firstAttribute="top" secondItem="Xid-MV-8z6" secondAttribute="top" id="RDK-yx-cx0"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="k0r-mZ-HQI" secondAttribute="bottom" id="TxA-jE-2N2"/>
+                            <constraint firstAttribute="trailing" secondItem="k0r-mZ-HQI" secondAttribute="trailing" id="ZVb-z0-lZS"/>
                             <constraint firstItem="CFa-7Q-c3l" firstAttribute="centerX" secondItem="SEp-x5-sVd" secondAttribute="centerX" id="bjO-9j-h36"/>
                             <constraint firstItem="CFa-7Q-c3l" firstAttribute="centerY" secondItem="Xid-MV-8z6" secondAttribute="centerY" id="dSW-hy-EDv"/>
+                            <constraint firstAttribute="bottom" secondItem="3Fx-Jr-Exf" secondAttribute="bottom" id="dmz-BV-SHa"/>
                             <constraint firstItem="Knt-Bv-kuD" firstAttribute="centerX" secondItem="SEp-x5-sVd" secondAttribute="centerX" id="kBw-Gh-Xd2"/>
                             <constraint firstItem="3Fx-Jr-Exf" firstAttribute="leading" secondItem="SEp-x5-sVd" secondAttribute="leading" id="y08-Ak-hU1"/>
-                            <constraint firstItem="SEp-x5-sVd" firstAttribute="bottom" secondItem="3Fx-Jr-Exf" secondAttribute="bottom" id="yJp-eR-bOV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="H78-Ux-RmO">
@@ -209,11 +221,17 @@
                     <connections>
                         <outlet property="FailedLabel" destination="Knt-Bv-kuD" id="f4v-XO-ktW"/>
                         <outlet property="LoadingLabel" destination="flg-IM-cxb" id="KeI-YB-i02"/>
+                        <outlet property="baseView" destination="Xid-MV-8z6" id="EQI-49-Fd5"/>
                         <outlet property="imageView" destination="3Fx-Jr-Exf" id="v4E-n7-KKQ"/>
                         <outlet property="indicatorView" destination="ngz-Xt-aDJ" id="lHV-kF-xon"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmp-g2-ZuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UvY-TT-HWZ">
+                    <connections>
+                        <action selector="tapImageView:" destination="45G-hC-5DD" id="KBx-lZ-Eam"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2049" y="-1301"/>
         </scene>
@@ -433,14 +451,13 @@
         <!--Navigation Controller-->
         <scene sceneID="8Jr-vq-hwB">
             <objects>
-                <navigationController id="UWM-7A-nOd" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" id="UWM-7A-nOd" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Aba-Y2-I7a">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <navigationBarAppearance key="scrollEdgeAppearance">
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance"/>
                     </navigationBar>
                     <connections>
                         <segue destination="45G-hC-5DD" kind="relationship" relationship="rootViewController" id="e2S-Zx-sTh"/>
