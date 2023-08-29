@@ -200,7 +200,7 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
         let serverCount = servers.count;
         let isRemote = indexPath.row < serverCount
         let name = isRemote ? servers[indexPath.row].service.name : AppDelegate.deviceName()
-        let icon = isRemote ? servers[indexPath.row].icon : AppDelegate.deviceIcon()
+        let icon = (isRemote ? servers[indexPath.row].icon : AppDelegate.deviceIcon())?.withRenderingMode(.alwaysTemplate)
         let description = isRemote ? servers[indexPath.row].attributes[DVRCNMETA_MACHINE_NAME] : nil
         cell.dataSourceLabel.text = name
         cell.descriptionLabel.text = description

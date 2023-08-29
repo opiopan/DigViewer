@@ -142,13 +142,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, U
     static func deviceIcon() -> UIImage? {
         let identifier = AppDelegate.deviceID()
         if identifier.hasPrefix("iPhone") {
-            return UIImage(named: "icon_iPhone")
+            return UIImage(systemName: "iphone")
         }else if identifier.hasPrefix("iPad") {
-            return UIImage(named: "icon_iPad")
+            return UIImage(systemName: "iPad")
         }else if identifier.hasPrefix("iPod") {
-            return UIImage(named: "icon_iPod")
+            return UIImage(systemName: "ipodtouch")
         }else{
-            return UIImage(named: "icon_iPhone")
+            return UIImage(systemName: "iphone")
         }
     }
     

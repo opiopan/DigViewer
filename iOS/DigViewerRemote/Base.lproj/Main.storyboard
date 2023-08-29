@@ -699,6 +699,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4us-M7-aLR">
                                             <rect key="frame" x="15" y="8" width="40" height="40"/>
+                                            <color key="tintColor" systemColor="labelColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="ceg-S4-BEN"/>
                                                 <constraint firstAttribute="width" constant="40" id="iEQ-cj-k4D"/>
@@ -2360,6 +2361,9 @@ You can also download the installation disk image of DigViewer for Mac from this
         <image name="ListButton" width="31" height="31"/>
         <image name="RightButton" width="31" height="31"/>
         <image name="pin_off" width="20" height="20"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
