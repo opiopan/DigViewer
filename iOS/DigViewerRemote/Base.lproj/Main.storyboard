@@ -266,6 +266,7 @@
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-qv-HoW">
                                             <rect key="frame" x="131.33333333333334" y="29.666666666666671" width="20" height="20"/>
+                                            <color key="color" systemColor="labelColor"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCB-Ot-OqI">
                                             <rect key="frame" x="159.33333333333334" y="29.333333333333336" width="74.666666666666657" height="20.333333333333336"/>

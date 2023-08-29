@@ -25,6 +25,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         let client = DVRemoteClient.shared()
         client?.add(self)
 
+        self.setNavigator(true)
         let time = DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time){
             [unowned self]() in
@@ -63,8 +64,6 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override var prefersStatusBarHidden : Bool {true}
     
     @IBAction func exitView(_ sender: AnyObject) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
@@ -141,6 +140,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
             let labelColor = enabled ? UIColor.label : UIColor.white
             LoadingLabel.textColor = labelColor
             FailedLabel.textColor = labelColor
+            indicatorView.color = labelColor
         }, completion:{
             [unowned self] (_) in
             UIView.animate(withDuration: 0.2){
