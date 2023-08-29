@@ -144,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, U
         if identifier.hasPrefix("iPhone") {
             return UIImage(systemName: "iphone")
         }else if identifier.hasPrefix("iPad") {
-            return UIImage(systemName: "iPad")
+            return UIImage(systemName: "ipad")
         }else if identifier.hasPrefix("iPod") {
             return UIImage(systemName: "ipodtouch")
         }else{
