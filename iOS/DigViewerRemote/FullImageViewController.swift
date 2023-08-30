@@ -44,10 +44,9 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         if let image = DVRemoteClient.shared().fullImage(forID: targetPath, inDocument: targetDocument, withMaxSize: 2048) {
             indicatorView.layer.isHidden = true;
             LoadingLabel.layer.zPosition = -1;
-            applyImage(image, rotation: DVRemoteClient.shared().imageRotation, animation: false)
-            let time = DispatchTime.now() + Double(0) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: time, execute: {[unowned self]() -> Void in
-                self.applyTransform(self.imageView!.bounds.size)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                [unowned self]() -> Void in
+                applyImage(image, rotation: DVRemoteClient.shared().imageRotation, animation: false)
             })
         }else{
             indicatorView.layer.isHidden = false;
@@ -114,11 +113,13 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     }
     
     fileprivate func applyTransform(_ viewSize : CGSize) {
-        let hRatio = viewSize.width / imageSize.width
-        let vRatio = viewSize.height / imageSize.height
-        let ratio = min(hRatio, vRatio)
-        let transform = imageTransform.scaledBy(x: ratio, y: ratio)
-        imageView!.transform = transform
+        if imageSize.width > 0 && imageSize.height > 0 {
+            let hRatio = viewSize.width / imageSize.width
+            let vRatio = viewSize.height / imageSize.height
+            let ratio = min(hRatio, vRatio)
+            let transform = imageTransform.scaledBy(x: ratio, y: ratio)
+            imageView!.transform = transform
+        }
     }
 
     //-----------------------------------------------------------------------------------------
@@ -176,10 +177,16 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        UIView.animate(withDuration: 0.2){
+        UIView.animate(withDuration: 0.2, animations: {
             [unowned self] in
             self.applyTransform(size)
-        }
+        }, completion: {
+            [unowned self] (_) in
+            UIView.animate(withDuration: 0.2){
+                [unowned self] in
+                self.applyTransform(imageView?.bounds.size ?? CGSize())
+            }
+        })
     }
     
     //-----------------------------------------------------------------------------------------
