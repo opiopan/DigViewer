@@ -327,6 +327,10 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             return super.tableView(tableView, viewForFooterInSection: section)
         }
     }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 150
+    }
     
     //-----------------------------------------------------------------------------------------
     // MARK: - Navigation
@@ -344,5 +348,4 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
             }
         }
     }
-
 }

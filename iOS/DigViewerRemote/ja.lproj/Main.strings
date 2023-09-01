@@ -159,3 +159,6 @@
 
 /* Class = "UILabel"; text = "The source code of DigViewer remote..."; ObjectID = "KWl-36-8Oc"; */
 "KWl-36-8Oc.text" = "DigViewer remoteのソースコードはMac版DivViewerのソースコードと共にGitHubリポジトリでオープンソースとして公開されています。このリポジトリ内のコードはライセンスの範囲内で自由に改変、再配布、商用利用できます。\n詳しくはDigViewerのオフィシャルサイトをご覧ください。\nまたMac版DigViewerのインストール用ディスクイメージをこのサイトからダウンロードできます。";
+
+/* Class = "UIButton"; normalTitle = "About DigViewer for Mac"; ObjectID = "7kY-wu-IEB"; */
+"7kY-wu-IEB.normalTitle" = "Mac版DigViewerについて";
