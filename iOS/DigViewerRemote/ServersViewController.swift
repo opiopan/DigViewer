@@ -96,6 +96,13 @@ class ServerViewController: UITableViewController, DVRemoteBrowserDelegate, DVRe
     fileprivate func registerServer(_ serverInfo : ServerInfo) {
         let pinnedIndexes = servers.enumerated().filter{$0.element.service.name == serverInfo.service.name}.map{$0.offset}
         if let pinnedIndex = pinnedIndexes.first {
+            if pinnedServers[pinnedIndex].attributes[DVRCNMETA_OS_VERSION] != serverInfo.attributes[DVRCNMETA_OS_VERSION] ||
+                pinnedServers[pinnedIndex].attributes[DVRCNMETA_DV_VERSION] != serverInfo.attributes[DVRCNMETA_DV_VERSION]{
+                serverInfo.isPinned = true
+                pinnedServers = pinnedServers.enumerated().map{$0.offset == pinnedIndex ? serverInfo : $0.element}
+                ConfigurationController.sharedController.dataSourcePinnedList = pinnedServers
+                servers[pinnedIndex] = serverInfo
+            }
             servers[pinnedIndex].isActive = true
             let indexPath = IndexPath(row: pinnedIndex, section: 0)
             if let cell = tableView.cellForRow(at: indexPath){
