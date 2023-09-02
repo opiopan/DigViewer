@@ -802,7 +802,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="About DigViewer for Mac"/>
                                 <connections>
-                                    <action selector="openWebSite:" destination="zvy-xB-2KM" eventType="touchUpInside" id="9fk-bQ-XaK"/>
+                                    <action selector="openWebSite:" destination="yUM-KV-yS5" eventType="touchUpInside" id="25m-TQ-jye"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1782,7 +1782,7 @@ You can also download the installation disk image of DigViewer for Mac from this
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Visit DigViewer Website"/>
                                         <connections>
-                                            <action selector="openGithubRepository:" destination="Rib-t3-csh" eventType="touchUpInside" id="MYC-vW-6dc"/>
+                                            <action selector="openWebSite:" destination="cYe-WI-Ri8" eventType="touchUpInside" id="twW-nY-p3I"/>
                                         </connections>
                                     </button>
                                 </subviews>

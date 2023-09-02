@@ -163,5 +163,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DVRemoteClientDelegate, U
             return name
         }
     }
+
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Web site accessor
+    //-----------------------------------------------------------------------------------------
+    @IBAction func openWebSite(_ sender: UIButton) {
+        if let url = URL(string: "https://opiopan.github.io/DigViewer/"){
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction func openGithubRepository(_ sender: UIButton) {
+        if let url = URL(string: "https://github.com/opiopan/DigViewer/"){
+            UIApplication.shared.open(url)
+        }
+    }
 }
 
