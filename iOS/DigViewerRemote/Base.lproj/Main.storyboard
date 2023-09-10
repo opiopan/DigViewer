@@ -188,7 +188,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="UvY-TT-HWZ" appends="YES" id="QQc-62-wZe"/>
+                                    <outletCollection property="gestureRecognizers" destination="UvY-TT-HWZ" appends="YES" id="uUG-zk-UAX"/>
+                                    <outletCollection property="gestureRecognizers" destination="8Dg-MC-p5V" appends="YES" id="PfI-gQ-Wch"/>
+                                    <outletCollection property="gestureRecognizers" destination="bNx-sL-jeO" appends="YES" id="3A8-8i-nUt"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -222,16 +224,32 @@
                         <outlet property="FailedLabel" destination="Knt-Bv-kuD" id="f4v-XO-ktW"/>
                         <outlet property="LoadingLabel" destination="flg-IM-cxb" id="KeI-YB-i02"/>
                         <outlet property="baseView" destination="Xid-MV-8z6" id="EQI-49-Fd5"/>
+                        <outlet property="frontendView" destination="k0r-mZ-HQI" id="UqZ-5C-6Zx"/>
                         <outlet property="imageView" destination="3Fx-Jr-Exf" id="v4E-n7-KKQ"/>
                         <outlet property="indicatorView" destination="ngz-Xt-aDJ" id="lHV-kF-xon"/>
+                        <outlet property="panGestureRecognizer" destination="bNx-sL-jeO" id="6ZY-NV-33Q"/>
+                        <outlet property="pinchGestureRecognizer" destination="8Dg-MC-p5V" id="vLM-Wg-IrK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmp-g2-ZuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="UvY-TT-HWZ">
                     <connections>
                         <action selector="tapImageView:" destination="45G-hC-5DD" id="KBx-lZ-Eam"/>
+                        <outlet property="delegate" destination="45G-hC-5DD" id="602-rN-wUC"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pinchGestureRecognizer id="8Dg-MC-p5V">
+                    <connections>
+                        <action selector="recognizeGesture:" destination="45G-hC-5DD" id="5Xr-vc-6dl"/>
+                        <outlet property="delegate" destination="45G-hC-5DD" id="c49-Vf-TqC"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="bNx-sL-jeO">
+                    <connections>
+                        <action selector="recognizeGesture:" destination="45G-hC-5DD" id="kIr-UC-m1g"/>
+                        <outlet property="delegate" destination="45G-hC-5DD" id="qd4-3C-BEl"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2049" y="-1301"/>
         </scene>

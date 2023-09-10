@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FullImageViewController: UIViewController, DVRemoteClientDelegate {
+class FullImageViewController: UIViewController, DVRemoteClientDelegate, UIGestureRecognizerDelegate {
 
     fileprivate var targetDocument : String? = nil
     fileprivate var targetPath : [String]? = nil
@@ -18,9 +18,14 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var LoadingLabel: UILabel!
     @IBOutlet weak var FailedLabel: UILabel!
+    @IBOutlet weak var frontendView: UIView!
+    @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        resetImageTransform()
         
         let client = DVRemoteClient.shared()
         client?.add(self)
@@ -43,7 +48,7 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         FailedLabel.alpha = 0;
         if let image = DVRemoteClient.shared().fullImage(forID: targetPath, inDocument: targetDocument, withMaxSize: 2048) {
             indicatorView.layer.isHidden = true;
-            LoadingLabel.layer.zPosition = -1;
+            LoadingLabel.layer.isHidden = true;
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                 [unowned self]() -> Void in
                 applyImage(image, rotation: DVRemoteClient.shared().imageRotation, animation: false)
@@ -81,9 +86,17 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
     //-----------------------------------------------------------------------------------------
     // MARK: - Displaying Image
     //-----------------------------------------------------------------------------------------
-    fileprivate var imageSize : CGSize = CGSize(width: 0, height: 0)
-    fileprivate var imageTransform :  CGAffineTransform = CGAffineTransform.identity
+    fileprivate var imageSize = CGSize.zero
+    fileprivate var imageTransform = CGAffineTransform.identity
+    fileprivate var imageRatio = 1.0
+    fileprivate var pinchScale = 1.0
+    fileprivate var panOffset = CGPoint.zero
     
+    fileprivate func resetImageTransform() {
+        pinchScale = 1.0
+        panOffset = CGPoint.zero
+    }
+
     fileprivate func applyImage(_ image : UIImage?, rotation : Int, animation : Bool) {
         imageSize = image!.size
         imageTransform = CGAffineTransform.identity
@@ -116,10 +129,59 @@ class FullImageViewController: UIViewController, DVRemoteClientDelegate {
         if imageSize.width > 0 && imageSize.height > 0 {
             let hRatio = viewSize.width / imageSize.width
             let vRatio = viewSize.height / imageSize.height
-            let ratio = min(hRatio, vRatio)
-            let transform = imageTransform.scaledBy(x: ratio, y: ratio)
+            imageRatio = min(hRatio, vRatio)
+            let transform = imageTransform
+                .translatedBy(x: panOffset.x, y: panOffset.y)
+                .scaledBy(x: imageRatio, y: imageRatio)
+                .scaledBy(x: pinchScale, y: pinchScale)
             imageView!.transform = transform
         }
+    }
+
+    //-----------------------------------------------------------------------------------------
+    // MARK: - Transform by gesture
+    //-----------------------------------------------------------------------------------------
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        switch (gestureRecognizer, otherGestureRecognizer) {
+        case (panGestureRecognizer, pinchGestureRecognizer),
+             (pinchGestureRecognizer, panGestureRecognizer):
+            return true
+        default:
+            return false
+        }
+    }
+    
+    @IBAction func recognizeGesture(_ sender : AnyObject){
+        if let pan = sender as? UIPanGestureRecognizer{
+            let offset = pan.translation(in: frontendView)
+            panOffset.x += offset.x
+            panOffset.y += offset.y
+            pan.setTranslation(.zero, in: frontendView)
+            applyTransform(imageView!.bounds.size)
+        }else if let pinch = sender as? UIPinchGestureRecognizer{
+            let location = pinch.location(in: frontendView)
+            let pointInImage = pointInImage(from: location, in: frontendView)
+            pinchScale *= pinch.scale
+            anchorImage(point: pointInImage, to: location, in: frontendView)
+            pinch.scale = 1.0
+            applyTransform(imageView!.bounds.size)
+        }
+    }
+    
+    fileprivate func pointInImage(from point: CGPoint, in view: UIView) -> CGPoint{
+        let viewSize = view.bounds.size
+        let scale = 1.0 / (imageRatio * pinchScale)
+        let x = (point.x - viewSize.width / 2 - panOffset.x) * scale
+        let y = (point.y - viewSize.height / 2  - panOffset.y) * scale
+        return CGPoint(x: x, y: y)
+    }
+    
+    fileprivate func anchorImage(point imagePoint : CGPoint, to viewPoint : CGPoint, in view : UIView){
+        let viewSize = view.bounds.size
+        let scale = imageRatio * pinchScale
+        let offset_x = imagePoint.x * scale - (viewPoint.x - viewSize.width / 2)
+        let offset_y = imagePoint.y * scale - (viewPoint.y - viewSize.height / 2)
+        panOffset = CGPoint(x: -offset_x, y: -offset_y)
     }
 
     //-----------------------------------------------------------------------------------------
