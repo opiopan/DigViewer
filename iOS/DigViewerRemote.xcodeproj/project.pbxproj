@@ -887,10 +887,10 @@
 			buildPhases = (
 				7BBA59C51B9DA59C0025B902 /* Sources */,
 				7BBA59C61B9DA59C0025B902 /* Frameworks */,
-				7BBA59C71B9DA59C0025B902 /* Resources */,
-				7BBA59EE1B9DAD710025B902 /* Run Script For Embedding Version */,
 				7BF05B1D1C257CC100A4A766 /* Embed Foundation Extensions */,
 				7B6D69D51C356E1D0060212A /* Embed Frameworks */,
+				7BBA59C71B9DA59C0025B902 /* Resources */,
+				7BBA59EE1B9DAD710025B902 /* Run Script For Embedding Version */,
 			);
 			buildRules = (
 			);
