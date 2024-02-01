@@ -44,6 +44,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           OUTPUT_FILE: ./docs/_site/release.json
+      - name: SEO treatment
+        run: cp docs/_seo/googleff749040537ff105.html docs/_site
       - name: Upload artifact
         uses: actions/Upload-Pages-Artifact@v2
         with:
