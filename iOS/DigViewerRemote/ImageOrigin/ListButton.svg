@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="512" height="512" viewBox="0, 0, 512, 512">
+  <g id="レイヤー_1">
+    <g>
+      <path d="M71.94,73.5 L441.06,73.5 L441.06,107.5 L71.94,107.5 L71.94,73.5 z" fill="#000000"/>
+      <path d="M71.94,73.5 L441.06,73.5 L441.06,107.5 L71.94,107.5 L71.94,73.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M71.94,405.5 L441.06,405.5 L441.06,439.5 L71.94,439.5 L71.94,405.5 z" fill="#000000"/>
+      <path d="M71.94,405.5 L441.06,405.5 L441.06,439.5 L71.94,439.5 L71.94,405.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M71.94,239.5 L441.06,239.5 L441.06,273.5 L71.94,273.5 L71.94,239.5 z" fill="#000000"/>
+      <path d="M71.94,239.5 L441.06,239.5 L441.06,273.5 L71.94,273.5 L71.94,239.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

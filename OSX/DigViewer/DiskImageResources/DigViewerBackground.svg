@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="1280" height="960" viewBox="0, 0, 1280, 960">
+  <defs>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="625.64" y1="0.121" x2="654.36" y2="959.879">
+      <stop offset="0" stop-color="#000D53" stop-opacity="0.959"/>
+      <stop offset="0.679" stop-color="#00A7FF"/>
+    </linearGradient>
+    <linearGradient id="Gradient_2" gradientUnits="userSpaceOnUse" x1="1511.876" y1="582.287" x2="1511.888" y2="591.37">
+      <stop offset="0" stop-color="#000D53" stop-opacity="0.959"/>
+      <stop offset="1" stop-color="#00A7FF"/>
+    </linearGradient>
+  </defs>
+  <g id="background">
+    <path d="M-0,0 L1280,-0 L1280,960 L0,960 z" fill="url(#Gradient_1)"/>
+    <g>
+      <path d="M1511.617,582.286 L1512.147,582.286 L1512.147,591.372 L1511.617,591.372 z" fill="url(#Gradient_2)"/>
+      <path d="M1511.617,582.286 L1512.147,582.286 L1512.147,591.372 L1511.617,591.372 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+  </g>
+  <g id="main">
+    <path d="M565.576,432.768 L628.685,432.768 L628.685,378.214 L714.424,480 L628.685,581.786 L628.685,527.232 L565.576,527.232 z" fill="#FFFFFF"/>
+    <text transform="matrix(1, 0.004, -0.004, 1, 640, 150.727)">
+      <tspan x="-360.545" y="64.762" font-family="Impact" font-size="172" fill="#FFFFFF">DigViewer</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 318.444, 834.597)">
+      <tspan x="-274.254" y="12.912" font-family="Helvetica-Bold" font-size="48" fill="#FFFFFF">To install, drag this icon</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 961.556, 834.597)">
+      <tspan x="-178.641" y="17.5" font-family="Helvetica-Bold" font-size="48" fill="#FFFFFF">...onto this one!</tspan>
+    </text>
+  </g>
+  <g id="guide" display="none">
+    <g>
+      <path d="M193.346,300.29 L444.542,300.29 C472.156,300.29 494.542,322.675 494.542,350.29 L494.542,610.781 C494.542,638.395 472.156,660.781 444.542,660.781 L193.346,660.781 C165.731,660.781 143.346,638.395 143.346,610.781 L143.346,350.29 C143.346,322.675 165.731,300.29 193.346,300.29 z" fill="#FFFFFF"/>
+      <path d="M193.346,300.29 L444.542,300.29 C472.156,300.29 494.542,322.675 494.542,350.29 L494.542,610.781 C494.542,638.395 472.156,660.781 444.542,660.781 L193.346,660.781 C165.731,660.781 143.346,638.395 143.346,610.781 L143.346,350.29 C143.346,322.675 165.731,300.29 193.346,300.29 z" fill-opacity="0" stroke="#000000" stroke-width="7"/>
+    </g>
+    <g>
+      <path d="M836.458,300.29 L1087.654,300.29 C1115.268,300.29 1137.654,322.675 1137.654,350.29 L1137.654,610.781 C1137.654,638.395 1115.268,660.781 1087.654,660.781 L836.458,660.781 C808.844,660.781 786.458,638.395 786.458,610.781 L786.458,350.29 C786.458,322.675 808.844,300.29 836.458,300.29 z" fill="#FFFFFF"/>
+      <path d="M836.458,300.29 L1087.654,300.29 C1115.268,300.29 1137.654,322.675 1137.654,350.29 L1137.654,610.781 C1137.654,638.395 1115.268,660.781 1087.654,660.781 L836.458,660.781 C808.844,660.781 786.458,638.395 786.458,610.781 L786.458,350.29 C786.458,322.675 808.844,300.29 836.458,300.29 z" fill-opacity="0" stroke="#000000" stroke-width="7"/>
+    </g>
+    <path d="M0.5,735.615 L1280.5,733.779" fill-opacity="0" stroke="#000000" stroke-width="8"/>
+    <path d="M318.944,232.215 L318.944,733.779" fill-opacity="0" stroke="#000000" stroke-width="8"/>
+    <path d="M962.056,232.215 L962.056,733.779" fill-opacity="0" stroke="#000000" stroke-width="8"/>
+  </g>
+</svg>

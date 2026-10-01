@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="1024" height="1024" viewBox="0, 0, 1024, 1024">
+  <defs>
+    <filter id="Shadow_1">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feFlood flood-color="#000000"/>
+      <feComposite in2="offsetblur" operator="in"/>
+    </filter>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-680.439" y1="-261.927" x2="-343.561" y2="-762.073" gradientTransform="matrix(-1, -0, 0, -1, 0, 0)">
+      <stop offset="0.453" stop-color="#282828"/>
+      <stop offset="1" stop-color="#7D7D7D"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1">
+    <g>
+      <path d="M175.122,223.24 L848.878,223.24 L512,800.76 L175.122,223.24 z" filter="url(#Shadow_1)" fill="rgba(0,0,0,0.647)"/>
+      <path d="M848.878,223.24 L512,800.76 L175.122,223.24 z" fill="url(#Gradient_1)"/>
+    </g>
+  </g>
+</svg>
